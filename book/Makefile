@@ -5,7 +5,7 @@
 SPHINXOPTS    =
 SPHINXBUILD   = /Users/obo/local/bin/sphinx-build
 PAPER         =
-BUILDDIR      = /Users/obo/Documents/Cours/CNP3/book.build
+BUILDDIR      = /Users/obo/Documents/Cours/CNP3/build.book
 
 # Internal variables.
 PAPEROPT_a4     = -D latex_paper_size=a4
