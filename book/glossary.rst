@@ -4,6 +4,12 @@ Glossary
 ========
 
 .. glossary::
+
+   PBL
+	Problem-based learning is a teaching approach that relies on problems.
+
+   DNS
+        The Domain Name System is a distributed database that allows to map names on IP addresses.
    
    packet
 	a packet is the unit of information transfert in the network layer

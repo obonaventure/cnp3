@@ -7,9 +7,9 @@
 Computer Networking : Principles, Protocols and Practice
 ========================================================
 
-Contents:
+Contents :
 
-.. toctree::
+.. toctree:: 
    :maxdepth: 2
 
    intro/introduction

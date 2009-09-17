@@ -8,7 +8,16 @@ In this chapter, we first briefly describe the main principles of the applicatio
 Principles
 ----------
 
-The are two important models to organise a networked application. The first and oldest model is the client-server model. In this model, a server provides services to clients that exchange information with it. This model is highly assymetrical : clients send requests and servers perform actions and provide responses. The second model is the peer-to-peer model. It appaered recently as another way to organise Internet applications. 
+The are two important models to organise a networked application. The first and oldest model is the client-server model. In this model, a server provides services to clients that exchange information with it. This model is highly assymetrical : clients send requests and servers perform actions and provide responses. It is illsutrated in the figure below.
+
+
+.. figure:: png/intro-figures-007-c.png
+   :align: center
+   :scale: 50 
+
+   Host count GSM
+
+ The second model is the peer-to-peer model. It appaered recently as another way to organise Internet applications. 
 
 The client-server model
 .......................
@@ -38,17 +47,39 @@ describe architecture
 The Simple Mail Transfert Protocol
 ..................................
 
+smtp :rfc:`821
+
 describe protocol
+
+MIME :rfc:`2045` :rfc:`2046
 
 The Post Office Protocol
 ........................
 
-The Post Office Protocol is defined in [RFC1939]
+The Post Office Protocol is defined in :rfc:`1939`
 
+The IMAP :rfc:`2060`
+
+webmail (mainly implemantions, no standard)
 
 
 The HyperText Transfert Protocol
 ................................
+
+
+file transfert : ftp : :rfc:`959
+
+urls : :rfc:`1738` see also http://www.w3.org/Addressing
+
+html http://www.w3.org/MarkUp
+
+http 1.0 : :rfc:`1945`
+
+http 1.1 :rfc:`2616
+
+
+
+
 
 
 Practice
@@ -89,3 +120,4 @@ ftp
 gopher
 
 
+.. include:: ../links.rst
