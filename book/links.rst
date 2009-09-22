@@ -1,15 +1,27 @@
 
 .. _linux: http://www.linux.org
 
+.. _minicomputer: http://en.wikipedia.org/wiki/Minicomputer
+
 .. _freebsd: http://www.freebsd.org
 
 .. _apache: http://www.apache.org
 
 .. _RFC: http://www.ietf.org/rfc.html
 
+.. _Unicode: http://en.wikipedia.org/wiki/Unicode
+
 .. _Internet drafts: http://www.ietf.org/id-info/
 
+.. _Paul Baran: http://en.wikipedia.org/wiki/Paul_Baran
+
+.. _Donald Davies: http://en.wikipedia.org/wiki/Donald_Davies
+
+.. _Louis Pouzin: http://conferences.sigcomm.org/sigcomm/1999/pouzin.html
+
 .. _sendmail: http://www.sendmail.org
+
+.. _X25: http://en.wikipedia.org/wiki/X.25
 
 .. _xorp: http://www.xorp.org
 
@@ -65,3 +77,17 @@
 
 .. _apache: http://www.apache.org
 
+.. _CRC: http://en.wikipedia.org/wiki/Cyclic_redundancy_check
+
+.. _NFS: http://en.wikipedia.org/wiki/Network_File_System_(protocol)
+
+.. _NTP: http://www.ntp.org
+
+.. _RPC: http://en.wikipedia.org/wiki/Remote_procedure_call
+
+.. _ISP: Internet Service Provider
+
+.. _spam: http://en.wikipedia.org/wiki/Spam_(electronic)
+
+.. _datacenter: http://en.wikipedia.org/wiki/Data_center
+.. _datacenters: http://en.wikipedia.org/wiki/Data_center
