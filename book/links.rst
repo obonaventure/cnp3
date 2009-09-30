@@ -90,4 +90,9 @@
 .. _spam: http://en.wikipedia.org/wiki/Spam_(electronic)
 
 .. _datacenter: http://en.wikipedia.org/wiki/Data_center
+
 .. _datacenters: http://en.wikipedia.org/wiki/Data_center
+
+.. _`Philippe Biondi`: http://www.secdev.org/
+
+.. _UML: http://user-mode-linux.sourceforge.net/
