@@ -24,25 +24,24 @@ where
 
 #. What are the IP addresses of the resolvers that the `dig` implementation you are using relies on [#fdig]_ ?
 
-.. ucl : 130.104.230.68 130.104.1.1 130.104.1.2
+ .. ucl : 130.104.230.68 130.104.1.1 130.104.1.2
 
 #. What is the IP address that corresponds to `inl.info.ucl.ac.be` ? Which type of DNS query does `dig` send to obtain this information ?
 
-.. A query, this is a CNAME for rembrandt.info.ucl.ac.be whose IP address is 130.104.229.225
-
+ .. A query, this is a CNAME for rembrandt.info.ucl.ac.be whose IP address is 130.104.229.225
 
 #. Which type of DNS request do you need to send to obtain the nameservers that are responsible for a given domain ?
 
-.. NS
+ .. NS
 
 #. What are the nameservers that are responsible for the `be` top-level domain ? Where are they located ? Is it possible to use IPv6 to query them ?
 
-.. x.dns.be, london.ns.dns.bs,  prague, brussels, amsterdam, a. b. c.
-.. dns.be is managed by a non-profit organisations and several other organisations have agreed to mirror the DNS server of .be, one is for example the belnet research network, london is on the LINX IXP in London, Prague is on the NIX in CZ, ...
+ .. x.dns.be, london.ns.dns.bs,  prague, brussels, amsterdam, a. b. c.
+ .. dns.be is managed by a non-profit organisations and several other organisations have agreed to mirror the DNS server of .be, one is for example the belnet research network, london is on the LINX IXP in London, Prague is on the NIX in CZ, ...
 
 #. When run without any parameter, `dig` queries one of the root DNS servers and retrieves the list of the the names of all root DNS servers. For technical reasons, there are only 13 different root DNS servers. This information is also available as a text file from http://www.internic.net/zones/named.root What are the IP addresses of all these servers. Do they all support IPv6 [#rs]_ ? 
 
-.. 4 support IPv6 others are 198.41.0.4, 192.228.79.201, ...
+ .. 4 support IPv6 others are 198.41.0.4, 192.228.79.201, ...
 
 #. Assume now that you are residing in a network where there is no DNS resolver and that you need to start your query from the DNS root.
 
@@ -51,9 +50,9 @@ where
    - Continue until you find the server responsible for `www.root-servers.org`
    - What is the lifetime associated to this IP address ?
 
-.. lifetime is 2 days (from root), 199.19.56.1 for org
-.. NS for root-servers : 204.152.184.64 or noc.umd.edu or ns-sec.ripe.net
-.. 192.71.80.110 note that this is  a CNAME for root-servers.org.
+ .. lifetime is 2 days (from root), 199.19.56.1 for org
+ .. NS for root-servers : 204.152.184.64 or noc.umd.edu or ns-sec.ripe.net
+ .. 192.71.80.110 note that this is  a CNAME for root-servers.org.
 
 #. Perform the same analysis for a popular website such as `www.google.com`. What is the lifetime associated to this IP address ? If you perform the same request several times, do you always receive the same answer ? Can you explain why a lifetime is associated to the DNS replies ?
 

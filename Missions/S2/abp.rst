@@ -520,12 +520,11 @@ errors at runtime.
 .. rubric:: Footnotes
 
 
-.. [#fsport] The specification of the UDP source port field in scapy_ contains three parameters. The first one is the name of the field, which can be used to set the value of this field when creating a packet. The second value is the default. The source port is set to `53` when not specified at packet creation time. The last parameter for an enumerated field is the list of names for all UDP
-services. This list is automatically created by scapy_ from the `/etc/services` file on a Linux host so that you can specify `dns` as source port instead of 53.
+.. [#fsport] The specification of the UDP source port field in scapy_ contains three parameters. The first one is the name of the field, which can be used to set the value of this field when creating a packet. The second value is the default. The source port is set to `53` when not specified at packet creation time. The last parameter for an enumerated field is the list of names for all UDP services. This list is automatically created by scapy_ from the `/etc/services` file on a Linux host so that you can specify `dns` as source port instead of 53.
 
 .. [#ftimeout] For this exercise, consider a fixed timeout value. We will discuss later on how to correctly choose a timeout value.
 
-.. [#fstest] If your team of two students implements a sender FSM, you can test it by using on the other UML machine a simple FSM that has a single state and prints all received segments (see the example with the `WAIT_PDU state) 
+.. [#fstest] If your team of two students implements a sender FSM, you can test it by using on the other UML machine a simple FSM that has a single state and prints all received segments (see the example with the `WAIT_PDU`  state) 
 
 .. [#frtest] If your team of two students implements a receiver FSM, you can test it by manually sending segments using `send()` from scapy_
 
