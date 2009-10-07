@@ -17,7 +17,7 @@ van den Schriek
 
    S1/application  
    S2/abp
-..   S3/gbnsr
+   S3/gbnsr
 ..   S4/tcp1
 ..   S5/tcp2
 ..   S6/ip1

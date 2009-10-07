@@ -38,7 +38,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'CNP3-Practice'
-copyright = u'2009, Olivier Bonaventure, Mickael Hoerdt, Laurent Vanbever, Virginie van den Schriek'
+copyright = u'2009, Olivier Bonaventure'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
