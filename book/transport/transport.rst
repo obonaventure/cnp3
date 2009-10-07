@@ -5,7 +5,7 @@ The transport layer
 The application layer 
 The transport layer contains essential protocols
 
-.. figure:: fig/transport-fig-001-c.png
+.. Figure:: fig/transport-fig-001-c.png
    :align: center
    :scale: 50 
 
@@ -268,8 +268,6 @@ The sender side of this protocol can be expressed by the following python code a
 
 
 
-
-
 Reliable data transfert on top of an imperfect network service
 ==============================================================
 
@@ -282,9 +280,11 @@ Let us first consider a connectionless network service that may corrupt SDUs. Di
 .. sidebar:: Random errors versus malicious modifications
 
    The protocols of the transport layer are designed to recover from the random errors and losses that may occur in the underlying layers. These random
-   see [SPMR09] for how to recomput
+   see [SPMR09]_ for how to recompute a CRC
 
 In this case, we need a mechanism that allows the receiver of a segment to verify that the SDU contained in
+
+.. index:: Internet checksum
 
 Implementation of the Internet checksum defined in :rfc:`1071` in C ::
 
@@ -327,9 +327,11 @@ Implementation of the Internet checksum defined in :rfc:`1071` in C ::
 
 .. sidebar:: Checksum versus hash functions
 
-   Checksums and CRCs should not be confused with hash functions such as MD5 or SHA-1.
+   Checksums and CRCs should not be confused with hash functions such as MD5 defined in :rfc:`1321` or `SHA-1 <http://www.itl.nist.gov/fipspubs/fip180-1.htm>`_ .
 
 
+.. index:: UDP
+.. _UDP:
 
 The User Datagram Protocol
 ##########################
@@ -350,6 +352,7 @@ The figure below shows a typical usage of the UDP port numbers. The client proce
 
    Usage of the UDP port numbers
 
+.. index:: UDP segment
 
 The UDP protocol uses a single segment format shown below. The UDP header contains four fiels :
 
@@ -374,60 +377,261 @@ In most Unix variants, only processes having system administrator priviledges ca
 
 .. mention inetd and super servers somewhere ?
 
+.. index:: UDP Checksum, Checksum computation
 
 .. sidebar:: Computation of the UDP checksum
 
- The checksum of the UDP segment is computed over :
+   The checksum of the UDP segment is computed over :
 
- - a pseudo header containing the source IP address, the destination IP address and a 32 bits bit field containing a the most significant byte set to 0, the second set to 17 and the length of the UDP segment in the lower two bytes
- - the entire UDP segment, including its header
+       - a pseudo header containing the source IP address, the destination IP address and a 32 bits bit field containing a the most significant byte set to 0, the second set to 17 and the length of the UDP segment in the lower two bytes
+       - the entire UDP segment, including its header
 
- This pseudo-header allows the receiver to detect errors that affect the IP source or destination addresses that are placed in the IP layer below. This is a violation of the layer principle that dates from the time when UDP and IP were elements of a single protocol. It should be noted that if the checksum algorithm computes value '0x0000', then value '0xffff' is transmitted. A UDP segment whose checksum is set to '0x0000' is a segment for which the transmitter did not compute a checksum upon transmission. Some NFS_ servers chose to disable UDP checksums for performance reasons, but this caused `problems <http://lynnesblog.telemuse.net/192>`_ that were difficult to diagnose. In practice, there are rarely good reasons to disable UDP checksums.
-
-
-
-Several types of applications rely on UDP.
+       This pseudo-header allows the receiver to detect errors that affect the IP source or destination addresses that are placed in the IP layer below. This is a violation of the layer principle that dates from the time when UDP and IP were elements of a single protocol. It should be noted that if the checksum algorithm computes value '0x0000', then value '0xffff' is transmitted. A UDP segment whose checksum is set to '0x0000' is a segment for which the transmitter did not compute a checksum upon transmission. Some NFS_ servers chose to disable UDP checksums for performance reasons, but this caused `problems <http://lynnesblog.telemuse.net/192>`_ that were difficult to diagnose. In practice, there are rarely good reasons to disable UDP checksums.
 
 
+Several types of applications rely on UDP. As a rule of thumb, UDP is used for applications where delay must be minimised or losses can be recovered by the application itself. A first class of UDP-based applications are applications where the client sends a small request and expects quickly a small answer. The DNS_ is an example of such applications that is often used in the wide area. However, in local area networks, many distributed systems rely on Remote Procedure Call (RPC_) that is often used on top of UDP. In Unix enviroments, the Network File System (NFS_) is built on top of RPC and runs frequently on top of UDP. A second class of UDP-based applications are the interactive computer games that need to exchange frequently small informations such as the player's location or recent actions. Many of these games use UDP to minimise the delay and can recover from losses. A third class of applications are the multimedia applications such as interactive Voice over IP or interactive Video over IP. These interactive applications expect a delay shorter than about 200 milliseconds between the sender and the receiver and can recover from losses inside the application. 
+
+.. index:: TCP
+.. _TCP:
 
 The Transmission Control Protocol
 #################################
 
 
-The Transmission Control Protocol (TCP) was initially defined in :rfc:`793`
+The Transmission Control Protocol (TCP) was initially defined in :rfc:`793`. Several parts of the protocol have been improved since the publication of the original protocol specification. However, the basics of the protocol remain and an implementation that only supports :rfc:`793` should interoperate with today's implementation.
 
+TCP provides a reliable bytestream connection-oriented transport service on top of the unreliable connectionless network service provided by IP_. TCP is used my a large number of applications, including :
 
-explain segment format briefly and main principles of the protocol
+ - Email_ (SMTP_, POP_, IMAP_)
+ - World wide web ( HTTP_, ...)
+ - Most file transfert protocols ( ftp_, peer-to-peer file sharing applications , ...)
+ - remote computer access : telnet_, ssh_, X11_, VNC_, 
+ - non-interactive multimedia applications : youtube_, skype_
 
+On the global Internet, most of the applications used in the wide area rely on TCP. Many studies [#ftcpusage]_ have reported that TCP was responsible for more than 90% of the data exchanged in the global Internet.
+
+.. index:: TCP header
+ 
+To provide this service, TCP relies on a simple segment format. Each TCP segment contains a twenty bytes header described below and optionnaly a payload.
 
 .. figure:: fig/transport-fig-058-c.png
    :align: center
 
-   The UDP segment format
+   TCP segment format 
+
+A TCP header contains contains the following fields :
+
+ - Source and destination ports. The source and destination ports play an important role in TCP as they allow to identify the connection to which a TCP segment belongs. When a client opens a TCP connection, it typically selects an ephemeral TCP port number as its source port and contacts the server by using the server's port number. All the segments that will be sent by the client on this connection will have the same source and destination ports. The server will send segments that contain as source (resp. destination) port the destination (resp. source) port of the segments sent by the client. A TCP connection is always identified by five informations :
+
+   - the IP address of the client
+   - the IP address of the server
+   - the port chosen by the client
+   - the destination port of the server
+   - TCP
+
+ - the `sequence number` (32 bits), `acknowledgement number` (32 bits) and `window` (16 bits) fields are used to provide a reliable data transfert by using a window-based protocol. In a TCP bytestream, each byte of the stream consummes one sequence number. Their utilisation will be described in more details in :ref:`TCPData`
+ - the `Urgent pointer` is used to indicate that some data should be considered as urgent in a TCP bytestream. However, it is rarely used in practice and will not be described here. Additional details may be found in :rfc:`793`, :rfc:`1122` or [StevensTCP]_
+ - the flags field contain a set of bit flags that indicate how a segment should be interpreted by the TCP entity that receives it : 
+
+    - the `SYN` flag is used during connection establishment
+    - the `FIN` flag is used during connection release
+    - the `RST` is used in case of problems or when an invalid segment has been received
+    - when the `ACK` flag is set, it indicates that the `acknowledgment` field contains a valid number. Otherwise, the content of the `acknwoledgment` field must be ignored
+    - the `URG` flag is used together with the `Urgent pointer`
+    - the `PSH` flag is used as a notification from the sender to indicate to the receiver that it should pass all the data it has received to the receiving process. However, in practice TCP implementations do not allow TCP users to indicate when the `PSH` flag should be set and thus there are few real utilizations of this flag. 
+
+ - the `checksum` field contains the value of the Internet checksum computer over the entire TCP segment and a pseudo-header as with UDP
+ - the `Reserved` field is reserved for future utilization and must be set to 0
+ - the `TCP Header Length` (THL) or `Data Offset` field is a four bits field that indicates the size of the TCP header in 32 bits words. The maximum size of the TCP header is thus 64 bytes.
+ - the `Optional header extension` is used to add optional information in the TCP header. Thanks to this header extension, it is possible to add new fields in the TCP header that were not planned in the original specification. This allowed TCP to evolve since the early eighties. The details of the TCP header extension will be explained in :ref:`TCPOpen` and :ref:`TCPData`.
+ 
+.. figure:: fig/transport-fig-057-c.png
+   :align: center
+
+   Utilization of the TCP source and destination ports
+
+The rest of this section is organised as follows. We first explain the establishement and the release of a TCP connection, then we discuss the mechanisms that are used by TCP to provide a reliable bytestream service. We end the section with a discussion of network congestion and explain the mechanisms that TCP uses to avod congestion collapse.
+
+.. Urgent pointer not discussed, rarely used, see http://www.ietf.org/id/draft-ietf-tcpm-urgent-data-00.txt for discussion, defined in :rfc:`793` and updated in :rfc:`1122`
+
+
+.. _TCPOpen:
 
 TCP connection establishment
 ============================
 
-describe finite state machine
+.. index:: TCP Connection establishment, TCP SYN, TCP SYN+ACK
+
+A TCP connection is established by using a three-way handshake. The connection establishment phase uses the `sequence number` and `acknowledgment number` and the `SYN` flag. When a TCP connection is established, the two communicating hosts negotiate the initial sequence number used on both directions of the connection. For this, each TCP entity maintains a 32 bits counter that is supposed to be incremented by one at least every 4 microseconds and after each connection establishment [#ftcpclock]_. When a client host wants to open a TCP connection with a server host, it creates a TCP segment with :
+
+ - the `SYN` flag set
+ - the `sequence number` set to the current value of the 32 bits counter of the client host's TCP entity
+
+Upon reception of this segment (which is often called a `SYN segment`), the server host will reply with a segment containing :
+
+ - the `SYN` flag set
+ - the `sequence number` set to the current value of the 32 bits counter of the client host's TCP entity
+ - the `ACK` flag set
+ - the `acknowledgment number` set to the `sequence number` of the received `SYN` segment incremented by 1 (:math:`~mod~2^{32}`) [#ftcpinc]_
+
+This segment is often called a `SYN+ACK` segment. The acknowledgment confirms to the client that the server has correctly received the `SYN` segment. The `sequence number` of the `SYN+ACK` is used by the server host to verify that the `client` host receives the segment. Upon reception of the `SYN+ACK` segment, the client host will reply with a segment containing :
+
+ - the `ACK` flag set
+ - the `acknowledgment number` set to the `sequence number` of the received `SYN+32` segment incremented by 1 ( :math:`~mod~2^{32}`)
+
+At this point, the TCP connection is open and both the client and the server are allowed to send TCP segments containing data. This is illustrated in the figure below. 
+
+.. figure:: fig/transport-fig-059-c.png
+   :align: center
+
+   Establishment of a TCP connection
+
+In the figure above, the connection is considered established by the client once it has received the `SYN+ACK` segment while the server considers the connection to be established upon reception of the `ACK` segment. The first data segment sent by the client (server) will have its `sequence number` set to `x+1` (resp. `y+1`). 
+
+.. index:: TCP Initial Sequence Number
+
+.. sidebar:: Computing TCP's initial sequence number
+
+ In the original TCP specification :rfc:`793`, each TCP entity maintained a clock to compute the initial sequence number (ISN_) placed in the `SYN` and `SYN+ACK` segments. This made the iss predictible and caused a security problem. The typical security problem was the following. Consider a server that trusts a host based on its IP address. For example, the server allows this host to login without giving a password [#frlogin]_. Consider now an attacker who knows this particular configuration and is able to send IP packets having the client's address as source. He can send fake TCP segments to the server, but does not receive the server's answers. If he can predict the `ISN` that will be chosen by the server, he can send a fake `SYN` segment and shortly after the fake `ACK` segment that confirms the reception of the `SYN+ACK` segment sent by the server. Once the TCP connection is open, he can use it to send any command on the server. To counter this attack, current TCP implementations add randomness to the `ISN`. One of the solutions, proposed in :rfc:`1948` is to compute the `ISN` as ::
+ 
+  ISN = M + H(localhost, localport, remotehost, remoteport, secret).
+
+ where `M` is the current value of the TCP clock and `H` a cryptographic hash function. `localhost` and `remotehost` (resp. `localport` and `remoteport` ) are the IP addresses (port numbers) of the local and remote host and `secret` is a random number only known by the server. This method allows the server to use different ISNs for different clients at the same time. `Measurements <http://lcamtuf.coredump.cx/newtcp/>`_ performed with the first implementations of this technique showed that it was difficult to implement it correctly, but today's TCP implementation now generate good ISNs.
+
+ 
+.. index:: TCP RST
+
+A server could, of course, refuse to open a TCP connection upon reception of a `SYN` segment. This refusal may be due to various reasons. There may be no server process that is listening on the destination port of the `SYN` segment. The server could always refuse connection establishments from this particular client (e.g. due to security reasons) or the server may not have enough resources to accept a new TCP connection now. In this case, the server would reply with a TCP segment having its `RST` flag and containing the `sequence number` of the received `SYN` segment as its `acknowledgment number`. This is illustrated in the figure below. We will discuss the various utilizations of the TCP `RST` flag later (see :ref:`TCPReset`).
+
+.. figure:: fig/transport-fig-061-c.png
+   :align: center
+
+   TCP connection establishment rejected by peer
 
 
-.. sidebar:: Denial of service
+The TCP connection establishment can be described as the four states Finite State Machine shown below. In this FSM, `!X` (resp. `?Y`) indicates the transmission of segment `X` (resp. reception of segment `Y`) during the corresponding transition. `Init` is the initial state. 
 
- explain syn DoS, reference :rfc:`4987`
- syn flood affecting panix http://memex.org/meme2-12.html
+.. figure:: fig/transport-fig-063-c.png
+   :align: center
+
+   TCP FSM for connection establishment
+
+A client host starts in the `Init` state. It then sends a `SYN` segment and enters the `SYN Sent` state where it waits for a `SYN+ACK` segment, replies with an `ACK` segment and enters the `Established` state where data can be exchanged. On the other hand, a server host starts in the `Init` state. When a server process starts to listen to a destination port, the underlying TCP entity creates a TCP control block and a queue to process incoming `SYN` segments. Upon reception of a `SYN` segment, the server's TCP entity replies with a `SYN+ACK` and enters the `SYN RCVD` state. It remains in this state until it receives an `ACK` segment that acknowledges its `SYN+ACK` segment.
+
+Besides these two paths in the TCP connection establishment FSM, there is a third path that corresponds to the case when both the client and the server send a `SYN` segment to open a TCP connection [#ftcpboth]_. In this case, the client and the server send a `SYN` segment and enter the `SYN Sent` state. Upon reception of the `SYN` segment sent by the other host, they reply by sending a `SYN+ACK` segment and enter the `SYN Rcvd` state. The `SYN+ACK` that will arrive from the other host will allow them to transition to the `Established` state. The figure below shows such a simultaneous establishment of a TCP connection.
+
+.. figure:: fig/transport-fig-062-c.png
+   :align: center
+
+   Simultaneous establishment of a TCP connection
 
 
+.. index:: SYN cookies, Denial of Service
+
+.. sidebar:: Denial of Service attacks
+
+ When a TCP entity opens a TCP connection, it creates a Transmission Control Block (TCB). The TCB contains all the state that is maintained by the TCP entity for each TCP connection. During connection establishment, the TCB contains the local IP address, the remote IP address, the local port number, the remote port number, the current local sequence number, the last sequence number received from the remote entity, ... :rfc:`793` Until the mid 1990s, TCP implementations had a limit on the number of TCP connnections that could be in the `SYN Rcvd` state at a given time. Many implementations set this limit to about 100 TCBs. This limit was 100 TCBs was considered sufficient even for heavily load http servers given the small delay between the reception of a `SYN` segment and the reception of the `ACK` segment that terminates the establishment of the TCP connection. When the limit of 100 TCBs in the `SYN Rcvd` state is reached, the TCP entity discard all received TCP `SYN` segments that do not correspond to an existing TCB. 
+
+ This limit of 100 TCBs in the `SYN Rcvd` state Was chosen to protect the TCP entity from the risk of overloading its memory with too many TCBs in the `SYN Rcvd` state. However, it was also the reason for a new type of the Denial of Service (DoS) attack :rfc:`4987`. A DoS attack is defined as an attack where an attacker can render a resource useless in the network. For example, an attacker may cause a DoS attack on a 2 Mbps link used by a company by sending more than 20 Mpbs of packets through this link. In the case of the TCBs, the DoS attack was more subtle. As a TCP entity discards all received `SYN` segments as soon as it has 100 TCBs in the `SYN Rcvd` state, an attacker simply had to send a few 100s of `SYN` segments every second to a server and never reply to the received `SYN+ACK` segments. To avoid being caught, attackers were of course sending these `SYN` segments with a different address than their own IP address [#fspoofing]_. On most TCP implementations, once a TCB entered the `SYN Rcvd` state, it remained in this state for several seconds, waiting for a retransmission of the initial `SYN` segmet. This attack was later called a `SYN flood` attack and the servers of the ISP named panix were among the firsts to `suffer <http://memex.org/meme2-12.html>`_ from it.
+
+ To avoid the `Syn flood` attacks, recent TCP implementations do not anymore enter the `SYN Rcvd` state upon reception of a `SYN segment`. Instead, they reply directly with a `SYN+ACK` segment and wait until the reception of a valid `ACK`. This implementation trick is only possible if the TCP implementation is able to verify that the received `ACK` segment acknowedges the `SYN+ACK` segment sent earlier without storing the `ISN` of this `SYN+ACK` segment in a TCB. The solution to solve this problem, which is known as `SYN cookies <http://cr.yp.to/syncookies.html>`_ is to compute the 32 bits of the `ISN` as follows :
+
+   - the high order bits contain a the low order bits of a counter that is incremented slowly
+   - the low order bits contain a hash value computed over the local and remote IP addresses and ports and a random secret only known to the server
+   
+ The advantage of the `SYN cookies`_ is that by using them, the server does not need to create a TCB_ upon reception of the `SYN` segment and can still check the returned `ACK` segment by recomputing the `SYN cookie`.
+
+
+.. sidebar:: Retransmitting the first `SYN` segment
+
+   As IP provides an unreliable connectionless service, the `SYN` and `SYN+ACK` segments sent to open a TCP connection could be lost. Current TCP implementations start a retransmission timer when then send the first `SYN` segment. This timer is often set to a three seconds for the first retransmission and then doubles after each retransmission :rfc:`2988`. TCP implementations also enforce a maximum number of retransmissions for the initial `SYN` segment.  
+
+
+.. index:: TCP Options
+
+As explained earlier, TCP segments may contain an optional header extension. In the `SYN` and `SYN+ACK` segments, these options are used to negotiate some parameters and the utilisation of extensions to the basic TCP specification. 
+
+.. index:: TCP MSS, Maximum Segment Size, MSS
+
+The first parameter which is negotiated during the establishment of a TCP connection is the Maximum Segment Size (MSS). The MSS is the size of the largest segment that a TCP implementation is able to process. According to :rfc:`879`, all TCP implementations must be able to receive TCP segments containing 536 bytes of payload. However, most TCP implementations are able to process larger segments. Such TCP implementations use the TCP MSS Option in the `SYN`/`SYN+ACK` segment to indicate the largest segment that are able to process. The MSS value indicates the maximum size of the payload of the TCP segments. The client (resp. server) stores in its TCB_ the MSS value announced by the server (resp. the client).
+
+Another utilisation of the TCP options during connection establishment is to enable TCP extensions. For example, consider :rfc:`1323` (that will be discussed in :ref:`TCPReliable`). :rfc:`1323` defines TCP extensions to support timestamps and larger windows. If the client supports :rfc:`1323` it adds a :rfc:`1323` option to its `SYN` segment. If the server understands this :rfc:`1323` option and wishes to use it, it replies with an :rfc:`1323` option in the `SYN+ACK` segment and the extension defined in :rfc:`1323` is used throughout the TCP connection. Otherwise, if the server's `SYN+ACK` does not contain the :rfc:`1323` option, the client is not allowed to use this extension and the corresponding TCP header options throughout the TCP connection. TCP's option mechanism is flexible and it allowed to extend TCP while maintaining compatibility with older implementations.
+
+The TCP options are encoded by using a Type Length Value format where :
+
+ - the first byte indicates the `type` of the option.
+ - the second byte indicates the total length of the option (including the first two bytes) in bytes
+ - the last bytes are specific for each type of option
+
+:rfc:`793` defines the Maximum Segment Size (MSS) TCP option that must be understood by all TCP implementations. This option (type 2) has a length of 4 bytes and contains a 16 bits word that indicates the MSS supported by the sender of the `SYN` segment. The MSS option can only be used in TCP segments having the `SYN` flag set.
+
+:rfc:`793` also defines two special options that must be supported by all TCP implementations. Since the TCP Header Length field contains the length of the TCP header in 32 bits word, The first option is `End of option`. It is encoded as a single byte having value `0x00` and can be used to ensure that the TCP header extension ends on a 32 bits boundary. The `No-Operation`, encoded as a single byte having value `0x01`, can be used when the TCP header extension contains several TCP options that should be aligned on 32 bits boundaries. All other options [#ftcpoptions]_ are encoded with the TLV format. 
+
+
+
+
+.. _TCPRelease:
 
 TCP connection release
 ======================
 
+.. index:: TCP connection release
+
+TCP, like most 
+
+
 .. sidebar:: TIME\_WAIT on busy TCP servers
 
- see [AW05]_ and [FTY99]_ 
+   see [AW05]_ and [FTY99]_ 
 
 .. tuning timewait http://publib.boulder.ibm.com/infocenter/wasinfo/v7r0/index.jsp?topic=/com.ibm.websphere.edge.doc/cp/admingd45.htm bad idea
 
+two types of release
 
+graceful
+
+abrupt
+
+A TCP entity should never send a RST segment
+upon reception of another RST segment
+
+
+processing TCP RST
+
+.. figure:: fig/transport-fig-067-c.png
+   :align: center
+
+   FSM for TCP connection release
+
+
+.. _TCPData:
+
+TCP reliable data transfert
+===========================
+
+sequence number ack number
+
+window, basic and window scaling :rfc:`1323`
+
+rtt estimation, karn/partridge, :rfc:`1323` timestamp option
+
+retransmission mechanisms
+ - timer based
+ - duplicate acks
+ - sack
+ - fack 
+ - others ?
+
+Nagle
+
+.. _TCPReset:
+
+.. sidebar:: TCP Reset
+
+   Explain TCP reset and the risks of attacks
+
+
+.. _TCPCongestion:
 
 TCP congestion control
 ======================
@@ -471,5 +675,20 @@ Other transport protocols
 .. [#fportnum] The complete list of allocated port numbers is maintained by IANA_ . It may be downloaded from http://www.iana.org/assignments/port-numbers
 
 .. [#fephemeral] A discussion of the ephemeral port ranges used by different TCP/UDP implementations may be found in http://www.ncftp.com/ncftpd/doc/misc/ephemeral_ports.html
+
+.. [#ftcpusage] Several researchers have analysed the utilisation of TCP and UDP in the global Internet. Most of these studies have been performed by collecting all the packets transmitted over a given link during a period of a few hours or days and then analysing their headers to infer the transport protocol used, the type of application, ... Recent studies include http://www.caida.org/research/traffic-analysis/tcpudpratio/, https://research.sprintlabs.com/packstat/packetoverview.php or http://www.nanog.org/meetings/nanog43/presentations/Labovitz_internetstats_N43.pdf
+
+.. [#ftcpclock] This 32 bits counter was specified in :rfc:`793`. A 32 bits counter that is incremented every 4 microseconds wraps in about 4.5 hours. This period is much larger than the Maximum Segment Lifetime that is fixed at 2 minutes in the Internet (:rfc:`791`, :rfc:`1122`).
+
+.. [#frlogin] On many departmental networks containing Unix workstations, it was common to allow users on one of the hosts to use rlogin_ and rsh_ to run commands on any of the workstations of the network without giving any password. In this case, the remote workstation "authenticated" the client host based on its IP address. This was a bad practice from a security viewpoint.
+
+.. [#fctpinc] When a TCP entity sends a segment having `x+1` as acknowledgment number, this indicates that it has received all data up to and including sequence number `x` and that it is expecting data having sequence number `x+1`. As the `SYN` flag was set in a segment having sequence number `x`, this implies that setting the `SYN` flag in a segment consummes one sequence number.
+
+.. [#ftcpboth] Of course, such a simultaneous TCP establishment can only occur if the source port chosen by the client is equal to the destination port chosen by the server. This may happen when a host can serve both as a client as a server or in peer-to-peer applications when the communicating hosts do not use ephemeral port numbers. 
+
+.. [#fspoofing] Sending a packet with a different source IP address than the address allocated to the host is called sending a spoofed packet.
+
+.. [#ftcpoptions] The full list of all TCP options may be found at http://www.iana.org/assignments/tcp-parameters/
+
 
 .. include:: ../links.rst

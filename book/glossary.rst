@@ -92,3 +92,12 @@ Glossary
 
    ftp
 	The File Transfert Protocol defined in :rfc:`959` has been the de facto protocol to exchange files over the Internet before the widespread adoption of :rfc:`http`
+
+   ISN
+	The Initial Sequence Number of a TCP connection is the sequence number chosen by the client ( resp. server) that is placed in the `SYN` (resp. `SYN+ACK`) segment during the establishment of the TCP connection.
+
+   SYN cookie
+        The SYN cookies is a technique used to compute the ISN_ 
+
+   TCB
+	The Transmission Control Block is the set of variables that are maintained for each established TCP connection by a TCP implementation. 

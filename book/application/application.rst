@@ -35,17 +35,21 @@ Protocols
 #########
 
 
-.. DNS
+.. _DNS:
 
 The Domain Name System
 ======================
 
+
+.. _Email:
 
 Electronic mail
 ===============
 
 
 describe architecture
+
+.. _SMTP:
 
 The Simple Mail Transfert Protocol
 ----------------------------------
@@ -56,6 +60,8 @@ describe protocol
 
 MIME :rfc:`2045` :rfc:`2046`
 
+.. _POP:
+
 The Post Office Protocol
 ------------------------
 
@@ -65,6 +71,7 @@ The IMAP :rfc:`2060`
 
 webmail (mainly implementations, no standard)
 
+.. _HTTP:
 
 The HyperText Transfert Protocol
 ================================
@@ -83,6 +90,10 @@ html http://www.w3.org/MarkUp
 http 1.0 : :rfc:`1945`
 
 http 1.1 :rfc:`2616`
+
+
+The socket API
+==============
 
 Practice
 ########

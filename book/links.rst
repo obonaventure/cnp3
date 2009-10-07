@@ -13,6 +13,8 @@
 
 .. _Internet drafts: http://www.ietf.org/id-info/
 
+.. _telnet: http://en.wikipedia.org/wiki/Telnet
+
 .. _Paul Baran: http://en.wikipedia.org/wiki/Paul_Baran
 
 .. _Donald Davies: http://en.wikipedia.org/wiki/Donald_Davies
@@ -96,3 +98,4 @@
 .. _`Philippe Biondi`: http://www.secdev.org/
 
 .. _UML: http://user-mode-linux.sourceforge.net/
+

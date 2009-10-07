@@ -26,6 +26,10 @@ Whenever possible, the bibliography includes hypertext links to the references c
 
 .. [Selinger] Selinger, P., MD5 collision demo, http://www.mscs.dal.ca/~selinger/md5collision/
 
+.. [StevensTCP] Stevens, R., TCP/IP Illustrated : the Protocols, Addison-Wesley, 1994
+
+.. [Goralski2009] Goralski, W., The Illustrated network : How TCP/IP works in a modern network, Morgan Kaufmann, 2009
+
 .. [X200] ITU-T, recommendation X.200, Open Systems Interconnection - Model and Notation, 1994, http://www.itu.int/rec/T-REC-X.200-199407-I/en
 
 .. [X224] ITU-T, recommendation X.224 : Information technology - Open Systems Interconnection - Protocol for providing the connection-mode transport service, 1995, http://www.itu.int/rec/T-REC-X.224-199511-I/en/
