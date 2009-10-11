@@ -9,7 +9,7 @@ group, you will write one sender per team of two students.
 The deadline for this exercise is Tuesday October 13th, 2009 at 13.00.
 
 Partial implementation of a simplified GBN receiver in scapy_
-.............................................................
+-------------------------------------------------------------
 
 Our go-back-n protocol relies on a very simple header that can be
 implemented by the following scapy_ class ::
@@ -72,10 +72,10 @@ simple go-back-n protocol ::
                 self.dbg=debug        # True if debug output is requested, false otherwise
 		self.sender = sender  # ip address of sender
                 self.next=0           # next expected sequence number
-
+ 
 	def master_filter(self, pkt):
         	return (IP in pkt and pkt[IP].src == self.sender and GBN in pkt)
-
+ 
 	@ATMT.state(initial=1)
 	def WAIT_SEGMENT (self):
             if self.dbg:
@@ -89,14 +89,14 @@ simple go-back-n protocol ::
                 if self.dbg:
                     print " Lost : [type=",pkt.getlayer(GBN).type,",
 	num=",pkt.getlayer(GBN).num," ,win=",pkt.getlayer(GBN).win,"]"
-	
+ 	
 	        raise self.WAIT_SEGMENT()
-                    
+                     
             else:
                 # segment was received correctly
                 if self.dbg:
                     print " Received : [type=",pkt.getlayer(GBN).type,", num=",pkt.getlayer(GBN).num," ,win=",pkt.getlayer(GBN).win,"] payload=",pkt.getlayer(GBN).payload
-
+ 
                 # check if segment is a data segment    
 		ptype = pkt.getlayer(GBN).type
                 if ptype==0:
@@ -112,7 +112,7 @@ simple go-back-n protocol ::
                     # we received an ack while we are supposed to receive only data segments
                     print "ERROR: Received ack segment : ",pkt.show()
                     sys.exit(-1)
-
+ 
                 # send ack back to sender    
                 if random.random() < self.pack :
                     # the ack will be lost, discard it
@@ -143,7 +143,7 @@ handled by the `wait_segment` receive condition that operates as follows.
 
 
 Preliminary questions
-......................
+---------------------
 
 The following questions should help you to prepare your implementation of the go-back-n sender FSM.
 
@@ -162,7 +162,7 @@ The following questions should help you to prepare your implementation of the go
 #. When the timer expires, what are the segments that should be retransmitted ? How do you retransmit them ?
 
 Implementation of the sender FSM
-................................
+--------------------------------
 
 To implement the FSM for your go-back-n sender, you can start from the
 skeleton FSM below that is composed of two states, one timeout and one
@@ -237,7 +237,7 @@ To implement the go-back-n receiver, you can reuse the UML machines that you use
  - recompile scapy (`python setup clean` and `python setup install`) and you are ready to implement your go-back-n sender.
 
 Deliverables
-............
+------------
 
 For this week, you need to provide in your group's subversion repository :
 

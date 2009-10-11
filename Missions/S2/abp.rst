@@ -8,7 +8,7 @@ October 6th, 2009 at 13.00*.
 
 
 scapy_
-......
+------
 
 
 For this exercise, and many of others, we will extend scapy_. scapy_ is
@@ -17,8 +17,6 @@ others. scapy is open-source and written in python_. It was designed as
 a tool to easily create and process specially crafted TCP/IP
 packets. We will use scapy as a prototyping tool that allows to easily
 implement simple protocols and simple mechanisms.
-
-
 
 
 .. explain layering
@@ -391,7 +389,7 @@ description of the automatons : http://www.secdev.org/projects/scapy/doc/advance
 
 
 Implementing the Alternating Bit Protocol in scapy_
-...................................................
+---------------------------------------------------
 
 The Alternating Bit Protocol (ABP) is the simplest protocol that provides a
 reliable data transfer in the transport layer. Your objective for this
@@ -427,7 +425,7 @@ can reuse the standard python classes, such as :
 
 
 Running scapy_ in the lab
-.........................
+-------------------------
 
 
 To allow you to write the required scapy_ extensions without losing
