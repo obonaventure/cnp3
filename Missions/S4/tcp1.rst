@@ -42,7 +42,7 @@ The other fields of the TCP header are set to a default value (urgptr) or automa
 
  p=IP(dst="5.6.7.8",src="1.2.3.4")/TCP(dport=9999,sport=80,flags="SA",window=4096,seq=56789,ack=1235)
 
-Note that in the reply, the source and destination addresses and the source and destination ports have been swapped. When establishing a TCP connection, the utilisation of the `SYN` flag consummes one sequence number. This explains why the `ack` field of the reply segment is set to `1235` while the sequence number of the `SYN` segment was `1234`.
+Note that in the reply, the source and destination addresses and the source and destination ports have been swapped. When establishing a TCP connection, the utilisation of the `SYN` flag consumes one sequence number. This explains why the `ack` field of the reply segment is set to `1235` while the sequence number of the `SYN` segment was `1234`.
 
 scapy_ allows you to easily set a flag in the header of a TCP segment that you create. However, scapy_ is not as user friendly to check the value of a flag in a received segment. For this, you can use the following function ::
 
@@ -52,8 +52,8 @@ scapy_ allows you to easily set a flag in the header of a TCP segment that you c
     
     :param pkt: segment to compare flag values 
     :type pkt:  scapy.TCP
-    :param flag_str: character corresponding to the flag 
-    :type flag_str: char
+    :param flag: character corresponding to the flag 
+    :type flag: char
     :return: True if flag was set in pkt, False otherwise
     :rtype: boolean
     '''
@@ -137,7 +137,7 @@ For this exercise we will limit the number of unacknowledged segments to `one`. 
 
 The TCB also needs to contain the current size of the windows :
 
- - `self.sndwnd` : the current sending windowd
+ - `self.sndwnd` : the current sending window
  - `self.rcvwnd` : the current window advertised by the receiver
 
 For this exercise, you do not need to process the `window` field of the received segments. You can assume that the receiver is always advertising a window of a least one segment.
@@ -146,7 +146,7 @@ For this exercise, you do not need to process the `window` field of the received
 Practical issues
 ----------------
 
-For this exercise, you will reuse the UML virtual machines that you have used for the two previous exercices. 
+For this exercise, you will reuse the UML virtual machines that you have used for the two previous exercises. 
 
 As you are implementing a protocol that is already supported by the Linux kernel, you need to ensure that the Linux kernel will not reply to the TCP segments that your implementation receives. For this, the easiest solution is to configure the firewall [#ffirewall]_ on the UML machine where you are running scapy_ to block all TCP segments. TCP should only be blocked on the interface between the two UML between. For example, if you run scapy_ on the UML1 and test it against UML2, you could configure UML1's firewall as follows ::
 
@@ -173,12 +173,84 @@ The two FSMs must correctly process the TCP segments with the `SYN`, `RST` and `
 
 To simplify the TCP connection establishment, you can ignore the options in the `SYN` segment and assume the default MSS_ size of 536 bytes as defined in :rfc:`793`. 
 
-You do not need to implement the TCP connection release. To release the TCP connection, you can set a long timeout in the `ESTABLISHED` and send a `RST` segment when this timer expires :: 
+For the TCP client, your implementation should be structured as follows ::
+
+ class TCP_simpleclient(Automaton):
+    
+    def parse_args(self, remoteip, remoteport, data, *args, **kargs):
+	Automaton.parse_args(self, **kargs)
+	# to be completed
+
+    def master_filter(self, pkt):
+        return (IP in pkt 
+	       # to be completed
+	       )
+
+    @ATMT.state(initial=1)
+    def INIT(self):
+    # to be completed
+
+    @ATMT.state()
+    def SYN_SENT(self):
+    # to be completed
+
+    @ATMT.state()
+    def SYN_RCVD(self):
+    # to be completed 
+	    
+    @ATMT.state()
+    def ESTABLISHED(self):
+        # to be completed 
+
+    @ATMT.state(final=1)
+    def CLOSED(self):
+        print "Done !"
+
+    # receive_conditions and timeouts to be added
+
+
+For the TCP server, your implementation should be structured as follows ::
+
+ class TCP_simpleserver(Automaton):
+    
+    def parse_args(self, remoteip, localport, *args, **kargs):
+	Automaton.parse_args(self, **kargs)
+        # to be completed 
+
+    def master_filter(self, pkt):
+        return (IP in pkt 
+	        # to be completed
+                )
+
+    @ATMT.state(initial=1)
+    def INIT(self):
+    # to be completed 
+
+    @ATMT.state()
+    def SYN_RCVD(self):
+    # to be completed 
+
+    @ATMT.state()
+    def SYN_SENT(self):
+    # to be completed
+
+    @ATMT.state()
+    def ESTABLISHED(self):
+    # to be completed 
+
+    @ATMT.state(final=1)
+    def CLOSED(self):
+        print "Done !"
+
+    # receive_conditions and timeouts to be added
+  
+
+You do not need to implement the TCP connection release. To release the TCP connection, you can set a long timeout in the `ESTABLISHED` and send a `RST` segment when this timer expires ::
 
     @ATMT.timeout(ESTABLISHED,15)
     def reset_connection(self):	
         # send RST segment
-        p=IP(dst=self.dst)/TCP(seq=self.snduna,sport=self.sport,dport=self.dport,ack=self.rcvnxt,window=self.sndwnd,flags='R')
+        p=IP(dst=self.remoteip)/TCP(seq=self.snduna,sport=self.localport,dport=self.remoteport,ack=self.rcvnxt,window=self.sndwnd,flags='R')
 	
 Remember that the initial TCP specification :rfc:`793` defines a go-back-n mechanism for TCP. This implies that your implementation can behave as a go-back-n receiver (e.g. ignore out-of-sequence segments) or sender. To simplify the retransmission of segments, consider that you send a single segment at a time. You can advertise a TCP window size of one segment (536 bytes) to limit the number of segments that the remote TCP implementation will send you.
 
