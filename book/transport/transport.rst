@@ -5,7 +5,7 @@ The transport layer
 The application layer 
 The transport layer contains essential protocols
 
-.. Figure:: fig/transport-fig-001-c.png
+.. figure:: fig/transport-fig-001-c.png
    :align: center
    :scale: 50 
 
@@ -398,7 +398,7 @@ The Transmission Control Protocol
 #################################
 
 
-The Transmission Control Protocol (TCP) was initially defined in :rfc:`793`. Several parts of the protocol have been improved since the publication of the original protocol specification. However, the basics of the protocol remain and an implementation that only supports :rfc:`793` should interoperate with today's implementation.
+The Transmission Control Protocol (TCP) was initially defined in :rfc:`793`. Several parts of the protocol have been improved since the publication of the original protocol specification [#ftcpspecs]_. However, the basics of the protocol remain and an implementation that only supports :rfc:`793` should interoperate with today's implementation.
 
 TCP provides a reliable bytestream connection-oriented transport service on top of the unreliable connectionless network service provided by IP_. TCP is used my a large number of applications, including :
 
@@ -501,13 +501,12 @@ In the figure above, the connection is considered established by the client once
  
 .. index:: TCP RST
 
-A server could, of course, refuse to open a TCP connection upon reception of a `SYN` segment. This refusal may be due to various reasons. There may be no server process that is listening on the destination port of the `SYN` segment. The server could always refuse connection establishments from this particular client (e.g. due to security reasons) or the server may not have enough resources to accept a new TCP connection now. In this case, the server would reply with a TCP segment having its `RST` flag and containing the `sequence number` of the received `SYN` segment as its `acknowledgment number`. This is illustrated in the figure below. We will discuss the various utilizations of the TCP `RST` flag later (see :ref:`TCPReset`).
+A server could, of course, refuse to open a TCP connection upon reception of a `SYN` segment. This refusal may be due to various reasons. There may be no server process that is listening on the destination port of the `SYN` segment. The server could always refuse connection establishments from this particular client (e.g. due to security reasons) or the server may not have enough resources to accept a new TCP connection now. In this case, the server would reply with a TCP segment having its `RST` flag and containing the `sequence number` of the received `SYN` segment as its `acknowledgment number`. This is illustrated in the figure below. We will discuss the other utilizations of the TCP `RST` flag later (see :ref:`TCPReset`).
 
 .. figure:: fig/transport-fig-061-c.png
    :align: center
 
    TCP connection establishment rejected by peer
-
 
 The TCP connection establishment can be described as the four states Finite State Machine shown below. In this FSM, `!X` (resp. `?Y`) indicates the transmission of segment `X` (resp. reception of segment `Y`) during the corresponding transition. `Init` is the initial state. 
 
@@ -567,8 +566,11 @@ The TCP options are encoded by using a Type Length Value format where :
 
 :rfc:`793` also defines two special options that must be supported by all TCP implementations. Since the TCP Header Length field contains the length of the TCP header in 32 bits word, The first option is `End of option`. It is encoded as a single byte having value `0x00` and can be used to ensure that the TCP header extension ends on a 32 bits boundary. The `No-Operation`, encoded as a single byte having value `0x01`, can be used when the TCP header extension contains several TCP options that should be aligned on 32 bits boundaries. All other options [#ftcpoptions]_ are encoded with the TLV format. 
 
+.. sidebar:: The robustness principle
 
+ The handling of the TCP options by TCP implementations is one of the many applications of the `robustness principle` which is usually attributed to `Jon Postel`_ and is often quoted as `"Be liberal in what you accept, and conservative in what you send"` :rfc:`1122`
 
+ Concerning the TCP options, the robustness principle implies that a TCP implementation should be able to accept TCP options that it does not understand, in particular in received `SYN` segments, and that it should be able to parse any received segment without crashing, even if the segment contains an unknown TCP option. 
 
 .. _TCPRelease:
 
@@ -577,43 +579,216 @@ TCP connection release
 
 .. index:: TCP connection release
 
-TCP, like most 
+TCP, like most connection-oriented transport protocols support two types of connection release :
+
+ - graceful connection release where each TCP user can release its own direction of data transfer
+ - abrupt connection release where either one user closes both directions of data transfert or one of the TCP entity is forced to close the connection (e.g. because the remote host does not reply anymore or due to lack of resources)
+
+.. _TCPReset:
+
+The abrupt connection release mechanism is very simple and relies on a single segment having the `RST` bit set. A TCP segment containing the `RST` bit can be sent for the following reasons :
+
+ - a non-`SYN` segment was received for a non-existing TCP connection :rfc:`793`
+ - by extension, some implementations respond with a `RST` segment to a segment that is received on an existing connection but with an invalid header :rfc:`3360`. This causes the corresponding connection to be closed has lead to security attacks :rfc:`4953`
+ - by extension, some implementations send a `RST` segment when they need to close an existing TCP connection (e.g. because there are not enough resources to support this connection or because the remote host is considered to be unreachable). Measurements have shown that this usage of TCP `RST` was widespread [AW05]_
+
+.. sidebar:: TCP `RST` wars
+
+.. index:: Robustness principle
+
+ TCP implementers should ensure that two TCP entities never enter in a TCP `RST` war where host `A` is sending a `RST` segment in response to a previous `RST` segment that was sent by host `B` in response to a TCP `RST` segment sent by host `A` ... To avoid such an infinite exchange of `RST` segments that do not carry data, a TCP entity is *never* allowed to send a `RST` segment in response to another `RST` segment. 
 
 
-.. sidebar:: TIME\_WAIT on busy TCP servers
+The normal way of terminating a TCP connection is by using the graceful TCP connection release. This mechanism uses the `FIN` flag of the TCP header and allows each host to release its own direction of data transfer. As for the `SYN` flag, the utilisation of the `FIN` flag in the TCP header consumes one sequence number. The figure below shows the part of the TCP FSM that contains the states during the release phase. 
 
-   see [AW05]_ and [FTY99]_ 
-
-.. tuning timewait http://publib.boulder.ibm.com/infocenter/wasinfo/v7r0/index.jsp?topic=/com.ibm.websphere.edge.doc/cp/admingd45.htm bad idea
-
-two types of release
-
-graceful
-
-abrupt
-
-A TCP entity should never send a RST segment
-upon reception of another RST segment
-
-
-processing TCP RST
 
 .. figure:: fig/transport-fig-067-c.png
    :align: center
 
    FSM for TCP connection release
 
+Starting from the `Established` state, there are two main paths through this FSM.
+
+The first path is when the host receives a segment with sequence number `x` and the `FIN` flag set. The utilisation of the `FIN` flag indicates that the `x` was the last byte of the byte stream sent by the remote host. Once all data up to sequence number `x` have been delivered to the user, the TCP entity will send an `ACK` segment whose `ack` field is set to :math:`~(x+1)~mod~2^{32}` to acknowledge the `FIN` segment. The `FIN` segment is subject to the same retransmission mechanisms as a normal TCP segment. In particular, its transmission is protected by the retransmission timer. At this point, the TCP connection enters the `CLOSE\_WAIT` state. In this state, the host can still send data to the remote host. Once all the data have been sent, it will send a `FIN` segment and enter the `LAST\_ACK` state. In this state, the TCP entity will wait for the acknowledgement of its `FIN` segment. It may still retransmit unacknowledged data segments e.g. if the retransmission timer expires. Upon reception of the acknowledgement for the `FIN` segment, the TCP connection is completely closed and its TCB_ can be discarded. 
+
+The second path is when the host decides first to send a `FIN` segment. In this case, it enters the `FIN_WAIT1` state. It this state, it can retransmit unacknowledged segments but cannot send new data segments. It will wait for an acknowledgement of its `FIN` segment, but may receive a `FIN` segment sent by the remote host. In the first case, the TCP connection enters the `FIN\_WAIT2` state. In this state, new data segments from the remote host are still accepted until the reception of the `FIN` segment. The acknowledgement for this `FIN` segment is sent once all data received before the `FIN` segment have been delivered to the user and the connection enters the `TIME\_WAIT` state. In the second case, a `FIN` segment is received and the connection enters the `Closing` state one all data received from the remote host have been delivered to the user. In this state, no new data segments can be sent and the host waits for an acknowledgement of its `FIN` segment before entering the `TIME\_WAIT` state.
+
+The `TIME\_WAIT` state is different from the other states of the TCP FSM. A TCP entity enters in this state after having sent the last `ACK` segment on a TCP connection. This segment indicates to the remote host that all the data that it has sent have been correctly received and that it can safely release the TCP connection and discard the corresponding TCB_. After having sent the last `ACK` segment, a TCP connection enters the `TIME\_WAIT` And remains in this state during :math:`2*MSL` seconds. During this period, the TCB of the connection is maintained to allow the host to retransmit the last `ACK` for example if the remote host retransmits its `FIN` segment. The delay of :math:`2*MSL` seconds ensures that any duplicate segments on the connection would be handled correctly without causing the transmission of a `RST` segment. Without the `TIME\_WAIT` state and the :math:`2*MSL` seconds delay, the connection release would not be graceful when the last `ACK` segment is lost. 
+
+.. sidebar:: TIME\_WAIT on busy TCP servers
+
+ The :math:`2*MSL` seconds delay in the `TIME\_WAIT` state is an important operationnal problem on servers having thousands of simultaneously opened TCP connections [FTY99]_. Consider for example a busy web server that processes 10.000 TCP connections every second. If each of these connections remains in the `TIME\_WAIT` state during 4 minutes, this implies that the server would have to maintain more than 2 millions TCBs at any time. For this reason, some TCP implementations prefer to perform an abrupt connection release by sending a `RST` segment to close the connection [AW05]_ and immediately discarding the corresponding TCB_. However, if the `RST` segment is lost, the remote host will continue to maintain a TCB_ for a connection that does not exist anymore. This optimisation reduces the number of TCBs maintained by the host sending the `RST` segment but at the cost of possibly more processing on the remote host when the `RST` segment is lost.
+
+.. tuning timewait http://publib.boulder.ibm.com/infocenter/wasinfo/v7r0/index.jsp?topic=/com.ibm.websphere.edge.doc/cp/admingd45.htm bad idea
+
+.. sidebar TCP RST attacks  Explain TCP reset and the risks of attacks rfc4953
 
 .. _TCPData:
 
 TCP reliable data transfert
 ===========================
 
-sequence number ack number
+The original TCP data transfer mechanisms were defined in :rfc:`793`. Based on the experience of using TCP on the growing global Internet, this part of the TCP specification has been updated and improved several times, always while preserving the backward compatibility with older TCP implementations. In this section, we will review the different data transfer mechanisms used by TCP, starting from the older ones to several of the recent ones. 
 
-window, basic and window scaling :rfc:`1323`
+TCP is a window-based transport protocol that provides a bi-directionnal byte stream. This has several implications on the fields of the TCP header and the mechanisms used by TCP. The three fields of the TCP header are :
 
-rtt estimation, karn/partridge, :rfc:`1323` timestamp option
+ - `sequence number` : TCP uses a 32 bits sequence number. The `sequence number` placed in the header of a TCP segment containing data its the sequence number of the first byte of the payload of the TCP segment.
+ - `acknowledgement number` : TCP uses cumulative positive acknowledgements. Each TCP segment contains the `sequence number` of the next byte that the sender of the acknowledgement expects to receive from the remote host. In theory, the `acknowledgement number` is only valid if the `ACK` flag of the TCP header is set. However, in practice almost all [#fackflag]_ TCP segments have their `ACK` flag set.
+ - `window` : a TCP receiver uses this 16 bits field to indicate the current size of its receive window expressed in bytes.
+
+.. index:: Transmission Control Block
+
+.. sidebar:: The Transmission Control Block
+
+ For each established TCP connection, a TCP implementation must maintain a Transmission Control Block (TCB_). A TCB contains all the information required to send and receive segments on this connection :rfc:`793`. This includes [#ftcpurgent]_ :
+
+  - the local IP address
+  - the remote IP address
+  - the local TCP port number 
+  - the remote TCP port number
+  - the current state of the TCP FSM 
+  - the `maximum segment size` (MSS) announced by the remote host during connection establishment [#fmss]_
+  - `snd.nxt` : the sequence number of the next byte in the byte stream (the first byte of a new data segment that you send will use this sequence number)
+  - `snd.una` : the earliest sequence number that has been sent but has not yet been acknowledged
+  - `snd.wnd` : the current size of the sending window (in bytes)
+  - `rcv.nxt` : the sequence number of the next byte that is expected to be received from the remote host
+  - `rcv.wnd` : the current size of the receive window advertised by the remote host
+  - `sending buffer` : a buffer used to store all unacknowledged data
+  - `receiving buffer` : a buffer to store all data received from the remote host that has not yet been delivered to the user. Data may be stored in the `receiving buffer` because either it was not received in sequence or because the user is too slow to process it  
+
+
+The original TCP specification can be categorised as a transport protocol that provides a byte stream service and uses go-back-n. 
+
+To send new data on an established connection, a TCP entity performs the following operations on the corresponding TCB. It first checks that the `sending buffer` does not contain more data than the receive window advertised by the remote host (`rcv.wnd`). If the window is not full, up to `MSS` bytes of data are placed in the payload of a TCP segment. The `sequence number` of this segment is the sequence number of the first byte of the payload. It is set to the first available sequence number : `snd.nxt` and `snd.nxt` is incremented by the length of the payload of the TCP segment. The `acknowledgement number` of this segment is set to the current value of `rcv.nxt` and the `window` field of the TCP segment is set to the current value of `snd.wnd`. The data is placed in the `sending buffer` in case it needs to be retransmitted later.
+
+When a TCP segment with the `ACK` set is received, the following operations are performed. `rcv.wnd` is set to the value of the `window` field of the received segment. The `acknowledgement numnber` is compared to `snd.una`. The newly acknowledged data is remove from the `sending buffer` and `snd.una` is updated. If the TCP segment contained data, the `sequence number` is compared to `rcv.nxt`. If they are equal, the segment was received in sequence and the data can be delivered to the user and `rcv.nxt` is updated. The contents of the `receiving buffer` is checked to see whether other data already present in this buffer can be delivered in sequence to the user. If so, `rcv.nxt` is updated again. Otherwise, the segment's payload is placed in the `receiving buffer`.
+
+.. sidebar:: When should a new data segment be sent ?
+
+ .. index:: Nagle
+
+ In a transport protocol such as TCP that offers a bytestream, a practical issue that is left as an implementation choice is to decide when a new TCP segment containing data must be sent. There are two simple and extreme implementation choices. The first implementation choice is to send a TCP segment as soon as the user has requested the transmission of some data. This allows TCP to provide a low delay service. However, if the user is sending data one byte at a time, TCP woulld place each user byte in a segment containing 20 bytes of TCP header [#fnagleip]_. This is a huge overhead that is not acceptable in wide area networks. A second simple solution would be to only transmit a new TCP segment once the user has produced MSS_ bytes of data. This solution reduces the overhead, but at the cost of a potentially veyr high delay. 
+
+ An elegant solution to this problem was proposed by John Nagle in :rfc:`896`. John Nagle observed that the overhead caused by the TCP header was a problem in wide area connections, but less in local area connections where the available bandwidth is usually higher. He proposed the following rules to decide to send a new data segment ::
+
+  if rcv.wnd>= MSS and len(data) >= MSS :
+    send one MSS-sized segment
+  else
+    if there are unacknowledged data:
+      place data in buffer until acknowledgement is received
+    else
+      send one TCP segment containing all buffered data
+
+ The first rule ensures that a TCP connection used for bulk data transfer will always send full TCP segments. The second rule sends one partially filled TCP segment every round-trip-time.
+ 
+ This algorithm, called the Nagle algorithm, takes a few lines of code in all TCP implementations. 
+
+.. index:: large window
+
+TCP windows
+-----------
+
+From a performance viewpoint, one of the main limitations of the original TCP specification is the 16 bits `window` field in the TCP header. As this field indicates the current size of the receive window in bytes, it limits the TCP receive window at 65535 bytes. This limitation was not a severe problem when TCP was designed since at that time high-speed wide area networks offered a maximum bandwidth of 56 kbps. However, in today's network, this limitation is not acceptable anymore. The table below provides the rough maximum throughput that can be achieved by a TCP connection with a 64 KBytes window in function of the connection's round-trip-time_ 
+
+======== ==================  
+ RTT     Maximum Throughput  
+======== ==================  
+1 msec   524 Mbps
+10 msec  52.4 Mbps
+100 msec 5.24 Mbps
+500 msec 1.05 Mbps
+======== ==================  
+
+To solve this problem, a backward compatible extension that allows TCP to se larger receive windows was proposed in :rfc:`1323`. Today, most TCP implementations support this option. The basic idea is that instead of storing `snd.wnd` and `rcv.wnd` as 16 bits integers in the TCB_, they should be stored as 32 bits integers. As the TCP segment header only contains 16 bits to place the window field, it is impossible to copy the value of `snd.wnd` in each sent TCP segment. Instead the header will contain `snd.wnd >> S` where `S` is the scaling factor ( :math:`0 \le S \le 14`) negotiated during connection establishment. The client adds its proposed scaling factor as a TCP option in the `SYN` segment. If the server supports :rfc:`1323`, it places in the `SYN+ACK` the scaling factor that it will use when advertising its own receive window. The local and remote scaling factors are included in the TCB_. If the server does not support :rfc:`1323`, it ignores the received option and no scaling is applied. 
+
+By using the window scaling extensions defined in :rfc:`1323`, TCP implementations can use a receive buffer of up to 1 GByte. With such a receive buffer, the maximum throughput that can be achieved by a TCP connection becomes :
+
+======== ==================  
+ RTT     Maximum Throughput  
+======== ==================  
+1 msec   8590 Gbps
+10 msec  859 Gbps
+100 msec 86 Gbps
+500 msec 17 Gbps
+======== ==================  
+
+These throughputs are acceptable given today's networks. However, there are already servers having 10 Gbps interfaces... Early TCP implementations had fixed receiving and sending buffers [#ftcphosts]_. Today's high performance implementations are able to automatically adjust the size of the sending and receiving buffer to better support high bandwidth flows [SMM98]_
+
+.. index::retransmission timer, round-trip-time, timestamp option
+
+TCP's retransmission timeout
+----------------------------
+
+In a go-back-n transport protocol such as TCP, the retransmission timeout must be correctly set in order to achieve good performance. If the retransmission timeout expires too early, then bandwith is wasted by retransmitting segments that have been correctly received. If the retransmission timeout expires too late, then bandwidth is wasted because the sender is idle waiting for the expiration of its retransmission timeout.
+
+A good setting of the retransmission timeout clearly depends on an accurate estimation of the round-trip-time_ on each TCP connection. The round-trip-time differs between TCP connections, but may also change during the lifetime of a single connection. For example, the figure below shows the evolution of the round-trip-time_  between two hosts during a period of 45 seconds.
+
+.. figure:: fig/transport-fig-070-c.png
+   :align: center
+
+   Evolution of the round-trip-time between two hosts 
+
+
+The easiest solution to measure the round-trip-time on a TCP connection is to measure the delay between the transmission of a data segment and the reception of a corresponding acknowledgement [#frttmes]_. As illustrated in the figure below, this measurement works well when there are no segment losses.
+
+.. figure:: fig/transport-fig-072-c.png
+   :align: center
+
+   How to measure the round-trip-time ? 
+
+However, when a data segment is lost, as illustrated in the bottom part of the figure, the measurement is ambiguous as the sender cannot determine whether the received acknowledgement was triggered by the first transmission of segment `123`or the retransmission. Using incorrect round-trip-time_ estimations could lead to incorrect values of the retransmission timeout. For this reason, Karn and Partridge proposed in [KP91]_ to ignore the round-trip-time_ measurements performed during retransmissions.
+
+To avoid this ambiguity in the estimation of the round-trip-time when segments are retransmitted, many TCP implementations rely on the `timestamp option` defined in :rfc:`1323`. This option allows a TCP sender to place two 32 bits timestamps in each TCP segment that it sends. The first timestamp, TS Value (`TSval`) is chosen by the sender of the segment. It could for example be the current value of its real-time clock [#ftimestamp]_. The second value, TS Echo Reply (`TSecr`), is the last `TSval` that was received from the remote host and stored in the TCB_. The figure below shows how the utilization of this timestamp option allows the disembiguate the round-trip-time measurement in case of retransmissions.
+  
+.. figure:: fig/transport-fig-072-c.png
+   :align: center
+
+   Disembiguating round-trip-time measurements with the :rfc:`1323` timestamp option 
+
+Once the round-trip-time measurements have been collected for a given TCP connection, the TCP entity must compute the retransmission timeout. As the round-trip-time measurements may change during the lifetime of a connection, the retransmission timeout will also likely change. At the beginning of a connection [#ftcbtouch]_, the TCP entity that sends a `SYN` segment does not know the round-trip-time to reach the remote host and the initial retransmission timeout is usually set to 3 seconds :rfc:`2988`. 
+
+The original TCP specification proposed in :rfc:`793` to maintain in the TCB two additional variables :
+
+ - `srtt` : the smoothed rount-trip-time computed as :math:`srrt=(\alpha \times srtt)+( (1-\alpha) \times rtt)` where `rtt` is the round-trip-time measured according to the above procedure and :math:`\alpha` a smoothing factor (e.g. 0.8 or 0.9)
+ - `rto` : the retransmission timeout is computed as :math:`rto=min(60,max(1,\beta \times srtt))` where :math:`\beta` is used to take into account the delay variance (value : 1.3 to 2.0). The `60` and `1` constants are used to ensure that the `rto` is not larger than one minute nor smaller than 1 second.
+    
+However, in practice, this computation for the retransmission timeout did not work well. The main problem was that the computed `rto` did not correctly take into account the variations in the measured round-trip-time. `Van Jacobson` proposed in his seminal paper [Jacobson88]_ an improved algorithm to compute the `rto` and implemented it in the BSD Unix distribution. This algorithm is now part of the TCP standard :rfc:`2988`.
+
+Jacobson's algorithm uses two state variables, `srtt` the smoothed `rtt` and `rttvar` the estimation of the variance of the `rtt` and two parameters : :math:`\alpha` and :math:`\beta`. When a TCP connection starts, the first `rto` is set to `3` seconds. When a first estimation of the `rtt` is available, the `srtt`, `rttvar` and `rto` are computed as ::
+
+  srtt=rtt
+  rttvar=rtt/2
+  rto=srtt+4*rttvar
+
+
+Then, when other rtt measurements are collected, `srtt` and `rttvar` are updated as follows :
+
+   rttvar=:math:`(1-\beta) \times rttvar + \beta \times |srtt - rtt|`
+   srtt=:math:`(1-\alpha) \times srtt + \alpha \times rtt
+   rto=srtt+4*rttvar
+
+The proposed values for the parameters are :math:`\alpha=\frac{1}{8}` and :math:`\beta=\frac{1}{4}`. This allows a TCP implementation is running in the kernel to perform the `rtt`computation by using shift operations instead of the more costly floating point operations [Jacobson88]_. 
+
+
+Advanced retransmission strategies
+----------------------------------
+
+.. index:: exponential backoff
+ 
+The default go-back-n retransmission strategy was defined in :rfc:`793`. When the retransmission timer expires, TCP retransmits the first unacknowledged segment (i.e. the one having sequence number `snd.una`). The expiration of the retransmission timeout indicates that segments have been lost. After the retransmission of the first segment, :rfc:`2988` recommends to double the value of the retransmission timout. This is called an `exponential backoff`. This doubling of the retransmission timeout after a retransmission was include in TCP to deal with issues including network/receiver overload and incorrect initial estimations of the retransmission timeout. If the same segment is retransmitted severa times, the retransmission timeout is doubled after every retransmission until it reaches a configured maximum. :rfc:`2988` suggests a maximum retransmission timeout higher than 60 seconds. Once the retransmission timeout reaches this configured maximum, the remote host is considered to be unreachable and the TCP connection is closed.
+
+.. index:: delayed acknowledgements
+
+This retransmission strategy has been refined based on the experience of using TCP on the Internet. The first refinement was a clarification of the strategy used to send acknowledgements. As TCP uses piggybacking, the easiest and less costly method to send acknowledgements is to place them in the data segments sent in the other direction. However, few application layer protocols exchange data in both directions at the same time and thus this method rarely works. For an application that is sending data segments in one direction only, the remote TCP entity will return empty TCP segments whose only useful information is their acknowledgement number. This may cause a large overhead in wide area network if pure `ACK` segment is sent in response to a received data segment. Most TCP implementations use a `delayed acknowledgement` strategy. This strategy ensures that piggybacking is used when possible and otherwise pure `ACK` segments are sent for every second received data segments when there are no losses. When there are losses or reordering, `ACK` segments are more important for the received and they are sent immediately :rfc:`813` :rfc:`1122`. This strategy can be summarised as follows :
+
+
+
+.. sidebar:: Protection agains wrapped sequence numbers
+
+
+
+
+slow/fast ack
 
 retransmission mechanisms
  - timer based
@@ -622,13 +797,10 @@ retransmission mechanisms
  - fack 
  - others ?
 
-Nagle
 
-.. _TCPReset:
 
-.. sidebar:: TCP Reset
+ 
 
-   Explain TCP reset and the risks of attacks
 
 
 .. _TCPCongestion:
@@ -644,6 +816,8 @@ defined in :rfc:`5681`
 
 
 explain tail-drop and RED
+
+add to transmission control block
 
 
 Other congestion control mechanisms
@@ -676,13 +850,15 @@ Other transport protocols
 
 .. [#fephemeral] A discussion of the ephemeral port ranges used by different TCP/UDP implementations may be found in http://www.ncftp.com/ncftpd/doc/misc/ephemeral_ports.html
 
+.. [#ftcpspecs] A detailed presentation of all standardisation documents concerning TCP may be found in :rfc:`4614`
+
 .. [#ftcpusage] Several researchers have analysed the utilisation of TCP and UDP in the global Internet. Most of these studies have been performed by collecting all the packets transmitted over a given link during a period of a few hours or days and then analysing their headers to infer the transport protocol used, the type of application, ... Recent studies include http://www.caida.org/research/traffic-analysis/tcpudpratio/, https://research.sprintlabs.com/packstat/packetoverview.php or http://www.nanog.org/meetings/nanog43/presentations/Labovitz_internetstats_N43.pdf
 
 .. [#ftcpclock] This 32 bits counter was specified in :rfc:`793`. A 32 bits counter that is incremented every 4 microseconds wraps in about 4.5 hours. This period is much larger than the Maximum Segment Lifetime that is fixed at 2 minutes in the Internet (:rfc:`791`, :rfc:`1122`).
 
 .. [#frlogin] On many departmental networks containing Unix workstations, it was common to allow users on one of the hosts to use rlogin_ and rsh_ to run commands on any of the workstations of the network without giving any password. In this case, the remote workstation "authenticated" the client host based on its IP address. This was a bad practice from a security viewpoint.
 
-.. [#fctpinc] When a TCP entity sends a segment having `x+1` as acknowledgment number, this indicates that it has received all data up to and including sequence number `x` and that it is expecting data having sequence number `x+1`. As the `SYN` flag was set in a segment having sequence number `x`, this implies that setting the `SYN` flag in a segment consummes one sequence number.
+.. [#ftcpinc] When a TCP entity sends a segment having `x+1` as acknowledgment number, this indicates that it has received all data up to and including sequence number `x` and that it is expecting data having sequence number `x+1`. As the `SYN` flag was set in a segment having sequence number `x`, this implies that setting the `SYN` flag in a segment consummes one sequence number.
 
 .. [#ftcpboth] Of course, such a simultaneous TCP establishment can only occur if the source port chosen by the client is equal to the destination port chosen by the server. This may happen when a host can serve both as a client as a server or in peer-to-peer applications when the communicating hosts do not use ephemeral port numbers. 
 
@@ -690,5 +866,20 @@ Other transport protocols
 
 .. [#ftcpoptions] The full list of all TCP options may be found at http://www.iana.org/assignments/tcp-parameters/
 
+.. [#fackflag] In practice, only the `SYN` segment do not have their `ACK` flag set.
+
+.. [#ftcpurgent] A complete TCP implementation will contain additional information in its TCB, notably to support the `urgent` pointer. However, this part of TCP is not discussed in this book. Refer to :rfc:`793` and :rfc:`2140` for more details about the TCB. 
+
+.. [#fmss] In theory, TCP implementations could send segments as large as the MSS_ advertised by the remote host during connection establishment. In practice, most implementations use as MSS_ the minimum between the received MSS_ and their own MSS_. This avoids fragmentation in the underlying IP layer and will be discussed in the next chapter.
+
+.. [#fnagleip] This TCP segment will then be placed in an IP header. We will describe IPv4 and IPv6 in the next chapter. The minimum size of the IPv4 (resp. IPv6) header is 20 bytes (resp. 40 bytes). 
+
+.. [#ftcphosts] See http://fasterdata.es.net/tuning.html for more information on how to tune a TCP implementation
+
+.. [#frttmes] In theory, a TCP implementation could store the timestamp of each data segment transmitted and . However, using such frequent measurements introduces a lot of noise in practice and many implementations still measure the round-trip-time once per round-trip-time by recording the transmission time of one segment at a time :rfc:
+
+.. [#ftimestamp] Some security experts have raised concerns that using the real-time clock to set the `TSval` in the timestamp option can leak information such as the system's uptime. Solutions proposed to solve this problem may be found in [CNPI09]_
+
+.. [#tcbtouch] As a TCP client will often establish several parallel or successive connections with the same server, :rfc:`2140` has proposed to reuse for a new connection some information that was collected in the TCB of a previous connection, such as the measured rtt. However, this solution has not been widely implemented. 
 
 .. include:: ../links.rst

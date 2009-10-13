@@ -21,6 +21,10 @@
 
 .. _Louis Pouzin: http://conferences.sigcomm.org/sigcomm/1999/pouzin.html
 
+.. _Van Jacobson: http://www.parc.com/about/people/88/van-jacobson.html
+
+.. _Jon Postel: http://www.postel.org/postel.html
+
 .. _sendmail: http://www.sendmail.org
 
 .. _X25: http://en.wikipedia.org/wiki/X.25
@@ -99,3 +103,6 @@
 
 .. _UML: http://user-mode-linux.sourceforge.net/
 
+.. _socket: http://en.wikipedia.org/wiki/Berkeley_sockets
+
+.. _netfilter: http://www.netfilter.org/

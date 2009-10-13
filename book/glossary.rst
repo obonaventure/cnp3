@@ -101,3 +101,12 @@ Glossary
 
    TCB
 	The Transmission Control Block is the set of variables that are maintained for each established TCP connection by a TCP implementation. 
+
+   socket
+	A low-level API originally defined on Berkeley Unix to allow programmers to develop clients and servers. 
+
+   MSS
+	A TCP option used by a TCP entity in SYN segments to indicate the Maximum Segment Size that it is able to receive.
+
+   round-trip-time
+	The round-trip-time (RTT) is the delay between the transmission of a segment and the reception of the corresponding acknowledgement in a transport protocol.
