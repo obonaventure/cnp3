@@ -26,6 +26,8 @@ Whenever possible, the bibliography includes hypertext links to the references c
 
 .. [LCCD09] Leiner, B. M., Cerf, V. G., Clark, D. D., Kahn, R. E., Kleinrock, L., Lynch, D. C., Postel, J., Roberts, L. G., and Wolff, S. 2009. A brief history of the internet. SIGCOMM Comput. Commun. Rev. 39, 5 (Oct. 2009), 22-31. DOI= http://doi.acm.org/10.1145/1629607.1629613
 
+.. [Paxson99] Paxson, V. End-to-end Internet packet dynamics. SIGCOMM Comput. Commun. Rev. 27, 4 (Oct. 1997), 139-152. DOI= http://doi.acm.org/10.1145/263109.263155
+
 .. [Russel06] Russell A., Rough Consensus and Running Code and the Internet-OSI Standards War, IEEE Annals of the History of Computing, July-September 2006, http://www.computer.org/portal/cms_docs_annals/annals/content/promo2.pdf
 
 .. [Sklower89] Sklower, K. 1989. Improving the efficiency of the OSI checksum calculation. SIGCOMM Comput. Commun. Rev. 19, 5 (Oct. 1989), 32-43. DOI= http://doi.acm.org/10.1145/74681.74684

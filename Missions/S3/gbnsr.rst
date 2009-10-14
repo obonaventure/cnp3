@@ -253,3 +253,19 @@ For this week, you need to provide in your group's subversion repository :
 .. include:: ../../book/links.rst
 
 
+..
+  Additional questions for the students
+
+  Explain to the other members of the group the operation of your implementation :
+  describe state variables
+  describe datastructure used to implement the sending buffer
+
+  As exemple, consider the case where 4 segments (NBITS=4, send 14,15,0,1) are sent and only OK0 is received. Explain in details what happens in this case
+
+  Discuss what should be done to support selective repeat on the receiver and the transmitter side of your implementation
+
+  Issues to be checked in the students's implementation
+  - window : how do they check whether the window is full
+  - processing of the sequence number (acks, advance of the sequence number, ...)
+  - how to store the transmitted segments and their sequence number
+  - retransmission : in which order are the retransmitted segments sent ?

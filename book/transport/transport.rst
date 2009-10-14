@@ -23,7 +23,7 @@ These imperfections of the connectionless network layer service will be better u
 
 Some transport protocols have been developed on top of a connection-oriented network service, such as class 0 of the ISO Transport Protocol (TP0) defined in [X224]_ , but they have not been widely used. We do not discuss such utilisation of a connection-oriented network service in more details in this book.
 
-This chapter is organised as follows. We first explain how it is possible to provide a reliable transport service on top of an unreliable connectionless network service. For this, we build step by step a simple protocol that provides a reliable data transfert and explain the main mechanisms found in such protocols. Then, we study in details the two transport protocols that are used in the Internet. We start from the User Datagram Protocol (UDP) that provides a simple connectionless transport service. Then, we describe the Transmission Control Protocol in details, including its congestion control mechanism.
+This chapter is organised as follows. We first explain how it is possible to provide a reliable transport service on top of an unreliable connectionless network service. For this, we build step by step a simple protocol that provides a reliable data transfer and explain the main mechanisms found in such protocols. Then, we study in details the two transport protocols that are used in the Internet. We start from the User Datagram Protocol (UDP) that provides a simple connectionless transport service. Then, we describe the Transmission Control Protocol in details, including its congestion control mechanism.
 
 Principles of a reliable transport protocol
 ###########################################
@@ -38,7 +38,7 @@ In this section, we will design a reliable transport protocol running above a co
 
 We will remove these assumptions one after the other in order to better understand the mechanism that inside the transport layer is used to solve each imperfection.
 
-Reliable data transfert on top of a perfect network service
+Reliable data transfer on top of a perfect network service
 ===========================================================
 
 The transport layer entity that we will design will interact with a user in the application layer and also with an entity in the network layer. According to the reference model, these interactions will be performed by using `DATA.req`and DATA.ind` primitives. However, to simplify the presentation and avoid a confusion between a `DATA.req` primitive issued by the user of the transport layer entity and a `DATA.req` issued by the transport layer entity itself, we will use the following terminology :
@@ -50,6 +50,7 @@ This is illustrated in the figure below.
 
 .. figure:: fig/transport-fig-007-c.png
    :align: center
+   :scale: 50 
 
    Interactions between the transport layer and its user and its network layer provider
 
@@ -58,12 +59,13 @@ When running on top of a perfect connectionless network, a transport level entit
 
 .. figure:: fig/transport-fig-004-c.png
    :align: center
+   :scale: 50 
 
    The simplest transport protocol
 
 However, if the server is slower than the client, problems could arise. If the network layer on the server needs to deliver segments to the transport entity above it faster than the rate at which the transport entity can process them, a queue will build. A similar queue would build if the application above the transport layer does not process the received SDUs quickly enough. These queues have a limited size [#fqueuesize]_ and if they overflow, the corresponding entity will have to discard information that it has received.
 
-.. sidebar:: Scapy as a newtork prototyping tools
+.. sidebar:: Scapy as a network prototyping tools
 
    Throughout this section, we use scapy_  as a prototyping tool to build a reliable transport protocol. scapy_ is a packet manipulation tool that was written and is maintained by Philippe Biondi and many others. scapy_ is written in python_ and allows to easily create, manipulate and process many types of network packets. scapy_ can also be easily extended to support new protocols and allows to easily specify the complete finite state machine that implements a protocol. Additional information about scapy are available at : http://www.secdev.org/projects/scapy/
 
@@ -95,12 +97,14 @@ The transport entity can then be modelled as a finite state machine containing t
 
 .. figure:: fig/transport-fig-008-c.png
    :align: center
+   :scale: 50 
 
 
-A time-sequence diagramme showing 
+A time-sequence diagram showing 
 
 .. figure:: fig/transport-fig-009-c.png
    :align: center
+   :scale: 50 
 
 
 The receiver side of this protocol can be expressed by the following python code as a scapy automaton ::
@@ -268,7 +272,7 @@ The sender side of this protocol can be expressed by the following python code a
 
 
 
-Reliable data transfert on top of an imperfect network service
+Reliable data transfer on top of an imperfect network service
 ==============================================================
 
 
@@ -345,16 +349,17 @@ The User Datagram Protocol (UDP) was defined in :rfc:`768`. It provides an unrel
 
 Compared to the connectionless network layer service, the main advantage of the UDP service is that it allows several applications running on a host to exchange SDUs with several other applications running on remote hosts. Consider two hosts, e.g. a client and a server. The network layer service allows the client to send information to the server, but if an application running on the client wants to contact a particular application running on the server, then an additional addressing mechanism is required besides the IP address that identifies a host to identify an application running on a host. This additional addressing is provided by the port numbers. When a server using UDP is enabled on a host, this server requests a port number. This port number will be used by the clients to contact the server process via UDP. 
 
-The figure below shows a typical usage of the UDP port numbers. The client process uses port number `1234` while the server process uses port number `5678`. When the client sends a request, it is identified as originating from port number `1234` on the client host and destined to port number `5678` on the server host. When the server process replies to this request, the server's UDP implementation will send the reply as orginiating from port  `5678` on the server host and destined to port `1234` on the client host.
+The figure below shows a typical usage of the UDP port numbers. The client process uses port number `1234` while the server process uses port number `5678`. When the client sends a request, it is identified as originating from port number `1234` on the client host and destined to port number `5678` on the server host. When the server process replies to this request, the server's UDP implementation will send the reply as originating from port  `5678` on the server host and destined to port `1234` on the client host.
 
 .. figure:: fig/transport-fig-056-c.png
    :align: center
+   :scale: 50 
 
    Usage of the UDP port numbers
 
 .. index:: UDP segment
 
-The UDP protocol uses a single segment format shown below. The UDP header contains four fiels :
+The UDP protocol uses a single segment format shown below. The UDP header contains four fields :
 
  - a 16 bits source port
  - a 16 bits destination port
@@ -364,16 +369,17 @@ The UDP protocol uses a single segment format shown below. The UDP header contai
 
 .. figure:: fig/transport-fig-055-c.png
    :align: center
+   :scale: 50 
 
    The UDP segment format
 
-As the port numbers are encoded as 16 bits field, there can be only up to 65635 different server processes that are listeing to a different UDP port at the same time on a given server. In practice, this limit is never reached. However, it is worth to note that most implementations divide the range of allowed UDP port numbers in three different ranges :
+As the port numbers are encoded as 16 bits field, there can be only up to 65635 different server processes that are listening to a different UDP port at the same time on a given server. In practice, this limit is never reached. However, it is worth to note that most implementations divide the range of allowed UDP port numbers in three different ranges :
 
- - the priviledged port numbers (1 < port < 1024 )
+ - the privileged port numbers (1 < port < 1024 )
  - the ephemeral port numbers ( officially [#fephemeral]_ 49152 <= port <= 65535 )
  - the registered port numbers (officially 1024 <= port < 49152)
 
-In most Unix variants, only processes having system administrator priviledges can be bound to port numbers smaller than `1024`. Well-known servers such as DNS_, NTP_ or RPC_ use priviledged port numbers. When a client needs to use UDP, it usually does not require a specific port number. In this case, the UDP implementation will allocate the first available port number in the ephemeral range. The registered port numbers range should be used by servers. In theory, developers of network servers should register their port number officially through IANA, but few developpers do this. 
+In most Unix variants, only processes having system administrator privileges can be bound to port numbers smaller than `1024`. Well-known servers such as DNS_, NTP_ or RPC_ use privileged port numbers. When a client needs to use UDP, it usually does not require a specific port number. In this case, the UDP implementation will allocate the first available port number in the ephemeral range. The registered port numbers range should be used by servers. In theory, developers of network servers should register their port number officially through IANA, but few developers do this. 
 
 .. mention inetd and super servers somewhere ?
 
@@ -389,7 +395,7 @@ In most Unix variants, only processes having system administrator priviledges ca
        This pseudo-header allows the receiver to detect errors that affect the IP source or destination addresses that are placed in the IP layer below. This is a violation of the layer principle that dates from the time when UDP and IP were elements of a single protocol. It should be noted that if the checksum algorithm computes value '0x0000', then value '0xffff' is transmitted. A UDP segment whose checksum is set to '0x0000' is a segment for which the transmitter did not compute a checksum upon transmission. Some NFS_ servers chose to disable UDP checksums for performance reasons, but this caused `problems <http://lynnesblog.telemuse.net/192>`_ that were difficult to diagnose. In practice, there are rarely good reasons to disable UDP checksums.
 
 
-Several types of applications rely on UDP. As a rule of thumb, UDP is used for applications where delay must be minimised or losses can be recovered by the application itself. A first class of UDP-based applications are applications where the client sends a small request and expects quickly a small answer. The DNS_ is an example of such applications that is often used in the wide area. However, in local area networks, many distributed systems rely on Remote Procedure Call (RPC_) that is often used on top of UDP. In Unix enviroments, the Network File System (NFS_) is built on top of RPC and runs frequently on top of UDP. A second class of UDP-based applications are the interactive computer games that need to exchange frequently small informations such as the player's location or recent actions. Many of these games use UDP to minimise the delay and can recover from losses. A third class of applications are the multimedia applications such as interactive Voice over IP or interactive Video over IP. These interactive applications expect a delay shorter than about 200 milliseconds between the sender and the receiver and can recover from losses inside the application. 
+Several types of applications rely on UDP. As a rule of thumb, UDP is used for applications where delay must be minimised or losses can be recovered by the application itself. A first class of UDP-based applications are applications where the client sends a small request and expects quickly a small answer. The DNS_ is an example of such applications that is often used in the wide area. However, in local area networks, many distributed systems rely on Remote Procedure Call (RPC_) that is often used on top of UDP. In Unix environments, the Network File System (NFS_) is built on top of RPC and runs frequently on top of UDP. A second class of UDP-based applications are the interactive computer games that need to exchange frequently small messages such as the player's location or recent actions. Many of these games use UDP to minimise the delay and can recover from losses. A third class of applications are the multimedia applications such as interactive Voice over IP or interactive Video over IP. These interactive applications expect a delay shorter than about 200 milliseconds between the sender and the receiver and can recover from losses inside the application. 
 
 .. index:: TCP
 .. _TCP:
@@ -404,7 +410,7 @@ TCP provides a reliable bytestream connection-oriented transport service on top 
 
  - Email_ (SMTP_, POP_, IMAP_)
  - World wide web ( HTTP_, ...)
- - Most file transfert protocols ( ftp_, peer-to-peer file sharing applications , ...)
+ - Most file transfer protocols ( ftp_, peer-to-peer file sharing applications , ...)
  - remote computer access : telnet_, ssh_, X11_, VNC_, 
  - non-interactive multimedia applications : youtube_, skype_
 
@@ -412,10 +418,11 @@ On the global Internet, most of the applications used in the wide area rely on T
 
 .. index:: TCP header
  
-To provide this service, TCP relies on a simple segment format. Each TCP segment contains a twenty bytes header described below and optionnaly a payload.
+To provide this service, TCP relies on a simple segment format. Each TCP segment contains a twenty bytes header described below and optionally a payload.
 
 .. figure:: fig/transport-fig-058-c.png
    :align: center
+   :scale: 50 
 
    TCP segment format 
 
@@ -429,14 +436,14 @@ A TCP header contains contains the following fields :
    - the destination port of the server
    - TCP
 
- - the `sequence number` (32 bits), `acknowledgement number` (32 bits) and `window` (16 bits) fields are used to provide a reliable data transfert by using a window-based protocol. In a TCP bytestream, each byte of the stream consummes one sequence number. Their utilisation will be described in more details in :ref:`TCPData`
+ - the `sequence number` (32 bits), `acknowledgement number` (32 bits) and `window` (16 bits) fields are used to provide a reliable data transfer by using a window-based protocol. In a TCP bytestream, each byte of the stream consumes one sequence number. Their utilisation will be described in more details in :ref:`TCPData`
  - the `Urgent pointer` is used to indicate that some data should be considered as urgent in a TCP bytestream. However, it is rarely used in practice and will not be described here. Additional details may be found in :rfc:`793`, :rfc:`1122` or [StevensTCP]_
  - the flags field contain a set of bit flags that indicate how a segment should be interpreted by the TCP entity that receives it : 
 
     - the `SYN` flag is used during connection establishment
     - the `FIN` flag is used during connection release
     - the `RST` is used in case of problems or when an invalid segment has been received
-    - when the `ACK` flag is set, it indicates that the `acknowledgment` field contains a valid number. Otherwise, the content of the `acknwoledgment` field must be ignored
+    - when the `ACK` flag is set, it indicates that the `acknowledgment` field contains a valid number. Otherwise, the content of the `acknowledgment` field must be ignored
     - the `URG` flag is used together with the `Urgent pointer`
     - the `PSH` flag is used as a notification from the sender to indicate to the receiver that it should pass all the data it has received to the receiving process. However, in practice TCP implementations do not allow TCP users to indicate when the `PSH` flag should be set and thus there are few real utilizations of this flag. 
 
@@ -447,10 +454,11 @@ A TCP header contains contains the following fields :
  
 .. figure:: fig/transport-fig-057-c.png
    :align: center
+   :scale: 50 
 
    Utilization of the TCP source and destination ports
 
-The rest of this section is organised as follows. We first explain the establishement and the release of a TCP connection, then we discuss the mechanisms that are used by TCP to provide a reliable bytestream service. We end the section with a discussion of network congestion and explain the mechanisms that TCP uses to avod congestion collapse.
+The rest of this section is organised as follows. We first explain the establishment and the release of a TCP connection, then we discuss the mechanisms that are used by TCP to provide a reliable bytestream service. We end the section with a discussion of network congestion and explain the mechanisms that TCP uses to avoid congestion collapse.
 
 .. Urgent pointer not discussed, rarely used, see http://www.ietf.org/id/draft-ietf-tcpm-urgent-data-00.txt for discussion, defined in :rfc:`793` and updated in :rfc:`1122`
 
@@ -483,6 +491,7 @@ At this point, the TCP connection is open and both the client and the server are
 
 .. figure:: fig/transport-fig-059-c.png
    :align: center
+   :scale: 50 
 
    Establishment of a TCP connection
 
@@ -492,7 +501,7 @@ In the figure above, the connection is considered established by the client once
 
 .. sidebar:: Computing TCP's initial sequence number
 
- In the original TCP specification :rfc:`793`, each TCP entity maintained a clock to compute the initial sequence number (ISN_) placed in the `SYN` and `SYN+ACK` segments. This made the iss predictible and caused a security problem. The typical security problem was the following. Consider a server that trusts a host based on its IP address. For example, the server allows this host to login without giving a password [#frlogin]_. Consider now an attacker who knows this particular configuration and is able to send IP packets having the client's address as source. He can send fake TCP segments to the server, but does not receive the server's answers. If he can predict the `ISN` that will be chosen by the server, he can send a fake `SYN` segment and shortly after the fake `ACK` segment that confirms the reception of the `SYN+ACK` segment sent by the server. Once the TCP connection is open, he can use it to send any command on the server. To counter this attack, current TCP implementations add randomness to the `ISN`. One of the solutions, proposed in :rfc:`1948` is to compute the `ISN` as ::
+ In the original TCP specification :rfc:`793`, each TCP entity maintained a clock to compute the initial sequence number (ISN_) placed in the `SYN` and `SYN+ACK` segments. This made the ISN predictable and caused a security problem. The typical security problem was the following. Consider a server that trusts a host based on its IP address. For example, the server allows this host to login without giving a password [#frlogin]_. Consider now an attacker who knows this particular configuration and is able to send IP packets having the client's address as source. He can send fake TCP segments to the server, but does not receive the server's answers. If he can predict the `ISN` that will be chosen by the server, he can send a fake `SYN` segment and shortly after the fake `ACK` segment that confirms the reception of the `SYN+ACK` segment sent by the server. Once the TCP connection is open, he can use it to send any command on the server. To counter this attack, current TCP implementations add randomness to the `ISN`. One of the solutions, proposed in :rfc:`1948` is to compute the `ISN` as ::
  
   ISN = M + H(localhost, localport, remotehost, remoteport, secret).
 
@@ -505,6 +514,7 @@ A server could, of course, refuse to open a TCP connection upon reception of a `
 
 .. figure:: fig/transport-fig-061-c.png
    :align: center
+   :scale: 50 
 
    TCP connection establishment rejected by peer
 
@@ -512,15 +522,17 @@ The TCP connection establishment can be described as the four states Finite Stat
 
 .. figure:: fig/transport-fig-063-c.png
    :align: center
+   :scale: 50 
 
    TCP FSM for connection establishment
 
 A client host starts in the `Init` state. It then sends a `SYN` segment and enters the `SYN Sent` state where it waits for a `SYN+ACK` segment, replies with an `ACK` segment and enters the `Established` state where data can be exchanged. On the other hand, a server host starts in the `Init` state. When a server process starts to listen to a destination port, the underlying TCP entity creates a TCP control block and a queue to process incoming `SYN` segments. Upon reception of a `SYN` segment, the server's TCP entity replies with a `SYN+ACK` and enters the `SYN RCVD` state. It remains in this state until it receives an `ACK` segment that acknowledges its `SYN+ACK` segment.
 
-Besides these two paths in the TCP connection establishment FSM, there is a third path that corresponds to the case when both the client and the server send a `SYN` segment to open a TCP connection [#ftcpboth]_. In this case, the client and the server send a `SYN` segment and enter the `SYN Sent` state. Upon reception of the `SYN` segment sent by the other host, they reply by sending a `SYN+ACK` segment and enter the `SYN Rcvd` state. The `SYN+ACK` that will arrive from the other host will allow them to transition to the `Established` state. The figure below shows such a simultaneous establishment of a TCP connection.
+Besides these two paths in the TCP connection establishment FSM, there is a third path that corresponds to the case when both the client and the server send a `SYN` segment to open a TCP connection [#ftcpboth]_. In this case, the client and the server send a `SYN` segment and enter the `SYN Sent` state. Upon reception of the `SYN` segment sent by the other host, they reply by sending a `SYN+ACK` segment and enter the `SYN RCVD` state. The `SYN+ACK` that will arrive from the other host will allow them to transition to the `Established` state. The figure below shows such a simultaneous establishment of a TCP connection.
 
 .. figure:: fig/transport-fig-062-c.png
    :align: center
+   :scale: 50 
 
    Simultaneous establishment of a TCP connection
 
@@ -529,7 +541,7 @@ Besides these two paths in the TCP connection establishment FSM, there is a thir
 
 .. sidebar:: Denial of Service attacks
 
- When a TCP entity opens a TCP connection, it creates a Transmission Control Block (TCB). The TCB contains all the state that is maintained by the TCP entity for each TCP connection. During connection establishment, the TCB contains the local IP address, the remote IP address, the local port number, the remote port number, the current local sequence number, the last sequence number received from the remote entity, ... :rfc:`793` Until the mid 1990s, TCP implementations had a limit on the number of TCP connnections that could be in the `SYN Rcvd` state at a given time. Many implementations set this limit to about 100 TCBs. This limit was 100 TCBs was considered sufficient even for heavily load http servers given the small delay between the reception of a `SYN` segment and the reception of the `ACK` segment that terminates the establishment of the TCP connection. When the limit of 100 TCBs in the `SYN Rcvd` state is reached, the TCP entity discard all received TCP `SYN` segments that do not correspond to an existing TCB. 
+ When a TCP entity opens a TCP connection, it creates a Transmission Control Block (TCB). The TCB contains all the state that is maintained by the TCP entity for each TCP connection. During connection establishment, the TCB contains the local IP address, the remote IP address, the local port number, the remote port number, the current local sequence number, the last sequence number received from the remote entity, ... :rfc:`793` Until the mid 1990s, TCP implementations had a limit on the number of TCP connections that could be in the `SYN RCVD` state at a given time. Many implementations set this limit to about 100 TCBs. This limit was 100 TCBs was considered sufficient even for heavily load http servers given the small delay between the reception of a `SYN` segment and the reception of the `ACK` segment that terminates the establishment of the TCP connection. When the limit of 100 TCBs in the `SYN Rcvd` state is reached, the TCP entity discard all received TCP `SYN` segments that do not correspond to an existing TCB. 
 
  This limit of 100 TCBs in the `SYN Rcvd` state Was chosen to protect the TCP entity from the risk of overloading its memory with too many TCBs in the `SYN Rcvd` state. However, it was also the reason for a new type of the Denial of Service (DoS) attack :rfc:`4987`. A DoS attack is defined as an attack where an attacker can render a resource useless in the network. For example, an attacker may cause a DoS attack on a 2 Mbps link used by a company by sending more than 20 Mpbs of packets through this link. In the case of the TCBs, the DoS attack was more subtle. As a TCP entity discards all received `SYN` segments as soon as it has 100 TCBs in the `SYN Rcvd` state, an attacker simply had to send a few 100s of `SYN` segments every second to a server and never reply to the received `SYN+ACK` segments. To avoid being caught, attackers were of course sending these `SYN` segments with a different address than their own IP address [#fspoofing]_. On most TCP implementations, once a TCB entered the `SYN Rcvd` state, it remained in this state for several seconds, waiting for a retransmission of the initial `SYN` segmet. This attack was later called a `SYN flood` attack and the servers of the ISP named panix were among the firsts to `suffer <http://memex.org/meme2-12.html>`_ from it.
 
@@ -604,6 +616,7 @@ The normal way of terminating a TCP connection is by using the graceful TCP conn
 
 .. figure:: fig/transport-fig-067-c.png
    :align: center
+   :scale: 50 
 
    FSM for TCP connection release
 
@@ -663,7 +676,8 @@ To send new data on an established connection, a TCP entity performs the followi
 
 When a TCP segment with the `ACK` set is received, the following operations are performed. `rcv.wnd` is set to the value of the `window` field of the received segment. The `acknowledgement numnber` is compared to `snd.una`. The newly acknowledged data is remove from the `sending buffer` and `snd.una` is updated. If the TCP segment contained data, the `sequence number` is compared to `rcv.nxt`. If they are equal, the segment was received in sequence and the data can be delivered to the user and `rcv.nxt` is updated. The contents of the `receiving buffer` is checked to see whether other data already present in this buffer can be delivered in sequence to the user. If so, `rcv.nxt` is updated again. Otherwise, the segment's payload is placed in the `receiving buffer`.
 
-.. sidebar:: When should a new data segment be sent ?
+Segment transmission strategies
+-------------------------------
 
  .. index:: Nagle
 
@@ -681,7 +695,24 @@ When a TCP segment with the `ACK` set is received, the following operations are 
 
  The first rule ensures that a TCP connection used for bulk data transfer will always send full TCP segments. The second rule sends one partially filled TCP segment every round-trip-time.
  
- This algorithm, called the Nagle algorithm, takes a few lines of code in all TCP implementations. 
+.. index:: packet size distribution
+
+ This algorithm, called the Nagle algorithm, takes a few lines of code in all TCP implementations. These lines of code have a huge impact on the packets that are exchanged in TCP/IP networks. Researchers have analysed the distribution of the packet sizes by capturing and analysing all the packets passing through a given link. These studies have shown several important results :
+
+  - in TCP/IPv4 networks, a large fraction of the packets are TCP segments that contain only an acknowledgement. These packets usually account for 40-50% of the packets passing through the studied link
+  - in TCP/IPv4 networks, most of the bytes are exchanged in long packets, usually packets containing up to 1460 bytes of payload which is the default MSS for hosts attached to an Ethernet network, the most popular type of LAN
+
+ The figure below provides a distribution of the packet sizes measured on a link. It shows a three-modal distribution of the packet size. 50% of the packets contain pure TCP acknowledgements and occupy 40 bytes. About 20% of the packets contain about 500 bytes [#fmss500]_ of user data and 12% of the packets contain 1460 bytes of user data. However, most of the user data is transported in large packets. This packet size distribution has implications on the design of routers as we will discuss in the next chapter.
+
+  .. figure:: fig/transport-fig-079-c.png
+     :align: center
+     :scale: 50 
+
+     Packet size distribution in the Internet 
+
+ `Recent measurements <http://www.caida.org/research/traffic-analysis/pkt_size_distribution/graphs.xml>`_ indicate that these packet size distributions are still valid in today's Internet, although the packet distribution tends to become bimodal with small packets corresponding to TCP pure acks (40-64 bytes depending on the utilisation of TCP options) and large 1460-bytes packets carrying most of the user data. 
+
+
 
 .. index:: large window
 
@@ -725,6 +756,7 @@ A good setting of the retransmission timeout clearly depends on an accurate esti
 
 .. figure:: fig/transport-fig-070-c.png
    :align: center
+   :scale: 50 
 
    Evolution of the round-trip-time between two hosts 
 
@@ -733,8 +765,10 @@ The easiest solution to measure the round-trip-time on a TCP connection is to me
 
 .. figure:: fig/transport-fig-072-c.png
    :align: center
+   :scale: 50 
 
    How to measure the round-trip-time ? 
+
 
 However, when a data segment is lost, as illustrated in the bottom part of the figure, the measurement is ambiguous as the sender cannot determine whether the received acknowledgement was triggered by the first transmission of segment `123`or the retransmission. Using incorrect round-trip-time_ estimations could lead to incorrect values of the retransmission timeout. For this reason, Karn and Partridge proposed in [KP91]_ to ignore the round-trip-time_ measurements performed during retransmissions.
 
@@ -742,6 +776,7 @@ To avoid this ambiguity in the estimation of the round-trip-time when segments a
   
 .. figure:: fig/transport-fig-072-c.png
    :align: center
+   :scale: 50  
 
    Disembiguating round-trip-time measurements with the :rfc:`1323` timestamp option 
 
@@ -767,9 +802,16 @@ Then, when other rtt measurements are collected, `srtt` and `rttvar` are updated
    srtt=:math:`(1-\alpha) \times srtt + \alpha \times rtt
    rto=srtt+4*rttvar
 
-The proposed values for the parameters are :math:`\alpha=\frac{1}{8}` and :math:`\beta=\frac{1}{4}`. This allows a TCP implementation is running in the kernel to perform the `rtt`computation by using shift operations instead of the more costly floating point operations [Jacobson88]_. 
+The proposed values for the parameters are :math:`\alpha=\frac{1}{8}` and :math:`\beta=\frac{1}{4}`. This allows a TCP implementation is running in the kernel to perform the `rtt` computation by using shift operations instead of the more costly floating point operations [Jacobson88]_. The figure below illustrates the computation of the `rto` upon `rtt` changes.
 
 
+.. figure:: fig/transport-fig-071-c.png
+   :align: center
+   :scale: 50 
+
+   Example computation of the `rto`
+
+ 
 Advanced retransmission strategies
 ----------------------------------
 
@@ -779,24 +821,94 @@ The default go-back-n retransmission strategy was defined in :rfc:`793`. When th
 
 .. index:: delayed acknowledgements
 
-This retransmission strategy has been refined based on the experience of using TCP on the Internet. The first refinement was a clarification of the strategy used to send acknowledgements. As TCP uses piggybacking, the easiest and less costly method to send acknowledgements is to place them in the data segments sent in the other direction. However, few application layer protocols exchange data in both directions at the same time and thus this method rarely works. For an application that is sending data segments in one direction only, the remote TCP entity will return empty TCP segments whose only useful information is their acknowledgement number. This may cause a large overhead in wide area network if pure `ACK` segment is sent in response to a received data segment. Most TCP implementations use a `delayed acknowledgement` strategy. This strategy ensures that piggybacking is used when possible and otherwise pure `ACK` segments are sent for every second received data segments when there are no losses. When there are losses or reordering, `ACK` segments are more important for the received and they are sent immediately :rfc:`813` :rfc:`1122`. This strategy can be summarised as follows :
+This retransmission strategy has been refined based on the experience of using TCP on the Internet. The first refinement was a clarification of the strategy used to send acknowledgements. As TCP uses piggybacking, the easiest and less costly method to send acknowledgements is to place them in the data segments sent in the other direction. However, few application layer protocols exchange data in both directions at the same time and thus this method rarely works. For an application that is sending data segments in one direction only, the remote TCP entity will return empty TCP segments whose only useful information is their acknowledgement number. This may cause a large overhead in wide area network if pure `ACK` segment is sent in response to a received data segment. Most TCP implementations use a `delayed acknowledgement` strategy. This strategy ensures that piggybacking is used when possible and otherwise pure `ACK` segments are sent for every second received data segments when there are no losses. When there are losses or reordering, `ACK` segments are more important for the received and they are sent immediately :rfc:`813` :rfc:`1122`. This strategy relies on a new timer with a short delay (e.g. 50 milliseconds) and one additional flag in the TCB. It can be implemented as follows ::
 
+  reception of a segment:
+     if pkt.seq==rcv.nxt:   # segment received in sequence
+     	if delayedack : 
+	   send pure ack segment
+	   cancel acktimer
+	   delayedack=False
+	else:
+	   delayedack=True
+	   start acktimer
+     else:			# out of sequence segment
+     	send pure ack segment
+        if delayedack:
+	   delayedack=False
+	   cancel acktimer 	   			
 
+  transmission of a data segment:  # piggyback ack
+     if delayedack:
+     	delayedack=False
+        cancel acktimer
+ 
+  acktimer expiration:
+     send pure ack segment
+     delayedack=False
+
+Due to this delayed acknowledgement strategy, during a bulk transfer, a TCP implementation will usually acknowledge every second received TCP segment.
+
+The default go-back-n retransmission strategy used by TCP has the advantage of being simple to implement, in particular on the receiver side, but when there are losses, a go-back-n strategy will provide a lower performance than a selective repeat strategy. The TCP developpers have designed several extensions to TCP to allow it to use a selective repeat strategy while maintaining backward compatibility with older TCP implementations. These TCP extensions assume that the receiver is able to buffer the segments that it receives out-of-sequence. 
+
+.. index:: TCP fast retransmit
+
+The first extension that was proposed is the fast retransmit heuristics. This extension can be implemented on TCP senders and thus not require any change to the protocol. It only assumes that the TCP receiver is able to buffer out-of-sequence segments. 
+
+From a performance viewpoint, one issue with the TCP's `retransmission timeout` is that when there are isolated segment losses, the TCP sender will often remain idle waiting for the expiration of its retransmission timeouts. Such isolated losses are frequent in the global Internet [Paxson99]_.  A heuristic to deal with isolated losses without waiting for the expiration of the retransmission timeout has been included in many TCP implementations since the early 1990s. To understand this heuristic, let us consider the figure below that shows the segments exchanged over a TCP connection when an isolated segment is lost.
+
+.. figure:: fig/transport-fig-074-c.png 
+   :align: center
+   :scale: 50 
+
+   Detecting isolated segment losses
+
+As shown above, when an isolated segment is lost the sender will receive several `duplicate acknowledgements` since the TCP receiver immediately sends a pure acknowledgement when it receives an out-of-sequence segment. A duplicate acknowledgement is an acknowledgement that contains the same `acknowledgement number` as a previous segment. A single duplicate acknowledgement does not necessarily imply that a segment was lost as a simple reordering of the segments may cause duplicate acknowledgements as well. Measurements  [Paxson99]_ have shown that segment reordering is a frequent in the Internet. Based on these observations, the `fast retransmit` heuristics has been included in many TCP implementations. It can be implemented as follows ::
+
+   ack arrival:
+       if tcp.ack==rcv.nxt:    # duplicate acknowledgement
+       	  dupacks++
+	  if dupacks==3:
+	     retransmit segment(rcv.nxt)
+	     dupacks=0
+       else:
+	  dupacks=0
+	  # process acknowledgement
+
+This heuristic requires an additional variable in the TCB (`dupacks`). Most implementations set the default number of duplicate acknowledgements that trigger a retransmission to 3. It is now part of the standard TCP specification :rfc:`2581`. The `fast retransmit` heuristics improves the TCP performance provided that :
+
+ - isolated segments are lost
+ - the windows is large enough to allow the sender to send three duplicate acknowledgements
+
+The figure below illustrates the operation of the `fast retransmit` heuristic.
+
+.. figure:: fig/transport-fig-075-c.png 
+   :align: center
+   :scale: 50 
+
+   TCP fast retransmit heuristics
+
+.. index:: TCP selective acknowledgements, TCP SACK
+
+When losses are not isolated or when the windows are large, which is the case for bulk data transfer connections used in high bandwidth*delay environements, the performance of the `fast retransmit` heuristics decreases. In such environments, it is necessary to allow a TCP sender to use a selective repeat strategy instead of the default go-back-n strategy. Implementing selective-repeat requires a change to the TCP protocol as the receiver needs to be able to inform the sender of the out-of-order segments that it has already received. This can be done by using the Selective Acknowledgements (SACK) option defined in :rfc:`2018`. This TCP option is negotiated during the establishment of a TCP connection. If both TCP hosts support the option, SACK blocks can be attached by the receiver to the segments that it sends. SACK blocks allow a TCP receiver to indicate the blocks of data that it has received correctly but out of sequence. The figure below illustrates the utilisation of the SACK blocks.
+
+.. figure:: fig/transport-fig-076-c.png 
+   :align: center
+   :scale: 50 
+
+   TCP selective acknowledgements
+
+A SACK option contains one or more blocks. A block corresponds to all the sequence numbers between the `left edge` and the `right edge` of the block. The two edges of the block are encoded as 32 bits numbers (the same size as the TCP sequence number) in a SACK option. As the SACK option contains one byte to encode its type and one byte for its length, a SACK option containing `b` blocks is encoded as a sequence of :math:`2+8 \times b` bytes. In practice, the size of the SACK option can be problematic as the optional TCP header extension cannot occupy more than 44 bytes. As the SACK option is usually combined with the :rfc:`1323` timestamp extension, this implies that a TCP segment cannot usually contain more than three SACK blocks. This limitation implies that a TCP receiver cannot always place in the SACK option that it sends information about all the received blocks.
+
+To deal with the limited size of the SACK option, a TCP receiver that has currently more than 3 blocks inside its receiving buffer must the blocks that it will place in the SACK option. A good heuristic is to put in the SACK option the blocks that have changed the most recently as the sender is likely already aware of the older blocks. 
+
+When a sender receives a SACK option that indicates a new block and thus a new possible segment loss, it usually does not retransmit the missing segment(s) immediately. To deal with reordering, a TCP sender could apply a solution similar to `fast retransmit` by retransmitting a gap only once it has received three SACK options indicating this gap. It should be noted that the SACK option does not supersedes the `acknowledgement number` of the TCP header. A TCP sender can only remove data from its sending buffer once they have been acknowledged by TCP's cumulative acknowledgements. This design was chosen for two reasons. First, it allows the receiver to discard parts of its receiving buffer when it is running out of memory without loosing data. Second, as the SACK option is not transmitted reliably, the cumulative acknowledgements are still required to deal with losses of `ACK` segments carrying only SACK information. Thus, the SACK option only serves as a hint to allow the sender to optimise its retransmissions.
 
 .. sidebar:: Protection agains wrapped sequence numbers
+  
+ todo
 
-
-
-
-slow/fast ack
-
-retransmission mechanisms
- - timer based
- - duplicate acks
- - sack
- - fack 
- - others ?
-
+Many researchers have worked on techniques to improve the data transfer mechanisms used by TCP. 
 
 
  
@@ -873,6 +985,8 @@ Other transport protocols
 .. [#fmss] In theory, TCP implementations could send segments as large as the MSS_ advertised by the remote host during connection establishment. In practice, most implementations use as MSS_ the minimum between the received MSS_ and their own MSS_. This avoids fragmentation in the underlying IP layer and will be discussed in the next chapter.
 
 .. [#fnagleip] This TCP segment will then be placed in an IP header. We will describe IPv4 and IPv6 in the next chapter. The minimum size of the IPv4 (resp. IPv6) header is 20 bytes (resp. 40 bytes). 
+
+.. [#fmss500] When these measurements were taken, some hosts had a default MSS of 552 bytes (e.g. BSD Unix derivatives) or 536 bytes (the default MSS specified in :rfc:`793`). Today, most TCP implementation derive the MSS from the maximum packet size of the LAN interface they use (Ethernet in most cases). 
 
 .. [#ftcphosts] See http://fasterdata.es.net/tuning.html for more information on how to tune a TCP implementation
 

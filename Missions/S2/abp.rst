@@ -529,3 +529,15 @@ errors at runtime.
 
 
 .. include:: ../../book/links.rst
+
+
+.. 
+   Additional questions for the students
+   When to send a retransmission
+   discuss the optimal value of the timeout
+   What happens when a data segment is lost ?
+   What happens when an ack segment is lost ?
+
+   What are the factors that affect the performance of this protocol when there are no losses - rtt and bandwidth*delay product
+   What is the usefulness of a NAK ? difficulty of implementing NAK when reordering is possible
+   Retransmission mechanisms : how and when to retransmit (upon expiration of a timeout, upon NAK, pros and cons of each solution)
