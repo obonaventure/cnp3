@@ -2,9 +2,9 @@ The Transmission Control Protocol
 =================================
 
 
-The Transmission Control Protocol plays a key role in the TCP/IP protocol by providing a reliable byte stream service on top of the unreliable connectionless service provided by IP. During this exercise, you will learn how to establish correctly a TCP connection by playing either the role of a client or of a server and also to reliably exchange one data segment over this connection.
+The Transmission Control Protocol plays a key role in the TCP/IP protocol suite by providing a reliable byte stream service on top of the unreliable connectionless service provided by IP. During this exercise, you will learn how to establish correctly a TCP connection by playing either the role of a client or the role of a server and also to reliably exchange one data segment over this connection.
 
-The deadline for this exercise is be Tuesday October 20th, 13.00.
+The deadline for this exercise is Tuesday October 20th, 13.00.
 
 TCP support in scapy_
 ---------------------
@@ -38,9 +38,10 @@ scapy_ allows you to easily create a TCP segment. For example, to create a `SYN`
 
  p=IP(dst="1.2.3.4",src="5.6.7.8")/TCP(sport=9999,dport=80,flags="S",window=4096,seq=1234,ack=0)
 
-The other fields of the TCP header are set to a default value (urgptr) or automatically computed (chksum). In this segment, since the `ACK` flag is not set, the receiver will not look at the content of the `ack` field. A `SYN+ACK` segment sent in reply to the previous `SYN` segment could be ::
+The other fields of the TCP header are set to a default value (`urgptr`) or automatically computed (`chksum`). In this segment, since the `ACK` flag is not set, the receiver will not look at the content of the `ack` field. A `SYN+ACK` segment sent in reply to the previous `SYN` segment could be ::
 
- p=IP(dst="5.6.7.8",src="1.2.3.4")/TCP(dport=9999,sport=80,flags="SA",window=4096,seq=56789,ack=1235)
+ p=IP(dst="5.6.7.8",src="1.2.3.4")/TCP(dport=9999,sport=80,flags="SA",
+				       window=4096,seq=56789,ack=1235)
 
 Note that in the reply, the source and destination addresses and the source and destination ports have been swapped. When establishing a TCP connection, the utilisation of the `SYN` flag consumes one sequence number. This explains why the `ack` field of the reply segment is set to `1235` while the sequence number of the `SYN` segment was `1234`.
 
@@ -65,7 +66,7 @@ scapy_ allows you to easily set a flag in the header of a TCP segment that you c
 
 Note that the `pkt[TCP]` is used to force scapy_ to interpret `pkt` as a TCP segment. `pkt[TCP].flags` returns a byte containing the TCP flags of a received segment, while `pkt.flags` returns the *IP* flags of the received segments.
 
-Conversely, you may also want to print the header fields of a received segment. You can easily access the `seq`, `ack` or `window` fields of a received segment. To print the main header fields of a received TCP segment, you can use ::
+Conversely, you may also want to convert the flags of a received segment in a string. This can be done with the following function ::
 
  def flags2string(flags):
     '''
@@ -82,6 +83,9 @@ Conversely, you may also want to print the header fields of a received segment. 
             flagstring+=f
      
     return flagstring
+
+scapy_ allows you to easily access the `seq`, `ack` or `window` fields of a received segment. To print the main header fields of a received TCP segment, you can use ::
+
     
  def print_segment(pkt):
     '''
@@ -93,9 +97,13 @@ Conversely, you may also want to print the header fields of a received segment. 
     if not (TCP in pkt):
        print "Not a TCP segment"
     else:
-       print "sport=",pkt[TCP].sport," dport=",pkt[TCP].dport," seq=",pkt[TCP].seq," ack=",pkt[TCP].ack, " len=",len(pkt[TCP].payload)," flags=",flags2string(pkt[TCP].flags), " win=",pkt[TCP].window
+       print "sport=",pkt[TCP].sport," dport=",pkt[TCP].dport,
+       	     " seq=",pkt[TCP].seq," ack=",pkt[TCP].ack, 
+	     " len=",len(pkt[TCP].payload),
+	     " flags=",flags2string(pkt[TCP].flags), 
+	     " win=",pkt[TCP].window
 
-
+Note that `len(pkt[TCP].payload)` allows you to easily extract the length of the payload of a received TCP segment.
 
 When implementing a Finite State Machine in scapy_, it can sometimes be useful to add some debugging information about the segments that are received. For this, it is interesting to note that scapy_ allows you to define multiple `receive_conditions` for a given state. For example, you can write the following code ::
 
@@ -111,7 +119,7 @@ When implementing a Finite State Machine in scapy_, it can sometimes be useful t
     def data_received(self,pkt):
     # processing of the received segment
 
-You can also specify a `priority` to the `receive_condition`s. The default value of the priority is `0` and scapy_ will first run the conditions having the lowest value of the priority. In the example above, scapy_ will first evaluate the `printpkt` condition and then the `data_received` condition. Note that `len(pkt[TCP].payload)` allows you to easily extract the length of the 
+You can also specify a `priority` to the `receive_condition`. The default value of the priority is `0` and scapy_ will first run the conditions having the lowest priority value. In the example above, scapy_ will first evaluate the `printpkt` condition and then the `data_received` condition. 
 
 
 Implementing TCP in scapy_
@@ -119,11 +127,11 @@ Implementing TCP in scapy_
 
 A complete implementation of TCP in scapy_ is, of course, outside the scope of this exercise. However, even for a simplified implementation such as this one, it is useful to consider some of the problems that must be solved in a real TCP implementation.
 
-A TCP implementation maintains a Transmission Control Block (TCB) for each TCP connection. This TCB is a data structure that contains the complete "`state`"  of each TCP connection. The TCB is described in :rfc:`793`. This TCB contains first the identification of the TCP connection. As the IP address of the local host is known by scapy_, your implementation will need to store : 
+A TCP implementation maintains a Transmission Control Block (TCB) for each TCP connection. This TCB is a data structure that contains the complete "`state`"  of each TCP connection. The TCB is described in :rfc:`793`. This TCB contains first the identification of the TCP connection. As the IP address of the local host is already known by scapy_, your implementation will need to store : 
 
  - `self.remoteip` : the IP address of the remote host
  - `self.remoteport` : the TCP port used for this connection on the remote host
- - `self.localport` : the TCP port used for this connection on the local host. Note that when a client opens a TCP connection, the local port will be chosen in the ephemeral port range. 
+ - `self.localport` : the TCP port used for this connection on the local host. Note that when a client opens a TCP connection, the local port will be chosen in the ephemeral port range ( 49152 <= localport <= 65535 ). 
 
 Your implementation also needs to store information about the segments that it has sent and the segments that it has received. :rfc:`793` defines the following variables :
 
@@ -148,7 +156,7 @@ Practical issues
 
 For this exercise, you will reuse the UML virtual machines that you have used for the two previous exercises. 
 
-As you are implementing a protocol that is already supported by the Linux kernel, you need to ensure that the Linux kernel will not reply to the TCP segments that your implementation receives. For this, the easiest solution is to configure the firewall [#ffirewall]_ on the UML machine where you are running scapy_ to block all TCP segments. TCP should only be blocked on the interface between the two UML between. For example, if you run scapy_ on the UML1 and test it against UML2, you could configure UML1's firewall as follows ::
+As you are implementing a protocol that is already supported by the Linux kernel, you need to ensure that the Linux kernel will not reply to the TCP segments that your implementation receives. For this, the easiest solution is to configure the firewall [#ffirewall]_ on the UML machine where you are running scapy_ to block all TCP segments. TCP should only be blocked on the interface between the two UML machines. For example, if you run scapy_ on the UML1 and test it against UML2, you could configure UML1's firewall as follows ::
 
  iptables -A INPUT -p tcp -i eth0 -j DROP
  iptables -A OUTPUT -p tcp -o eth0 -j DROP
@@ -159,15 +167,25 @@ The first line configures the firewall to drop all TCP segments destined to the 
 
 Additional information about the netfilter_ firewall used on the Linux kernel may be found at `<http://www.netfilter.org/documentation/index.html>`_ or in the :manpage:`iptables(8)` man page.
 
+As most Unix variants, Linux supports the :manpage:`netstat(8)` command. This command allows you to extract various statistics from the networking stack on the Linux kernel. For TCP, `netstat` can list all the active TCP connections with the state of their FSM. `netstat` supports the following options that could be useful during this exercices :
+
+ - `-t` requests information about the TCP connections
+ - `-n` requests numeric output (by default, `netstat` sends DNS queries to resolve IP addresses in hosts and uses `/etc/services` to convert port number in service names, `-n` is recommended on the UML machines)
+ - `-e` provides more information about the state of the TCP connections
+ - `-o` provides information about the timers
+ - `-a` provides information about all TCP connections, not only those in the Established state
+
 
 Deliverables
 ------------
 
-Each group will provide two implementations [#fgoogle]_:
+Each team of two students will either implement [#fgoogle]_: : 
 
 #. One FSM for a TCP client that connects to a TCP server (e.g. a python_ server using the socket API on a Linux kernel), sends reliably one segment of data, receives one segment, acknowledges it and prints it on stdout
 
 #. One FSM for a TCP server that accepts one connection from a client (this client could be a python_ client using the socket API on top of a Linux kernel), receives one data segment, prints it on stdout, acknowledges it and sends reliably one data segment in response
+
+Each group must ensure that at least one team implements a client and one team implements a server.
 
 The two FSMs must correctly process the TCP segments with the `SYN`, `RST` and `ACK` flags. The other flags (notably `FIN`, `PSH` and `URG`) can be ignored for this exercise. 
 
@@ -204,6 +222,10 @@ For the TCP client, your implementation should be structured as follows ::
 
     @ATMT.state(final=1)
     def CLOSED(self):
+        # send RST segment
+        p=IP(dst=self.remoteip)/TCP(seq=self.sndnxt,sport=self.localport,
+			            dport=self.remoteport,ack=self.rcvnxt,
+				    window=self.sndwnd,flags='R')
         print "Done !"
 
     # receive_conditions and timeouts to be added
@@ -240,17 +262,20 @@ For the TCP server, your implementation should be structured as follows ::
 
     @ATMT.state(final=1)
     def CLOSED(self):
+        # send RST segment
+        p=IP(dst=self.remoteip)/TCP(seq=self.sndnxt,sport=self.localport,
+			            dport=self.remoteport,ack=self.rcvnxt,
+				    window=self.sndwnd,flags='R')
         print "Done !"
 
     # receive_conditions and timeouts to be added
   
 
-You do not need to implement the TCP connection release. To release the TCP connection, you can set a long timeout in the `ESTABLISHED` and send a `RST` segment when this timer expires ::
+You do not need to implement the TCP connection release. To release the TCP connection, you can set a long timeout in the `ESTABLISHED` and enter the `CLOSED` state when this timer expires ::
 
-    @ATMT.timeout(ESTABLISHED,15)
+    @ATMT.timeout(ESTABLISHED,30)
     def reset_connection(self):	
-        # send RST segment
-        p=IP(dst=self.remoteip)/TCP(seq=self.snduna,sport=self.localport,dport=self.remoteport,ack=self.rcvnxt,window=self.sndwnd,flags='R')
+    	raise self.CLOSED()
 	
 Remember that the initial TCP specification :rfc:`793` defines a go-back-n mechanism for TCP. This implies that your implementation can behave as a go-back-n receiver (e.g. ignore out-of-sequence segments) or sender. To simplify the retransmission of segments, consider that you send a single segment at a time. You can advertise a TCP window size of one segment (536 bytes) to limit the number of segments that the remote TCP implementation will send you.
 
@@ -264,7 +289,7 @@ The socket API
 
 Network applications are often written by using the socket_ API. This API is a relatively low-level API that allows to develop servers and clients. The documentation of the socket_ API in python may be found at http://docs.python.org/library/socket.html
 
-For example, the code below [#fsourcepythondoc]_ Provides a simple socket client written in python that opens a TCP connection to a remote server, sends `Hello, world`, prints the received answer on stdout and waits for 10 seconds before closing the connection ::
+For example, the code below [#fsourcepythondoc]_ provides a simple socket client written in python that opens a TCP connection to a remote server, sends `Hello, world`, prints the received answer on stdout and waits for 10 seconds before closing the connection ::
 
   #! /usr/bin/env python
 
@@ -357,3 +382,11 @@ The code below is for a server that receives a string, prints it on stdout, echo
 .. [#fgoogle] The astute reader or expert googler might notice that some implementations of the TCP FSM have already been written. For example, the scapy distribution contains in the file `scapy/layers/inet.py` a `TCP_client` Automaton. Although this Automaton can work in some cases, it does not completely implement the TCP FSM. A more detailed TCP FSM in scapy_ has been implemented by Adam Pridgen http://www.thecoverofnight.com/projects/code/basic_tcp_sm.py, but this FSM goes beyond this simple exercise.
 
 .. include:: ../../book/links.rst
+
+.. 
+   Additional questions to ask to the students
+
+
+
+   Points to check during the evaluation of the TCP code
+
