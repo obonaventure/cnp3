@@ -96,6 +96,9 @@ Glossary
    ISN
 	The Initial Sequence Number of a TCP connection is the sequence number chosen by the client ( resp. server) that is placed in the `SYN` (resp. `SYN+ACK`) segment during the establishment of the TCP connection.
 
+   spoofed packet
+   	A packet is said to be spoofed when the sender of the packet has used as source address a different address than its own.
+
    SYN cookie
         The SYN cookies is a technique used to compute the ISN_ 
 

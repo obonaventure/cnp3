@@ -385,8 +385,13 @@ The code below is for a server that receives a string, prints it on stdout, echo
 
 .. 
    Additional questions to ask to the students
-
+   initial sequence number of the SYN segment : why is it useful and how to compute it ?
+   selection of the port number in the SYN segment
+   SYN flood and DoS attacks, how to deal with such attacks
 
 
    Points to check during the evaluation of the TCP code
-
+   - increment of sequence number/ack modulo 2**32
+   - retransmission of SYN segment and possibly data segment
+   - ack processing should be decoupled from data processing (i.e. you can receive a segment that both advances the ack and contains data due to pyggyback)
+   - data transfert (send and receive data segments on the established connection) 

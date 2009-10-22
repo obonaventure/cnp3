@@ -10,38 +10,55 @@ The deadline for this exercise is Tuesday October 27th, 13.00.
 Experimental setup
 ------------------
 
-
 For this exercise, we have performed measurements in the emulated [#femulation]_ network shown below.
 
 
-.. figure
+.. figure:: fig/emulated-network-001-c.png
+   :align: center
+
+   Emulated network
 
 
-The emulated network is composed of three machines : a client, a server and a router. The client and the server are connected via the router. The server sends 1 MBytes of data to the client by using iperf_. The link between the router and the client is controlled by using the `netem <http://www.linuxfoundation.org/en/Net:Netem>`_ Linux kernel module. This module allows us to insert additional delays, reduce the link bandwidth and insert random losses. 
+The emulated network is composed of three UML machines [#fcongestion]_: a client, a server and a router. The client and the server are connected via the router. The client sends 1 MBytes of data to the server by using iperf_. The link between the router and the client is controlled by using the `netem <http://www.linuxfoundation.org/en/Net:Netem>`_ Linux kernel module. This module allows us to insert additional delays, reduce the link bandwidth and insert random packet losses. 
+
+We used `netem <http://www.linuxfoundation.org/en/Net:Netem>`_ To perform three measurements :
+
+#. no losses on the link between `R` and `S`, 100 milliseconds of delay
+#. 1% of segment losses on the link between `R` and `S`, 100 milliseconds of delay
+#. 10% of segment losses on the link between `R` and `S`, 100 milliseconds of delay
+
+Note that due to the way `netem <http://www.linuxfoundation.org/en/Net:Netem>`_ has been configured, the delays and the losses are only applied on packets received by `S`, not on packets sent by `S`.
+
+For each measurement, we have collected a packet trace that can be analysed by using wireshark_ and two tcpprobe_ traces. You can download these traces from the links below :
+
+ - :download:`traces/0pc_100msec.tar.gz` : 100 milliseconds delay, no packet losses
+ - :download:`traces/1pc_100msec.tar.gz` : 100 milliseconds delay, 1% packet losses
+ - :download:`traces/10pc_100msec.tar.gz` : 100 milliseconds delay, 10% packet losses
+
+Each team of two students will analyse these three traces, first by using wireshark_ and then by looking at the tcpprobe_ trace to find more detailed explanation. For each trace, you must : 
+
+ 1. identify the TCP options that have been used on the TCP connection
+ 2. try to find explanations for the evolution of the round-trip-time on each of these TCP connections. For this, you can use the `round-trip-time` graph of wireshark_
+ 3. verify whether the TCP implementation used implemented `delayed acknowledgements`
+ 3. analyse the packet trace without packet losses and explain the behaviour of TCP congestion control scheme by looking at the tcpprobe_ traces
+ 4. inside the traces with packet losses, find :
+
+   a. one segment that has been retransmitted by using `fast retransmit`. Explain this retransmission in details.
+   b. one segment that has been retransmitted thanks to the expiration of TCP's retransmission timeout. Explain why this segment could not have been retransmitted by using `fast retransmit`.
 
 
-.. sidebar:: Linux congestion control schemes
+ 6. wireshark_ contain several two useful graphs : the `round-trip-time` graph and the `time sequence` graph. Explain how you would compute the same graph from such a trace 
 
- Linux supports several congestion control mechanisms [#fcongestion]_ . For this exercise, we have configured the Linux kernel to use the NewReno scheme :rfc:`3782` that is very close to the official standard defined in :rfc:`5681`
-
-
-
-
-When debugging networking problems or to analyse performance problems, it is sometimes useful to capture the segments that are exchanged between two hosts and to analyse them.  We first used `tcpdump <http://www.tcpdump.org>`_ to capture all the TCP segments that are exchanged between the client and the server. For each measurement, we collected two traces :
-
- - the first trace contains all the segments sent and received by the client
- - the second trace contains all the segments sent and received by the server
-
-Each trace contains the first xx bytes of each segment (as well as the headers of the protocols in the network and datalink layers, but these headers will not be analysed during this exercise) and the capture time of this segment. By looking at the header of each segment, it is easy to extract the `flags`,  `sequence number` or `acknowledgement numbers` of each segment 
-
-To analyse such as trace, there are basically two possible options :
-
-#. Use a packet trace analysis software such as `tcpdump <http://www.tcpdump.org>`_ or `wireshark <http://www.wireshark.org>`_
-
-#. Develop some scapy_ scripts to extract the information that you need from a packet trace
+ 7. When displaying TCP segments, recent versions of wireshark_ contain `expert analysis` heuristics that indicate whether the segment has been retransmitted, whether it is a duplicate ack or whether the retransmission timeout has expired. Explain how you would implement the same heuristics as wireshark_. 
+ 
 
 
-Several packet trace analysis software are available, either as commercial or open-source tools. These tools are able to capture all the packets exchanged on a link. Of course, capturing packets require administrator privileges. They can also analyse the content of the captured packets and display information about them. The captured packets can be stored in a file for offline analysis.
+Packet trace analysis tools
+---------------------------
+
+When debugging networking problems or to analyse performance problems, it is sometimes useful to capture the segments that are exchanged between two hosts and to analyse them.  
+
+Several packet trace analysis softwares are available, either as commercial or open-source tools. These tools are able to capture all the packets exchanged on a link. Of course, capturing packets require administrator privileges. They can also analyse the content of the captured packets and display information about them. The captured packets can be stored in a file for offline analysis.
 
 tcpdump_ is probably one of the most well known packet capture software. It is able to both capture packets and display their content. tcpdump_ is a text-based tool that can display the value of the most important fields of the captured packets. Additional information about tcpdump_ may be found in :manpage:`tcpdump(1)`. The text below is an example of the output of tcpdump_ for the first TCP segments exchanged on an scp transfer between two hosts ::
 
@@ -55,7 +72,7 @@ tcpdump_ is probably one of the most well known packet capture software. It is a
  21:05:56.303623 IP 192.168.1.101.54150 > 130.104.78.8.22: P 22:814(792) ack 21 win 65535 <nop,nop,timestamp 274527749 1212093357>
 
 
-You can easily recognise in the output above the `SYN` segment containing the `MSS`, `window scale`, `timestamp` and `sackOK` options, the `SYN+ACK` segment whose `wscale` option indicates that the server does use use window scaling for this connection and then the first few segments exchanged on the connection.
+You can easily recognise in the output above the `SYN` segment containing the `MSS`, `window scale`, `timestamp` and `sackOK` options, the `SYN+ACK` segment whose `wscale` option indicates that the server uses window scaling for this connection and then the first few segments exchanged on the connection.
 
 
 wireshark_ is more recent than tcpdump_. It evolved from the ethereal packet trace analysis software. It can be used as a text tool like tcpdump_. For a TCP connection, wireshark_ would provide almost the same output as tcpdump_. The main advantage of wireshark_ is that it also includes a graphical user interface that allows to perform various types of analysis on a packet trace.
@@ -78,7 +95,7 @@ The second tool is the flow graph that is part of the `Statistics` menu. It prov
 
    Wireshark : flow graph
 
-The third set of tools are the `TCP stream graph` tools that are part of the `Statistics menu`. These tools allow you to plot various types of information extracted from the segments exchanged during a TCP connection. A first interesting graphs is the `sequence number graph` that shows the evolution of the sequence number field of the captured segments with time. This graph can be used to detect graphically retransmissions.
+The third set of tools are the `TCP stream graph` tools that are part of the `Statistics menu`. These tools allow you to plot various types of information extracted from the segments exchanged during a TCP connection. A first interesting graph is the `sequence number graph` that shows the evolution of the sequence number field of the captured segments with time. This graph can be used to detect graphically retransmissions.
 
 .. figure:: fig/wireshark-seqgraph.png
    :align: center
@@ -86,7 +103,7 @@ The third set of tools are the `TCP stream graph` tools that are part of the `St
 
    Wireshark : sequence number graph
 
-A second interesting graph is the `round-trip-time` graph that shows the evolution of the round-trip-time in function of time. This graph can be used to check whether the round-trip-time remains stable or not.
+A second interesting graph is the `round-trip-time` graph that shows the evolution of the round-trip-time in function of time. This graph can be used to check whether the round-trip-time remains stable or not. Note that from a packet trace, wireshark_ can plot two `round-trip-time` graphs, One for the flow from the client to the server and the other one. wireshark_ will plot the `round-trip-time` graph that corresponds to the selected packet in the top wireshark_ window. 
 
 .. figure:: fig/wireshark-rttgraph.png
    :align: center
@@ -94,6 +111,8 @@ A second interesting graph is the `round-trip-time` graph that shows the evoluti
 
    Wireshark : round-trip-time graph
 
+scapy_
+......
 
 In addition to allowing you to send and receive packets, scapy_ also allows you to easily read packet traces captured by tools such as tcpdump_ or wireshark_ provided that they are in the libpcap_ format. The `rdpcap` method allows you to read an entire trace in memory and convert it into a list of scapy_ packets ::
 
@@ -120,26 +139,28 @@ This packet trace contains 2863 TCP segments, 48 UDP segments and 14 other packe
  >>> l[1234][TCP].window
  49248
 
-You can easily write python scripts to extract information from a libpcap trace. When writing such a script, do not forget that the trace contains the segments sent and received by a host.
+You can write python scripts to extract information from a libpcap trace. When writing such a script, do not forget that the trace contains the segments sent and received by a host. For this exercise, scapy_ is not required. You can answer the questions without using scapy_
 
-During the previous exercise, you have used :manpage:`netstat(8)` To lookup the state of the TCP connections on a given host. On the Linux kernel, there are tools that can provide more information than :manpage:`netstat(8)`. One of these tools is the `TCPProbe <http://www.linuxfoundation.org/en/Net:TcpProbe>`_ kernel module. When installed on a Linux kernel, this kernel module prints one ASCII line containing the following information upon the arrival of each TCP segment :
+tcpprobe_
+.........
 
+During the previous exercise, you have used :manpage:`netstat(8)` To lookup the state of the TCP connections on a given host. On the Linux kernel, there are tools that can provide more information than :manpage:`netstat(8)`. One of these tools is the `TCPProbe <http://www.linuxfoundation.org/en/Net:TcpProbe>`_ kernel module. When installed on a Linux kernel, this kernel module prints one ASCII line containing the following information upon the arrival and the transmission of each TCP segment :
 
  #. The timestamp (seconds.nanoseconds)
  #. The source endpoint (address:port)
  #. The destination endpoint (address:port)  
  #. This column should be ignored
- #. The length of payload of the IP packet containing the segment (you need to subtract the length of the TCP header to compute the length of the TCP payload)
+ #. This column should be ignored
  #. The current value of `snd.nxt`
  #. The current value of `snd.una`
- #. The current value of the congestion window `snd.cwnd`
- #. The current value of the slow-start threshold `snd.ssthresh`
- #. The current size of the sending window `snd.wnd`
- #. The current value of the smoothed round-trip-time `srtt`
+ #. The current value of the congestion window `snd.cwnd` (in segments)
+ #. The current value of the slow-start threshold `snd.ssthresh` (in segments)
+ #. The current size of the sending window `snd.wnd` (in bytes)
+ #. The current value of the smoothed round-trip-time `srtt` (in multiples of 10 milliseconds)
  #. The current value of `rcv.nxt`
  #. This column should be ignored
  #. The current value of the receive window `rcv.wnd`
- #. This column should be ignored
+
 
 A sample TCPProbe trace is shown below ::
 
@@ -153,38 +174,14 @@ A sample TCPProbe trace is shown below ::
  14.532096000 192.168.10.2:48044 192.168.12.2:5001 0 32 0x6feddb79 0x6feda891 9 2147483647 23168 5 0x6fe931b6 0x6fe931b6 5840
 
 As you can see from the trace, the values of `snd.nxt` and `snd.una` are in hexadecimal. The congestion window and the slow-start threshold are expressed in MSS-sized segments. We see clearly in the trace above the congestion window that increases. The slow-start threshold is initialised at `2147483647` when the TCP connection starts. Its value will be updated after the first congestion event.
-
-Deliverables
-____________
-
-
-For this exercises, we have generated nine packet traces corresponding to different network conditions (delay, losses) between the client and the server. You can download these traces from the links below :
-
- - :download:`traces/trace1.pcap` : milliseconds delay, packet loss ratio
- - :download:`traces/trace2.pcap` :
- - :download:`traces/trace3.pcap` :
- - :download:`traces/trace4.pcap` :
- - :download:`traces/trace5.pcap` :
- - :download:`traces/trace6.pcap` :
- - :download:`traces/trace7.pcap` :
- - :download:`traces/trace8.pcap` :
- - :download:`traces/trace9.pcap` :
-
-Each team of two students will select two different traces from the set above and will analyse these. For each trace, you will compute :
-
- - the number of segments containing data sent by the client and the server
- - the options used on the TCP connection
- - the evolution of the round-trip-time
- - the number of segments that have been retransmitted (and the number of unnecessary retransmissions)
- - the number of expirations of the retransmission timer
- - the evolution of the congestion window
-
-Based on this analysis, each team will explain to the other members of the group the evolution of a TCP connection.
+Information from a tcpprobe_ trace can be easily plotted by using a tool such as gnuplot. See http://www.linuxfoundation.org/en/Net:TcpProbe for an example gnuplot script to plot the evolution of `snd.cwnd` and `snd.ssthresh`.
 
 .. rubric:: Footnotes
 
-.. [#fcongestion] For more information about the TCP congestion control schemes implemented in the Linux kernel, see http://linuxgazette.net/135/pfeiffer.html and http://www.cs.helsinki.fi/research/iwtcp/papers/linuxtcp.pdf or the source code of a recent Linux. A description of some of the sysctl variables that allow to tune the TCP implementation in the Linux kernel may be found in http://fasterdata.es.net/TCP-tuning/linux.html
-
 .. [#femulation] With an emulated network, it is more difficult to obtain quantitative results than with a real network since all the emulated machines need to share the same CPU and memory. This creates interactions between the different emulated machines that do not happen in the real world. However, since the objective of this exercise is only to allow the students to understand the behaviour of the TCP congestion control mechanism, this is not a severe problem.
+
+.. [#fcongestion] For more information about the TCP congestion control schemes implemented in the Linux kernel, see http://linuxgazette.net/135/pfeiffer.html and http://www.cs.helsinki.fi/research/iwtcp/papers/linuxtcp.pdf or the source code of a recent Linux. A description of some of the sysctl variables that allow to tune the TCP implementation in the Linux kernel may be found in http://fasterdata.es.net/TCP-tuning/linux.html. For this exercise, we have configured the Linux kernel to use the NewReno scheme :rfc:`3782` that is very close to the official standard defined in :rfc:`5681`
+
+
 
 .. include:: ../../book/links.rst

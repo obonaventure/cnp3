@@ -41,6 +41,16 @@
 
 .. _scapy: http://www.secdev.org/projects/scapy/ 
 
+.. _tcpdump: http://www.tcpdump.org
+
+.. _libpcap: http://www.tcpdump.org/
+
+.. _wireshark: http://www.wireshark.org
+
+.. _iperf: http://iperf.sourceforge.net/
+
+.. _tcpprobe: http://www.linuxfoundation.org/en/Net:TcpProbe
+
 .. _ASCII: http://en.wikipedia.org/wiki/ASCII
 
 .. _minicomputer: http://en.wikipedia.org/wiki/Minicomputer
