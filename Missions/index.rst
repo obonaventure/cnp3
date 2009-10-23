@@ -20,7 +20,7 @@ van den Schriek
    S3/gbnsr
    S4/tcp1
    S5/tcp2
-..   S6/ip1
+   S6/ip1
 ..   S7/ip2
 ..   S8/routing1
 ..   S9/routing2
