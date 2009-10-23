@@ -19,7 +19,7 @@ Questions
    :align: center 
    :scale: 50 
 
-   caption
+   Simple network
 
 2. When a network specialist designs a network, one of the problems that he needs to solve is to seet the weights of the links in his network. In the USA, the Abilene network interconnects most of the research labs and universities. The figure below shows the topology [#fabilene]_ of this network in 2009.
 
@@ -34,7 +34,19 @@ Questions
 
 * Is it possible to configure the link weights so that the packets sent by `Los Angeles` to `New York` follow one path while the packets sent by `New York` to reach `Los Angeles` follow a completely different path ?
 
-3. In the above questions, you have worked on the stable state of the routing tables computed by routing protocols. Let us now consider the transient problems that main happen when the network topology changes [#ffailures]_. For this, consider the network topology shown in the figure below and assume that all routers use a distance vector protocol that uses split horizon.
+* Assume that `Denver` and `Kansas City` need to exchange lots of packets. Can you configure the link metrics such that the link between these two routers does not carry any packet coming from other routers in the network ?
+
+3. In the five nodes network shown below, can you configure the link weights so that the packets sent by `E` to `A` use link `B->A` while the packets sent by `B` use links `B->D` and `D->A`?
+
+.. figure:: fig/routing-fig-003-c.png 
+   :align: center 
+   :scale: 50 
+
+   Simple five nodes network
+
+4. In the five nodes network shown above, can you configure the link weights so that the packets sent by `E` (resp. `F`) follow the `E->B->A` path (resp. `F->
+
+5. In the above questions, you have worked on the stable state of the routing tables computed by routing protocols. Let us now consider the transient problems that main happen when the network topology changes [#ffailures]_. For this, consider the network topology shown in the figure below and assume that all routers use a distance vector protocol that uses split horizon.
 
 
 .. figure:: fig/routing-fig-002-c.png
