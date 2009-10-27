@@ -777,7 +777,7 @@ However, when a data segment is lost, as illustrated in the bottom part of the f
 
 To avoid this ambiguity in the estimation of the round-trip-time when segments are retransmitted, recent TCP implementations rely on the `timestamp option` defined in :rfc:`1323`. This option allows a TCP sender to place two 32 bits timestamps in each TCP segment that it sends. The first timestamp, TS Value (`TSval`) is chosen by the sender of the segment. It could for example be the current value of its real-time clock [#ftimestamp]_. The second value, TS Echo Reply (`TSecr`), is the last `TSval` that was received from the remote host and stored in the :term:`TCB`. The figure below shows how the utilization of this timestamp option allows the disembiguate the round-trip-time measurement when there are retransmissions.
   
-.. figure:: fig/transport-fig-072-c.png
+.. figure:: fig/transport-fig-073-c.png
    :align: center
    :scale: 50  
 

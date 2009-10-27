@@ -6,19 +6,29 @@ Whenever possible, the bibliography includes hypertext links to the references c
 
 .. [AW05] Arlitt, M. and Williamson, C. 2005. An analysis of TCP reset behaviour on the internet. SIGCOMM Comput. Commun. Rev. 35, 1 (Jan. 2005), 37-44. DOI= http://doi.acm.org/10.1145/1052812.1052823
 
+.. [BE2007] Biondi, P. and A. Ebalard, "IPv6 Routing Header  Security", CanSecWest Security Conference 2007, April 2007. http://www.secdev.org/conf/IPv6_RH_security-csw07.pdf
+
+.. [CB2003] Cheswick, William R., Bellovin, Steven M., Rubin, Aviel D. Firewalls and internet security - Second edition - Repelling the Wily Hacker, Addison-Wesley 2003
+
 .. [Clark88] Clark D., "The Design Philosophy of the DARPA Internet Protocols", Computer Communications Review 18:4, August 1988, pp. 106-114, http://groups.csail.mit.edu/ana/Publications/PubPDFs/The%20design%20philosophy%20of%20the%20DARPA%20internet%20protocols.pdf
 
 .. [CK74] Vinton Cerf, Robert Kahn, A Protocol for Packet Network Intercommunication, IEEE Transactions on Communications, May 1974
 
 .. [CNPI09] CNPI, Security Assessment of the Transmission Control Protocol (TCP), http://www.cpni.gov.uk/Docs/tn-03-09-security-assessment-TCP.pdf
 
+.. [CSP2009] Carr, B., Sury, O., Palet Martinez, J., Davidson, A., Evans, R., Yilmaz, F., Wijte, Y., IPv6 Address Allocation and Assignment Policy, RIPE document ripe-481, September 2009, http://www.ripe.net/ripe/docs/ipv6policy.html
+
 .. [Feldmeier95] Feldmeier, D. C. 1995. Fast software implementation of error detection codes. IEEE/ACM Trans. Netw. 3, 6 (Dec. 1995), 640-651. DOI= http://dx.doi.org/10.1109/90.477710
 
 .. [FTY99] Theodore Faber, Joe Touch, and Wei Yue, The TIME-WAIT state in TCP and Its Effect on Busy Servers, Proc. Infocom '99, pp. 1573, http://www.isi.edu/touch/pubs/infocomm99/
 
+.. [Gill2004] Gill, V. , Lack of Priority Queuing Considered Harmful, ACM Queue, December 2004, http://queue.acm.org/detail.cfm?id=1036502
+
 .. [Goralski2009] Goralski, W., The Illustrated network : How TCP/IP works in a modern network, Morgan Kaufmann, 2009
 
 .. [Jacobson88] Jacobson, V. 1988. Congestion avoidance and control. In Symposium Proceedings on Communications Architectures and Protocols (Stanford, California, United States, August 16 - 18, 1988). V. Cerf, Ed. SIGCOMM '88. ACM, New York, NY, 314-329. DOI= http://doi.acm.org/10.1145/52324.52356
+
+.. [KM1995] Kent, C. A. and Mogul, J. C. 1995. Fragmentation considered harmful. SIGCOMM Comput. Commun. Rev. 25, 1 (Jan. 1995), 75-87. DOI= http://doi.acm.org/10.1145/205447.205456
 
 .. [KP91] Karn, P. and Partridge, C. 1991. Improving round-trip time estimates in reliable transport protocols. ACM Trans. Comput. Syst. 9, 4 (Nov. 1991), 364-373. DOI= http://doi.acm.org/10.1145/118544.118549
 
@@ -42,6 +52,7 @@ Whenever possible, the bibliography includes hypertext links to the references c
 
 .. [StevensTCP] Stevens, R., TCP/IP Illustrated : the Protocols, Addison-Wesley, 1994
 
+.. [Thomborson1992] Thomborson, C., The V.42bis Standard for Data-Compressing Modems, IEEE Micro, September/October 1992 (vol. 12 no. 5), pp. 41-53, http://www.computer.org/portal/web/csdl/doi/10.1109/40.166712
 
 .. [X200] ITU-T, recommendation X.200, Open Systems Interconnection - Model and Notation, 1994, http://www.itu.int/rec/T-REC-X.200-199407-I/en
 

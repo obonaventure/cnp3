@@ -113,3 +113,10 @@ Glossary
 
    round-trip-time
 	The round-trip-time (RTT) is the delay between the transmission of a segment and the reception of the corresponding acknowledgement in a transport protocol.
+
+   CIDR
+	Classless InterDomain Routing is the current address allocation architecture for IPv4. It was defined in :rfc:`1518` and :rfc:`4632`. 
+
+   RIR
+	Regional Internet Registry. An organisation that manages IP addresses and AS numbers on behalf of IANA.
+

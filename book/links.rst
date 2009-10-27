@@ -116,3 +116,10 @@
 .. _socket: http://en.wikipedia.org/wiki/Berkeley_sockets
 
 .. _netfilter: http://www.netfilter.org/
+
+.. _RIPE: http://www.ripe.net
+
+.. _ARIN: http://www.arin.net
+
+.. _afrinic: http://www.afrinic.net
+
