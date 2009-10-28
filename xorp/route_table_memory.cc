@@ -1,4 +1,5 @@
-//#define DEBUG_PRINT_FUNCTION_NAME
+#define DEBUG_LOGGING
+#define DEBUG_PRINT_FUNCTION_NAME
 
 #include "bgp_module.h"
 #include "libxorp/xlog.h"
@@ -9,13 +10,13 @@
 
 template<class A>
 MemoryTable<A>::MemoryTable(string table_name,
-			  Safi safi)
+			  Safi safi, BGPRouteTable<A> *parent_table)
     : 	BGPRouteTable<A>("MemoryTable-" + table_name, safi)
 {
-    _route_table = new BgpTrie<A>;
+    this->_parent = parent_table;
+    _route_table = new RefTrie<A, MemorySubnetRoute<A> >;
     _genid = 1; /*zero is not a valid genid*/
     _table_version = 1;
-    this->_parent = NULL;
 
 }
 
@@ -32,6 +33,12 @@ MemoryTable<A>::flush()
     debug_msg("%s\n", this->tablename().c_str());
     _route_table->delete_all_nodes();
 }
+
+// - If add_route is called, it means that the route doesn't
+//   exist upstream (otherwhise replace_route would have been called
+// - But the route can still exist in this route table if a
+//   delete_route for this route has been called has been called 
+//   before for instance.
 
 template<class A>
 int
@@ -54,20 +61,39 @@ MemoryTable<A>::add_route(InternalMessage<A> &rtmsg,
     // Create the concise format PA list.
     PAListRef<A> pa_list = new PathAttributeList<A>(rtmsg.attributes());
     pa_list.register_with_attmgr();
+    
+    typename RefTrie<A, MemorySubnetRoute<A> >::iterator iter = _route_table->lookup_node(existing_route->net());
+    
+    // the route is still existing, update it's history
 
-    MemorySubnetRoute<A>* tmp_route = new MemorySubnetRoute<A>(existing_route->net(), pa_list);
-        
+    if (iter != _route_table->end()) {
+	MemorySubnetRoute<A> *trie_route = (MemorySubnetRoute<A> *) &(iter.payload());
+	
+	AttributeMemory *m= new AttributeMemory();
+    	TimerList::system_gettimeofday(&m->when); 
+    	m->_attributes = existing_route->attributes();
+    	trie_route->history.push_front(m);
+	
+	if((int)trie_route->history.size() > MAX_HISTORY_SIZE)
+		trie_route->history.pop_back();
+
+    } else {
     // the route doesn't exist,  initiate its history
-    AttributeMemory *m= new AttributeMemory();
-    TimerList::system_gettimeofday(&m->when); 
-    m->_attributes = existing_route->attributes(); 
-    tmp_route->history.push_front(*m);
+        MemorySubnetRoute<A>* tmp_route = new MemorySubnetRoute<A>(existing_route->net(), pa_list);
+        
+        AttributeMemory *m= new AttributeMemory();
+        TimerList::system_gettimeofday(&m->when); 
+        m->_attributes = existing_route->attributes(); 
+        tmp_route->history.push_front(m);
+	
+        if((int)tmp_route->history.size() > MAX_HISTORY_SIZE)
+       	    tmp_route->history.pop_back();
 
-    _route_table->insert(existing_route->net(), *tmp_route);
-    tmp_route->unref();
+        _route_table->insert(existing_route->net(), *tmp_route);
+        tmp_route->unref();
+    }
 
     return this->_next_table->add_route(rtmsg, (BGPRouteTable<A>*)this);    
- 
 }
 
 template<class A>
@@ -99,8 +125,7 @@ MemoryTable<A>::replace_route(InternalMessage<A> &old_rtmsg,
     const SubnetRoute<A> *new_route=new_rtmsg.route();
     XLOG_ASSERT(existing_route->net() == new_route->net());
     
-	
-    typename BgpTrie<A>::iterator iter = _route_table->lookup_node(existing_route->net());
+    typename RefTrie<A, MemorySubnetRoute<A> >::iterator iter = _route_table->lookup_node(existing_route->net());
     if (iter != _route_table->end()) 
     {
     
@@ -113,8 +138,9 @@ MemoryTable<A>::replace_route(InternalMessage<A> &old_rtmsg,
     	AttributeMemory *m= new AttributeMemory();
     	TimerList::system_gettimeofday(&m->when); 
     	m->_attributes = existing_route->attributes(); 
-    	trie_route->history.push_front(*m);
-    	if(trie_route->history.size() > MAX_HISTORY_SIZE)
+    	trie_route->history.push_front(m);
+    	
+	if((int)trie_route->history.size() > MAX_HISTORY_SIZE)
         	trie_route->history.pop_back();
     }     
     
@@ -141,18 +167,17 @@ MemoryTable<A>::delete_route(InternalMessage<A> &rtmsg,
     //log("delete route: " + existing_route->net().str());
 
 
-    typename BgpTrie<A>::iterator iter = _route_table->lookup_node(existing_route->net());
+    typename RefTrie<A, MemorySubnetRoute<A> >::iterator iter = _route_table->lookup_node(existing_route->net());
     if (iter != _route_table->end()) {
 	MemorySubnetRoute<A> *trie_route = (MemorySubnetRoute<A> *) &(iter.payload());
-
+	
 	AttributeMemory *m= new AttributeMemory();
     	TimerList::system_gettimeofday(&m->when); 
     	m->_attributes = NULL; // means that the route was deleted at that time.
-    	trie_route->history.push_front(*m);
+    	trie_route->history.push_front(m);
 	
-	if(trie_route->history.size() > MAX_HISTORY_SIZE)
+	if((int)trie_route->history.size() > MAX_HISTORY_SIZE)
 		trie_route->history.pop_back();
-
 
          this->_next_table->delete_route(rtmsg, (BGPRouteTable<A>*)this);
     } else {
@@ -179,7 +204,7 @@ int
 MemoryTable<A>::push(BGPRouteTable<A> *caller)
 {
     debug_msg("MemoryTable<A>::push\n");
-    XLOG_ASSERT(caller == NULL);
+    XLOG_ASSERT(caller == this->_parent);
     XLOG_ASSERT(this->_next_table != NULL);
 
     return this->_next_table->push((BGPRouteTable<A>*)this);

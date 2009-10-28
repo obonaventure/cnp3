@@ -53,7 +53,7 @@ public:
 		       const PAListRef<A> attributes) :
 	SubnetRoute<A>(net, attributes,NULL) {}
 	
-	list< AttributeMemory<A> > history;
+	list< AttributeMemory<A> *> history;
 };
 
 /**
@@ -74,7 +74,7 @@ public:
 template<class A>
 class MemoryTable : public BGPRouteTable<A> {
 public:
-    MemoryTable(string tablename, Safi safi);
+    MemoryTable(string tablename, Safi safi, BGPRouteTable<A> *parent_table);
     ~MemoryTable();
     /**
      * Remove all the stored routes. Used to flush static routes only.
@@ -108,13 +108,11 @@ public:
 
     bool get_next_message(BGPRouteTable<A> */*next_table*/);
     
-    bool dump_next_route(DumpIterator<A>& dump_iter);
-
     int route_count() const {
 	return _route_table->route_count();
     }
 
-    BgpTrie<A>& trie() const {
+    RefTrie<A, MemorySubnetRoute<A> >& trie() const {
 	return *_route_table;
     }
 
@@ -126,7 +124,7 @@ public:
 
 private:
 
-    BgpTrie<A>* _route_table;
+    RefTrie<A, MemorySubnetRoute<A> > *_route_table;    
     uint32_t _genid;
     uint32_t _table_version;
 
