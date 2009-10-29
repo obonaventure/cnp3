@@ -1,0 +1,156 @@
+
+
+===========  ========  ========  =======  =======  =======
+Destination   Routes   Routes    Routes   Routes   Routes  
+	      on A     on B      on C     on D     on E
+-----------  --------  --------  -------  -------  -------
+A             0        1 via A   2 via B  3 via C  4 via D
+B 	      1 via B  0     	 1 via B  2 via C  3 via D
+C             2 via B  1 via C	 0     	  1 via C  2 via D
+D             3 via B  2 via C	 1 via D  0 	   1 via D
+E             4 via B  3 via C	 2 via D  1 via E  0
+===========  ========  ========  =======  =======  =======
+
+B-C fails, B updates
+
+===========  ========  ========  =======  =======  =======
+Destination   Route    Route     Route    Route    Route  
+	      on A     on B      on C     on D     on E
+
+A             0        1 via A   2 via B  3 via C  4 via D
+B 	      1 via B  0     	 1 via B  2 via C  3 via D
+C             2 via B  -	 0     	  1 via C  2 via D
+D             3 via B  -	 1 via D  0 	   1 via D
+E             4 via B  -	 2 via D  1 via E  0
+===========  ========  ========  =======  =======  =======
+
+B sends B=0 to A and D, A and D update 
+
+===========  ========  ========  =======  =======  =======
+Destination   Route    Route     Route    Route    Route  
+	      on A     on B      on C     on D     on E
+
+A             0        1 via A   2 via B  3 via C  4 via D
+B 	      1 via B  0     	 1 via B  2 via C  3 via D
+C             -	       -	 0     	  1 via C  2 via D
+D             -	       -	 1 via D  0 	   1 via D
+E             -	       -	 2 via D  1 via E  0
+===========  ========  ========  =======  =======  =======
+
+no trigger on D
+
+A sends A=0 to B and E, B and E update
+
+===========  ========  ========  =======  =======  =======
+Destination   Route    Route     Route    Route    Route  
+	      on A     on B      on C     on D     on E
+
+A             0        1 via A   2 via B  3 via C  4 via D
+B 	      1 via B  0     	 1 via B  2 via C  3 via D
+C             -	       -	 0     	  1 via C  2 via D
+D             -	       -	 1 via D  0 	   1 via D
+E             -	       -	 2 via D  1 via E  0
+===========  ========  ========  =======  =======  =======
+
+C updates
+
+===========  ========  ========  =======  =======  =======
+Destination   Route    Route     Route    Route    Route  
+	      on A     on B      on C     on D     on E
+
+A             0        1 via A   -  	  3 via C  4 via D
+B 	      1 via B  0     	 -	  2 via C  3 via D
+C             -	       -	 0     	  1 via C  2 via D
+D             -	       -	 1 via D  0 	   1 via D
+E             -	       -	 2 via D  1 via E  0
+===========  ========  ========  =======  =======  =======
+
+
+C sends to D that updates
+
+===========  ========  ========  =======  =======  =======
+Destination   Route    Route     Route    Route    Route  
+	      on A     on B      on C     on D     on E
+
+A             0        1 via A   -  	  -  	   4 via D
+B 	      1 via B  0     	 -	  -  	   3 via D
+C             -	       -	 0     	  1 via C  2 via D
+D             -	       -	 1 via D  0 	   1 via D
+E             -	       -	 2 via D  1 via E  0
+===========  ========  ========  =======  =======  =======
+
+D sends to B, C and E
+
+===========  ========  ========  =======  =======  =======
+Destination   Route    Route     Route    Route    Route  
+	      on A     on B      on C     on D     on E
+
+A             0        1 via A   -  	  -  	   -
+B 	      1 via B  0     	 -	  -  	   -
+C             -	       4 via D	 0     	  1 via C  2 via D
+D             -	       3 via D	 1 via D  0 	   1 via D
+E             -	       4 via D	 2 via D  1 via E  0
+===========  ========  ========  =======  =======  =======
+
+no change on C and E
+
+B has been updated and triggers to A and D
+
+===========  ========  ========  =======  =======  =======
+Destination   Route    Route     Route    Route    Route  
+	      on A     on B      on C     on D     on E
+
+A             0        1 via A   -  	  4 via B  -
+B 	      1 via B  0     	 -	  3 via B  -
+C             5 via B  4 via D	 0     	  1 via C  2 via D
+D             4 via B  3 via D	 1 via D  0 	   1 via D
+E             5 via B  4 via D	 2 via D  1 via E  0
+===========  ========  ========  =======  =======  =======
+
+A and D have been updated, A sends 
+
+===========  ========  ========  =======  =======  =======
+Destination   Route    Route     Route    Route    Route  
+	      on A     on B      on C     on D     on E
+
+A             0        1 via A   -  	  4 via B  8 via A
+B 	      1 via B  0     	 -	  3 via B  9 via A
+C             5 via B  4 via D	 0     	  1 via C  2 via D
+D             4 via B  3 via D	 1 via D  0 	   1 via D
+E             5 via B  4 via D	 2 via D  1 via E  0
+===========  ========  ========  =======  =======  =======
+
+no change on B, E is updated
+
+D sends to B, C and E
+
+===========  ========  ========  =======  =======  =======
+Destination   Route    Route     Route    Route    Route  
+	      on A     on B      on C     on D     on E
+-----------  --------  --------  -------  -------  -------
+A             0        1 via A   5 via D  4 via B  5 via D
+B 	      1 via B  0     	 4 via D  3 via B  4 via D
+C             5 via B  4 via D	 0     	  1 via C  2 via D
+D             4 via B  3 via D	 1 via D  0 	   1 via D
+E             5 via B  4 via D	 2 via D  1 via E  0
+===========  ========  ========  =======  =======  =======
+
+B no change, C updated, E updated
+
+
+C sends, no change
+
+
+===========  ========  ========  =======  =======  =======
+Destination   Route    Route     Route    Route    Route  
+	      on A     on B      on C     on D     on E
+-----------  --------  --------  -------  -------  -------
+A             0        1 via A   5 via D  4 via B  5 via D
+B 	      1 via B  0     	 4 via D  3 via B  4 via D
+C             5 via B  4 via D	 0     	  1 via C  2 via D
+D             4 via B  3 via D	 1 via D  0 	   1 via D
+E             5 via B  4 via D	 2 via D  1 via E  0
+===========  ========  ========  =======  =======  =======
+
+
+E sends, no change
