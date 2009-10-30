@@ -1,5 +1,5 @@
-#define DEBUG_LOGGING
-#define DEBUG_PRINT_FUNCTION_NAME
+//#define DEBUG_LOGGING
+//#define DEBUG_PRINT_FUNCTION_NAME
 
 #include "bgp_module.h"
 #include "libxorp/xlog.h"
@@ -62,6 +62,10 @@ MemoryTable<A>::add_route(InternalMessage<A> &rtmsg,
     PAListRef<A> pa_list = new PathAttributeList<A>(rtmsg.attributes());
     pa_list.register_with_attmgr();
     
+    LocalPrefAttribute* a=rtmsg.attributes()->local_pref_att();  
+    if(a) 
+    	XLOG_WARNING("LOGLOG MEMORY route count %d att count %d", _route_table->route_count(), pa_list.number_of_managed_atts());
+    
     typename RefTrie<A, MemorySubnetRoute<A> >::iterator iter = _route_table->lookup_node(existing_route->net());
     
     // the route is still existing, update it's history
@@ -71,11 +75,16 @@ MemoryTable<A>::add_route(InternalMessage<A> &rtmsg,
 	
 	AttributeMemory *m= new AttributeMemory();
     	TimerList::system_gettimeofday(&m->when); 
-    	m->_attributes = existing_route->attributes();
+    	m->_attributes = pa_list;
     	trie_route->history.push_front(m);
 	
-	if((int)trie_route->history.size() > MAX_HISTORY_SIZE)
+	if((int)trie_route->history.size() > MAX_HISTORY_SIZE) 
+        {
+    		PAListRef<A> pa_list = trie_route->history.back()->_attributes;
+		if(!pa_list.is_empty())
+			pa_list.deregister_with_attmgr();
 		trie_route->history.pop_back();
+	}
 
     } else {
     // the route doesn't exist,  initiate its history
@@ -83,12 +92,9 @@ MemoryTable<A>::add_route(InternalMessage<A> &rtmsg,
         
         AttributeMemory *m= new AttributeMemory();
         TimerList::system_gettimeofday(&m->when); 
-        m->_attributes = existing_route->attributes(); 
+        m->_attributes = pa_list; 
         tmp_route->history.push_front(m);
 	
-        if((int)tmp_route->history.size() > MAX_HISTORY_SIZE)
-       	    tmp_route->history.pop_back();
-
         _route_table->insert(existing_route->net(), *tmp_route);
         tmp_route->unref();
     }
@@ -124,10 +130,12 @@ MemoryTable<A>::replace_route(InternalMessage<A> &old_rtmsg,
     const SubnetRoute<A> *existing_route=old_rtmsg.route();
     const SubnetRoute<A> *new_route=new_rtmsg.route();
     XLOG_ASSERT(existing_route->net() == new_route->net());
+     
     
     typename RefTrie<A, MemorySubnetRoute<A> >::iterator iter = _route_table->lookup_node(existing_route->net());
     if (iter != _route_table->end()) 
     {
+    
     
 	MemorySubnetRoute<A> *trie_route = (MemorySubnetRoute<A> *) &(iter.payload());
 
@@ -135,13 +143,22 @@ MemoryTable<A>::replace_route(InternalMessage<A> &old_rtmsg,
     	PAListRef<A> pa_list = new PathAttributeList<A>(new_rtmsg.attributes());
     	pa_list.register_with_attmgr();
 
-    	AttributeMemory *m= new AttributeMemory();
+	LocalPrefAttribute* a=new_rtmsg.attributes()->local_pref_att();  
+    	if(a) 
+    	XLOG_WARNING("LOGLOG MEMORY route count %d att count %d", _route_table->route_count(), pa_list.number_of_managed_atts());
+    	
+	AttributeMemory *m= new AttributeMemory();
     	TimerList::system_gettimeofday(&m->when); 
-    	m->_attributes = existing_route->attributes(); 
+    	m->_attributes = pa_list; 
     	trie_route->history.push_front(m);
     	
 	if((int)trie_route->history.size() > MAX_HISTORY_SIZE)
+        {
+    		PAListRef<A> pa_list = trie_route->history.back()->_attributes;
+		if(!pa_list.is_empty())
+			pa_list.deregister_with_attmgr();
         	trie_route->history.pop_back();
+        } 
     }     
     
     return this->_next_table->replace_route(old_rtmsg, new_rtmsg, (BGPRouteTable<A>*)this);    
@@ -177,8 +194,12 @@ MemoryTable<A>::delete_route(InternalMessage<A> &rtmsg,
     	trie_route->history.push_front(m);
 	
 	if((int)trie_route->history.size() > MAX_HISTORY_SIZE)
+        {
+    		PAListRef<A> pa_list = trie_route->history.back()->_attributes;
+		if(!pa_list.is_empty())
+			pa_list.deregister_with_attmgr();
 		trie_route->history.pop_back();
-
+	}
          this->_next_table->delete_route(rtmsg, (BGPRouteTable<A>*)this);
     } else {
 	// we received a delete, but didn't have anything to delete.
