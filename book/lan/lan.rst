@@ -10,3 +10,8 @@ The datalink layer and the local area networks
 
 IP over Ethernet
 ----------------
+
+
+
+
+dhcp :rfc:`2131` (maybe together with ARP later)

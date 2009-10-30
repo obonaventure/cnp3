@@ -61,3 +61,7 @@ Whenever possible, the bibliography includes hypertext links to the references c
 .. [Zimmermann80] Zimmermann, H., OSI Reference Model - The ISO Model of Architecture for Open Systems InterconnectionPDF (776 KB), IEEE Transactions on Communications, vol. 28, no. 4, April 1980, pp. 425 - 432. http://www.comsoc.org/livepubs/50_journals/pdf/RightsManagement_eid=136833.pdf
 
 
+
+.. [WMH2008] Wilson, P., Michaelson, G., Huston, G., Redesignation of 240/4 from "Future Use" to "Private Use", Internet draft, September 2008, work in progress, http://tools.ietf.org/html/draft-wilson-class-e-02
+
+.. [FLM2008] Fuller, V., Lear, E., Meyer, D., Reclassifying 240/4 as usable unicast address space, Internet draft, March 2008, workin progress, http://tools.ietf.org/html/draft-fuller-240space-02
