@@ -76,3 +76,11 @@ Whenever possible, the bibliography includes hypertext links to the references c
 
 .. [Cheswick1990] Cheswick, B., An Evening with Berferd In Which a Cracker is Lured, Endured, and Studied, Proc. Winter USENIX Conference, 1990, pp. 163-174, http://cheswick.com/ches/papers/berferd.pdf
    
+.. [TE1993] Tsuchiya, P. F. and Eng, T. 1993. Extending the IP internet through address reuse. SIGCOMM Comput. Commun. Rev. 23, 1 (Jan. 1993), 16-33. DOI= http://doi.acm.org/10.1145/173942.173944
+
+.. [Miyakawa2008] Miyakawa, S., From IPv4 only To v4/v6 Dual Stack, IETF72 IAB Technical Plenary, July 2008, http://www.nttv6.jp/~miyakawa/IETF72/IETF-IAB-TECH-PLENARY-NTT-miyakawa-extended.pdf
+
+
+.. [WB2008] Waserman, M., Baker, F., IPv6-to-IPv6 Network Address Translation (NAT66), Internet draft, November 2008, http://tools.ietf.org/html/draft-mrw-behave-nat66-02
+
+.. [BMvB2009] Bagnulo, M., Matthews, P., van Beijnum, I., NAT64: Network Address and Protocol Translation from IPv6 Clients to IPv4 Servers, Internet draft, work in progress, October 2009, http://tools.ietf.org/html/draft-ietf-behave-v6v4-xlate-stateful-02

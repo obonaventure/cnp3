@@ -141,6 +141,8 @@ To preserve the scalability of the routing system, it is important to minimize t
    
    The subnetwork and host identifiers inside an IPv4 address
 
+.. index:: Class A IPv4 address, Class B IPv4 address, Class C IPv4 address
+
 When a router needs to forward a packet, it must know the `subnet` of the destination address to be able to consult its forwarding table to forward the packet. :rfc:`791` proposed to use the high-order bits of the address to encode the length of the subnet identifier. This lead to the definition of three `classes` of unicast addresses [#fclasses]_
 
 =======  ==========  =========  =============	=============
@@ -234,6 +236,9 @@ However, there is only difficulty with the aggregatable variable length subnets 
 With such a multihomed network, routers on the Internet would have two routes towards IPv4 address `193.191.245.88` : one route via Belnet (`193.190.0.0/15`) and one route via the other ISP (`193.191.244.0/23`). Both routes match IPv4 address `193.192.145.88`. Since :rfc:`1519` when a router knows several routes towards the same destination address, it must forward packets along the route having the longest prefix length. In the case of `193.191.245.88`, this is the route `193.191.244.0/23` that will be followed to forward the packet. This forwarding rule is called the `longest match` or the `more specific match`. All IPv4 routers implement this forwarding rule.
 
 .. sidebar:: Special IPv4 addresses
+
+ .. index :: 0.0.0.0, 127.0.0.1, private IPv4 addresses, link local IPv4 addresses
+
  Most unicast IPv4 addresses can be used as source and destination addresses in the global Internet. However, it is worth to note that some  blocks of IPv4 addresses have a special usage as described in :rfc:`3330`. These include :
   - `0.0.0.0/8` that is reserved for self-identification. A common address in this block is `0.0.0.0` that is sometimes used when a host boots and does not yet know its IPv4 address.
   - `127.0.0.0/8` that is reserved for loopback addresses. Each host implementing IPv4 must have a loopback interface (that is not attached to a datalink layer) and uses `127.0.0.1`. This allows processes running on a host to use TCP/IP to contact other processes running on the same host. This can be very useful for testing purposes. 
@@ -265,6 +270,7 @@ The main fields of the IPv4 header are :
  - a 32 bits `destination address` field that contains the IPv4 address of the destination host 
  - a 16 bits `checksum` that protects only the IPv4 header against transmission errors
 
+.. index:: Time To Live (IP)
 
 The other fields of the IPv4 header are used for specific purposes. The first is the 8 bits `Time To Live (TTL)` field. This field was introduced in IPv4 to avoid the risk of having an IPv4 packet caught in an infinite loop due to a transient or permanent error in routing tables. Consider for example the situation depicted in the figure below where destination `D` uses address `11.0.0.56`. If `S` sends a packet towards this destination, the packet will be forwarded to router `B` that will forward it to router `C` that will forward it back to router `A`.
 
@@ -309,7 +315,7 @@ The basic operation of the IPv4 fragmentation is as follows. A large packet is f
 
 .. sidebar:: IPv4 in scapy
 
- In the pseudocode used in this section, we use the scapy_ notations for the fields of the IPv4 header. `ihl` is the `IP Header Length`, `tos` is the `DS` byte, `len` is the packet length, `id` the packet identifier, `flags` contains the `DF` and `More` flags, `proto` is the `Protocol` field, `chksum` contains the Internet checksum and `src` (resp. `dst`) the source (resp. destination) IPv4 address. 
+ In the pseudo-code used in this section, we use the scapy_ notations for the fields of the IPv4 header. `ihl` is the `IP Header Length`, `tos` is the `DS` byte, `len` is the packet length, `id` the packet identifier, `flags` contains the `DF` and `More` flags, `proto` is the `Protocol` field, `chksum` contains the Internet checksum and `src` (resp. `dst`) the source (resp. destination) IPv4 address. 
 
 
 The following pseudo-code details the IPv4 fragmentation, assuming that the packet does not contain options, ::
@@ -347,7 +353,7 @@ The reassembly algorithm used by the destination host is roughly as follows. Fir
 Note that the reassembly algorithm must deal with the unreliability of the IP network. This implies that a fragment may be duplicated or a fragment may never reach the destination. The destination will easily detect fragment duplication thanks to the `Fragment Offset`. To deal with fragment losses, the reassembly algorithm must bound the time during which the fragments of a packet are stored in its buffer while the packet is being reassembled. This can be implemented by starting a timer when the first fragment of a packet is received. If the packet has not been reassembled upon expiration of the timer, all fragments are discarded and the packet is considered to be lost. 
 
 
-.. index Internet Control Message Protocol, ICMP
+.. index:: Internet Control Message Protocol, ICMP
 
 ICMP version 4
 ==============
@@ -385,6 +391,7 @@ The main types of ICMP messages are :
    - `Reassembly time exceeded` : this ICMP message is sent when a destination has been unable to reassemble all the fragments of a packet before the expiration of its reassembly timer. 
  - `Echo request` and `Echo reply` : these ICMP messages are used by the :manpage:`ping(8)` network debugging software. 
 
+.. index:: ping
 
 :manpage:`ping(8)` is often used by network operators to verify that a given IP address is reachable. Each host is supposed [#fpingproblems]_ to reply with an `Echo reply` ICMP message when its receives an  ICMP `Echo request` message. A sample usage of :manpage:`ping(8)` is shown below ::
 
@@ -398,6 +405,8 @@ The main types of ICMP messages are :
   --- 130.104.1.1 ping statistics ---
   5 packets transmitted, 5 packets received, 0% packet loss
   round-trip min/avg/max/stddev = 19.961/22.044/25.099/1.938 ms
+
+.. index:: traceroute
 
 Another very useful debugging tool is :manpage:`traceroute(8)`. The traceroute man page describes this tool as 'print the route packets take to network host'. traceroute uses the `TTL exceeded` ICMP messages to discover the intermediate routers on the path towards a destination. The principle behind traceroute is very simple. When a router receives an IP packet whose `TTL` is set to `1` it decrements the `TTL` and is forced to return to the sending host a `TTL exceeded` ICMP message containing the header and the first bytes of the IP. To discover all routers on a network path, a simple solution is to first send a packet whose `TTL` is set to `1`, then a packet whose `TTL` is set to `2`, ... A sample traceroute output is shown below ::
 
@@ -462,7 +471,7 @@ The router first decrement the packet's `TTL`. If the `TTL` reaches `0`, a `TTL 
 
 .. sidebar:: Longest prefix match in IP routers
 
- Performing the longest prefix match at line rate on routers requires highly tunes datastructures and algorithms. Consider for example an implementation of the longest match based on a Radix tree on a router with a 10 Gbps link. On such a link, a router can receive 31,250,000 40 bytes IPv4 packets every second. To forward the packets at line rate, the router must process one IPv4 packet every 32 nanoseconds. This cannot be achieved by a software implementation. For a hardware implementation, it main difficulty lies in the number of memory accesses that are necessary to perform the longest prefix match. 32 nanoseconds is very small compared to the memory accesses that are required by a navie longest prefix match implement. Additional information about longest match and other algorithms used on routers may be found in [Varghese]_.
+ Performing the longest prefix match at line rate on routers requires highly tunes data structures and algorithms. Consider for example an implementation of the longest match based on a Radix tree on a router with a 10 Gbps link. On such a link, a router can receive 31,250,000 40 bytes IPv4 packets every second. To forward the packets at line rate, the router must process one IPv4 packet every 32 nanoseconds. This cannot be achieved by a software implementation. For a hardware implementation, it main difficulty lies in the number of memory accesses that are necessary to perform the longest prefix match. 32 nanoseconds is very small compared to the memory accesses that are required by a naive longest prefix match implement. Additional information about longest match and other algorithms used on routers may be found in [Varghese]_.
 
 
 
@@ -485,7 +494,7 @@ The IETF decided to pursue the development of IPng on the basis on the SIPP prop
  * A host should be able to configure its IPv6 address automatically
  * Security must be part of IPv6
 
-.. sidebar:: IPng address size
+.. sidebar:: The IPng address size
 
 When the work on IPng started, it was clear that 32 bits was too small to encode an IPng address and all proposals used longer addresses. However, there were many discussions on the most suitable address length. A first approach, proposed by SIP in :rfc:`1710` was to use 64 bits addresses. A 64 bits address space was 4 billion times larger than the IPv4 address space and furthermore from an implementation viewpoint, 64 bits CPU were starting to appear and 64 bits addresses would naturally fit inside registers. Another approach was to use an existing address format. This was the TUBA proposal (:rfc:`1347`) that reuses the ISO CLNP 20 bytes addresses. The 20 bytes addresses provided room for growth and could 
 
@@ -507,7 +516,7 @@ An IPv6 unicast address is composed of three parts :
  #. A global routing prefix that allows to identify the Internet Service Provider that owns this block of addresses
  #. A subnet identifier that identifies a customer of the ISP
  #. An interface identifier that identifies particular interface on an endsystem 
-In today's deployments, interface identifiers are always 64 bits wide. This implies that while there are :math:`2^{128}` different IPv6 addresses, these must be grouped in :math:`2^{64}` subnets. This could appear as a waste of resources, however using 64 bits for the host identifier allows IPv6 addresses to be autoconfigured and also provides some benefits from a security viewpoint as will be explained in section ICMPv6_
+In today's deployments, interface identifiers are always 64 bits wide. This implies that while there are :math:`2^{128}` different IPv6 addresses, these must be grouped in :math:`2^{64}` subnets. This could appear as a waste of resources, however using 64 bits for the host identifier allows IPv6 addresses to be auto-configured and also provides some benefits from a security viewpoint as will be explained in section ICMPv6_
 
 
 .. sidebar:: Textual representation of IPv6 addresses
@@ -543,9 +552,11 @@ When considering the allocation of IPv6 addresses, two types of address allocati
  - /64 for a single user (e.g. a home user connected via ADSL) 
  - /128 in the rare case when it is known that no more than one endhost will be attached
 
-.. index:: Unique Local Unicast
+.. index:: Unique Local Unicast IPv6
 
 For the companies that want to use IPv6 without being connected to the IPv6 Internet, :rfc:`4193` defines the `Unique Local Unicast (ULA)` addresses (`FC00::/7`). These ULA addresses play a similar role as the private IPv4 addresses defined in :rfc:`1918`. However, the size of the `FC00::/7` address block allow ULA to be much more flexible than private IPv4 addresses.
+
+.. index:: ::1, ::
 
 Furthermore, the IETF has reserved some IPv6 addresses for a special usage. The two most important ones :
 
@@ -695,8 +706,11 @@ ICMPv6 specifies two classes of messages : error messages that indicate a proble
  - 3 : Time Exceeded. This error message can be sent either by a router or by a host. A router would set `code` to `0` to report the reception of a packet with its `Hop Limit` set to `0`. A host would set `code` to `1` to report that it was unable to reassemble IPv6 fragments received.
  - 4 : Parameter Problem. This ICMPv6 messages is used to report either the reception of an IPv6 packet with an erroneous header field (type `0`) or an unknown `Next Header` or IP option (types `1` and `2`). In this case, the message body contains the erroneous IPv6 packet and the first 32 bits word of the message body is a pointer to the error.
 
-Two types of informational ICMPv6 messages are in :rfc:`4443` : `echo request` and `echo reply` that are used to test the reachability of a destination by using :manpage:`ping6(8)`.
+.. index:: ping6
 
+Two types of informational ICMPv6 messages are defined in :rfc:`4443` : `echo request` and `echo reply` that are used to test the reachability of a destination by using :manpage:`ping6(8)`.
+
+.. index:: traceroute6
 
 ICMPv6 also allows to discover the path between a source and a destination by using :manpage:`traceroute6(8)`. The output below shows a traceroute between a host at UCLouvain and one of the main IETF servers. Note that compared to the IPv4 path that was described earlier, this path is completely different ::
 
@@ -754,19 +768,19 @@ These security problems convinced the industry that IP networks are a key part o
 The first firewalls included configurable packet filters. A packet filter is a set of rules that define the security policy of a network. In practice, these rules are based on the values of fields of the IP or transport layer headers. Any field of the IP or transport header can be used by a firewall rule, but the most common ones :
 
  - filter on the source address. For example, a company may decide to discard all packets received from one of its competitors. In this case, all packets whose source address belong to the competitor's address block would be rejected 
- - filter on destination address. For example, the hosts of the research lab of a company may receive packets from the global Internet, but not the hosts of the financial departement
+ - filter on destination address. For example, the hosts of the research lab of a company may receive packets from the global Internet, but not the hosts of the financial department
  - filter on the `Protocol` number found in the IP header. For example, a company may only allow its hosts to use TCP or UDP, but not other more experimental transport protocols
  - filter on the TCP or UDP port numbers. For example, only the DNS server of a company should received UDP segments whose destination port is set to `53` or only the official SMTP servers of the company can send TCP segments whose source ports are set to `25`
  - filter on the TCP flags. For example, a solution to prohibit external hosts from opening TCP connections with hosts inside the company is to discard all TCP segments received from the external interface with only the `SYN` flag set.
 
 These firewalls are often called `stateless` firewalls because they do not maintain any state about the TCP connections that pass through them.
 
-A second type of firewalls are the `stateful` firewalls. A stateful firewall tracks the state of each TCP connection passing through it. It maintains a TCB for each TCP connection. This TCB allows it to mainly reassemble the received segments to extract thei payload and perform verifications in the application layer. Some firewalls are able to inspect the URLs accessed by using HTTP and log all URLs visited or block TCP connections where a dangerous URL is exchanged. Some firewalls can verify that SMTP commands are used when a TCP connection is established on port `25` or that a TCP connection on port `80` carries HTTP commands and responses, ... 
+A second type of firewalls are the `stateful` firewalls. A stateful firewall tracks the state of each TCP connection passing through it. It maintains a TCB for each TCP connection. This TCB allows it to mainly reassemble the received segments to extract their payload and perform verifications in the application layer. Some firewalls are able to inspect the URLs accessed by using HTTP and log all URLs visited or block TCP connections where a dangerous URL is exchanged. Some firewalls can verify that SMTP commands are used when a TCP connection is established on port `25` or that a TCP connection on port `80` carries HTTP commands and responses, ... 
 
 
 .. sidebar:: Beyond firewalls
 
- Besides the firewalls, different types of "security" devices have been installed at the periphery of corporate networks. Intrusion Detection Systems (IDS) such as the popular snort_ are stateful firewalls that are capable of matching reassembled segments against regular expressions that correspond to signatures of viruses, worms or other types of attacks. Deep Packet Inspection (DPI) is another type of middlebox that analyse the packet's payload and possibly reassemble TCP segments to detect inappropriate usages. While IDS are mainly used in corporate networks, DPI is mainly used in Internet Service Providers. Some ISPs use DPI to detect and limit the bandwidth consummed by peer-to-peer applications. Some countries such as China or Iran use DPI to detect inapproriate Internet usage.
+ Besides the firewalls, different types of "security" devices have been installed at the periphery of corporate networks. Intrusion Detection Systems (IDS) such as the popular snort_ are stateful firewalls that are capable of matching reassembled segments against regular expressions that correspond to signatures of viruses, worms or other types of attacks. Deep Packet Inspection (DPI) is another type of middlebox that analyse the packet's payload and possibly reassemble TCP segments to detect inappropriate usages. While IDS are mainly used in corporate networks, DPI is mainly used in Internet Service Providers. Some ISPs use DPI to detect and limit the bandwidth consumed by peer-to-peer applications. Some countries such as China or Iran use DPI to detect inappropriate Internet usage.
 
 
 .. index:: Network Address Translation, NAT
@@ -774,33 +788,54 @@ A second type of firewalls are the `stateful` firewalls. A stateful firewall tra
 NAT
 ---
 
-Network Address Translation was proposed in :rfc:`1631`. 
+Network Address Translation (NAT) was proposed in [TE1993]_ and :rfc:`3022` as a short term solution to deal with the expected shortage of IPv4 addresses in the late 1980s - early 1990s. Combined with CIDR, NAT allowed to significantly slow the allocation rate of IPv4 addresses. A NAT is a middleboxes that interconnects two networks that are using IPv4 addresses from different addressing spaces. Usually, one of these addressing spaces is the public Internet while the other is using the private IPv4 addresses defined in :rfc:`1918`.
 
-normal, nat-pt
+A very common deployment of NAT is in broadband access routers as shown in the figure below. The broadband router access router interconnects a home network, either WiFi or Ethernet based and the global Internet via one ISP over ADSL or CATV. A single IPv4 address is allocated to the broadband access router and network address translation allows all the hosts attached to the home network to share a single public IPv4 address.
 
-:rfc:`2993`
+.. figure:: fig/network-fig-158-c.png
+   :align: center
+   :scale: 50
+   
+   A simple NAT with one public IPv4 address
 
-   [RFC2993]   Hain, T., "Architectural Implications of NAT", RFC 2993,
-               November 2000.
+A second type of deployment is in enterprise networks as shown in the figure below. In this case, the NAT functionality is installed on a border router of the enterprise. A private IPv4 address is assigned to each enterprise host while the border router has a pool of public IPv4 addresses. 
 
-:rfc:`3027`
+.. figure:: fig/network-fig-159-c.png
+   :align: center
+   :scale: 50
+   
+   An enterprise NAT with several public IPv4 addresses
 
-   [RFC3027]   Holdrege, M. and P. Srisuresh, "Protocol Complications
-               with the IP Network Address Translator (NAT)", RFC 3027,
-               January 2001.
+As the name implies, a NAT is a device that "translates" IP addresses. A NAT maintains a mapping table between the private IP addresses used in the internal network and the public IPv4 addresses. NAT allows a large number of hosts to share a pool of IP addresses because these hosts do not all access the global Internet at the same time. 
 
-   [RFC2663]   Srisuresh, P. and M. Holdrege, "IP Network Address
-               Translator (NAT) Terminology and Considerations", RFC
-               2663, August 1999.
+The simplest NAT is a NAT that uses a one-to-one mapping between a private IP address and a public IP address. To understand its operation, let us assume that an NAT such as the one shown above has booted. When the NAT receives a first packet from source `S` in the internal network destined to the public Internet, it creates a mapping between internal address `S` and the first address of its pool of public addresses (`P1`). Then it translates the received packet so that it can be sent to the public Internet. This translation is performed as followed :
+ - the source address of the packet (`S`) is replaced by the mapped public address (`P1`)
+ - the checksum of the IP header is incrementally updated as its content has changed
+ - if the packet carried a TCP or UDP segment, the transport layer checksum found of the included segment must also be updated as it is computed over the segment and a pseudo-header that includes the source and destination addresses
 
-:rfc:`3022`
+When a packet destined to `P1` is received from the public Internet, the NAT consults its mapping table to find `S`. The received packet is translated and forwarded in the internal network. 
 
-   [RFC3022]   Srisuresh, P. and K. Egevang, "Traditional IP Network
-               Address Translator (Traditional NAT)", RFC 3022, January
-               2001.
+This works as long as the pool of public IP addresses of the NAT does not become empty. In this case, a mapping must be removed from the mapping table to allow a packet from a new host to be translated. This garbage collection can be implemented by adding to each entry in the mapping table a timestamp that contains the last utilisation time of a mapping entry. This timestamp is updated each time a the corresponding entry is used. Then, the garbage collection algorithm can remove the oldest mapping entry in the table.
+
+A drawback of such as simple enterprise NAT is the size of the pool of public IPv4 addresses that is often too small to allow a large number of hosts to share such a NAT. In this case, a better solution is to allow the NAT to translate both IP addresses and port numbers. 
+
+Such a NAT maintains a mapping table that maps an internal IP address and TCP port number with an external IP address and TCP port number. When such a NAT receives a packet from the internal network, it performs a lookup in the mapping table with the packet's source IP address and source TCP port number. If a mapping is found, the source IP address and the source TCP port number of the packet are translated with the values found in the mapping table, the checksums are updated and the packet is sent to the global Internet. If no mapping is found, a new mapping is created with the first available couple `(IP address, TCP port number)` and the packet is translated. The entries of the mapping table are either removed at the end of the corresponding TCP connection is the NAT tracks TCP connection state like a stateful firewall or after some idle time.
+
+When such a NAT receives a packet from the global Internet, it lookups its mapping table with the packet's destination IP address and destination TCP port number. If a mapping is found, the packet is translated and forwarded in the internal network. Otherwise, the packet is discarded as the NAT cannot determine to which particular internal host the packet should be forwarded. For this reason, 
+
+With :math:`2^{16}` different port numbers, a NAT may support a large number of hosts with a single public IPv4 address. However, it should be noted that some applications open a large number of TCP connections [Miyakawa2008]_. Each of these TCP connections consumes one mapping entry in the NAT's mapping table. 
+
+.. index:: Application Level Gateway, ALG
+
+NAT allows many hosts to share one or a few public IPv4 addresses. However, using NAT has two important drawbacks. First, it is difficult for external hosts to open TCP connections with hosts that are behind a NAT. Some consider this to be a benefit from a security viewpoint. However, a NAT should not be confused with a firewall as there are some techniques to traverse NATs. Second, NAT breaks the end-to-end transparency of the network and transport layers. The main problem is when an application layer protocol uses IP addresses in some of the ADUs that it sends. A popular example is ftp defined in :rfc:`959`. In this case, there is a mismatch between the packet header translated by the NAT and the packet payload. The only solution to solve this problem is to place on the NAT an Application Level Gateway (ALG) that understands the application layer protocol and can thus translate the IP addresses and port numbers found in the ADUs. However, defining an ALG for each application is costly and application developers should avoid using IP addresses in the messages exchanged in the application layer :rfc:`3235`.
 
 
-NAT 6to6 margaret wasserman
+.. sidebar:: IPv6 and NAT
+
+ .. index:: NAT66
+
+ NAT has been very successful with IPv4. Given the size of the IPv6 addressing space, the IPv6 designers expected that NAT would never be useful with IPv6. The end-to-end transparency of IPv6 has been one of its key selling points compared to IPv4. However, recently the expected shortage of IPv4 addresses lead enterprise network administrators to consider IPv6 more seriously. One of the results of this analysis is that the IETF is considering the definition of NAT devices [WB2008]_ that are IPv6 specific. Another usage of NAT with IPv6 is to allow IPv6 hosts to access IPv4 destinations and conversely. The early IPv6 specifications included the Network Address Translation - Protocol Translation (NAT-PT) mechanism defined in :rfc:`2766`. This mechanism was later deprecated in :rfc:`4966` but has been recently restarted [BMvB2009]_
+
 
 
 Routing in IP networks
@@ -912,7 +947,7 @@ but see recent arbor data
 
 .. rubric:: Footnotes
 
-.. [#fclasses] In addition to the A, B and C classes, :rfc:`791` also defined the `D` and `E` classes of IPv4 addresses. Class `D` (resp. `E`) addresses are those whose high order bits are set to `1110` (resp. `1111`). Class `D` addresses are used by IP multicast and will be explained later. Class `E` addresses are currently unused, but there are some discussions on possible future utsages [WMH2008]_ [FLM2008]_
+.. [#fclasses] In addition to the A, B and C classes, :rfc:`791` also defined the `D` and `E` classes of IPv4 addresses. Class `D` (resp. `E`) addresses are those whose high order bits are set to `1110` (resp. `1111`). Class `D` addresses are used by IP multicast and will be explained later. Class `E` addresses are currently unused, but there are some discussions on possible future usages [WMH2008]_ [FLM2008]_
 
 .. [#fnetmask] Another way of representing IP subnets is to use netmasks. A netmask is a 32 bits field whose `p` high order bits are set to `1` and the low order bits are set to `0`. The number of high order bits set `1` indicates the length of the subnet identifier. Netmasks are usually represented in the same dotted decimal format as IPv4 addresses. For example `10.0.0.0/8` would be represented as `10.0.0.0 255.0.0.0` while `192.168.1.0/24` would be represented as `192.168.1.0 255.255.255.0`. In some cases, the netmask can be represented in hexadecimal.
 
