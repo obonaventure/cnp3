@@ -166,10 +166,10 @@ Subnet      	Number of   Smallest      Highest
 192.0.2.0/24	256	    192.0.2.0 	  192.0.2.255
 10.0.0.0/30	4	    10.0.0.0	  10.0.0.3
 10.0.0.0/31	2	    10.0.0.0	  10.0.0.1
-============== 	==========  ============= ===============
+============== 	==========  ============  ===============
 
 
-The figure below provides a simple example of the utilisation of IPv4 subnets in an enterprise network. In Local Area Networks, the size of the subnet will usually depend on the expected number of hosts attached to the LAN. For point-to-point links, many deployments have used `/30` prefixes, but recent routers are now using `/31` subnets on point-to-point links :rfc:`3021` or even do not use IPv4 addresses on such links [#funnumbered]_. 
+The figure below provides a simple example of the utilisation of IPv4 subnets in an enterprise network. In Local Area Networks, the size of the subnet will usually depend on the expected number of hosts attached to the LAN. For point-to-point links, many deployments have used `/30` prefixes, but recent routers are now using `/31` subnets on point-to-point links :rfc:`3021` or even do not use IPv4 addresses on such links [#funumbered]_. 
  
 .. figure:: fig/network-fig-056-c.png
    :align: center
@@ -235,9 +235,9 @@ However, there is only difficulty with the aggregatable variable length subnets 
 
 With such a multihomed network, routers on the Internet would have two routes towards IPv4 address `193.191.245.88` : one route via Belnet (`193.190.0.0/15`) and one route via the other ISP (`193.191.244.0/23`). Both routes match IPv4 address `193.192.145.88`. Since :rfc:`1519` when a router knows several routes towards the same destination address, it must forward packets along the route having the longest prefix length. In the case of `193.191.245.88`, this is the route `193.191.244.0/23` that will be followed to forward the packet. This forwarding rule is called the `longest match` or the `more specific match`. All IPv4 routers implement this forwarding rule.
 
-.. sidebar:: Special IPv4 addresses
+.. index :: 0.0.0.0, 127.0.0.1, private IPv4 addresses, link local IPv4 addresses
 
- .. index :: 0.0.0.0, 127.0.0.1, private IPv4 addresses, link local IPv4 addresses
+.. sidebar:: Special IPv4 addresses
 
  Most unicast IPv4 addresses can be used as source and destination addresses in the global Internet. However, it is worth to note that some  blocks of IPv4 addresses have a special usage as described in :rfc:`3330`. These include :
   - `0.0.0.0/8` that is reserved for self-identification. A common address in this block is `0.0.0.0` that is sometimes used when a host boots and does not yet know its IPv4 address.
@@ -360,6 +360,7 @@ ICMP version 4
 
 When IPv4 packets are processed, it is sometimes necessary for intermediate routers or the destination host to inform the sender of the packet of a problem that occurred while processing the packet. The TCP/IP protocol suite contains the Internet Control Message Protocol (ICMP). ICMP is defined in :rfc:`792`. ICMP messages are carried as the payload of IP packets (the protocol value reserved for ICMP is `1`). An ICMP message is composed of an 8 bytes header and a variable length payload that usually contains the first bytes of the packet that triggered the transmission of the ICMP message.
 
+
 .. figure:: fig/network-fig-069-c.png
    :align: center
    :scale: 50
@@ -446,6 +447,7 @@ ICMP, combined with the `Don't fragment (DF)` IPv4 flag, can be used by hosts an
 
 
 
+
 Operation of IPv4 devices
 -------------------------
 
@@ -496,7 +498,7 @@ The IETF decided to pursue the development of IPng on the basis on the SIPP prop
 
 .. sidebar:: The IPng address size
 
-When the work on IPng started, it was clear that 32 bits was too small to encode an IPng address and all proposals used longer addresses. However, there were many discussions on the most suitable address length. A first approach, proposed by SIP in :rfc:`1710` was to use 64 bits addresses. A 64 bits address space was 4 billion times larger than the IPv4 address space and furthermore from an implementation viewpoint, 64 bits CPU were starting to appear and 64 bits addresses would naturally fit inside registers. Another approach was to use an existing address format. This was the TUBA proposal (:rfc:`1347`) that reuses the ISO CLNP 20 bytes addresses. The 20 bytes addresses provided room for growth and could 
+ When the work on IPng started, it was clear that 32 bits was too small to encode an IPng address and all proposals used longer addresses. However, there were many discussions on the most suitable address length. A first approach, proposed by SIP in :rfc:`1710` was to use 64 bits addresses. A 64 bits address space was 4 billion times larger than the IPv4 address space and furthermore from an implementation viewpoint, 64 bits CPU were starting to appear and 64 bits addresses would naturally fit inside registers. Another approach was to use an existing address format. This was the TUBA proposal (:rfc:`1347`) that reuses the ISO CLNP 20 bytes addresses. The 20 bytes addresses provided room for growth and could 
 
 IPv6 addressing architecture
 ----------------------------
@@ -513,9 +515,10 @@ IPv6 supports unicast, multicast and anycast addresses. As with IPv4, an IPv6 un
 
 An IPv6 unicast address is composed of three parts :
 
- #. A global routing prefix that allows to identify the Internet Service Provider that owns this block of addresses
- #. A subnet identifier that identifies a customer of the ISP
- #. An interface identifier that identifies particular interface on an endsystem 
+#. A global routing prefix that allows to identify the Internet Service Provider that owns this block of addresses
+#. A subnet identifier that identifies a customer of the ISP
+#. An interface identifier that identifies particular interface on an endsystem 
+
 In today's deployments, interface identifiers are always 64 bits wide. This implies that while there are :math:`2^{128}` different IPv6 addresses, these must be grouped in :math:`2^{64}` subnets. This could appear as a waste of resources, however using 64 bits for the host identifier allows IPv6 addresses to be auto-configured and also provides some benefits from a security viewpoint as will be explained in section ICMPv6_
 
 
@@ -640,9 +643,6 @@ In IPv6, each option is considered as one header that contains a multiple of 8 b
 .. index:: jumbogram
 
 Two `hop-by-hop` options have been defined. :rfc:`2675` specifies the jumbogram that enables IPv6 to support packets containing a payload larger than 65535 bytes. These jumbo packets have their `payload length` set to `0` and the jumbogram option contains the packet length as a 32 bits field. Such packets can only be sent from a source to a destination if all the routers on the path support this option. However, as of this writing it does not seem that the jumbogram option has been implemented. The router alert option defined in :rfc:`2711` is the second example of `hop-by-hop` option. The packets that contain this option should be processed in a special way by the intermediate routers. This option is used for IP packets that carry Resource Reservation Protocol (RSVP) messages that must be processed by intermediate routers.
-
-.. sidebar:: The security risk of hop-by-hop options
-
 
 The type 0 routing header defined in :rfc:`2460` is an example of an IPv6 option that must be processed by some routers. This option is encoded as shown below.
 
@@ -830,9 +830,8 @@ With :math:`2^{16}` different port numbers, a NAT may support a large number of 
 NAT allows many hosts to share one or a few public IPv4 addresses. However, using NAT has two important drawbacks. First, it is difficult for external hosts to open TCP connections with hosts that are behind a NAT. Some consider this to be a benefit from a security viewpoint. However, a NAT should not be confused with a firewall as there are some techniques to traverse NATs. Second, NAT breaks the end-to-end transparency of the network and transport layers. The main problem is when an application layer protocol uses IP addresses in some of the ADUs that it sends. A popular example is ftp defined in :rfc:`959`. In this case, there is a mismatch between the packet header translated by the NAT and the packet payload. The only solution to solve this problem is to place on the NAT an Application Level Gateway (ALG) that understands the application layer protocol and can thus translate the IP addresses and port numbers found in the ADUs. However, defining an ALG for each application is costly and application developers should avoid using IP addresses in the messages exchanged in the application layer :rfc:`3235`.
 
 
+.. index:: NAT66
 .. sidebar:: IPv6 and NAT
-
- .. index:: NAT66
 
  NAT has been very successful with IPv4. Given the size of the IPv6 addressing space, the IPv6 designers expected that NAT would never be useful with IPv6. The end-to-end transparency of IPv6 has been one of its key selling points compared to IPv4. However, recently the expected shortage of IPv4 addresses lead enterprise network administrators to consider IPv6 more seriously. One of the results of this analysis is that the IETF is considering the definition of NAT devices [WB2008]_ that are IPv6 specific. Another usage of NAT with IPv6 is to allow IPv6 hosts to access IPv4 destinations and conversely. The early IPv6 specifications included the Network Address Translation - Protocol Translation (NAT-PT) mechanism defined in :rfc:`2766`. This mechanism was later deprecated in :rfc:`4966` but has been recently restarted [BMvB2009]_
 
@@ -951,7 +950,7 @@ but see recent arbor data
 
 .. [#fnetmask] Another way of representing IP subnets is to use netmasks. A netmask is a 32 bits field whose `p` high order bits are set to `1` and the low order bits are set to `0`. The number of high order bits set `1` indicates the length of the subnet identifier. Netmasks are usually represented in the same dotted decimal format as IPv4 addresses. For example `10.0.0.0/8` would be represented as `10.0.0.0 255.0.0.0` while `192.168.1.0/24` would be represented as `192.168.1.0 255.255.255.0`. In some cases, the netmask can be represented in hexadecimal.
 
-.. [#funnunmbered] A point-to-point link to which no IPv4 address has been allocated is called an unnumbered link. See :rfc:`1812` section 2.2.7 for a discussion of such unnumbered links.
+.. [#funumbered] A point-to-point link to which no IPv4 address has been allocated is called an unnumbered link. See :rfc:`1812` section 2.2.7 for a discussion of such unnumbered links.
 
 .. [#finitialttl] The initial TTL value used to send IP packets vary from one implementation to another. Most current IP implementations use an initial TTL of 64 or more. See http://members.cox.net/~ndav1/self_published/TTL_values.html for additional information.
 
