@@ -2,7 +2,7 @@
 The network layer
 ==================
 
-.. :rfc:`3927` special addresses
+
 
 .. http://tools.ietf.org/html/draft-touch-intarea-ipv4-unique-id-01 comment choisir les IP ids
 
@@ -82,16 +82,17 @@ Link state routing
 ------------------
 
 more complex, explain first discovery, then reliable flooding
-and using dijkstra for shortest path computation
+and using Dijkstra for shortest path computation
 
 Internet Protocol
 #################
 
-The Internet Protocol (IP) is the network layer protocol of the TCP/IP protocol suite. IP is the layer that allows the applications running above the transport layer (UDP/TCP) to use a wide range of heterogeneous datalink layers. IP was designed when most point-to-point links were telephone lines with modems. Since then, IP has been able to use Local Area Networks (Ethernet, Token Ring, FDDI, ...), new wide area data link layer technologies (X.25, ATM, FrameRelay, ...) and more recently wireless networks (802.11, 802.15, UMTS, GPRS, ...). The flexibility  of IP and its ability to use various types of underlying data link layer technologies is one of its key advantages.
+The Internet Protocol (IP) is the network layer protocol of the TCP/IP protocol suite. IP is the layer that allows the applications running above the transport layer (UDP/TCP) to use a wide range of heterogeneous datalink layers. IP was designed when most point-to-point links were telephone lines with modems. Since then, IP has been able to use Local Area Networks (Ethernet, Token Ring, FDDI, ...), new wide area data link layer technologies (X.25, ATM, Frame Relay, ...) and more recently wireless networks (802.11, 802.15, UMTS, GPRS, ...). The flexibility  of IP and its ability to use various types of underlying data link layer technologies is one of its key advantages.
 
 .. figure:: fig/network-fig-051-c.png
    :align: center
-   
+   :scale: 50
+
    IP and the reference model
 
 .. there is a draft on expectations of lower layer
@@ -122,13 +123,13 @@ IPv4 addresses are encoded as a 32 bits field. IPv4 addresses are often represen
 
 An IPv4 address is used to identify an interface on a router or a host. A router has thus as many IPv4 addresses as the number of interfaces that it has in the datalink layer. Most hosts have a single datalink layer interface and thus have a single IPv4 address. However, with the growth of wireless, more and more hosts have several datalink layer interfaces (e.g. an Ethernet interface and a WiFi interface). These hosts are said to be `multihomed`. A multihomed host with two interfaces has thus two IPv4 addresses.
 
-An important point to be defined in a network layer protocol is the allocation of the network layer addresses how they are used. A naïve allocation scheme would be to provide an IPv4 address to each host when the host is attached to the Internet on a first come first served basis. With this solution, a host in Belgium could have address 2.3.4.5 while another host located in Africa would use address 2.3.4.6. Unfortunately, this would force all routers to maintain a route for all hosts. The figure below shows a simple enterprise networks with two routers and three hosts and the associated routing tables.
+An important point to be defined in a network layer protocol is the allocation of the network layer addresses how they are used. A naive allocation scheme would be to provide an IPv4 address to each host when the host is attached to the Internet on a first come first served basis. With this solution, a host in Belgium could have address 2.3.4.5 while another host located in Africa would use address 2.3.4.6. Unfortunately, this would force all routers to maintain a route for all hosts. The figure below shows a simple enterprise networks with two routers and three hosts and the associated routing tables.
 
 .. figure:: fig/network-fig-056-c.png
    :align: center
    :scale: 50
    
-   Scalibility issues when using isolated IP addresses 
+   Scalability issues when using isolated IP addresses 
 
 .. index:: IP subnet, IP prefix, subnet mask
 
@@ -151,7 +152,7 @@ Class B	 `10`        16 bits	16,384     	65,536 (:math:`2^{16}`)
 Class C	 `110`	     24 bits	2,097,152  	256 (:math:`2^8`)
 =======  ==========  =========  =============	=============
 
-However, these three classes of addresses were not flexible enough. A class `A` subnet was too large for most organisations and a class `C` subnet was too small. Flexbility was added by the introduction of `variable-length subnets` in :rfc:`1519`. With `variable-length` subnets, the subnet identifier can have any size from `1` to `31`. `Variable-length` subnets allow the network operators to use a subnet that matches the number of hosts that will be placed inside the subnet. A subnet identifier or IPv4 prefix is usually [#fnetmask]_ represented as `A.B.C.D/p` where `A.B.C.D` is the network address obtained by concatenating the subnet identifier with a host identifier containing only `0` and `p` is the length of the subnet identifier in bits. The table below provides examples of IP subnets.
+However, these three classes of addresses were not flexible enough. A class `A` subnet was too large for most organisations and a class `C` subnet was too small. Flexibility was added by the introduction of `variable-length subnets` in :rfc:`1519`. With `variable-length` subnets, the subnet identifier can have any size from `1` to `31`. `Variable-length` subnets allow the network operators to use a subnet that matches the number of hosts that will be placed inside the subnet. A subnet identifier or IPv4 prefix is usually [#fnetmask]_ represented as `A.B.C.D/p` where `A.B.C.D` is the network address obtained by concatenating the subnet identifier with a host identifier containing only `0` and `p` is the length of the subnet identifier in bits. The table below provides examples of IP subnets.
 
 ============== 	==========  ============  ===============
 Subnet      	Number of   Smallest      Highest
@@ -187,7 +188,7 @@ Subnet	       		  Organisation
 130.104.0.0/16		  Open Software Foundation, USA
 ==============            ===========================================
 
-However, the Internet was a victim of its own success and in the late 1980s, many organisations were requesting blocks of IPv4 addresses and connected to the Internet. Most of these organisations requested class `B` address blocks because class `A` address were too large and in limited supply while class `C` address blocks were considered to be too small. Unfortunately, there were only 16,384 different class `B` address blocks and this address space was being consummed were quickly. Furthermore, the routing tables maintained by the routers were growing quickly and some routers had difficulties in maintaining all these routes in their limited memory [#fciscoags]_.
+However, the Internet was a victim of its own success and in the late 1980s, many organisations were requesting blocks of IPv4 addresses and connected to the Internet. Most of these organisations requested class `B` address blocks because class `A` address were too large and in limited supply while class `C` address blocks were considered to be too small. Unfortunately, there were only 16,384 different class `B` address blocks and this address space was being consumed were quickly. Furthermore, the routing tables maintained by the routers were growing quickly and some routers had difficulties in maintaining all these routes in their limited memory [#fciscoags]_.
 
 .. figure:: fig/network-fig-162-c.png
    :align: center
@@ -222,7 +223,7 @@ These universities are all connected to the Internet exclusively via the `Belgia
  
 .. index:: multihomed network
 
-However, there is only difficulty with the aggregatable variable length subnets used by CIDR. Consider for example `FEDICT <http://www.fedict.be>`_, a governmental institution that uses the `193.191.244.0/23` address block. Assume that in addition to being connected to the Internet via the `Belgian Research Network <http://www.belnet.be>`_ , `FEDICT <http://www.fedict.be>`_ also wanrts to be connected to another Internet Service Provider. The FEDICT network is then said to be multihomed. This is shown in the figure below.
+However, there is only difficulty with the aggregatable variable length subnets used by CIDR. Consider for example `FEDICT <http://www.fedict.be>`_, a governmental institution that uses the `193.191.244.0/23` address block. Assume that in addition to being connected to the Internet via the `Belgian Research Network <http://www.belnet.be>`_ , `FEDICT <http://www.fedict.be>`_ also wants to be connected to another Internet Service Provider. The FEDICT network is then said to be multihomed. This is shown in the figure below.
 
 .. figure:: fig/network-fig-163-c.png
    :align: center
@@ -232,14 +233,24 @@ However, there is only difficulty with the aggregatable variable length subnets 
 
 With such a multihomed network, routers on the Internet would have two routes towards IPv4 address `193.191.245.88` : one route via Belnet (`193.190.0.0/15`) and one route via the other ISP (`193.191.244.0/23`). Both routes match IPv4 address `193.192.145.88`. Since :rfc:`1519` when a router knows several routes towards the same destination address, it must forward packets along the route having the longest prefix length. In the case of `193.191.245.88`, this is the route `193.191.244.0/23` that will be followed to forward the packet. This forwarding rule is called the `longest match` or the `more specific match`. All IPv4 routers implement this forwarding rule.
 
+.. sidebar:: Special IPv4 addresses
+ Most unicast IPv4 addresses can be used as source and destination addresses in the global Internet. However, it is worth to note that some  blocks of IPv4 addresses have a special usage as described in :rfc:`3330`. These include :
+  - `0.0.0.0/8` that is reserved for self-identification. A common address in this block is `0.0.0.0` that is sometimes used when a host boots and does not yet know its IPv4 address.
+  - `127.0.0.0/8` that is reserved for loopback addresses. Each host implementing IPv4 must have a loopback interface (that is not attached to a datalink layer) and uses `127.0.0.1`. This allows processes running on a host to use TCP/IP to contact other processes running on the same host. This can be very useful for testing purposes. 
+  - `10.0.0.0/8`, `172.16.0.0/12` and `192.168.0.0/16` are reserved for private networks that are not directly attached to the Internet. These addresses are often called private addresses or :rfc:`1918` addresses. 
+  - `169.254.0.0/16` is used for link-local addresses :rfc:`3927`. Some hosts use an address in this block when they are connected to a network that does not allocated addresses as expected. 
 
-IPv4 packet forwarding
-----------------------
+
+
+
+IPv4 packets
+------------
 
 Now that we have clarified the allocation of IPv4 addresses and the utilisation of longest match to forward IPv4 packets, we can have a more detailed look at IPv4 by starting with the format of the IPv4 packets. The IPv4 packet format was defined in :rfc:`791`. Besides a few clarifications and some backward compatible changes, the IPv4 packet format did not change significantly since the publication of :rfc:`791`. All IPv4 packets use the 20 bytes header shown below. Some IPv4 packets contain an optional header extension that will be described later. 
 
 .. figure:: fig/network-fig-064-c.png
    :align: center
+   :scale: 50
    
    The IP version 4 header
 
@@ -248,16 +259,18 @@ The main fields of the IPv4 header are :
  - a 4 bits `version` that indicates the version of IP used to defined the header. Using a version field in the header allows the protocol to evolve as we'll see with IPv5
  -  a 4 bits `IP Header Length (IHL)` that indicates the length of the IP header in 32 bits words. This field allows IPv4 to use options if required, but as it is encoded as a 4 bits field, the IPv4 header cannot occupy more than 64 bytes. 
  - an 8 bits `DS` field that is used for Quality of Service and whose usage will be described later.
+ - an 8 bits `Protocol` field that indicates the transport layer protocol that must process the packet contents at the destination. Common values for this field are `6` for TCP and `17` for UDP
  - a 16 bits `length` that indicates the total length of the entire IPv4 packet (header and payload) in bytes. This implies that an IPv4 packet cannot be longer than 65535 bytes.
  - a 32 bits `source address` field that contains the IPv4 address of the source host
  - a 32 bits `destination address` field that contains the IPv4 address of the destination host 
  - a 16 bits `checksum` that protects only the IPv4 header against transmission errors
 
 
-The other fields of the IPv4 header are used for specific purposes. The first is the 8 bits `Time To Live (TTL)` field. This field was introduced in IPv4 to avoid the risk of having an IPv4 packet caught in an infinite loop due to a transient or permament error in routing tables. Consider for example the situation depicted in the figure below where destination `D` uses address `11.0.0.56`. If `S` sends a packet towards this destination, the packet will be forwarded to router `B` that will forward it to router `C` that will forward it back to router `A`.
+The other fields of the IPv4 header are used for specific purposes. The first is the 8 bits `Time To Live (TTL)` field. This field was introduced in IPv4 to avoid the risk of having an IPv4 packet caught in an infinite loop due to a transient or permanent error in routing tables. Consider for example the situation depicted in the figure below where destination `D` uses address `11.0.0.56`. If `S` sends a packet towards this destination, the packet will be forwarded to router `B` that will forward it to router `C` that will forward it back to router `A`.
 
 .. figure:: fig/network-fig-164-c.png
    :align: center
+   :scale: 50
    
    Forwarding loops in an IP network
 
@@ -280,6 +293,7 @@ Although IPv4 can send 64 KBytes long packets, none of the datalink layer techno
 
 .. figure:: fig/network-fig-063-c.png
    :align: center
+   :scale: 50
    
    The need for fragmentation and reassembly
 
@@ -293,8 +307,12 @@ The IPv4 fragmentation mechanism relies on four fields of the IPv4 header : `Len
 
 The basic operation of the IPv4 fragmentation is as follows. A large packet is fragmented in several fragments. The size of all fragments, except the last one, is equal to the Maximum Transmission Unit of the link used to forward the packet. Each IPv4 packet contains a 16 bits `Identifier` field. The `Identifier` of the large packet is copied in all fragments to allow the destination to reassemble the received fragments together. In each fragment, the `Fragment Offset` indicates, in units of 8 bytes, the position of the payload of the fragment in the payload of the original packet. The `Length` field in each fragment indicates the length of the payload of the fragment as in a normal IPv4 packet. Finally, the `More` flag is set only in the last fragment of a large packet.
 
+.. sidebar:: IPv4 in scapy
 
-The following pseudocode details the IPv4 fragmentation ::
+ In the pseudocode used in this section, we use the scapy_ notations for the fields of the IPv4 header. `ihl` is the `IP Header Length`, `tos` is the `DS` byte, `len` is the packet length, `id` the packet identifier, `flags` contains the `DF` and `More` flags, `proto` is the `Protocol` field, `chksum` contains the Internet checksum and `src` (resp. `dst`) the source (resp. destination) IPv4 address. 
+
+
+The following pseudo-code details the IPv4 fragmentation, assuming that the packet does not contain options, ::
 
 
  mtu : maximum size of the packet (including header) of outgoing link
@@ -324,11 +342,9 @@ The following pseudocode details the IPv4 fragmentation ::
 
 The fragments of an IPv4 packet may arrive at the destination in any order as each fragment will be forwarded independently in the network and may follow different paths. Furthermore, some fragments may be lost and never reach the destination.
 
-The reassembly algorithm used by the destination host is roughly as follows. First, the destination can verify whether a received IPv4 packet is a fragment or not by checking the value of the `More` flag and the `Fragment Offset`. If the `Fragment Offset` is set to `0` and the `More` flag is reset, the received packet has not been fragmented. Otherwise, the packet has been fragmented and must be reassembled. The reassembly algorithm relies on the `Identifier` field of the received fragments to associate a fragment with the corresponding packet being reassembled. Furthermore, the `Fragment Offset` field indicates the position of the fragment payload in the original unfragmented packet. Finally, thanks to the `More` flag the destination can determine the total length of the orginal unfragmented packet.
+The reassembly algorithm used by the destination host is roughly as follows. First, the destination can verify whether a received IPv4 packet is a fragment or not by checking the value of the `More` flag and the `Fragment Offset`. If the `Fragment Offset` is set to `0` and the `More` flag is reset, the received packet has not been fragmented. Otherwise, the packet has been fragmented and must be reassembled. The reassembly algorithm relies on the `Identifier` field of the received fragments to associate a fragment with the corresponding packet being reassembled. Furthermore, the `Fragment Offset` field indicates the position of the fragment payload in the original unfragmented packet. Finally, thanks to the `More` flag the destination can determine the total length of the original unfragmented packet.
 
 Note that the reassembly algorithm must deal with the unreliability of the IP network. This implies that a fragment may be duplicated or a fragment may never reach the destination. The destination will easily detect fragment duplication thanks to the `Fragment Offset`. To deal with fragment losses, the reassembly algorithm must bound the time during which the fragments of a packet are stored in its buffer while the packet is being reassembled. This can be implemented by starting a timer when the first fragment of a packet is received. If the packet has not been reassembled upon expiration of the timer, all fragments are discarded and the packet is considered to be lost. 
-
-
 
 
 .. index Internet Control Message Protocol, ICMP
@@ -336,10 +352,11 @@ Note that the reassembly algorithm must deal with the unreliability of the IP ne
 ICMP version 4
 ==============
 
-When IPv4 packets are processed, it is sometimes necessary for intermediate routers or the destination host to inform the sender of the packet of a problem that occured while processing the packet. The TCP/IP protocol suite contains the Internet Control Message Protocol (ICMP). ICMP is defined in :rfc:`792`. ICMP messages are carried as the payload of IP packets (the protocol value reserved for ICMP is `1`). An ICMP message is composed of an 8 bytes header and a variable length payload that usually contains the first bytes of the packet that triggered the transmission of the ICMP message.
+When IPv4 packets are processed, it is sometimes necessary for intermediate routers or the destination host to inform the sender of the packet of a problem that occurred while processing the packet. The TCP/IP protocol suite contains the Internet Control Message Protocol (ICMP). ICMP is defined in :rfc:`792`. ICMP messages are carried as the payload of IP packets (the protocol value reserved for ICMP is `1`). An ICMP message is composed of an 8 bytes header and a variable length payload that usually contains the first bytes of the packet that triggered the transmission of the ICMP message.
 
 .. figure:: fig/network-fig-069-c.png
    :align: center
+   :scale: 50
    
    ICMP version 4 
 
@@ -353,59 +370,109 @@ The main types of ICMP messages are :
    - `Protocol unreachable` : this ICMP message will be sent by a destination host that has received a packet, but does not support the transport protocol indicated in the packet's `Protocol` field
    - `Port unreachable` : this ICMP message will be sent by a destination host that has received a packet destined to a (usually) UDP port number, but no server process is listening on this port
  - `Fragmentation needed` : this ICMP message will be sent by a router that receives a packet having the `Don't Fragment` flag set that is too large to be sent over the outgoing interface 
- - `Redirect` : this ICMP message can be sent when there are two routers on the same LAN. Consider a LAN with one host and two routers : `R1` and `R2`. Assume that `R1` is also connected to subnet `1.0.0.0/8` while `R2` is connected to subnet `2.0.0.0/8`. If a host on the LAN sends a packet towards `2.0.0.1` to `R1`, `R1` will need to forward the packet again on the LAN to reach `R2`. This is not optimal as the packet is sent twice on the same LAN. In this case, `R1` could send an ICMP `Redirect` message to the host to inform it that it should have sent the packet directly to `R2`. This will allow the host the send the other packets to `2.0.0.1` directly via `R2`. 
+ - `Redirect` : this ICMP message can be sent when there are two routers on the same LAN. Consider a LAN with one host and two routers : `R1` and `R2`. Assume that `R1` is also connected to subnet `130.104.0.0/16` while `R2` is connected to subnet `138.48.0.0/16`. If a host on the LAN sends a packet towards `130.104.1.1` to `R2`, `R2` will need to forward the packet again on the LAN to reach `R1`. This is not optimal as the packet is sent twice on the same LAN. In this case, `R2` could send an ICMP `Redirect` message to the host to inform it that it should have sent the packet directly to `R1`. This will allow the host the send the other packets to `130.104.1.1` directly via `R1`. 
+
+ .. figure:: fig/network-fig-165-c.png
+   :align: center
+   :scale: 50
+   
+   ICMP redirect
+
  - `Parameter problem` : this ICMP message is sent when a router or a host receives an IP packet containing an error
+ - `Source quench` : a router was supposed to send this message when it had to discard packets due to congestion. However, sending ICMP messages in case of congestion was not the best way to reduce the congestion and since the inclusion of a congestion control scheme in TCP, this ICMP message has been deprecated. 
  - `Time Exceeded` : there are two types of `Time Exceeded` ICMP messages
-   - `TTL exceeded` : a `TTL exceeded` message is sent by a router when it discards an IPv4 packet becaused its `TTL` reached `0`.
+   - `TTL exceeded` : a `TTL exceeded` message is sent by a router when it discards an IPv4 packet because its `TTL` reached `0`.
    - `Reassembly time exceeded` : this ICMP message is sent when a destination has been unable to reassemble all the fragments of a packet before the expiration of its reassembly timer. 
- - `Echo request` and `Echo reply` : these ICMP messages are used by the :manpage:`ping(8)` network debugging software. :manpage:`ping(8)` is often used by network operators to verify that a given IP address is reachable. Each host is supposed [#fpingproblems]_ to reply with an `Echo reply` ICMP message when its receives an  ICMP `Echo request` message. A sample usage of :manpage:`ping(8)` is shown below ::
-
- ping 130.104.1.1
- PING 130.104.1.1 (130.104.1.1): 56 data bytes
- 64 bytes from 130.104.1.1: icmp_seq=0 ttl=243 time=19.961 ms
- 64 bytes from 130.104.1.1: icmp_seq=1 ttl=243 time=22.072 ms
- 64 bytes from 130.104.1.1: icmp_seq=2 ttl=243 time=23.064 ms
- 64 bytes from 130.104.1.1: icmp_seq=3 ttl=243 time=20.026 ms
- 64 bytes from 130.104.1.1: icmp_seq=4 ttl=243 time=25.099 ms
- ^C
- --- 130.104.1.1 ping statistics ---
- 5 packets transmitted, 5 packets received, 0% packet loss
- round-trip min/avg/max/stddev = 19.961/22.044/25.099/1.938 ms
+ - `Echo request` and `Echo reply` : these ICMP messages are used by the :manpage:`ping(8)` network debugging software. 
 
 
-Echo requEast et Echo reply 
+:manpage:`ping(8)` is often used by network operators to verify that a given IP address is reachable. Each host is supposed [#fpingproblems]_ to reply with an `Echo reply` ICMP message when its receives an  ICMP `Echo request` message. A sample usage of :manpage:`ping(8)` is shown below ::
 
-traceroute + example
+  ping 130.104.1.1
+  PING 130.104.1.1 (130.104.1.1): 56 data bytes
+  64 bytes from 130.104.1.1: icmp_seq=0 ttl=243 time=19.961 ms
+  64 bytes from 130.104.1.1: icmp_seq=1 ttl=243 time=22.072 ms
+  64 bytes from 130.104.1.1: icmp_seq=2 ttl=243 time=23.064 ms
+  64 bytes from 130.104.1.1: icmp_seq=3 ttl=243 time=20.026 ms
+  64 bytes from 130.104.1.1: icmp_seq=4 ttl=243 time=25.099 ms
+  --- 130.104.1.1 ping statistics ---
+  5 packets transmitted, 5 packets received, 0% packet loss
+  round-trip min/avg/max/stddev = 19.961/22.044/25.099/1.938 ms
 
-ping + example
+Another very useful debugging tool is :manpage:`traceroute(8)`. The traceroute man page describes this tool as 'print the route packets take to network host'. traceroute uses the `TTL exceeded` ICMP messages to discover the intermediate routers on the path towards a destination. The principle behind traceroute is very simple. When a router receives an IP packet whose `TTL` is set to `1` it decrements the `TTL` and is forced to return to the sending host a `TTL exceeded` ICMP message containing the header and the first bytes of the IP. To discover all routers on a network path, a simple solution is to first send a packet whose `TTL` is set to `1`, then a packet whose `TTL` is set to `2`, ... A sample traceroute output is shown below ::
 
-.. sidebar:: Redirection attacks
+ traceroute www.ietf.org
+ traceroute to www.ietf.org (64.170.98.32), 64 hops max, 40 byte packets
+  1  CsHalles3.sri.ucl.ac.be (192.168.251.230)  5.376 ms  1.217 ms  1.137 ms
+  2  CtHalles.sri.ucl.ac.be (192.168.251.229)  1.444 ms  1.669 ms  1.301 ms
+  3  CtPythagore.sri.ucl.ac.be (130.104.254.230)  1.950 ms  4.688 ms  1.319 ms
+  4  fe.m20.access.lln.belnet.net (193.191.11.9)  1.578 ms  1.272 ms  1.259 ms
+  5  10ge.cr2.brueve.belnet.net (193.191.16.22)  5.461 ms  4.241 ms  4.162 ms
+  6  212.3.237.13 (212.3.237.13)  5.347 ms  4.544 ms  4.285 ms
+  7  ae-11-11.car1.Brussels1.Level3.net (4.69.136.249)  5.195 ms  4.304 ms  4.329 ms
+  8  ae-6-6.ebr1.London1.Level3.net (4.69.136.246)  8.892 ms  8.980 ms  8.830 ms
+  9  ae-100-100.ebr2.London1.Level3.net (4.69.141.166)  8.925 ms  8.950 ms  9.006 ms
+  10  ae-41-41.ebr1.NewYork1.Level3.net (4.69.137.66)  79.590 ms ae-43-43.ebr1.NewYork1.Level3.net (4.69.137.74)  78.140 ms ae-42-42.ebr1.NewYork1.Level3.net (4.69.137.70)  77.663 ms
+  11  ae-2-2.ebr1.Newark1.Level3.net (4.69.132.98)  78.290 ms  83.765 ms  90.006 ms
+  12  ae-14-51.car4.Newark1.Level3.net (4.68.99.8)  78.309 ms  78.257 ms  79.709 ms
+  13  ex1-tg2-0.eqnwnj.sbcglobal.net (151.164.89.249)  78.460 ms  78.452 ms  78.292 ms
+  14  151.164.95.190 (151.164.95.190)  157.198 ms  160.767 ms  159.898 ms
+  15  ded-p10-0.pltn13.sbcglobal.net (151.164.191.243)  161.872 ms  156.996 ms  159.425 ms
+  16  AMS-1152322.cust-rtr.swbell.net (75.61.192.10)  158.735 ms  158.485 ms  158.588 ms
+  17  mail.ietf.org (64.170.98.32)  158.427 ms  158.502 ms  158.567 ms
 
- explain the problem of redirection attacks and show that redirect should be used with care. introduce man in the middle attack
+This traceroute output shows a 17 hops path between a host at UCLouvain and one of the main IETF servers. For each hop, traceroute provides the IPv4 address of the router that sent the ICMP message and the measured round-trip-time between the source and this router. traceroute sends three probes with each `TTL` value. In some cases, such as at the 10th hop above, the ICMP messages may be received from different addresses. This is usually because different packets from the same source have followed different paths in the network. A detailed analysis of traceroute output is outside the scope of this document. Additional information may be found in [ACO+2006]_ [DT2007]_
 
 
 .. index:: Path MTU discovery
 
-path mtu discovery :rfc:`1191`
+Another important utilisation of ICMP messages is to discover the MTU to reach a particular host. As explained earlier, when an IPv4 router receives a packet that is larger than the MTU of the outgoing link, it must forward the packet in fragments. Unfortunately, fragmentation is a complex operation and routers cannot perform it at line rate [KM1995]_. Furthermore, when a TCP segment is transported in an IP packet that is fragmented in the network, the loss of a single fragment will force TCP to retransmit the entire segment (and thus all the fragments). If TCP was able to send only packets that do not require fragmentation in the network, it could retransmit only the information that was lost in the network. Finally, IP reassembly causes several challenges at high speed as discussed in :rfc:`4963`.
+
+ICMP, combined with the `Don't fragment (DF)` IPv4 flag, can be used by hosts and TCP implementations in particular, to discover the largest segment size to be used to reach a destination host without causing network fragmentation. This is the `Path MTU discovery` mechanism defined in :rfc:`1191`. A TCP implementation that includes `Path MTU discovery` (most do) requests the IPv4 layer to send all segments inside IPv4 packets having the `DF` flag set. This prohibits intermediate routers from fragmenting these packets. If a router needs to forward an unfragmentable packet over a link with a smaller MTU, it sends back a `Fragmentation needed` ICMP message to the source indicating the MTU of its outgoing link. Upon reception of this ICMP message, the source TCP implementation adjusts its Maximum Segment Size (MSS) so that the packets containing the segments that it sends can be forwarded by this router without requiring fragmentation. 
 
 
-Operation of an IPv4 router
----------------------------
+.. sidebar:: Redirection attacks
 
-decrement ttl
-lookup
-update checksum
+ ICMP redirect messages are useful when several routers are attached to the same LAN as hosts. However, they should be used with care as they also create a an important security risk. One of the most annoying attack in an IP network is called the `man in the middle attack`. Such an attack occurs when a host is able to receive, process, possibly modify and forward all the packets exchanged between a source and a destination. As the attacker receives all the packets exchanged, e.g. on a TCP connection, it can easily collect passwords, credit card numbers, ... ICMP redirects unfortunately enable an attacker to easily perform such an attack. In the figure above, consider host `H` that is attached to the same LAN as `A` and `R1`. If `H` sends to `A` an ICMP redirect for prefix `138.48.0.0/16`, `A` will forward to `H` all the packets that it wants to send to this prefix. `H` can then forward them to `R2`. To avoid these attacks, host should ignore ICMP redirect messages.
 
-default route
+
+
+Operation of IPv4 devices
+-------------------------
+
+At this point of the description of IPv4, it is useful to have a detailed look at how an IPv4 implementation sends, receives and forwards IPv4 packets. The simplest case is when a host needs to send in an IPv4 packet a transport segment. The host needs perform two operations. First, it must decide on which interface the packet will be sent. Second it must create the corresponding IP packet(s). 
+
+To simplify the discussion in this section, we ignore the utilisation of IPv4 options. This is not a severe limitation as most IPv4 packets do not contain options. Details about the processing of the IPv4 options my be found in the relevant RFCs such as :rfc:`791`. Furthermore, we also assume that only point-to-point links are used. We defer the explanation of operation of IPv4 over Local Area Networks until the next chapter.
+
+An IPv4 host having :math:`n` datalink layer interfaces manages :math:`n+1` IPv4 addresses :
+ - the `127.0.0.1/32` assigned by convention to its loopback address
+ - one `A.B.C.D/p` IPv4 address assigned to each of its :math:`n` datalink layer interfaces
+
+Such a host will maintain a routing table that contains one entry for its loopback address and one entry for each subnet identifier assigned to its interfaces. Furthermore, the host will usually utilise of of its interfaces as the `default` interface when sending packets that are not addressed to a directly connected destination. This is represented by the `default` route : `0.0.0.0/0` that is associated to one interface.
+
+When a transport protocol running on the host requests the transmission of a segment, it usually provides to the IPv4 layer the IPv4 destination address in addition to the segment [#fdfflag]_. The IPv4 implementation will first perform a longest prefix match with the destination address in its routing table. The lookup will return the identification of the interface that must be used to send the packet. The host can then create the IPv4 packet that will contain the segment. The source IPv4 address of the packet will be the IPv4 address of the host on the interface returned by the longest prefix match. The `Protocol` field of the packet is set to the identification of the local transport protocol that created the segment. The `TTL` field of the packet is set to the default `TTL` used by the host. The host must now choose the packet's `Identifier`. This `Identifier is important if the packet becomes fragmented in the network as it ensures that the destination will be able to reassemble the received fragments. Ideally, a sending host should never send twice a packet with the same `Identifier` to the same destination host to ensure that all fragments are correctly reassembled by the destination. Unfortunately, with a 16 bits `Identifier` field and an expected MSL of 2 minutes, this implies that the sum of all TCP segments to a given destination is limited to roughly 286 Mbps. With a more realistic 1500 bytes MTU, that bandwidth drops to 6.4 Mbps :rfc:`4963`. This is very low and is another reason why hosts are highly encouraged to avoid fragmentation. If despite of this the MTU of the outgoing interface is smaller than the packet's length, the packet is fragmented. Finally, the packet's checksum is computed before transmission.
+
+
+When a host receives an IPv4 packet destined to itself, there are several operations that it must perform. First, it must check the packet's checksum. If the checksum is incorrect, the packet is discarded. Then, it must check whether the packet has been fragmented. If yes, the packet is passed to the reassembly algorithm described earlier. Otherwise, the packet must be passed to the upper layer. This is done by looking at the `Protocol` field (`6` for TCP, `17` for UDP). If the host does not implement the transport layer protocol corresponding to the received `Protocol` field, it sends a `Protocol unreachable` ICMP message to the sending host. If the received packet contains an ICMP message (`Protocol` field set to `1`), the processing is more complex. An `Echo-request` ICMP message will trigger the transmission of an `ICMP Echo-reply` message. The other types of ICMP messages indicate an error that was caused by a previously transmitted packet. They are usually forwarded to the transport protocol that sent the errored packet. This can be done by inspecting the contents of the ICMP message that includes the header and the first 64 bits of the errored packet. If the IP packet did not contain options, which is the case for most IPv4 packets, the transport protocol can find in the first 32 bits of the transport header the source and destination to determine the affected transport flow. This is important for Path MTU discovery for example.
+
+When a router receives an IPv4 packet, it must first check the packet's checksum. If the checksum is invalid, it is discarded. Otherwise, the router must check whether the destination address is one of the IPv4 addresses assigned to the router. If so, the router must behave as a host and processes the packet as described above. Although routers mainly forward IPv4 packets, they sometimes need to be accessed as hosts by network operators or network management software. If the packet is not addressed to the router, it must be forwarded on an outgoing interface according to the router's routing table.
+
+The router first decrement the packet's `TTL`. If the `TTL` reaches `0`, a `TTL Exceeded` ICMP message is sent back to the source. As the packet header has been modified, the checksum must be recomputed. Fortunately, as IPv4 uses an arithmetic checksum, a router can incrementally update the packet's checksum as described in :rfc:`1624`. Then, the router performs a longest prefix match for the packet's destination address in its forwarding table. If the lookup does not return a match, the router must return a `Destination unreachable` ICMP message to the source. Otherwise, the lookup returns the interface over which the packet must be forwarded. Before forwarding the packet over this interface, the router must first compare the length of the packet with the MTU of the outgoing interface. If the packet is smaller than the MTU, it is forwarded. Otherwise, a `Fragmentation needed` ICMP message is sent if the `DF` flag was sent or the packet is fragmented if the `DF` was not set. 
+
+
+.. sidebar:: Longest prefix match in IP routers
+
+ Performing the longest prefix match at line rate on routers requires highly tunes datastructures and algorithms. Consider for example an implementation of the longest match based on a Radix tree on a router with a 10 Gbps link. On such a link, a router can receive 31,250,000 40 bytes IPv4 packets every second. To forward the packets at line rate, the router must process one IPv4 packet every 32 nanoseconds. This cannot be achieved by a software implementation. For a hardware implementation, it main difficulty lies in the number of memory accesses that are necessary to perform the longest prefix match. 32 nanoseconds is very small compared to the memory accesses that are required by a navie longest prefix match implement. Additional information about longest match and other algorithms used on routers may be found in [Varghese]_.
+
 
 
 IP version 6
 ============
 
-In the late 1980s and early 1990s the growth of the Internet was causing several operationnal problems on routers. Many of these routers had a single CPU and up to 1 MB of RAM to store their operating system, packet buffers and routing tables. Given the rate of allocation of IPv4 prefixes to companies and universities willing to join the Internet, the routing tables where growing very quickly and some feared that all IPv4 prefixes would be quickly allocated. In 1987, a study cited in :rfc:`1752` estimated 100,000 networks in the near future. In August 1990, estimates indicated that the class B space would be exhausted by March 1994. 
-Two types of solutions were developed to solve this problem. The first short term solution was the introduction of Classless InterDomain Routing (:term:`CIDR`). A second short term solution was the Network Address Translation (:term:`NAT`) mechanism defined in :rfc:`1631` that allowed multiple hosts to share a single public IP address. 
+In the late 1980s and early 1990s the growth of the Internet was causing several operational problems on routers. Many of these routers had a single CPU and up to 1 MB of RAM to store their operating system, packet buffers and routing tables. Given the rate of allocation of IPv4 prefixes to companies and universities willing to join the Internet, the routing tables where growing very quickly and some feared that all IPv4 prefixes would be quickly allocated. In 1987, a study cited in :rfc:`1752` estimated 100,000 networks in the near future. In August 1990, estimates indicated that the class B space would be exhausted by March 1994. 
+Two types of solutions were developed to solve this problem. The first short term solution was the introduction of Classless Inter Domain Routing (:term:`CIDR`). A second short term solution was the Network Address Translation (:term:`NAT`) mechanism defined in :rfc:`1631` that allowed multiple hosts to share a single public IP address. 
 
-However, in parallel with these short-term solutions, that have allowed the IPv4 Internet to continue to be useable until now, the Internet Engineering Task Force started to work on developing a replacement for IPv4. This work started with an open call for proposal outline in :rfc:`1550`. Several groups responded to this call with proposals for a next generation Internet Protocol (IPng) :
+However, in parallel with these short-term solutions, that have allowed the IPv4 Internet to continue to be usable until now, the Internet Engineering Task Force started to work on developing a replacement for IPv4. This work started with an open call for proposal outline in :rfc:`1550`. Several groups responded to this call with proposals for a next generation Internet Protocol (IPng) :
 
  * TUBA proposed in :rfc:`1347` and :rfc:`1561`
  * PIP proposed in :rfc:`1621`
@@ -425,12 +492,13 @@ When the work on IPng started, it was clear that 32 bits was too small to encode
 IPv6 addressing architecture
 ----------------------------
 
-The experience with IPv4 reveleaded that the scalability of a network layer protocol heavily depends on its addressing architecture. The designers of IPv6 spent a lot of effort defining its addressing architecture :rfc:`3513`. All IPv6 addresses are 128 bits wide. This implies that there are 340,282,366,920,938,463,463,374,607,431,768,211,456 (3.4 × 10^38) different IPv6 addresses. As the surface of the Earth is about 510,072,000 :math:`km^2`, this implies that there are about :math:`6.67 \times 10^{23}` IPv6 addresses per square meter on Earth. Compared to IPv4 that offered only 8 addresses per square kilometer, this is a significant improvement on paper. 
+The experience with IPv4 revealed that the scalability of a network layer protocol heavily depends on its addressing architecture. The designers of IPv6 spent a lot of effort defining its addressing architecture :rfc:`3513`. All IPv6 addresses are 128 bits wide. This implies that there are 340,282,366,920,938,463,463,374,607,431,768,211,456 (3.4 × 10^38) different IPv6 addresses. As the surface of the Earth is about 510,072,000 :Math:`km^2`, this implies that there are about :math:`6.67 \times 10^{23}` IPv6 addresses per square meter on Earth. Compared to IPv4 that offered only 8 addresses per square kilometer, this is a significant improvement on paper. 
 
 IPv6 supports unicast, multicast and anycast addresses. As with IPv4, an IPv6 unicast address is used to identify one datalink-layer interface on a host. If a host has several datalink layer interfaces (e.g. an Ethernet interface and a WiFi interface), then it needs several IPv6 addresses. In general, an IPv6 unicast address is structured as shown in the figure below.
 
 .. figure:: fig/network-fig-073-c.png
    :align: center
+   :scale: 50
    
    Structure of IPv6 unicast addresses
 
@@ -463,12 +531,12 @@ In today's deployments, interface identifiers are always 64 bits wide. This impl
   - 2001:0DB8::CD30:0:0:0:0/60
   - 2001:0DB8:0:CD30::/60
 
-.. index:: Provider Independant address
+.. index:: Provider Independent address
 .. index:: Provider Aggregatable address
 
-There are in practice several types of IPv6 unicast address. Most of the `IPv6 unicast addresses <http://www.iana.org/assignments/ipv6-address-space/ipv6-address-space.xhtml>`_ are allocated in blocks under the responsibilities of IANA_ The current IPv6 allocations are part of the `2000::/3` address block. Regional Internet Registries (RIR) such as RIPE_ in Europe,  ARIN_ in North-America or AfriNIC in Africa have each received a `block of IPv6 addresses <http://www.iana.org/assignments/ipv6-unicast-address-assignments/ipv6-unicast-address-assignments.xhtml>`_ that they suballocate to Internet Service Providers in their region.  The ISPs then suballocate addresses to their customers. 
+There are in practice several types of IPv6 unicast address. Most of the `IPv6 unicast addresses <http://www.iana.org/assignments/ipv6-address-space/ipv6-address-space.xhtml>`_ are allocated in blocks under the responsibilities of IANA_ The current IPv6 allocations are part of the `2000::/3` address block. Regional Internet Registries (RIR) such as RIPE_ in Europe,  ARIN_ in North-America or AfriNIC in Africa have each received a `block of IPv6 addresses <http://www.iana.org/assignments/ipv6-unicast-address-assignments/ipv6-unicast-address-assignments.xhtml>`_ that they sub-allocate to Internet Service Providers in their region.  The ISPs then sub-allocate addresses to their customers. 
 
-When considering the allocation of IPv6 addresses, two types of address allocations are often distinguished. The RIRs allocate `provider-independant (PI)` addresses. PI addresses are usually allocated to Internet Service Providers and large companies that are connected to at least two different ISPs [CSP2009]_. Once a PI address block has been allocated to a company, this company can use its address block with the provider of its choice and change of provider at will. Internet Service Providers allocate `provider-aggregatable (PA)` address blocks from their own PI address block to their customers. A company that is connected to only one ISP can only use PA addresses. The drawback of PA addresses is that when a company using a PA address block changes of provider, it needs to change all the addresses that it uses. This can be a nightmare from an operational viewpoint and many companies are lobbying to obtain `PI` address blocks even if they are small and connected to a single provider. The typical size of the IPv6 address blocks are :
+When considering the allocation of IPv6 addresses, two types of address allocations are often distinguished. The RIRs allocate `provider-independent (PI)` addresses. PI addresses are usually allocated to Internet Service Providers and large companies that are connected to at least two different ISPs [CSP2009]_. Once a PI address block has been allocated to a company, this company can use its address block with the provider of its choice and change of provider at will. Internet Service Providers allocate `provider-aggregatable (PA)` address blocks from their own PI address block to their customers. A company that is connected to only one ISP can only use PA addresses. The drawback of PA addresses is that when a company using a PA address block changes of provider, it needs to change all the addresses that it uses. This can be a nightmare from an operational viewpoint and many companies are lobbying to obtain `PI` address blocks even if they are small and connected to a single provider. The typical size of the IPv6 address blocks are :
 
  - /32 for an Internet Service Provider
  - /48 for a single company
@@ -481,15 +549,16 @@ For the companies that want to use IPv6 without being connected to the IPv6 Inte
 
 Furthermore, the IETF has reserved some IPv6 addresses for a special usage. The two most important ones :
 
- - `0:0:0:0:0:0:0:1` (`::1` in compact form) is the IPv6 loopback address. This is the address of a logical interface that is always up and runing on IPv6 enabled hosts. This is the equivalent of 127.0.0.1 in IPv4.
- - `0:0:0:0:0:0:0:0` (`\:\:` in compact form) is the unspecified IPv6. This is the IPv6 address that a host can use as source address when trying to aquire an official address.
+ - `0:0:0:0:0:0:0:1` (`::1` in compact form) is the IPv6 loopback address. This is the address of a logical interface that is always up and running on IPv6 enabled hosts. This is the equivalent of 127.0.0.1 in IPv4.
+ - `0:0:0:0:0:0:0:0` (`\:\:` in compact form) is the unspecified IPv6. This is the IPv6 address that a host can use as source address when trying to acquire an official address.
 
 .. index:: Link Local address
 
-The last type of unicast IPv6 addresses are the `Link Local Unicast` addresses. These addresses are part of the `FE80::/10` address block and are defined in:rfc:`4291`. Each host can compute its own link local address by concatenating the `FE80::/64` prefix with the 64 bits identifier of its interface. Link local addresses can be used when hosts that are attached to the same link (or local area network) need to exchange packets. They are used notably for address discovery and autoconfiguration purposes. Their usage is restricted to each link and a router cannot forward a packet having a link local address as source or destination address. 
+The last type of unicast IPv6 addresses are the `Link Local Unicast` addresses. These addresses are part of the `FE80::/10` address block and are defined in:rfc:`4291`. Each host can compute its own link local address by concatenating the `FE80::/64` prefix with the 64 bits identifier of its interface. Link local addresses can be used when hosts that are attached to the same link (or local area network) need to exchange packets. They are used notably for address discovery and auto-configuration purposes. Their usage is restricted to each link and a router cannot forward a packet having a link local address as source or destination address. 
 
-.. figure:: fig/network-fig-073-c.png
+.. figure:: fig/network-fig-074-c.png
    :align: center
+   :scale: 50
    
    IPv6 link local address structure
 
@@ -501,6 +570,7 @@ Finally, :rfc:`4291` defines the structure of the IPv6 multicast addresses [#fmu
 
 .. figure:: fig/network-fig-075-c.png
    :align: center
+   :scale: 50
    
    IPv6 multicast address structure
 
@@ -517,6 +587,7 @@ The IPv6 packet format was heavily inspired by the packet format proposed for th
 
 .. figure:: fig/network-fig-077-c.png
    :align: center
+   :scale: 50
    
    The IP version 6 header
 
@@ -531,7 +602,7 @@ Besides the source and destination addresses of the packet, the IPv6 header cont
 
 In comparison with IPv4, the IPv6 is much simpler and easier to process by a router. A first important difference is that there is no checksum inside the IPv6 header. This is mainly because all datalink layers and transport protocols include a checksum or a CRC to protect their frames/segments against transmission errors. Adding a checksum in the IPv6 header would have forced each router to recompute the checksum off all packets, with a limited benefit in detecting errors. In practice, an IP checksum allows to catch errors that occur inside routers (e.g. due to memory corruption) before the packet reaches its destination. However, this benefit was found to be too small given the reliability of current memories and the cost of computing the checksum on each router.
 
-A second difference with IPv4 is that the IPv6 header does not support fragmentation and reassembly. The experience with IPv4 has shown that fragmenting packets in routers was costly [KM1995]_ and the developers of IPv6 have decided that routers would not fragment packets anymore. If a router receives a packet that is too long to be forwarded, the packet is droppted and the rotuer returns an ICMPv6 messages to inform the sender of the problem and allow it to either fragment the packet or perform Path MTU discovery. In IPv6, packet fragmentation is performed by the source by using IPv6 options.
+A second difference with IPv4 is that the IPv6 header does not support fragmentation and reassembly. The experience with IPv4 has shown that fragmenting packets in routers was costly [KM1995]_ and the developers of IPv6 have decided that routers would not fragment packets anymore. If a router receives a packet that is too long to be forwarded, the packet is dropped and the router returns an ICMPv6 messages to inform the sender of the problem and allow it to either fragment the packet or perform Path MTU discovery. In IPv6, packet fragmentation is performed by the source by using IPv6 options.
 
 The third difference are the IPv6 options that are simpler and easier to process than the IPv4 options.
 
@@ -566,10 +637,11 @@ The type 0 routing header defined in :rfc:`2460` is an example of an IPv6 option
 
 .. figure:: fig/network-fig-079-c.png
    :align: center
+   :scale: 50
    
    The Type 0 routing header
 
-The type 0 routing was intended to allow a host to indicate a loose source router that should be followed by a packet by specifying the addresses of some of the routers that must forward this packet. Unfortunately, furtherwork with this routing header, including an entertaining demonstration with scapy_ [BE2007]_ revealed some severe security problems with this routing header. For this reason, loose source routing with the type 0 routing header has been removed from the IPv6 specification :rfc:`5095`.
+The type 0 routing was intended to allow a host to indicate a loose source router that should be followed by a packet by specifying the addresses of some of the routers that must forward this packet. Unfortunately, further work with this routing header, including an entertaining demonstration with scapy_ [BE2007]_ revealed some severe security problems with this routing header. For this reason, loose source routing with the type 0 routing header has been removed from the IPv6 specification :rfc:`5095`.
   
 .. index:: IPv6 fragmentation
 
@@ -593,25 +665,19 @@ The figure below provides an example of the fragmentation of an IPv6 packet cont
 
 Finally, the last type of IPv6 options are the Encaspulating Security Payload (ESP) defined in :rfc:`4303` and the Authentication Header (AH) defined in :rfc:`4302`. These two headers are used by IPSec :rfc:`4301`. They will be discussed in another chapter.
 
-IPv6 packet forwarding
-----------------------
-
-describe operation of a router when a packet is received with pseudocode without options
-ignore tclass, flowlabel
-longest prefix match forwarding like ipv4
-subnet addresses should be up to /64, but routers cannot assume this
 
 .. _ICMPv6:
 
 ICMP version 6
 ==============
 
-ICMPv6 defined in :rfc:`4443` is the companion protocol for IPv6 as ICMPv4 is the companion protocol for IPv4. ICMPv6 is used by routers to report problems when forwarding IPv6 packets. However, as we will see in section IPEthernet_, ICMPv6 is also used when autoconfiguring addresses.
+ICMPv6 defined in :rfc:`4443` is the companion protocol for IPv6 as ICMPv4 is the companion protocol for IPv4. ICMPv6 is used by routers to report problems when forwarding IPv6 packets. However, as we will see in section IPEthernet_, ICMPv6 is also used when auto-configuring addresses.
 
-The traditional utilisation of ICMPv6 is similar to ICMPv4. ICMPv6 messages are carried inside IPv6 packets (the `Next Header` field for ICMPv6 is 58). Each ICMP message contains an 8 bits header with a `type` field, a `code` field and a 16 bits checkcum computed over the entire ICMPv6 message. The message body contains a copy of the IPv6 packet in error.
+The traditional utilisation of ICMPv6 is similar to ICMPv4. ICMPv6 messages are carried inside IPv6 packets (the `Next Header` field for ICMPv6 is 58). Each ICMP message contains an 8 bits header with a `type` field, a `code` field and a 16 bits checksum computed over the entire ICMPv6 message. The message body contains a copy of the IPv6 packet in error.
 
 .. figure:: fig/network-fig-088-c.png
    :align: center
+   :scale: 50
    
    ICMP version 6 packet format
 
@@ -622,7 +688,7 @@ ICMPv6 specifies two classes of messages : error messages that indicate a proble
      - 0 : No route to destination. This indicates that the router that sent the ICMPv6 message did not have a route
      - 1 : Communication with destination administratively prohibited. This indicates that a firewall has refused to forward the packet towards its destination. Types 5 and 6
      - 2 : Beyond scope of source address. This message can be sent if the source is using link-local addresses to reach a global unicast address outside its subnet.
-     - 3 : Address unreachable. This messages indicates that the packet reached the subnet of the destination, but the host that own this destination address is not reachaed.
+     - 3 : Address unreachable. This messages indicates that the packet reached the subnet of the destination, but the host that own this destination address is not reached.
      - 4 : Port unreachable. This message indicates that the IPv6 packet was received by the destination, but 
 
  - 2 : Packet Too Big. The router that sends the ICMPv6 message received an IPv6 packet that is larger than the MTU of the outgoing link. The ICMPv6 messages contains the MTU of this link in bytes. This allows the sending host to implement Path MTU discovery :rfc:`1981`
@@ -631,48 +697,84 @@ ICMPv6 specifies two classes of messages : error messages that indicate a proble
 
 Two types of informational ICMPv6 messages are in :rfc:`4443` : `echo request` and `echo reply` that are used to test the reachability of a destination by using :manpage:`ping6(8)`.
 
+
+ICMPv6 also allows to discover the path between a source and a destination by using :manpage:`traceroute6(8)`. The output below shows a traceroute between a host at UCLouvain and one of the main IETF servers. Note that compared to the IPv4 path that was described earlier, this path is completely different ::
+
+ traceroute6 www.ietf.org
+ traceroute6 to www.ietf.org (2001:1890:1112:1::20) from 2001:6a8:3080:2:217:f2ff:fed6:65c0, 30 hops max, 12 byte packets
+  1  2001:6a8:3080:2::1  13.821 ms  0.301 ms  0.324 ms
+  2  2001:6a8:3000:8000::1  0.651 ms  0.51 ms  0.495 ms
+  3  10ge.cr2.bruvil.belnet.net  3.402 ms  3.34 ms  3.33 ms
+  4  10ge.cr2.brueve.belnet.net  3.668 ms 10ge.cr2.brueve.belnet.net  3.988 ms 10ge.cr2.brueve.belnet.net  3.699 ms
+  5  belnet.rt1.ams.nl.geant2.net  10.598 ms  7.214 ms  10.082 ms
+  6  so-7-0-0.rt2.cop.dk.geant2.net  20.19 ms  20.002 ms  20.064 ms
+  7  kbn-ipv6-b1.ipv6.telia.net  21.078 ms  20.868 ms  20.864 ms
+  8  s-ipv6-b1-link.ipv6.telia.net  31.312 ms  31.113 ms  31.411 ms
+  9  s-ipv6-b1-link.ipv6.telia.net  61.986 ms  61.988 ms  61.994 ms
+  10  2001:1890:61:8909::1  121.716 ms  121.779 ms  121.177 ms
+  11  2001:1890:61:9117::2  203.709 ms  203.305 ms  203.07 ms
+  12  mail.ietf.org  204.172 ms  203.755 ms  203.748 ms
+
 .. send after Ethernet
 
 .. sidebar:: Rate limitation of ICMP messages
 
- High-end harward based routers use special purpose chips on their interfaces to be able to forward IPv6 packets at line rate. These chips are optimised to process `correct` IP packets. These chips are not able to create an ICMP message. When they receive an IP packet that will trigger an ICMP message, they interrupt the main CPU of the router and the software running on this CPU processes the packet. This CPU is much slower than the hardware acceleration found on the interfaces [Gill2004]_. It would be overload if it had to process IP packets at line rate and generate one ICMP message for each receive packet. To protect this CPU, high-end routers limit the rate at which the hardware can interrupt the main CPU and thus the rate at which ICMP messages can be generated. This implies that not all erroneous IP packets will cause the transmission of an ICMP message. The risk of overloading the main CPU of the router is also the reason why using hop-by-hop IPv6 options, including the router alter option is discouraged [#falert]_. 
-
+ High-end hardware based routers use special purpose chips on their interfaces to be able to forward IPv6 packets at line rate. These chips are optimised to process `correct` IP packets. These chips are not able to create an ICMP message. When they receive an IP packet that will trigger an ICMP message, they interrupt the main CPU of the router and the software running on this CPU processes the packet. This CPU is much slower than the hardware acceleration found on the interfaces [Gill2004]_. It would be overload if it had to process IP packets at line rate and generate one ICMP message for each receive packet. To protect this CPU, high-end routers limit the rate at which the hardware can interrupt the main CPU and thus the rate at which ICMP messages can be generated. This implies that not all erroneous IP packets will cause the transmission of an ICMP message. The risk of overloading the main CPU of the router is also the reason why using hop-by-hop IPv6 options, including the router alter option is discouraged [#falert]_. 
 
 .. index:: Middlebox
 
 Middleboxes
 ===========
 
-When the TCP/IP architecture and the IP protocol was defined, two types of devices were considered in the network layer : endhosts and routers. Endhosts are the sender and receiver of IP packets while routers forward IP packets. When a router forwards an IP packet, it consults its FIB, updates the packets's TTL, recomputes its checksum and forward it to the nexthop. A router does not need to read nor change the contents of the packet's payload.
+When the TCP/IP architecture and the IP protocol was defined, two types of devices were considered in the network layer : endhosts and routers. Endhosts are the sender and receiver of IP packets while routers forward IP packets. When a router forwards an IP packet, it consults its FIB, updates the packets' TTL, recomputes its checksum and forward it to the nexthop. A router does not need to read nor change the contents of the packet's payload.
 
-However, in today's Internet, there exist devices that are not strictly routers but process, sometimes modify and forward IP packets. These devices are often called `middleboxes` :rfc:`3234`. Some middleboxes operate only in the network layer, but most middleboxes are able to analyse the payload of the received packets and extract the transport header and in some cases the application layer protocol. 
+However, in today's Internet, there exist devices that are not strictly routers but process, sometimes modify and forward IP packets. These devices are often called `middleboxes` :rfc:`3234`. Some middleboxes operate only in the network layer, but most middleboxes are able to analyse the payload of the received packets and extract the transport header and in some cases the application layer protocols.  
   
 
 .. figure:: fig/network-fig-161-c.png
    :align: center
+   :scale: 50
    
    IP middleboxes and the reference model
 
-In this section, we briefly analyse two types of middleboxes : firewalls and network address translation (NAT) devices. A longer list of middleboxes with references may be found in :rfc:`3234`.
+In this section, we briefly analyse two types of middleboxes : firewalls and network address translation (NAT) devices. A more detailed discussion of the different types of middleboxes with references may be found in :rfc:`3234`.
 
-not part of the architecture, but added due to practical reasons, most important are nat and firewalls, but also shapers, DPI, ...
-
-.. index:: Network Address Translation, NAT
-
+.. index:: firewall
 
 Firewalls
 ---------
 
-[CB2003]_ 
+When the Internet was a only research network interconnecting research labs, security was not a concern and most hosts agreed to exchange packets, open TCP connections with most other hosts. However, as companies and more and more users became connected to Internet, allowing unlimited access to the hosts managed by companies was becoming a concern. Furthermore, at the end of the 1980s, several security issues affected the Internet such as the first Internet worm [RE1989]_ and some widely publicised security breaches [Stoll1988]_ [CB2003]_ [Cheswick1990]_
+
     
+These security problems convinced the industry that IP networks are a key part of the infrastructure of a company that they they should be protected by special devices like security guards and fences are used to protect buildings. These special devices were quickly called `firewalls`. A typical firewall has two interfaces : 
+  - an external interface connected to the global Internet
+  - an internal interface connected to a trusted network
+
+The first firewalls included configurable packet filters. A packet filter is a set of rules that define the security policy of a network. In practice, these rules are based on the values of fields of the IP or transport layer headers. Any field of the IP or transport header can be used by a firewall rule, but the most common ones :
+
+ - filter on the source address. For example, a company may decide to discard all packets received from one of its competitors. In this case, all packets whose source address belong to the competitor's address block would be rejected 
+ - filter on destination address. For example, the hosts of the research lab of a company may receive packets from the global Internet, but not the hosts of the financial departement
+ - filter on the `Protocol` number found in the IP header. For example, a company may only allow its hosts to use TCP or UDP, but not other more experimental transport protocols
+ - filter on the TCP or UDP port numbers. For example, only the DNS server of a company should received UDP segments whose destination port is set to `53` or only the official SMTP servers of the company can send TCP segments whose source ports are set to `25`
+ - filter on the TCP flags. For example, a solution to prohibit external hosts from opening TCP connections with hosts inside the company is to discard all TCP segments received from the external interface with only the `SYN` flag set.
+
+These firewalls are often called `stateless` firewalls because they do not maintain any state about the TCP connections that pass through them.
+
+A second type of firewalls are the `stateful` firewalls. A stateful firewall tracks the state of each TCP connection passing through it. It maintains a TCB for each TCP connection. This TCB allows it to mainly reassemble the received segments to extract thei payload and perform verifications in the application layer. Some firewalls are able to inspect the URLs accessed by using HTTP and log all URLs visited or block TCP connections where a dangerous URL is exchanged. Some firewalls can verify that SMTP commands are used when a TCP connection is established on port `25` or that a TCP connection on port `80` carries HTTP commands and responses, ... 
 
 
+.. sidebar:: Beyond firewalls
 
+ Besides the firewalls, different types of "security" devices have been installed at the periphery of corporate networks. Intrusion Detection Systems (IDS) such as the popular snort_ are stateful firewalls that are capable of matching reassembled segments against regular expressions that correspond to signatures of viruses, worms or other types of attacks. Deep Packet Inspection (DPI) is another type of middlebox that analyse the packet's payload and possibly reassemble TCP segments to detect inappropriate usages. While IDS are mainly used in corporate networks, DPI is mainly used in Internet Service Providers. Some ISPs use DPI to detect and limit the bandwidth consummed by peer-to-peer applications. Some countries such as China or Iran use DPI to detect inapproriate Internet usage.
+
+
+.. index:: Network Address Translation, NAT
 
 NAT
 ---
 
-NAT : Paul :rfc:`1631`
+Network Address Translation was proposed in :rfc:`1631`. 
 
 normal, nat-pt
 
@@ -698,12 +800,17 @@ normal, nat-pt
                2001.
 
 
-load balancer
--------------
+NAT 6to6 margaret wasserman
 
 
-Intradomain routing in IP networks 
-==================================
+Routing in IP networks
+######################
+
+explain intra and interdomain routing
+
+
+Intradomain routing 
+===================
 
 
 RIP
@@ -735,12 +842,14 @@ port 521 UDP
 
 .. figure:: fig/network-fig-094-c.png
    :align: center
+   :scale: 50
    
    RIP message format
 
 
 .. figure:: fig/network-fig-095-c.png
    :align: center
+   :scale: 50
    
    Format of the RIP route entries
 
@@ -773,8 +882,8 @@ Pour plus d'informations sur OSPF, voir
 ou
 J. Moy, OSPF: Anatomy of an Internet Routing Protocol, Addison Wesley, 1998
 
-Interdomain routing in the Internet
-===================================
+Interdomain routing
+===================
 
 :rfc:`2622`
 
@@ -796,6 +905,8 @@ http://www.apnic.net/apnic-bin/whois.pl
  L. Subramanian, S. Agarwal, J. Rexford, and RH Katz. Characterizing the Internet hierarchy from multiple vantage points. In IEEE INFOCOM, 2002
 
 
+bgp :rfc:`4672`
+
 but see recent arbor data
 
 
@@ -814,6 +925,8 @@ but see recent arbor data
 .. ping of death http://insecure.org/sploits/ping-o-death.html
 
 .. [#fciscoags] Example routers from this period include the Cisco AGS http://www.knossos.net.nz/don/wn1.html and AGS+ http://www.ciscopress.com/articles/article.asp?p=25296
+
+.. [#fdfflag] A transport protocol implementation can also specify whether the packet must be sent with the `DF` set or set. A TCP implementation using `Path MTU Discovery` would always request the transmission of IPv4 packets with the `DF`flag set.
 
 .. [#fmultiiana] The full list of allocated IPv6 multicast addresses is available at http://www.iana.org/assignments/ipv6-multicast-addresses
 

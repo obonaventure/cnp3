@@ -65,3 +65,14 @@ Whenever possible, the bibliography includes hypertext links to the references c
 .. [WMH2008] Wilson, P., Michaelson, G., Huston, G., Redesignation of 240/4 from "Future Use" to "Private Use", Internet draft, September 2008, work in progress, http://tools.ietf.org/html/draft-wilson-class-e-02
 
 .. [FLM2008] Fuller, V., Lear, E., Meyer, D., Reclassifying 240/4 as usable unicast address space, Internet draft, March 2008, workin progress, http://tools.ietf.org/html/draft-fuller-240space-02
+
+..  [ACO+2006] Augustin, B., Cuvellier, X., Orgogozo, B., Viger, F., Friedman, T., Latapy, M., Magnien, C., Teixeira, R., "Avoiding traceroute anomalies with Paris traceroute", Internet Measurement Conference, October 2006, http://www.paris-traceroute.net/
+
+.. [DT2007] Donnet, B. and Friedman, T.. Internet Topology Discovery: a Survey. IEEE Communications Surveys and Tutorials, 9(4):2-15, December 2007, http://inl.info.ucl.ac.be/publications/internet-topology-discovery-survey
+
+.. [Stoll1988] Stoll, C. 1988. Stalking the wily hacker. Commun. ACM 31, 5 (May. 1988), 484-497. DOI= http://doi.acm.org/10.1145/42411.42412
+
+.. [RE1989] Rochlis, J. A. and Eichin, M. W. 1989. With microscope and tweezers: the worm from MIT's perspective. Commun. ACM 32, 6 (Jun. 1989), 689-698. DOI= http://doi.acm.org/10.1145/63526.63528
+
+.. [Cheswick1990] Cheswick, B., An Evening with Berferd In Which a Cracker is Lured, Endured, and Studied, Proc. Winter USENIX Conference, 1990, pp. 163-174, http://cheswick.com/ches/papers/berferd.pdf
+   
