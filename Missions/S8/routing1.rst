@@ -8,7 +8,7 @@ not have done the transition towards IPv6 yet.
 
 In this exercise you'll implement a gateway that allow communications between
 hosts that only supports IPv6 and hosts that only supports IPv4. This gateway
-will a simplified version of the NAT64 box described in [#nat64]_. It will not
+will a simplified version of the NAT64 box described in [#nat64]_. It will 
 only handle TCP flows without name servers.
 
 The deadline for this exercise will be Tuesday November 17th, 13.00.
