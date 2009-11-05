@@ -1,5 +1,5 @@
-Implementing an IPv4 router
-===========================
+A prototype IPv4 router in scapy_
+=================================
 
 During this exercise, you will implement a subset of a prototype IPv4 router by using scapy_. Your router will be able to :
  - forward IPv4 packets
@@ -7,7 +7,6 @@ During this exercise, you will implement a subset of a prototype IPv4 router by 
  - support :manpage:`traceroute(8)`
 
 The deadline for this exercise is Tuesday November 10th, 13.00.
-
 
 
 Preparation of the lab
@@ -21,6 +20,11 @@ The different interfaces have been connected as follows :
  - `eth0` on the router is connected to `eth0` on `client1`
  - `eth1` on the router is connected to `eth0` on `client2`
  - `eth2` on the router is connected to `eth0` on `client3`
+
+.. note:: 
+
+ The virtual machines will be placed in the `/etinfo/applications/uml2/` directory. You will find in the README file additional information about their installation. 
+
 
 The clients will use the IPv4 implementation of the Linux kernel while the router will use your implementation written in scapy_. As you will use the emulated network to send and receive IPv4 packets, you need to configure the interfaces on all clients. On Linux, the IP addresses assigned on an interface can be configured by using :manpage:`ifconfig(8)`. When :manpage:`ifconfig(8)` is used without parameters, it lists all the existing interfaces of the host with their configuration. A sample :manpage:`ifconfig(8)` output is shown below ::
 
@@ -89,9 +93,34 @@ Use :manpage:`ifconfig(8)` to configure the following IPv4 addresses :
  -  one IPv4 address inside `8.8.0.0/16` on `eth0:1` on `client3` 
  -  one IPv4 address inside `9.0.0.0/23` on `eth0:2` on `client3` 
 
+.. figure:: SchemaForwarding.png
+   :scale: 50
+
+   Testbed configuration
+
+
 Concerning the addresses of the virtual interfaces on `client2` and `client3`, when there are overlapping prefixes, ensure that the address assigned in largest subnet on one client does not belong to the more specific subnet allocated to the other client. Verify the configuration of these addresses with :manpage:`ifconfig(8)`. For each interface, note its hardware address. Then, use :manpage:`ping(8)` on each virtual machine to verify that the locally assigned IPv4 addresses are working correctly.
 
-As your router will use scapy to process IPv4 packets, you need to disable IPv4 on the Linux kernel. This can be done by installing an :manpage:`iptables(8)` on each interface on your router ::
+The last point that you need to configure is the mapping between the IP addresses and the hardware addresses on the clients. When a client sends an IP packet inside on an Ethernet LAN, it places the packet inside an Ethernet frame that contains the hardware address of the source Ethernet interface, the hardware address
+of the destination Ethernet interface and the entire IP packet. In a real network, a special protocol [#farp]_ is used for this, but implementing this protocol is outside the scope of this exercise. It is also possible to configure these mappings manually by using the :manpage:`arp(8)` software. :manpage:`arp(8)` inserts in the Linux kernel a static mapping between an IP address and an Ethernet address. :manpage:`arp(8)` can be used as follows ::
+
+ UML2:~# arp -i eth0 -s 192.168.1.1 C6:41:03:34:F4:98`
+ Uml2:~# arp -v -n
+ Address                  HWtype  HWaddress           Flags Mask            Iface
+ 192.168.1.1              ether   c6:41:03:34:f4:98   CM                    eth0
+ Entries: 1	Skipped: 0	Found: 1
+
+
+The first line adds a mapping between IPv4 address `192.168.1.1` and hardware address `C6:41:03:34:F4:98` on interface `eth0`. The `arp -v -n` command allows you to see the content of the mapping table maintained by the kernel.
+
+Use :manpage:`arp(8)` to insert the following mappings :
+ - on `client1` insert a mapping between `192.168.0.1` and the hardware address of interface `eth0` on `router1`
+ - on `client2` insert a mapping between `10.1.0.1` and the hardware address of interface `eth1` on `router1`
+ - on `client3` insert a mapping between `10.1.0.6` and the hardware address of interface `eth2` on `router1`
+
+Verify each mapping with `arp -v -n`. 
+
+As your router will use scapy_ to process IPv4 packets, you need to disable IPv4 on the Linux kernel of the `router` virtual machine. This can be done by installing an :manpage:`iptables(8)` on each interface on your `router` ::
 
  iptables -A INPUT -p ip -i eth0 -j DROP
  iptables -A OUTPUT -p ip -i eth0 -j DROP
@@ -118,10 +147,38 @@ You can use scapy_ to easily build an Ethernet frame that contains an IPv4 packe
 Note that the code above uses `sendp` an not `send` to send the Ethernet frame. `send` uses the IP implementation and the routing tables on the local host to decide on which interface the packet should be forward. We will not use `send` in this exercise as your will use the routing tables that you implement in scapy_ and not the kernel's routing tables. 
 
 
-.. figure:: SchemaForwarding.png
-   :scale: 50
 
-   Testbed configuration
+scapy_ allows you to easily create and parse IPv4 packets and ICMP messages. For reference, here are the fields of the IPv4 header and of the ICMP header ::
+
+ >>> ls(IP)
+ version    : BitField             = (4)
+ ihl        : BitField             = (None)
+ tos        : XByteField           = (0)
+ len        : ShortField           = (None)
+ id         : ShortField           = (1)
+ flags      : FlagsField           = (0)
+ frag       : BitField             = (0)
+ ttl        : ByteField            = (64)
+ proto      : ByteEnumField        = (0)
+ chksum     : XShortField          = (None)
+ src        : Emph                 = (None)
+ dst        : Emph                 = ('127.0.0.1')
+ options    : IPoptionsField       = ('')
+ >>> ls(ICMP)
+ type       : ByteEnumField        = (8)
+ code       : ByteField            = (0)
+ chksum     : XShortField          = (None)
+ id         : ConditionalField     = (0)
+ seq        : ConditionalField     = (0)
+ ts_ori     : ConditionalField     = (75208778)
+ ts_rx      : ConditionalField     = (75208778)
+ ts_tx      : ConditionalField     = (75208778)
+ gw         : ConditionalField     = ('0.0.0.0')
+ ptr        : ConditionalField     = (0)
+ reserved   : ConditionalField     = (0)
+ addr_mask  : ConditionalField     = ('0.0.0.0')
+ unused     : ConditionalField     = (0)
+
 
 To implement your prototype IPv4 router in scapy_, proceed as follows :
 
@@ -134,7 +191,7 @@ First, define several python data structures that allow you to store the configu
 Second, in addition to its list of IPv4 and hardware addresses, a router needs a routing table where it can easily perform a longest prefix match. Many data structures could be used to implement such a longest prefix match. For this exercise, use the py-radix library available from  http://www.mindrot.org/projects/py-radix/ . py-radix has been installed on the virtual machines in the lab. The `README <http://www.mindrot.org/files/py-radix/README>`_ file from the py-radix distribution contains some information about the utilisation of this data structure. For this exercise, you need to :
 
  - store in the radix tree the forwarding table that the router shown in the figure above would use. For this, insert each of the prefixes shown in the figure above in the radix tree and associate the appropriate interface as the `data` of each node
- - initialise a datastructure that maps with each outgoing interface the hardware address of the nexthop router attached to this interface (`client1`, `client2` or `client3`)
+ - initialise a data structure that maps with each outgoing interface the hardware address of the nexthop router attached to this interface (`client1`, `client2` or `client3`)
 
 Third, start your implementation with the skeleton below ::
 
@@ -151,7 +208,6 @@ Third, start your implementation with the skeleton below ::
 	# IP addresses local to the router
 	local_ips = ... 
 	
-	# Note: We need hardware addresses to forward IP packet, because, by default, the scapy send method works at L3 and rewrite source addresse based on its routing table
 	# hardware addresses local to the router corresponding to each interface
 	hard_addr_src = ... 
 	# Remote hardware addresses corresponding to each interface
@@ -181,16 +237,17 @@ Third, start your implementation with the skeleton below ::
 		raise self.WAIT_FOR_PACKET_TO_FORWARD()	
 
 
-Fourth, start to build your protoype router in scapy_ . Your first objective will be to support :manpage:`ping(8)`. A client, such as `client1` must be able to `ping` the IP address of your router (i.e. `192.168.0.1`) and receive the correct ICMP message in response. For this, define a first receive condition that process any IP packet whose destination address is one of the IPv4 addresses assigned to the router ::
+Fourth, start to build your prototype router in scapy_ . Your first objective will be to support :manpage:`ping(8)`. A client, such as `client1` must be able to `ping` the IP address of your router (i.e. `192.168.0.1`) and receive the correct ICMP message in response. For this, define a first receive condition that process any IP packet whose destination address is one of the IPv4 addresses assigned to the router ::
 
 	@ATMT.receive_condition(WAIT_FOR_PACKET_TO_FORWARD)
 	def received_local_ICMP(self, pkt):
-	    if (ICMP in pkt and pkt[IP].dst in self.local_ips and pkt[ICMP].type==8):
+	    if (ICMP in pkt and pkt[IP].dst in self.local_ips and pkt[ICMP].type==`echo-request`):
 	    ...
 
- When building an ICMP message, scapy_ supports all the ICMP types and codes. An ICMP message is always sent inside an IPv4 packet. Note that when :manpage:`ping(8)` sends a ICMP echo request, it sets the value of the `seq` and ìd` fields. These two fields must be echoed in the returned `ICMP` `Echo reply` message. A typical ICMP `Echo reply` in response to a received ICMP `Echo request` will be built as follows ::
 
- self.answer = IP(src=myIP,dst=pkt[IP].src)/ICMP(type='echo-reply', seq=pkt[ICMP].seq,id=pkt[ICMP].id)/pkt[Raw]
+When building an ICMP message, scapy_ supports all the ICMP types and codes. An ICMP message is always sent inside an IPv4 packet. Note that when :manpage:`ping(8)` sends a ICMP echo request, it sets the value of the `seq` and ìd` fields. These two fields must be echoed in the returned `ICMP` `Echo reply` message. A typical ICMP `Echo reply` in response to a received ICMP `Echo request` will be built as follows ::
+
+ IP(src=myIP,dst=pkt[IP].src)/ICMP(type='echo-reply', seq=pkt[ICMP].seq,id=pkt[ICMP].id)/pkt[Raw]
 
 
 Fifth. Now that your router can receive packets on one of your its local addresses, the next step is to forward IPv4 packets. You will implement this forwarding as another receive condition ::
@@ -199,7 +256,6 @@ Fifth. Now that your router can receive packets on one of your its local address
 	def received_fwd_IP(self, pkt):
 	    if not (pkt[IP].dst in self.local_ips):
 		 ...
-
 
 To forward the packet, remember that a router needs to :
   - update the TTL (assume first that the decremented TTL is >0)
@@ -216,5 +272,12 @@ Finally, a real router should also send ICMP messages in case of errors. Modify 
 
 If these ICMP messages are implemented correctly, your should be able to use :manpage:`traceroute(8)` in your emulated network.
 
+
+
+
+
+.. rubric:: Footnotes
+
+.. [#farp] In practice, IPv4 hosts and routers use the Address Resolution Protocol (ARP) specified in :rfc:`826` to find the hardware address that corresponds to an IPv4 address. However, implementing this protocol is outside the scope of this exercise.
 
 .. include:: ../../book/links.rst
