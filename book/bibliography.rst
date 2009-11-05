@@ -48,7 +48,7 @@ Whenever possible, the bibliography includes hypertext links to the references c
 
 .. [Selinger] Selinger, P., MD5 collision demo, http://www.mscs.dal.ca/~selinger/md5collision/
 
-.. [SMM98] Semke, J., Mahdavi, J., and Mathis, M. 1998. Automatic TCP buffer tuning. SIGCOMM Comput. Commun. Rev. 28, 4 (Oct. 1998), 315-323. DOI= http://doi.acm.org/10.1145/285243.285292
+.. [Smm98] Semke, J., Mahdavi, J., and Mathis, M. 1998. Automatic TCP buffer tuning. SIGCOMM Comput. Commun. Rev. 28, 4 (Oct. 1998), 315-323. DOI= http://doi.acm.org/10.1145/285243.285292
 
 .. [StevensTCP] Stevens, R., TCP/IP Illustrated : the Protocols, Addison-Wesley, 1994
 
@@ -84,3 +84,5 @@ Whenever possible, the bibliography includes hypertext links to the references c
 .. [WB2008] Waserman, M., Baker, F., IPv6-to-IPv6 Network Address Translation (NAT66), Internet draft, November 2008, http://tools.ietf.org/html/draft-mrw-behave-nat66-02
 
 .. [BMvB2009] Bagnulo, M., Matthews, P., van Beijnum, I., NAT64: Network Address and Protocol Translation from IPv6 Clients to IPv4 Servers, Internet draft, work in progress, October 2009, http://tools.ietf.org/html/draft-ietf-behave-v6v4-xlate-stateful-02
+
+.. [Varghese2005] Varghese, G. , Network Algorithmics: An Interdisciplinary Approach to Designing Fast Networked Devices, Morgan Kaufmann, 2005
