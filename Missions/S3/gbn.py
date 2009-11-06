@@ -42,27 +42,26 @@ if __name__ == "__main__":
 ## This class implements the sender side of the Alternating Bit Protocol by using scapy Automaton facilities
 
 class GBNSender(Automaton):
-	def parse_args(self, payloads, win, receiver,**kargs):
-        	Automaton.parse_args(self, **kargs)
-                self.win=win # the maximum window size of the sender
-                assert self.win<pow(2,NBITS)
-        	self.receiver = receiver # the IP address of the receiver
-       		self.q = Queue.Queue()
-		for item in payloads:
-			self.q.put(item)
-
-                ## Additional state variables to be maintained        
-                self.buffer={} # empty dictionnary
-                self.current=0 # current sequence number
-                self.unack=-1 # last unacked segment, -1 is none
-                self.currentwin=win # current window advertised by receiver, initialised at win, could be 1 instead
+    def parse_args(self, payloads, win, receiver,**kargs):
+        Automaton.parse_args(self, **kargs)
+        self.win=win # the maximum window size of the sender
+        assert self.win<pow(2,NBITS)
+        self.receiver = receiver # the IP address of the receiver
+        self.q = Queue.Queue()
+        for item in payloads:
+            self.q.put(item)
+            ## Additional state variables to be maintained        
+        self.buffer={} # empty dictionnary
+        self.current=0 # current sequence number
+        self.unack=-1 # last unacked segment, -1 is none
+        self.currentwin=win # current window advertised by receiver, initialised at win, could be 1 instead
 
                         
-	def master_filter(self, pkt):
-        	return (IP in pkt and pkt[IP].src == self.receiver and GBN in pkt)
-		
-	@ATMT.state(initial=1)
-	def BEGIN (self):
+    def master_filter(self, pkt):
+        return (IP in pkt and pkt[IP].src == self.receiver and GBN in pkt)
+        
+    @ATMT.state(initial=1)
+    def BEGIN (self):
             raise self.WAIT_ACK()
             
 
@@ -91,9 +90,9 @@ class GBNSender(Automaton):
                           pass
               else:
                   pass
-	
-	@ATMT.receive_condition(WAIT_ACK)
-	def wait_for_ack(self,pkt):
+    
+    @ATMT.receive_condition(WAIT_ACK)
+    def wait_for_ack(self,pkt):
             # to be completed
             print "Received ack : ",pkt.getlayer(GBN).num
             ptype = pkt.getlayer(GBN).type
@@ -113,10 +112,10 @@ class GBNSender(Automaton):
                 self.unack=-1   # no unacked segment
             raise self.WAIT_ACK()
 
-	
+    
 
-	@ATMT.timeout(WAIT_ACK, TIMEOUT)
-	def timeout_wait_ack(self):
+    @ATMT.timeout(WAIT_ACK, TIMEOUT)
+    def timeout_wait_ack(self):
             # to be completed
             # retransmit unacked segments
              seq=self.unack
@@ -132,8 +131,8 @@ class GBNSender(Automaton):
 ## This class implements the receiver side of the GBN protocol by using scapy Automaton facilities
 
 class GBNReceiver(Automaton):
-	def parse_args(self, window, pdata, pack, debug, sender, **kargs):
-		Automaton.parse_args(self, **kargs)
+    def parse_args(self, window, pdata, pack, debug, sender, **kargs):
+        Automaton.parse_args(self, **kargs)
                 self.win=window       # window size advertised by receiver in segments
                 assert self.win <= pow(2,NBITS)
                 self.pdata=pdata      # loss probability for data segments 0<= proba < 1
@@ -141,20 +140,20 @@ class GBNReceiver(Automaton):
                 self.pack=pack        # loss probability for acks  0<= proba < 1
                 assert 0<=pack and pack<1
                 self.dbg=debug        # True if debug output is requested, false otherwise
-		self.sender = sender  # ip address of sender
+        self.sender = sender  # ip address of sender
                 self.next=0           # next expected sequence number
 
-	def master_filter(self, pkt):
-        	return (IP in pkt and pkt[IP].src == self.sender and GBN in pkt)
+    def master_filter(self, pkt):
+            return (IP in pkt and pkt[IP].src == self.sender and GBN in pkt)
 
-	@ATMT.state(initial=1)
-	def WAIT_SEGMENT (self):
+    @ATMT.state(initial=1)
+    def WAIT_SEGMENT (self):
             if self.dbg==True:
                 print "Waiting for segment ",self.next
             pass
-	
-	@ATMT.receive_condition(WAIT_SEGMENT)
-	def wait_segment (self, pkt):
+    
+    @ATMT.receive_condition(WAIT_SEGMENT)
+    def wait_segment (self, pkt):
             if random.random() < self.pdata :
                 # received segment was lost/corrupted in the network
                 if self.dbg==True:
@@ -168,7 +167,7 @@ class GBNReceiver(Automaton):
                     print " Received : [type=",pkt.getlayer(GBN).type,", num=",pkt.getlayer(GBN).num," ,win=",pkt.getlayer(GBN).win,"] payload=",pkt.getlayer(GBN).payload
 
                 # check is segment is a data segment    
-		ptype = pkt.getlayer(GBN).type
+        ptype = pkt.getlayer(GBN).type
                 if ptype==0:
                     if pkt.getlayer(GBN).num==self.next:
                         # this is the segment with the expected sequence number
@@ -196,4 +195,4 @@ class GBNReceiver(Automaton):
                 # transition to WAIT_SEGMENT to receive next segment     
                 raise self.WAIT_SEGMENT()
 
-			
+            
