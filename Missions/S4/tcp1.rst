@@ -363,7 +363,7 @@ The code below is for a server that receives a string, prints it on stdout, echo
   else:
     print "Received: ",data
   # echoes the received data to client
-  s.send(data)    
+  conn.send(data)    
   time.sleep(10)
   print "Closing connection"
   # release of the connection
