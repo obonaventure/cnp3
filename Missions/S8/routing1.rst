@@ -168,7 +168,13 @@ as you'll do the packet translation and forwarding with `scapy` and not in the k
 
   ip6tables -A OUTPUT -p ipv6-icmp --icmpv6-type destination-unreachable -o eth0 -j DROP 
 
-Your implementation will do NAT64 for TCP only. To check that your NAT64 implementation is functionning you 
+Your implementation will do NAT64 for TCP only. You need to configure filters on `NAT64` so 
+that it will receive IPv4 TCP messages from `H2` this will not interfere with the kernel ::
+
+   iptables -A INPUT -p tcp -i eth1 -j DROP
+   iptables -A OUTPUT -p tcp -o eth1 -j DROP
+
+To check that your NAT64 implementation is functionning you 
 need to configure H2 with a server waiting
 for a IPv4 connection and sending 'HELLO` to connecting clients. On H1 you need a client connecting H2 
 to the IPv6 destination address `2003::c0a8:0102:ffff:ffff` that embbeds the IPv4 address `192.168.1.2`.
@@ -186,7 +192,7 @@ correct ::
   ./cl-tcp6.py 2003::c0a8:0102:ffff:ffff 1234
 
 A NAT64 gateway implementation written in scapy. 
-............................................
+................................................
 
 The main data structure used to implement the NAT64 box is a mapping entry. It will be used
 by your NAT64 implementation to remember which flows are associated to which machines. 
@@ -217,6 +223,56 @@ The payload of the packet must stay the same.
 
 - The second step of your implementation will be to perform this packet header translation and
   send the packet on the network towards H1.
+
+To implement the Nat64 scapy gateway, you can start with the following skeletton ::
+
+ ## This file abstracts a simple Nat64 gateway by using Scapy Automaton Facility
+ ## Mickael Hoerdt <mickael.hoerdt@uclouvain.be>
+ ## UCL - INL <http://inl.info.ucl.ac.be>
+
+ import Queue,sys
+ import ipaddr
+ from scapy.packet import *
+ from scapy.fields import *
+ from scapy.automaton import *
+ from scapy.layers.inet import *
+ from scapy.sendrecv import *
+
+ EXT_VERSION = "v0.1"
+ TIMEOUT = 2
+
+ class Nat64(Automaton):
+	
+	def parse_args(self, **kargs):
+		Automaton.parse_args(self, **kargs)
+		print "Entering <WAIT_FOR_TCP_PACKET> ..."
+    
+	# Scapy Nat64 Automata
+		
+	@ATMT.state(initial=1)
+	def WAIT_FOR_PACKET_TO_TRANSLATE(self):
+		#print "<WAIT_FOR_TCP_PACKET>"
+		pass
+		
+	@ATMT.timeout(WAIT_FOR_PACKET_TO_TRANSLATE, TIMEOUT)
+	def timeout_waiting_for_packet_to_forward(self):
+		print "<WAIT_FOR_TCP_PACKET/timeout>: Nothing to translate..."
+		raise self.WAIT_FOR_PACKET_TO_TRANSLATE()	
+
+	@ATMT.receive_condition(WAIT_FOR_PACKET_TO_TRANSLATE, prio=1)
+	def received_TCP(self, pkt):
+		if (IPv6 in pkt):
+			print "src=",pkt[IPv6].src,"dst=",pkt[IPv6].dst
+			if (TCP in pkt):
+				print "sport=",pkt[TCP].sport," dport=",pkt[TCP].dport
+				ipv6_packet=pkt[IPv6]	
+				new_ipv4_packet=IP()
+				new_ipv4_packet.dst = str(ipaddr.IPv4(int(hex(ipaddr.IPv6(ipv6_packet.dst))[18:26],16)).ip_ext_full)
+				ls(new_ipv4_packet)
+		if (IP in pkt):
+			print "src=",pkt[IP].src,"dst=",pkt[IP].dst
+			if (TCP in pkt):
+				print "sport=",pkt[TCP].sport," dport=",pkt[TCP].dport
 
 .. rubric:: Footnotes
 
