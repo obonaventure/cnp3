@@ -120,3 +120,20 @@ Glossary
    RIR
 	Regional Internet Registry. An organisation that manages IP addresses and AS numbers on behalf of IANA.
 
+   RIP
+	Routing Information Protocol. An intradomain routing protocol based on distance vectors that is sometimes used in entreprise networks. RIP is defined in :rfc:`2453`.
+
+   OSPF
+	Open Shortest Path First. A link-state intradomain routing protocol that  is often used in entreprise and ISP networks. OSPF is defined in and :rfc:`2328`  and :rfc:`5340`
+ 
+   IS-IS
+	Intermediate System- Intermediate System. A link-state intradomain routing that was initially defined for the ISO CLNP protocol but was extended to support IPv4 and IPv6. IS-IS is often used in ISP networks. It is defined in [ISO10589]_
+
+   IGP
+	Interior Gateway Protocol. Synonym of intradomain routing protocol
+
+   EGP
+	Exterior Gateway Protocol. Synonym of interdomain routing protocol
+
+   IXP
+	Internet eXchange Point. A location where routers belonging to different domains are attached to the same Local Area Network to establish peering sessions and exchange packets. See http://www.euro-ix.net/ or http://en.wikipedia.org/wiki/List_of_Internet_exchange_points_by_size for a partial list of IXPs.

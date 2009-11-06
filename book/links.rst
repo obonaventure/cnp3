@@ -23,6 +23,8 @@
 
 .. _Van Jacobson: http://www.parc.com/about/people/88/van-jacobson.html
 
+.. _Sally Floyd: http://www.icir.org/floyd/
+
 .. _Jon Postel: http://www.postel.org/postel.html
 
 .. _sendmail: http://www.sendmail.org
@@ -126,3 +128,13 @@
 .. _IANA: http://www.iana.org
 
 .. _snort: http://www.snort.org/
+
+.. _belnet: http://www.belnet.be
+
+.. _belgacom: http://www.belgacom.be
+
+.. _cisco: http://www.cisco.com
+
+.. _level3: http://www.level3.com
+
+.. _google: http://www.google.com

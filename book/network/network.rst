@@ -4,8 +4,6 @@ The network layer
 
 
 
-.. http://tools.ietf.org/html/draft-touch-intarea-ipv4-unique-id-01 comment choisir les IP ids
-
 Principles 
 ###########
 
@@ -24,6 +22,8 @@ types of datalink
 - point to point
 - local area networks
 
+TODO
+explain addresses in the datalink layer for LANs !!!! then ARP can be explained in this chapter as well
 
 datalink layer service
 
@@ -384,7 +384,7 @@ The reassembly algorithm used by the destination host is roughly as follows. Fir
 
 Note that the reassembly algorithm must deal with the unreliability of the IP network. This implies that a fragment may be duplicated or a fragment may never reach the destination. The destination will easily detect fragment duplication thanks to the `Fragment Offset`. To deal with fragment losses, the reassembly algorithm must bound the time during which the fragments of a packet are stored in its buffer while the packet is being reassembled. This can be implemented by starting a timer when the first fragment of a packet is received. If the packet has not been reassembled upon expiration of the timer, all fragments are discarded and the packet is considered to be lost. 
 
-.. index: IP options
+.. index:: IP options
 
 The original IP specification defined in :rfc:`791` several types of options that can be added to the IP header. Each option is encoded by using a `type length value` format. They are not widely used today and are thus only briefly described. Additional details may be found in :rfc:`791`.
 
@@ -552,8 +552,8 @@ If the packet is not addressed to the router, it must be forwarded on an outgoin
 IP version 6
 ============
 
-In the late 1980s and early 1990s the growth of the Internet was causing several operational problems on routers. Many of these routers had a single CPU and up to 1 MB of RAM to store their operating system, packet buffers and routing tables. Given the rate of allocation of IPv4 prefixes to companies and universities willing to join the Internet, the routing tables where growing very quickly and some feared that all IPv4 prefixes would be quickly allocated. In 1987, a study cited in :rfc:`1752` estimated 100,000 networks in the near future. In August 1990, estimates indicated that the class B space would be exhausted by March 1994. 
-Two types of solutions were developed to solve this problem. The first short term solution was the introduction of Classless Inter Domain Routing (:term:`CIDR`). A second short term solution was the Network Address Translation (:term:`NAT`) mechanism defined in :rfc:`1631` that allowed multiple hosts to share a single public IP address. 
+In the late 1980s and early 1990s the growth of the Internet was causing several operational problems on routers. Many of these routers had a single CPU and up to 1 MBytes of RAM to store their operating system, packet buffers and routing tables. Given the rate of allocation of IPv4 prefixes to companies and universities willing to join the Internet, the routing tables where growing very quickly and some feared that all IPv4 prefixes would be quickly allocated. In 1987, a study cited in :rfc:`1752` estimated 100,000 networks in the near future. In August 1990, estimates indicated that the class B space would be exhausted by March 1994. 
+Two types of solutions were developed to solve this problem. The first short term solution was the introduction of Classless Inter Domain Routing (:term:`CIDR`). A second short term solution was the Network Address Translation (:term:`NAT`) mechanism defined in :rfc:`1631` that allowed multiple hosts to share a single public IP address. NAT will be explained in section :ref:`Middleboxes`.
 
 However, in parallel with these short-term solutions, that have allowed the IPv4 Internet to continue to be usable until now, the Internet Engineering Task Force started to work on developing a replacement for IPv4. This work started with an open call for proposal outline in :rfc:`1550`. Several groups responded to this call with proposals for a next generation Internet Protocol (IPng) :
 
@@ -561,7 +561,7 @@ However, in parallel with these short-term solutions, that have allowed the IPv4
  * PIP proposed in :rfc:`1621`
  * SIPP proposed in :rfc:`1710`
 
-The IETF decided to pursue the development of IPng on the basis on the SIPP proposal. As IP version `5` was already used by the experimental ST-2 protocol defined in :rfc:`1819`, the successor of IP version 4 is IP version 6. The initial IP version 6  in :rfc:`1752` was designed based on the following assumptions :
+The IETF decided to pursue the development of IPng on the basis on the SIPP proposal. As IP version `5` was already used by the experimental ST-2 protocol defined in :rfc:`1819`, the successor of IP version 4 is IP version 6. The initial IP version 6 defined in :rfc:`1752` was designed based on the following assumptions :
 
  * IPv6 addresses are encoded as a 128 bits field
  * The IPv6 header has a simple format that can be easily parsed by hardware devices
@@ -570,7 +570,7 @@ The IETF decided to pursue the development of IPng on the basis on the SIPP prop
 
 .. sidebar:: The IPng address size
 
- When the work on IPng started, it was clear that 32 bits was too small to encode an IPng address and all proposals used longer addresses. However, there were many discussions on the most suitable address length. A first approach, proposed by SIP in :rfc:`1710` was to use 64 bits addresses. A 64 bits address space was 4 billion times larger than the IPv4 address space and furthermore from an implementation viewpoint, 64 bits CPU were starting to appear and 64 bits addresses would naturally fit inside registers. Another approach was to use an existing address format. This was the TUBA proposal (:rfc:`1347`) that reuses the ISO CLNP 20 bytes addresses. The 20 bytes addresses provided room for growth and could 
+ When the work on IPng started, it was clear that 32 bits was too small to encode an IPng address and all proposals used longer addresses. However, there were many discussions on the most suitable address length. A first approach, proposed by SIP in :rfc:`1710` was to use 64 bits addresses. A 64 bits address space was 4 billion times larger than the IPv4 address space and furthermore from an implementation viewpoint, 64 bits CPU were being considered and 64 bits addresses would naturally fit inside their registers. Another approach was to use an existing address format. This was the TUBA proposal (:rfc:`1347`) that reuses the ISO CLNP 20 bytes addresses. The 20 bytes addresses provided room for growth, but using ISO CLNP was not favored by the IETF partially due to political reasons, despite the fact that mature CLNP implementations were already available. 
 
 IPv6 addressing architecture
 ----------------------------
@@ -911,38 +911,36 @@ NAT allows many hosts to share one or a few public IPv4 addresses. However, usin
 Routing in IP networks
 ######################
 
-explain intra and interdomain routing
+In a large IP network such as the global Internet, routers need to exchange routing information. The Internet is an interconnection of networks, often called domains, that are under different responsibilites. As of this writing, the Internet is composed on more than 30,000 different domains and this number is still growing. A domain can be a small enterprise that manages a few routers in a single building, a larger entreprise with hundred routers at multiple locations or a large Internet Service Provider that manages thousands of routers. Two classes of routing protocols are used to allow these domains to efficiently exchange routing information. 
+
+
+.. figure:: fig/network-fig-093-c.png
+   :align: center
+   :scale: 50
+   
+   Organisation of a small Internet
+
+
+The first class of routing protocols are the `intradomain routing protocols` (sometimes also called the interior gateway protocols or :term:`IGP`). An intradomain routing protocol is used by all the routers inside a domain to exchange routing information about the destinations that are reachable inside the domain. There exist several routing protocols. Some domains use :term:`RIP`  which is a distance vector protocols. Other domains use link-state routing protocols such as :term:`OSPF` or :term:`IS-IS`. Finally, some domains use static routing or proprietary protocols such as :term:`IGRP` :term:`EIGRP`   
+
+These intradomain routing protocols usually have two objectives. First, they distribute routing information that corresponds to the shortest path between two routers in the domain. Second, they should allow the routers to quickly recover from link and router failures.
+
+The second class of routing protocols are the `interdomain routing protocols` (sometimes also called the exterio gateway protocols or :term:`EGP`). The objective of an interdomain routing protocol is to distribute routing information between domains. For scalability reasons, an interdomain routing protocol must distribute aggregated routing information and considers each domain as a blackbox. As we will see later, the objective of the interdomain routing protocol is to find the `cheapest` route towards each destination. There is only one interdomain routing protocol : :term:`BGP`
 
 
 Intradomain routing 
 ===================
 
+In this section, we briefly describe the key features of the two main intradomain unicast routing protocols : RIP and OSPF. 
+
+.. index:: RIP
 
 RIP
 ---
 
-"Command"
- 1 : Request
- 2 : Response
+The Routing Information Protocol (RIP) is the simplest routing protocol that was standardised for the TCP/IP protocol suite. RIP is defined in :rfc:`2453`. Additional information about RIP may be found in [Malkin1999]_
 
-Version
- 1 : Prehistoric 
- 2 : Usable
-
-Authentication
-Authentication
-Optional. Configure all routers
-with the same password. Slightly improves security
-
-Distance vector
-One Route Entry (20 bytes)
-for each route to be advertised
-
-ripng : rfc:`2080`
-
-port 521 UDP
-
-16=infinity
+RIP routers periodically exchange RIP messages. The format of these messages is show below. A RIP message is sent inside a UDP segment with destination port set to `521`. A RIP message contains several fields. The `Cmd` field indicates whether the RIP message is a request or a response. Routers send one of more RIP response messages every 30 seconds. These messages contain the summary of the router's routing table. The RIP requests messages can be used by routers or hosts to query other routers about the content of their routing table. A typical usage is when a router boots and wants to receive quickly the RIP responses from its neighbours to compute its own routing table. The current version of RIP is version 2 defined in :rfc:`2453` for IPv4 and :rfc:`2080` for IPv6. 
 
 
 .. figure:: fig/network-fig-094-c.png
@@ -952,43 +950,93 @@ port 521 UDP
    RIP message format
 
 
+The RIP header contains an authentication field. This authentication can be used by network administrators to ensure that only the RIP messages sent by routers that they manage are used to build the routing tables. :rfc:`2453` only supports a basic authentication scheme where all routers are configured with the same password and include this password in all RIP messages. This is not very secure since an attacker can know the password by capturing a single RIP message. However, this password can protect against configuration errors. Stronger authentication schemes are described in :rfc:`2082` and :rfc:`4822`, but the details of these mechanisms are outside the scope of this section.
+
+Each RIP message contains a set of route entries. Each route entry is encode as a 20 bytes field whose format is shown below. RIP was designed initially to be suitable for different network layer protocols. Some implementations of RIP were used in XNS or IPX networks. The first field of the RIP route entry is the `Address Family Identifier` (`AFI`). This identifier indicates the type of address found in the route entry [#fafi]_. IPv4 uses `AFI=1`. The other important fields of the route entry are the IPv4 prefix, the netmask that indicates the length of the subnet identifier and is encoded as a 32 bits netmask and the metric. Although the metric is encoded as a 32 bits field, the maximum RIP metric is `15`(for RIP, :math:`16=\inf`)
+
+
 .. figure:: fig/network-fig-095-c.png
    :align: center
    :scale: 50
    
-   Format of the RIP route entries
+   Format of the RIP IPv4 route entries
 
-RIP multiprotocol with support for IPX, XNS, etc.
+With a 20 bytes route entry, it was difficult to use the same format as above to support IPv6. Instead of defining a variable length route entry format, the designers of :rfc:`2080` defined a new format that does not include an `AFI` field. The format of the route entries used by :rfc:`2080` is shown below. `Plen` is the length of the subnet identifier in bits and the metric is encoded as one byte. The maximum metric is still `15`.
 
-address family http://www.iana.org/assignments/address-family-numbers/
+.. figure:: fig/network-fig-098-c.png
+   :align: center
+   :scale: 50
+   
+   Format of the RIP IPv6 route entries
 
 
+.. IP multicast est couvert dans le cours avancé. A ce stade, il suffit de considérer IP multicast (avec TTL=1) comme étant un mécanisme permettant à un routeur connecté sur un réseau local d'envoyer, en une seule transmission, un paquet qui sera reçu par tous les routeurs RIP connectés à ce réseau local.
 
-ICMP version 6 
+.. sidebar:: A note on timers
 
+ The first RIP implementations sent their distance vector exactly every 30 seconds. This worked well in most networks, but some researchers noticed that routers were sometimes overloaded because they were processing too many distance vectors at the same time [FJ1994]_. They collected packet traces in these networks and found that after some time the routers' timers became synchronised, i.e. almost all routers were sending their distance vectors at almost the same time. This synchronisation of the transmission times of the distance vectors caused an overload on the routers' CPU but also increased the convergence time of the protocol in some cases. It is mainly due to the fact that all routers set their timers to the same expiration time after having processed the received distance vectors. `Sally Floyd`_ and `Van Jacobson`_ proposed in [FJ1994]_ a simple solution to solve this synchronisation problem. Instead of advertising their distance vector exactly after 30 seconds, a router should send its next distance vector after a a delay of delay chosen randomly in the [15,45] interval :rfc:`2080`. This randomisation of the delays prevents the synchronisations that occur with a fixed delay and is used nowadays by most protocols.
 
-
-:rfc:`2453`
-
-La version actuelle de RIP East définie dans 
-RFC2453 RIP Version 2. G. Malkin. November 1998
-
-Une autre description de RIP East disponible dans : 
-Gary Malkin, RIP : an intra-domain routing protocol, Addison-Wesley, 2002 
-
-IP multicast East couvert dans le cours avancé. A ce stade, il suffit de considérer IP multicast (avec TTL=1) comme étant un mécanisme permettant à un routeur connecté sur un réseau local d'envoyer, en une seule transmission, un paquet qui sera reçu par tous les routeurs RIP connectés à ce réseau local.
-
-The Synchronization of Periodic Routing Messages , Floyd, S., and Jacobson, V. IEEE/ACM Transactions on Networking, V.2 N.2, p. 122-136, April 1994.
+.. index:: OSPF
 
 OSPF
 ----
-Pour plus d'informations sur OSPF, voir 
-:rfc:`2328` OSPF Version 2. J. Moy. April 1998.
-ou
-J. Moy, OSPF: Anatomy of an Internet Routing Protocol, Addison Wesley, 1998
+
+OSPF is defined in :rfc:`2328`. The last version of OSPF that supports IPv6 is defined in :rfc:`5340`. Additional informations about OSPF may be found in [Moy1998]_.
+
+
 
 Interdomain routing
 ===================
+
+As explained earlier, the Internet is composed of more than 30,000 different networks [#fasnum]_ called `domains`. Each domain is composed of a group of routers and hosts that are managed by the same organisation. Example domains include belnet_, belgacom_, level3_, cisco_, google_ ... 
+
+Each domain contains a set of routers. Domains are not isolated. They need to b interconnected to allow a host inside a domain to exchange IP packets with hosts located in other domains. From a physical viewpoint, domains can be interconnected in two different ways. The first solution is to directly connect a router belonging to the first domain with a router inside the second domain. Such links between domains are called private interdomain links or `private peering links`. In practice, for redundancy of performance reasons, several links are usually established between different routers in the two domains that are interconnected.
+
+.. figure:: fig/network-fig-104-c.png
+   :align: center
+   :scale: 50
+   
+   Interconnection of two domains via a private peering link 
+
+
+Such `private peering links` are useful when for example an entreprise or university network needs to be connected to its Internet Service Provider. However, some domains are connected to hundreds of other domains [#fasrank]_. For some of these domains, using only private peering links would be too costly. A better solution to allow a many domains to interconnect cheaply are the `Internet eXchange Points` (:term:`IXP`). An :term:`IXP` is usually some space in a data center that hosts routers belonging to different domains. A domains willing to exchange packets with other domains present at the :term:`IXP` installs one of its routers on the :term:`IXP` and connects it to other routers inside its own network. The IXP contains a Local Area Network to which all the participating routers are connected. When two domains that are present at the IXP wish to exchange packets, they simply use the Local Area Network. IXPs are very popular in Europe and many Internet Service Providers and Content providers are present on these IXPs.
+
+.. figure:: fig/network-fig-104-c.png
+   :align: center
+   :scale: 50
+   
+   Interconnection of two domains at an Internet eXchange Point
+
+In the early days of the Internet, domains would simply exchange all the routes they know to allow a host inside one domain to reach any host in the global Internet. However, as the Internet is now a commercial network, this is not true anymore. For economical reasons, there are different types of relationships that can be established between domains that are connected via a peering links. 
+
+.. index:: customer-provider peering relationship
+
+The first category is the `customer->provider` relationship. Such a relationship is used when a customer domain pays an Internet Service Provider to be able to exchange packets with the global Internet over a peering link. A similar relationship is used when a small Internet Service Provider pays a larger Internet Service Provider to exchange packets with the global Internet. 
+
+
+.. figure:: fig/network-fig-106-c.png
+   :align: center
+   :scale: 50
+   
+   A simple Internet with peering relationships
+
+To understand the `customer->provider` relationship, let us consider the simple internetwork shown in the figure above. In this internetwork, `AS7` is an enterprise domain that is connected to one provider : `AS4`. The contract between `AS4` and `AS7` allows a host inside `AS7` to exchange packets with any host in the internetwork. To enable this exchange of packets, `AS7` must know a route towards any domain and all the domains of the internetwork must learn a route via `AS4` that allows them to reach hosts inside `AS7`. 
+
+
+.. index:: shared-cost peering relationship
+
+
+.. index:: sibling peering relationship
+
+
+
+.. figure:: fig/network-fig-110-c.png
+   :align: center
+   :scale: 50
+   
+   The layered structure of the global Internet
+
+google
 
 :rfc:`2622`
 
@@ -1047,5 +1095,13 @@ but see recent arbor data
 
 .. [#falert] For a discussion of the issues with the router alert IP option, see http://tools.ietf.org/html/draft-rahman-rtg-router-alert-dangerous-00 or
  http://tools.ietf.org/html/draft-rahman-rtg-router-alert-considerations-03
+
+.. [#fafi] The Address Family Identifiers are maintained by IANA at http://www.iana.org/assignments/address-family-numbers/
+
+.. [#fasnum] An analysis of the evolution of the number of domains on the global Internet during the last ten years may be found in http://www.potaroo.net/tools/asn32/
+
+.. [#fasrank] See http://as-rank.caida.org/ to analysis of the interconnections between domains based on measurements collected in the global Internet
+
+
 
 .. include:: ../links.rst

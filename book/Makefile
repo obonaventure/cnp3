@@ -3,9 +3,9 @@
 
 # You can set these variables from the command line.
 SPHINXOPTS    =
-SPHINXBUILD   = sphinx-build
+SPHINXBUILD   = /Users/obo/local/bin/sphinx-build
 PAPER         =
-BUILDDIR      = .
+BUILDDIR      = /Users/obo/Documents/Cours/cnp3/build.book
 
 # Internal variables.
 PAPEROPT_a4     = -D latex_paper_size=a4
