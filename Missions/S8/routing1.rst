@@ -115,11 +115,12 @@ The different interfaces have been connected as follows :
  - `eth0` on NAT64 is connected to `eth0` on `H1`
  - `eth1` on NAT64 is connected to `eth0` on `H2`
 
-`H1` and `H2` will use the IPv4 implementation of the Linux kernel while `NAT64` will use your IPv6-IPv4 translator 
+`H1` and `H2` will use the IPv4/IPv6 implementation of the Linux kernel while `NAT64` will use your IPv6-IPv4 translator 
 implementation written in scapy_. You will use the emulated network to send and receive IPv4 and IPv6 packets and 
 need to configure the interfaces on `H1`,`H2` and `NAT64`. 
 
-Use :manpage:`ifconfig(8)` to configure the following IPv4 and IPv6 addresses :
+The interfaces of your boxes are configured with 
+the following IPv4 and IPv6 addresses :
 
  - `2001::2/64` on `eth0` on `H1` this is corresponding to `X` from the previous section.
  - `2001::1/64` on `eth0` on `NAT64` this is corresponding to `Y` from the previous section.
@@ -127,7 +128,9 @@ Use :manpage:`ifconfig(8)` to configure the following IPv4 and IPv6 addresses :
  - `192.168.1.2/24` on `eth1` on `H2` this is corresponding to `T` from the previous section.
 
 You need to configure the routing on H1 so that all packet with a destination of `2003::/64` 
-will be sent towards `NAT64`. This is corresponding to `Pref64::/n` from the previous section.
+will be sent towards `NAT64`. This is corresponding to `Pref64::/n` from the previous section ::
+
+  ip -6 route add 2003::/64 via 2001::1
 
 Your implementation will do NAT64 for TCP only. To check that your NAT64 implementation is functionning you 
 need to configure H2 with a server waiting
