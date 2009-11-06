@@ -163,11 +163,27 @@ To do this execute the following command on `H1` ::
 
   ip -6 route add 2003::/64 via 2001::1
 
+You need to configure filters on `NAT64` so that it will not send ICMPv6 unreachable messages
+as you'll do the packet translation and forwarding with `scapy` and not in the kernel of `NAT64` ::
+
+  ip6tables -A OUTPUT -p ipv6-icmp --icmpv6-type destination-unreachable -o eth0 -j DROP 
+
 Your implementation will do NAT64 for TCP only. To check that your NAT64 implementation is functionning you 
 need to configure H2 with a server waiting
 for a IPv4 connection and sending 'HELLO` to connecting clients. On H1 you need a client connecting H2 
 to the IPv6 destination address `2003::c0a8:0102:ffff:ffff` that embbeds the IPv4 address `192.168.1.2`.
 
+On `H2` you'll find the file `srv-tcp4.py` that start an IPv4 server waiting on the port given on 
+argument and echoing any received data to a connected client. On `H1` you'll find the file `cl-tcp6.py`
+that connects to a server with a given IPv6 and port given in argument. Once you have launched the IPv4 
+server on `H2` ::
+
+  ./srv-tcp4.py 1234
+
+You should be able to connect to it via your NAT64 scapy gateway when NAT64 implementation will be 
+correct ::
+
+  ./cl-tcp6.py 2003::c0a8:0102:ffff:ffff 1234
 
 A NAT64 gateway implementation written in scapy. 
 ............................................
