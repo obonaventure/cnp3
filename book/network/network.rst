@@ -925,7 +925,11 @@ The first class of routing protocols are the `intradomain routing protocols` (so
 
 These intradomain routing protocols usually have two objectives. First, they distribute routing information that corresponds to the shortest path between two routers in the domain. Second, they should allow the routers to quickly recover from link and router failures.
 
-The second class of routing protocols are the `interdomain routing protocols` (sometimes also called the exterio gateway protocols or :term:`EGP`). The objective of an interdomain routing protocol is to distribute routing information between domains. For scalability reasons, an interdomain routing protocol must distribute aggregated routing information and considers each domain as a blackbox. As we will see later, the objective of the interdomain routing protocol is to find the `cheapest` route towards each destination. There is only one interdomain routing protocol : :term:`BGP`
+The second class of routing protocols are the `interdomain routing protocols` (sometimes also called the exterio gateway protocols or :term:`EGP`). The objective of an interdomain routing protocol is to distribute routing information between domains. For scalability reasons, an interdomain routing protocol must distribute aggregated routing information and considers each domain as a blackbox.
+
+A very important difference between intradomain and interdomain routing are the `routing policies` that are used by each domain. Inside a single domain, all routers are considered equal and when several routes are available to reach a given destination prefix, the best route is selected based on technical criterias such as the route with the shortest delay, the route with the minimum number of hops, the route with the highest bandwidth, ... When we consider the interconnection of domains that are managed by different organisations, this is not true anymore. Each domain implements its own routing policy. 
+
+As we will see later, the objective of the interdomain routing protocol is to find the `cheapest` route towards each destination. There is only one interdomain routing protocol : :term:`BGP`
 
 
 Intradomain routing 
@@ -969,9 +973,6 @@ With a 20 bytes route entry, it was difficult to use the same format as above to
    
    Format of the RIP IPv6 route entries
 
-
-.. IP multicast est couvert dans le cours avancé. A ce stade, il suffit de considérer IP multicast (avec TTL=1) comme étant un mécanisme permettant à un routeur connecté sur un réseau local d'envoyer, en une seule transmission, un paquet qui sera reçu par tous les routeurs RIP connectés à ce réseau local.
-
 .. sidebar:: A note on timers
 
  The first RIP implementations sent their distance vector exactly every 30 seconds. This worked well in most networks, but some researchers noticed that routers were sometimes overloaded because they were processing too many distance vectors at the same time [FJ1994]_. They collected packet traces in these networks and found that after some time the routers' timers became synchronised, i.e. almost all routers were sending their distance vectors at almost the same time. This synchronisation of the transmission times of the distance vectors caused an overload on the routers' CPU but also increased the convergence time of the protocol in some cases. It is mainly due to the fact that all routers set their timers to the same expiration time after having processed the received distance vectors. `Sally Floyd`_ and `Van Jacobson`_ proposed in [FJ1994]_ a simple solution to solve this synchronisation problem. Instead of advertising their distance vector exactly after 30 seconds, a router should send its next distance vector after a a delay of delay chosen randomly in the [15,45] interval :rfc:`2080`. This randomisation of the delays prevents the synchronisations that occur with a fixed delay and is used nowadays by most protocols.
@@ -988,9 +989,21 @@ OSPF is defined in :rfc:`2328`. The last version of OSPF that supports IPv6 is d
 Interdomain routing
 ===================
 
-As explained earlier, the Internet is composed of more than 30,000 different networks [#fasnum]_ called `domains`. Each domain is composed of a group of routers and hosts that are managed by the same organisation. Example domains include belnet_, belgacom_, level3_, cisco_, google_ ... 
+As explained earlier, the Internet is composed of more than 30,000 different networks [#fasnum]_ called `domains`. Each domain is composed of a group of routers and hosts that are managed by the same organisation. Example domains include belnet_, sprint_, level3_, geant_, abilene_ cisco_, google_ ... 
 
-Each domain contains a set of routers. Domains are not isolated. They need to b interconnected to allow a host inside a domain to exchange IP packets with hosts located in other domains. From a physical viewpoint, domains can be interconnected in two different ways. The first solution is to directly connect a router belonging to the first domain with a router inside the second domain. Such links between domains are called private interdomain links or `private peering links`. In practice, for redundancy of performance reasons, several links are usually established between different routers in the two domains that are interconnected.
+.. index:: stub domain, transit domain
+
+Each domain contains a set of routers. From a routing viewpoint, these domains can be divided in two classes : the `transit` and the `stub` domain. A `stub` domain sends and receive packets whose source or destination are one of its hosts. A `transit` domain is a domain that provides a transit service for other domains, i.e. the routers in this domain forward packets whose source and destinations do not belong to the transit domain. As of this writing, there are about 85% of stub domains in the Internet. A `stub` domain that is connected to a single transit domain is called a `single-homed stub`. A `multihomed stub` is a `stub` domain connected to two or more transit providers.
+
+.. figure:: fig/network-fig-089-c.png
+   :align: center
+   :scale: 50
+   
+   Transit and stub domains 
+
+The stub domains can be further classified by considering whether they mainly send or receive packets. An `access-rich` stub domain is a domain that contains a lot of hosts that mainly receive packets. Typical examples include small ADSL- or cable model-based Internet Service Providers or entreprise networks. On the other hand, a `content-rich` stub domain is a domain that mainly produces packets. Examples of `content-rich` stub domains include google_, yahoo_, microsoft_, facebook_ or content distribution networks such as akamai_ or limelight_ During the last years, we have seen a rapid growth of these `content-rich` stub domains. Recent measurements [ATLAS2009]_ indicate that a growing fraction of all the packets exchanged on the Internet are produced in the datacenters managed by these content providers.
+
+Domains need to be interconnected to allow a host inside a domain to exchange IP packets with hosts located in other domains. From a physical viewpoint, domains can be interconnected in two different ways. The first solution is to directly connect a router belonging to the first domain with a router inside the second domain. Such links between domains are called private interdomain links or `private peering links`. In practice, for redundancy of performance reasons, several links are usually established between different routers in the two domains that are interconnected.
 
 .. figure:: fig/network-fig-104-c.png
    :align: center
@@ -1001,17 +1014,19 @@ Each domain contains a set of routers. Domains are not isolated. They need to b 
 
 Such `private peering links` are useful when for example an entreprise or university network needs to be connected to its Internet Service Provider. However, some domains are connected to hundreds of other domains [#fasrank]_. For some of these domains, using only private peering links would be too costly. A better solution to allow a many domains to interconnect cheaply are the `Internet eXchange Points` (:term:`IXP`). An :term:`IXP` is usually some space in a data center that hosts routers belonging to different domains. A domains willing to exchange packets with other domains present at the :term:`IXP` installs one of its routers on the :term:`IXP` and connects it to other routers inside its own network. The IXP contains a Local Area Network to which all the participating routers are connected. When two domains that are present at the IXP wish to exchange packets, they simply use the Local Area Network. IXPs are very popular in Europe and many Internet Service Providers and Content providers are present on these IXPs.
 
-.. figure:: fig/network-fig-104-c.png
+.. figure:: fig/network-fig-105-c.png
    :align: center
    :scale: 50
    
    Interconnection of two domains at an Internet eXchange Point
 
-In the early days of the Internet, domains would simply exchange all the routes they know to allow a host inside one domain to reach any host in the global Internet. However, as the Internet is now a commercial network, this is not true anymore. For economical reasons, there are different types of relationships that can be established between domains that are connected via a peering links. 
+In the early days of the Internet, domains would simply exchange all the routes they know to allow a host inside one domain to reach any host in the global Internet. However, in today's highly commercial Internet, this is not true anymore. For economical reasons, there are different types of relationships that can be established between domains that are connected via a peering links. 
+
+Furthermore, while intradomain routing usually prefers some routes over others based on their technical merits (e.g. prefer path with the minimum number of hops, prefer path with the minimum delay, prefer high bandwidth paths over low bandwidth ones, ...) interdomain routing mainly deals with economical issues. For interdomain routing, the cost of using a path is often more important than the quality of the path measured by its delay or bandwidth.
 
 .. index:: customer-provider peering relationship
 
-The first category is the `customer->provider` relationship. Such a relationship is used when a customer domain pays an Internet Service Provider to be able to exchange packets with the global Internet over a peering link. A similar relationship is used when a small Internet Service Provider pays a larger Internet Service Provider to exchange packets with the global Internet. 
+The first category of peering relationship is the `customer->provider` relationship. Such a relationship is used when a customer domain pays an Internet Service Provider to be able to exchange packets with the global Internet over a peering link. A similar relationship is used when a small Internet Service Provider pays a larger Internet Service Provider to exchange packets with the global Internet. 
 
 
 .. figure:: fig/network-fig-106-c.png
@@ -1020,13 +1035,60 @@ The first category is the `customer->provider` relationship. Such a relationship
    
    A simple Internet with peering relationships
 
-To understand the `customer->provider` relationship, let us consider the simple internetwork shown in the figure above. In this internetwork, `AS7` is an enterprise domain that is connected to one provider : `AS4`. The contract between `AS4` and `AS7` allows a host inside `AS7` to exchange packets with any host in the internetwork. To enable this exchange of packets, `AS7` must know a route towards any domain and all the domains of the internetwork must learn a route via `AS4` that allows them to reach hosts inside `AS7`. 
+To understand the `customer->provider` relationship, let us consider the simple internetwork shown in the figure above. In this internetwork, `AS7` is an enterprise domain that is connected to one provider : `AS4`. The contract between `AS4` and `AS7` allows a host inside `AS7` to exchange packets with any host in the internetwork. To enable this exchange of packets, `AS7` must know a route towards any domain and all the domains of the internetwork must learn a route via `AS4` that allows them to reach hosts inside `AS7`. From a routing viewpoint, the commercial contract between `AS7` and `AS4` will lead to the following routes being exchanged :
+ - over a `customer->provider` relationship, the `customer` domain 
+advertise to its `provider`  all its routes and all the routes that it has learned from its own customers.
+ - over a `provider->customer` relationship, a `provider` advertises all the routes that it knows to its `customer`
 
+The second rule ensures that the customer domain will receive a route towards all destinations that are reachable via its provider. The first rule allows the routes of the customer domain to be distributed through the Internet.
+
+Coming back to the figure above, `AS4` advertises to its two providers `AS1` and `AS2` its own routes and the routes learned from its customer, `AS7`. On the other hand, `AS4` advertises to `AS7` all the routes that it knows. 
 
 .. index:: shared-cost peering relationship
 
+The second type of peering relationship is the `shared-cost` peering relationship. Such a relationship usually does not involve a paiment in contrast with the `customer->provider` relationship. A `shared-cost` peering relationship is usually established between domains having a similar size and geographic coverage. For example, consider the figure above. If `AS3` and `AS4` exchange many packets via `AS1`, they both need to pay `AS1`. A cheaper alternative for `AS3` and `AS4` would be to establish a `shared-cost` peering. Such a peering can be established at IXPs where both `AS3` and `AS4` are present or by using private peering links. This `shared-cost` peering should be used to exchange packets between hosts inside `AS3` and hosts inside `AS4`. However, `AS3` does not want to receive on the `AS3-AS4` `shared-cost` peering links packets whose destination belongs to `AS1` and `AS3` would have to pay to send these packets to `AS1`. 
+
+From a routing viewpoint, over a `shared-cost` peering relationship a domain only advertises its internal routes and the routes that it has learned from its customers. This restriction ensures that only packets destined to the local domain or one of its customers will be received over the `shared-cost` peering relationship. This implies that the routes that have been learned from a provider or from another `shared-cost` peer will not be advertised over a `shared-cost` peering relationship. This is motivated by economical reasons. If a domain was advertising over a `shared-cost` peering relationship that does not bring revenue the routes that it learned from a provider it would have allowed its `shared-cost` peer to use the link with its provider without any payment. If a domain was advertising over a `shared-cost` peering relationship the routes learned over another `shared-cost` peering relationship, it would have allowed these `shared-cost` peers to use its own network (which may span one or more continents) freely to exchange packets.
+
 
 .. index:: sibling peering relationship
+
+Finally, the last type of peering relationship is the `sibling`. Such a relationship is used when two domains exchange all their routes in both directions. In practice, such a relationship is only used between domains that belong to the same company.
+
+.. index:: interdomain routing policy
+
+These different types of relationships are implemented in the `interdomain routing policies` that are defined by each domain. The `interdomain routing policy` of a domain is composed of three main parts :
+ - the `import policy` that specifies, for each peering relationship, the routes that can be accepted from the neighboring domain (the non-acceptable routes are ignored and the domain never uses them to forward packets)
+ - the `export policy` that specifies, for each peering relationship, the routes that can be advertised to the neighboring domain 
+ - the `ranking` algorithm that is used to prefer some route over others when a domain has received several routes towards the same destination prefix
+
+.. index:: import policy, export policy
+
+A domain's import and export policies can be defined by using the Route Policy Specification Language (RPSL) specified in :rfc:`2622`. Some Internet Service Providers, notably in Europe, use RPSL to document [#fripedb]_ their import and export policies. Several tools allow to easily convert a RPSL policy into router commands. 
+
+The figure below provides a simple example of import and export policies for two domains in a simple internetwork. In a RPSL policy, the keyword `ANY` is used to replace any route from any domain. It is typically used on by a provider to indicate that it announces all its routes to a customer over a `provider->customer` relationship. This is the case for `AS4`'s export policy. The example below shows clearly the difference between a `provider->customer` and a `shared-cost` peering relationship. `AS4`'s export policy indicates that it announces only its internal routes (`AS4`) and the routes learned from its clients (`AS7`) over its `shared-cost` peering with `AS3` while it advertises to `AS7` all the routes that it uses (including the routes learned from `AS3`). 
+
+.. figure:: fig/network-fig-109-c.png
+   :align: center
+   :scale: 50
+   
+   Import and export policies 
+
+Tier-1 ISPs
+Dozen of large ISPs interconnected by shared-cost
+Provide transit service
+Uunet, Level3, OpenTransit, ...
+Tier-2 ISPs
+Regional or National ISPs 
+Customer of T1 ISP(s)
+Provider of T3 ISP(s) 
+shared-cost with other T2 ISPs
+France Telecom, BT, Belgacom
+Tier-3 ISPs
+Smaller ISPs, Corporate Networks, Content providers
+Customers of T2 or T1 ISPs
+shared-cost with other T3 ISPs
+
 
 
 
@@ -1036,9 +1098,54 @@ To understand the `customer->provider` relationship, let us consider the simple 
    
    The layered structure of the global Internet
 
-google
 
-:rfc:`2622`
+
+.. index:: BGP, Border Gateway Protocol
+
+The Border Gateway Protocol
+---------------------------
+
+
+The Internet uses a single interdomain routing protocol : the Border Gateway Protocol (BGP). The current version of BGP is defined in :rfc:`4271`. BGP differs from the intradomain routing protocols that we have already discussed in several ways. First, BGP is a `path-vector` protocol. When a BGP router advertises a route towards a prefix, it announces the IP prefix and the interdomain path used to reach this prefix. From BGP's viewpoint, each domain is identified by a unique `Autonomous System` (AS) number [#fasdomain]_ and the interdomain path contains the AS numbers of the transit domains that are used to reach the associated prefix. This interdomain path is called the `AS Path`. Thanks to these AS-paths, BGP does not suffer from the count-to-infinity problems that affect distance vector routing protocols. Furthermore, the AS-Path can be used to implement some routing policies. Another difference between BGP and the intradomain routing protocols is that a BGP router does not advertise the contents of its routing table to its neighbours regularly. Given the size of the global Internet, routers would be overloaded by the number of BGP messages that they need to process. A BGP router uses incremental updates, i.e. it only announces to its neighbours the routes that have changed.
+
+The figure below shows a simple example of the BGP routes that are exchanged between domains. In this example, prefix `1.0.0.0/8` is announced by `AS1`. `AS1` advertises to `AS2` a BGP route towards this prefix. The AS-Path of this route indicates that `AS1` is the originator of the prefix. When `AS4` receives the BGP route from `AS1`, it reannounces it to `AS2` and adds its AS number in the AS-Path. `AS2` has learned two routes towards prefix `1.0.0.0/8`. It compares the two routes and prefers the route learned from `AS4` based on its own ranking algorithm. `AS2` advertises to `AS5` a route towards `1.0.0.0/8` with its AS-Path set to `AS2:AS4:AS1`. Thanks to the AS-Path, `AS5` knows that if it sends a packet towards `1.0.0.0/8` the packet will first pass through `AS2`, then through `AS4` before reaching its destination inside `AS1`.
+
+.. figure:: fig/network-fig-111-c.png
+   :align: center
+   :scale: 50
+   
+   Simple exchange of BGP routes 
+
+
+
+
+
+.. figure:: fig/network-fig-113-c.png
+   :align: center
+   :scale: 50
+   
+   Basic organisation of a BGP router 
+
+BGP Routing Information Base
+Contains all the acceptable routes 
+learned from all Peers + internal routes
+ BGP decision process selects 
+  the best route towards each destination
+
+.. index:: BGP decision process
+
+BGP Decision Process 
+ Ignore routes with unreachable nexthop
+ Prefer routes with highest local-pref
+ Prefer routes with shortest ASPath
+ Prefer routes with smallest MED
+ Prefer routes learned via eBGP over routes learned via iBGP
+ Prefer routes with closest next-hop 
+ Tie breaking rules
+Prefer Routes learned from router with lowest router id
+
+
+
 
 RFC 2622 Routing Policy Specification Language (RPSL). C. Alaettinoglu, C.
      Villamizar, E. Gerich, D. Kessens, D. Meyer, T. Bates, D. Karrenberg,
@@ -1058,7 +1165,7 @@ http://www.apnic.net/apnic-bin/whois.pl
  L. Subramanian, S. Agarwal, J. Rexford, and RH Katz. Characterizing the Internet hierarchy from multiple vantage points. In IEEE INFOCOM, 2002
 
 
-bgp :rfc:`4672`
+bgp 
 
 but see recent arbor data
 
@@ -1102,6 +1209,8 @@ but see recent arbor data
 
 .. [#fasrank] See http://as-rank.caida.org/ to analysis of the interconnections between domains based on measurements collected in the global Internet
 
+.. [#fripedb] See ftp://ftp.ripe.net/ripe/dbase for the RIPE database that contains the import and export policies of many European ISPs
 
+.. [#fasdomain] In this text, we consider Autonomous System and domain as synonyms. In practice, a domain may be  divided into several Autonomous Systems, but we ignore this detail. 
 
 .. include:: ../links.rst

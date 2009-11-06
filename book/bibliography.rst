@@ -94,3 +94,7 @@ Whenever possible, the bibliography includes hypertext links to the references c
 .. [FJ1994] Floyd, S., and Jacobson, V., The Synchronization of Periodic Routing Messages , IEEE/ACM Transactions on Networking, V.2 N.2, p. 122-136, April 1994.
 
 .. [Moy1998] Moy, J., OSPF: Anatomy of an Internet Routing Protocol, Addison Wesley, 1998
+
+.. [ATLAS2009] Labovitz, C., Iekel-Johnson, S., McPherson, D., Oberheide, J., Jahanian F., Karir, M., ATLAS Internet Observatory 2009 Annual Report, presented at NANOG47, October 2009 http://www.nanog.org/meetings/nanog47/presentations/Monday/Labovitz_ObserveReport_N47_Mon.pdf
+
+

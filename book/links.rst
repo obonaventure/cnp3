@@ -138,3 +138,18 @@
 .. _level3: http://www.level3.com
 
 .. _google: http://www.google.com
+
+.. _geant: http://www.geant.net
+
+.. _abilene: http://www.internet2.edu
+
+.. _yahoo: http://www.yahoo.com
+
+.. _microsoft: http://www.microsoft.com
+
+.. _facebook: http://www.facebook.com
+
+.. _akamai: http://www.akamai.net
+
+.. _limelight: http://uk.limelightnetworks.com/index.php
+
