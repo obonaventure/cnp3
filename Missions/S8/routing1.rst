@@ -144,13 +144,18 @@ virtual setup illustrated on the figure execute the following procedure:
    terminal start the virtual machine `NAT64` by executing the script
    `start_nat64`
 
-The interfaces of your boxes are configured with 
+#. The interfaces of your boxes are configured with 
 the following IPv4 and IPv6 addresses :
 
  - `2001::2/64` on `eth0` on `H1` this is corresponding to `X` from the previous section.
  - `2001::1/64` on `eth0` on `NAT64` this is corresponding to `Y` from the previous section.
  - `192.168.1.1/24` on `eth1` on `NAT64` this is corresponding to `Z` from the previous section.
  - `192.168.1.2/24` on `eth1` on `H2` this is corresponding to `T` from the previous section.
+
+#. Check the IPv6 and the IPv4 connectivity between `H1` and `NAT64` and `H2` and `NAT64` by
+   using the ping and the ping6 command. If one of the IPs is not responding, you'll have
+   to restart the setup from the `start_network` script, somehow the uml_switch daemon is
+   bugged.
 
 You need to configure the routing on H1 so that all packet with a destination of `2003::/64` 
 will be sent towards `NAT64`. This is corresponding to `Pref64::/n` from the previous section.
