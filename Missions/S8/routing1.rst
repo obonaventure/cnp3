@@ -119,6 +119,31 @@ The different interfaces have been connected as follows :
 implementation written in scapy_. You will use the emulated network to send and receive IPv4 and IPv6 packets and 
 need to configure the interfaces on `H1`,`H2` and `NAT64`. 
 
+The filesystems and the kernel of the virtual machines are stored
+in the directory `/etinfo/INGI2141/uml/nat64`. To create the
+virtual setup illustrated on the figure execute the following procedure:
+
+#. Copy the boot script of each H1,H2 and NAT64 virtual machines in your working directory ::
+
+	cp /etinfo/INGI2141/uml/nat64/start_h1 ~/INGI2141/UML/NAT64
+	cp /etinfo/INGI2141/uml/net64/start_h2 ~/INGI2141/UML/NAT64
+	cp /etinfo/INGI2141/uml/net64/start_nat64 ~/INGI2141/UML/NAT64
+
+#. Copy the network book script in your working directory ::
+	
+	cp /etinfo/INGI2141/uml/nat64/start_network ~/INGI2141/UML/NAT64
+
+#. Open 4 terminals, 1 for each virtual machine and 1 to start the network
+
+#. In the first terminal start the network by executing the script `start_network`
+
+#. In the second terminal, start the virtual machine `H1` by executing
+   the script `start_h1`. 
+   In the second terminal, start the virtual machine
+   `H2` by executing the script `start_h2`. In the third
+   terminal start the virtual machine `NAT64` by executing the script
+   `start_nat64`
+
 The interfaces of your boxes are configured with 
 the following IPv4 and IPv6 addresses :
 
@@ -128,7 +153,8 @@ the following IPv4 and IPv6 addresses :
  - `192.168.1.2/24` on `eth1` on `H2` this is corresponding to `T` from the previous section.
 
 You need to configure the routing on H1 so that all packet with a destination of `2003::/64` 
-will be sent towards `NAT64`. This is corresponding to `Pref64::/n` from the previous section ::
+will be sent towards `NAT64`. This is corresponding to `Pref64::/n` from the previous section.
+To do this execute the following command on `H1` ::
 
   ip -6 route add 2003::/64 via 2001::1
 
