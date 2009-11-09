@@ -163,6 +163,11 @@ To do this execute the following command on `H1` ::
 
   ip -6 route add 2003::/64 via 2001::1
 
+You need to configure `NAT64` to indicate a default route for IPv6 packets, scapy requires
+it to set the MAC destination of your packets ::
+
+  ip -6 route add default dev eth0
+
 You need to configure filters on `NAT64` so that it will not send ICMPv6 unreachable messages
 as you'll do the packet translation and forwarding with `scapy` and not in the kernel of `NAT64` ::
 
@@ -226,7 +231,8 @@ The payload of the packet must stay the same.
 
 To implement the Nat64 scapy gateway, you can start with the following skeletton ::
 
- ## This file abstracts a simple Nat64 gateway by using Scapy Automaton Facility
+ ## This file abstracts a *very* simple Nat64 gateway by 
+ #  using Scapy Automaton Facility
  ## Mickael Hoerdt <mickael.hoerdt@uclouvain.be>
  ## UCL - INL <http://inl.info.ucl.ac.be>
 
@@ -242,11 +248,25 @@ To implement the Nat64 scapy gateway, you can start with the following skeletton
  TIMEOUT = 2
 
  class Nat64(Automaton):
-	
-	def parse_args(self, **kargs):
-		Automaton.parse_args(self, **kargs)
+
+	# MAC address filtering as scapy sees every packets, even its own
+
+        mac_addr_src = { "eth0":'02:00:E3:00:30:02', "eth1":'02:00:E3:00:30:03'}
+        mac_addr_dst = { "bcastv6":'33:33:ff:ff:ff:ff', "bcastv4":'ff:ff:ff:ff:ff:ff'}
+
+        def parse_args(self, **kargs):
+	   	Automaton.parse_args(self, **kargs)
+		self.mapping={}	
+		self.srcv4='192.168.1.1'	
+		self.pref64='0x200300000000000000000000ffffffffL'	
 		print "Entering <WAIT_FOR_TCP_PACKET> ..."
-    
+        
+	def master_filter(self, pkt):
+		if (TCP in pkt):
+			if(not pkt.src.upper() in self.mac_addr_src.values()):
+				if(not pkt.dst.upper() in self.mac_addr_dst.values()):
+					return True
+
 	# Scapy Nat64 Automata
 		
 	@ATMT.state(initial=1)
@@ -262,17 +282,50 @@ To implement the Nat64 scapy gateway, you can start with the following skeletton
 	@ATMT.receive_condition(WAIT_FOR_PACKET_TO_TRANSLATE, prio=1)
 	def received_TCP(self, pkt):
 		if (IPv6 in pkt):
-			print "src=",pkt[IPv6].src,"dst=",pkt[IPv6].dst
-			if (TCP in pkt):
-				print "sport=",pkt[TCP].sport," dport=",pkt[TCP].dport
-				ipv6_packet=pkt[IPv6]	
-				new_ipv4_packet=IP()
-				new_ipv4_packet.dst = str(ipaddr.IPv4(int(hex(ipaddr.IPv6(ipv6_packet.dst))[18:26],16)).ip_ext_full)
-				ls(new_ipv4_packet)
+			#Look for the entry in the mapping
+			#If if doesn't exist, create a new one (with a random port).	
+
+			if((pkt[IPv6].src,pkt[TCP].sport) in self.mapping.values()):	
+				for map_src,map_port in self.mapping.keys():
+					if(self.mapping[map_src,map_port] == (pkt[IPv6].src,pkt[TCP].sport)):
+						break
+			else:
+				print "IPv6: Creating a new NAT64 mapping entry:",pkt[IPv6].src,"  ",pkt[TCP].sport
+				src_port=int(random.random()*65535)	
+				self.mapping[(self.srcv4,src_port)]=(pkt[IPv6].src,pkt[TCP].sport)
+				map_src,map_port=self.srcv4,src_port
+			
+			#extract the destination
+			#Fill up the important information for the new packet
+
+			dstv4 = str(ipaddr.IPv4(int(hex(ipaddr.IPv6(pkt[IPv6].dst))[18:26],16)).ip_ext_full)
+			new_ipv4_packet=IP(src=map_src,dst=dstv4,ttl=pkt[IPv6].hlim)/pkt[TCP]
+			new_ipv4_packet[TCP].sport=map_port
+			
+			#Remove checksum to force scapy to recompute it
+			#and send the packet in IPv4
+
+			new_ipv4_packet[TCP].chksum=None
+			self.send(new_ipv4_packet)
+			
 		if (IP in pkt):
-			print "src=",pkt[IP].src,"dst=",pkt[IP].dst
-			if (TCP in pkt):
-				print "sport=",pkt[TCP].sport," dport=",pkt[TCP].dport
+			#Try to find the corresponding mapping entry
+			try:
+				#Extract the source IPv6 and the dport from the mapping
+				(srcv6,map_port)=self.mapping[(pkt[IP].dst,pkt[TCP].dport)]
+				
+				#Build the destination and fill up important information
+				dstv6=str(ipaddr.IPv6(int(self.pref64[:18]+hex(ipaddr.IPv4(pkt[IP].src))[2:10]+self.pref64[26:34],16)))
+				new_ipv6_packet=IPv6(src=dstv6,dst=srcv6,hlim=pkt[IP].ttl)/pkt[TCP]
+				new_ipv6_packet[TCP].dport=map_port	
+				
+				#Remove checksum to force scapy to recompute it
+				#and send the packet in IPv6
+				new_ipv6_packet[TCP].chksum=None
+				self.send(new_ipv6_packet)	
+			
+			except KeyError:
+				print "IPv4: Mapping entry not found:",pkt[IP].dst,"  ",pkt[TCP].dport
 
 .. rubric:: Footnotes
 
