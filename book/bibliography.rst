@@ -97,4 +97,8 @@ Whenever possible, the bibliography includes hypertext links to the references c
 
 .. [ATLAS2009] Labovitz, C., Iekel-Johnson, S., McPherson, D., Oberheide, J., Jahanian F., Karir, M., ATLAS Internet Observatory 2009 Annual Report, presented at NANOG47, October 2009 http://www.nanog.org/meetings/nanog47/presentations/Monday/Labovitz_ObserveReport_N47_Mon.pdf
 
-
+.. [KW2009] Katz, D., Ward, D.,  Bidirectional Forwarding Detection, Internet draft, http://tools.ietf.org/html/draft-ietf-bfd-base-09, Feb 2009, work in progress
+.. [FFEB2005] Francois, P., Filsfils, C., Evans, J., and Bonaventure, O. 2005. Achieving sub-second IGP convergence in large IP networks. SIGCOMM Comput. Commun. Rev. 35, 3 (Jul. 2005), 35-44. DOI= http://doi.acm.org/10.1145/1070873.1070877
+.. [VPD2004] Vasseur, J., Pickavet, M., and Demeester, P. 2004 Network Recovery: Protection and Restoration of Optical, Sonet-Sdh, Ip, and MPLS. Morgan Kaufmann Publishers Inc.
+.. [WMS2004] White, R., Mc Pherson, D., Srihari, S., Practical BGP, Addison-Wesley, 2004 
+.. [Stewart1998] Stewart, J., BGP4: Inter-Domain Routing In The Internet, Addison-Wesley, 1998 
