@@ -1,4 +1,4 @@
-An NAT gateway.
+A NAT gateway.
 ========================
 
 At the global scale, the Internet is a fully distributed and uncoordinated network.
@@ -130,7 +130,7 @@ virtual setup illustrated on the figure execute the following procedure:
    `start_nat`
 
 #. The interfaces of your boxes are configured with 
-the following IPv4 and IPv6 addresses :
+the following IPv4 addresses :
 
  - `192.168.1.2/24` on `eth0` on `H1` this is corresponding to `X` from the previous section.
  - `192.168.1.1/24` on `eth0` on `NAT` this is corresponding to `Y` from the previous section.
