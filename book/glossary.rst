@@ -137,3 +137,20 @@ Glossary
 
    IXP
 	Internet eXchange Point. A location where routers belonging to different domains are attached to the same Local Area Network to establish peering sessions and exchange packets. See http://www.euro-ix.net/ or http://en.wikipedia.org/wiki/List_of_Internet_exchange_points_by_size for a partial list of IXPs.
+
+   BGP
+	The Border Gateway Protocol is the interdomain routing protocol used in the global Internet.
+
+   EIGRP
+
+	The Enhanced Interior Gateway Routing Protocol (EIGRP) is prorietary intradomain routing protocol that is often used in entreprise networks. EIGRP uses the DUAL algorithm described in [Garcia1993]_.
+
+
+   IGRP	
+   	The Interior Gateway Routing Protocol (IGRP) is a proprietary intradomain routing protocol that uses distance vector. IGRP supports multiple metrics for each route but has been replaced by :term:`EIGRP`
+
+   NAT
+	A Network Address Translator is a middlebox that translates IP packets.
+
+
+	
