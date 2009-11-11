@@ -116,14 +116,14 @@ The first line adds a mapping between IPv4 address `192.168.1.1` and hardware ad
 Use :manpage:`arp(8)` to insert the following mappings :
  - on `client1` insert a mapping between `192.168.0.1` and the hardware address of interface `eth0` on `router1`
  - on `client2` insert a mapping between `10.1.0.1` and the hardware address of interface `eth1` on `router1`
- - on `client3` insert a mapping between `10.1.0.6` and the hardware address of interface `eth2` on `router1`
+ - on `client3` insert a mapping between `10.1.0.5` and the hardware address of interface `eth2` on `router1`
 
 Verify each mapping with `arp -v -n`. 
 
 As your router will use scapy_ to process IPv4 packets, you need to disable IPv4 on the Linux kernel of the `router` virtual machine. This can be done by installing an :manpage:`iptables(8)` on each interface on your `router` ::
 
  iptables -A INPUT -p ip -i eth0 -j DROP
- iptables -A OUTPUT -p ip -i eth0 -j DROP
+ iptables -A OUTPUT -p ip -o eth0 -j DROP
    
 
 
@@ -281,3 +281,9 @@ If these ICMP messages are implemented correctly, your should be able to use :ma
 .. [#farp] In practice, IPv4 hosts and routers use the Address Resolution Protocol (ARP) specified in :rfc:`826` to find the hardware address that corresponds to an IPv4 address. However, implementing this protocol is outside the scope of this exercise.
 
 .. include:: ../../book/links.rst
+
+
+.. exercices complementaires : calculer 8/13,  adresse plus basse et plus haute, découper un bloc /9 en deux plus petits blocs, ...
+.. tp forwarding dans un réseau avec des routeurs
+.. revoir mieux la configuration de base des uml, elle a posé des problèmes, penser à expliquer les routes par défaut, la configuration des adresses ip de chaque pc a pris du temps, voir comment on peut simplifier cela et mieux l'expliquer
+
