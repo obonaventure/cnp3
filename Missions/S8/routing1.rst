@@ -116,6 +116,7 @@ scapy_ allows you to modify any field in an IPv4 packet or TCP segment. For exam
 To capture the packets to be processed by the NAT, you can use a `master_filter` such as the following one ::
 
 	mac_addr_src = { "00:00:E3:00:30:04":'eth0', "00:00:E3:00:30:03":'eth1'}
+        mac_addr_dst = { "bcastv4":'ff:ff:ff:ff:ff:ff'}	
 	# verify that these are the hardware addresses of your NAT
 	# with ifconfig
 
