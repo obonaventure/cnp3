@@ -44,7 +44,8 @@ virtual setup illustrated on the figure execute the following procedure:
 
 #. Open 3 terminals, 1 for each virtual machine 
 
-#. In the first terminal, start the virtual machine `H1` by executing
+#. In the first terminal, get your student id and then 
+   start the virtual machine `H1` by executing
    the script `start_h1`. 
    In the second terminal, start the virtual machine
    `H2` by executing the script `start_h2`. In the third
