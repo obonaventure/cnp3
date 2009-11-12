@@ -1,10 +1,5 @@
-<<<<<<< .mine
 A Network Address Translator
 ============================
-=======
-A NAT gateway.
-========================
->>>>>>> .r66
 
 The global Internet is a fully distributed and uncoordinated network.
 Historically IP addresses were allocated in a first-come first-served basis. As
@@ -55,12 +50,7 @@ virtual setup illustrated on the figure execute the following procedure:
    `H2` by executing the script `start_h2`. In the third
    terminal start the virtual machine `NAT` by executing the script `start_nat`
 
-<<<<<<< .mine
 #. The interfaces of your boxes have already been configured with the following IPv4 addresses :
-=======
-#. The interfaces of your boxes are configured with 
-the following IPv4 addresses :
->>>>>>> .r66
 
  - `192.168.1.2/24` on `eth0` on `H1` 
  - `192.168.1.1/24` on `eth0` on `NAT` 
@@ -87,7 +77,7 @@ need to start on a TCP server on `H2`. For this, you can use the
 simple python_ server in file `/root/srv-tcp.py` on `H2`. This server
 waits for a TCP connection on the port specified as the first argument.
 
-On `H1` you can use :manpage:`telnet(1)` to contact this server or use the python client in file `/root/cl-tcp.py` 
+On `H1` you can use the python client in file `/root/cl-tcp.py` 
 
 
 Implementation issues in scapy_
