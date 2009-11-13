@@ -100,7 +100,9 @@ Whenever possible, the bibliography includes hypertext links to the references c
 .. [KW2009] Katz, D., Ward, D.,  Bidirectional Forwarding Detection, Internet draft, http://tools.ietf.org/html/draft-ietf-bfd-base-09, Feb 2009, work in progress
 .. [FFEB2005] Francois, P., Filsfils, C., Evans, J., and Bonaventure, O. 2005. Achieving sub-second IGP convergence in large IP networks. SIGCOMM Comput. Commun. Rev. 35, 3 (Jul. 2005), 35-44. DOI= http://doi.acm.org/10.1145/1070873.1070877
 .. [VPD2004] Vasseur, J., Pickavet, M., and Demeester, P. 2004 Network Recovery: Protection and Restoration of Optical, Sonet-Sdh, Ip, and MPLS. Morgan Kaufmann Publishers Inc.
-.. [WMS2004] White, R., Mc Pherson, D., Srihari, S., Practical BGP, Addison-Wesley, 2004 
+.. [WMS2004] White, R., Mc Pherson, D., Srihari, S., Practical BGP, Addison-Wesley, 2004, http://my.safaribooksonline.com/0321127005/
 .. [Stewart1998] Stewart, J., BGP4: Inter-Domain Routing In The Internet, Addison-Wesley, 1998 
 .. [Garcia1993] Garcia-Lunes-Aceves, J., Loop-Free Routing Using Diffusing Computations, IEEE/ACM Transcations on Networking, Vol. 1, No, 1, Feb. 1993
 .. [SARK2002] Subramanian, L., Agarwal, S., Rexford, J., Katz, R.. Characterizing the Internet hierarchy from multiple vantage points. In IEEE INFOCOM, 2002
+.. [HFPMC2002] Huffaker, B., Fomenkov, M., Plummer, D., Moore, D., Claffy, K., Distance Metrics in the Internet, Presented at the IEEE International Telecommunications Symposium (ITS) in 2002. http://www.caida.org/outreach/papers/2002/Distance/
+.. [GW2002] Griffin, T. and Wilfong, G. T. 2002. Analysis of the MED Oscillation Problem in BGP. In Proceedings of the 10th IEEE international Conference on Network Protocols (November 12 - 15, 2002). ICNP. IEEE Computer Society, Washington, DC, 90-99.

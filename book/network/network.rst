@@ -10,7 +10,7 @@ Principles
 
 .. figure:: fig/network-fig-001-c.png
    :align: center
-   :scale: 50
+   :scale: 70
    
    The network layer in the reference model
 
@@ -91,7 +91,7 @@ The Internet Protocol (IP) is the network layer protocol of the TCP/IP protocol 
 
 .. figure:: fig/network-fig-051-c.png
    :align: center
-   :scale: 50
+   :scale: 70
 
    IP and the reference model
 
@@ -127,7 +127,7 @@ An important point to be defined in a network layer protocol is the allocation o
 
 .. figure:: fig/network-fig-056-c.png
    :align: center
-   :scale: 50
+   :scale: 70
    
    Scalability issues when using isolated IP addresses 
 
@@ -138,7 +138,7 @@ To preserve the scalability of the routing system, it is important to minimize t
 
 .. figure:: fig/network-fig-054-c.png
    :align: center
-   :scale: 50
+   :scale: 70
    
    The subnetwork and host identifiers inside an IPv4 address
 
@@ -174,7 +174,7 @@ The figure below provides a simple example of the utilisation of IPv4 subnets in
  
 .. figure:: fig/network-fig-056-c.png
    :align: center
-   :scale: 50
+   :scale: 70
    
    IP subnets in a simple enterprise network
 
@@ -195,7 +195,7 @@ However, the Internet was a victim of its own success and in the late 1980s, man
 
 .. figure:: fig/network-fig-162-c.png
    :align: center
-   :scale: 50
+   :scale: 70
    
    Evolution of the size of the routing tables on the Internet (Jul 1988- Dec 1992 - source : :rfc:`1518`)
 
@@ -231,7 +231,7 @@ However, there is one difficulty with the aggregatable variable length subnets u
 
 .. figure:: fig/network-fig-163-c.png
    :align: center
-   :scale: 50
+   :scale: 70
    
    Multihoming and CIDR
 
@@ -247,7 +247,7 @@ The understand the `longest prefix match` forwarding, consider the figure below.
 
 .. figure:: fig/network-fig-067-c.png
    :align: center
-   :scale: 50
+   :scale: 70
    
    Longest prefix match example 
 
@@ -257,7 +257,7 @@ The longest prefix match can be implemented by using different data structures. 
 
 .. figure:: fig/network-fig-068-c.png
    :align: center
-   :scale: 50
+   :scale: 70
    
    A trie representing a routing table 
 
@@ -283,7 +283,7 @@ Now that we have clarified the allocation of IPv4 addresses and the utilisation 
 
 .. figure:: fig/network-fig-064-c.png
    :align: center
-   :scale: 50
+   :scale: 70
    
    The IP version 4 header
 
@@ -304,7 +304,7 @@ The other fields of the IPv4 header are used for specific purposes. The first is
 
 .. figure:: fig/network-fig-164-c.png
    :align: center
-   :scale: 50
+   :scale: 70
    
    Forwarding loops in an IP network
 
@@ -329,7 +329,7 @@ Although IPv4 can send 64 KBytes long packets, few datalink layer technologies t
 
 .. figure:: fig/network-fig-063-c.png
    :align: center
-   :scale: 50
+   :scale: 70
    
    The need for fragmentation and reassembly
 
@@ -395,7 +395,7 @@ The other routing options are the `Strict source route` and the `Loose source ro
 
 .. figure:: fig/network-fig-065-c.png
    :align: center
-   :scale: 50
+   :scale: 70
    
    Usage of the `Strict source route` option 
 
@@ -404,7 +404,7 @@ The maximum length of the optionnal part of the IPv4 header is a severe limitati
 
 .. figure:: fig/network-fig-066-c.png
    :align: center
-   :scale: 50
+   :scale: 70
    
    Usage of the `Loose source route` option 
 
@@ -422,7 +422,7 @@ It is sometimes necessary for intermediate routers or the destination host to in
 
 .. figure:: fig/network-fig-069-c.png
    :align: center
-   :scale: 50
+   :scale: 70
    
    ICMP version 4 
 
@@ -443,7 +443,7 @@ The main types of ICMP messages are :
 
  .. figure:: fig/network-fig-165-c.png
    :align: center
-   :scale: 50
+   :scale: 70
    
    ICMP redirect
 
@@ -581,7 +581,7 @@ IPv6 supports unicast, multicast and anycast addresses. As with IPv4, an IPv6 un
 
 .. figure:: fig/network-fig-073-c.png
    :align: center
-   :scale: 50
+   :scale: 70
    
    Structure of IPv6 unicast addresses
 
@@ -644,7 +644,7 @@ The last type of unicast IPv6 addresses are the `Link Local Unicast` addresses. 
 
 .. figure:: fig/network-fig-074-c.png
    :align: center
-   :scale: 50
+   :scale: 70
    
    IPv6 link local address structure
 
@@ -656,7 +656,7 @@ Finally, :rfc:`4291` defines the structure of the IPv6 multicast addresses [#fmu
 
 .. figure:: fig/network-fig-075-c.png
    :align: center
-   :scale: 50
+   :scale: 70
    
    IPv6 multicast address structure
 
@@ -673,7 +673,7 @@ The IPv6 packet format was heavily inspired by the packet format proposed for th
 
 .. figure:: fig/network-fig-077-c.png
    :align: center
-   :scale: 50
+   :scale: 70
    
    The IP version 6 header
 
@@ -722,7 +722,7 @@ The type 0 routing header defined in :rfc:`2460` is an example of an IPv6 option
 
 .. figure:: fig/network-fig-079-c.png
    :align: center
-   :scale: 50
+   :scale: 70
    
    The Type 0 routing header
 
@@ -745,7 +745,7 @@ The figure below provides an example of a fragmented IPv6 packet containing a UD
 
 .. figure:: fig/network-fig-087-c.png
    :align: center
-   :scale: 50
+   :scale: 70
    
    IPv6 fragmentation example
 
@@ -763,7 +763,7 @@ The traditional utilisation of ICMPv6 is similar to ICMPv4. ICMPv6 messages are 
 
 .. figure:: fig/network-fig-088-c.png
    :align: center
-   :scale: 50
+   :scale: 70
    
    ICMP version 6 packet format
 
@@ -812,10 +812,13 @@ ICMPv6 also allows to discover the path between a source and a destination by us
 
  High-end hardware based routers use special purpose chips on their interfaces to forward IPv6 packets at line rate. These chips are optimised to process `correct` IP packets. They are not able to create ICMP messages at line rate. When such a chip receives an IP packet that will trigger an ICMP message, it interrupts the main CPU of the router and the software running on this CPU processes the packet. This CPU is much slower than the hardware acceleration found on the interfaces [Gill2004]_. It would be overloaded if it had to process IP packets at line rate and generate one ICMP message for each received packet. To protect this CPU, high-end routers limit the rate at which the hardware can interrupt the main CPU and thus the rate at which ICMP messages can be generated. This implies that not all erroneous IP packets will cause the transmission of an ICMP message. The risk of overloading the main CPU of the router is also the reason why using hop-by-hop IPv6 options, including the router alter option is discouraged [#falert]_. 
 
-.. index:: Middlebox
+
+.. _Middleboxes:
 
 Middleboxes
 ===========
+
+.. index:: Middlebox
 
 When the TCP/IP architecture and the IP protocol were defined, two types of devices were considered in the network layer : endhosts and routers. Endhosts are the sources and destinations of IP packets while routers forward packets. When a router forwards an IP packet, it consults its forwarding table, updates the packets' TTL, recomputes its checksum and forward it to the nexthop. A router does not need to read nor change the contents of the packet's payload.
 
@@ -824,7 +827,7 @@ However, in today's Internet, there exist devices that are not strictly routers 
 
 .. figure:: fig/network-fig-161-c.png
    :align: center
-   :scale: 50
+   :scale: 70
    
    IP middleboxes and the reference model
 
@@ -872,7 +875,7 @@ A very common deployment of NAT is in broadband access routers as shown in the f
 
 .. figure:: fig/network-fig-158-c.png
    :align: center
-   :scale: 50
+   :scale: 70
    
    A simple NAT with one public IPv4 address
 
@@ -880,7 +883,7 @@ A second type of deployment is in enterprise networks as shown in the figure bel
 
 .. figure:: fig/network-fig-159-c.png
    :align: center
-   :scale: 50
+   :scale: 70
    
    An enterprise NAT with several public IPv4 addresses
 
@@ -924,7 +927,7 @@ In a large IP network such as the global Internet, routers need to exchange rout
 
 .. figure:: fig/network-fig-093-c.png
    :align: center
-   :scale: 50
+   :scale: 70
    
    Organisation of a small Internet
 
@@ -957,7 +960,7 @@ RIP routers periodically exchange RIP messages. The format of these messages is 
 
 .. figure:: fig/network-fig-094-c.png
    :align: center
-   :scale: 50
+   :scale: 70
    
    RIP message format
 
@@ -969,7 +972,7 @@ Each RIP message contains a set of route entries. Each route entry is encode as 
 
 .. figure:: fig/network-fig-095-c.png
    :align: center
-   :scale: 50
+   :scale: 70
    
    Format of the RIP IPv4 route entries
 
@@ -977,7 +980,7 @@ With a 20 bytes route entry, it was difficult to use the same format as above to
 
 .. figure:: fig/network-fig-098-c.png
    :align: center
-   :scale: 50
+   :scale: 70
    
    Format of the RIP IPv6 route entries
 
@@ -997,6 +1000,9 @@ LANs (again !)
 HELLOs
 LSAa
 other details 
+
+:rfc:`2991` ECMP
+
 
 .. sidebar:: How to quickly detect a link failure ?
 
@@ -1020,7 +1026,7 @@ Each domain contains a set of routers. From a routing viewpoint, these domains c
 
 .. figure:: fig/network-fig-089-c.png
    :align: center
-   :scale: 50
+   :scale: 70
    
    Transit and stub domains 
 
@@ -1030,7 +1036,7 @@ Domains need to be interconnected to allow a host inside a domain to exchange IP
 
 .. figure:: fig/network-fig-104-c.png
    :align: center
-   :scale: 50
+   :scale: 70
    
    Interconnection of two domains via a private peering link 
 
@@ -1039,7 +1045,7 @@ Such `private peering links` are useful when for example an entreprise or univer
 
 .. figure:: fig/network-fig-105-c.png
    :align: center
-   :scale: 50
+   :scale: 70
    
    Interconnection of two domains at an Internet eXchange Point
 
@@ -1054,13 +1060,13 @@ The first category of peering relationship is the `customer->provider` relations
 
 .. figure:: fig/network-fig-106-c.png
    :align: center
-   :scale: 50
+   :scale: 70
    
    A simple Internet with peering relationships
 
 To understand the `customer->provider` relationship, let us consider the simple internetwork shown in the figure above. In this internetwork, `AS7` is an enterprise domain that is connected to one provider : `AS4`. The contract between `AS4` and `AS7` allows a host inside `AS7` to exchange packets with any host in the internetwork. To enable this exchange of packets, `AS7` must know a route towards any domain and all the domains of the internetwork must learn a route via `AS4` that allows them to reach hosts inside `AS7`. From a routing viewpoint, the commercial contract between `AS7` and `AS4` will lead to the following routes being exchanged :
- - over a `customer->provider` relationship, the `customer` domain 
-advertise to its `provider`  all its routes and all the routes that it has learned from its own customers.
+
+ - over a `customer->provider` relationship, the `customer` domain advertises to its `provider`  all its routes and all the routes that it has learned from its own customers.
  - over a `provider->customer` relationship, a `provider` advertises all the routes that it knows to its `customer`
 
 The second rule ensures that the customer domain will receive a route towards all destinations that are reachable via its provider. The first rule allows the routes of the customer domain to be distributed through the Internet.
@@ -1093,33 +1099,9 @@ The figure below provides a simple example of import and export policies for two
 
 .. figure:: fig/network-fig-109-c.png
    :align: center
-   :scale: 50
+   :scale: 70
    
    Import and export policies 
-
-Tier-1 ISPs
-Dozen of large ISPs interconnected by shared-cost
-Provide transit service
-Uunet, Level3, OpenTransit, ...
-Tier-2 ISPs
-Regional or National ISPs 
-Customer of T1 ISP(s)
-Provider of T3 ISP(s) 
-shared-cost with other T2 ISPs
-France Telecom, BT, Belgacom
-Tier-3 ISPs
-Smaller ISPs, Corporate Networks, Content providers
-Customers of T2 or T1 ISPs
-shared-cost with other T3 ISPs
-
-
-.. figure:: fig/network-fig-110-c.png
-   :align: center
-   :scale: 50
-   
-   The layered structure of the global Internet
-
-
 
 .. index:: BGP, Border Gateway Protocol
 
@@ -1134,7 +1116,7 @@ The figure below shows a simple example of the BGP routes that are exchanged bet
 
 .. figure:: fig/network-fig-111-c.png
    :align: center
-   :scale: 50
+   :scale: 70
    
    Simple exchange of BGP routes 
 
@@ -1144,7 +1126,7 @@ A BGP peering session is established between two routers belonging to two differ
 
 .. figure:: fig/network-fig-112-c.png
    :align: center
-   :scale: 50
+   :scale: 70
    
    A BGP peering session between two directly connected routers
 
@@ -1170,12 +1152,14 @@ The BGP protocol :rfc:`4271` defines several types of messages that can be excha
 
 
 As explained earlier, BGP relies on incremental updates. This implies that when a BGP session starts, each router will first send BGP `UPDATE` messages to advertise to the other peer all the exportable routes that it knows. Once all these routes have been advertised, the BGP router will only send BGP `UPDATE` message about a prefix if the route is new, one of its attributes has changed or the route became unreachable and must be withdrawned. The BGP `UPDATE` message allows BGP routers to efficiently exchange such information while minimising the number of bytes exchanged. Each `UPDATE` message contains :
+
  - a list of IP prefixes that are withdraw
  - a list of IP prefixes that are (re-)advertised
  - the set of attributes (e.g. AS-Path) associated to the of the advertised prefixes
 
 
 In the remainder of this chapter, and although all routing information is exchnaged by using BGP `UPDATE` messages, we assume for simplicity that a BGP message contains only information about one prefix and we will use the words :
+
  - `Withdraw message` to indicate a BGP `UPDATE` message containing one route that is witdrawn
  - `Update message` to indicate a BGP `UPDATE` containing one new or updated route with its attributes 
 
@@ -1183,16 +1167,20 @@ In the remainder of this chapter, and although all routing information is exchna
 
 From a conceptual viewpoint, a BGP router connected to `N` BGP peers, can be described as being composed of four parts as shown in the figure below.
 
+
+.. _bgprouter:
+
 .. figure:: fig/network-fig-113-c.png
    :align: center
-   :scale: 50
+   :scale: 70
    
    Organisation of a BGP router 
 
 In this figure, the router receives BGP messages on the left part of the figure, processes these messages and possibly sends BGP messages on the right part of the figure. A BGP router contains three important data structures :
+
  - the `Adj-RIB-In` contains the BGP routes that have been received from each BGP peer. The routes in the `Adj-RIB-In` are filtered by the `import filter` before being placed in the `BGP-Loc-RIB`
  - the `Local Routing Information Base` (`Loc-RIB`) contains all the routes that are considered as acceptable by the router. The `Loc-RIB` may contain several routes, learned from different BGP peers, towards the same destination prefix.
- -  the `Forwarding Information Base` (`FIB`) is used by the dataplane to forward packets towards their destination. The `FIB` contains, for each destination, the best route that has been selected by the `BGP decision process`. This decision process is an algorithm that selects, for each destination prefix, the best route according to the router's ranking process that is part of its policy.
+ - the `Forwarding Information Base` (`FIB`) is used by the dataplane to forward packets towards their destination. The `FIB` contains, for each destination, the best route that has been selected by the `BGP decision process`. This decision process is an algorithm that selects, for each destination prefix, the best route according to the router's ranking process that is part of its policy.
  - the `Adj-RIB-Out` contains the BGP routes that have been advertised to each BGP peer. The `Adj-RIB-Out` for a given peer is built by applying the peer`s `export filter` on the routes that have been installed in the `FIB`
 
 When a BGP session starts, the routers first exchange `OPEN` messages to negotiate the options that will apply throughout the entire session. Then, each router will advertise to its peer all its exportable routes. A BGP router can only advertise a router that it actually uses to forward packets. Thus, only the routes that have been installed in the `FIB` can be advertised to a peer. These routes are subject to the `export filter`. The `export filter` is a set of rules that define which routes can be advertised over the corresponding session, possibly after having modified some of its attributes. One `export filter` is associated to each BGP session. For example, on a `shared-cost peering`, the `export filter` will only select the internal routes and the routes that have been learned from a `customer`. The pseudocode below shows the initialisation of a BGP session ::
@@ -1295,12 +1283,14 @@ To understand the operation of BGP in an IPv4 network, let us consider the simpl
 
 .. figure:: fig/network-fig-121-c.png
    :align: center
-   :scale: 50
+   :scale: 70
    
    Utilisation of the BGP nexthop attribute
 
 
 This network contains three routers : `R1`, `R2` and `R3`. Each router is attached to a local IPv4 subnet that it will advertise by using BGP. There are two BGP sessions, one between `R1` and `R2` and the second between `R2` and `R3`. A `/30` subnet is used on each interdomain link (`195.100.0.0/30` on `R1-R2` and 195.100.0.4/30` on `R2-R3`). The BGP sessions run above TCP connections established between the neighbouring routers (e.g. `195.100.0.1 - 195.100.0.2` for the `R1-R2 session).
+
+.. index:: BGP nexthop
 
 Let us assume that the `R1-R2` BGP session is the first to be established. A `BGP Update` message sent on such a session contains three informations :
 
@@ -1319,7 +1309,7 @@ Most networks that use BGP contain more than one router. For example, consider t
 
 .. figure:: fig/network-fig-136-c.png
    :align: center
-   :scale: 50
+   :scale: 70
    
    A larger network using BGP
 
@@ -1336,77 +1326,229 @@ The best solution to allow BGP routers to distribute, inside an AS, all the rout
  - :term:`iBGP session` or `internal BGP session`. Such a BGP session is established between two routers belonging to the same domain. 
 
 
-To understand the utilisation of an iBGP session, let us consider in the network shown below what happens when router `R1` sends `U(194.100.0.0/23,195.100.0.1,AS10)`. This BGP message is processed by `R2` that advertises it over its `iBGP session` with `R4`. The `BGP Update` sent by `R2` contains the same nexthop and the same AS-Path as in the `BGP Update` received by `R2`. `R4` then sends `U(194.100.0.0/23,195.100.0.5,AS20:AS10)` to `R3`. Note that the BGP nexthop and the AS-Path are only updated when a BGP route is advertised over an `eBGP session`.
+To understand the utilisation of an iBGP session, let us consider in the network shown below what happens when router `R1` sends `U(194.100.0.0/23,195.100.0.1,AS10)`. This BGP message is processed by `R2` that advertises it over its `iBGP session` with `R4`. The `BGP Update` sent by `R2` contains the same nexthop and the same AS-Path as in the `BGP Update` received by `R2`. `R4` then sends `U(194.100.0.0/23,195.100.0.5,AS20:AS10)` to `R3`. Note that the BGP nexthop and the AS-Path are only updated [#fnexthopself]_ when a BGP route is advertised over an `eBGP session`.
 
 .. figure:: fig/network-fig-138-c.png
    :align: center
-   :scale: 50
+   :scale: 70
    
    iBGP and eBGP sessions
 
+In practice, each BGP router inside a domain will maintain an `iBGP session` with each other BGP router in the domain [#frr]_. This will create a full-mesh of `iBGP sessions` among all BGP routers of the domain. `iBGP sessions`, like `eBGP sessions` run over TCP connections. Note that in contrast with `eBGP sessions` that are established between directly connected routers, `iBGP sessions`
 
+An important point to note about `iBGP sessions` is that a BGP router will only advertise a route over an `iBGP session` provided that :
 
+ - the router uses this route to forward packets, and
+ - the route was learned over one of the router's `eBGP sessions`
 
+A BGP router does not advertise over an `iBGP session` a route that it has learned over another `iBGP session` while it can, of course, advertise over `eBGP sessions` routes learned over `iBGP sessions`. This difference between the behaviour of a BGP router over `iBGP` and `eBGP` session is due to the utilisation of a full-mesh of `iBGP sessions`. Consider a network containing three BGP routers : `A`, `B` and `C` interconnected via a full-mesh of iBGP sessions. If router `A` learns a route towards prefix `p` from router `B`, router `A` does not need to advertise the received route to router `C` since router `C` will also learn the same route over the `C-B` `iBGP session`.
 
-.. figure:: fig/network-fig-122-c.png
+.. index:: loopback interface
+
+.. sidebar:: Loopback interfaces and iBGP sessions
+
+ In addition to their physical interfaces, routers can also be configured with a special loopback interface. A loopback interface is a software interface that is always up. Thus, the IP address associated to a loopback interface is always reachable while an IP address associated to a physical interface will become unreachable as soon as the corresponding physical interface fails. When a loopback interface is configured on a router, the address associated to this interface is advertised by the intradomain routing protocol inside the domain. `iBGP sessions` are usually established by using the router's loopback addresses as endpoints. This allows the `iBGP session` and its underlying TCP connection to remain up even if physical interfaces fail on the routers.
+
+.. example route not selected ?
+
+Now that routers can learn interdomain routes by using the iBGP and eBGP sessions, let us examine what happens when router `R3` sends a packet destined to `194.100.1.234`. `R3` forwards this packet to `R4`.  `R4` uses an intradomain routing protocol and BGP. Its BGP routing table contains the following longest prefix match : 
+
+ - `194.100.0.0/23` via `195.100.0.1`
+
+This routes indicates that to forward a packet towards `194.100.0.0/23`, `R4` needs to forward the packet along the route towards `195.100.0.1`. However, `R4`is not directly connected to `195.100.0.1`. `R4` learned a route towards this address thanks to its intradomain routing protocol that distributed the following routes :
+
+ - `195.100.0.0/30`  via `195.100.0.10`
+ - `195.100.0.4/30`  East
+ - `195.100.0.8/30`  North
+ - `194.100.2.0/23`  via `195.100.0.10`
+ - `194.100.0.4/23`  West
+
+To build its forwarding table, `R4` must combine the routes learned from the intradomain routing protocol with the routes learned from BGP. Thanks to its intradomain routing table, `R4` will replace for each interdomain route the BGP nexthop with its shortest path computed by the intradomain routing protocol. In the figure above, `R4` will thus replace `195.100.0.1` by `195.100.0.10` to which it is directly connected via its North interface. `R4` resulting forwarding table, that associates and outgoing interface for a directly connected prefix or a directly connected nexthop and an outgoing interface for other prefixes, is shown below :
+
+ - `194.100.0.0/23`  via `195.100.0.10` (North)
+ - `195.100.0.0/30`  via `195.100.0.10` (North)
+ - `195.100.0.4/30`  East
+ - `195.100.0.8/30`  North
+ - `194.100.2.0/23`  via `195.100.0.10` (North)
+ - `194.100.4.0/23`  West
+
+There is thus a coupling between the interdomain and the intradomain routing tables used on routers. If the intradomain routes change, e.g. due to link failures or changes in link metrics, then the forwarding table must be update on each router as the shortest path towards a BGP nexthop may have changed.
+
+The last point to be discussed before looking at the BGP decision process is that a network may contain routers that do not maintain any eBGP sessions. These routers can be stub routers attached to a single router in the network or core routers that reside on the path between two border routers that are using BGP as illustrated in the figure below.
+
+.. figure:: fig/network-fig-138-c.png
    :align: center
-   :scale: 50
+   :scale: 70
    
-   How to create a backup link with BGP ?
+   How to deal with non-BGP routers ?
 
+In the scenario above, router `R2` needs to be able to forward a packet towards any destination in the `12.0.0.0/8` prefix inside `AS30`. Such a packet would need to be forwarded by router `R5` since this router resides on the path between `R2` and its BGP nexthop attached to `R4`. Two solutions can be used to ensure that `R2` will be able to forward such interdomain packets :
 
-.. figure:: fig/network-fig-123-c.png
-   :align: center
-   :scale: 50
-   
-   How to prefer a cheap link over an more expensive one ? 
-
-
-
-
-.. figure:: fig/network-fig-136-c.png
-   :align: center
-   :scale: 50
-   
-   A simple internetwork using BGP
+ - enable BGP on router `R5` and include this router in the `iBGP` full-mesh. Two iBGP sessions would be added in the figure above : `R2-R5` and `R4-R5`. This solution works and is used by many ASes. However, it forces all routers to have enough ressources (CPU and memory) to run BGP and maintain a large forwarding table
+ - encapsulate the interdomain packets sent through the AS so that router `R5` never forward a packet whose destination is outside the local AS. Different encapsulation mechanisms exist. MultiProtocol Label Switching (MPLS) :rfc:`3031` and the Layer 2 Tuneling Protocol (L2TP) :rfc:`3931` are frequently used in large domains, but a detailed explanation of these techniques is outside the scope of this introduction. The simplest encapsulation scheme to understand is in IP in IP defined in :rfc:`2003`. This encapsulation scheme places an IP packet (called the inner packet), including its payload, as the payload of a larger IP packet (called the outer packet). It can be used by border routers to forward packets via routers that do not maintain a BGP routing table. For example, in the figure above, if router `R2` needs to forward a packet towards destination `12.0.0.1`, it can add at the front of this packet an IPv4 header whose source address is set to one of its IPv4 addresses and whose destination address is one of the IPv4 addresses of `R4`. The `Protocol` field of the IP header is set to `4` to indicate that it contains an IPv4 packet. The packet will be forwarded by `R5` to `R4`. Upon reception of the packet, `R4` will remove the outer header and consult its forwarding table to forward the packet towards `R3`. 
 
 .. index:: BGP decision process
 
-BGP Decision Process 
- Ignore routes with unreachable nexthop
- Prefer routes with highest local-pref
- Prefer routes with shortest ASPath
- Prefer routes with smallest MED
- Prefer routes learned via eBGP over routes learned via iBGP
- Prefer routes with closest next-hop 
- Tie breaking rules
-Prefer Routes learned from router with lowest router id
+The BGP decision process
+........................
+
+Besides the import and export filters, a key difference between BGP and the intradomain routing protocols is that each domain can define is own ranking algorithm to determine which routes is preferred when several routes have been learned towards the same prefix. This ranking depends on several BGP attributes that can be attached to a BGP route.
+
+
+.. index:: BGP local-preference
+
+The first BGP attribute that is used to rank BGP routes is the `local-preference` (local-pref) attribute. This attribute is an unsigned integer that is attached to each BGP route received over an eBGP by the associated import filter.
+
+When comparing routes towards the same destination prefix, a BGP router always prefer the routes with the highest `local-pref`. If the BGP router knows several routes with the same `local-pref`, it will prefer among the routes having this `local-pref` the ones with the shortest AS-Path.
+
+The `local-pref` attribute is often used to prefer some routes over others. This attribute is always present inside `BGP Updates` exchanged over `iBGP sessions, but never present in the messages exchanged over `eBGP sessions`. 
+
+A common utilisation of `local-pref` is to support backup links. Consider the situation depicted in the figure below. `AS1` would like to always use the high bandwidth link to send an receive packets via `AS2` and only use the backup link upon failure of the primary one.
+
+.. figure:: fig/network-fig-122-c.png
+   :align: center
+   :scale: 70
+   
+   How to create a backup link with BGP ?
+
+As BGP routers always prefer the routes having the highest `local-pref` attribute, this policy can be implemented by using the following import filter on `R1`::
+
+ import: from  AS2 RA at R1 set localpref=100;
+         from  AS2 RB at R1 set localpref=200;
+         accept ANY
+
+With this import filter, all the BGP routes learned from `RB` over the high bandwidth links will be preferred over the routes learned over the backup link. If the primary link fails, the corresponding routes are removed from `R1`'s RIB and `R1` will use the route learned from `RA`. `R1` will reuse the routes via `RB` as soon as the `R1-RB` link comes back.
+
+The import filter above modifies the selection of the BGP routes inside `AS1`. Thus, it influences the route followed by the packets forwarded by `AS1`. In addition to using the primary link to send packets, `AS1` would like to receive its packets via the high bandwidth link. For this, `AS2` also needs to set the `local-pref` attribute in its import filter ::
+
+ import: from  AS1 R1 at RA set localpref=100;
+         from  AS1 R1 at RB set localpref=200;
+         accept AS1
+
+Sometimes, the `local-pref` attribute is used to prefer a `cheap` link compared to a more expensive one. For example, in the network below, `AS1` could wish to send an receive packets mainly via its interdomain link with `AS4`.
+
+.. figure:: fig/network-fig-123-c.png
+   :align: center
+   :scale: 70
+   
+   How to prefer a cheap link over an more expensive one ? 
+
+`AS1` can install the following import filter on `R1` to ensure that it always sends packets via `R2` when it has learned a route via `AS2` and via `AS4` ::
+
+ import: from  AS2 RA at R1 set localpref=100;
+        from  AS4 R2 at R1 set localpref=200;
+        accept ANY
+
+
+However, this import filter does not influence how `AS3` for example will prefer some routes over others. If the link between `AS3` and `AS2` is less expensive than the link between `AS3` and `AS4`, `AS3` culd send all its packets via `AS2` and `AS1` would receive packets over its expensive link. An important point to remember about `local-pref` is that it can be used to prefer some routes over others to send packets, but it has no influence on the routes followed by received packets.
+
+Another important utilisation of the `local-pref` attribute is to support the `customer->provider` and `shared-cost` peering relationships. From an economic viewpoint, there is an important difference between these three types of peering relationships. A domain usually earns money when it sends packets over a `provider->customer` relationship. On the other hand, it must to pay its provider when it sends packets over a `customer->provider` relationship. Using a `shared-cost` peering to send packets is usually neutral from an economic viewpoint. To take into account these economic issues, domains usually configure the import filters on their routers as follows :
+
+ - insert a high `local-pref` attribute in the routes learned from a customer
+ - insert a medium `local-pref` attribute in the routes learned over a shared-cost peering
+ - insert a low `local-pref` attribute in the routes learned from a provider
+
+With such an import filter, the routers of a domain will always prefer to reach destinations via their customers whenever such a route exists. Otherwise, they will prefer to use `shared-cost` peering relationships and they will only send packets via their providers when they do not know any alternate route.
+
+Coming back to the organisation of a BGP router shown in figure :ref:`bgprouter`, the part ot be discussed is the BGP decision process. The `BGP Decision Process` is the algorithm used by routers to select the route to be installed in the FIB when there are multiple routes towards the same prefix. The BGP decision process receives a set of candidate routes towards the same prefix and uses seven steps. At each step, some routes are removed from the candidate set and the process stops when the set contains only one route [#fbgpmulti]_ :
+
+ 1. Ignore routes with unreachable BGP nexthop
+ 2. Prefer routes with highest local-pref
+ 3. Prefer routes with shortest AS-Path
+ 4. Prefer routes with smallest MED
+ 5. Prefer routes learned via eBGP over routes learned via iBGP
+ 6. Prefer routes with closest next-hop 
+ 7. Tie breaking rules : prefer Routes learned from router with lowest router id
+
+
+The first step of the BGP decision process ensures that a BGP router will not install in its FIB a route whose nexthop is considered to be unreachable by the intradomain routing protocol. This rule implies that the BGP decision process must be re-run each time the intradomain routing protocol reports a change in the unreachability of a prefix containing one of more BGP nexthops.
+
+The second rule allows each domain to define its routing preferences. The `local-pref` attribute is set by the import filter when a route is first learned over an eBGP session. 
+
+In contrast with intradomain routing protocols, BGP does not contain an explicit metric. This is because in the global Internet it is impossible for all domains to agree on a common metric that meets the requirements of each domain. Despite of this, BGP routers prefer routes having a short AS-Path attribute over routes with a long AS-Path. This step of the BGP decision process is motivated by the fact that we expect a route with a long AS-Path that have a lower quality than a route with a shorter AS-Path. However studies have shown that there was not always a strong correlation between the quality of a route and the length of its AS-Path [HFPMC2002]_. 
+
+.. index:: Hot potato routing
+
+Before explaining the fourth step, let us first describe the fifth and the sixth steps of the BGP decision process. These two steps are used to implement `hot potato` routing. Intuitively, when a domain implements `hot potato routing`, it tries to forward as quickly as possible to other domains packets that are not destined to addresses inside its own domain. 
+
+To understand `hot potato routing`, let us consider the two networks shown in the figure below. `AS2` advertises prefix `1.0.0.0/8` over the `R2-R6` and `R3-R7` peering links. The routers inside `AS1` will learn two routes towards `1.0.0.0/8`: one via `R6-R2` and the second via `R7-R3`.
+
+.. _fig-med:
+
+.. figure:: fig/network-fig-151-c.png
+   :align: center
+   :scale: 70
+   
+   Hot and cold potato routing
+
+With the fifth step of the BGP decision process, a router will always prefer to use a route learned over an `eBGP session` compared to a route learned over an `iBGP session`. Thus, router `R6` (resp. `R7`)  will prefer to use the router via router `R2` (resp. `R3`) to reach prefix `1.0.0.0/8`. 
+
+The sixth step of the BGP decision process takes into account the distance, measured as the length of the shortest intradomain path, between a BGP router and the BGP nexthop for routes learned over `iBGP sessions`. This rule is used on router `R8` in the example above. This router has received two routes towards `1.0.0.0/8`:
+ 
+ - `1.0.0.0/8` via `R7` that is at a distance of `1` from `R8` 
+ - `1.0.0.0/8` via `R6` that is at a distance of `50` from `R8`
+
+The first route, via `R7` is the one that router `R8` will prefer as this is the route that will minimise the cost of forwarding packets inside `AS1` before sending them to `AS2`.
+
+`Hot potato routing` allows `AS1` to minimise the cost of forwarding a packet towards `AS2`. However, there are situations where this is not desireable. For example, assume that `AS1` and `AS2` are domains with routers on both the East and the West coast of the USA. In these two domains, the high metric associated to links `R6-R8` and `R0-R2` correspond to the cost of forwarding a packet accross the USA. If `AS2` is a customer that pays `AS1`, it would prefer to received the packets destined to `1.0.0.0/8` via the `R2-R6` link instead of the `R7-R3` link. This is the objective of `cold potato routing`.
+
+
+.. index:: Multi-Exit Discriminator (MED), Cold potato routing
+
+
+`Cold potato routing` is implemented by using the `Multi-Exit Discriminator (MED)`. This attribute is an optionnal BGP attribute that may be set [#fmed]_ by border routers when advertising a BGP route over an `eBGP session`. The most common utilisation of the MED attribute is to indicate over an `eBGP session` the cost to reach the BGP nexthop for the advertised route. In the example above, router `R2` will send `U(1.0.0.0/8,R2,AS2,MED=1)` while `R3` will send `U(1.0.0.0/8,R3,AS2,MED=98)`. 
+
+Assume that the BGP session `R7-3` is the first to be established. `R7` sends `U(1.0.0.0/8,R3,AS2,MED=98)` to both `R8` and `R6`. At this point, all routers inside `AS1` send the packets towards `1.0.0.0/8` via `R7-R3`. Then, the `R6-R2` BGP session is established and router `R6` receives `U(1.0.0.0/8,R2,AS2,MED=1)`. Router `R6` runs its decision process for destination `1.0.0.0/8` and selects the route via `R2` as its route to reach this prefix. `R6` sends `U(1.0.0.0/8,R2,AS2,MED=1)` to routers `R8` and `R7`. They both run their decision prefer and prefer the route advertised by `R6` as it contains the smallest `MED`. Now, all routers inside `AS1` forward the packets to `1.0.0.0/8` via link `R6-R2` as expected by `AS2`. As router `R7` does not anymore use the BGP route learned via `R3` it must stop advertising it over `iBGP sessions` and sends `W(1.0.0.0/8)` over its `iBGP sessions` with `R6` and `R8`. However, router `R7` still keeps the route learned from `R3` inside its Adj-RIB-In. If the `R6-R2` link fails, `R6` will send `W(1.0.0.0/8)` over its iBGP sessions and router `R7` will respond by sending `U(1.0.0.0/8,R3,AS2,MED=98)` over its iBGP sessions.
+
+In practice, the fifth step of the BGP decision process is slighty more complex because the routes towards a given prefix can be learned from different ASes. For example, assume that in figure :ref:`fig-med`, `1.0.0.0/8` is also advertised by `AS3` (not shown in the figure) that has peering links with routers `R6` and `R8. If `AS3` advertises a route whose MED attribute is set to `2` and another with a MED set to `3`, how should `AS1`'s router compare the four BGP routes towards `1.0.0.0/8` ? Is a MED value of `1` from `AS2` better than a MED value of `2` from `AS3` ?  The fifth step of the BGP decision process solves this problem by only comparing the MED attribute of the routes learned from the same neighbour AS. Additional details about the MED attribute may be found in :rfc:`4451`. It should be noted that using the MED attribute may cause some problems in BGP networks as explained in [GW2002]_
+
+.. index: BGP router-id
+
+The last step of the BGP decision allows to select a single route when a BGP router has received several routes that are considered as equal by the first six steps of the decision process. This can happen for example in a dual-homed stub attached to two different providers. As shown in the figure below, router `R1` will received two equally BGP routes towards `1.0.0.0/8`. To break the ties, each router is identified by a unique `router-id` which in practice is one of the IP addresses assigned to the router. On some routers, the lowest router id step in the BGP decision process is replaced by the selection of the oldest route :rfc:`5004`. Preferring the oldest route when breaking ties is used to prefer stable paths over unstable paths. However, a drawback of this approach is that the selection of the BGP routes will depend on the arrival times of the corresponding messages. This makes the BGP selection process non-deterministic and can lead to problems that are difficult to debug.
+
+.. figure:: fig/network-fig-153-c.png
+   :align: center
+   :scale: 70
+   
+   A stub connected to two providers
+
+
+BGP convergence
+...............
+
+Tier-1 ISPs
+Dozen of large ISPs interconnected by shared-cost
+Provide transit service
+Uunet, Level3, OpenTransit, ...
+Tier-2 ISPs
+Regional or National ISPs 
+Customer of T1 ISP(s)
+Provider of T3 ISP(s) 
+shared-cost with other T2 ISPs
+France Telecom, BT, Belgacom
+Tier-3 ISPs
+Smaller ISPs, Corporate Networks, Content providers
+Customers of T2 or T1 ISPs
+shared-cost with other T3 ISPs
+
+
+.. figure:: fig/network-fig-110-c.png
+   :align: center
+   :scale: 70
+   
+   The layered structure of the global Internet
+
+[SARK2002]_
+[ATLAS2009]_
+http://www.caida.org/research/topology/as_core_network/
 
 
 
+.. sidebar:: BGP security
 
-RFC 2622 Routing Policy Specification Language (RPSL). C. Alaettinoglu, C.
-     Villamizar, E. Gerich, D. Kessens, D. Meyer, T. Bates, D. Karrenberg,
-     M. Terpstra. June 1999.
-
-:rfc:`2650`
-
-RFC 2650 Using RPSL in Practice. D. Meyer, J. Schmitz, C. Orange, M.
-     Prior, C. Alaettinoglu. August 1999.
-
-Internet Routing Registries contain the routing policies of various ISPs, see :
-
-http://www.ripe.net/ripencc/pub-services/whois.html
-http://www.arin.net/whois/index.html
-http://www.apnic.net/apnic-bin/whois.pl
+   explain Youtube attack and briefly discuss the work in SIDR
 
 
-Note that on some router implementations, the lowest router id step in the BGP decision process is replaced by the selection of the oldest route. See e.g. : http://www.cisco.com/warp/public/459/25.shtml
-Preferring the oldest route when breaking times is used to prefer stable paths over unstable paths, however, a drawback of this approach is that the selection of the BGP routes will depend on the arrival times of the corresponding messages. This makes the BGP selection process non-deterministic and can lead to problems that are difficult to debug.
-
-bgp 
-
-but see recent arbor data
 
 
 .. rubric:: Footnotes
@@ -1457,5 +1599,13 @@ but see recent arbor data
 .. [#flifetimebgp] The TCP connections used to support BGP sessions are typically established. They are rarely released, except if the corresponding peering link fails or one of the endpoints crashes or needs to be rebooted. 
 
 .. [#fdefaultkeepalive] The 90 seconds default is the default delay recommended by :rfc:`4271`. However, two BGP peers can negotiate a different timer during the establishment of a BGP session. Using a too small interval to detect BGP session failures is not recommended. BFD [KW2009]_ can be used to replace BGP's KEEPALIVE mechanism if fast detection of interdomain link failures is required.
+
+.. [#fnexthopself] Some routers, when they receive a `BGP Update` over an `eBGP session`, set the nexthop of the received route to one of their own addresses. `This is called `nexthop-self`. See e.g. [WMS2004]_ for additional details.
+
+.. [#frr] Using a full-mesh of iBGP sessions is suitable in small networks. However, this solution does not scale in large networks containing hundreds or more routers since :math:`O(n^2)` iBGP sessions must be established. Large domains use either Route Reflection :rfc:`4456` or confederations :rfc:`5065` to scale their iBGP, but this goes beyond this introduction.
+
+.. [#fbgpmulti] Some BGP implementations can be configured to install several routes towards a single prefix in their FIB for load-balancing purposes. However, this goes beyond this introduction to BGP.
+
+.. [#fmed] The MED attribute can be used on `customer->provider` peering relationships upon request of the customer. On `shared-cost` peering relationship, the MED attribute is only enabled when there is a explicit agreement between the two peers. 
 
 .. include:: ../links.rst

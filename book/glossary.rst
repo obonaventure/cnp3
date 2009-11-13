@@ -152,11 +152,11 @@ Glossary
    NAT
 	A Network Address Translator is a middlebox that translates IP packets.
 
-   iBGP session
+   `iBGP session`
 
    	A BGP session between two routers belonging to the same Autonomous System. Also called an internal BGP session.
 
-   eBGP session
+   `eBGP session`
    	
 	A BGP session between two directly connected routers that belong to two different Autonomous Systems. Also called an external BGP session.
 

@@ -151,6 +151,8 @@
 
 .. _akamai: http://www.akamai.net
 
+.. _sprint: https://www.sprint.net/
+
 .. _limelight: http://uk.limelightnetworks.com/index.php
 
 .. _Olivier Bonaventure: http://inl.info.ucl.ac.be/obo
