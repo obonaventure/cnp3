@@ -153,3 +153,11 @@
 
 .. _limelight: http://uk.limelightnetworks.com/index.php
 
+.. _Olivier Bonaventure: http://inl.info.ucl.ac.be/obo
+
+.. _Mickael Hoerdt: http://inl.info.ucl.ac.be/mhoerdt
+
+.. _Virginie Van den Schriek: http://inl.info.ucl.ac.be/vvandens
+
+.. _Laurent Vanbever: http://inl.info.ucl.ac.be/lvanbeve
+

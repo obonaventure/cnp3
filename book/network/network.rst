@@ -312,7 +312,7 @@ Unfortunately, such loops can occur for two reasons in IP networks. First, if th
 
 .. index:: Maximum Transmission Unit, MTU
 
-A second problem for IPv4 is the heterogeneity of the datalink layer. IPv4 is used above many very different datalink layers. Each datalink layer has its own characteristics and as indicated earlier, each datalink layer is characterised by a maximum frame size. From IP's viewpoint, a datalink layer interface is characterised by its `Maximum Transmission Unit (MTU)`. The MTU of an interface is the largest IPv4 packet (including header) that it can send. The table below provides some common MTU sizes. 
+A second problem for IPv4 is the heterogeneity of the datalink layer. IPv4 is used above many very different datalink layers. Each datalink layer has its own characteristics and as indicated earlier, each datalink layer is characterised by a maximum frame size. From IP's viewpoint, a datalink layer interface is characterised by its `Maximum Transmission Unit (MTU)`. The MTU of an interface is the largest IPv4 packet (including header) that it can send. The table below provides some common MTU sizes [#f6lowpan]_. 
 
 ==============      ==================
 Datalink layer      MTU
@@ -992,6 +992,11 @@ OSPF
 
 OSPF is defined in :rfc:`2328`. The last version of OSPF that supports IPv6 is defined in :rfc:`5340`. Additional informations about OSPF may be found in [Moy1998]_.
 
+areas
+LANs (again !)
+HELLOs
+LSAa
+other details 
 
 .. sidebar:: How to quickly detect a link failure ?
 
@@ -999,12 +1004,10 @@ OSPF is defined in :rfc:`2328`. The last version of OSPF that supports IPv6 is d
  explain fats hello and the difficulty of implementing them
  briefly explain BFD [KW2009]_
  [VPD2004]_
+  explain flap and the backoff timers to slowdown things
 
 
 
-.. sidebarr: Route flap
-
- explain flap
 
 Interdomain routing
 ===================
@@ -1288,7 +1291,7 @@ When a BGP message is received, the router first applies the peer's `import filt
 If the BGP message is acceptable, we need to distinguish two cases. If this is an `Update message` for prefix `p`, this can be a new route for this prefix or a modification of the route's attributes. The router first retrieves from its `RIB` the best route towards prefix `p`. Then, the new route is inserted in the `RIB` and the `BGP decision process` is run to find the best route towards destination `p` changes. A BGP message only needs to be sent to the router's peers if the best route has changed. For each peer, the router applies the  `export filter` to verify whether the route can be advertised. If yes, the filtered BGP message is sent. Otherwise, a `Withdraw message` is sent. When the router receives a `Withdraw message`, it also verifies whether the removal of the route from its `RIB` caused its best route towards this prefix to change. It should be noted that, depending on the content of the `RIB` and the `export filters`, a BGP router may need to send a `Withdraw message` to a peer after having received an `Update message` from another peer and conversely.
 
 
-
+To understand the operation of BGP in an IPv4 network, let us consider the simple network composed of three routers located in three different ASes and shown in the figure below.
 
 .. figure:: fig/network-fig-121-c.png
    :align: center
@@ -1297,7 +1300,52 @@ If the BGP message is acceptable, we need to distinguish two cases. If this is a
    Utilisation of the BGP nexthop attribute
 
 
-bgp policies
+This network contains three routers : `R1`, `R2` and `R3`. Each router is attached to a local IPv4 subnet that it will advertise by using BGP. There are two BGP sessions, one between `R1` and `R2` and the second between `R2` and `R3`. A `/30` subnet is used on each interdomain link (`195.100.0.0/30` on `R1-R2` and 195.100.0.4/30` on `R2-R3`). The BGP sessions run above TCP connections established between the neighbouring routers (e.g. `195.100.0.1 - 195.100.0.2` for the `R1-R2 session).
+
+Let us assume that the `R1-R2` BGP session is the first to be established. A `BGP Update` message sent on such a session contains three informations :
+
+ - the advertised prefix
+ - the `BGP nexthop`
+ - the attributes including the AS-Path 
+
+We will use the notation `U(prefix, nexthop, attributes)` to represent such a `BGP Update` message in this section. Similarly, `W(prefix)` will represent a `BGP withdraw` for the specified prefix. On the `R1-R2` session has been established, `R1` sends `U(194.100.0.0/24,195.100.0.1,AS10)` to `R2` and `R2` sends `U(194.100.2.0/23,195.100.0.2,AS20)`. At this point, `R1` can reach `194.100.2.0/23` via `195.100.0.2` and `R2` can reach `194.100.0.0/24` via `195.100.0.1`.
+
+When the `R2-R3` has been established, `R3` sends `U(194.100.1.0/24,195.100.0.6,AS30)`. `R2` will announce on the `R2-R3` session all the routes inside its RIB. I will thus send to `R3` : `U(194.100.0.0/24,195.100.0.5,AS20:AS10)` and `U(194.100.2.0/23,195.100.0.5,AS20)`. Note that when `R2` advertises the route that it learned from `R1`, it updates the BGP nexthop and adds it AS number in the AS-Path. `R2` will also send `U(194.100.1.0/24,195.100.0.2,AS20:AS30)` to `R1` on the `R1`R3` session. At this point, all BGP routes have been exchanged and all routers can reach `194.100.0.0/24`, `194.100.2.0/23` and `194.100.1.0/24`.
+
+If the link between `R2` and `R3` fails, `R3` will detect the failure because it did not receive `KEEPALIVE` messages recently from `R2`. At this time, `R3` will remove from its RIB all the routes learned over the `R2-R3` BGP session. `R2` will also remove from its RIB the routes learned from `R3`. `R2` will also send  `W(194.100.1.0/24)` to `R1` over the `R1-R3` BGP session since it does not have a route anymore towards this prefix.
+
+
+Most networks that use BGP contain more than one router. For example, consider the network shown in the figure below where `AS20` contains two different routers attached to interdomain links : `R2` and `R4`. In this network, two routing protocols are used by `R2` and `R4`. They use an intradomain routing protocol to distribute the routes towards the internal prefixes : `195.100.0.8/30`, `195.100.0.0/30`, ... `R2` and `R4` also use BGP. `R2` will receive the routes advertised by `AS10` while `R4` will receive the routes advertised by `AS30`. These two routers will need to exchange the routes that they have respectively received over their BGP sessions. 
+
+.. figure:: fig/network-fig-136-c.png
+   :align: center
+   :scale: 50
+   
+   A larger network using BGP
+
+A first solution to allow `R2` and `R3` to exchange the interdomain routes that they have learned over their respective BGP sessions would be to configure the intrdomain routing protocol to distribute inside `AS20` the routes learned over BGP sessions. Although routers support this feature, this is a bad solution for two reasons :
+
+ 1. Intradomain routing protocols cannot distribute the attributes that are attached to a BGP route. If `R4` received via the intradomain routing protocol a route towards `194.100.0.0/23` that `R2` learned via BGP, it would not know that the route was originated by `AS10` and the only advertisement that it could send to `R3` would contain an invalid AS-Path
+ 2. Intradomain routing protocols have not been designed to support the hundreds of thousands of routes that a BGP router can receive on today's global Internet.
+
+.. index:: eBGP, iBGP
+
+The best solution to allow BGP routers to distribute, inside an AS, all the routes learned over BGP sessions is to establish BGP sessions among all the BGP routers inside an AS. In practice, we distinguish between two types of BGP sessions :
+
+ - :term:`eBGP session` or `external BGP session`. Such a BGP session is established between two routers that are directly connected and belong to two different domains.
+ - :term:`iBGP session` or `internal BGP session`. Such a BGP session is established between two routers belonging to the same domain. 
+
+
+To understand the utilisation of an iBGP session, let us consider in the network shown below what happens when router `R1` sends `U(194.100.0.0/23,195.100.0.1,AS10)`. This BGP message is processed by `R2` that advertises it over its `iBGP session` with `R4`. The `BGP Update` sent by `R2` contains the same nexthop and the same AS-Path as in the `BGP Update` received by `R2`. `R4` then sends `U(194.100.0.0/23,195.100.0.5,AS20:AS10)` to `R3`. Note that the BGP nexthop and the AS-Path are only updated when a BGP route is advertised over an `eBGP session`.
+
+.. figure:: fig/network-fig-138-c.png
+   :align: center
+   :scale: 50
+   
+   iBGP and eBGP sessions
+
+
+
 
 
 .. figure:: fig/network-fig-122-c.png
@@ -1352,8 +1400,9 @@ http://www.ripe.net/ripencc/pub-services/whois.html
 http://www.arin.net/whois/index.html
 http://www.apnic.net/apnic-bin/whois.pl
 
- L. Subramanian, S. Agarwal, J. Rexford, and RH Katz. Characterizing the Internet hierarchy from multiple vantage points. In IEEE INFOCOM, 2002
 
+Note that on some router implementations, the lowest router id step in the BGP decision process is replaced by the selection of the oldest route. See e.g. : http://www.cisco.com/warp/public/459/25.shtml
+Preferring the oldest route when breaking times is used to prefer stable paths over unstable paths, however, a drawback of this approach is that the selection of the BGP routes will depend on the arrival times of the corresponding messages. This makes the BGP selection process non-deterministic and can lead to problems that are difficult to debug.
 
 bgp 
 
@@ -1373,6 +1422,8 @@ but see recent arbor data
 .. [#fttl] The initial IP specification in :rfc:`791` suggested that routers would decrement the `TTL` at least once every second. This would ensure that a packet would never remain for more than `TTL` seconds in the network. However, in practice most router implementations simply chose to decrement the `TTL` by one. 
 
 .. [#finitialttl] The initial TTL value used to send IP packets vary from one implementation to another. Most current IP implementations use an initial TTL of 64 or more. See http://members.cox.net/~ndav1/self_published/TTL_values.html for additional information.
+
+.. [#f6lowpan] Supporting IP over the 802.15.4 datalink layer technology requires special mechanisms. See :rfc:`4944` for a discussion of the special problems posed by 802.15.4
 
 .. [#fpingproblems] Until a few years ago, all hosts replied to `Echo request` ICMP messages. However, due to the security problems that have affected TCP/IP implementations, many of these implementations can now be configured to disable answering `Echo request` ICMP messages. 
 
