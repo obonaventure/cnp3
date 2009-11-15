@@ -6,7 +6,7 @@ The transport layer contains essential protocols
 
 .. figure:: fig/transport-fig-001-c.png
    :align: center
-   :scale: 50 
+   :scale: 70 
 
    The transport layer in the reference model
 
@@ -49,7 +49,7 @@ This is illustrated in the figure below.
 
 .. figure:: fig/transport-fig-007-c.png
    :align: center
-   :scale: 50 
+   :scale: 70 
 
    Interactions between the transport layer and its user and its network layer provider
 
@@ -58,7 +58,7 @@ When running on top of a perfect connectionless network, a transport level entit
 
 .. figure:: fig/transport-fig-004-c.png
    :align: center
-   :scale: 50 
+   :scale: 70 
 
    The simplest transport protocol
 
@@ -96,14 +96,14 @@ The transport entity can then be modelled as a finite state machine containing t
 
 .. figure:: fig/transport-fig-008-c.png
    :align: center
-   :scale: 50 
+   :scale: 70 
 
 
 A time-sequence diagram showing 
 
 .. figure:: fig/transport-fig-009-c.png
    :align: center
-   :scale: 50 
+   :scale: 70 
 
 
 The receiver side of this protocol can be expressed by the following python code as a scapy automaton ::
@@ -352,7 +352,7 @@ The figure below shows a typical usage of the UDP port numbers. The client proce
 
 .. figure:: fig/transport-fig-056-c.png
    :align: center
-   :scale: 50 
+   :scale: 70 
 
    Usage of the UDP port numbers
 
@@ -370,7 +370,7 @@ UDP uses a single segment format shown below. The UDP header contains four field
 
 .. figure:: fig/transport-fig-055-c.png
    :align: center
-   :scale: 50 
+   :scale: 70 
 
    The UDP segment format
 
@@ -423,7 +423,7 @@ To provide this service, TCP relies on a simple segment format. Each TCP segment
 
 .. figure:: fig/transport-fig-058-c.png
    :align: center
-   :scale: 50 
+   :scale: 70 
 
    TCP segment format 
 
@@ -455,7 +455,7 @@ A TCP header contains the following fields :
  
 .. figure:: fig/transport-fig-057-c.png
    :align: center
-   :scale: 50 
+   :scale: 70 
 
    Utilization of the TCP source and destination ports
 
@@ -492,7 +492,7 @@ At this point, the TCP connection is open and both the client and the server are
 
 .. figure:: fig/transport-fig-059-c.png
    :align: center
-   :scale: 50 
+   :scale: 70 
 
    Establishment of a TCP connection
 
@@ -515,7 +515,7 @@ A server could, of course, refuse to open a TCP connection upon reception of a `
 
 .. figure:: fig/transport-fig-061-c.png
    :align: center
-   :scale: 50 
+   :scale: 70 
 
    TCP connection establishment rejected by peer
 
@@ -523,7 +523,7 @@ The TCP connection establishment can be described as the four states Finite Stat
 
 .. figure:: fig/transport-fig-063-c.png
    :align: center
-   :scale: 50 
+   :scale: 70 
 
    TCP FSM for connection establishment
 
@@ -533,7 +533,7 @@ Besides these two paths in the TCP connection establishment FSM, there is a thir
 
 .. figure:: fig/transport-fig-062-c.png
    :align: center
-   :scale: 50 
+   :scale: 70 
 
    Simultaneous establishment of a TCP connection
 
@@ -619,7 +619,7 @@ The normal way of terminating a TCP connection is by using the graceful TCP conn
 
 .. figure:: fig/transport-fig-067-c.png
    :align: center
-   :scale: 50 
+   :scale: 70 
 
    FSM for TCP connection release
 
@@ -709,7 +709,7 @@ The figure below provides a distribution of the packet sizes measured on a link.
 
 .. figure:: fig/transport-fig-079-c.png
    :align: center
-   :scale: 50 
+   :scale: 70 
 
    Packet size distribution in the Internet 
 
@@ -759,7 +759,7 @@ A good setting of the retransmission timeout clearly depends on an accurate esti
 
 .. figure:: fig/transport-fig-070-c.png
    :align: center
-   :scale: 50 
+   :scale: 70 
 
    Evolution of the round-trip-time between two hosts 
 
@@ -768,7 +768,7 @@ The easiest solution to measure the round-trip-time on a TCP connection is to me
 
 .. figure:: fig/transport-fig-072-c.png
    :align: center
-   :scale: 50 
+   :scale: 70 
 
    How to measure the round-trip-time ? 
 
@@ -779,7 +779,7 @@ To avoid this ambiguity in the estimation of the round-trip-time when segments a
   
 .. figure:: fig/transport-fig-073-c.png
    :align: center
-   :scale: 50  
+   :scale: 70  
 
    Disembiguating round-trip-time measurements with the :rfc:`1323` timestamp option 
 
@@ -810,7 +810,7 @@ The proposed values for the parameters are :math:`\alpha=\frac{1}{8}` and :math:
 
 .. figure:: fig/transport-fig-071-c.png
    :align: center
-   :scale: 50 
+   :scale: 70 
 
    Example computation of the `rto`
 
@@ -863,7 +863,7 @@ From a performance viewpoint, one issue with the TCP's `retransmission timeout` 
 
 .. figure:: fig/transport-fig-074-c.png 
    :align: center
-   :scale: 50 
+   :scale: 70 
 
    Detecting isolated segment losses
 
@@ -887,7 +887,7 @@ The figure below illustrates the operation of the `fast retransmit` heuristic.
 
 .. figure:: fig/transport-fig-075-c.png 
    :align: center
-   :scale: 50 
+   :scale: 70 
 
    TCP fast retransmit heuristics
 
@@ -898,7 +898,7 @@ When losses are not isolated or when the windows are large, which is the case fo
 
 .. figure:: fig/transport-fig-076-c.png 
    :align: center
-   :scale: 50 
+   :scale: 70 
 
    TCP selective acknowledgements
 
