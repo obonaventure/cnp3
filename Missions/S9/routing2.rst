@@ -11,9 +11,35 @@ The deadline for this exercise is Tuesday November 24th, 13.00.
 Link state routing
 ------------------
 
+1 Consider the network shown below. In this network, the metric of each link is set to `1` except link `R7-R1` whose metric is set to `3` in both directions. In this network, there are two paths with the same cost between `R9` and `R8`. Old routers would randomly select one of these equal cost paths and install it in their forwarding table. Recent routers are able to use up to `N` equal cost paths towards the same destination. 
+
+ .. figure:: fig/BGP-figs-010-c.png
+    :align: center
+    :scale: 50
+   
+    A simple network running OSPF
+
+ #. On recent routers, a lookup in the forwarding table for a destination addresses returns thus a set of outgoing interfaces. How would you design an algorithm that selects the outgoing interface used for each packet, knowing that to avoid reordering, all segments from the same TCP connection should ideally follow the same path ? 
+
+2 Consider again the topology shown above. After some time, OSPF converges and all routers compute the following routing tables :
+
+ ===========  ========  =========  =========  =========  =========
+ Destination   Routes   Routes     Routes     Routes   	 Routes  
+ 	       on A     on B       on C       on D     	 on E
+ -----------  --------  ---------  ---------  ---------  ---------
+ A             0        2 via C    1 via A    3 via B,E  2 via C
+ B 	       2 via C  0     	   1 via B    1 via B    2 via D,C
+ C             1 via C  1 via C	   0          2 via B,E  1 via C
+ D             3 via C  1 via D	   2 via B,E  0 	 1 via D
+ E             2 via C  2 via C,D  1 via E    1 via E    0
+ ===========  ========  =========  =========  =========  =========
+
+An important difference between OSPF and RIP is that OSPF routers flood link state packets that allow the other routers to recompute their own routing tables while RIP routers exchange distance vectors. Consider that link `B-C` fails and that router `B` is the first to detect the failure. At this point, `B` cannot reach anymore `A`, `C` and half of its paths towards `E` have failed. `C` cannot reach `B` anymore and half of its paths towards `D` have failed.
 
 
+Router `B` will flood its updated link state packet through the entire network and all routers will recompute their forwarding table. Upon reception of a link state packet, routers usually first flood the received link-state packet and then recompute their forwarding table. Assume that `B` is the first to recompute its forwarding table, followed by `D`, `E`, `A` and finally `C`
 
+After each update of a forwarding table, verify which pairs of routers are able to exchange packets. Provide your answer using a table similar to the one shown above.
 
 
 BGP
@@ -45,4 +71,86 @@ BGP
     :scale: 50
    
     A stub connected to two providers
+
+4 ? example with prepending
+
+5 Consider the network topology shown below.
+
+ .. figure:: path_explo.png
+    :align: center
+    :scale: 50
+   
+    A simple internetwork 
+
+ #. Show which BGP messages are exchanged when router `R1` advertises prefix `10.0.0.0/8`.  
+ #. How many and which routes are known by router `R5` ? Which route does it advertise to `R6`?
+ #. Assume now that the link between `R1` and `R2` fails.  Show the messages exchanged due to this event.  Which BGP messages are sent to `R6` ?
+
+
+6 Consider the network shown in the figure below where `R1 advertises a single prefix. In this network, the link between `R1` and `R2 is considered as a backup link. It should only be used only when the primary link (`R1-R4) fails. This can be implemented on `R2` by setting a low `local-pref` to the routes received on link `R2-R1`
+
+  #. In this topology, what are the paths used by all routers to reach `R1` ?
+  #. Assume now that the link `R1-R4` fails. Which BGP messages are exchanged and what are now the paths used to reach `R1` ?
+  #. Link `R1-R4` comes back. Which BGP messages are exchanged and what are now the paths used to reach `R1` ?
+
+ .. figure:: fig/BGP-figs-009-c.png
+    :align: center
+    :scale: 50
+   
+    A simple topology with a backup link 
+
+
+7 On February 22, 2008, the Pakistan Telecom Authority issued an `order <http://www.teeth.com.pk/blog/wp-content/uploads/2008/02/22-02-08_pta_blocking_of_websities.pdf>` to Pakistan ISPs to block access to three IP addresses belonging to _youtube : `208.65.153.238`, `208.65.153.253`, `208.65.153.251`. One operator noted that these addressed were belonging to the same `/24` prefix. Read http://www.ripe.net/news/study-youtube-hijacking.html to understand what happened really.
+
+ #. What should have done _youtube to avoid this problem ?
+ #. What kind of solutions would you propose to improve the security of interdomain routing ?
+
+
+
+
+
+
+.. comment
+
+
+
+6 Researchers and network operators collect and expose lots of BGP information. For example, http://www.routeviews.org/ maintains BGP sessions with many ISPs. routeviews is also useful when debugging networking problems to verify that a BGP route has been correctly received by some ISPs. But it can also be used for other types of analyses.
+
+In this exercises, you will use routeviews to check Most of the routers maintained by routeviews can be accessed by using telnet and stores all BGP messages exchnaA very useful website for ::
+
+ telnet route-views.routeviews.org
+ Trying 128.223.51.103...
+ Connected to route-views.routeviews.org.
+ Escape character is '^]'.
+
+ **********************************************************************
+
+                    Oregon Exchange BGP Route Viewer
+          route-views.oregon-ix.net / route-views.routeviews.org
+
+ route views data is archived on http://archive.routeviews.org
+
+ This hardware is part of a grant from Cisco Systems.
+ Please contact help@routeviews.org if you have questions or
+ comments about this service, its use, or if you might be able to
+ contribute your view. 
+
+ This router has views of the full routing tables from several ASes.
+ The list of ASes is documented under "Current Participants" on
+ http://www.routeviews.org/
+
+                        **************
+
+ route-views.routeviews.org is now using AAA for logins.  Login with
+ username "rviews".  See http://routeviews.org/aaa.html
+
+ **********************************************************************
+ User Access Verification
+
+ Username: rviews
+
+
+
+
+looking glass http://www.traceroute.org/#Looking%20Glass
 
