@@ -64,7 +64,7 @@ virtual setup illustrated on the figure execute the following procedure:
 You need to configure the routing table on `H1` so that all packets with a destination in 
 the public network will be sent via `NAT`. This is can be achieved by adding a default route. To do this use the following command on `H1` ::
 
-  ip route add default gw 192.168.1.1
+  route add default gw 192.168.1.1
 
 Your NAT will only support TCP. To ensure that the Linux kernel on `NAT` does not intercept the packets that you will process in scapy_, you need to configure the following filters on `NAT`:: 
 
