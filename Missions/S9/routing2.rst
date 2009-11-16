@@ -110,47 +110,4 @@ BGP
 
 
 
-.. comment
-
-
-
-6 Researchers and network operators collect and expose lots of BGP information. For example, http://www.routeviews.org/ maintains BGP sessions with many ISPs. routeviews is also useful when debugging networking problems to verify that a BGP route has been correctly received by some ISPs. But it can also be used for other types of analyses.
-
-In this exercises, you will use routeviews to check Most of the routers maintained by routeviews can be accessed by using telnet and stores all BGP messages exchnaA very useful website for ::
-
- telnet route-views.routeviews.org
- Trying 128.223.51.103...
- Connected to route-views.routeviews.org.
- Escape character is '^]'.
-
- **********************************************************************
-
-                    Oregon Exchange BGP Route Viewer
-          route-views.oregon-ix.net / route-views.routeviews.org
-
- route views data is archived on http://archive.routeviews.org
-
- This hardware is part of a grant from Cisco Systems.
- Please contact help@routeviews.org if you have questions or
- comments about this service, its use, or if you might be able to
- contribute your view. 
-
- This router has views of the full routing tables from several ASes.
- The list of ASes is documented under "Current Participants" on
- http://www.routeviews.org/
-
-                        **************
-
- route-views.routeviews.org is now using AAA for logins.  Login with
- username "rviews".  See http://routeviews.org/aaa.html
-
- **********************************************************************
- User Access Verification
-
- Username: rviews
-
-
-
-
-looking glass http://www.traceroute.org/#Looking%20Glass
 
