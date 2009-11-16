@@ -1,0 +1,78 @@
+ ===========  ========  =========  =========  =========  =========
+ Destination   Routes   Routes     Routes     Routes   	 Routes  
+ 	       on A     on B       on C       on D     	 on E
+ -----------  --------  ---------  ---------  ---------  ---------
+ A             0        2 via C    1 via A    3 via B,E  2 via C
+ B 	       2 via C  0     	   1 via B    1 via B    2 via D,C
+ C             1 via C  1 via C	   0          2 via B,E  1 via C
+ D             3 via C  1 via D	   2 via B,E  0 	 1 via D
+ E             2 via C  2 via C,D  1 via E    1 via E    0
+ ===========  ========  =========  =========  =========  =========
+
+B updates : partial loop on B towards A, loop for C
+
+ ===========  ========  =========  =========  =========  =========
+ Destination   Routes   Routes     Routes     Routes   	 Routes  
+ 	       on A     on B       on C       on D     	 on E
+ -----------  --------  ---------  ---------  ---------  ---------
+ A             0        4 via D,A  1 via A    3 via B,E  2 via C
+ B 	       2 via C  0     	   1 via B    1 via B    2 via D,C
+ C             1 via C  3 via D	   0          2 via B,E  1 via C
+ D             3 via C  1 via D	   2 via B,E  0 	 1 via D
+ E             2 via C  3 via D    1 via E    1 via E    0
+ ===========  ========  =========  =========  =========  =========
+
+D updates : B can reach every one
+
+ ===========  ========  =========  =========  =========  =========
+ Destination   Routes   Routes     Routes     Routes   	 Routes  
+ 	       on A     on B       on C       on D     	 on E
+ -----------  --------  ---------  ---------  ---------  ---------
+ A             0        4 via D,A  1 via A    3 via E    2 via C
+ B 	       2 via C  0     	   1 via B    1 via B    2 via D,C
+ C             1 via C  3 via D	   0          2 via E    1 via C
+ D             3 via C  1 via D	   2 via B,E  0 	 1 via D
+ E             2 via C  3 via D    1 via E    1 via E    0
+ ===========  ========  =========  =========  =========  =========
+
+
+C updates, C partial loop towards B
+
+ ===========  ========  =========  =========  =========  =========
+ Destination   Routes   Routes     Routes     Routes   	 Routes  
+ 	       on A     on B       on C       on D     	 on E
+ -----------  --------  ---------  ---------  ---------  ---------
+ A             0        4 via D,A  1 via A    3 via E    2 via C
+ B 	       2 via C  0     	   3 via E    1 via B    2 via D,C
+ C             1 via C  3 via D	   0          2 via E    1 via C
+ D             3 via C  1 via D	   2 via E    0 	 1 via D
+ E             2 via C  3 via D    1 via E    1 via E    0
+ ===========  ========  =========  =========  =========  =========
+
+A updates : loop towards B via E
+
+ ===========  ========== =========  =========  =========  =========
+ Destination   Routes    Routes     Routes     Routes     Routes  
+ 	       on A      on B       on C       on D       on E
+ -----------  ---------- ---------  ---------  ---------  ---------
+ A             0         4 via D,A  1 via A    3 via E    2 via C
+ B 	       4 via C,B 0     	    3 via E    1 via B    2 via D,C
+ C             1 via C   3 via D    0          2 via E    1 via C
+ D             3 via C   1 via D    2 via E    0 	  1 via D
+ E             2 via C   3 via D    1 via E    1 via E    0
+ ===========  ========== =========  =========  =========  =========
+
+
+E updates : no problem anymore
+
+ ===========  ========== =========  =========  =========  =========
+ Destination   Routes    Routes     Routes     Routes     Routes  
+ 	       on A      on B       on C       on D       on E
+ -----------  ---------- ---------  ---------  ---------  ---------
+ A             0         4 via D,A  1 via A    3 via E    2 via C
+ B 	       4 via C,B 0     	    3 via E    1 via B    2 via D
+ C             1 via C   3 via D    0          2 via E    1 via C
+ D             3 via C   1 via D    2 via E    0 	  1 via D
+ E             2 via C   3 via D    1 via E    1 via E    0
+ ===========  ========== =========  =========  =========  =========
+

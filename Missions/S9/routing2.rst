@@ -15,7 +15,7 @@ Link state routing
 
  .. figure:: fig/BGP-figs-010-c.png
     :align: center
-    :scale: 50
+    :scale: 70
    
     A simple network running OSPF
 
@@ -36,11 +36,10 @@ Link state routing
 
 An important difference between OSPF and RIP is that OSPF routers flood link state packets that allow the other routers to recompute their own routing tables while RIP routers exchange distance vectors. Consider that link `B-C` fails and that router `B` is the first to detect the failure. At this point, `B` cannot reach anymore `A`, `C` and half of its paths towards `E` have failed. `C` cannot reach `B` anymore and half of its paths towards `D` have failed.
 
+Router `B` will flood its updated link state packet through the entire network and all routers will recompute their forwarding table. Upon reception of a link state packet, routers usually first flood the received link-state packet and then recompute their forwarding table. Assume that `B` is the first to recompute its forwarding table, followed by `D`, `A`, `C` and finally `E`
 
-Router `B` will flood its updated link state packet through the entire network and all routers will recompute their forwarding table. Upon reception of a link state packet, routers usually first flood the received link-state packet and then recompute their forwarding table. Assume that `B` is the first to recompute its forwarding table, followed by `D`, `E`, `A` and finally `C`
-
-After each update of a forwarding table, verify which pairs of routers are able to exchange packets. Provide your answer using a table similar to the one shown above.
-
+#. After each update of a forwarding table, verify which pairs of routers are able to exchange packets. Provide your answer using a table similar to the one shown above.
+#. Can you find an ordering of the updates of the forwarding tables that avoids all transient problems ?
 
 BGP
 ---
