@@ -4,7 +4,7 @@ OSPF and BGP
 
 In this set of exercices, you will explore in more details the operation of a link-state routing protocol such as OSPF and the operation of BGP.
 
-The deadline for this exercise is Tuesday November 24th, 13.00.
+The deadline for this set of exercises is Tuesday November 24th, 13.00.
 
 
 
@@ -86,7 +86,7 @@ BGP
  #. Assume now that the link between `R1` and `R2` fails.  Show the messages exchanged due to this event.  Which BGP messages are sent to `R6` ?
 
 
-6 Consider the network shown in the figure below where `R1 advertises a single prefix. In this network, the link between `R1` and `R2 is considered as a backup link. It should only be used only when the primary link (`R1-R4) fails. This can be implemented on `R2` by setting a low `local-pref` to the routes received on link `R2-R1`
+6 Consider the network shown in the figure below where `R1` advertises a single prefix. In this network, the link between `R1` and `R2` is considered as a backup link. It should only be used only when the primary link (`R1-R4`) fails. This can be implemented on `R2` by setting a low `local-pref` to the routes received on link `R2-R1`
 
   #. In this topology, what are the paths used by all routers to reach `R1` ?
   #. Assume now that the link `R1-R4` fails. Which BGP messages are exchanged and what are now the paths used to reach `R1` ?
@@ -99,7 +99,7 @@ BGP
     A simple topology with a backup link 
 
 
-7 On February 22, 2008, the Pakistan Telecom Authority issued an `order <http://www.teeth.com.pk/blog/wp-content/uploads/2008/02/22-02-08_pta_blocking_of_websities.pdf>` to Pakistan ISPs to block access to three IP addresses belonging to _youtube : `208.65.153.238`, `208.65.153.253`, `208.65.153.251`. One operator noted that these addressed were belonging to the same `/24` prefix. Read http://www.ripe.net/news/study-youtube-hijacking.html to understand what happened really.
+7 On February 22, 2008, the Pakistan Telecom Authority issued an `order <http://www.teeth.com.pk/blog/wp-content/uploads/2008/02/22-02-08_pta_blocking_of_websities.pdf>`_ to Pakistan ISPs to block access to three IP addresses belonging to `youtube <http://www.youtube.com>`_: `208.65.153.238`, `208.65.153.253`, `208.65.153.251`. One operator noted that these addressed were belonging to the same `/24` prefix. Read http://www.ripe.net/news/study-youtube-hijacking.html to understand what happened really.
 
  #. What should have done _youtube to avoid this problem ?
  #. What kind of solutions would you propose to improve the security of interdomain routing ?
