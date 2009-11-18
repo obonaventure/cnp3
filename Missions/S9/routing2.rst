@@ -9,7 +9,7 @@ The deadline for this set of exercises is Tuesday November 24th, 13.00.
 Link state routing
 ------------------
 
-1 Consider the network shown below. In this network, the metric of each link is set to `1` except link `R7-R1` whose metric is set to `3` in both directions. In this network, there are two paths with the same cost between `R9` and `R8`. Old routers would randomly select one of these equal cost paths and install it in their forwarding table. Recent routers are able to use up to `N` equal cost paths towards the same destination. 
+1 Consider the network shown below. In this network, the metric of each link is set to `1` except link `A-B` whose metric is set to `4` in both directions. In this network, there are two paths with the same cost between `D` and `C`. Old routers would randomly select one of these equal cost paths and install it in their forwarding table. Recent routers are able to use up to `N` equal cost paths towards the same destination. 
 
  .. figure:: fig/BGP-figs-010-c.png
     :align: center
@@ -118,16 +118,26 @@ Among all the commands supported by this router, the `show ip bgp` command is ve
 
  #. Use `show ip bgp 130.104.0.0/16` to find the best path used by this router to reach UCLouvain
  #. Knowing that `130.104.0.0/16` is announced by belnet (AS2611), what are, according to this BGP routing tables, the ASes that peer with belnet
- #. Do the same analysis for one of the IPv4 prefixes assigned to Skynet (AS5432° : `62.4.128.0/17`. The output of the `show ip bgp 62.4.128.0/17` reveals something strange as it seems that one of the paths towards this prefix passes twice via `AS5432`. Can you explain this ? ::
-
- 2905 702 1239 5432 5432
-    196.7.106.245 from 196.7.106.245 (196.7.106.245)
-      Origin IGP, metric 0, localpref 100, valid, external
+ #. Do the same analysis for one of the IPv4 prefixes assigned to Skynet (AS5432) : `62.4.128.0/17`. The output of the `show ip bgp 62.4.128.0/17` reveals something strange as it seems that one of the paths towards this prefix passes twice via `AS5432`. Can you explain this ? ::
 
 
+   2905 702 1239 5432 5432
+     196.7.106.245 from 196.7.106.245 (196.7.106.245)
+       Origin IGP, metric 0, localpref 100, valid, external
 
 
-5 Consider the network topology shown below.
+
+5 Consider the network shown in the figure below and assume that R1` advertises a single prefix. R1` receives a lot of packets from `R9`. Without any help from `R2`, `R9` or `R4`, how could `R1` configure its BGP advertisement such that it receives the packets from `R9` via `R3` ? What happens when a link fails ?
+
+ .. figure:: fig/BGP-figs-004-c.png
+    :align: center
+    :scale: 50
+   
+    A simple internetwork 
+
+
+
+6 Consider the network topology shown below.
 
  .. figure:: path_explo.png
     :align: center
@@ -140,7 +150,7 @@ Among all the commands supported by this router, the `show ip bgp` command is ve
  #. Assume now that the link between `R1` and `R2` fails.  Show the messages exchanged due to this event.  Which BGP messages are sent to `R6` ?
 
 
-6 Consider the network shown in the figure below where `R1` advertises a single prefix. In this network, the link between `R1` and `R2` is considered as a backup link. It should only be used only when the primary link (`R1-R4`) fails. This can be implemented on `R2` by setting a low `local-pref` to the routes received on link `R2-R1`
+7 Consider the network shown in the figure below where `R1` advertises a single prefix. In this network, the link between `R1` and `R2` is considered as a backup link. It should only be used only when the primary link (`R1-R4`) fails. This can be implemented on `R2` by setting a low `local-pref` to the routes received on link `R2-R1`
 
   #. In this topology, what are the paths used by all routers to reach `R1` ?
   #. Assume now that the link `R1-R4` fails. Which BGP messages are exchanged and what are now the paths used to reach `R1` ?
@@ -153,14 +163,14 @@ Among all the commands supported by this router, the `show ip bgp` command is ve
     A simple topology with a backup link 
 
 
-7 On February 22, 2008, the Pakistan Telecom Authority issued an `order <http://www.teeth.com.pk/blog/wp-content/uploads/2008/02/22-02-08_pta_blocking_of_websities.pdf>`_ to Pakistan ISPs to block access to three IP addresses belonging to `youtube <http://www.youtube.com>`_: `208.65.153.238`, `208.65.153.253`, `208.65.153.251`. One operator noted that these addresses were belonging to the same `/24` prefix. Read http://www.ripe.net/news/study-youtube-hijacking.html to understand what happened really.
+8 On February 22, 2008, the Pakistan Telecom Authority issued an `order <http://www.teeth.com.pk/blog/wp-content/uploads/2008/02/22-02-08_pta_blocking_of_websities.pdf>`_ to Pakistan ISPs to block access to three IP addresses belonging to `youtube <http://www.youtube.com>`_: `208.65.153.238`, `208.65.153.253`, `208.65.153.251`. One operator noted that these addresses were belonging to the same `/24` prefix. Read http://www.ripe.net/news/study-youtube-hijacking.html to understand what happened really.
 
- #. What should have done _youtube to avoid this problem ?
+ #. What should have done youtube_ to avoid this problem ?
  #. What kind of solutions would you propose to improve the security of interdomain routing ?
 
 
 
-
+.. include:: ../../book/links.rst
 
 
 
