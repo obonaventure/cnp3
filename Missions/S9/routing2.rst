@@ -6,8 +6,6 @@ In this set of exercices, you will explore in more details the operation of a li
 
 The deadline for this set of exercises is Tuesday November 24th, 13.00.
 
-
-
 Link state routing
 ------------------
 
@@ -45,6 +43,7 @@ BGP
 ---
 
 1 Consider the network shown in the figure below and explain the path that will be followed by the packets to reach `194.100.10.0/23`
+
  .. figure:: fig/BGP-figs-001-c.png
     :align: center
     :scale: 50
@@ -52,6 +51,7 @@ BGP
     A stub connected to one provider
 
 2 Consider, now, as shown in the figure below that the stub AS is now connected also to provider `AS789`. Via which provider will the packets destined to `194.100.10.0/23` will be received by `AS4567` ? Propose a modification to the BGP configuration of `AS123` ?
+
  .. figure:: fig/BGP-figs-002-c.png
     :align: center
     :scale: 50
@@ -71,7 +71,61 @@ BGP
    
     A stub connected to two providers
 
-4 ? example with prepending
+4 Researchers and network operators collect and expose lots of BGP data. For this, they establish eBGP sessions between `data collection` routers and production routers located operationnal networks. Several `data collection` routers are available, the most popular ones are :
+
+ - http://www.routeviews.org
+ - http://www.ripe.net/ris
+
+For this exercice, you will use one of the `routeviews` BGP routers. You can access this router by using telnet. Once logged on the router, you can use the router's command line interface to analyse its BGP routing table ::
+
+ telnet route-views.routeviews.org
+ Trying 128.223.51.103...
+ Connected to route-views.routeviews.org.
+ Escape character is '^]'.
+ C
+ **********************************************************************
+
+                    Oregon Exchange BGP Route Viewer
+          route-views.oregon-ix.net / route-views.routeviews.org
+
+ route views data is archived on http://archive.routeviews.org
+
+ This hardware is part of a grant from Cisco Systems.
+ Please contact help@routeviews.org if you have questions or
+ comments about this service, its use, or if you might be able to
+ contribute your view. 
+
+ This router has views of the full routing tables from several ASes.
+ The list of ASes is documented under "Current Participants" on
+ http://www.routeviews.org/.
+
+                          **************
+
+ route-views.routeviews.org is now using AAA for logins.  Login with
+ username "rviews".  See http://routeviews.org/aaa.html
+
+ **********************************************************************
+
+ 
+ User Access Verification
+
+ Username: rviews
+ route-views.oregon-ix.net>
+
+This router has eBGP sessions with routers from several ISPs. See http://www.routeviews.org/peers/route-views.oregon-ix.net.txt for an up-to-date list of all eBGP sessions maintained by this router.
+
+Among all the commands supported by this router, the `show ip bgp` command is very useful. This command takes an IPv4 prefix as parameter and allows you to retrieve all the routes that this routers has received in its Adj-RIB-In for the specified prefix.
+
+ #. Use `show ip bgp 130.104.0.0/16` to find the best path used by this router to reach UCLouvain
+ #. Knowing that `130.104.0.0/16` is announced by belnet (AS2611), what are, according to this BGP routing tables, the ASes that peer with belnet
+ #. Do the same analysis for one of the IPv4 prefixes assigned to Skynet (AS5432° : `62.4.128.0/17`. The output of the `show ip bgp 62.4.128.0/17` reveals something strange as it seems that one of the paths towards this prefix passes twice via `AS5432`. Can you explain this ? ::
+
+ 2905 702 1239 5432 5432
+    196.7.106.245 from 196.7.106.245 (196.7.106.245)
+      Origin IGP, metric 0, localpref 100, valid, external
+
+
+
 
 5 Consider the network topology shown below.
 
@@ -99,7 +153,7 @@ BGP
     A simple topology with a backup link 
 
 
-7 On February 22, 2008, the Pakistan Telecom Authority issued an `order <http://www.teeth.com.pk/blog/wp-content/uploads/2008/02/22-02-08_pta_blocking_of_websities.pdf>`_ to Pakistan ISPs to block access to three IP addresses belonging to `youtube <http://www.youtube.com>`_: `208.65.153.238`, `208.65.153.253`, `208.65.153.251`. One operator noted that these addressed were belonging to the same `/24` prefix. Read http://www.ripe.net/news/study-youtube-hijacking.html to understand what happened really.
+7 On February 22, 2008, the Pakistan Telecom Authority issued an `order <http://www.teeth.com.pk/blog/wp-content/uploads/2008/02/22-02-08_pta_blocking_of_websities.pdf>`_ to Pakistan ISPs to block access to three IP addresses belonging to `youtube <http://www.youtube.com>`_: `208.65.153.238`, `208.65.153.253`, `208.65.153.251`. One operator noted that these addresses were belonging to the same `/24` prefix. Read http://www.ripe.net/news/study-youtube-hijacking.html to understand what happened really.
 
  #. What should have done _youtube to avoid this problem ?
  #. What kind of solutions would you propose to improve the security of interdomain routing ?
