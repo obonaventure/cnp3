@@ -143,6 +143,8 @@
 
 .. _abilene: http://www.internet2.edu
 
+.. _youtube: http://www.youtube.com
+
 .. _yahoo: http://www.yahoo.com
 
 .. _microsoft: http://www.microsoft.com
@@ -152,6 +154,8 @@
 .. _akamai: http://www.akamai.net
 
 .. _sprint: https://www.sprint.net/
+
+.. _opentransit: http://www.opentransit.net
 
 .. _limelight: http://uk.limelightnetworks.com/index.php
 

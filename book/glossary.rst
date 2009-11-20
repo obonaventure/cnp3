@@ -57,6 +57,12 @@ Glossary
    packet
 	a packet is the unit of information transfert in the network layer
 
+   segment
+	a segment is the unit of information transfert in the transport layer
+
+   frame
+	a frame is the unit of information transfert in the datalink layer
+
    SDU (Service Data Unit)	
         a Service Data Unit is the unit information transferred between applications
  
@@ -160,5 +166,12 @@ Glossary
    	
 	A BGP session between two directly connected routers that belong to two different Autonomous Systems. Also called an external BGP session.
 
-   
+   router
+	A relay operating in the network layer.
+
+   switch
+	A relay operating in the datalink layer.
+
+   hub
+	A relay operating in the physical layer.   
 	
