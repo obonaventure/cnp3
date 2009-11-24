@@ -25,7 +25,8 @@ Before explaining the network layer in details, it is useful to first analyse th
 
 .. figure:: fig/network-fig-003-c.png
    :align: center
-   
+   :scale: 70   
+
    The point-to-point datalink layer
 
 There are two main types of datalink layers. The simplest datalink layer, shown in the figure above, is when there are only two communicating systems that are directly connected through the physical layer. Such a datalink layer is used when there is a point-to-point link between the two systems. The two systems can be endsystems  or routers. The `Point-to-Point Protocol (PPP)` defined in :rfc:`1661` in an example of such a point-to-point datalink layer. Datalink layers exchange `frames` and a datalink :term:`frame` sent by a datalink layer entity on the left will be transmitted through the physical layer so that it can reach the datalink layer entity on the right. Point-to-point datalink layers can either provide an unreliable service (frames can be corrupted or lost) or a reliable service (in this case, the datalink layer includes retransmission mechanisms similar to the ones used in the transport layer). The unreliable service is frequently used above physical layers (e.g. optical fiber, twisted pairs) having a low bit error ratio while reliability mechanisms are often used in wireless networks.
@@ -34,6 +35,7 @@ The second type of datalink layer is the one used in Local Area Networks (LAN). 
 
 .. figure:: fig/network-fig-002-c.png
    :align: center
+   :scale: 70    
    
    A local area network 
 
@@ -337,14 +339,25 @@ After having detected the failure, router `A` will send its distance vectors :
 
 If unfortunately the distance vector sent to router `C` is lost due to a transmission error or because router `C` is overloaded, a new count to infinity problem can occur. If router `C` sends its distance vector :math:`[A=2,B=1,C=0,E=\infty]` to router `E`, this router will install a route of distance `3` to reach `A` via `C`. Router `E` will send its distance vectors :math:`[A=3,B=\infty,C=1,E=1]` to router `B` and :math:`[A=\infty,B=1,C=\infty,E=0]` to router `C`. This distance vector allows `B` to recover a route of distance `4` to reach `A`...
 
-In practice, distance vector routing protocols are only used in small networks were the risk and the consequences of count-to-infinity problems are small. 
-
-.. _linkstate:
+.. index:: link-state routing
 
 Link state routing
 ------------------
 
+Link state routing is the second family of routing protocols. Link state routing is built on a different principle than distance vector routing. While distance vector routers use a distributed algorithm to compute directly their routing tables, link-state routers exchange messages to allow each router to learn the entire network topology. Based on this learned topology, each router is then able to compute its routing table by using a shortest path computation [Dijkstra1959]_. 
 
+For link-state routing, a network is a `directed weighted graph`. Each router is a node and the links between routers are the edges in the graph.  A positive weight is associated to each directed edge and routers will use the shortest path  to reach each destination. In practice, the different types of weights can be associated to each directed edge :
+
+ - unit weight. If all links have a unit weight, shortest path routing will prefer the paths with the smallest number of intermediate routers.
+ - weight proportionnal to the propagation delay on the link. If all links weights are configured this way, shortest path routing will use the paths with the smallest delay. 
+ - weight=:math:`\frac{C}{bandwidth}` where `C` is a constant larger than the highest link bandwidth in the network. If all links weights are configured this way, shortest path routing will prefer higher bandwidth paths over lower bandwidth paths
+ 
+Other variants are possible. Some networks use optimisation algorithms to find the best set of weights to minimize congestion inside the network for a given traffic demand [FRT2002]_. Usually, the same weight is associated to the two directed edges that correspond to a physical link. However, in some cases, these weights can differ (e.g. because the uplink and downlink bandwidths of the link are different or because one direction is overloaded and fewer destinations should be reached over this directed link).
+
+
+.. index:: Hello message
+
+When a link-state router boots, it first needs to discover to which routers it is directly connected. For this, each router sends every `N` seconds a HELLO message on all its interfaces. This message contains the router's address. As its neighbouring routers will also send HELLO messages, the router will automatically discover to which neighbours it is connected. These HELLO messages are only sent to the direct neighbour. A router never forwards the HELLO messages that they receive. The HELLO messages are also used to detect link and router failures. A link is considered to have failed if no HELLO message has been received from the neighboring router during a period of :math:`3 \times N` seconds.
 
 .. figure:: fig/network-fig-041-c.png
    :align: center
@@ -353,10 +366,89 @@ Link state routing
    The exchange of HELLO messages
 
 
-link state database
+Once a router has discovered its neighbours, it must reliably distribute its local topology to all routers in the network to allow them to build their local view of the network topology. For this, each router builds a `link-state packet` (LSP) that contains the following information :
 
-more complex, explain first discovery, then reliable flooding
-and using Dijkstra for shortest path computation
+ - LSP.Router : Identification (address) of the sender of the LSP
+ - LSP.age : age or remaining lifetime of the LSP
+ - LSP.seq : sequence number of the LSP
+ - LSP.Links[] : links advertised in the LSP. Each directed link starting is represented with the following information :  
+   - LSP.Links[i].Id : identification of the neighbour
+   - LSP.Links[i].cost : cost of the link
+
+
+As the LSPs are used to distribute the network topology that allows routers to compute their routing tables, routers cannot rely on their non-existing routing tables to distribute the LSPs. `Reliable flooding` is used to efficiently distribute the LSPs of all routers.  Each router that implements `reliable flooding` maintains a `link state database` (LSDB) that contains the most recent LSP sent by each router. When a router receives a LSP, it first verifies whether this LSP is already stored inside its LSDB. If so, the router has already distributed the LSP earlier and it does not need to forward it. Otherwise, the router forwards the LSP on all links expect the link over which the LSP was received. Reliable flooding can be implemented by using the pseudo-code below ::
+
+ # links is the set of all links on the router
+ # Router R's LSP arrival on link l:
+ if newer(LSP, LSDB(LSP.Router))
+   LSDB.add(LSP)
+   for i in links :
+     if i!=l send(LSP,i)
+ 
+.. sidebar:: Which is the most recent LSP ?
+
+ A router that implements reliable flooding must be able to detect whether a received LSP is newer than the received LSP. This requires a comparison between the sequence number of the received LSP and the sequence number of the LSP stored in the link state database. The ARPANET routing protocol [MRR1979]_ used a 6 bits sequence number and implemented the comparison as follows :rfc:`789` ::
+
+  def newer( lsp1, lsp2 ):
+    return ( ( ( lsp1.seq > lsp2.seq) and ( (lsp1.seq-lsp2.seq)<=32) ) or
+    	     ( ( lsp1.seq < lsp2.seq) and ( (lsp2.seq-lsp1.seq)> 32) )    )
+
+ This comparison takes into account the modulo :math:`2^{6}` arithemtic used to increment the sequence numbers. Intuitively, the comparaison divides the circle of all sequence numbers in two halfs. Usually, the sequence number of the received LSP is previous one incremented by one, but sometimes the sequence numbers of two successive LSPs may differ, e.g. if one router has been disconnected from the network for some time. This comparison worked well until October 27, 1980. On this day, the ARPANET crashed completely. The crash was complex and involved sveral routers. At one point, LSP `40` and LSP `44` from one of the routers were stored in the LSDB of some routers in the ARPANET. As LSP `44` was the newest it should have replaced LSP `40` on all routers. Unfortunately, one of the ARPANET routers suffered from a memory problem and sequence number `40` (`101000` in binary) was replaced by `8`(`001000` in binary) in the router and flooded. Three LSPs were present in the network and `44` was newer than `40` that is newer than `8`, but unfortunately `8` was considered as newer than `44`... All routers started to exchange these three link state packets for ever and the only solution to recover from this problem was to shutdown the entire network :rfc:`789`.
+ Current link state routing protocols usually use 32 bits sequence number and include a special mechanism in the unlikely case that a sequence number reaches the maximum value (using a 32 bits sequence number space takes 136 years if a link state packet is generated every second).
+ To deal with the memory corruption problem, link state packets contain a checksum. This checksum is computed by the router that generate the LSP. Each router must verify the checksum when it receives or floods a LSP. Furthermore, each router must periodically verify the checksums of the LSPs stored in its LSDB.
+
+
+Reliable flooding is illustrated in the figure below. By exchanging HELLO messages, each router learns its local topology. For example, router `E` learns that it is directly connected to routers `D`, `B` and `C`. Its first LSP has sequence number `0` and contains the directed links `E->D`, `E->B` and `E->C`. Router `E` sends its LSP on all its links and routers `D`, `B` and `C` will insert the LSP in their LSDB and forward it over their other links. 
+
+
+.. figure:: fig/network-fig-045-c.png
+   :align: center
+   :scale: 70   
+
+   Reliable flooding : example 
+
+
+Reliable flooding allows LSPs to be distributed to all routers inside the network without using the routing tables of the routers. In the example above, the LSP sent by router `E` will likely be sent twice on some links in the network. For example, routers `B` and `C` will receive `E`'s LSP at almost the same time and will forward it over the `B-C` link. To avoid sending the same LSP twice on each link, a possible solution is to slightly change the pseudo-code above so that a router waits for some random time before forwarding a LSP on each link. The drawback of this solution is that the delay to flood a LSP to all routers in the network will increase.
+
+
+Thanks to reliable flooding, all routers will store in their LSDB the most recent LSP sent by each router in the network. By combining the received LSPs with its own LSP, each router will be able to compute the entire network topology.
+
+.. figure:: fig/network-fig-047-c.png
+   :align: center
+   :scale: 70   
+
+   Link state databases received by all routers 
+
+
+.. sidebar:: Static or dynamic link metrics ?
+
+ As link state packets are flooded regularly, routers could measure the quality (e.g. delay or load) and their links and adjust the metric of each link according to its current quality. Such dynamic adjustements were included in the ARPANET routing protocol [MMR1979]_ . However, experience showed that it was difficult to tune the dynamic adjustements and ensure that no forwarding loops would happen in the network [KZ1989]_. Today's link state routing protocols use metrics that are configured on the routers and rarely change. 
+
+.. index:: two-way connectivity
+
+When a link fails, the two routers attached to the link will detect the failure by the lack of HELLO messages during the last :math:`3 \times N` seconds. Once a router has detected a local link failure, it generates and floods a new LSP that does not contain anymore the failed link. The LSP will replace the previous LSP in the network. As the two routers attached to a link will not detect its failure exactly at the same time, some links may be announced in only one direction. This is illustrated in the figure below. Router `E` has detected the failures of link `E-B` and flooded a new LSP, but router `B` has not yet detected the failure.
+
+
+.. figure:: fig/network-fig-048-c.png
+   :align: center
+   :scale: 70   
+
+   The two-way connectivity check
+
+
+When a link is reported in the LSP of only one of the attached routers, routers consider the link as having failed and they remove it from the directed graph that they compute from their LSDB. This is called the `two-way connectivity check`. This check allows link failures to be flooded quickly as a single LSP is sufficient to announce such a bad news. However, when a link comes up, it can only be used once the two attached routers have sent their LSPs. The `two-way connectivit check` also allows to deal with router failures. When a router fails, all its links will fail, but it will not, of course, send a new LSP to announce its failure. The `two-way connectivity check` ensures that the failed router will be removed from the graph.
+
+When a router has failed, its LSP must be removed from the LSDB of all routers [#foverload]_. This can be done by using the `age` field that is included in each LSP. The `age` field is used to bound the maximum lifetime of a link state packet in the network. When a router generates a LSP, it sets its lifetime (usually measured in seconds) in the `age` field. All routers regularly decrement the `age` of the LSPs in their LSDB and a LSP is discarded once its `age` reaches `0`. The `two-way conn
+
+
+To compute its routing table, each router computes the spanning rooted at itself by using Dijkstra's shortest path algorithm [Dijkstra1959]_. The routing table can be derived automatically from the spanning.
+
+.. figure:: fig/network-fig-049-c.png
+   :align: center
+   :scale: 70   
+
+   Computation of the routing table
+
 
 
 .. todo explain broadcast address IPv4 ?
@@ -1967,6 +2059,8 @@ Due to this organisation of the Internet and due to the BGP decision process, mo
 
 
 .. rubric:: Footnotes
+
+.. [#foverload] It should be noted that link state routing assumes that all routers in the network have enough memory to store the entire LSDB. The routers that do not have enough memory to store the entire LSDB cannot participate in link state routing. Some link state routing protocols allow routers to report that they do not have enough memory and must be removed from the graph by the other routers in the network.
 
 .. [#fclasses] In addition to the A, B and C classes, :rfc:`791` also defined the `D` and `E` classes of IPv4 addresses. Class `D` (resp. `E`) addresses are those whose high order bits are set to `1110` (resp. `1111`). Class `D` addresses are used by IP multicast and will be explained later. Class `E` addresses are currently unused, but there are some discussions on possible future usages [WMH2008]_ [FLM2008]_
 

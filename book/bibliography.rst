@@ -127,3 +127,20 @@ Whenever possible, the bibliography includes hypertext links to the references c
 .. [BMO2006] Bhatia, M., Manral, V., Ohara, Y., IS-IS and OSPF Difference Discussions, Internet draft, Jan. 2006, http://tools.ietf.org/html/draft-bhatia-manral-diff-isis-ospf-01, work in progress
 
 .. [Perlman2000] Perlman, R., Interconnections : Bridges, routers, switches and internetworking protocols, 2nd edition, Addison Wesley, 2000
+
+.. [FRT2002] Fortz, B. Rexford, J. ,Thorup, M., Traffic engineering with traditional IP routing protocols, IEEE Communication Magazine, October 2002
+
+
+.. [KZ1989] Khanna, A. and Zinky, J. 1989. The revised ARPANET routing metric. SIGCOMM Comput. Commun. Rev. 19, 4 (Aug. 1989), 45-56. DOI= http://doi.acm.org/10.1145/75247.75252
+
+.. [Dijkstra1959] Dijkstra, E. A Note on Two Problems in Connection with Graphs. Numerische Mathematik, 1:269- 271, 1959.
+
+.. [MRR1979] McQuillan, J. M., Richer, I., and Rosen, E. C. 1979. An overview of the new routing algorithm for the ARPANET. In Proceedings of the Sixth Symposium on Data Communications (Pacific Grove, California, United States, November 27 - 29, 1979). SIGCOMM '79. ACM, New York, NY, 63-68. DOI= http://doi.acm.org/10.1145/800092.802981
+
+.. [CR1989] Chiu, D., Jain, R., Analysis of the Increase and Decrease Algorithms for Congestion Avoidance in Computer Networks, Computer Networks and ISDN Systems Vol 17, pp 1-14, 1989.
+
+.. [Jacobson1989] Jacobson, V. 1988. Congestion avoidance and control. In Symposium Proceedings on Communications Architectures and Protocols (Stanford, California, United States, August 16 - 18, 1988). V. Cerf, Ed. SIGCOMM '88. ACM, New York, NY, 314-329. DOI= http://doi.acm.org/10.1145/52324.52356
+
+.. [RJ1995] Ramakrishnan, K. K. and Jain, R. 1995. A binary feedback scheme for congestion avoidance in computer networks with a connectionless network layer. SIGCOMM Comput. Commun. Rev. 25, 1 (Jan. 1995), 138-156. DOI= http://doi.acm.org/10.1145/205447.205461
+
+.. [MSMO1997] Mathis, M., Semke, J., Mahdavi, J., and Ott, T. 1997. The macroscopic behavior of the TCP congestion avoidance algorithm. SIGCOMM Comput. Commun. Rev. 27, 3 (Jul. 1997), 67-82. DOI= http://doi.acm.org/10.1145/263932.264023
