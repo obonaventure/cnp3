@@ -24,7 +24,7 @@ by `Olivier Bonaventure`_, `Mickael Hoerdt`_, `Laurent Vanbever`_ and
    S7/ip2
    S8/routing1
    S9/routing2
-..   S10/routing3
+   S10/routing3
 ..   S11/lan2
 
 Indices and tables
