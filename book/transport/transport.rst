@@ -929,6 +929,16 @@ Explain the congestion problem
 by Nagle describes it briefly
 
 
+[CR1989] general problem and binary feedback
+(non -binary feedback is more complex to be discussed here, but point to ATM)
+
+
+graph rate1 versus rate 2
+
+how to regulate the rate in TCP : window/rtt
+
+show graph cwind1 versus cwnd2
+
 .. figure:: fig/transport-fig-081-c.png 
    :align: center
    :scale: 70 
@@ -940,8 +950,12 @@ by Nagle describes it briefly
    :align: center
    :scale: 70 
 
-   TCP self clockingCongestion in a simple internetwork
+   TCP self clocking
 
+
+.. sidebar:: Initial TCP window
+
+ :rfc:`3390` changes from 1 to 4, some stacks may be higher than this, especially for http and short responses
 
 
 
@@ -975,6 +989,8 @@ and RED ?? if decbit/ecn
 add to transmission control block
 
 
+To understand the impact of losses of the throughput achieved by a TCP connection, it is useful to consider a simple scenario. Consider a single TCP connection
+
 .. figure:: fig/transport-fig-089-c.png 
    :align: center
    :scale: 70 
@@ -990,6 +1006,7 @@ Framerelay
 ATM, ABR, EFCI
 XCP ?
 
+dccp RFC 4340 :rfc:`4340`
 
 
 Other transport protocols
