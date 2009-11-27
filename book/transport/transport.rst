@@ -1,6 +1,6 @@
-===================
-The transport layer
-===================
+=====================
+ The transport layer
+=====================
 
 The transport layer contains essential protocols
 
@@ -25,7 +25,7 @@ Some transport protocols have been developed on top of a connection-oriented net
 This chapter is organised as follows. We first explain how it is possible to provide a reliable transport service on top of an unreliable connectionless network service. For this, we build step by step a simple protocol that provides a reliable data transfer and explain the main mechanisms found in such protocols. Then, we study in details the two transport protocols that are used in the Internet. We start from the User Datagram Protocol (UDP) that provides a simple connectionless transport service. Then, we describe the Transmission Control Protocol in details, including its congestion control mechanism.
 
 Principles of a reliable transport protocol
-###########################################
+===========================================
 
 In this section, we will design a reliable transport protocol running above a connectionless network layer service. For this, we will first assume that the network layer provides a perfect service, i.e. :
 
@@ -38,7 +38,7 @@ In this section, we will design a reliable transport protocol running above a co
 We will remove these assumptions one after the other in order to better understand the mechanism that inside the transport layer is used to solve each imperfection.
 
 Reliable data transfer on top of a perfect network service
-===========================================================
+----------------------------------------------------------
 
 The transport layer entity that we will design will interact with a user in the application layer and also with an entity in the network layer. According to the reference model, these interactions will be performed by using `DATA.req`and DATA.ind` primitives. However, to simplify the presentation and avoid a confusion between a `DATA.req` primitive issued by the user of the transport layer entity and a `DATA.req` issued by the transport layer entity itself, we will use the following terminology :
 
@@ -272,7 +272,7 @@ The sender side of this protocol can be expressed by the following python code a
 
 
 Reliable data transfer on top of an imperfect network service
-==============================================================
+-------------------------------------------------------------
 
 
 Let us first consider a connectionless network service that may corrupt SDUs. Different types of corruption are possible :
@@ -337,7 +337,7 @@ Implementation of the Internet checksum defined in :rfc:`1071` in C ::
 .. _UDP:
 
 The User Datagram Protocol
-##########################
+==========================
 
 
 The User Datagram Protocol (UDP) was defined in :rfc:`768`. It provides an unreliable connectionless transport service on top of the unreliable network layer connectionless service. The main characteristics of the UDP service are :
@@ -405,7 +405,7 @@ Several types of applications rely on UDP. As a rule of thumb, UDP is used for a
 .. _TCP:
 
 The Transmission Control Protocol
-#################################
+=================================
 
 
 The Transmission Control Protocol (TCP) was initially defined in :rfc:`793`. Several parts of the protocol have been improved since the publication of the original protocol specification [#ftcpspecs]_. However, the basics of the protocol remain and an implementation that only supports :rfc:`793` should interoperate with today's implementation.
@@ -470,7 +470,7 @@ The rest of this section is organised as follows. We first explain the establish
 .. _TCPOpen:
 
 TCP connection establishment
-============================
+----------------------------
 
 .. index:: TCP Connection establishment, TCP SYN, TCP SYN+ACK
 
@@ -591,7 +591,7 @@ The TCP options are encoded by using a Type Length Value format where :
 .. _TCPRelease:
 
 TCP connection release
-======================
+----------------------
 
 .. index:: TCP connection release
 
@@ -645,7 +645,7 @@ The `TIME\_WAIT` state is different from the other states of the TCP FSM. A TCP 
 .. _TCPReliable:
 
 TCP reliable data transfer
-==========================
+--------------------------
 
 The original TCP data transfer mechanisms were defined in :rfc:`793`. Based on the experience of using TCP on the growing global Internet, this part of the TCP specification has been updated and improved several times, always while preserving the backward compatibility with older TCP implementations. In this section, we review the main data transfer mechanisms used by TCP, starting from the older ones to several of the recent ones. 
 
@@ -683,7 +683,7 @@ To send new data on an established connection, a TCP entity performs the followi
 When a TCP segment with the `ACK` flag set is received, the following operations are performed. `rcv.wnd` is set to the value of the `window` field of the received segment. The `acknowledgement numnber` is compared to `snd.una`. The newly acknowledged data is remove from the `sending buffer` and `snd.una` is updated. If the TCP segment contained data, the `sequence number` is compared to `rcv.nxt`. If they are equal, the segment was received in sequence and the data can be delivered to the user and `rcv.nxt` is updated. The contents of the `receiving buffer` is checked to see whether other data already present in this buffer can be delivered in sequence to the user. If so, `rcv.nxt` is updated again. Otherwise, the segment's payload is placed in the `receiving buffer`.
 
 Segment transmission strategies
--------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. index:: Nagle algorithm
 
@@ -723,7 +723,7 @@ The figure below provides a distribution of the packet sizes measured on a link.
 .. index:: large window
 
 TCP windows
------------
+~~~~~~~~~~~
 
 From a performance viewpoint, one of the main limitations of the original TCP specification is the 16 bits `window` field in the TCP header. As this field indicates the current size of the receive window in bytes, it limits the TCP receive window at 65535 bytes. This limitation was not a severe problem when TCP was designed since at that time high-speed wide area networks offered a maximum bandwidth of 56 kbps. However, in today's network, this limitation is not acceptable anymore. The table below provides the rough [#faveragebandwidth]_ maximum throughput that can be achieved by a TCP connection with a 64 KBytes window in function of the connection's round-trip-time 
 
@@ -754,7 +754,7 @@ These throughputs are acceptable in today's networks. However, there are already
 .. index::retransmission timer, round-trip-time, timestamp option
 
 TCP's retransmission timeout
-----------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 In a go-back-n transport protocol such as TCP, the retransmission timeout must be correctly set in order to achieve good performance. If the retransmission timeout expires too early, then bandwith is wasted by retransmitting segments that have been already correctly received. If the retransmission timeout expires too late, then bandwidth is wasted because the sender is idle waiting for the expiration of its retransmission timeout.
 
@@ -819,7 +819,7 @@ The proposed values for the parameters are :math:`\alpha=\frac{1}{8}` and :math:
 
  
 Advanced retransmission strategies
-----------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. index:: exponential backoff
  
@@ -873,13 +873,14 @@ From a performance viewpoint, one issue with the TCP's `retransmission timeout` 
 As shown above, when an isolated segment is lost the sender will receive several `duplicate acknowledgements` since the TCP receiver immediately sends a pure acknowledgement when it receives an out-of-sequence segment. A duplicate acknowledgement is an acknowledgement that contains the same `acknowledgement number` as a previous segment. A single duplicate acknowledgement does not necessarily imply that a segment was lost as a simple reordering of the segments may cause duplicate acknowledgements as well. Measurements  [Paxson99]_ have shown that segment reordering is a frequent in the Internet. Based on these observations, the `fast retransmit` heuristics has been included in most TCP implementations. It can be implemented as follows ::
 
    ack arrival:
-       if tcp.ack==rcv.nxt:    # duplicate acknowledgement
+       if tcp.ack==snd.una:    # duplicate acknowledgement
        	  dupacks++
 	  if dupacks==3:
-	     retransmit segment(rcv.nxt)
+	     retransmit segment(snd.una)
        else:
 	  dupacks=0
 	  # process acknowledgement
+
 
 This heuristic requires an additional variable in the TCB (`dupacks`). Most implementations set the default number of duplicate acknowledgements that trigger a retransmission to 3. It is now part of the standard TCP specification :rfc:`2581`. The `fast retransmit` heuristics improves the TCP performance provided that :
 
@@ -915,35 +916,28 @@ When a sender receives a SACK option that indicates a new block and thus a new p
   
 .. todo
 
-..Many researchers have worked on techniques to improve the data transfer mechanisms used by TCP. 
+.. Many researchers have worked on techniques to improve the data transfer mechanisms used by TCP. 
 
 
 
 .. _TCPCongestion:
 
 TCP congestion control
-======================
+----------------------
 
-Explain the congestion problem
+In the previous sections, we have explained the mechanisms that TCP uses to deal with transmission errors and segment losses. In an heterogeneous network such as the Internet or enterprise IP networks, endsystems will have very different performances. Some endsystems are highend servers attached to 10 Gbps links while others are mobile devices with a very low bandwidth wireless link. Despite of this huge difference in terms of performance, the mobile device should be able to download a file from the highend server.
 
-by Nagle describes it briefly
+.. index:: TCP self clocking
 
+To better understand this problem, let us consider the scenario shown in the figure below where a server (`A`) attached to a `10 Mbps` link is sending TCP segments to a laptop (`C`) attached to a `2 Mbps` link.
 
-[CR1989] general problem and binary feedback
-(non -binary feedback is more complex to be discussed here, but point to ATM)
-
-
-graph rate1 versus rate 2
-
-how to regulate the rate in TCP : window/rtt
-
-show graph cwind1 versus cwnd2
-
-.. figure:: fig/transport-fig-081-c.png 
+.. figure:: fig/transport-fig-090-c.png 
    :align: center
    :scale: 70 
 
    TCP over heterogenous links 
+
+In this network, the TCP segments sent by the server will reach router `R1` that will forward the segments towards router `R2`. Router `R2` can potentially receive segments at `10 Mbps`, but it can only forward them at `2 Mbps` to host `C`.  Router `R2` contains buffers that allow it to store the packets that cannot be immediately forwarded to their destination. To understand the operation of TCP in this environment, let us consider a simplified model of this network where host `A` is attached to a `10 Mbps` link to a queue that represents the buffers of router `R2`. This queue is emptied at a rate of `2 Mbps`.
 
 
 .. figure:: fig/transport-fig-082-c.png 
@@ -953,64 +947,201 @@ show graph cwind1 versus cwnd2
    TCP self clocking
 
 
-.. sidebar:: Initial TCP window
-
- :rfc:`3390` changes from 1 to 4, some stacks may be higher than this, especially for http and short responses
+Let us consider that host `A` uses a window of three segments. It will thus send three back-to-back segments at `10 Mbps`. Host `A` stops sending segments when its window is full. These segments will reach the buffers of router `R2`. The first segment stored in this buffer will be sent by router `R2` at a rate of `2 Mbps` to the destination host. Upon reception of this segment, the destination will send an acknowledgement. This acknowledgement will allow host `A` to transmit a new segment. This segment will be stored in the buffers of router `R2` while it is transmitting the second segment that when sent by host `A`... Thus, after the transmission of the first window of segments, TCP will send one data segment after the reception of each acknowledgement returned by the destination [#fdelack]_ . In practice, the acknowledgements sent by the destination serve as a kind of `clok` that allows the sending host to adapt its transmission rate to the rate at which segments are received by the destination. This `TCP self-clocking` is the first mechanism that allows TCP to adapt to heterogeneous networks [Jacobson1988]_. It depends on the availability of buffers to store the segments that have been sent by the sender and have not yet been transmitted to the destination.
 
 
+However, TCP is rarely used in this simple environement. In the global Internet, TCP is used in networks where a large number of hosts send segments to a large number of receivers. For example, let us consider the network depicted below that is similar to the one discussed in [Jacobson1988]_ and :rfc:`896`. In this network, we assume that the buffers of the router are infinite to ensure that no packets will be lost.
 
-defined in :rfc:`5681`
+.. index:: congestion collapse
+
+.. figure:: fig/transport-fig-083-c.png 
+   :align: center
+   :scale: 70 
+
+   The congestion collapse problem
+
+
+
+If many TCP senders are attached to the left part of the network above, they will all send a window full of segments. These segments will be stored in the buffers of the router before being transmitted towards their destination. If there are many senders on the left part of the network, the occupancy of the buffers will quickly grow. A consequence of the buffer occupancy is that the round-trip-time, measured by TCP, between the sender and the receiver will increase. Consider a network where 10.000 bits segments are sent. When the buffer is empty, such a segment spents 1 millisecond to be transmitted on the `10 Mbps` link and 5 milliseconds to be the transmitted on the `2 Mbps` link. Thus, the round-trip-time measure by TCP is roughly 6 milliseconds. As a router manages its buffers as a FIFO queue, if the buffer contains 100 segments, the round-trip-time will become :math:`1+100 \ times 5+ 5` milliseconds as a new segment will only be transmitted on the `2 Mbps` link once all previous segments have been transmitted. Unfortunately, TCP uses a retransmission timer and performs `go-back-n` to recover from tranmission errors. If the buffer occupancy is high, TCP will assume that some segments have been lost and will retransmit a full window of segments. This will increase the occupancy of the buffer and the delay through the buffer... Furthermore, the buffer may store and send on the low bandwidth links several retransmissions of the same segment. This problem is called `congestion collapse`. It occured several times in the late 1980s. For example, [Jacobson1988]_ notes that in 1986, the useable bandwidth of a 32 Kbits link dropped to 40 bits per second due to congestion collapse [#foldtcp]_ !
+
+The `congestion collapse` is a problem that faces all heterogenous networks. Different types of mechanisms have been proposed in the scientific literature and some of them have been implemented and deployed in real networks. To understand this problem in more details, let us first consider a simple network with two hosts attached to a high bandwidth link that are sending information to a destination attached to a low bandwidth link as depicted below.
 
 .. figure:: fig/transport-fig-080-c.png 
    :align: center
    :scale: 70 
 
-   Congestion in a simple internetwork
+   The congestion problem
+
+To avoid `congestion collapse`, the hosts must regulate their transmission rate [#fcredit]_ by using a `congestion control` mechanism. Such a mechanism can be implemented in the transport layer or in the network layer. In TCP/IP networks, it is implemented in the transport layer, but other technologies such as `Asynchronous Transfert Mode (ATM)` or `Frame Relay` include congestion control mechanisms in lower layers.
+
+.. index:: Fairness, max-min fairness
+
+Let us first consider the simple problem of a set of :math:`i` hosts that share a single bottleneck link as shwn in the example above. In such as network, the congestion control scheme must achieve the following objectives [CJ1989]_ :
+
+ #. The congestion control scheme must `avoid congestion`. in practice, this means that the bottleneck link cannot be overloaded. If :math:`r_i(t)` is the transmission rate allocated to host :math:`i` at time :math:`t` and :math:`R` the bandwidth of the bottleneck link, then the congestion control scheme should ensure that on average :math:`\forall{t} \sum{r_i(t)} \le R`. 
+ #. The congestion control scheme must be `efficient`. The bottleneck link is usually both a shared and an expensive resources. Usually, bottleneck links are wide area links that are much more expensive to upgrade than the local area networks. The congestion control scheme should ensure that such links are efficiently used. Mathematically, the control scheme should ensure that :math:`\forall{t} \sum{r_i(t)} \approx R`.
+ #. The congestion control scheme should be `fair`. Most congestion schemes aim at achieving `max-min fairness`. An allocation of transmission rates to sources is said to be `max-min fair` if no link in the network is congested and furthermore, the rate allocated to source :math:`j` cannot be increased by decreasing the rate allocated to a source :math:`i` whose allocation is smaller than the rate allocated to source :math:`j` [Leboudec2008]_. Depending on the network, a `max-min fair allocation` may not always exist. In practice, `max-min fairness` whill the ideal objective that cannot necessarily be achieved. When there is a single blottlneck link as in the example above, `max-min fairness` implies that each source should be allocated the same transmission rate.
+
+To visualise the different rate allocations, it is useful to consider the graph shown below. In this graph, we plot on the `x-axis` (resp. `y-axis`) the rate allocated to host `B` (resp. `A`). A point in the graph :math:`(r_B,r_A)` Corresponds to a possible allocation of the transmission rates. Since there is a `2 Mbps` bottleneck link in this network, the graph can be divided in two regions. The  lower left part of the graph contains all allocations :math:`(r_B,r_A)` that are such that the bottleneck link is not congested (:math:`r_A+r_B<2`). The right border of this region is the `efficiency line`, i.e. the set of allocations that completely utilise the bottleneck link (:math:`r_A+r_B=2`). Finally, the `fairness line` is the set of fair allocations. 
+
+.. figure:: fig/transport-fig-092-c.png 
+   :align: center
+   :scale: 70 
+
+   Possible allocated transmission rates
+
+As shown in the graph above, a rate allocation may be fair but not efficient (e.g. :math:`r_A=0.7,r_B=0.7`), fair and efficient ( e.g. :math:`r_A=1,r_B=1`) or efficient but not fair (e.g. :math:`r_A=1.5,r_B=0.5`). Ideally, the allocation should be both fair and efficient, but maintaining such an allocation with fluctuations in the number of flows that use the network is a challenging problem. There might be several thousands of TCP connections or more that pass through the same link [#fflowslink]_.
+
+To deal with these fluctuations in the demand that result in fluctuations in the available bandwidth, computer networks use a congestion control scheme. This congestion control scheme should achieve the three objectives listed above. Some congestion control schemes rely on a close cooperation between the endhosts and the routers while others are mainly implemented on the endhosts with limited support from the routers. 
+
+A congestion control scheme can be modelled as a algorithm that adapts the transmission rate (:math:`r_i(t)`) of host :math:`i` based on the feedback received from the network. Different types of feedbacks are possible. The simplest scheme is a binary feedback [CJ1989]_  [Jacobson1988]_ where the hosts simply learn whether the network is congested or not. Some congestion control schemes allow the network to regularly send the allocated transmission rate in Mbps to each host [BF1995]_. 
+
+.. index:: Additive Increase Multiplicative Decrease (AIMD)
+
+Let us focus on the binary feedback scheme which is today the most widely used. Intuitively, the congestion control scheme should decrease the transmission rate of a host when congestion has been detected in the network to avoid congestion collapse. Furthermore, the hosts should increase there transmission rate when the network is not congested. Otherwise, the hosts would not be able to efficiently utilise the network. The rate allocated to each host will fluctuate with time depending on the feedback received from the network. The figure below illustrates the evolution of the transmission rates allocated to two hosts in our simple network. Initially, two hosts have a low allocation, but this is not efficient. The allocations increases until the network becomes congested. At this point, the hosts decrease their transmission rate to avoid congestion collapse. If the congestion control scheme works well, after some time the allocation should be both fair and efficient.
+
+.. figure:: fig/transport-fig-093-c.png 
+   :align: center
+   :scale: 70 
+
+   Evolution of the transmission rates 
 
 
-[CR1989] Chiu, D., Jain, R., Analysis of the Increase and Decrease Algorithms for Congestion Avoidance in Computer Networks, Computer Networks and ISDN Systems Vol 17, pp 1-14, 1989.
+Various types of rate adaption algorithms are possible. `Dah Ming Chiu`_ and `Raj Jain`_ have analysed in [CJ1989]_ different types of linear algorithms. Let us assume that the binary feedback :math:`y(t)` is defined as :math:`y(t)=[ if ( \sum{r_i(t) \le R})~then~1~else~0]`. In this case, the linear adaptation algorithm can be written as :math:`r_i(t+1) = u_{y(t)}\times r_i(t) + v_{y(t)}` where :math:`u_0, u_1, v_0` and :math:`v_1` are constants. The analysis of [CR1989]_ shows that to be fair and efficient, such a binary rate adaption mechanism must relay on `Additive Increase and Multiplicative Decrease`. When the network is not congested, the hosts should slowy increase their transmission rate (:math:`u_0=1 and v_0>0`). When the network is congested, the hosts must multiplicatively decrease their transmission rate (:math:`u_1 < 1~and~v_1 = 0`). Such an AIMD rate adapation algorithm can be implemented by the pseudocode below ::
 
-[Jacobson1989] Jacobson, V. 1988. Congestion avoidance and control. In Symposium Proceedings on Communications Architectures and Protocols (Stanford, California, United States, August 16 - 18, 1988). V. Cerf, Ed. SIGCOMM '88. ACM, New York, NY, 314-329. DOI= http://doi.acm.org/10.1145/52324.52356
-
-[RJ1995] Ramakrishnan, K. K. and Jain, R. 1995. A binary feedback scheme for congestion avoidance in computer networks with a connectionless network layer. SIGCOMM Comput. Commun. Rev. 25, 1 (Jan. 1995), 138-156. DOI= http://doi.acm.org/10.1145/205447.205461
-
-[MSMO1997] Mathis, M., Semke, J., Mahdavi, J., and Ott, T. 1997. The macroscopic behavior of the TCP congestion avoidance algorithm. SIGCOMM Comput. Commun. Rev. 27, 3 (Jul. 1997), 67-82. DOI= http://doi.acm.org/10.1145/263932.264023
-
-
-explain tail-drop 
+ # Additive Increse Multiplicative Decrease	
+ if congestion :
+    rate=rate*u1    # multiplicative decrease, u1<1
+ else
+    rate=rate+v0    # additive increase, v0>0
 
 
+.. sidebar:: Which binary feedback ?
 
-and RED ?? if decbit/ecn
-
-
-
-
-add to transmission control block
+ Two types of binary feedback are possible in computer networks. A first solution is to rely on implicit feedback. This is the solution chosen for TCP. TCP's congestion control scheme [Jacobson1988]_ does not require any cooperation from the router. It only assumes that they use buffers and that they discard packets when there is congestion. TCP uses the segment losses as an indication of congestion. When there are no losses, the network is assumed to be not congested. This implies that congestion is the main cause of packet losses. This is true in wired networks, but unfortunately not always true in wireless networks. 
+ Another solution is to rely on explicit feedback. This is the solution proposed in the DECBit congestion control scheme [RJ1995]_ and used in Frame Relay and ATM networks. This explicit feedback can be implemented in two ways. A first solution would be to define a special message that could be sent by routers to hosts when they are congested. Unfortunately, generating such messages may increase the amount of congestion in the network. Such a solution is thus discouraged :rfc:`1812`. A better approach is to allow the intermediate routers to indicate, in the packets that they forward, their current congestion status. A binary feedback can be encoded by using one bit in the packet header. With such a scheme, congested routers will set a special bit in the packets that they forward while non-congested routers will leave this bit unmodified. The destination host will return the congestion status of the network in the acknowledgements that it sends to the sending host. Details about such a solution in IP networks may be found in :rfc:`3168`. Unfortunately, as of this writing, this solution is still not deployed despite its potential benefits.
 
 
-To understand the impact of losses of the throughput achieved by a TCP connection, it is useful to consider a simple scenario. Consider a single TCP connection
+.. todo provide illustrations with simulations
+
+
+The TCP congestion control scheme was initially proposed by `Van Jacobson`_ in [Jacobson1988]_. The current specification may be found in :rfc:`5681`. TCP relies on `Additive Increase and Multiplicative Decrease (AIMD)`. To implement :term:`AIMD`, a TCP host should be able to control its transmission rate. A first approach would be to use timers and adjust their expiration times in function of the rate imposed by :term:`AIMD`. Unfortunately, maintaining such timers for a largenumber of TCP connections can be difficult. Instead, `Van Jacobson`_ noted that the rate of a TCP congestion can be artificially controlled by constraining the window size. A TCP connection cannot send data faster than :math:`\frac{window}{rtt}` where :math:`window` is the maximum between the host's sending window and the window advertised by the receiver.
+
+TCP's congestion control scheme is based on a `congestion window`. The current value of the congestion window (`cwnd`) is stored in the TCB of each TCP connection. The `Additive Increase` part of the TCP congestion control increments the congestion window by :term:`MSS` bytes every round-trip-time. In this TCP literature, this phase is often called the `congestion avoidance` phase. The `Multiplicative Decrease` part of the TCP congestion control divides the current value of the congestion window once congestion has been detected.
+
+When a TCP connection starts, the sending host does not know whether the part of the network that it uses to reach the destination is congested or not. To avoid causing too much congestion, it must start with a small congestion window. [Jacobson1988]_ recommended an initial window of MSS bytes. As the additive increase part of the TCP congestion control scheme increments the congestion window by MSS bytes every round-trip-time, the TCP connection may have to wait many round-trip-times before being able to efficiently use the available bandwidth. This is especially important in environments where the :math:`bandwidth \times rtt` product is high. To avoid waiting too many round-trip-times before reaching a congestion window that is large enough to efficiently utilise the network, the TCP congestion control scheme includes the `slow-start` algorithm. The objective of the TCP `slow-start` is to quickly reach an acceptable value for the `cwnd`. During `slow-start`, the congestion window is doubled every round-trip-time. The `slow-start` algorithm uses an additional variable in the TCB : `sshtresh` (`slow-start threshold`). The `ssthresh` is an estimation of the last value of the `cwnd` that did not cause congestion. It is initialised at the sending window and is updated after each congestion event. 
+
+In practice, a TCP implementation will consider the network to be congested once its needs to retransmit a segment. The TCP congestion control scheme distinguishes between two types of congestion :
+
+ - `mild congestion`. TCP considers that the network is lightly congested if it receives three duplicate acknowledgements and performs a fast retransmit. If the fast retransmit is successful, this implies that only one segment has been lost. In this case, TCP performs multiplicative decrease and the congestion window is divided by `2`. The slow-start theshold is set to the new value of the congestion window.
+ - `severe congestion`. TCP considers that the network is severely congested if its retransmission expires. In this case, TCP retransmits the first segment, sets the slow-start threshold to 50% of the congestion window. The congestion window is reset to its initial value and TCP performs a slow-start.
+
+The figure below illustrates the evolution of the congestion window when there is severe congestion.
+
+.. figure:: fig/transport-fig-088-c.png 
+   :align: center
+   :scale: 70 
+
+   Evaluation of the TCP congestion window with severe congestion
+
+
+The figure below illustrates the evolution of the congestion window when the network is lightly congested and all lost segments can be retransmitted by using fast retransmit.
+
+.. figure:: fig/transport-fig-094-c.png 
+   :align: center
+   :scale: 70 
+
+   Evaluation of the TCP congestion window when the network is lightly congested
+
+
+Most TCP implementations update the congestion window when they receive an acknowledgement. If we assume that the receiver acknowledges each received segment and the the sender only sends MSS sized segments, the TCP congestion control scheme can be implemented by using the simplified pseudocode [#fwrap]_ below ::
+
+ # Initialisation 
+ cwnd = MSS;
+ ssthresh= swin;
+    
+ # Ack arrival 
+ if tcp.ack > snd.una :  # new ack, no congestion
+    if  cwnd < ssthresh :
+      # slow-start : increase quickly cwnd
+      # double cwnd  every rtt
+      cwnd = cwnd + MSS
+    else:
+      # congestion avoidance : increase slowly cwnd
+      # increase cwnd by one mss every rtt
+      cwnd = cwnd+ mss*(mss/cwnd)
+ else: # duplicate or old ack
+    if tcp.ack==snd.una:    # duplicate acknowledgement
+      dupacks++
+      if dupacks==3:
+	retransmitsegment(snd.una)
+	ssthresh=min(cwnd/2,2*MSS)
+	cwnd=ssthresh   
+      else:
+	dupacks=0
+	# ack for old segment, ignored
+  
+ Expiration of the retransmission timer:
+  send(snd.una)     # retransmit first lost segment
+  sshtresh=min(cwnd/2,2*MSS)
+  cwnd=MSS
+  
+ 
+Furthermore when a TCP connection has been idle for more than its current retransmission timer, it should reset its congestion window to congestion window size that it uses when the connection begins.
+
+.. sidebar:: Initial congestion window
+
+ The original TCP congestion control mechanism proposed in [Jacobson1988]_ recommended that each TCP connection begins by setting :math:`cwnd=MSS`. However, in today's higher bandwidth networks, using such a small initial congestion window severely affects the performance for short TCP connections, such as those to web servers. Since the publication of :rfc:`3390`, TCP hosts are allowed to use an initial congestion window of about 4 KBytes, which corresponds to 3 segments in many environments. 
+
+.. todo example
+
+
+Thanks to its congestion control scheme, TCP adapts its transmission rate to the losses that occur in the network. Intuitively, the TCP transmission rate decreases when the percentage of losses increases. Researchers have proposed detailed models that allow to predict the throughput of a TCP connection when losses occur [MMSO1997]_. To have some intuition about the factors that affect the performance of TCP, let us consider the simplest of this model. Its assumptions are not completely realistics, but it will give us a good intuition without requiring complex mathematics.
+
+This model considers an hypothetical TCP connection that suffers from equally spaced segment losses. If :math:`p` is the segment loss ratio, then the TCP connection successfully transfers :math:`\frac{1}{p}-1` segments and the next segment is lost. If we ignore the slow-start at the beginning of the connection, TCP in this environment will always be in congestion avoidance as there are only isolated losses that can be recovered by using the fast retransmit algorithm. The evolution of the congestion window will thus be as shown in the figure below. Note the that `x-axis` of this figure represents time measured in units of one round-trip-time, which is supposed to be constant in the model, and the `y-axis` represents the size of the congestion window measured in MSS-sized segments.
 
 .. figure:: fig/transport-fig-089-c.png 
    :align: center
    :scale: 70 
 
-   Simple model of TCP performance with losses
+   Evolution of the congestion window with regular losses
+
+As the losses are equally spaced, the congestion window will always start at some value (:math:`\frac{W}{2}`), be incremented by one MSS every round-trip-time until it reaches twice this value (`W`). At this point, a segment is retransmitted and the cycle starts again. If the congestion window is measured in MSS-sized segments, a cycle lasts :math:`\frac{W}{2}` round-trip-times. The bandwidth of the TCP connection is the number of bytes that have been transmitted during a given period of time. During a cycle, the number of segments that are sent on the TCP connection is equal to the area of the yellow trapeze in the figure. Its area is thus :
+
+ :math:`area=(\frac{W}{2})^2 + \frac{1}{2} \times (\frac{W}{2})^2 = \frac{3 \times W^2}{8}`
+
+However, given the regular losses that we consider, the number of segments that are sent between two losses (i.e. during a cycle) is by definition equal to :math:`\frac{1}{p}`. Thus, :math:`W=\sqrt{\frac{8}{3 \times p}}=\frac{k}{\sqrt{p}}`. The throughput (in bytes per second) of the TCP connection is equal to the number of segments transmitted divided by the duration of the cycle :
+ 
+ :math:`Throughput=\frac{area \times MSS}{time} = \frac{ \frac{3 \times W^2}{8}}{\frac{W}{2} \times rtt}`
+ or, after having eliminated `W`, :math:`Throughput=\sqrt{\frac{3}{2}} \times \frac{MSS}{rtt \times \sqrt{p}}`
 
 
-Other congestion control mechanisms
------------------------------------
+More detailed models and the analysis of simulations have shown that a first order model of the TCP throughput when losses occur was :math:`Throughput \approx \frac{k \times MSS}{rtt \times \sqrt{p}}`. This is an important results that shows that :
 
-Decbit
-Framerelay
-ATM, ABR, EFCI
-XCP ?
+ - TCP connections with a small round-trip-time can achieve a higher throughput than TCP connections having a longer round-trip-time when losses occur. This implies that the TCP congestion control scheme is not completely fair since it favors the connections that have the shorter round-trip-time
+ - TCP connections that use a large MSS can achieve a higher throughput that the TCP connections that use a shorter MSS. This creates another source of unfairness between TCP connections. However, it should be noted that today most hosts are using almost the same MSS that is roughly 1460 bytes. 
 
-dccp RFC 4340 :rfc:`4340`
+In general, the maximum throughput that can be achieved by a TCP connection depends on its maximum window size and the round-trip-time if there are no losses are the MSS, the round-trip-time and the loss ratio otherwise.
+
+ :math:`Throughput<min(\frac{window}{rtt},\frac{k \times MSS}{rtt \times \sqrt{p}})`
 
 
-Other transport protocols
-#########################
+.. sidebar:: The TCP congestion control zoo
+
+ The first TCP congestion control scheme was proposed by `Van Jacobson`_ in [Jacobson1988]_. In addition to writing the scientific paper, `Van Jacobson`_ also implemented the slow-start and congestion avoidance schemes in release 4.3 `Tahoe` of the BSD Unix distributed by the University of Berkeley. Later, he improved the congestion control by adding the fast retransmit and the fast recovery mechanisms in the `Reno` release of 4.3 BSD Unix. Since then, many researchers have proposed, simulated and implemented modifications to the TCP congestion control scheme. Some of these modifications are still used today, e.g. :
+
+  - `NewReno` (:rfc:`3782`) that was proposed in as an improvement over the fast recovery mechanism in the `Reno` implementation 
+  - `TCP Vegas` that uses changes in the round-trip-time to estimate congestion in order to avoid it [BOP1994]_
+  - `CUBIC` that was designed for high bandwidth links and is the default congestion control scheme in the Linux 2.6.19 kernel [HRX2008]_
+  - `Compound TCP` that was designed for high bandwidth links is the default congestion control scheme in several Microsoft operating systems [STBT2009]_
+
+ A search of the scientific literature will probably reveal more than 100 different variants of the TCP congestion control scheme. Most of them have only been evaluated by simulations. However, the TCP implementation in the recent Linux kernels supports several congestion control schemes and new ones can be easily added. We can expect that new TCP congestion control schemes will always continue to appear... 
+
+.. dccp RFC 4340 :rfc:`4340`
+
+
+.. Other transport protocols
+.. =========================
 
 .. stcp 
 .. xtp 
@@ -1069,6 +1200,14 @@ Other transport protocols
 
 .. [#tcbtouch] As a TCP client will often establish several parallel or successive connections with the same server, :rfc:`2140` has proposed to reuse for a new connection some information that was collected in the TCB of a previous connection, such as the measured rtt. However, this solution has not been widely implemented. 
 
+.. [#fdelack] If the destination is using delayed acknowledgements, the sending host will send two data segments after each acknowedgement.
 
+.. [#foldtcp] At this time, TCP implementations were mainly following :rfc:`791`. The round-trip-time estimations and the retransmission mechanisms were very simple. They were improved after the publication of [Jacobson1988]_
+
+.. [#fcredit] In this section, we focus on congestion control mechanisms that regulate the transmission rate of the hosts. Other types of mechanisms have been proposed in the literature. For example, `credit-based` flow-control has been proposed to avoid congestion in ATM networks [KR1995]_. With a credit-based mechanism, hosts can only send packets once they have received credits from the routers and the credits depend on the occupancy of the router's buffers. 
+
+.. [#fflowslink] For example, the measurements performed in the Sprint network in 2004 reported more than 10k active TCP connections on a link, see https://research.sprintlabs.com/packstat/packetoverview.php. More recent information about backbone links may be obtained from caida_ 's realtime measurements, see e.g.  http://www.caida.org/data/realtime/passive/ 
+
+.. [#fwrap] In this pseudo-code, we assume that TCP uses unlimited sequence and acknowledgement numbers. Furthermore, we do not detail how the `cwnd` is adjusted after the retransmission of the lost segment by fats retransmit. Additional details may be found in :rfc:`5681`.
 
 .. include:: ../links.rst

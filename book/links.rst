@@ -1,3 +1,4 @@
+.. _caida: http://www.caida.org
 
 .. _linux: http://www.linux.org
 
@@ -167,3 +168,6 @@
 
 .. _Laurent Vanbever: http://inl.info.ucl.ac.be/lvanbeve
 
+.. _Raj Jain: http://www.cse.wustl.edu/~jain/
+
+.. _Dah Ming Chiu: http://home.ie.cuhk.edu.hk/~dmchiu/

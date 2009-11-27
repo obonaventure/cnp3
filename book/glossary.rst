@@ -175,3 +175,5 @@ Glossary
    hub
 	A relay operating in the physical layer.   
 	
+   AIMD
+	Additive Increase, Multiplicative Decrease. A rate adaption algorithm used notably by TCP where a host additively increases its transmission rate when the network is not congested and multiplicatevely decreases when congested is detected.
