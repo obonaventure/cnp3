@@ -1,7 +1,7 @@
 BGP and IP over Ethernet
 ========================
 
-In this set of exercices, we will discuss about the BGP decision process and anlyse in more details the operation of IP in an Ethernet network.
+In this set of exercices, we will discuss about the BGP decision process and analyse in more details the operation of IP in an Ethernet network.
 
 
 The deadline for this exercise will be Tuesday December 8th, 13.00.
@@ -90,7 +90,7 @@ IP over Ethernet
 3. Consider now the transmission of IPv4 packets. One security issue with IPv4 is the Address Resolution Protocol (ARP). Can you explain what ARP spoofing or ARP poisoning is and show how host `A` in the network below could intercept all the IP packets sent by host `B` via the default router ?
 
 
-4. Same question as above, but now consider that the Ehternet network is not a coaxial cable but an Ethernet switch.  Is it possible to protect switches against these ARP spoofing attacks ? If so how ?
+4. Same question as above, but now consider that the Ethernet network is not a coaxial cable but an Ethernet switch.  Is it possible to protect switches against these ARP spoofing attacks ? If so how ?
 
  .. figure:: fig/IPEth-001-c.png
     :align: center
