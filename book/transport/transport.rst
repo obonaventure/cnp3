@@ -22,7 +22,7 @@ These imperfections of the connectionless network layer service will be better u
 
 Some transport protocols have been developed on top of a connection-oriented network service, such as class 0 of the ISO Transport Protocol (TP0) defined in [X224]_ , but they have not been widely used. We do not discuss such utilisation of a connection-oriented network service in more details in this book.
 
-This chapter is organised as follows. We first explain how it is possible to provide a reliable transport service on top of an unreliable connectionless network service. For this, we build step by step a simple protocol that provides a reliable data transfer and explain the main mechanisms found in such protocols. Then, we study in details the two transport protocols that are used in the Internet. We start from the User Datagram Protocol (UDP) that provides a simple connectionless transport service. Then, we describe the Transmission Control Protocol in details, including its congestion control mechanism.
+This chapter is organised as follows. We first explain how it is possible to provide a reliable transport service on top of an unreliable connectionless network service. For this, we explain the main mechanisms found in such protocols. Then, we study in details the two transport protocols that are used in the Internet. We start from the User Datagram Protocol (UDP) that provides a simple connectionless transport service. Then, we describe the Transmission Control Protocol in details, including its congestion control mechanism.
 
 Principles of a reliable transport protocol
 ===========================================
@@ -40,10 +40,11 @@ We will remove these assumptions one after the other in order to better understa
 Reliable data transfer on top of a perfect network service
 ----------------------------------------------------------
 
-The transport layer entity that we will design will interact with a user in the application layer and also with an entity in the network layer. According to the reference model, these interactions will be performed by using `DATA.req`and DATA.ind` primitives. However, to simplify the presentation and avoid a confusion between a `DATA.req` primitive issued by the user of the transport layer entity and a `DATA.req` issued by the transport layer entity itself, we will use the following terminology :
+The transport layer entity that we design will interact with a user in the application layer and also with an entity in the network layer. According to the reference model, these interactions will be performed by using `DATA.req`and DATA.ind` primitives. However, to simplify the presentation and avoid a confusion between a `DATA.req` primitive issued by the user of the transport layer entity and a `DATA.req` issued by the transport layer entity itself, we will use the following terminology :
 
  - the interactions between the user and the transport layer entity are represented by using the `DATA.req`, `DATA.ind`, ... primitives
- - the interactions between the transport layer entity and the network layer service are represented by using `send` instead of `DATA.req` and `recvd` instead of `DATA.ind` 
+ - the interactions between the transport layer entity and the network layer service are represented by using `send` instead of `DATA.req` and `recvd` instead of `DATA.ind`
+ 
 
 This is illustrated in the figure below.
 
@@ -64,11 +65,7 @@ When running on top of a perfect connectionless network, a transport level entit
 
 However, if the server is slower than the client, problems could arise. If the network layer on the server needs to deliver segments to the transport entity above it faster than the rate at which the transport entity can process them, a queue will build. A similar queue would build if the application above the transport layer does not process the received SDUs quickly enough. These queues have a limited size [#fqueuesize]_ and if they overflow, the corresponding entity will have to discard information that it has received.
 
-.. sidebar:: Scapy as a network prototyping tools
 
-   Throughout this section, we use scapy_  as a prototyping tool to build a reliable transport protocol. scapy_ is a packet manipulation tool that was written and is maintained by Philippe Biondi and many others. scapy_ is written in python_ and allows to easily create, manipulate and process many types of network packets. scapy_ can also be easily extended to support new protocols and allows to easily specify the complete finite state machine that implements a protocol. Additional information about scapy are available at : http://www.secdev.org/projects/scapy/
-
-.. Other possibilities : libpcap, libdnet, click
 
 To solve this problem, we need to introduce inside our transport protocol, and despite the fact that the network layer provides a perfect service, a feedback mechanism that allows the receiver to inform the sender that it has processed a segment and that another one can be sent. For this, our transport protocol must support two types of segments :
 
@@ -77,20 +74,9 @@ To solve this problem, we need to introduce inside our transport protocol, and d
 
 These two types of segments can be distinguished by using a segment composed of two parts :
 
- - a `header` that contains one bit so to `0` in data segments and to `1` in control segments
+ - a `header` that contains one bit set to `0` in data segments and to `1` in control segments
  - the payload containing the SDU supplied by the user application
 
-In the scapy_ framework, this segment format can be expressed as follows ::
-
- class P1(Packet):
-    name = "Protocol1"
-    fields_desc=[BitEnumField("type" , 2, {0:"Data", 1:"OK"}, ]
-    
-    def post_build(self, segment, SDU):
-        segment += SDU
-        return segment
-
-This scapy code defines a protocol with a header containing one bit. The bit is set to 0 in a data segment and 1 in an OK segment. The `post_build` method is used to indicate how the SDU should be added to build the complete segment.
 
 The transport entity can then be modelled as a finite state machine containing two states for the receiver and two states for the sender. The figure below provides a graphical representation of this state machine with the sender above and the receiver below.
 
@@ -98,216 +84,63 @@ The transport entity can then be modelled as a finite state machine containing t
    :align: center
    :scale: 70 
 
+   Finite state machine of the simplest transport protocol
 
-A time-sequence diagram showing 
+The above FSM shows that the sender has to wait for an acknowledgement from the receiver before being able to transmit the next SDU.  The figure below illustrates the exchange of a few segments between two hosts.
 
 .. figure:: fig/transport-fig-009-c.png
    :align: center
    :scale: 70 
 
-
-The receiver side of this protocol can be expressed by the following python code as a scapy_ automaton ::
-
- class P1Sender(Automaton):
-	def parse_args(self, sender, **kargs):
-		Automaton.parse_args(self, **kargs)
-		self.sender = sender
-		self.info = "CTRL"
-
-	def master_filter(self, pkt):
-        	return (IP in pkt and pkt[IP].src == self.sender and P1 in pkt)
-
-	@ATMT.state(initial=True)
-	def WAIT_DATA0 (self):
-		print "State: WAIT_DATA0"
-		pass
-		
-	@ATMT.state()
-	def WAIT_DATA1 (self):
-		print "State: WAIT_DATA1"
-		pass
-		
-
-	@ATMT.receive_condition(WAIT_FOR_OK)
-	def wait_data0 (self, pkt):
-		flag = pkt.getlayer(ABP).flags
-		payload = pkt.getlayer(ABP).payload.load
-		if flag == 0:
-			print "data received [[",payload,"]]"
-			packet = IP(dst=self.sender)/ABP(flags="ok0")/self.info
-			self.send(packet)
-			raise self.WAIT_DATA1()
-		if flag == 1:
-			packet = IP(dst=self.sender)/ABP(flags="ok1")/self.info
-			self.send(packet)
-			raise self.WAIT_DATA0()
-	
-	@ATMT.receive_condition(WAIT_DATA1)
-	def wait_data1 (self, pkt):
-		flag = pkt.getlayer(ABP).flags
-		payload = pkt.getlayer(ABP).payload.load
-		if flag == 1:
-			print "data received [[",payload,"]]"
-			packet = IP(dst=self.sender)/ABP(flags="ok1")/self.info
-			self.send(packet)
-			raise self.WAIT_DATA0()
-		if flag == 0:
-			packet = IP(dst=self.sender)/ABP(flags="ok0")/self.info
-			self.send(packet)
-			raise self.WAIT_DATA1()
-			
-
-
-The sender side of this protocol can be expressed by the following python code as a scapy automaton ::
-
- class P1(Automaton):
-	def parse_args(self, payloads, receiver,**kargs):
-        	Automaton.parse_args(self, **kargs)
-        	self.receiver = receiver
-       		self.q = Queue.Queue()
-		for item in payloads:
-			self.q.put(item)
-    
-	def master_filter(self, pkt):
-        	return (IP in pkt and pkt[IP].src == self.receiver and ABP in pkt)
-		
-	@ATMT.state(initial=1)
-	def WAIT_DATA_REQ0 (self):
-		print "State: WAIT_DATA_REQ0"
-		pass
-	
-	@ATMT.condition(WAIT_DATA_REQ0)
-	def wait_for_data0(self):
-		try:
-			self.payload = self.q.get(timeout=TIMEOUT)
-			print "data to be transmitted [[",self.payload,"]]"
-			raise self.WAIT_FOR_OK0_OR_NAK()
-		except Queue.Empty:
-			sys.exit(0)
-	
-	@ATMT.action(wait_for_data0)
-	def send_data0(self):
-		print "Transition: WAIT_DATA_REQ0 --> WAIT_FOR_OK0_OR_NAK / Sending data0 (Data Request)"
-		self.last_packet = IP(dst=self.receiver)/ABP(flags="data0")/self.payload
-		self.send(self.last_packet)
-	
-	@ATMT.state()
-	def WAIT_DATA_REQ1 (self):
-		print "State: WAIT_DATA_REQ1"
-	
-	@ATMT.condition(WAIT_DATA_REQ1)
-	def wait_for_data1(self):
-		try:
-			self.payload = self.q.get(timeout=TIMEOUT)
-			print "data to be transmitted [[",self.payload,"]]"
-			raise self.WAIT_FOR_OK1_OR_NAK()
-		except Queue.Empty:
-			sys.exit(0)
-	
-	@ATMT.action(wait_for_data1)
-	def send_data1(self):
-		print "Transition: WAIT_DATA_REQ1 --> WAIT_FOR_OK1_OR_NAK / Sending data1 (Data Request)"
-		self.last_packet = IP(dst=self.receiver)/ABP(flags="data1")/self.payload
-		self.send(self.last_packet)
-	
-	@ATMT.state()
-	def WAIT_FOR_OK0_OR_NAK(self):
-		print "State: WAIT_FOR_OK0_OR_NAK"
-	
-	@ATMT.state()
-	def WAIT_FOR_OK1_OR_NAK(self):
-		print "State: WAIT_FOR_OK1_OR_NAK"
-	
-	@ATMT.timeout(WAIT_FOR_OK0_OR_NAK, TIMEOUT)
-	def timeout_waiting_for_ok0(self):
-		raise self.WAIT_FOR_OK0_OR_NAK()
-	
-	@ATMT.action(timeout_waiting_for_ok0)
-	def retransmit_data0(self):
-		print "Transition: WAIT_FOR_OK0_OR_NAK --> WAIT_FOR_OK0_OR_NAK / Re-sending data0 (Timeout)"
-		self.send(self.last_packet)
-	
-	@ATMT.timeout(WAIT_FOR_OK1_OR_NAK, TIMEOUT)
-	def timeout_waiting_for_ok1(self):
-		raise self.WAIT_FOR_OK1_OR_NAK()
-	
-	@ATMT.action(timeout_waiting_for_ok1)
-	def retransmit_data1(self):
-		print "Transition: WAIT_FOR_OK1_OR_NAK --> WAIT_FOR_OK1_OR_NAK / Re-sending data1 (Timeout)"
-		self.send(self.last_packet)
-	
-	@ATMT.receive_condition(WAIT_FOR_OK0_OR_NAK)
-	def receive_data0(self, pkt):
-		flag = pkt.getlayer(ABP).flags
-		if flag == 4:
-			print "Transition: WAIT_FOR_OK0_OR_NAK --> WAIT_FOR_OK0_OR_NAK / Re-sending data0 (Received nak)"
-			self.send(self.last_packet)
-			raise self.WAIT_FOR_OK0_OR_NAK()
-		if flag == 3:
-			print "Transition: WAIT_FOR_OK0_OR_NAK --> WAIT_FOR_OK0_OR_NAK / Re-sending data0 (Received ok1)"
-			self.send(self.last_packet)
-			raise self.WAIT_FOR_OK0_OR_NAK()
-		if flag == 2:
-			print "data [[",self.payload,"]] transmitted!"
-			print "Transition: WAIT_FOR_OK0_OR_NAK --> WAIT_DATA_REQ1 / Received ok0"
-			raise self.WAIT_DATA_REQ1()
-	
-	@ATMT.receive_condition(WAIT_FOR_OK1_OR_NAK)
-	def receive_data1(self, pkt):
-		flag = pkt.getlayer(ABP).flags
-		if flag == 4:
-			print "Transition: WAIT_FOR_OK1_OR_NAK --> WAIT_FOR_OK1_OR_NAK / Re-sending data0 (Received nak)"
-			self.send(self.last_packet)
-			raise self.WAIT_FOR_OK1_OR_NAK()
-		if flag == 2:
-			print "Transition: WAIT_FOR_OK1_OR_NAK --> WAIT_FOR_OK1_OR_NAK / Re-sending data0 (Received ok0)"
-			self.send(self.last_packet)
-			raise self.WAIT_FOR_OK1_OR_NAK()
-		if flag == 3:
-			print "data [[",self.payload,"]] transmitted!"	
-			print "Transition: WAIT_FOR_OK1_OR_NAK --> WAIT_DATA_REQ0 / Received ok1"
-			raise self.WAIT_DATA_REQ0()
-
-
+   Time sequence diagram illustrating the operation simplest transport protocol
 
 
 Reliable data transfer on top of an imperfect network service
 -------------------------------------------------------------
 
+The transport layer must deal with the imperfections of the network layer service. There are three types of imperfections that must be considered by the transport layer :
 
-Let us first consider a connectionless network service that may corrupt SDUs. Different types of corruption are possible :
-
- - the size of the SDU may increase or decrease
- - the value some of the bits of the SDU may change
-
-.. sidebar:: Random errors versus malicious modifications
-
-   The protocols of the transport layer are designed to recover from the random errors and losses that may occur in the underlying layers. These random
-   see [SPMR09]_ for how to recompute a CRC
-
-In this case, we need a mechanism that allows the receiver of a segment to verify that the SDU contained in
-
-.. index:: Internet checksum
-
-Implementation of the Internet checksum defined in :rfc:`1071` in C ::
-
- u_short cksum (u_short *buf, int count)
- {
-   u_long sum=0;
-   while (count--)
-   {
-     sum = sum + *buf++;
-     if(sum & 0xFFFF0000)
-     { /* carry, wrap around */
-       sum = sum & 0xFFFF;
-       sum++;
-      }
-    }
-    return ~(sum & 0xFFFF);
-  }
+ #. Segments can be corrupted by transmission errors 
+ #. Segments can be lost
+ #. Segments can be reordered or duplicated
 
 
+To deal with these four types of imperfections, transport protocols rely on different types of mechanisms. The first problem are the transmission errors. The segments sent by a transport will be processed by the network and datalink layers and finally will be transmitted by the physical layer. All these layers are imperfect. For example, the physical layer may be affected different types of errors :
 
+ - random isolated errors where the value of single bit has been changed due to a transmission error.
+ - random burst errors where the values of `n` consecutive bits have been changed due to transmission errors
+ - random bit creations and random bit removals where bits have been added or removed due to transmission errors
+
+The only solution to protect against transmission errors is to add redundacy to the segments that are sent. `Information Theory` defines two mechanisms that can be used to transmit information over a transmission channel that is affected by random errors. These two mechanisms add redundancy to the information sent to allow the receiver to detect or sometimes even correct transmission errors. A detailed discussion of these mechanisms is outside the scope of this chapter, but it is useful to consider a simple mechanism to understand its operation and its limitations.
+
+`Information theory` defines `coding schemes`. There are different types of coding schemes, but let us focus on coding schemes that operate on binary strings. A coding scheme is a function that maps information encoded as a string of `m` bits into a string of `n` bits. The simplest coding scheme is the even parity coding. This coding scheme takes a `m` bits source string and produces a `m+1` bits coded string where the first `m` of the coded string are the bits of the source string and the last bit of the string is always chosen such that the coded string always contains an even number of bits set to `1`. For example :
+
+ - `1001` is encoded as `10010`
+ - `1101` is encoded as `11011`
+
+This parity scheme has been used in some RAMs and to encode characters sent over a serial line. It is easy to show that this coding scheme allows the receiver to detect a single transmission error that has affected one of the `m+1` bits that were transmitted, but it cannot correct it. If two or more bits are errored, the receiver may not always be able to detect the error.
+
+Some coding schemes allow the receiver to correct some transmission errors. For example, consider the coding scheme that encoded each source bit as follows :
+
+ - `1` is encoded as `111`
+ - `0` is encoded as `000`
+
+This simple coding scheme forces the sender to transmit three bits for each source bit. However, it allows the receiver to correct single bit errors. More advanced coding systems that allow to recover from errors are used in several types of physical layers.
+
+Transport protocols use error detection schemes, but none of the widely used transport protocols relies on error correction schemes. For this, a segment is usually divided in two parts :
+
+ - a `header` that contains the fields used by the transport protocol to ensure a reliable delivery. The header contains a checksum or Cyclical Redundancy Check (CRC) that is used to detect transmission errors
+ - a `payload` that contains the user data passed by the application layer.
+
+.. sidebar:: Trailer versus header
+
+ When a segment format is designed for a transport protocol, it can be composed of three parts : a header, a payload and a trailer. The header is typically used to place most of the control information. However, the checksum/CRC may be placed either inside the header or inside the trailer.
+
+ - when the checksum/CRC is placed in the trailer, the sender can use hardware assistance on the interface card to compute the checksum/CRC while the segment is being sent. This is an optimisation that is now found on some high speed interfaces
+ - when the checksum/CRC is placed in the header, this implies, as segments are sent on the wire one byte after the other starting from the trailer, that the checksum/CRC must be computed before transmitting the segment. It is still possible to use hardware assistance to compute the CRC/checksum, but this is slightly more complex than when the checksum/CRC is placed inside a trailer. 
+
+
+The simplest error detection scheme that is used in several transport protocols is the checksum. There are different types of checksums. For example, an eight bits checksum can be computed as the arithmetic sum of all the bytes of (the header and trailer of) the segment. The checksum is computed by the sender before sending the segment and the receiver verifies the checksum upon reception of each segment. The receiver discards the segments received with an invalid checksum. Checksums can be easily implemented in software, but their error detection capabilities are limited. Cyclical Redundancy Checks (CRC) have better error detection capabilities, but require more CPU when implemented in software.
 
 .. sidebar:: The checksum zoo 
 
@@ -321,16 +154,299 @@ Implementation of the Internet checksum defined in :rfc:`1071` in C ::
 .. tcp offload engine http://www.10gea.org/tcp-ip-offload-engine-toe.htm
 .. stcp used Adler-32 but it now uses CRC :rfc:`3309`
 
-.. sidebar:: Trailer versus header
+The second imperfection of the network layer is that it may lose segments. As we will see later, the main cause of packet losses in the network layers is the lack of buffers in intermediate routers. Since the receiver sends an acknowledgement segment after having received each seegment, the simplest solution to deal with losses is to use a retranmission timer. When the sender sends a segment, it starts a retransmission timer. The value of this retransmission timer should be larger than the `round-trip-time`, i.e. the delay between the transmission of a data segment and the reception of the corresponding acknowledgement. When the retransmission timer expires, the sender assumes that the data segment has been lost and it retransmits it. This is illustrated in the figure below.
 
-   When a segment format is designed for a transport protocol, it can be composed of three parts : a header, a payload and a trailer. The header is typically used to place most of the control information. However, the checksum/CRC may be placed either inside the header or inside the trailer.
+.. figure:: fig/transport-fig-018-c.png
+   :align: center
+   :scale: 70 
 
-   - when the checksum/CRC is placed in the trailer, the sender can use hardware assistance on the interface card to compute the checksum/CRC while the segment is being sent. This is an optimisation that is now found on some high speed interfaces
-   - when the checksum/CRC is placed in the header, this implies, as segments are sent on the wire one byte after the other starting from the trailer, that the checksum/CRC must be computed before transmitting the segment. It is still possible to use hardware assistance to compute the CRC/checksum, but this is slightly more complex than when the checksum/CRC is placed inside a trailer. 
+   Using retransmission timers to recover from segment losses
 
-.. sidebar:: Checksum versus hash functions
 
+Unfortunately, retransmission timers alone are not sufficient to recover from segment losses. Let us for example consider the situation depicted below where an acknowledgement is lost. In this case, the sender will retransmit the data segment that has not been acknowledged. Unfortunately, as illustrated in the figure below, the receiver will consider the retransmission as a new segment whose payload must be delivered to its user.
+
+
+.. figure:: fig/transport-fig-019-c.png
+   :align: center
+   :scale: 70 
+
+   Limitations of retransmission timers 
+
+.. index:: sequence number
+
+To solve this problem, transport protocols associate `sequence number` to each data segment. This `sequence number` is placed in the header of the data segments. We use the notation `D(S,...)` to indicate a data segment whose sequence number field is set to `S`. The acknowledgements also contain a sequence number that indicates that data segments that it acknowledges. We use `OKS` to indicate an acknowledgement segment that confirms the reception of `D(S,...)`. The sequence number is encoded as a bit string of fixed length. The simplest transport is the Alternating Bit Protocol (ABP). 
+
+
+.. index:: Alternating Bit Protocol
+
+The Alternating Bit Protocol can be implemented as a simple Finite State Machine. The initial state of the sender is `Wait for D(0,...)`. In this state, the sender waits for a `Data.request`. The first data segment that is sends uses sequence number `0`. After having sent this segment, the sender waits for an `OK0` acknowledgement. A segment is retransmitted upon expiration of the retransmission timer or if an acknowledgement with an incorrect sequence number is received.
+
+
+.. figure:: fig/transport-fig-021-c.png
+   :align: center
+   :scale: 70 
+
+   Alternating bit protocol : Sender FSM
+
+
+The receiver first waits for `D(0,...)`. If the segment has a correct `CRC`, it passes the SDU to its user and sends `OK0`. Then, the receiver waits for `D(1,...)`. In this state, it may receive a duplicate `D(0,...)` or a data segment with an invalid CRC. As a duplicate `D(0,...)` might have been caused by the retransmission of `D(0,...)` after the loss of `OK0` for example.
+
+.. figure:: fig/transport-fig-022-c.png
+   :align: center
+   :scale: 70 
+
+   Alternating bit protocol : Receiver FSM
+
+
+The figure below illustrates the operation of the alternating bit protocol.
+
+.. figure:: fig/transport-fig-023-c.png
+   :align: center
+   :scale: 70 
+
+   Operation of the alternating bit protocol
+   
+
+.. 
+   sidebar:: Random errors versus malicious modifications
+   The protocols of the transport layer are designed to recover from the random errors and losses that may occur in the underlying layers. There random errors are caused by 
+   see [SPMR09]_ for how to recompute a CRC
    Checksums and CRCs should not be confused with hash functions such as MD5 defined in :rfc:`1321` or `SHA-1 <http://www.itl.nist.gov/fipspubs/fip180-1.htm>`_ .
+
+The alternating bit protocol can recover from the transmission errors and the segment losses. However, it has one important drawback. Consider two hosts that are directly connected by a 50 Kbits/sec satellite link that has a 250 milliseconds propagation delay. If these hosts send 1000 bits segments, then the maximum throughput that can be achieved by the alternating bit protocol is one segment every :math:`20+250+250=520` millseconds if we ignore the transmission time of the acknowledgement. This is less than 2 Kbits/sec ! 
+
+.. figure:: fig/transport-fig-024-c.png
+   :align: center
+   :scale: 70 
+
+   Performance of the alternating bit protocol
+
+
+Go-back-n and selective repeat
+------------------------------
+
+To overcome the performance limitations of the alternating bit protocol, transport protocols rely on `pipeling`. This technique allows a sender to transmit several consecutive segments without being forced to wait for an acknowledgement after each segment. Each data segment contains a sequence number encoded in a `n` bits field.
+
+.. figure:: fig/transport-fig-025-c.png
+   :align: center
+   :scale: 70 
+
+   Pipelining to improve the performance of transport protocols
+
+`Pipelining` allows the sender to transmit segments faster, but we need to ensure that the receiver does not become overloaded. Otherwise, the segments sent by the sender will not be correctly received by the destination entity. Our first transport protocol and the alternating bit protocol allowed the sending entity to send one unacknowledged segment. The transport protocols that rely on pipelining allow the sender to transmit `W` unacknowledged segments before being forced to wait for an acknowledgement from the receiving entity. 
+
+This is implemented as a `sliding window`. The sliding window is the set of consecutive sequence numbers that the sender can use when transmitting segments without being forced to wait for an acknowledgement. The figure below shows a sliding window that contains five segments. Two of these sequence numbers have been used to send segments and only three sequence numbers remain in the sliding window. The sliding window is said to be closed once all sequence numbers contained in the sliding window have been used. 
+
+.. figure:: fig/transport-fig-026-c.png
+   :align: center
+   :scale: 70 
+
+   The sliding window 
+
+The figure below illustrates the operation of the sliding window. The sliding window contains three segments. The sender can thus transmit three segments before being forced to wait for an acknowledgement. The sliding window moves to the higher sequence numbers upon reception of acknowledgements. When the first acknowledgement (`OK0`) is received, it indicates the sender moves the sliding window to the right and sequence number `3` becomes available. This sequence number is used later to transmit SDU `d`.
+
+
+.. figure:: fig/transport-fig-027-c.png
+   :align: center
+   :scale: 70 
+
+   Utilisation of the sliding window 
+
+
+In practice, as the segment header encodes the sequence number in a `n` bits string, only the sequence numbers between :math:`0` and :math:`2^{n}-1` can be used. This implies that the same sequence number will be used for different segments and that the sliding window will wrap. This is illustrated in the figure below assuming that `2` bits are used to encode the sequence number in the segment header. This is illustrated in the figure below. Note that when the `OK1` acknownledgement is received it allows the sender to reuse sequence number `0`.
+
+
+.. figure:: fig/transport-fig-027-c.png
+   :align: center
+   :scale: 70 
+
+   Utilisation of the sliding window with modulo arithmetic
+
+.. index:: go-back-n
+
+
+Unfortunately, segment losses do not disappear because a transport protocol is using a sliding window. As for the alternating bit protocol, to recover from segment losses, a sliding window protocol must define a strategy to detect segment losses and use a `retransmission strategy` to retransmit the lost segments.
+
+.. index:: cumulative acknowledgements
+
+The simplest sliding window protocol uses `go-back-n` recovery. Intuitively, `go-back-n` operates as follows. First, the `go-back-n` receiver is as simple as possible. It only accepts the segments that arrive in-sequence. A `go-back-n` receiver discards any out-of-sequence segments that it receives. When a `go-back-n` receives a data segment, it always returns an acknowledgement that contains the 
+sequence number of the last in-sequence segment that it received. This acknowledgement is said to be cumulative. When a `go-back-n` receiver send an acknowledgement for sequence number `x`, it implicitely acknowledges the reception of all segmentd whose sequence number is earlier than `x`. A key advantage of these cumulative acknowledgements is that they allow to recover from the loss of acknowledgements. Consider for example a `go-back-n` receiver that received segments `1`, `2` and `3`. It sent `OK1`, `OK2` and `OK3`. Unfortunately, `OK1` and `OK2` were lost. Thanks to the cumulative acknowledgements, when the receiver receives `OK3`, it knows that all three segments have been correctly received. 
+
+The figure below shows the FSM of a simple `go-back-n` receiver. This receiver uses two variables : `lastack` and `next`. `next` is the next expected sequence number and `lastack` the sequence number of the last data segment that has been acknowledged. The receiver only accepts the segments if they are received in sequence. `maxseq` is the number of different sequence numbers (:math:`2^n`).
+
+
+.. figure:: fig/transport-fig-029-c.png
+   :align: center
+   :scale: 70 
+
+   Go-back-n : receiver
+
+
+The `go-back-n` sender is also very simple. It uses a sending buffer that can store an entire slide window of segments [#fsizesliding]_ . The segments are sent with increasing sequence number (modulo `maxseq`). The sender must wait for an acknowledgement once its sending buffer is full. When the `go-back-n` sender receives an acknowledgement, it removes from the sending buffer all acknowledged segments. It uses a retransmission timer to detect segment losses. A simple `go-back-n` sender maintains one retransmission timer per connection. This timer is started when the first segment is sent. When the `go-back-n sender` receives an acknowledgement, it restarts the retransmission timer only if there are still unacknowledged segments. When the retransmission timer expires, the `go-back-n` sender assumes that all the unacknowledged segments that are stored in its sending buffer have been lost. It thus retransmits all the unacknowledged segments and restarts its retransmission timer.
+
+
+.. figure:: fig/transport-fig-030-c.png
+   :align: center
+   :scale: 70 
+
+   Go-back-n : sender
+
+
+The operation of `go-back-n` is illustrated in the figure below. 
+
+.. figure:: fig/transport-fig-032-c.png
+   :align: center
+   :scale: 70 
+
+   Go-back-n : example
+
+
+The main advantage of `go-back-n` is that it can be easily implemented. It can provide good performance when the packet loss ratio is small. However, when there are many losses, the performance of `go-back-n` drops quickly for two reasons :
+ 
+ - the `go-back-n` receiver does not accept out-of-sequence segments
+ - the `go-back-n` sender retransmits all unacknowledged segments once its has detected a loss
+
+.. index:: selective repeat
+
+`Selective repeat` is a better strategy to recover from segment losses. Intuitively, `selection repeat` allows the receiver to accept out-of-sequence segments. Furthermore, when a `selective repeat` sender detects losses, it only retransmits the lost segments and not the segments that have already been correctly received.
+
+A `selective repeat` receiver maintains a receive sliding window and stores in a buffer the out-of-sequence segments that it receives. The figure below shows a five segment receive window on a receiver that has already received segments `7` and `9`.
+
+.. figure:: fig/transport-fig-033-c.png
+   :align: center
+   :scale: 70 
+
+   The receiving window with selective repeat 
+
+A `selective repeat` receiver maintains a receive buffer that is able to store `W` segments where `W` is the size of the sliding window. This receiver discards all segments having an invalid CRC. The receiver maintains in variable `lastack` the sequence number of the last in-sequence segment that it has received. It always includes the value of `lastack` in the acknowledgements that it sends. Some protocols also allow the `selective repeat` receiver to acknowledge the out-of-sequence that it has received. This can be done for example by placing the list of the sequence numbers of the correctly received out-of-sequence segments in the acknowledgements together with the `lastack` value.
+
+When a `selective repeat` receivers receives a data segment, it first verifies whether the segment is inside its receiving window. If yes, the segment is placed in the receive buffer. Otherwise, it is discarded and an acknowledgement containing `lastack` is sent. Then the receiver removes from the receive buffer all consecutive segments starting at `lastack` (if any). The payloads of these segments are delivered to the user, `lastack` and the receiving window are updated and an acknowledgement that acknowledges the last segment received in sequence is sent.
+
+The `selective repeat` sender maintains a sending buffer that can store up to `W` unacknowledged segments. The segments are sent as long as the sending buffer is not full. Several implementations of a `selective repeat` sender are possible. A simple implementation is to associate a retransmission timer to each segment. The timer is started when the segment is sent and cancelled when an acknowledgement that covers this segment is received. When a retransmission timer expires, the corresponding segment is retransmitted and this retransmission timer is restarted. When an acknowledgement is received, all the segments that are covered by this acknowledgement are removed from the sending buffer and the sliding window is updated.
+
+The figure below illustrates the operation of `selective repeat` when segments are lost. In this figure, `C(OK,x)` is used to indicate that all segments, up to and including sequence number `x` have been received correctly.
+
+.. figure:: fig/transport-fig-037-c.png
+   :align: center
+   :scale: 70 
+
+   Selective repeat : example 
+
+.. index:: selective acknowledgements
+
+Pure cumulative acknowledgements work well with the `go-back-n` strategy. However, with only cumulative acknowledgements a `selective repeat` sender cannot easily determine which data segments have been correctly received after a lost data segment. For example, in the figure above, the second `C(OK,0)` does not inform explicitely the sender of the reception of `D(2,c)` and the sender could retransmit this segment although it has already been received. A possible solution to improve the performance of `selective repeat` is to provide additional information about the received segments in the acknowledgements that are returned by the receiver. For example, the receiver could add in the returned acknowledgement the list of the sequence numbers of all segments that have already been received. Such acknowledgements are sometimes called `selective acknowledgements`. This is ilustrated in the figure below. 
+
+
+.. figure:: fig/transport-fig-036-c.png
+   :align: center
+   :scale: 70 
+
+   Selective repeat : example with selective acknowledgements
+
+In the figure above, when the sender receives `C(OK,0,[2])`, it knows that all segments up to and including `D(0,...)` have been correctly received. It also knows that segment `D(2,...)` has been received and can cancel the retransmission timer associated to this segment. However, this segment should not be removed from the sending buffer before the reception of a cumulative acknowledgement (`C(OK,2)` in the figure above) that covers this segment. 
+
+.. sidebar:: Maximum window size with `go-back-n` and `selective repeat`
+
+  A transport protocol that uses `n` bits to encode its sequence number can send up to :math:`2^n` different segments. However, to ensure a reliable delivery of the segments, `go-back-n` and `selective repeat` cannot use a sending window of :math:`2^n` segments.
+ Consider first `go-back-n` and assume that a sender sends :math:`2^n` segments. These segments are received in-sequence by the destination, but all the returned acknowledgements are lost. The sender will retransmit all segments and they will all be accepted by the receiver and delivered a second time to the user. It can be easily shown that this problem can be avoided if the maximum size of the sending window is :math:`{2^n}-1` segments.
+ A similar problem happens with `selective repeat`. However, as the receiver accepts out-of-sequence segments, a sending window of :math:`{2^n}-1` segments is not sufficient to ensure a reliable delivery of the segments. It can be easily shown that to avoid this problem, a `selective repeat` sender cannot use a window that is larger than :math:`\frac{2^n}{2}` segments.
+
+
+`Go-back-n` or `selective repeat` are used by transport protocols to provide a reliable data transfert above an unreliable network layer service. Until now, we have assumed that the size of the sliding window was fixed for the entire lifetime of the connection. In practice a transport layer entity will usually be implemented in the operating system and will share memory with other parts of the system. Furthermore, a transport layer entity will support at the same time several (possibly hundreds or thousands) of transport connections. This implies that the memory that can be used to support the sending or the receiving buffer of a transport connection will change during the lifetime of the connection [#fautotune]_ . Thus, a transport protocol must allow the sender and the receiver to adjust their window sizes.
+
+To deal with this issue, transport protocols allow the receiver to advertise the current size of its receiving window in all the acknowledgements that it sends. The receiving window advertised by the receiver will bound the size of the sending buffer used by the sender. In practice, the sender will maintain two state variables : `swin`, the size of its sending window (that may be adjuster by the system) and `rwin`, the size of the receiving window advertised by the receiver. At any time, the number of unacknowledged segments cannot be larger than `min(swin,rwin)` [#facklost]_ . The utilisation of dynamic windows is illustrated in the figure below.
+
+
+.. figure:: fig/transport-fig-039-c.png
+   :align: center
+   :scale: 70 
+
+   Dynamic receiving window
+
+The receiver may adjust its advertised receive window based on its current memory consumption but also to limit the bandwidth cosummed by the sender. In practice, the receive buffer can also shrink because the application is not able to process the received data quickly enough. In this case, the receiving buffer may be completely full and the advertised receive window may shrink to `0`. When the sender receives an acknowledgement with a receive window set to `0`, it is blocked until it receives an acknowledgement with a positive receive window. Unfortunately, as shown in the figure below, the loss of this acknowledgement could cause a deadlock as the sender waits for an acknowledgement while the receiver is waiting for a data segment.
+
+.. figure:: fig/transport-fig-040-c.png
+   :align: center
+   :scale: 70 
+
+   Risk of deadlock with dynamic windows
+
+.. index:: persistence time
+
+To solve this problem, transport protocols rely on a special timer : the `persistence timer`. This timer is started by the sender when it receives a acknowledgement that advertises a `0` window. When the timer expires, the sender retransmits an old segment to force the receiver to send a new acknowledgement.
+
+.. 
+ sidebar:: Negative acknowledgements
+ difficult, only if ordering is guaranteed
+
+To conclude our description of the basic mechanisms found in transport protocols, we still need to discuss the impact of segments reordering. If two consecutive segments are reordered, the receiver will rely on their sequence numbers to reorder them in its receive buffer. Unfortunately, as transport protocols reuse the same sequence number for different segments, if a segment is delayed for a too long time, it might be accepted by the receiver. This is illustrated in the figure below where segment `D(1,b)` is delayed.
+
+.. figure:: fig/transport-fig-041-c.png
+   :align: center
+   :scale: 70 
+
+   Ambiguities caused by excessive delays
+
+.. index:: maximum segment lifetime (MSL)
+
+To deal with this problem, transport protocols combine two solutions. First, they use 32 bits or more to encode the sequence number in the segment header. This increases the overhead, but also increases the delay between the transmission of two different segments having the same sequence number. Second, transport protocols require the network layer to enforce a `Maximum Segment Lifetime (MSL)`. The network layer must ensure that no packet will remain in the network during more than MSL seconds. In the Internet the MSL is assumed [#fmsl]_ to be 2 minutes :rfc:`793`. Note that this limits the maximum bandwidth of a transport protocol. If it uses `n` bits to encode its sequence numbers, then it cannot send more than :math:`2^n` segments every MSL seconds.
+
+.. index:: piggybacking
+
+Transport protocols often need to send data in both directions. To reduce the overhead caused by the acknowledgements, most transport protocols use `piggybacking`. Thanks to this technique, a transport entity can place inside the header of the data segments that it sends the acknowledgements and the receive window that it advertises for the opposite direction of the data flow. The main advantage of piggybacking is that it reduces the overhead as it is not necessary to send a complete segment to carry an acknowledgement. This is illustrated in the figure below where the acknowledgement number is underlined in the data segments. Piggybacking is only used when data flows in both directions. A receiver will generate a pure acknowledgement when it does not send data in the opposite direction as shown in the bottom of the figure.
+
+.. figure:: fig/transport-fig-043-c.png
+   :align: center
+   :scale: 70 
+
+   Piggybacking
+
+.. index:: provision of a byte stream service
+
+The last point to be discussed about the data transfer mechanisms used by transport protocols is the provision of a byte stream service. As indicated in the first chapter, the byte stream service is widely used in the transport layer. The transport protocols that provide a byte stream service associate a sequence number to all the bytes that are sent and place the sequence number of the first byte of the segment in the segment's header. This is illustrated in the figure below. In this example, the sender choose to put two bytes in each of the first three segments. This is due to graphical reasons, a real transport protocol would use larger segments in practice. However, the division of the byte stream in segments combined with the losses and retransmissions explain why the byte stream service does not preserve the SDU boundaries.
+
+.. figure:: fig/transport-fig-044-c.png
+   :align: center
+   :scale: 70 
+
+   Provision of the byte stream service
+
+
+Connection establishment and release
+------------------------------------
+
+The last points to be discussed about the transport protocol are the mechanisms used to establish and release a transport connection.
+
+.. figure:: fig/transport-fig-045-c.png
+   :align: center
+   :scale: 70 
+
+   Naive transport connection establishment 
+
+
+.. figure:: fig/transport-fig-048-c.png
+   :align: center
+   :scale: 70 
+
+   Transport clock
+
+Connection release
+------------------
+
+
+.. figure:: fig/transport-fig-053-c.png
+   :align: center
+   :scale: 70 
+
+   todo 
+
+
+.. figure:: fig/transport-fig-054-c.png
+   :align: center
+   :scale: 70 
+
+   todo 
+
 
 
 .. index:: UDP
@@ -394,6 +510,27 @@ In most Unix variants, only processes having system administrator privileges can
   - the entire UDP segment, including its header
 
   This pseudo-header allows the receiver to detect errors that affect the IP source or destination addresses that are placed in the IP layer below. This is a violation of the layering principle that dates from the time when UDP and IP were elements of a single protocol. It should be noted that if the checksum algorithm computes value '0x0000', then value '0xffff' is transmitted. A UDP segment whose checksum is set to '0x0000' is a segment for which the transmitter did not compute a checksum upon transmission. Some NFS_ servers chose to disable UDP checksums for performance reasons, but this caused `problems <http://lynnesblog.telemuse.net/192>`_ that were difficult to diagnose. In practice, there are rarely good reasons to disable UDP checksums.
+
+  Implementation of the Internet checksum defined in :rfc:`1071` in C ::
+
+  u_short cksum (u_short *buf, int count)
+  {
+   u_long sum=0;
+   while (count--)
+   {
+     sum = sum + *buf++;
+     if(sum & 0xFFFF0000)
+     { /* carry, wrap around */
+       sum = sum & 0xFFFF;
+       sum++;
+      }
+    }
+    return ~(sum & 0xFFFF);
+   }
+
+
+
+
 
 
 Several types of applications rely on UDP. As a rule of thumb, UDP is used for applications where delay must be minimised or losses can be recovered by the application itself. A first class of the UDP-based applications are applications where the client sends a small request and expects quickly a small answer. The DNS_ is an example of such applications that is often used in the wide area. However, in local area networks, many distributed systems rely on Remote Procedure Call (RPC_) that is often used on top of UDP. In Unix environments, the Network File System (NFS_) is built on top of RPC and runs frequently on top of UDP. A second class of UDP-based applications are the interactive computer games that need to exchange frequently small messages such as the player's location or their recent actions. Many of these games use UDP to minimise the delay and can recover from losses. A third class of applications are the multimedia applications such as interactive Voice over IP or interactive Video over IP. These interactive applications expect a delay shorter than about 200 milliseconds between the sender and the receiver and can recover from losses inside the application. 
@@ -1157,6 +1294,14 @@ In general, the maximum throughput that can be achieved by a TCP connection depe
 .. [#fsize] Many network layer services are unable to carry SDUs that are larger than 64 KBytes. 
 
 .. [#fqueuesize] In the application layer, most servers are implemented as processes. The network and transport layer on the other hand are usually implemented inside the operating system and the amount of memory that they can use is limited by the amount of memory allocated to the entire kernel.
+
+.. [#fsizesliding] The size of the sliding window can be either fixed for a given protocol or negotiated during the connection establishment phase. We'll see later that it is also possible to change the size of the sliding window during the connection's lifetime.
+
+.. [#fautotune] For a discussion on how the sending buffer can change, see e.g. [SMM1998]_
+
+.. [#facklost] Note that if the receive window shrinks, it might happen that the sender has already sent a segment that is not anymore inside its window. This segment will be discarded by the receiver and the sender will retransmit it later.
+
+.. [#fmsl] As we will see in the next chapter, the Internet does not strictly enforce this MSL. However, it is reasonable to expect that most packets on the Internet will not remain in the network during more than 2 minutes. There are a few exceptions to this rule, such as :rfc:`1149` whose implementation is described in http://www.blug.linux.no/rfc1149/ but there are few real links supporting :rfc:`1149` in the Internet.
 
 .. [#fmtuudp] This limitation is due to the fact that the network layer (IPv4 and IPv6) cannot transport packets that are larger than 64 KBytes. As UDP does not include any segmentation/reassembly mechanism, it cannot split a SDU before sending it.
 
