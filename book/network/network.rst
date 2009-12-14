@@ -376,7 +376,7 @@ Once a router has discovered its neighbours, it must reliably distribute its loc
    - LSP.Links[i].cost : cost of the link
 
 
-As the LSPs are used to distribute the network topology that allows routers to compute their routing tables, routers cannot rely on their non-existing routing tables to distribute the LSPs. `Reliable flooding` is used to efficiently distribute the LSPs of all routers.  Each router that implements `reliable flooding` maintains a `link state database` (LSDB) that contains the most recent LSP sent by each router. When a router receives a LSP, it first verifies whether this LSP is already stored inside its LSDB. If so, the router has already distributed the LSP earlier and it does not need to forward it. Otherwise, the router forwards the LSP on all links expect the link over which the LSP was received. Reliable flooding can be implemented by using the pseudo-code below ::
+As the LSPs are used to distribute the network topology that allows routers to compute their routing tables, routers cannot rely on their non-existing routing tables to distribute the LSPs. `Flooding` is used to efficiently distribute the LSPs of all routers.  Each router that implements `flooding` maintains a `link state database` (LSDB) that contains the most recent LSP sent by each router. When a router receives a LSP, it first verifies whether this LSP is already stored inside its LSDB. If so, the router has already distributed the LSP earlier and it does not need to forward it. Otherwise, the router forwards the LSP on all links expect the link over which the LSP was received. Reliable flooding can be implemented by using the pseudo-code below ::
 
  # links is the set of all links on the router
  # Router R's LSP arrival on link l:
@@ -387,7 +387,7 @@ As the LSPs are used to distribute the network topology that allows routers to c
  
 .. sidebar:: Which is the most recent LSP ?
 
- A router that implements reliable flooding must be able to detect whether a received LSP is newer than the received LSP. This requires a comparison between the sequence number of the received LSP and the sequence number of the LSP stored in the link state database. The ARPANET routing protocol [MRR1979]_ used a 6 bits sequence number and implemented the comparison as follows :rfc:`789` ::
+ A router that implements flooding must be able to detect whether a received LSP is newer than the received LSP. This requires a comparison between the sequence number of the received LSP and the sequence number of the LSP stored in the link state database. The ARPANET routing protocol [MRR1979]_ used a 6 bits sequence number and implemented the comparison as follows :rfc:`789` ::
 
   def newer( lsp1, lsp2 ):
     return ( ( ( lsp1.seq > lsp2.seq) and ( (lsp1.seq-lsp2.seq)<=32) ) or
@@ -398,20 +398,19 @@ As the LSPs are used to distribute the network topology that allows routers to c
  To deal with the memory corruption problem, link state packets contain a checksum. This checksum is computed by the router that generate the LSP. Each router must verify the checksum when it receives or floods a LSP. Furthermore, each router must periodically verify the checksums of the LSPs stored in its LSDB.
 
 
-Reliable flooding is illustrated in the figure below. By exchanging HELLO messages, each router learns its local topology. For example, router `E` learns that it is directly connected to routers `D`, `B` and `C`. Its first LSP has sequence number `0` and contains the directed links `E->D`, `E->B` and `E->C`. Router `E` sends its LSP on all its links and routers `D`, `B` and `C` will insert the LSP in their LSDB and forward it over their other links. 
+Flooding is illustrated in the figure below. By exchanging HELLO messages, each router learns its local topology. For example, router `E` learns that it is directly connected to routers `D`, `B` and `C`. Its first LSP has sequence number `0` and contains the directed links `E->D`, `E->B` and `E->C`. Router `E` sends its LSP on all its links and routers `D`, `B` and `C` will insert the LSP in their LSDB and forward it over their other links. 
 
 
 .. figure:: fig/network-fig-045-c.png
    :align: center
    :scale: 70   
 
-   Reliable flooding : example 
+   Flooding : example 
 
 
-Reliable flooding allows LSPs to be distributed to all routers inside the network without using the routing tables of the routers. In the example above, the LSP sent by router `E` will likely be sent twice on some links in the network. For example, routers `B` and `C` will receive `E`'s LSP at almost the same time and will forward it over the `B-C` link. To avoid sending the same LSP twice on each link, a possible solution is to slightly change the pseudo-code above so that a router waits for some random time before forwarding a LSP on each link. The drawback of this solution is that the delay to flood a LSP to all routers in the network will increase.
+Flooding allows LSPs to be distributed to all routers inside the network without using the routing tables of the routers. In the example above, the LSP sent by router `E` will likely be sent twice on some links in the network. For example, routers `B` and `C` will receive `E`'s LSP at almost the same time and will forward it over the `B-C` link. To avoid sending the same LSP twice on each link, a possible solution is to slightly change the pseudo-code above so that a router waits for some random time before forwarding a LSP on each link. The drawback of this solution is that the delay to flood a LSP to all routers in the network will increase.
 
-
-Thanks to reliable flooding, all routers will store in their LSDB the most recent LSP sent by each router in the network. By combining the received LSPs with its own LSP, each router will be able to compute the entire network topology.
+To ensure that all routers receive all LSPs even when there are transmissions errors, link state routing protocols use `reliable flooding`. With `reliable flooding`, routers use acknowledgements and if necessary retransmissions to ensure that all link state packets are successfully transferred to all neighboring routers.  Thanks to reliable flooding, all routers store in their LSDB the most recent LSP sent by each router in the network. By combining the received LSPs with its own LSP, each router can compute the entire network topology.
 
 .. figure:: fig/network-fig-047-c.png
    :align: center

@@ -12,26 +12,10 @@ Contents :
 .. toctree:: 
    :maxdepth: 2
 
-   intro/introduction
-   application/application
    transport/transport
    network/network
-   lan/lan
-
    bibliography
    glossary
-   changes
 
 
-==================
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
-
-
-These notes are licensed under the creative commons attribution share-alike license 3.0. You can obtain detailed information about this
-license at http://creativecommons.org/licenses/by-sa/3.0/
 

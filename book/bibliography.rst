@@ -1,8 +1,6 @@
-############
-Bibliography
-############
 
-Whenever possible, the bibliography includes hypertext links to the references cited. When there is no link, a search on http://scholar.google.com often returns a link to the article. RFC documents are cited in the text but do not appear in this version of the biblography.
+
+.. Whenever possible, the bibliography includes hypertext links to the references cited. When there is no link, a search on http://scholar.google.com often returns a link to the article. RFC documents are cited in the text but do not appear in this version of the biblography.
 
 .. [AW05] Arlitt, M. and Williamson, C. 2005. An analysis of TCP reset behaviour on the internet. SIGCOMM Comput. Commun. Rev. 35, 1 (Jan. 2005), 37-44. DOI= http://doi.acm.org/10.1145/1052812.1052823
 
@@ -154,3 +152,9 @@ Whenever possible, the bibliography includes hypertext links to the references c
 .. [HRX2008] Ha, S., Rhee, I., and Xu, L. 2008. CUBIC: a new TCP-friendly high-speed TCP variant. SIGOPS Oper. Syst. Rev. 42, 5 (Jul. 2008), 64-74. DOI= http://doi.acm.org/10.1145/1400097.1400105
 
 .. [STBT2009] Sridharan, M., Tan, K., Bansal, D., Thaler, D., Compound TCP: A New TCP Congestion Control for High-Speed and Long Distance Networks, Internet draft, work in progress, April 2009, http://tools.ietf.org/html/draft-sridharan-tcpm-ctcp-02
+
+.. [SMM1998] Semke, J., Mahdavi, J., and Mathis, M. 1998. Automatic TCP buffer tuning. SIGCOMM Comput. Commun. Rev. 28, 4 (Oct. 1998), 315-323. DOI= http://doi.acm.org/10.1145/285243.285292
+
+.. [LSP1982] Lamport, L., Shostak, R., and Pease, M. 1982. The Byzantine Generals Problem. ACM Trans. Program. Lang. Syst. 4, 3 (Jul. 1982), 382-401. DOI= http://doi.acm.org/10.1145/357172.357176
+
+.. [Mills2006] Mills, D.L. Computer Network Time Synchronization: the Network Time Protocol. CRC Press, March 2006, 304 pp.
