@@ -37,7 +37,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'CNP3'
+project = u'Computer networking : Principles, Protocols and Practice'
 copyright = u'2009, Olivier Bonaventure'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -172,7 +172,7 @@ htmlhelp_basename = 'CNP3doc'
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-  ('index', 'CNP3.tex', u'CNP3 Documentation',
+  ('index', 'CNP3.tex', u'Computer Networking : Principles, Protocols and Practice',
    u'Olivier Bonaventure', 'manual'),
 ]
 

@@ -2,16 +2,14 @@
 The network layer
 ==================
 
-
-
-The network is a very important layer in computer networks as it is bascially the glue that allows the applications running above the transport layers to use a wide range of different and interconnected networks built with different datalink and physical layers. The network layer enable applications to run above networks built with very different network technologies. 
+The network layer is a very important layer in computer networks as it is the glue that allows the applications running above the transport layers to use a wide range of different and interconnected networks built with different datalink and physical layers. The network layer enables applications to run above networks built with very different network technologies. 
 
 In this chapter, we first explain the principles of the network layer. These principles include the datagram and virtual circuit modes, the separation between the data plane and the control plane and the algorithms used by routing protocols. Then, we explain in more details the network layer in the Internet, starting with IPv4 and IPv6 and then moving to the routing protocols (RIP, OSPF and BGP).
 
 Principles 
 ###########
 
-The main ojbective of the network layer is to allow endsystems connected to different networks to exchange information through intermediate systems that are called :term:`routers`. The unit of information in the network layer is called a :term:`packet`.
+The main objective of the network layer is to allow endsystems connected to different networks to exchange information through intermediate systems that are called :term:`router`s. The unit of information in the network layer is called a :term:`packet`.
 
 
 .. figure:: fig/network-fig-001-c.png
@@ -20,7 +18,7 @@ The main ojbective of the network layer is to allow endsystems connected to diff
    
    The network layer in the reference model
 
-Before explaining the network layer in details, it is useful to first analyse the service provided by the `datalink` layer. There are many variants of the datalink layer. Some provide a connection-oriented service while others provide a connectionless service. In this section, we will focus on connectionless datalink layer services that are the most widely used. Using a connection-oriented datalink layer causes some problems that are beyond the scope of this chapter :rfc:`3819`.
+Before explaining the network layer in details, it is useful to first analyse the service provided by the `datalink` layer. There are many variants of the datalink layer. Some provide a connection-oriented service while others provide a connectionless service. In this section, we focus on connectionless datalink layer services that are the most widely used. Using a connection-oriented datalink layer causes some problems that are beyond the scope of this chapter. See :rfc:`3819` for a discussion on this topic.
 
 
 .. figure:: fig/network-fig-003-c.png
@@ -29,9 +27,9 @@ Before explaining the network layer in details, it is useful to first analyse th
 
    The point-to-point datalink layer
 
-There are two main types of datalink layers. The simplest datalink layer, shown in the figure above, is when there are only two communicating systems that are directly connected through the physical layer. Such a datalink layer is used when there is a point-to-point link between the two systems. The two systems can be endsystems  or routers. The `Point-to-Point Protocol (PPP)` defined in :rfc:`1661` in an example of such a point-to-point datalink layer. Datalink layers exchange `frames` and a datalink :term:`frame` sent by a datalink layer entity on the left will be transmitted through the physical layer so that it can reach the datalink layer entity on the right. Point-to-point datalink layers can either provide an unreliable service (frames can be corrupted or lost) or a reliable service (in this case, the datalink layer includes retransmission mechanisms similar to the ones used in the transport layer). The unreliable service is frequently used above physical layers (e.g. optical fiber, twisted pairs) having a low bit error ratio while reliability mechanisms are often used in wireless networks.
+There are two main types of datalink layers. The simplest datalink layer is when there are only two communicating systems that are directly connected through the physical layer. Such a datalink layer is used when there is a point-to-point link between the two communicating systems. The two systems can be endsystems  or routers. The `Point-to-Point Protocol (PPP)` defined in :rfc:`1661` in an example of such a point-to-point datalink layer. Datalink layers exchange `frames` and a datalink :term:`frame` sent by a datalink layer entity on the left is transmitted through the physical layer so that it can reach the datalink layer entity on the right. Point-to-point datalink layers can either provide an unreliable service (frames can be corrupted or lost) or a reliable service (in this case, the datalink layer includes retransmission mechanisms similar to the ones used in the transport layer). The unreliable service is frequently used above physical layers (e.g. optical fiber, twisted pairs) having a low bit error ratio while reliability mechanisms are often used in wireless networks to recover locally from transmission errors.
 
-The second type of datalink layer is the one used in Local Area Networks (LAN). Conceptually, a LAN is a set of communicating devices that are connected to the same datalink layer such that any two devices connected to the LAN can directly exchange frames. Both endsystems and routers can be connected to a LAN. Some LANs only connect a few devices, but some LANs may connect hundreds or even thousands of devices.
+The second type of datalink layer is the one used in Local Area Networks (LAN). Conceptually, a LAN is a set of communicating devices such that any two devices can directly exchange frames through the datalink layer. Both endsystems and routers can be connected to a LAN. Some LANs only connect a few devices, but some LANs may connect hundreds or even thousands of devices.
 
 .. figure:: fig/network-fig-002-c.png
    :align: center
@@ -39,25 +37,25 @@ The second type of datalink layer is the one used in Local Area Networks (LAN). 
    
    A local area network 
 
-We will describe in the next chapter the organisation and the operation of the Local Area Networks. An importance difference between the point-to-point datalink layers and the datalink layers used in LANs is that in a LAN, each communicating device must be identified by a unique unicast datalink layer address. This address is usually embedded in the hardware of the device and different types of LANs use different types of datalink layer addresses. A communicating device attached to a LAN can send a datalink frame to any other communicating device that is attached to the same LAN. Most LANs also support special broadcast and multicast addresses. A frame sent to the broadcast address of the LAN will be delivered to all communicating devices that are attached to the LAN. The multicast addresses are used to identify groups of communicating devices. When a frame is sent towards a multicast datalink layer address, it is delivered by the LAN to all communicating devices that belong to the corresponding group.
+We describe in the next chapter the organisation and the operation of Local Area Networks. An important difference between the point-to-point datalink layers and the datalink layers used in LANs is that in a LAN, each communicating device must be identified by a unique unicast datalink layer address. This address is usually embedded in the hardware of the device and different types of LANs use different types of datalink layer addresses. A communicating device attached to a LAN can send a datalink frame to any other communicating device that is attached to the same LAN. Most LANs also support special broadcast and multicast addresses. A frame sent to the broadcast address of the LAN is delivered to all communicating devices that are attached to the LAN. The multicast addresses are used to identify groups of communicating devices. When a frame is sent towards a multicast datalink layer address, it is delivered by the LAN to all communicating devices that belong to the corresponding group.
 
-A last, but important point, to be mentionned about the datalink layer is that no datalink layer is able to send frames of unlimited side. Each datalink layer is characterised by a maximum frame size that, as we will see in the next chapter, depends on the implementation of the datalink layer. There are more than dozen different datalink layers and unfortunately most of the datalink layers use a different maximum frame size. The network layer will need to deal with this heterogeinity of the datalink layer.
+Unfortunately no datalink layer is able to send frames of unlimited side. Each datalink layer is characterised by a maximum frame size. There are more than a dozen different datalink layers and unfortunately most of them use a different maximum frame size. The network layer must cope with the heterogeinity of the datalink layer.
 
 The network layer itself relies on the following principles : 
 
- #. Each network layer entity is identified by a `network layer address`. This address is independent from the datalink layer addresses that it may use.
- #. The service provided by the network layer does not depend on the service or the organisation of the underlying datalink layers
- #. The network layer is conceptually divided in two planes : the `data plane` and the `control plane`. The `data plane` contains the protocols and mechanisms that allow hosts and router to exchange packets carrying user data. The `control plane` contains the protocols and mechanisms that enable routers to efficiently forward packets towards their destination. 
+ #. Each network layer entity is identified by a `network layer address`. This address is independent of the datalink layer addresses that it may use.
+ #. The service provided by the network layer does not depend on the service or the internal organisation of the underlying datalink layers.
+ #. The network layer is conceptually divided in two planes : the `data plane` and the `control plane`. The `data plane` contains the protocols and mechanisms that allow hosts and routers to exchange packets carrying user data. The `control plane` contains the protocols and mechanisms that enable routers to efficiently learn how to forward packets towards their final destination. 
 
 
-The independance of the network layer from the underlying datalink layer is a key principle of the network. It ensures that the network layer can be used to allow hosts attached to different types of datalink layers to exchange packets through intermediate routers. Furthermore, this allows the datalink layers and the network layer to evolve independently from each other. This enables the network layer to be easily adapted to a new datalink layer every time a new datalink layer is invented.
+The independance of the network layer from the underlying datalink layer is a key principle of the network layer. It ensures that the network layer can be used to allow hosts attached to different types of datalink layers to exchange packets through intermediate routers. Furthermore, this allows the datalink layers and the network layer to evolve independently from each other. This enables the network layer to be easily adapted to a new datalink layer every time a new datalink layer is invented.
 
 There are two types of services that can be provided by the network layer :
 
  - an `unreliable connectionless` service
  - a `connection-oriented`, reliable or unreliable, service
 
-Connection-oriented services have been popular with technologies such as :term:`X.25` and :term:`ATM` or :term:`frame-relay`, but nowadays most networks use an `unreliable connectionless` service. This will be our main focus in this chapter.
+Connection-oriented services have been popular with technologies such as :term:`X.25` and :term:`ATM` or :term:`frame-relay`, but nowadays most networks use an `unreliable connectionless` service. This is our main focus in this chapter.
 
 
 Organisation of the network layer
@@ -65,17 +63,17 @@ Organisation of the network layer
 
 .. index:: datagram, virtual circuit
 
-There are two possible organisations of the network layer : 
+There are two possible internal organisations of the network layer : 
 
- - datagram
- - virtual circuits
+ - datagram 
+ - virtual circuits 
 
 The internal organisation of the network is orthogonal to the service that it provides, but most of the time a datagram organisation is used to provide a connectionless service while a virtual circuit organisation is used in networks that provide a connection-oriented service.
 
-Datagram mode
--------------
+Datagram organisation
+---------------------
 
-The first and most popular organisation of the network layer is the datagram mode. This organisation is inspired from the organisation of the postal service. Each host is identified by a `network layer address`. To send information to a remote host, a host creates a packet that contains :
+The first and most popular organisation of the network layer is the datagram organisation. This organisation is inspired from the organisation of the postal service. Each host is identified by a `network layer address`. To send information to a remote host, a host creates a packet that contains :
 
  - the network layer address of the destination host
  - its own network layer address
@@ -83,7 +81,7 @@ The first and most popular organisation of the network layer is the datagram mod
 
 The network layer limits the maximum packet size. Thus, the information must have been divided in packets by the transport layer before being passed to the network layer. 
 
-To understand the operation of a network in datagram mode, let us consider the figure below. A network layer address, represented by a letter, has been assigned to each host and router. To send some information to host `J`, host `A` creates a packet containing its own address, the destination address and the information to be exchanged.
+To understand the datagram organisation, let us consider the figure below. A network layer address, represented by a letter, has been assigned to each host and router. To send some information to host `J`, host `A` creates a packet containing its own address, the destination address and the information to be exchanged.
 
 .. figure:: fig/network-fig-006-c.png
    :align: center
@@ -94,25 +92,28 @@ To understand the operation of a network in datagram mode, let us consider the f
 .. index:: hop-by-hop forwarding
 
 
-In datagram mode, routers use `hop-by-hop forwarding`. This means that when a router receives a packet that is not destined to itself, it lookups the destination address of the packet in its `routing table`. The routing table typically contains for each destination address (or set of destination addresses) the outgoing interface of the router over which the packet must be forwarded so that it can reach its final destination. The main constraint imposed on the routing tables is that they should enable any host in the network to reach any other host. This implies that each router should know a route towards each destination but also that the paths composed from the information stored in the routing tables should not contain loops. Otherwise, some destinations would be unreachable. 
+With the datagram organisation, routers use `hop-by-hop forwarding`. This means that when a router receives a packet that is not destined to itself, it lookups the destination address of the packet in its `routing table`. A `routing table` is a data structure that maps each destination address (or set of destination addresses) on the outgoing interface over which a packet destined to this address must be forwarded to reach its final destination. 
+
+The main constraint imposed on the routing tables is that they must allow any host in the network to reach any other host. This implies that each router must know a route towards each destination but also that the paths composed from the information stored in the routing tables cannot not contain loops. Otherwise, some destinations would be unreachable. 
 
 In the example above, host `A` sends its packet to router `R1`. `R1` consults its routing table and forwards the packet towards `R2`. Based on its own routing table, `R2` decides to forward the packet to `R5` that can deliver it to its destination.
 
 To allow hosts to exchange packets, a network relies on two different types of protocols and mechanisms. First, there must be a precise definition of the format of the packets that are sent by hosts and processed by routers. Second, the algorithm used by the routers to forward these packets must be defined. This protocol and this algorithm are part of the `data plane` of the network layer. The `data plane` contains all the protocols and algorithms that are used by hosts and routers to create and process the packets that contain user data.
 
-The `data plane` and in particular the forwarding algorithm used by the routers depends on the routing tables that are maintained on reach router. These routing tables can be maintained by using various techniques (manual configuration, distributed protocols, centralised computation, ...). These techniques are part of the `control plane` of the network layer. The `control plane` contains all the protocols and mechanisms that are used to compute and install on the routers that routing tables that allow them to forward packets towards their destinations. 
+The `data plane` and in particular the forwarding algorithm used by the routers depends on the routing tables that are maintained on reach router. These routing tables can be maintained by using various techniques (manual configuration, distributed protocols, centralised computation, ...). These techniques are part of the `control plane` of the network layer. The `control plane` contains all the protocols and mechanisms that are used to compute and install routing tables  on the routers. 
 
-The datagram mode has been very popular in computer networks. Datagram based network layers include IPv4 and IPv6 in the global Internet, CLNP defined by the ISO, IPX define by Novell or XNS defined by Xerox.
+The datagram organisation has been very popular in computer networks. Datagram based network layers include IPv4 and IPv6 in the global Internet, CLNP defined by the ISO, IPX defined by Novell or XNS defined by Xerox.
 
 
-Virtual circuit mode
-=====================
+Virtual circuit organisation
+----------------------------
 
-The main advantage of the datagram mode is its simplicity. The principles of the datagram mode can be easily understood and it allows a host to easily send a packet towards any destination. However, as each packet is forwarded independently by intermediate routers, packets sent by a host my not follow the same path to reach a given destination. This may cause packet reordering which may be annoying for some applications. Furthermore, as a router using `hop-by-hop forwarding` always forwards over the same outgoing interface the packets sent towards the same destination, this may cause congestion over some links.
+The main advantage of the datagram organisation is its simplicity. The principles of this organisation can be easily understood. Furthermore, it allows a host to easily send a packet towards any destination at any time. However, as each packet is forwarded independently by intermediate routers, packets sent by a host may not follow the same path to reach a given destination. This may cause packet reordering which may be annoying for transport protocols. Furthermore, as a router using `hop-by-hop forwarding` always forwards over the same outgoing interface the packets sent towards the same destination, this may cause congestion over some links.
 
-The second organisation of the network layer, called `virtual circuits` has been inspired from the organisation of the telephone networks. Telephone networks have been designed to carry phone calls that usally lasts a few minutes. Each phone is identified by a telephone number and is attached to a telephone switch. To initiate a phone call, a telephone first needs to send the destination's phone number to its local switch. The switch will then cooperate with the other switches in the network to create a bi-directionnal channel between the two telephones through the network. This channel will be used by the two telephones during the lifetime of the phone call and will be released at the end of the call. Until the 1960s, most of these channels were created manually by the telephone operators upon request of the caller. Today's telephone networks use automated switches and allow several channels to be carried over the same physical link, but the principles remain roughly the same.
+The second organisation of the network layer, called `virtual circuits` has been inspired from the organisation of the telephone networks. Telephone networks have been designed to carry phone calls that usually last a few minutes. Each phone is identified by a telephone number and is attached to a telephone switch. To initiate a phone call, a telephone first needs to send the destination's phone number to its local switch. The switch cooperates with the other switches in the network to create a bi-directionnal channel between the two telephones through the network. This channel will be used by the two telephones during the lifetime of the call and will be released at the end of the call. Until the 1960s, most of these channels were created manually by the telephone operators upon request of the caller. Today's telephone networks use automated switches and allow several channels to be carried over the same physical link, but the principles remain roughly the same.
 
-In a network using virtual circuits all hosts are identified with a network layer address. However, a host must explicitely request the establishment of a virtual circuit before being able to send information to a destination host. The request to establish a virtual circuit will be processed by the `control plane` and will install the necessary state through create the virtual circuit between the source and the destination through intermediate routers. All the packets that are sent on the virtual circuit will contain a virtual circuit identifier that allows the routers to determine to which virtual circuit each a packet belongs. This is illustrated in the figure below with one virtual circuit between host `A` and host `I` and another one between host `A` and host `J`. 
+In a network using virtual circuits all hosts are identified with a network layer address. However, a host must explicitely request the establishment of a `virtual circuit before being able to send packets to a destination host. 
+The request to establish a virtual circuit is processed by the `control plane` that installs state to create the virtual circuit between the source and the destination through intermediate routers. All the packets that are sent on the virtual circuit contain a virtual circuit identifier that allows the routers to determine to which virtual circuit each packet belongs. This is illustrated in the figure below with one virtual circuit between host `A` and host `I` and another one between host `A` and host `J`. 
 
 .. figure:: fig/network-fig-008-c.png
    :align: center
@@ -121,9 +122,9 @@ In a network using virtual circuits all hosts are identified with a network laye
    A simple internetwork using virtual-circuits
 
 				   
-The establishment of a virtual circuit is performed by using a `signalling protocol` in the `control plane`. Usually, the source host sends a signalling message to indicate to its router the address of the destination and possibly some performance characteristics of the virtual circuit to be established. The first router can processe the signalling message in two different ways. 
+The establishment of a virtual circuit is performed by using a `signalling protocol` in the `control plane`. Usually, the source host sends a signalling message to indicate to its router the address of the destination and possibly some performance characteristics of the virtual circuit to be established. The first router can process the signalling message in two different ways. 
 
-A first solution is for the router to consult its routing table, remember the characteristics of the requested virtual circuit and forward over its outgoing interface towards the destination. The signalling message will thus be forwarded hop-by-hop until it reaches the destination and the virtual circuit will be opened along the path followed by the signalling message. This is illustrated with the red virtual circuit in the figure below.
+A first solution is for the router to consult its routing table, remember the characteristics of the requested virtual circuit and forward it over its outgoing interface towards the destination. The signalling message is thus forwarded hop-by-hop until it reaches the destination and the virtual circuit is opened along the path followed by the signalling message. This is illustrated with the red virtual circuit in the figure below.
 
 .. figure:: fig/network-fig-007-c.png
    :align: center
@@ -131,13 +132,14 @@ A first solution is for the router to consult its routing table, remember the ch
 
    Virtual circuit establishment
 
+
 .. index:: source routing, label
 
-A second solution can be used if the routers know the entire topology of the network. In this case, the first router can use a technique called `source routing`. Upon reception of the signalling message, the first router chooses the path of the virtual circuit in the network. This path is encoded as the list of the addresses of all intermediate routers to reach the destination. It is included in the signalling message and intermediate routers can remove their address from the signalling message before forwarding it. This technique enables routers to better spread the virtual circuits through the network. If the routers know the load of the links in the topology, they can also select the less loaded path when establishing a virtual circuit. This solution is illustrated with the blue circuit in the figure above.
+A second solution can be used if the routers know the entire topology of the network. In this case, the first router can use a technique called `source routing`. Upon reception of the signalling message, the first router chooses the path of the virtual circuit in the network. This path is encoded as the list of the addresses of all intermediate routers to reach the destination. It is included in the signalling message and intermediate routers can remove their address from the signalling message before forwarding it. This technique enables routers to better spread the virtual circuits throughout the network. If the routers know the load of remote links, they can also select the less loaded path when establishing a virtual circuit. This solution is illustrated with the blue circuit in the figure above.
 	   
-The last point to be discussed about the virtual circuit is its `data plane`. The `data plane` defines mainly the format of the data packets and the algorithm used by routers to forward packets. The data packets contain a virtual circuit identifier that is encoded in a fixed number of bits. These virtual circuit identifiers are usually called `labels`. 
+The last point to be discussed about the virtual circuit organisation is its `data plane`. The `data plane` defines mainly the format of the data packets and the algorithm used by routers to forward packets. The data packets contain a virtual circuit identifier that is encoded as a fixed number of bits. These virtual circuit identifiers are usually called `labels`. 
 
-Each host maintains a flow table that associates a label that each virtual circuit that is has established. When a router receives a labelled packet, it extracts the packet and consults its `label forwarding table`. This table contains for each couple `(incoming interface, label)` the outgoing interface to be used to forward the packet and the label that must be placed in the outgoing packets. in practice, the label forwarding table is organised as a vector and the couple `(incoming interface, label)` is the index of the entry in the vector that contains the outgoing interface and the outgoing label. Thus a single memory access is sufficient to consult the label forwarding table. The utilisation of the label forwarding table is illustrated in the figure below.
+Each host maintains a flow table that associates a label with each virtual circuit that is has established. When a router receives a packet that contains a label, it extracts the label and consults its `label forwarding table`. This table is a data structure that maps each couple `(incoming interface, label)` to the outgoing interface to be used to forward the packet and the label that must be placed in the outgoing packets. In practice, the label forwarding table can be implemented as a vector and the couple `(incoming interface, label)` is the index of the entry in the vector that contains the outgoing interface and the outgoing label. Thus a single memory access is sufficient to consult the label forwarding table. The utilisation of the label forwarding table is illustrated in the figure below.
 
 .. figure:: fig/network-fig-009-c.png
    :align: center
@@ -145,11 +147,10 @@ Each host maintains a flow table that associates a label that each virtual circu
 
    Label forwarding tables in a network using virtual circuits
 
-The virtual circuit mode has been mainly used in public networks, starting from X.25 and then frame relay and Asynchronous Transfert Mode (ATM). 
+The virtual circuit organisation has been mainly used in public networks, starting from X.25 and then Frame elay and Asynchronous Transfert Mode (ATM) network. 
 
 
-The datagram and virtual circuit modes have both advantages and drawbacks. The main advantage of the datagram mode is that hosts can easily send packets to any number of destinations while the virtual circuit mode requires the establishment of a virtual circuit before the transmission of any data packet. This solution can be costly for hosts that exchange small amounts of data. On the other hand, the main advantage of the virtual circuit mode is that the forwarding algorithm used by routers is simpler than when using the datagram mode. Furthermore, the utilisation of virtual circuits may allow the load to be better spread through the network thanks to the utilisation of virtual circuits. The MultiProtocol Label Switching (MPLS) technique that we will discuss in chapter ??? can be considered as a good compromise between datagram and virtual circuits. MPLS uses virtual circuits between routers, but does not extend them to the endhosts.
-
+Both the datagram and virtual circuit organisations have advantages and drawbacks. The main advantage of the datagram organisation is that hosts can easily send packets to any number of destinations while the virtual circuit organisation requires the establishment of a virtual circuit before the transmission of data packet. This solution can be costly for hosts that exchange small amounts of data. On the other hand, the main advantage of the virtual circuit organisation is that the forwarding algorithm used by routers is simpler than when using the datagram organisation. Furthermore, the utilisation of virtual circuits may allow the load to be better spread through the network thanks to the utilisation of multiple virtual circuits. The MultiProtocol Label Switching (MPLS) technique that we discuss in chapter ??? can be considered as a good compromise between datagram and virtual circuits. MPLS uses virtual circuits between routers, but does not extend them to the endhosts.
 
 
 .. maybe add more information
@@ -157,7 +158,7 @@ The datagram and virtual circuit modes have both advantages and drawbacks. The m
 The control plane
 =================
 
-One of the objectives of the control plane in network layers is to maintain the routing tables that are used on all routers. As indicated earlier, a routing table is a data structure that contains, for each destination address (or set of addresses) known by the router, the outgoing interface over which the router must forward a packet destined to this address. The routing table may also contain additional information such as the address of the next router on the path towards the destination or an estimation of the cost of this path. 
+One of the objectives of the `control plane` in the network layer is to maintain the routing tables that are used on all routers. As indicated earlier, a routing table is a data structure that contains, for each destination address (or block of addresses) known by the router, the outgoing interface over which the router must forward a packet destined to this address. The routing table may also contain additional information such as the address of the next router on the path towards the destination or an estimation of the cost of this path. 
 
 
 In this section, we discuss the three main techniques that can be used to maintain the routing tables in a network.
@@ -168,13 +169,12 @@ Static routing
 
 .. comment:: comment formaliser l'absence de boucles
 
-The solution solution 
-simplest
-avoid loop
+The simplest solution is to pre-compute all the routing tables of all routers solution and to install them on each router. Several algorithms can be used to compute these tables. A simple solution is to use shortest path routing and to minimise the number of intermediate routers to reach each destination. More complex algorithms can take into account the expected load on the links to ensure that congestion does not occur for a given traffic demand. Those algorithms must all ensure that :
 
-tables can be computed offline, but in this case the issue is to update the tables with traffic flowing
+ - all routers are configured with a route to reach each destination
+ - the paths composed with the entries found in the routing tables do not cause forwarding loops
 
-
+The figure below shows sample routing tables in a five routers network.
 
 .. figure:: fig/network-fig-011-c.png
    :align: center
@@ -182,33 +182,35 @@ tables can be computed offline, but in this case the issue is to update the tabl
 
    Routing tables in a simple network 
 
+The main drawback of static routing is that it does not adapt to the evolution of the network. When a new router or link is added, all routing tables must be recomputed. Furthermore, when a link or router fails, the routing tables must be updated as well.
+
 
 Distance vector routing
 -----------------------
 
-Distance vector routing is the simplest distributed routing protocol that is used in computer networks. Distance vector allows the routers to automatically discover the destinations that are reachable inside the network and the shortest path to reach each of these destinations. The shortest path is computed based on `metrics` that are associated to each link. We will use `l.cost` to represent in this section that metric that has been configured for link `l` on a router. 
+Distance vector routing is a simple distributed routing protocol. Distance vector routing allows the routers to automatically discover the destinations that are reachable inside the network and the shortest path to reach each of these destinations. The shortest path is computed based on `metrics` or `costs` that are associated to each link. We use `l.cost` to represent the metric that has been configured for link `l` on a router. 
 
 Each router maintains a routing table. The routing table `R` can be modelled as a data structure that stores, for each known destination address `d`, the following attributes :
 
- - `R[d].link` is the outgoing link that the router uses to forward packets towards destination `d
+ - `R[d].link` is the outgoing link that the router uses to forward packets towards destination `d`
  - `R[d].cost` is the sum of the metrics of the links that compose the shortest path to reach destination `d`
- - `R[d].time` is the timestamp of the last update of the route for destination `d`
+ - `R[d].time` is the timestamp of the last distance vector containing destination `d`
 
-A router that uses distance vector routing sends regularly its distance vector over all its interfaces. The distance vector is a summary of the router's routing table that indicates the distance towards each known destination. This distance vector can be computed from the routinng table by using the pseudo-code below ::
+A router that uses distance vector routing regularly sends its distance vector over all its interfaces. The distance vector is a summary of the router's routing table that indicates the distance towards each known destination. This distance vector can be computed from the routinng table by using the pseudo-code below ::
 
  Every N seconds: 
-  Vector=null;
+  v=Vector()
   for each destination=d in R[]
   {
-   Vector=Vector+Pair(d,R[d].cost);
+   v.add(Pair(d,R[d].cost));
   }
   for each interface
   {
-   Send(Vector);
+   Send(v,interface)  # send vector v on this interface
   }
 
 
-When a router boots, it does not know any destination in the network and its routing table only contains itself. It will thus send to all its neighbours a distance vector that contains only its address at a distance of `0`. When a router receives a distance vector on link `l`, it processes it as follows ::
+When a router boots, it does not know any destination in the network and its routing table only contains itself. It thus sends to all its neighbours a distance vector that contains only its address at a distance of `0`. When a router receives a distance vector on link `l`, it processes it as follows ::
 
 
  Received(Vector V[],link l)
@@ -232,14 +234,14 @@ When a router boots, it does not know any destination in the network and its rou
    }
  }
 
-The router iterates over all addresses included in the distance vector. If the distance vector contains an address that the router does not know, it inserts the destination inside its routing table via link `l` and at a distance which is the sum between the distance indicated in the distance vector and the cost associated to link `l`. If the destination was already known by the router, it will only update the corresponding entry in its routing table if either : 
+The router iterates over all addresses included in the distance vector. If the distance vector contains an address that the router does not know, it inserts the destination inside its routing table via link `l` and at a distance which is the sum between the distance indicated in the distance vector and the cost associated to link `l`. If the destination was already known by the router, it only updates the corresponding entry in its routing table if either : 
  
  - the cost of the new route is smaller than the cost of the already known route `( (V[d].cost+l.cost) < R[d].cost)`
  - the new route was learned over the same link as the current best route towards this destination `( R[d].link == l)`
 
-The first condition of the test ensures that the routers will discover the shortest path towards each destination. The second condition is used to take into account the change of routes that may occur after a link failure or a change in the metric associated to a link.
+The first condition ensures that the router discovers the shortest path towards each destination. The second condition is used to take into account the changes of routes that may occur after a link failure or a change of the metric associated to a link.
 
-To unerstand the operation of a distance vector protocol, let us consider the five routers network shown below.
+To understand the operation of a distance vector protocol, let us consider the five routers network shown below.
 
 
 .. figure:: fig/network-fig-014-c.png
@@ -251,7 +253,7 @@ To unerstand the operation of a distance vector protocol, let us consider the fi
 Assume that `A` is the first to send its distance vector `[A=0]`.
 
  - `B` and `D` process the received distance vector and update their routing table with a route towards `A`. 
- - `D` sends its distance vector `[D=0,A=1]` to `A` and `E`. `E` can reach `A` and `D`.
+ - `D` sends its distance vector `[D=0,A=1]` to `A` and `E`. `E` can now reach `A` and `D`.
  - `C` sends its distance vector `[C=0]` to `B` and `E`
  - `E` sends its distance vector `[E=0,D=1,A=2,C=2]` to `D`, `B` and `C`. `B` can now reach `A`, `C`, `D` and `E`
  - `B` sends its distance vector `[B=0,A=1,C=1,D=2,E=1]` to `A`, `C` and `E`. `A`, `B`, `C` and `E` can now reach all destinations.
@@ -265,16 +267,18 @@ At this point, all routers can reach all other routers in the network thanks to 
 
    Routing tables computed by distance vector in a simple network
 
-To deal with link and router failures, routers use the timestamp that is stored in their routing table. As all routers send their distance vector every `N` seconds, the timestamp of each route should refreshed regularly. Thus no route should have an old timestamp unless the route is not reachable anymore. In practice, to cope with the possible loss of a distance vector due to transmission errors, routers will check every `N` seconds the timestamp of the routes stored in their routing table and will remove the routes that are older than :math:`3 \times N` seconds. When a router notices that a route towards a destination has expired, it must first associate an :math:`\infty` cost to this route and send its distance vector to its neighbours to inform them. The route can then be removed from the routing table after some time (e.g. :math:`3 \times N` seconds) to ensure that the neighbour routers will have received the bad news even if some distance vectors do not reach them due to transmission errors. 
+To deal with link and router failures, routers use the timestamp that is stored in their routing table. As all routers send their distance vector every `N` seconds, the timestamp of each route should be regularly refreshed. Thus no route should have a timestamp older than `N` seconds unless the route is not reachable anymore. In practice, to cope with the possible loss of a distance vector due to transmission errors, routers check every `N` seconds the timestamp of the routes stored in their routing table and remove the routes that are older than :math:`3 \times N` seconds. When a router notices that a route towards a destination has expired, it must first associate an :math:`\infty` cost to this route and send its distance vector to its neighbours to inform them. The route can then be removed from the routing table after some time (e.g. :math:`3 \times N` seconds) to ensure that the neighbour routers have received the bad news even if some distance vectors do not reach them due to transmission errors. 
 
-Consider the example above and assume that the link between routers `A` and `B` fails. Before the failure, `A` used `B` to reach destinations `B`, `C` and `E` while `B` only used the `A-B` link to reach `A`. The affected route entries will timeout on routers `A` and `B` and they will both send their distance vector.
+Consider the example above and assume that the link between routers `A` and `B` fails. Before the failure, `A` used `B` to reach destinations `B`, `C` and `E` while `B` only used the `A-B` link to reach `A`. The affected entries timeout on routers `A` and `B` and they both send their distance vector.
 
  - `A` sends its distance vector :math:`[A=0,D=\infty,C=\infty,D=1,E=\infty]`. `D` knows that it cannot reach `B` anymore via `A`
  - `D` sends its distance vector :math:`[D=0,B=\infty,A=1,C=2,E=1]` to `A` and `E`. `A` recovers routes towards `C` and `E` via `D`.
  - `B` sends its distance vector :math:`[B=0,A=\infty,C=1,D=2,E=1]` to `E` and `C`. `D` learns that there is no route anymore to reach `A` via `B`.
  - `E` sends its distance vector :math:`[E=0,A=2,C=1,D=1,B=1]` to `D`, `B` and `C`. `D` learns a route towards `B`. `C` and `B` learn a route towards `A`. 
  
-At this point, all routers have a routing table that allows them to reach all another routers, except router `A` that cannot yet reach router `B`. `A` will recover the route towards `B` once router `D` sends its distance vector :math:`[A=1,B=2,C=2,D=1,E=1]`. This last step is illustrated in the figure below that alows shows the routing tables on all routers.
+At this point, all routers have a routing table that allows them to reach all another routers, except router `A` that cannot yet reach router `B`. `A` recovers the route towards `B` once router `D` sends its updated distance vector :math:`[A=1,B=2,C=2,D=1,E=1]`. This last step is illustrated in figure :ref:`fig-afterfailure` that shows the routing tables on all routers.
+
+.. _fig-afterfailure:
 
 .. figure:: fig/network-fig-028-c.png
    :align: center
@@ -284,16 +288,16 @@ At this point, all routers have a routing table that allows them to reach all an
 
 .. index:: count to infinity
 
+Consider now that the link between `D` and `E` fails. The network is now partitionned in two disjoint parts : (`A` , `D`)  and (`B`, `E`, `C`). The routes towards `B`, `C` and `E` expire first on router `D`. At this time, router `D` updates its routing table.
 
-Consider now what happens when the link between `D` and `E` fails. The network is now partitionned in two disjoint parts : (`A`,`D`)  and (`B`, `E`, `C`). The routes towards `B`, `C` and `E` will expire first on router `D`. At this time, router `D` will update its routing table.
+If `D` sends :math:`[D=0, A=1, B=\infty, C=\infty, E=\infty]` `A` learns that `B`, `C` and `E` are unreachable and updates its routing table.
 
- If `D` sends :math:`[D=0, A=1, B=\infty, C=\infty, E=\infty]` `A` will learn that `B`, `C` and `E` are unreachable and will update its routing table.
+Unfortunately, if the distance vector sent to `A` is lost or if `A` sends its own distance vector ( :math:`[A=0,D=1,B=3,C=3,E=2]` ) at the same time as `D` sends its distance vector, `D` updates its routing table to use the shorter routes advertised by `A` towards `B`, `C` and `E`. After some time `D` sends a new distance vector : :math:`[D=0,A=1,E=3,C=4,B=4]`. `A` updates its routing table and after some time sends its own distance vector :math:`[A=0,D=1,B=5,C=5,E=4]` ... This problem is known as the `count to infinity problem` in the networking literature. Routers `A` and `D` exchange distance vectors with increasing costs until these costs reach :math:`\infty`. This problem may occur in other scenarios than the one depicted in the above figure. In fact, distance vector routing may suffer from count to infinity problems as soon as there is a cycle in the network. Cycles are necessary to have enough redundancy to deal with link and router failures. To mitigate the impact of counting to infinity, some distance vector protocols consider that :math:`16=\infty`. Unfortunately, this limits the metrics that network operators can use and the diameter of the networks using distance vectors.
 
- Unfortunately, if the distance vector sent to `A` is lost or if `A` sends its own distance vector ( :math:`[A=0,D=1,B=3,C=3,E=2]` ) at the same time as `D` sends its distance vector, `D` will update its routing table to use the shorter routes advertised by `A` towards `B`, `C` and `E`. After some time `D` will send a ew distance vector : :math:`[D=0,A=1,E=3,C=4,B=4]`. `A` will update its routing table and after some time will send its own distance vector : math:`[A=0,D=1,B=5,C=5,E=4]` ... This problem is known as the count to infinity problem. Routers `A` and `D` will exchange distance vectors with increasing costs until these costs reach :math:`\infty`. This problem may occur in other scenarios than the one depicted in the above figure. In fact, a distance vector routing may suffer from count to infinity problem as soon as there is a cycle in the network. Unfortunately, cycles are necessary to have enough redundancy to deal with link and router failures. To reduce the impact of count to infinity, some distance vector protocols consider that :math:`16=\infty`. Unfortunately, this limits the metrics that network operators can use and the diameter of the networks using distance vectors.
 
 .. index:: split horizon, split horizon with poison reverse
 
-This count to infinity problem occurs because router `A` advertises to router `D` a route that it has learned via router `D`. A possible solution could be to change how a router creates its distance vector. Instead of computing one distance vector and sending it to all its neighbors, a router could create a distance vector and is specific to each neighbour and only contains the routes that have not been learned via this neighbour. This could be implemented by the following psudocode ::
+This count to infinity problem occurs because router `A` advertises to router `D` a route that it has learned via router `D`. A possible solution to avod this problem could be to change how a router creates its distance vector. Instead of computing one distance vector and sending it to all its neighbors, a router could create a distance vector that is specific to each neighbour and only contains the routes that have not been learned via this neighbour. This could be implemented by the following pseudocode ::
 
  Every N seconds:
   for each link=l
@@ -307,7 +311,7 @@ This count to infinity problem occurs because router `A` advertises to router `D
    Send(Vector);
   }
 
-This technique is called `split-horizon`. With this technique, the count-to-infinity problem would not have happened in the above scenario as router `A` would have advertised :math:`[A=0]` since it learned all its other routes via router `D`. Another variant called `split-horizon with poison reverse` is also possible.  Routers using this variant advertise a cost of :math:`\infty` for the destinations that they reach via the router to which they send the distance vector ::
+This technique is called `split-horizon`. With this technique, the count to infinity problem would not have happened in the above scenario as router `A` would have advertised :math:`[A=0]` since it learned all its other routes via router `D`. Another variant called `split-horizon with poison reverse` is also possible.  Routers using this variant advertise a cost of :math:`\infty` for the destinations that they reach via the router to which they send the distance vector. This can be implemented by using the pseudocode below ::
 
  Every N seconds:
   for each link=l
@@ -324,7 +328,7 @@ This technique is called `split-horizon`. With this technique, the count-to-infi
   }
 
 
-Unfortunately, split-horizon, is not sufficient to avoid all count to infinity problems with distance vector routing. Consider the failure of link `A-B` in the four routers topology below.
+Unfortunately, split-horizon, is not sufficient to avoid all count to infinity problems with distance vector routing. Consider the failure of link `A-B` in the four routers network below.
 
 .. figure:: fig/network-fig-039-c.png
    :align: center
@@ -332,32 +336,34 @@ Unfortunately, split-horizon, is not sufficient to avoid all count to infinity p
 
    Count to infinity problem
 
-After having detected the failure, router `A` will send its distance vectors :
+After having detected the failure, router `A` sends its distance vectors :
 
  - :math:`[A=\infty,B=0,C=\infty,E=1]` to router `C`
  - :math:`[A=\infty,B=0,C=1,E=\infty]` to router `E`
 
-If unfortunately the distance vector sent to router `C` is lost due to a transmission error or because router `C` is overloaded, a new count to infinity problem can occur. If router `C` sends its distance vector :math:`[A=2,B=1,C=0,E=\infty]` to router `E`, this router will install a route of distance `3` to reach `A` via `C`. Router `E` will send its distance vectors :math:`[A=3,B=\infty,C=1,E=1]` to router `B` and :math:`[A=\infty,B=1,C=\infty,E=0]` to router `C`. This distance vector allows `B` to recover a route of distance `4` to reach `A`...
+If unfortunately the distance vector sent to router `C` is lost due to a transmission error or because router `C` is overloaded, a new count to infinity problem can occur. If router `C` sends its distance vector :math:`[A=2,B=1,C=0,E=\infty]` to router `E`, this router installs a route of distance `3` to reach `A` via `C`. Router `E` sends its distance vectors :math:`[A=3,B=\infty,C=1,E=1]` to router `B` and :math:`[A=\infty,B=1,C=\infty,E=0]` to router `C`. This distance vector allows `B` to recover a route of distance `4` to reach `A`...
 
 .. index:: link-state routing
 
 Link state routing
 ------------------
 
-Link state routing is the second family of routing protocols. Link state routing is built on a different principle than distance vector routing. While distance vector routers use a distributed algorithm to compute directly their routing tables, link-state routers exchange messages to allow each router to learn the entire network topology. Based on this learned topology, each router is then able to compute its routing table by using a shortest path computation [Dijkstra1959]_. 
+Link state routing is the second family of routing protocols. While distance vector routers use a distributed algorithm to compute their routing tables, link-state routers exchange messages to allow each router to learn the entire network topology. Based on this learned topology, each router is then able to compute its routing table by using a shortest path computation [Dijkstra1959]_. 
 
-For link-state routing, a network is a `directed weighted graph`. Each router is a node and the links between routers are the edges in the graph.  A positive weight is associated to each directed edge and routers will use the shortest path  to reach each destination. In practice, the different types of weights can be associated to each directed edge :
+For link-state routing, a network is modelled as a `directed weighted graph`. Each router is a node and the links between routers are the edges in the graph.  A positive weight is associated to each directed edge and routers use the shortest path  to reach each destination. In practice, different types of weights can be associated to each directed edge :
 
- - unit weight. If all links have a unit weight, shortest path routing will prefer the paths with the smallest number of intermediate routers.
- - weight proportionnal to the propagation delay on the link. If all links weights are configured this way, shortest path routing will use the paths with the smallest delay. 
- - weight=:math:`\frac{C}{bandwidth}` where `C` is a constant larger than the highest link bandwidth in the network. If all links weights are configured this way, shortest path routing will prefer higher bandwidth paths over lower bandwidth paths
+ - unit weight. If all links have a unit weight, shortest path routing prefers the paths with the smallest number of intermediate routers.
+ - weight proportionnal to the propagation delay on the link. If all links weights are configured this way, shortest path routing uses the paths with the smallest propagation delay. 
+ - :math:`weight=\frac{C}{bandwidth}` where `C` is a constant larger than the highest link bandwidth in the network. If all link weights are configured this way, shortest path routing prefers higher bandwidth paths over lower bandwidth paths
  
-Other variants are possible. Some networks use optimisation algorithms to find the best set of weights to minimize congestion inside the network for a given traffic demand [FRT2002]_. Usually, the same weight is associated to the two directed edges that correspond to a physical link. However, in some cases, these weights can differ (e.g. because the uplink and downlink bandwidths of the link are different or because one direction is overloaded and fewer destinations should be reached over this directed link).
+Other variants are possible. Some networks use optimisation algorithms to find the best set of weights to minimize congestion inside the network for a given traffic demand [FRT2002]_. Usually, the same weight is associated to the two directed edges that correspond to a physical link. 
+
+However, in some cases, these weights can differ (e.g. because the uplink and downlink bandwidths are different or because one direction is overloaded and fewer destinations should be reached over this directed link).
 
 
 .. index:: Hello message
 
-When a link-state router boots, it first needs to discover to which routers it is directly connected. For this, each router sends every `N` seconds a HELLO message on all its interfaces. This message contains the router's address. As its neighbouring routers will also send HELLO messages, the router will automatically discover to which neighbours it is connected. These HELLO messages are only sent to the direct neighbour. A router never forwards the HELLO messages that they receive. The HELLO messages are also used to detect link and router failures. A link is considered to have failed if no HELLO message has been received from the neighboring router during a period of :math:`3 \times N` seconds.
+When a link-state router boots, it first needs to discover to which routers it is directly connected. For this, each router sends every `N` seconds a HELLO message on all its interfaces. This message contains the router's address. Each router has a unique address. As its neighbouring routers also send HELLO messages, the router automatically discovers to which neighbours it is connected. These HELLO messages are only sent to the direct neighbour. A router never forwards the HELLO messages that they receive. HELLO messages are also used to detect link and router failures. A link is considered to have failed if no HELLO message has been received from the neighboring router during a period of :math:`k \times N` seconds.
 
 .. figure:: fig/network-fig-041-c.png
    :align: center
@@ -366,12 +372,12 @@ When a link-state router boots, it first needs to discover to which routers it i
    The exchange of HELLO messages
 
 
-Once a router has discovered its neighbours, it must reliably distribute its local topology to all routers in the network to allow them to build their local view of the network topology. For this, each router builds a `link-state packet` (LSP) that contains the following information :
+Once a router has discovered its neighbours, it must reliably distribute its local links to all routers in the network to allow them to compute their local view of the network topology. For this, each router builds a `link-state packet` (LSP) that contains the following information :
 
- - LSP.Router : Identification (address) of the sender of the LSP
+ - LSP.Router : identification (address) of the sender of the LSP
  - LSP.age : age or remaining lifetime of the LSP
  - LSP.seq : sequence number of the LSP
- - LSP.Links[] : links advertised in the LSP. Each directed link starting is represented with the following information :  
+ - LSP.Links[] : links advertised in the LSP. Each directed link starting at this is represented with the following information :  
    - LSP.Links[i].Id : identification of the neighbour
    - LSP.Links[i].cost : cost of the link
 
@@ -380,11 +386,16 @@ As the LSPs are used to distribute the network topology that allows routers to c
 
  # links is the set of all links on the router
  # Router R's LSP arrival on link l:
- if newer(LSP, LSDB(LSP.Router))
+ if newer(LSP, LSDB(LSP.Router)):
    LSDB.add(LSP)
    for i in links :
      if i!=l send(LSP,i)
- 
+ else:
+  # LSP has already been flooded 
+
+
+In this pseudocode, `LSDB(r)` returns the most recent `LSP` originated by router `r` that is stored in the `LSDB`. `newer(lsp1,lsp2)` returns true if `lsp1` is more recent than `lsp2`. See the sidebar below for a discussion on how `newer` can be implemented.
+
 .. sidebar:: Which is the most recent LSP ?
 
  A router that implements flooding must be able to detect whether a received LSP is newer than the received LSP. This requires a comparison between the sequence number of the received LSP and the sequence number of the LSP stored in the link state database. The ARPANET routing protocol [MRR1979]_ used a 6 bits sequence number and implemented the comparison as follows :rfc:`789` ::
@@ -393,12 +404,14 @@ As the LSPs are used to distribute the network topology that allows routers to c
     return ( ( ( lsp1.seq > lsp2.seq) and ( (lsp1.seq-lsp2.seq)<=32) ) or
     	     ( ( lsp1.seq < lsp2.seq) and ( (lsp2.seq-lsp1.seq)> 32) )    )
 
- This comparison takes into account the modulo :math:`2^{6}` arithemtic used to increment the sequence numbers. Intuitively, the comparaison divides the circle of all sequence numbers in two halfs. Usually, the sequence number of the received LSP is previous one incremented by one, but sometimes the sequence numbers of two successive LSPs may differ, e.g. if one router has been disconnected from the network for some time. This comparison worked well until October 27, 1980. On this day, the ARPANET crashed completely. The crash was complex and involved sveral routers. At one point, LSP `40` and LSP `44` from one of the routers were stored in the LSDB of some routers in the ARPANET. As LSP `44` was the newest it should have replaced LSP `40` on all routers. Unfortunately, one of the ARPANET routers suffered from a memory problem and sequence number `40` (`101000` in binary) was replaced by `8`(`001000` in binary) in the router and flooded. Three LSPs were present in the network and `44` was newer than `40` that is newer than `8`, but unfortunately `8` was considered as newer than `44`... All routers started to exchange these three link state packets for ever and the only solution to recover from this problem was to shutdown the entire network :rfc:`789`.
+ This comparison takes into account the modulo :math:`2^{6}` arithemtic used to increment the sequence numbers. Intuitively, the comparaison divides the circle of all sequence numbers in two halves. Usually, the sequence number of the received LSP is equal to the sequence number of the stored LSP incremented by one, but sometimes the sequence numbers of two successive LSPs may differ, e.g. if one router has been disconnected from the network for some time. The comparison above worked well until October 27, 1980. On this day, the ARPANET crashed completely. The crash was complex and involved several routers. At one point, LSP `40` and LSP `44` from one of the routers were stored in the LSDB of some routers in the ARPANET. As LSP `44` was the newest it should have replaced LSP `40` on all routers. Unfortunately, one of the ARPANET routers suffered from a memory problem and sequence number `40` (`101000` in binary) was replaced by `8` (`001000` in binary) in the buggy router and flooded. Three LSPs were present in the network and `44` was newer than `40` that is newer than `8`, but unfortunately `8` was considered as newer than `44`... All routers started to exchange these three link state packets for ever and the only solution to recover from this problem was to shutdown the entire network :rfc:`789`.
+
  Current link state routing protocols usually use 32 bits sequence number and include a special mechanism in the unlikely case that a sequence number reaches the maximum value (using a 32 bits sequence number space takes 136 years if a link state packet is generated every second).
- To deal with the memory corruption problem, link state packets contain a checksum. This checksum is computed by the router that generate the LSP. Each router must verify the checksum when it receives or floods a LSP. Furthermore, each router must periodically verify the checksums of the LSPs stored in its LSDB.
+
+ To deal with the memory corruption problem, link state packets contain a checksum. This checksum is computed by the router that generates the LSP. Each router must verify the checksum when it receives or floods a LSP. Furthermore, each router must periodically verify the checksums of the LSPs stored in its LSDB.
 
 
-Flooding is illustrated in the figure below. By exchanging HELLO messages, each router learns its local topology. For example, router `E` learns that it is directly connected to routers `D`, `B` and `C`. Its first LSP has sequence number `0` and contains the directed links `E->D`, `E->B` and `E->C`. Router `E` sends its LSP on all its links and routers `D`, `B` and `C` will insert the LSP in their LSDB and forward it over their other links. 
+Flooding is illustrated in the figure below. By exchanging HELLO messages, each router learns its direct neighbours. For example, router `E` learns that it is directly connected to routers `D`, `B` and `C`. Its first LSP has sequence number `0` and contains the directed links `E->D`, `E->B` and `E->C`. Router `E` sends its LSP on all its links and routers `D`, `B` and `C` insert the LSP in their LSDB and forward it over their other links. 
 
 
 .. figure:: fig/network-fig-045-c.png
@@ -408,7 +421,7 @@ Flooding is illustrated in the figure below. By exchanging HELLO messages, each 
    Flooding : example 
 
 
-Flooding allows LSPs to be distributed to all routers inside the network without using the routing tables of the routers. In the example above, the LSP sent by router `E` will likely be sent twice on some links in the network. For example, routers `B` and `C` will receive `E`'s LSP at almost the same time and will forward it over the `B-C` link. To avoid sending the same LSP twice on each link, a possible solution is to slightly change the pseudo-code above so that a router waits for some random time before forwarding a LSP on each link. The drawback of this solution is that the delay to flood a LSP to all routers in the network will increase.
+Flooding allows LSPs to be distributed to all routers inside the network without relying on routing tables. In the example above, the LSP sent by router `E` is likely sent twice on some links in the network. For example, routers `B` and `C` receive `E`'s LSP at almost the same time and forward it over the `B-C` link. To avoid sending the same LSP twice on each link, a possible solution is to slightly change the pseudo-code above so that a router waits for some random time before forwarding a LSP on each link. The drawback of this solution is that the delay to flood a LSP to all routers in the network increases. In practice, routers flood immediately the LSPs that contain new information (e.g. addition or removal of a link) and delay the flooding of refresh LSPs (i.e. LSPs that contain exactly the same information as the previous LSP originated by this router) [FFEB2005]_.
 
 To ensure that all routers receive all LSPs even when there are transmissions errors, link state routing protocols use `reliable flooding`. With `reliable flooding`, routers use acknowledgements and if necessary retransmissions to ensure that all link state packets are successfully transferred to all neighboring routers.  Thanks to reliable flooding, all routers store in their LSDB the most recent LSP sent by each router in the network. By combining the received LSPs with its own LSP, each router can compute the entire network topology.
 
@@ -421,11 +434,11 @@ To ensure that all routers receive all LSPs even when there are transmissions er
 
 .. sidebar:: Static or dynamic link metrics ?
 
- As link state packets are flooded regularly, routers could measure the quality (e.g. delay or load) and their links and adjust the metric of each link according to its current quality. Such dynamic adjustements were included in the ARPANET routing protocol [MMR1979]_ . However, experience showed that it was difficult to tune the dynamic adjustements and ensure that no forwarding loops would happen in the network [KZ1989]_. Today's link state routing protocols use metrics that are configured on the routers and rarely change. 
+ As link state packets are flooded regularly, routers could measure the quality (e.g. delay or load) and their links and adjust the metric of each link according to its current quality. Such dynamic adjustements were included in the ARPANET routing protocol [MRR1979]_ . However, experience showed that it was difficult to tune the dynamic adjustements and ensure that no forwarding loops happen in the network [KZ1989]_. Today's link state routing protocols use metrics that are manually configured on the routers and are only changed by the network operators or network management tools [FRT2002]_.
 
 .. index:: two-way connectivity
 
-When a link fails, the two routers attached to the link will detect the failure by the lack of HELLO messages during the last :math:`3 \times N` seconds. Once a router has detected a local link failure, it generates and floods a new LSP that does not contain anymore the failed link. The LSP will replace the previous LSP in the network. As the two routers attached to a link will not detect its failure exactly at the same time, some links may be announced in only one direction. This is illustrated in the figure below. Router `E` has detected the failures of link `E-B` and flooded a new LSP, but router `B` has not yet detected the failure.
+When a link fails, the two routers attached to the link detect the failure by the lack of HELLO messages during the last :math:`k \times N` seconds. Once a router has detected a local link failure, it generates and floods a new LSP that does not contain anymore the failed link. The new LSP replaces the previous LSP in the network. As the two routers attached to a link do not detect this failure exactly at the same time, some links may be announced in only one direction. This is illustrated in the figure below. Router `E` has detected the failures of link `E-B` and flooded a new LSP, but router `B` has not yet detected the failure.
 
 
 .. figure:: fig/network-fig-048-c.png
@@ -435,12 +448,11 @@ When a link fails, the two routers attached to the link will detect the failure 
    The two-way connectivity check
 
 
-When a link is reported in the LSP of only one of the attached routers, routers consider the link as having failed and they remove it from the directed graph that they compute from their LSDB. This is called the `two-way connectivity check`. This check allows link failures to be flooded quickly as a single LSP is sufficient to announce such a bad news. However, when a link comes up, it can only be used once the two attached routers have sent their LSPs. The `two-way connectivit check` also allows to deal with router failures. When a router fails, all its links will fail, but it will not, of course, send a new LSP to announce its failure. The `two-way connectivity check` ensures that the failed router will be removed from the graph.
+When a link is reported in the LSP of only one of the attached routers, routers consider the link as having failed and they remove it from the directed graph that they compute from their LSDB. This is called the `two-way connectivity check`. This check allows link failures to be flooded quickly as a single LSP is sufficient to announce such a bad news. However, when a link comes up, it can only be used once the two attached routers have sent their LSPs. The `two-way connectivity check` also allows to deal with router failures. When a router fails, all its links fail by defintion. Unfortunately, it does not, of course, send a new LSP to announce its failure. The `two-way connectivity check` ensures that the failed router is removed from the graph.
 
-When a router has failed, its LSP must be removed from the LSDB of all routers [#foverload]_. This can be done by using the `age` field that is included in each LSP. The `age` field is used to bound the maximum lifetime of a link state packet in the network. When a router generates a LSP, it sets its lifetime (usually measured in seconds) in the `age` field. All routers regularly decrement the `age` of the LSPs in their LSDB and a LSP is discarded once its `age` reaches `0`. The `two-way conn
+When a router has failed, its LSP must be removed from the LSDB of all routers [#foverload]_. This can be done by using the `age` field that is included in each LSP. The `age` field is used to bound the maximum lifetime of a link state packet in the network. When a router generates a LSP, it sets its lifetime (usually measured in seconds) in the `age` field. All routers regularly decrement the `age` of the LSPs in their LSDB and a LSP is discarded once its `age` reaches `0`. Thanks to the `age` field, the LSP from a failed router does not remain in the LSDBs forever.
 
-
-To compute its routing table, each router computes the spanning rooted at itself by using Dijkstra's shortest path algorithm [Dijkstra1959]_. The routing table can be derived automatically from the spanning.
+To compute its routing table, each router computes the spanning rooted at itself by using Dijkstra's shortest path algorithm [Dijkstra1959]_. The routing table can be derived automatically from the spanning as shown in the figure below.
 
 .. figure:: fig/network-fig-049-c.png
    :align: center
@@ -461,7 +473,7 @@ The Internet Protocol (IP) is the network layer protocol of the TCP/IP protocol 
    :align: center
    :scale: 70
 
-   IP and the reference model
+   IP and the reference modem
 
 .. there is a draft on expectations of lower layer
 
@@ -472,11 +484,11 @@ IP version 4
 
 IP version 4 is the data plane protocol of the network layer in the TCP/IP protocol suite. The design of IP version 4 was based on the following assumptions :
 
- - IP will provide an unreliable connectionless service (reliability will be provided by TCP when needed)
- - IP will operate with the datagram transmission mode
- - IP addresses will have a fixed size of 32 bits 
- - IP will be used above different types of datalink layers
- - IP hosts will exchange variable length packets
+ - IP should provide an unreliable connectionless service (TCP provides reliability when required by the application)
+ - IP operates with the datagram transmission mode
+ - IP addresses have a fixed size of 32 bits 
+ - IP must be useable above different types of datalink layers
+ - IP hosts exchange variable length packets
 
 The addresses are an important part of any network layer protocol. In the late 1970s, the developers of IPv4 designed IPv4 for a research network that would interconnect some research labs and universities. For this utilisation, 32 bits wide addresses were much larger than the expected number of hosts on the network. Furthermore, 32 bits was a nice address size for software-based routers. None of the developers of IPv4 were expecting that IPv4 would become as widely used as it is today.
 
@@ -491,7 +503,7 @@ IPv4 addresses are encoded as a 32 bits field. IPv4 addresses are often represen
 
 An IPv4 address is used to identify an interface on a router or a host. A router has thus as many IPv4 addresses as the number of interfaces that it has in the datalink layer. Most hosts have a single datalink layer interface and thus have a single IPv4 address. However, with the growth of wireless, more and more hosts have several datalink layer interfaces (e.g. an Ethernet interface and a WiFi interface). These hosts are said to be `multihomed`. A multihomed host with two interfaces has thus two IPv4 addresses.
 
-An important point to be defined in a network layer protocol is the allocation of the network layer addresses. A naive allocation scheme would be to provide an IPv4 address to each host when the host is attached to the Internet on a first come first served basis. With this solution, a host in Belgium could have address 2.3.4.5 while another host located in Africa would use address 2.3.4.6. Unfortunately, this would force all routers to maintain a route for all hosts. The figure below shows a simple enterprise networks with two routers and three hosts and the associated routing tables if such isolated addresses were used.
+An important point to be defined in a network layer protocol is the allocation of the network layer addresses. A naive allocation scheme would be to provide an IPv4 address to each host when the host is attached to the Internet on a first come first served basis. With this solution, a host in Belgium could have address 2.3.4.5 while another host located in Africa would use address 2.3.4.6. Unfortunately, this would force all routers to maintain a specific route towards each host. The figure below shows a simple enterprise network with two routers and three hosts and the associated routing tables if such isolated addresses were used.
 
 .. figure:: fig/network-fig-056-c.png
    :align: center
@@ -502,7 +514,7 @@ An important point to be defined in a network layer protocol is the allocation o
 .. index:: IP subnet, IP prefix, subnet mask
 
 
-To preserve the scalability of the routing system, it is important to minimize the number of routes that are stored on each router. A router cannot store and maintain one route for each of the almost 1 billion hosts that are connected to today's Internet. Routers should only maintain routes towards blocks of addresses and not towards individual hosts. For this, hosts are grouped in `subnets` based on their location in the network. A typical subnet will group all the hosts that are part of the same enterprise. An enterprise network is usually composed of several LANs interconnected by routers. A small block of addresses from the Enterprise's block is usually assigned to each LAN. An IPv4 address is composed of two parts : a `subnetwork identifier` and  a `host identifier`. The `subnetwork identifier` is composed of the high order bits of the address and the host identifier is encoded in the low order bits of the address. This is illustrated in the figure below.
+To preserve the scalability of the routing system, it is important to minimize the number of routes that are stored on each router. A router cannot store and maintain one route for each of the almost 1 billion hosts that are connected to today's Internet. Routers should only maintain routes towards blocks of addresses and not towards individual hosts. For this, hosts are grouped in `subnets` based on their location in the network. A typical subnet groups all the hosts that are part of the same enterprise. An enterprise network is usually composed of several LANs interconnected by routers. A small block of addresses from the Enterprise's block is usually assigned to each LAN. An IPv4 address is composed of two parts : a `subnetwork identifier` and  a `host identifier`. The `subnetwork identifier` is composed of the high order bits of the address and the host identifier is encoded in the low order bits of the address. This is illustrated in the figure below.
 
 .. figure:: fig/network-fig-054-c.png
    :align: center
@@ -523,7 +535,7 @@ Class B	 `10`        16 bits	16,384     	65,536 (:math:`2^{16}`)
 Class C	 `110`	     24 bits	2,097,152  	256 (:math:`2^8`)
 =======  ==========  =========  =============	=============
 
-However, these three classes of addresses were not flexible enough. A class `A` subnet was too large for most organisations and a class `C` subnet was too small. Flexibility was added by the introduction of `variable-length subnets` in :rfc:`1519`. With `variable-length` subnets, the subnet identifier can have any size from `1` to `31` bits. `Variable-length` subnets allow the network operators to use a subnet that matches the number of hosts that will be placed inside the subnet. A subnet identifier or IPv4 prefix is usually [#fnetmask]_ represented as `A.B.C.D/p` where `A.B.C.D` is the network address obtained by concatenating the subnet identifier with a host identifier containing only `0` and `p` is the length of the subnet identifier in bits. The table below provides examples of IP subnets.
+However, these three classes of addresses were not flexible enough. A class `A` subnet was too large for most organisations and a class `C` subnet was too small. Flexibility was added by the introduction of `variable-length subnets` in :rfc:`1519`. With `variable-length` subnets, the subnet identifier can have any size from `1` to `31` bits. `Variable-length` subnets allow the network operators to use a subnet that better matches the number of hosts that are placed inside the subnet. A subnet identifier or IPv4 prefix is usually [#fnetmask]_ represented as `A.B.C.D/p` where `A.B.C.D` is the network address obtained by concatenating the subnet identifier with a host identifier containing only `0` and `p` is the length of the subnet identifier in bits. The table below provides examples of IP subnets.
 
 ============== 	==========  ============  ===============
 Subnet      	Number of   Smallest      Highest
@@ -538,7 +550,7 @@ Subnet      	Number of   Smallest      Highest
 ============== 	==========  ============  ===============
 
 
-The figure below provides a simple example of the utilisation of IPv4 subnets in an enterprise network. The length of the subnet identifier assigned to a LAN will usually depend on the expected number of hosts attached to the LAN. For point-to-point links, many deployments have used `/30` prefixes, but recent routers are now using `/31` subnets on point-to-point links :rfc:`3021` or even do not use IPv4 addresses on such links [#funumbered]_. 
+The figure below provides a simple example of the utilisation of IPv4 subnets in an enterprise network. The length of the subnet identifier assigned to a LAN usually depends on the expected number of hosts attached to the LAN. For point-to-point links, many deployments have used `/30` prefixes, but recent routers are now using `/31` subnets on point-to-point links :rfc:`3021` or even do not use IPv4 addresses on such links [#funumbered]_. 
  
 .. figure:: fig/network-fig-056-c.png
    :align: center
@@ -559,7 +571,7 @@ Subnet	       		  Organisation
 130.104.0.0/16		  Open Software Foundation, USA
 ==============            ===========================================
 
-However, the Internet was a victim of its own success and in the late 1980s, many organisations were requesting blocks of IPv4 addresses and connected to the Internet. Most of these organisations requested class `B` address blocks because class `A` address were too large and in limited supply while class `C` address blocks were considered to be too small. Unfortunately, there were only 16,384 different class `B` address blocks and this address space was being consumed were quickly. Furthermore, the routing tables maintained by the routers were growing quickly and some routers had difficulties in maintaining all these routes in their limited memory [#fciscoags]_.
+However, the Internet was a victim of its own success and in the late 1980s, many organisations were requesting blocks of IPv4 addresses and connected to the Internet. Most of these organisations requested class `B` address blocks because class `A` address were too large and in limited supply while class `C` address blocks were considered to be too small. Unfortunately, there were only 16,384 different class `B` address blocks and this address space was being consumed quickly. As a consequence, the routing tables maintained by the routers were growing quickly and some routers had difficulties in maintaining all these routes in their limited memory [#fciscoags]_.
 
 .. figure:: fig/network-fig-162-c.png
    :align: center
@@ -603,14 +615,15 @@ However, there is one difficulty with the aggregatable variable length subnets u
    
    Multihoming and CIDR
 
-With such a multihomed network, routers `R1` and `R2` would have two routes towards IPv4 address `193.191.245.88` : one route via Belnet (`193.190.0.0/15`) and one direct route  (`193.191.244.0/23`). Both routes match IPv4 address `193.192.145.88`. Since :rfc:`1519` when a router knows several routes towards the same destination address, it must forward packets along the route having the longest prefix length. In the case of `193.191.245.88`, this is the route `193.191.244.0/23` that will be followed to forward the packet. This forwarding rule is called the `longest prefix match` or the `more specific match`. All IPv4 routers implement this forwarding rule.
+With such a multihomed network, routers `R1` and `R2` would have two routes towards IPv4 address `193.191.245.88` : one route via Belnet (`193.190.0.0/15`) and one direct route  (`193.191.244.0/23`). Both routes match IPv4 address `193.192.145.88`. Since :rfc:`1519` when a router knows several routes towards the same destination address, it must forward packets along the route having the longest prefix length. In the case of `193.191.245.88`, this is the route `193.191.244.0/23` that is used to forward the packet. This forwarding rule is called the `longest prefix match` or the `more specific match`. All IPv4 routers implement this forwarding rule.
 
-The understand the `longest prefix match` forwarding, consider the figure below. With this rule, the route `0.0.0.0/0` plays a particular role. As this route has a prefix length of `0` bits, it will match all destination addresses. This route is often called the `default` route. 
- - a packet with destination `192.168.1.1` received by router `R` is destined to the router itself. It will be delivered to the appropriate transport protocol.
- - a packet with destination `11.2.3.4` matches two routes : `11.0.0.0/8` and `0.0.0.0/0`. The packet will be forwarded on the `West` interface.
- - a packet with destination `130.4.3.4` matches one route : `0.0.0.0/0`. The packet will be forwarded on the `North` interface.
- - a packet with destination `4.4.5.6` matches two routes : `4.0.0.0/8` and `0.0.0.0/0`. The packet will be forwarded on the `West` interface.
- - a packet with destination `4.10.11.254` matches three routes : `4.0.0.0/8`, `4.10.11.0/24 and `0.0.0.0/0`. The packet will be forwarded on the `South` interface.
+To understand the `longest prefix match` forwarding, consider the figure below. With this rule, the route `0.0.0.0/0` plays a particular role. As this route has a prefix length of `0` bits, it matches all destination addresses. This route is often called the `default` route. 
+
+ - a packet with destination `192.168.1.1` received by router `R` is destined to the router itself. It is delivered to the appropriate transport protocol.
+ - a packet with destination `11.2.3.4` matches two routes : `11.0.0.0/8` and `0.0.0.0/0`. The packet is forwarded on the `West` interface.
+ - a packet with destination `130.4.3.4` matches one route : `0.0.0.0/0`. The packet is forwarded on the `North` interface.
+ - a packet with destination `4.4.5.6` matches two routes : `4.0.0.0/8` and `0.0.0.0/0`. The packet is forwarded on the `West` interface.
+ - a packet with destination `4.10.11.254` matches three routes : `4.0.0.0/8`, `4.10.11.0/24 and `0.0.0.0/0`. The packet is forwarded on the `South` interface.
 
 
 .. figure:: fig/network-fig-067-c.png
@@ -647,7 +660,7 @@ The longest prefix match can be implemented by using different data structures. 
 IPv4 packets
 ------------
 
-Now that we have clarified the allocation of IPv4 addresses and the utilisation of the longest prefix match to forward IPv4 packets, we can have a more detailed look at IPv4 by starting with the format of the IPv4 packets. The IPv4 packet format was defined in :rfc:`791`. Besides a few clarifications and some backward compatible changes, the IPv4 packet format did not change significantly since the publication of :rfc:`791`. All IPv4 packets use the 20 bytes header shown below. Some IPv4 packets contain an optional header extension that will be described later. 
+Now that we have clarified the allocation of IPv4 addresses and the utilisation of the longest prefix match to forward IPv4 packets, we can have a more detailed look at IPv4 by starting with the format of the IPv4 packets. The IPv4 packet format was defined in :rfc:`791`. Besides a few clarifications and some backward compatible changes, the IPv4 packet format did not change significantly since the publication of :rfc:`791`. All IPv4 packets use the 20 bytes header shown below. Some IPv4 packets contain an optional header extension that is described later. 
 
 .. figure:: fig/network-fig-064-c.png
    :align: center
@@ -657,18 +670,18 @@ Now that we have clarified the allocation of IPv4 addresses and the utilisation 
 
 The main fields of the IPv4 header are :
 
- - a 4 bits `version` that indicates the version of IP used to build the header. Using a version field in the header allows the protocol to evolve as we'll see with IPv6
+ - a 4 bits `version` that indicates the version of IP used to build the header. Using a version field in the header allows the network layer protocol to evolve. 
  -  a 4 bits `IP Header Length (IHL)` that indicates the length of the IP header in 32 bits words. This field allows IPv4 to use options if required, but as it is encoded as a 4 bits field, the IPv4 header cannot be longer than 64 bytes. 
- - an 8 bits `DS` field that is used for Quality of Service and whose usage will be described later.
+ - an 8 bits `DS` field that is used for Quality of Service and whose usage is described later.
  - an 8 bits `Protocol` field that indicates the transport layer protocol that must process the packet's payload at the destination. Common values for this field [#fprotocolnumber]_ are `6` for TCP and `17` for UDP
- - a 16 bits `length` that indicates the total length of the entire IPv4 packet (header and payload) in bytes. This implies that an IPv4 packet cannot be longer than 65535 bytes.
+ - a 16 bits `length` field that indicates the total length of the entire IPv4 packet (header and payload) in bytes. This implies that an IPv4 packet cannot be longer than 65535 bytes.
  - a 32 bits `source address` field that contains the IPv4 address of the source host
  - a 32 bits `destination address` field that contains the IPv4 address of the destination host 
  - a 16 bits `checksum` that protects only the IPv4 header against transmission errors
 
 .. index:: Time To Live (IP)
 
-The other fields of the IPv4 header are used for specific purposes. The first is the 8 bits `Time To Live (TTL)` field. This field is used by IPv4 to avoid the risk of having an IPv4 packet caught in an infinite loop due to a transient or permanent error in routing tables [#fttl]_. Consider for example the situation depicted in the figure below where destination `D` uses address `11.0.0.56`. If `S` sends a packet towards this destination, the packet will be forwarded to router `B` that will forward it to router `C` that will forward it back to router `A`...
+The other fields of the IPv4 header are used for specific purposes. The first is the 8 bits `Time To Live (TTL)` field. This field is used by IPv4 to avoid the risk of having an IPv4 packet caught in an infinite loop due to a transient or permanent error in routing tables [#fttl]_. Consider for example the situation depicted in the figure below where destination `D` uses address `11.0.0.56`. If `S` sends a packet towards this destination, the packet is forwarded to router `B` that forwards it to router `C` that forwards it back to router `A`...
 
 .. figure:: fig/network-fig-164-c.png
    :align: center
@@ -703,18 +716,18 @@ Although IPv4 can send 64 KBytes long packets, few datalink layer technologies t
 
 .. index:: IPv4 fragmentation and reassembly
 
-To solve these problems, IPv4 includes a fragmentation and reassembly mechanism. Both hosts and intermediate routers may fragment an IPv4 packet if the packet is too long to sent via the datalink layer. In IPv4, fragmentation is completely performed in the IP layer and a large IPv4 will be fragmented in two or more IPv4 packets (called fragments). The IPv4 fragments of a large packet are normal IPv4 packets that are forwarded towards the destination of the large packet by intermediate routers. 
+To solve these problems, IPv4 includes a packet fragmentation and reassembly mechanism. Both hosts and intermediate routers may fragment an IPv4 packet if the packet is too long to be sent via the datalink layer. In IPv4, fragmentation is completely performed in the IP layer and a large IPv4 is fragmented into two or more IPv4 packets (called fragments). The IPv4 fragments of a large packet are normal IPv4 packets that are forwarded towards the destination of the large packet by intermediate routers. 
 
 The IPv4 fragmentation mechanism relies on four fields of the IPv4 header : `Length`, `Identification`, the `flags` and the `Fragment Offset`. The IPv4 header contains two flags : `More` and `Don't Fragment (DF)`. When the `DF` flag is set, this indicates that the packet cannot be fragmented.
 
 
 .. index:: Maximum Transmission Unit (MTU)
 
-The basic operation of the IPv4 fragmentation is as follows. A large packet is fragmented in two or more fragments. The size of all fragments, except the last one, is equal to the Maximum Transmission Unit of the link used to forward the packet. Each IPv4 packet contains a 16 bits `Identification` field. When a packet is fragmented, the `Identification` of the large packet is copied in all fragments to allow the destination to reassemble the received fragments together. In each fragment, the `Fragment Offset` indicates, in units of 8 bytes, the position of the payload of the fragment in the payload of the original packet. The `Length` field in each fragment indicates the length of the payload of the fragment as in a normal IPv4 packet. Finally, the `More` flag is set only in the last fragment of a large packet.
+The basic operation of the IPv4 fragmentation is as follows. A large packet is fragmented into two or more fragments. The size of all fragments, except the last one, is equal to the Maximum Transmission Unit of the link used to forward the packet. Each IPv4 packet contains a 16 bits `Identification` field. When a packet is fragmented, the `Identification` of the large packet is copied in all fragments to allow the destination to reassemble the received fragments together. In each fragment, the `Fragment Offset` indicates, in units of 8 bytes, the position of the payload of the fragment in the payload of the original packet. The `Length` field in each fragment indicates the length of the payload of the fragment as in a normal IPv4 packet. Finally, the `More` flag is set only in the last fragment of a large packet.
 
-.. sidebar:: IPv4 in scapy
-
- In the pseudo-code used in this section, we use the scapy_ notations for the fields of the IPv4 header. `ihl` is the `IP Header Length`, `tos` is the `DS` byte, `len` is the packet length, `id` the packet identifier, `flags` contains the `DF` and `More` flags, `proto` is the `Protocol` field, `chksum` contains the Internet checksum and `src` (resp. `dst`) the source (resp. destination) IPv4 address. 
+.. 
+  sidebar:: IPv4 in scapy
+  In the pseudo-code used in this section, we use the scapy_ notations for the fields of the IPv4 header. `ihl` is the `IP Header Length`, `tos` is the `DS` byte, `len` is the packet length, `id` the packet identifier, `flags` contains the `DF` and `More` flags, `proto` is the `Protocol` field, `chksum` contains the Internet checksum and `src` (resp. `dst`) the source (resp. destination) IPv4 address. 
 
 
 The following pseudo-code details the IPv4 fragmentation, assuming that the packet does not contain options ::
@@ -746,19 +759,19 @@ The following pseudo-code details the IPv4 fragmentation, assuming that the pack
 		 len=len(payload), proto=p.proto)/payload
     forward(toSend)   
 
-The fragments of an IPv4 packet may arrive at the destination in any order as each fragment will be forwarded independently in the network and may follow different paths. Furthermore, some fragments may be lost and never reach the destination.
+The fragments of an IPv4 packet may arrive at the destination in any order as each fragment is forwarded independently in the network and may follow different paths. Furthermore, some fragments may be lost and never reach the destination.
 
 The reassembly algorithm used by the destination host is roughly as follows. First, the destination can verify whether a received IPv4 packet is a fragment or not by checking the value of the `More` flag and the `Fragment Offset`. If the `Fragment Offset` is set to `0` and the `More` flag is reset, the received packet has not been fragmented. Otherwise, the packet has been fragmented and must be reassembled. The reassembly algorithm relies on the `Identification` field of the received fragments to associate a fragment with the corresponding packet being reassembled. Furthermore, the `Fragment Offset` field indicates the position of the fragment payload in the original unfragmented packet. Finally, the packet with the `More` flag reset allows the destination to determine the total length of the original unfragmented packet.
 
-Note that the reassembly algorithm must deal with the unreliability of the IP network. This implies that a fragment may be duplicated or a fragment may never reach the destination. The destination will easily detect fragment duplication thanks to the `Fragment Offset`. To deal with fragment losses, the reassembly algorithm must bound the time during which the fragments of a packet are stored in its buffer while the packet is being reassembled. This can be implemented by starting a timer when the first fragment of a packet is received. If the packet has not been reassembled upon expiration of the timer, all fragments are discarded and the packet is considered to be lost. 
+Note that the reassembly algorithm must deal with the unreliability of the IP network. This implies that a fragment may be duplicated or a fragment may never reach the destination. The destination can easily detect fragment duplication thanks to the `Fragment Offset`. To deal with fragment losses, the reassembly algorithm must bound the time during which the fragments of a packet are stored in its buffer while the packet is being reassembled. This can be implemented by starting a timer when the first fragment of a packet is received. If the packet has not been reassembled upon expiration of the timer, all fragments are discarded and the packet is considered to be lost. 
 
 .. index:: IP options
 
 The original IP specification defined in :rfc:`791` several types of options that can be added to the IP header. Each option is encoded by using a `type length value` format. They are not widely used today and are thus only briefly described. Additional details may be found in :rfc:`791`.
 
-The most interesting options in IPv4 are the three options that are related to routing. The `Record route` option was defined to allow network managers to determine the path followed by a packet. When the `Record route` option was present, routers on the packet's path had to insert their IP address in the option. This option was implemented, but as the optional part of the IPv4 header can only contain 44 bytes, it is impossible to record an entire path on the global Internet. :manpage:`traceroute(8)`, despite its limitations, is a better solution to record the path towards a destination.
+The most interesting options in IPv4 are the three options that are related to routing. The `Record route` option was defined to allow network managers to determine the path followed by a packet. When the `Record route` option was present, routers on the packet's path had to insert their IP address in the option. This option was implemented, but as the optional part of the IPv4 header can only contain 44 bytes, it is impossible to discover an entire path on the global Internet. :manpage:`traceroute(8)`, despite its limitations, is a better solution to record the path towards a destination.
 
-The other routing options are the `Strict source route` and the `Loose source route` option. The main idea behind these options is that a host may want, for any reason, to specify the path to be followed by the packets that it sends. The `Strict source route` option allows a host to indicate inside each packet the exact path to be followed. The `Strict source route` option contains a list of IPv4 address and a pointer to indicate the next address in the list. When a router receives a packet containing this option, it does not lookup the destination address in its routing table but forward the packet directly to the next router in the list and advances the pointer. This is illustrated in the figure below where `S` forces its packets to follow the `RA-RB-RD` path.
+The other routing options are the `Strict source route` and the `Loose source route` option. The main idea behind these options is that a host may want, for any reason, to specify the path to be followed by the packets that it sends. The `Strict source route` option allows a host to indicate inside each packet the exact path to be followed. The `Strict source route` option contains a list of IPv4 address and a pointer to indicate the next address in the list. When a router receives a packet containing this option, it does not lookup the destination address in its routing table but forwards the packet directly to the next router in the list and advances the pointer. This is illustrated in the figure below where `S` forces its packets to follow the `RA-RB-RD` path.
 
 
 .. figure:: fig/network-fig-065-c.png
@@ -785,7 +798,7 @@ These two options are usually ignored by routers because they cause security pro
 ICMP version 4
 ==============
 
-It is sometimes necessary for intermediate routers or the destination host to inform the sender of the packet of a problem that occurred while processing a packet. In the TCP/IP protocol suite, this reporting is done by the Internet Control Message Protocol (ICMP). ICMP is defined in :rfc:`792`. ICMP messages are carried as the payload of IP packets (the protocol value reserved for ICMP is `1`). An ICMP message is composed of an 8 bytes header and a variable length payload that usually contains the first bytes of the packet that triggered the transmission of the ICMP message.
+It is sometimes necessary for intermediate routers or the destination host to inform the sender of the packet of a problem that occurred while processing a packet. In the TCP/IP protocol suite, this reporting is done by the Internet Control Message Protocol (ICMP). ICMP is defined in :rfc:`792`. ICMP messages are carried as the payload of IP packets (the protocol value reserved for ICMP is `1`). An ICMP message is composed of an 8 byte header and a variable length payload that usually contains the first bytes of the packet that triggered the transmission of the ICMP message.
 
 
 .. figure:: fig/network-fig-069-c.png
@@ -800,14 +813,14 @@ The main types of ICMP messages are :
 
  - `Destination unreachable` : a `Destination unreachable` ICMP message is sent when a packet cannot be delivered to its destination due to routing problems. Different types of unreachability are distinguished :
 
-   - `Network unreachable` : this ICMP message will be sent by a router that does not have a route for the subnet containing the destination address of the packet 
-   - `Host unreachable` : this ICMP message will be sent by a router that is attached to the subnet that contains the destination address of the packet, but this destination address cannot be reached at this time
-   - `Protocol unreachable` : this ICMP message will be sent by a destination host that has received a packet, but does not support the transport protocol indicated in the packet's `Protocol` field
-   - `Port unreachable` : this ICMP message will be sent by a destination host that has received a packet destined to a port number, but no server process is bound to this port 
+   - `Network unreachable` : this ICMP message is sent by a router that does not have a route for the subnet containing the destination address of the packet 
+   - `Host unreachable` : this ICMP message is sent by a router that is attached to the subnet that contains the destination address of the packet, but this destination address cannot be reached at this time
+   - `Protocol unreachable` : this ICMP message is sent by a destination host that has received a packet, but does not support the transport protocol indicated in the packet's `Protocol` field
+   - `Port unreachable` : this ICMP message is sent by a destination host that has received a packet destined to a port number, but no server process is bound to this port 
 
- - `Fragmentation needed` : this ICMP message will be sent by a router that receives a packet with the `Don't Fragment` flag set that is larger than the MTU of the outgoing interface 
+ - `Fragmentation needed` : this ICMP message is sent by a router that receives a packet with the `Don't Fragment` flag set that is larger than the MTU of the outgoing interface 
 
- - `Redirect` : this ICMP message can be sent when there are two routers on the same LAN. Consider a LAN with one host and two routers : `R1` and `R2`. Assume that `R1` is also connected to subnet `130.104.0.0/16` while `R2` is connected to subnet `138.48.0.0/16`. If a host on the LAN sends a packet towards `130.104.1.1` to `R2`, `R2` will need to forward the packet again on the LAN to reach `R1`. This is not optimal as the packet is sent twice on the same LAN. In this case, `R2` could send an ICMP `Redirect` message to the host to inform it that it should have sent the packet directly to `R1`. This will allow the host the send the other packets to `130.104.1.1` directly via `R1`. 
+ - `Redirect` : this ICMP message can be sent when there are two routers on the same LAN. Consider a LAN with one host and two routers : `R1` and `R2`. Assume that `R1` is also connected to subnet `130.104.0.0/16` while `R2` is connected to subnet `138.48.0.0/16`. If a host on the LAN sends a packet towards `130.104.1.1` to `R2`, `R2` needs to forward the packet again on the LAN to reach `R1`. This is not optimal as the packet is sent twice on the same LAN. In this case, `R2` could send an ICMP `Redirect` message to the host to inform it that it should have sent the packet directly to `R1`. This allows the host to send the other packets to `130.104.1.1` directly via `R1`. 
 
  .. figure:: fig/network-fig-165-c.png
    :align: center
@@ -815,7 +828,7 @@ The main types of ICMP messages are :
    
    ICMP redirect
 
- - `Parameter problem` : this ICMP message is sent when a router or a host receives an IP packet containing an error
+ - `Parameter problem` : this ICMP message is sent when a router or a host receives an IP packet containing an error (e.g. an invalid option)
  - `Source quench` : a router was supposed to send this message when it had to discard packets due to congestion. However, sending ICMP messages in case of congestion was not the best way to reduce the congestion and since the inclusion of a congestion control scheme in TCP, this ICMP message has been deprecated. 
 
  - `Time Exceeded` : there are two types of `Time Exceeded` ICMP messages
@@ -829,7 +842,7 @@ The main types of ICMP messages are :
 
 .. sidebar:: Redirection attacks
 
- ICMP redirect messages are useful when several routers are attached to the same LAN as hosts. However, they should be used with care as they also create an important security risk. One of the most annoying attack in an IP network is called the `man in the middle attack`. Such an attack occurs if an attacker is able to receive, process, possibly modify and forward all the packets exchanged between a source and a destination. As the attacker receives all the packets it can easily collect passwords or credit card numbers or even inject fake information in an established TCP connection. ICMP redirects unfortunately enable an attacker to easily perform such an attack. In the figure above, consider host `H` that is attached to the same LAN as `A` and `R1`. If `H` sends to `A` an ICMP redirect for prefix `138.48.0.0/16`, `A` will forward to `H` all the packets that it wants to send to this prefix. `H` can then forward them to `R2`. To avoid these attacks, host should ignore ICMP redirect messages.
+ ICMP redirect messages are useful when several routers are attached to the same LAN as hosts. However, they should be used with care as they also create an important security risk. One of the most annoying attack in an IP network is called the `man in the middle attack`. Such an attack occurs if an attacker is able to receive, process, possibly modify and forward all the packets exchanged between a source and a destination. As the attacker receives all the packets it can easily collect passwords or credit card numbers or even inject fake information in an established TCP connection. ICMP redirects unfortunately enable an attacker to easily perform such an attack. In the figure above, consider host `H` that is attached to the same LAN as `A` and `R1`. If `H` sends to `A` an ICMP redirect for prefix `138.48.0.0/16`, `A` forwards to `H` all the packets that it wants to send to this prefix. `H` can then forward them to `R2`. To avoid these attacks, host should ignore the ICMP redirect messages that they receive.
 
 
 
@@ -882,10 +895,11 @@ The above :manpage:`traceroute(8)` output shows a 17 hops path between a host at
 
 .. index:: Path MTU discovery
 
-Another important utilisation of ICMP messages is to discover the maximum MTU that can be used to reach a destination without fragmentation. As explained earlier, when an IPv4 router receives a packet that is larger than the MTU of the outgoing link, it must fragment the packet. Unfortunately, fragmentation is a complex operation and routers cannot perform it at line rate [KM1995]_. Furthermore, when a TCP segment is transported in an IP packet that is fragmented in the network, the loss of a single fragment will force TCP to retransmit the entire segment (and thus all the fragments). If TCP was able to send only packets that do not require fragmentation in the network, it could retransmit only the information that was lost in the network. Finally, IP reassembly causes several challenges at high speed as discussed in :rfc:`4963`.
+Another important utilisation of ICMP messages is to discover the maximum MTU that can be used to reach a destination without fragmentation. As explained earlier, when an IPv4 router receives a packet that is larger than the MTU of the outgoing link, it must fragment the packet. Unfortunately, fragmentation is a complex operation and routers cannot perform it at line rate [KM1995]_. Furthermore, when a TCP segment is transported in an IP packet that is fragmented in the network, the loss of a single fragment forces TCP to retransmit the entire segment (and thus all the fragments). If TCP was able to send only packets that do not require fragmentation in the network, it could retransmit only the information that was lost in the network. In addition, IP reassembly causes several challenges at high speed as discussed in :rfc:`4963`. Using IP fragmentation to allow UDP applications to exchange large messages raises several security issues [KPS2003]_.
 
 
-ICMP, combined with the `Don't fragment (DF)` IPv4 flag, is used by TCP implementations to discover the largest MTU size to be used to reach a destination host without causing network fragmentation. This is the `Path MTU discovery` mechanism defined in :rfc:`1191`. A TCP implementation that includes `Path MTU discovery` (most do) requests the IPv4 layer to send all segments inside IPv4 packets having the `DF` flag set. This prohibits intermediate routers from fragmenting these packets. If a router needs to forward an unfragmentable packet over a link with a smaller MTU, it sends back a `Fragmentation needed` ICMP message to the source indicating the MTU of its outgoing link. This ICMP message contains in its `Data` field the MTU of the router's outgoing link. Upon reception of this ICMP message, the source TCP implementation adjusts its Maximum Segment Size (MSS) so that the packets containing the segments that it sends can be forwarded by this router without requiring fragmentation. 
+
+ICMP, combined with the `Don't fragment (DF)` IPv4 flag, is used by TCP implementations to discover the largest MTU size to be used to reach a destination host without causing network fragmentation. This is the `Path MTU discovery` mechanism defined in :rfc:`1191`. A TCP implementation that includes `Path MTU discovery` (most do) requests the IPv4 layer to send all segments inside IPv4 packets having the `DF` flag set. This prohibits intermediate routers from fragmenting these packets. If a router needs to forward an unfragmentable packet over a link with a smaller MTU, it returns a `Fragmentation needed` ICMP message to the source indicating the MTU of its outgoing link. This ICMP message contains in its `Data` field the MTU of the router's outgoing link. Upon reception of this ICMP message, the source TCP implementation adjusts its Maximum Segment Size (MSS) so that the packets containing the segments that it sends can be forwarded by this router without requiring fragmentation. 
 
 Operation of IPv4 devices
 -------------------------
@@ -899,16 +913,16 @@ An IPv4 host having :math:`n` datalink layer interfaces manages :math:`n+1` IPv4
  - the `127.0.0.1/32` IPv4 address assigned by convention to its loopback address
  - one `A.B.C.D/p` IPv4 address assigned to each of its :math:`n` datalink layer interfaces
 
-Such a host will maintain a routing table that contains one entry for its loopback address and one entry for each subnet identifier assigned to its interfaces. Furthermore, the host will usually utilise one of its interfaces as the `default` interface when sending packets that are not addressed to a directly connected destination. This is represented by the `default` route : `0.0.0.0/0` that is associated to one interface.
+Such a host maintains a routing table that contains one entry for its loopback address and one entry for each subnet identifier assigned to its interfaces. Furthermore, the host usually uses one of its interfaces as the `default` interface when sending packets that are not addressed to a directly connected destination. This is represented by the `default` route : `0.0.0.0/0` that is associated to one interface.
 
-When a transport protocol running on the host requests the transmission of a segment, it usually provides to the IPv4 layer the IPv4 destination address in addition to the segment [#fdfflag]_. The IPv4 implementation will first perform a longest prefix match with the destination address in its routing table. The lookup will return the identification of the interface that must be used to send the packet. The host can then create the IPv4 packet that will contain the segment. The source IPv4 address of the packet will be the IPv4 address of the host on the interface returned by the longest prefix match. The `Protocol` field of the packet is set to the identification of the local transport protocol that created the segment. The `TTL` field of the packet is set to the default `TTL` used by the host. The host must now choose the packet's `Identification`. This `Identification` is important if the packet becomes fragmented in the network as it ensures that the destination will be able to reassemble the received fragments. Ideally, a sending host should never send twice a packet with the same `Identification` to the same destination host to ensure that all fragments are correctly reassembled by the destination. Unfortunately, with a 16 bits `Identification` field and an expected MSL of 2 minutes, this implies that the maximum bandwidth to a given destination is limited to roughly 286 Mbps. With a more realistic 1500 bytes MTU, that bandwidth drops to 6.4 Mbps :rfc:`4963` if fragmentation must be possible [#fiddf]_. This is very low and is another reason why hosts are highly encouraged to avoid fragmentation. If despite of this the MTU of the outgoing interface is smaller than the packet's length, the packet is fragmented. Finally, the packet's checksum is computed before transmission.
+When a transport protocol running on the host requests the transmission of a segment, it usually provides to the IPv4 layer the IPv4 destination address in addition to the segment [#fdfflag]_. The IPv4 implementation first performs a longest prefix match with the destination address in its routing table. The lookup returns the identification of the interface that must be used to send the packet. The host can then create the IPv4 packet that contains the segment. The source IPv4 address of the packet is the IPv4 address of the host on the interface returned by the longest prefix match. The `Protocol` field of the packet is set to the identification of the local transport protocol that created the segment. The `TTL` field of the packet is set to the default `TTL` used by the host. The host must now choose the packet's `Identification`. This `Identification` is important if the packet becomes fragmented in the network as it ensures that the destination is able to reassemble the received fragments. Ideally, a sending host should never send twice a packet with the same `Identification` to the same destination host to ensure that all fragments are correctly reassembled by the destination. Unfortunately, with a 16 bits `Identification` field and an expected MSL of 2 minutes, this implies that the maximum bandwidth to a given destination is limited to roughly 286 Mbps. With a more realistic 1500 bytes MTU, that bandwidth drops to 6.4 Mbps :rfc:`4963` if fragmentation must be possible [#fiddf]_. This is very low and is another reason why hosts are highly encouraged to avoid fragmentation. If despite of this the MTU of the outgoing interface is smaller than the packet's length, the packet is fragmented. Finally, the packet's checksum is computed before transmission.
 
 
-When a host receives an IPv4 packet destined to itself, there are several operations that it must perform. First, it must check the packet's checksum. If the checksum is incorrect, the packet is discarded. Then, it must check whether the packet has been fragmented. If yes, the packet is passed to the reassembly algorithm described earlier. Otherwise, the packet must be passed to the upper layer. This is done by looking at the `Protocol` field (`6` for TCP, `17` for UDP). If the host does not implement the transport layer protocol corresponding to the received `Protocol` field, it sends a `Protocol unreachable` ICMP message to the sending host. If the received packet contains an ICMP message (`Protocol` field set to `1`), the processing is more complex. An `Echo-request` ICMP message will trigger the transmission of an `ICMP Echo-reply` message. The other types of ICMP messages indicate an error that was caused by a previously transmitted packet. These ICMP messages are usually forwarded to the transport protocol that sent the erroneous packet. This can be done by inspecting the contents of the ICMP message that includes the header and the first 64 bits of the erroneous packet. If the IP packet did not contain options, which is the case for most IPv4 packets, the transport protocol can find in the first 32 bits of the transport header the source and destination ports to determine the affected transport flow. This is important for Path MTU discovery for example.
+When a host receives an IPv4 packet destined to itself, there are several operations that it must perform. First, it must check the packet's checksum. If the checksum is incorrect, the packet is discarded. Then, it must check whether the packet has been fragmented. If yes, the packet is passed to the reassembly algorithm described earlier. Otherwise, the packet must be passed to the upper layer. This is done by looking at the `Protocol` field (`6` for TCP, `17` for UDP). If the host does not implement the transport layer protocol corresponding to the received `Protocol` field, it sends a `Protocol unreachable` ICMP message to the sending host. If the received packet contains an ICMP message (`Protocol` field set to `1`), the processing is more complex. An `Echo-request` ICMP message triggers the transmission of an `ICMP Echo-reply` message. The other types of ICMP messages indicate an error that was caused by a previously transmitted packet. These ICMP messages are usually forwarded to the transport protocol that sent the erroneous packet. This can be done by inspecting the contents of the ICMP message that includes the header and the first 64 bits of the erroneous packet. If the IP packet did not contain options, which is the case for most IPv4 packets, the transport protocol can find in the first 32 bits of the transport header the source and destination ports to determine the affected transport flow. This is important for Path MTU discovery for example.
 
-When a router receives an IPv4 packet, it must first check the packet's checksum. If the checksum is invalid, it is discarded. Otherwise, the router must check whether the destination address is one of the IPv4 addresses assigned to the router. If so, the router must behave as a host and processes the packet as described above. Although routers mainly forward IPv4 packets, they sometimes need to be accessed as hosts by network operators or network management software. 
+When a router receives an IPv4 packet, it must first check the packet's checksum. If the checksum is invalid, it is discarded. Otherwise, the router must check whether the destination address is one of the IPv4 addresses assigned to the router. If so, the router must behave as a host and process the packet as described above. Although routers mainly forward IPv4 packets, they sometimes need to be accessed as hosts by network operators or network management software. 
 
-If the packet is not addressed to the router, it must be forwarded on an outgoing interface according to the router's routing table. The router first decrements the packet's `TTL`. If the `TTL` reaches `0`, a `TTL Exceeded` ICMP message is sent back to the source. As the packet header has been modified, the checksum must be recomputed. Fortunately, as IPv4 uses an arithmetic checksum, a router can incrementally update the packet's checksum as described in :rfc:`1624`. Then, the router performs a longest prefix match for the packet's destination address in its forwarding table. If the lookup does not return a match, the router must return a `Destination unreachable` ICMP message to the source. Otherwise, the lookup returns the interface over which the packet must be forwarded. Before forwarding the packet over this interface, the router must first compare the length of the packet with the MTU of the outgoing interface. If the packet is smaller than the MTU, it is forwarded. Otherwise, a `Fragmentation needed` ICMP message is sent if the `DF` flag was sent or the packet is fragmented if the `DF` was not set. 
+If the packet is not addressed to the router, it must be forwarded on an outgoing interface according to the router's routing table. The router first decrements the packet's `TTL`. If the `TTL` reaches `0`, a `TTL Exceeded` ICMP message is sent back to the source. As the packet header has been modified, the checksum must be recomputed. Fortunately, as IPv4 uses an arithmetic checksum, a router can incrementally update the packet's checksum as described in :rfc:`1624`. Then, the router performs a longest prefix match for the packet's destination address in its forwarding table. If no match is found, the router must return a `Destination unreachable` ICMP message to the source. Otherwise, the lookup returns the interface over which the packet must be forwarded. Before forwarding the packet over this interface, the router must first compare the length of the packet with the MTU of the outgoing interface. If the packet is smaller than the MTU, it is forwarded. Otherwise, a `Fragmentation needed` ICMP message is sent if the `DF` flag was sent or the packet is fragmented if the `DF` was not set. 
 
 
 .. sidebar:: Longest prefix match in IP routers
@@ -921,7 +935,7 @@ IP version 6
 ============
 
 In the late 1980s and early 1990s the growth of the Internet was causing several operational problems on routers. Many of these routers had a single CPU and up to 1 MByte of RAM to store their operating system, packet buffers and routing tables. Given the rate of allocation of IPv4 prefixes to companies and universities willing to join the Internet, the routing tables where growing very quickly and some feared that all IPv4 prefixes would be quickly allocated. In 1987, a study cited in :rfc:`1752` estimated 100,000 networks in the near future. In August 1990, estimates indicated that the class B space would be exhausted by March 1994. 
-Two types of solutions were developed to solve this problem. The first short term solution was the introduction of Classless Inter Domain Routing (:term:`CIDR`). A second short term solution was the Network Address Translation (:term:`NAT`) mechanism defined in :rfc:`1631` that allowed multiple hosts to share a single public IP address. NAT will be explained in section :ref:`Middleboxes`.
+Two types of solutions were developed to solve this problem. The first short term solution was the introduction of Classless Inter Domain Routing (:term:`CIDR`). A second short term solution was the Network Address Translation (:term:`NAT`) mechanism defined in :rfc:`1631` that allowed multiple hosts to share a single public IP address. NAT is explained in section :ref:`Middleboxes`.
 
 However, in parallel with these short-term solutions, that have allowed the IPv4 Internet to continue to be usable until now, the Internet Engineering Task Force started to work on developing a replacement for IPv4. This work started with an open call for proposal outline in :rfc:`1550`. Several groups responded to this call with proposals for a next generation Internet Protocol (IPng) :
 
@@ -959,7 +973,7 @@ An IPv6 unicast address is composed of three parts :
 #. A subnet identifier that identifies a customer of the ISP
 #. An interface identifier that identifies a particular interface on an endsystem 
 
-In today's deployments, interface identifiers are always 64 bits wide. This implies that while there are :math:`2^{128}` different IPv6 addresses, they must be grouped in :math:`2^{64}` subnets. This could appear as a waste of resources, however using 64 bits for the host identifier allows IPv6 addresses to be auto-configured and also provides some benefits from a security viewpoint as will be explained in section ICMPv6_
+In today's deployments, interface identifiers are always 64 bits wide. This implies that while there are :math:`2^{128}` different IPv6 addresses, they must be grouped in :math:`2^{64}` subnets. This could appear as a waste of resources, however using 64 bits for the host identifier allows IPv6 addresses to be auto-configured and also provides some benefits from a security viewpoint as explained in section ICMPv6_
 
 
 .. sidebar:: Textual representation of IPv6 addresses
@@ -1030,7 +1044,7 @@ Finally, :rfc:`4291` defines the structure of the IPv6 multicast addresses [#fmu
 
 The low order 112 bits of an IPv6 multicast address are the group's identifier. The high order bits are used as a marker to distinguish multicast addresses from unicast addresses. The 4 bits flag field indicates notably whether the address is temporary or permanent. Finally, the scope field indicates the boundaries of the forwarding of packets destined to a particular address. A link-local scope indicates that a router should not forward a packet destined to such a multicast address. An organisation local-scope indicates that a packet sent to such a multicast destination address should not leave the organisation. Finally the global scope is intended for multicast groups spanning the global Internet.
 
-Among these addresses some are well known. For example, all endsystem automatically belong to the `FF02::1` multicast group while all routers automatically belong to the `FF02::2` multicast group. We will discuss IPv6 multicast later.
+Among these addresses some are well known. For example, all endsystem automatically belong to the `FF02::1` multicast group while all routers automatically belong to the `FF02::2` multicast group. We discuss IPv6 multicast later.
 
 .. _IPv6Packet:
 
@@ -1083,7 +1097,7 @@ In IPv6, each option is considered as one header containing a multiple of 8 byte
 
 .. index:: jumbogram
 
-Two `hop-by-hop` options have been defined. :rfc:`2675` specifies the jumbogram that enables IPv6 to support packets containing a payload larger than 65535 bytes. These jumbo packets have their `payload length` set to `0` and the jumbogram option contains the packet length as a 32 bits field. Such packets can only be sent from a source to a destination if all the routers on the path support this option. However, as of this writing it does not seem that the jumbogram option has been implemented. The router alert option defined in :rfc:`2711` is the second example of a `hop-by-hop` option. The packets that contain this option should be processed in a special way by intermediate routers. This option is used for IP packets that carry Resource Reservation Protocol (RSVP) messages. Its usage will be explained later.
+Two `hop-by-hop` options have been defined. :rfc:`2675` specifies the jumbogram that enables IPv6 to support packets containing a payload larger than 65535 bytes. These jumbo packets have their `payload length` set to `0` and the jumbogram option contains the packet length as a 32 bits field. Such packets can only be sent from a source to a destination if all the routers on the path support this option. However, as of this writing it does not seem that the jumbogram option has been implemented. The router alert option defined in :rfc:`2711` is the second example of a `hop-by-hop` option. The packets that contain this option should be processed in a special way by intermediate routers. This option is used for IP packets that carry Resource Reservation Protocol (RSVP) messages. Its usage is explained later.
 
 
 The type 0 routing header defined in :rfc:`2460` is an example of an IPv6 option that must be processed by some routers. This option is encoded as shown below.
@@ -1117,7 +1131,7 @@ The figure below provides an example of a fragmented IPv6 packet containing a UD
    
    IPv6 fragmentation example
 
-Finally, the last type of IPv6 options are the Encaspulating Security Payload (ESP) defined in :rfc:`4303` and the Authentication Header (AH) defined in :rfc:`4302`. These two headers are used by IPSec :rfc:`4301`. They will be discussed in another chapter.
+Finally, the last type of IPv6 options are the Encaspulating Security Payload (ESP) defined in :rfc:`4303` and the Authentication Header (AH) defined in :rfc:`4302`. These two headers are used by IPSec :rfc:`4301`. They are discussed in another chapter.
 
 
 .. _ICMPv6:
@@ -1178,7 +1192,7 @@ ICMPv6 also allows to discover the path between a source and a destination by us
 
 .. sidebar:: Rate limitation of ICMP messages
 
- High-end hardware based routers use special purpose chips on their interfaces to forward IPv6 packets at line rate. These chips are optimised to process `correct` IP packets. They are not able to create ICMP messages at line rate. When such a chip receives an IP packet that will trigger an ICMP message, it interrupts the main CPU of the router and the software running on this CPU processes the packet. This CPU is much slower than the hardware acceleration found on the interfaces [Gill2004]_. It would be overloaded if it had to process IP packets at line rate and generate one ICMP message for each received packet. To protect this CPU, high-end routers limit the rate at which the hardware can interrupt the main CPU and thus the rate at which ICMP messages can be generated. This implies that not all erroneous IP packets will cause the transmission of an ICMP message. The risk of overloading the main CPU of the router is also the reason why using hop-by-hop IPv6 options, including the router alter option is discouraged [#falert]_. 
+ High-end hardware based routers use special purpose chips on their interfaces to forward IPv6 packets at line rate. These chips are optimised to process `correct` IP packets. They are not able to create ICMP messages at line rate. When such a chip receives an IP packet that triggers an ICMP message, it interrupts the main CPU of the router and the software running on this CPU processes the packet. This CPU is much slower than the hardware acceleration found on the interfaces [Gill2004]_. It would be overloaded if it had to process IP packets at line rate and generate one ICMP message for each received packet. To protect this CPU, high-end routers limit the rate at which the hardware can interrupt the main CPU and thus the rate at which ICMP messages can be generated. This implies that not all erroneous IP packets cause the transmission of an ICMP message. The risk of overloading the main CPU of the router is also the reason why using hop-by-hop IPv6 options, including the router alter option is discouraged [#falert]_. 
 
 
 .. _Middleboxes:
@@ -1388,19 +1402,19 @@ Inside each non-backbone area, routers exchange link state packets to distribute
    
    Hierarchical routing with OSPF 
 
-Let us first consider OSPF routing inside `area 2`. All routers of the area will learn a route towards `192.168.1.0/24` and `192.168.10.0/24`. The two area border routers, `RB` and `RC`, will create network summary advertisements. Assuming that all links have a unit link metric :
+Let us first consider OSPF routing inside `area 2`. All routers of the area learn a route towards `192.168.1.0/24` and `192.168.10.0/24`. The two area border routers, `RB` and `RC`, create network summary advertisements. Assuming that all links have a unit link metric :
   
- - `RB` will advertise `192.168.1.0/24` at a distance of `2` and `192.168.10.0/24` at a distance of `3`
- - `RC` will advertise `192.168.1.0/24` at a distance of `3` and `192.168.10.0/24` at a distance of `2`
+ - `RB` advertises `192.168.1.0/24` at a distance of `2` and `192.168.10.0/24` at a distance of `3`
+ - `RC` advertises `192.168.1.0/24` at a distance of `3` and `192.168.10.0/24` at a distance of `2`
 
-These summary advertisements are flooded in the backbone area attached to routers `RB` and `RC`. In its routing table, router `RA` will select the summary advertised by `RB` to reach `192.168.1.0/24` and the summary advertised by `RC` to reach `192.168.10.0/24`. Router `RA` will advertise inside `area 1` a summary indicating that `192.168.1.0/24` and `192.168.10.0/24` are both at a distance of `3` from itself.
+These summary advertisements are flooded in the backbone area attached to routers `RB` and `RC`. In its routing table, router `RA` selects the summary advertised by `RB` to reach `192.168.1.0/24` and the summary advertised by `RC` to reach `192.168.10.0/24`. Router `RA` advertises inside `area 1` a summary indicating that `192.168.1.0/24` and `192.168.10.0/24` are both at a distance of `3` from itself.
 
 On the other hand, consider the prefixes `10.0.0.0/24` and `10.0.1.0/24` that are inside `area 1`. Router `RA` is the only area border router that is attached to this area. This router can create two different network summary advertisements :
 
  - `10.0.0.0/24` at a distance of `1` and `10.0.1.0/24` at a distance of `2` from `RA`
  - `10.0.0.0/23` at a distance of `2` from `RA`
 
-The first summary advertisement provides precise information about the distance used to reach each prefix. However, all routers in the network will have to maintain a route towards `10.0.0.0/24` and a route towards `10.0.1.0/24` that are both via router `RA`. The second advertisement allows to improve the scalability of OSPF by reducing the number of routes that are advertised across area boundaries. However, in practice this requires manual configuration on the border routers.
+The first summary advertisement provides precise information about the distance used to reach each prefix. However, all routers in the network have to maintain a route towards `10.0.0.0/24` and a route towards `10.0.1.0/24` that are both via router `RA`. The second advertisement allows to improve the scalability of OSPF by reducing the number of routes that are advertised across area boundaries. However, in practice this requires manual configuration on the border routers.
 
 
 .. index:: OSPF Designated Router
@@ -1417,9 +1431,9 @@ The second OSPF particularity that is worth discussing is the support of Local A
 A first solution to support such a LAN with a link-state routing protocol would be to consider that a LAN is equivalent to a full-mesh of point-to-point links as each router that can directly reach any other router on the LAN. However, this approach has two important drawbacks :
 
  #. Each router must exchange HELLOs and link state packets with all the other routers on the LAN. This increases the number of OSPF packets that are sent and processed by each router.
- #. Remote routers, when looking at the topology distributed by OSPF, consider that there is a full-mesh of links between all the LAN routers. Such a full-mesh implies a lot of redundancy in case of failure, while in practice the entire LAN may completely fail. In case of a failure of the entire LAN, all routers will need to detect the failures and flood link state packets before the LAN is completely removed from the OSPF topology by remote routers. 
+ #. Remote routers, when looking at the topology distributed by OSPF, consider that there is a full-mesh of links between all the LAN routers. Such a full-mesh implies a lot of redundancy in case of failure, while in practice the entire LAN may completely fail. In case of a failure of the entire LAN, all routers need to detect the failures and flood link state packets before the LAN is completely removed from the OSPF topology by remote routers. 
 
-To better represent LANs and reduce the number of OSPF packets that are exchanged, OSPF handles LAN differently. When OSPF routers boot on a LAN, they elect [#felection]_ one of them as the `Designated Router (DR)` :rfc:`2328`. The `DR` router `represents` the local area network. It will advertise the LAN's subnet (`138.48.4.0/24` in the example above). Furthermore, LAN routers will only exchange HELLO packets with the `DR`. Thanks to the utilisation of a `DR`, the topology of the LAN will appear as a set of point-to-point links connected to the `DR` as shown in the figure below. 
+To better represent LANs and reduce the number of OSPF packets that are exchanged, OSPF handles LAN differently. When OSPF routers boot on a LAN, they elect [#felection]_ one of them as the `Designated Router (DR)` :rfc:`2328`. The `DR` router `represents` the local area network. It advertises the LAN's subnet (`138.48.4.0/24` in the example above). Furthermore, LAN routers only exchange HELLO packets with the `DR`. Thanks to the utilisation of a `DR`, the topology of the LAN appears as a set of point-to-point links connected to the `DR` as shown in the figure below. 
 
 
 .. figure:: fig/network-fig-099-c.png
@@ -1493,12 +1507,12 @@ The first category of peering relationship is the `customer->provider` relations
    
    A simple Internet with peering relationships
 
-To understand the `customer->provider` relationship, let us consider the simple internetwork shown in the figure above. In this internetwork, `AS7` is a stub domain that is connected to one provider : `AS4`. The contract between `AS4` and `AS7` allows a host inside `AS7` to exchange packets with any host in the internetwork. To enable this exchange of packets, `AS7` must know a route towards any domain and all the domains of the internetwork must know a route via `AS4` that allows them to reach hosts inside `AS7`. From a routing viewpoint, the commercial contract between `AS7` and `AS4` will lead to the following routes being exchanged :
+To understand the `customer->provider` relationship, let us consider the simple internetwork shown in the figure above. In this internetwork, `AS7` is a stub domain that is connected to one provider : `AS4`. The contract between `AS4` and `AS7` allows a host inside `AS7` to exchange packets with any host in the internetwork. To enable this exchange of packets, `AS7` must know a route towards any domain and all the domains of the internetwork must know a route via `AS4` that allows them to reach hosts inside `AS7`. From a routing viewpoint, the commercial contract between `AS7` and `AS4` leads to the following routes being exchanged :
 
  - over a `customer->provider` relationship, the `customer` domain advertises to its `provider`  all its routes and all the routes that it has learned from its own customers.
  - over a `provider->customer` relationship, the `provider` advertises all the routes that it knows to its `customer`
 
-The second rule ensures that the customer domain will receive a route towards all destinations that are reachable via its provider. The first rule allows the routes of the customer domain to be distributed throughout the Internet.
+The second rule ensures that the customer domain receives a route towards all destinations that are reachable via its provider. The first rule allows the routes of the customer domain to be distributed throughout the Internet.
 
 Coming back to the figure above, `AS4` advertises to its two providers `AS1` and `AS2` its own routes and the routes learned from its customer, `AS7`. On the other hand, `AS4` advertises to `AS7` all the routes that it knows. 
 
@@ -1508,7 +1522,7 @@ Coming back to the figure above, `AS4` advertises to its two providers `AS1` and
 
 The second type of peering relationship is the `shared-cost` peering relationship. Such a relationship usually does not involve a payment from one domain to the other in contrast with the `customer->provider` relationship. A `shared-cost` peering relationship is usually established between domains having a similar size and geographic coverage. For example, consider the figure above. If `AS3` and `AS4` exchange many packets via `AS1`, they both need to pay `AS1`. A cheaper alternative for `AS3` and `AS4` would be to establish a `shared-cost` peering. Such a peering can be established at IXPs where both `AS3` and `AS4` are present or by using private peering links. This `shared-cost` peering should be used to exchange packets between hosts inside `AS3` and hosts inside `AS4`. However, `AS3` does not want to receive on the `AS3-AS4` `shared-cost` peering links packets whose destination belongs to `AS1` and `AS3` would have to pay to send these packets to `AS1`. 
 
-From a routing viewpoint, over a `shared-cost` peering relationship a domain only advertises its internal routes and the routes that it has learned from its customers. This restriction ensures that only packets destined to the local domain or one of its customers will be received over the `shared-cost` peering relationship. This implies that the routes that have been learned from a provider or from another `shared-cost` peer will not be advertised over a `shared-cost` peering relationship. This is motivated by economical reasons. If a domain were advertising over a `shared-cost` peering relationship that does not bring revenue the routes that it learned from a provider it would have allowed its `shared-cost` peer to use the link with its provider without any payment. If a domain were advertising over a `shared-cost` peering relationship the routes learned over another `shared-cost` peering relationship, it would have allowed these `shared-cost` peers to use its own network (which may span one or more continents) freely to exchange packets.
+From a routing viewpoint, over a `shared-cost` peering relationship a domain only advertises its internal routes and the routes that it has learned from its customers. This restriction ensures that only packets destined to the local domain or one of its customers is received over the `shared-cost` peering relationship. This implies that the routes that have been learned from a provider or from another `shared-cost` peer is not advertised over a `shared-cost` peering relationship. This is motivated by economical reasons. If a domain were advertising over a `shared-cost` peering relationship that does not bring revenue the routes that it learned from a provider it would have allowed its `shared-cost` peer to use the link with its provider without any payment. If a domain were advertising over a `shared-cost` peering relationship the routes learned over another `shared-cost` peering relationship, it would have allowed these `shared-cost` peers to use its own network (which may span one or more continents) freely to exchange packets.
 
 
 
@@ -1545,7 +1559,7 @@ The Border Gateway Protocol
 
 The Internet uses a single interdomain routing protocol : the Border Gateway Protocol (BGP). The current version of BGP is defined in :rfc:`4271`. BGP differs from the intradomain routing protocols that we have already discussed in several ways. First, BGP is a `path-vector` protocol. When a BGP router advertises a route towards a prefix, it announces the IP prefix and the interdomain path used to reach this prefix. From BGP's viewpoint, each domain is identified by a unique `Autonomous System` (AS) number [#fasdomain]_ and the interdomain path contains the AS numbers of the transit domains that are used to reach the associated prefix. This interdomain path is called the `AS Path`. Thanks to these AS-Paths, BGP does not suffer from the count-to-infinity problems that affect distance vector routing protocols. Furthermore, the AS-Path can be used to implement some routing policies. Another difference between BGP and the intradomain routing protocols is that a BGP router does not send the entire contents of its routing table to its neighbours regularly. Given the size of the global Internet, routers would be overloaded by the number of BGP messages that they would need to process. BGP uses incremental updates, i.e. it only announces to its neighbours the routes that have changed.
 
-The figure below shows a simple example of the BGP routes that are exchanged between domains. In this example, prefix `1.0.0.0/8` is announced by `AS1`. `AS1` advertises to `AS2` a BGP route towards this prefix. The AS-Path of this route indicates that `AS1` is the originator of the prefix. When `AS4` receives the BGP route from `AS1`, it re-announces it to `AS2` and adds its AS number in the AS-Path. `AS2` has learned two routes towards prefix `1.0.0.0/8`. It compares the two routes and prefers the route learned from `AS4` based on its own ranking algorithm. `AS2` advertises to `AS5` a route towards `1.0.0.0/8` with its AS-Path set to `AS2:AS4:AS1`. Thanks to the AS-Path, `AS5` knows that if it sends a packet towards `1.0.0.0/8` the packet will first pass through `AS2`, then through `AS4` before reaching its destination inside `AS1`.
+The figure below shows a simple example of the BGP routes that are exchanged between domains. In this example, prefix `1.0.0.0/8` is announced by `AS1`. `AS1` advertises to `AS2` a BGP route towards this prefix. The AS-Path of this route indicates that `AS1` is the originator of the prefix. When `AS4` receives the BGP route from `AS1`, it re-announces it to `AS2` and adds its AS number in the AS-Path. `AS2` has learned two routes towards prefix `1.0.0.0/8`. It compares the two routes and prefers the route learned from `AS4` based on its own ranking algorithm. `AS2` advertises to `AS5` a route towards `1.0.0.0/8` with its AS-Path set to `AS2:AS4:AS1`. Thanks to the AS-Path, `AS5` knows that if it sends a packet towards `1.0.0.0/8` the packet first passes through `AS2`, then through `AS4` before reaching its destination inside `AS1`.
 
 
 .. figure:: fig/network-fig-111-c.png
@@ -1558,7 +1572,7 @@ The figure below shows a simple example of the BGP routes that are exchanged bet
 
 .. index:: BGP peer
 
-BGP routers exchange routes over BGP sessions. A BGP session is established between two routers belonging to two different domains that are directly connected. As explained earlier, the physical connection between the two routers can be implemented as a private peering link or over an Internet eXchange Point. A BGP session between two adjacent routers runs above a TCP connection (the default BGP port is 179). In contrast with intradomain routing protocols that exchange IP packets or UDP segments, BGP runs above TCP because TCP ensures a reliable delivery of the BGP messages sent by each router without forcing the routers to implement acknowledgements, checksums, ... Furthermore, the two routers will consider the peering link to be up as long as the BGP session and the underlying TCP connection remains up [#flifetimebgp]_. The two endpoints of a BGP session are called `BGP peers`.
+BGP routers exchange routes over BGP sessions. A BGP session is established between two routers belonging to two different domains that are directly connected. As explained earlier, the physical connection between the two routers can be implemented as a private peering link or over an Internet eXchange Point. A BGP session between two adjacent routers runs above a TCP connection (the default BGP port is 179). In contrast with intradomain routing protocols that exchange IP packets or UDP segments, BGP runs above TCP because TCP ensures a reliable delivery of the BGP messages sent by each router without forcing the routers to implement acknowledgements, checksums, ... Furthermore, the two routers consider the peering link to be up as long as the BGP session and the underlying TCP connection remains up [#flifetimebgp]_. The two endpoints of a BGP session are called `BGP peers`.
 
 .. figure:: fig/network-fig-112-c.png
    :align: center
@@ -1566,7 +1580,7 @@ BGP routers exchange routes over BGP sessions. A BGP session is established betw
    
    A BGP peering session between two directly connected routers
 
-In practice, to establish a BGP session between routers `R1` on `R2` on the figure above, the network administrator of `AS3` must first configure on `R1` the IP address of `R2` on the `R1-R2` link and the AS number of `R2`. Router `R1` will then try to regularly establish the BGP session with `R2`. `R2` will only accept to establish the BGP session with `R1` once it has been configured with the IP address of `R1` and its AS number. For security reasons, a router never establishes a BGP session that has not been manually configured on the router. 
+In practice, to establish a BGP session between routers `R1` on `R2` on the figure above, the network administrator of `AS3` must first configure on `R1` the IP address of `R2` on the `R1-R2` link and the AS number of `R2`. Router `R1` then tries to regularly establish the BGP session with `R2`. `R2` only agrees to establish the BGP session with `R1` once it has been configured with the IP address of `R1` and its AS number. For security reasons, a router never establishes a BGP session that has not been manually configured on the router. 
 
 
 .. index BGP OPEN, BGP NOTIFICATION, BGP KEEPALIVE, BGP UPDATE
@@ -1580,13 +1594,13 @@ The BGP protocol :rfc:`4271` defines several types of messages that can be excha
 
 
 
-As explained earlier, BGP relies on incremental updates. This implies that when a BGP session starts, each router will first send BGP `UPDATE` messages to advertise to the other peer all the exportable routes that it knows. Once all these routes have been advertised, the BGP router will only send BGP `UPDATE` message about a prefix if the route is new, one of its attributes has changed or the route became unreachable and must be withdrawn. The BGP `UPDATE` message allows BGP routers to efficiently exchange such information while minimising the number of bytes exchanged. Each `UPDATE` message contains :
+As explained earlier, BGP relies on incremental updates. This implies that when a BGP session starts, each router first sends BGP `UPDATE` messages to advertise to the other peer all the exportable routes that it knows. Once all these routes have been advertised, the BGP router only sends BGP `UPDATE` message about a prefix if the route is new, one of its attributes has changed or the route became unreachable and must be withdrawn. The BGP `UPDATE` message allows BGP routers to efficiently exchange such information while minimising the number of bytes exchanged. Each `UPDATE` message contains :
 
  - a list of IP prefixes that are withdrawn
  - a list of IP prefixes that are (re-)advertised
  - the set of attributes (e.g. AS-Path) associated to the advertised prefixes
 
-In the remainder of this chapter, and although all routing information is exchanged by using BGP `UPDATE` messages, we assume for simplicity that a BGP message contains only information about one prefix and we will use the words :
+In the remainder of this chapter, and although all routing information is exchanged by using BGP `UPDATE` messages, we assume for simplicity that a BGP message contains only information about one prefix and we use the words :
 
  - `Withdraw message` to indicate a BGP `UPDATE` message containing one route that is withdrawn 
  - `Update message` to indicate a BGP `UPDATE` containing a new or updated route towards one destination prefix with its attributes 
@@ -1613,7 +1627,7 @@ In this figure, the router receives BGP messages on the left part of the figure,
  - the `Forwarding Information Base` (`FIB`) is used by the dataplane to forward packets towards their destination. The `FIB` contains, for each destination, the best route that has been selected by the `BGP decision process`. This decision process is an algorithm that selects, for each destination prefix, the best route according to the router's ranking algorithm that is part of its policy.
  - the `Adj-RIB-Out` contains the BGP routes that have been advertised to each BGP peer. The `Adj-RIB-Out` for a given peer is built by applying the peer`s `export filter` on the routes that have been installed in the `FIB`. There is one `export filter` per BGP peer. For this reason, the Adj-RIB-Out of a peer may contain different routes than the Adj-RIB-Out of another peer.
 
-When a BGP session starts, the routers first exchange `OPEN` messages to negotiate the options that will apply throughout the entire session. Then, each router will extract from its FIB the routes to be advertised to the peer. It is important to note that, for each known destination prefix, a BGP router can only advertise to a peer the route that it has itself installed inside its `FIB`. The routes that are advertised to a peer must pass the peer's `export filter`. The `export filter` is a set of rules that define which routes can be advertised over the corresponding session, possibly after having modified some of its attributes. One `export filter` is associated to each BGP session. For example, on a `shared-cost peering`, the `export filter` will only select the internal routes and the routes that have been learned from a `customer`. The pseudo-code below shows the initialisation of a BGP session ::
+When a BGP session starts, the routers first exchange `OPEN` messages to negotiate the options that apply throughout the entire session. Then, each router extracts from its FIB the routes to be advertised to the peer. It is important to note that, for each known destination prefix, a BGP router can only advertise to a peer the route that it has itself installed inside its `FIB`. The routes that are advertised to a peer must pass the peer's `export filter`. The `export filter` is a set of rules that define which routes can be advertised over the corresponding session, possibly after having modified some of its attributes. One `export filter` is associated to each BGP session. For example, on a `shared-cost peering`, the `export filter` only selects the internal routes and the routes that have been learned from a `customer`. The pseudo-code below shows the initialisation of a BGP session ::
 
  Initialize_BGP_Session(RemoteAS, RemoteIP)
  { 
@@ -1650,7 +1664,7 @@ In the above pseudo-code, the `build_BGP_UPDATE(d)` procedure extracts from the 
   /* Modify selected attributes inside BGPMsg */
  }
 
-At this point, the remote router has received all the exportable BGP routes. After this initial exchange, the router will only send `BGP UPDATE` messages when there is a change (addition of a route, removal of a route or change in the attributes of a route) in one of these exportable routes. Such a change can happen when the router receives a BGP message. The pseudo-code below summarizes the processing of these BGP messages. ::
+At this point, the remote router has received all the exportable BGP routes. After this initial exchange, the router only sends `BGP UPDATE` messages when there is a change (addition of a route, removal of a route or change in the attributes of a route) in one of these exportable routes. Such a change can happen when the router receives a BGP message. The pseudo-code below summarizes the processing of these BGP messages. ::
 
 
  Recvd_BGPMsg(Msg, RemoteAS)
@@ -1719,7 +1733,7 @@ Let us now discuss in more details the operation of BGP in an IPv4 network. For 
    Utilisation of the BGP nexthop attribute
 
 
-This network contains three routers : `R1`, `R2` and `R3`. Each router is attached to a local IPv4 subnet that it will advertise by using BGP. There are two BGP sessions, one between `R1` and `R2` and the second between `R2` and `R3`. A `/30` subnet is used on each interdomain link (`195.100.0.0/30` on `R1-R2` and `195.100.0.4/30` on `R2-R3`). The BGP sessions run above TCP connections established between the neighbouring routers (e.g. `195.100.0.1 - 195.100.0.2` for the `R1-R2` session).
+This network contains three routers : `R1`, `R2` and `R3`. Each router is attached to a local IPv4 subnet that it advertises by using BGP. There are two BGP sessions, one between `R1` and `R2` and the second between `R2` and `R3`. A `/30` subnet is used on each interdomain link (`195.100.0.0/30` on `R1-R2` and `195.100.0.4/30` on `R2-R3`). The BGP sessions run above TCP connections established between the neighbouring routers (e.g. `195.100.0.1 - 195.100.0.2` for the `R1-R2` session).
 
 
 .. index:: BGP nexthop
@@ -1730,11 +1744,11 @@ Let us assume that the `R1-R2` BGP session is the first to be established. A `BG
  - the `BGP nexthop`
  - the attributes including the AS-Path 
 
-We will use the notation `U(prefix, nexthop, attributes)` to represent such a `BGP Update` message in this section. Similarly, `W(prefix)` will represent a `BGP withdraw` for the specified prefix. Once the `R1-R2` session has been established, `R1` sends `U(194.100.0.0/24,195.100.0.1,AS10)` to `R2` and `R2` sends `U(194.100.2.0/23,195.100.0.2,AS20)`. At this point, `R1` can reach `194.100.2.0/23` via `195.100.0.2` and `R2` can reach `194.100.0.0/24` via `195.100.0.1`.
+We use the notation `U(prefix, nexthop, attributes)` to represent such a `BGP Update` message in this section. Similarly, `W(prefix)` represents a `BGP withdraw` for the specified prefix. Once the `R1-R2` session has been established, `R1` sends `U(194.100.0.0/24,195.100.0.1,AS10)` to `R2` and `R2` sends `U(194.100.2.0/23,195.100.0.2,AS20)`. At this point, `R1` can reach `194.100.2.0/23` via `195.100.0.2` and `R2` can reach `194.100.0.0/24` via `195.100.0.1`.
 
-Once the `R2-R3` has been established, `R3` sends `U(194.100.1.0/24,195.100.0.6,AS30)`. `R2` will announce on the `R2-R3` session all the routes inside its RIB. I will thus send to `R3` : `U(194.100.0.0/24,195.100.0.5,AS20:AS10)` and `U(194.100.2.0/23,195.100.0.5,AS20)`. Note that when `R2` advertises the route that it learned from `R1`, it updates the BGP nexthop and adds it AS number in the AS-Path. `R2` will also send `U(194.100.1.0/24,195.100.0.2,AS20:AS30)` to `R1` on the `R1-R3` session. At this point, all BGP routes have been exchanged and all routers can reach `194.100.0.0/24`, `194.100.2.0/23` and `194.100.1.0/24`.
+Once the `R2-R3` has been established, `R3` sends `U(194.100.1.0/24,195.100.0.6,AS30)`. `R2` announces on the `R2-R3` session all the routes inside its RIB. It thus sends to `R3` : `U(194.100.0.0/24,195.100.0.5,AS20:AS10)` and `U(194.100.2.0/23,195.100.0.5,AS20)`. Note that when `R2` advertises the route that it learned from `R1`, it updates the BGP nexthop and adds it AS number in the AS-Path. `R2` also sends `U(194.100.1.0/24,195.100.0.2,AS20:AS30)` to `R1` on the `R1-R3` session. At this point, all BGP routes have been exchanged and all routers can reach `194.100.0.0/24`, `194.100.2.0/23` and `194.100.1.0/24`.
 
-If the link between `R2` and `R3` fails, `R3` will detect the failure because it did not receive `KEEPALIVE` messages recently from `R2`. At this time, `R3` will remove from its RIB all the routes learned over the `R2-R3` BGP session. `R2` will also remove from its RIB the routes learned from `R3`. `R2` will also send  `W(194.100.1.0/24)` to `R1` over the `R1-R3` BGP session since it does not have a route anymore towards this prefix.
+If the link between `R2` and `R3` fails, `R3` detects the failure because it did not receive `KEEPALIVE` messages recently from `R2`. At this time, `R3` removes from its RIB all the routes learned over the `R2-R3` BGP session. `R2` also removes from its RIB the routes learned from `R3`. `R2` also sends  `W(194.100.1.0/24)` to `R1` over the `R1-R3` BGP session since it does not have a route anymore towards this prefix.
 
 
 .. sidebar:: Origin of the routes advertised by a BGP router
@@ -1745,7 +1759,7 @@ If the link between `R2` and `R3` fails, `R3` will detect the failure because it
   - the router has been configured by the network operator to advertise over its BGP session some of the routes that it learns with its intradomain routing protocol. For example, an enterprise router may advertise over a BGP session with its provider the routes to remote sites when these routes are reachable and advertised by the intradomain routing protocol
  The first solution is the most frequent. Advertising routes learned from an intradomain routing protocol is not recommended as if the route flaps [#fflap]_, this w cause a large number of BGP messages being exchanged in the global Internet.
 
-Most networks that use BGP contain more than one router. For example, consider the network shown in the figure below where `AS20` contains two routers attached to interdomain links : `R2` and `R4`. In this network, two routing protocols are used by `R2` and `R4`. They use an intradomain routing protocol such as OSPF to distribute the routes towards the internal prefixes : `195.100.0.8/30`, `195.100.0.0/30`, ... `R2` and `R4` also use BGP. `R2` will receive the routes advertised by `AS10` while `R4` will receive the routes advertised by `AS30`. These two routers will need to exchange the routes that they have respectively received over their BGP sessions. 
+Most networks that use BGP contain more than one router. For example, consider the network shown in the figure below where `AS20` contains two routers attached to interdomain links : `R2` and `R4`. In this network, two routing protocols are used by `R2` and `R4`. They use an intradomain routing protocol such as OSPF to distribute the routes towards the internal prefixes : `195.100.0.8/30`, `195.100.0.0/30`, ... `R2` and `R4` also use BGP. `R2` receives the routes advertised by `AS10` while `R4` receives the routes advertised by `AS30`. These two routers need to exchange the routes that they have respectively received over their BGP sessions. 
 
 
 .. figure:: fig/network-fig-136-c.png
@@ -1767,14 +1781,14 @@ The best solution to allow BGP routers to distribute, inside an AS, all the rout
  - :term:`iBGP session` or `internal BGP session`. Such a BGP session is established between two routers belonging to the same domain. These two routers do not need to be directly connected.
 
 
-In practice, each BGP router inside a domain will maintain an `iBGP session` with each other BGP router in the domain [#frr]_. This will create a full-mesh of `iBGP sessions` among all BGP routers of the domain. `iBGP sessions`, like `eBGP sessions` run over TCP connections. Note that in contrast with `eBGP sessions` that are established between directly connected routers, `iBGP sessions` are often established between routers that are not directly connected.
+In practice, each BGP router inside a domain maintains an `iBGP session` with each other BGP router in the domain [#frr]_. This creates a full-mesh of `iBGP sessions` among all BGP routers of the domain. `iBGP sessions`, like `eBGP sessions` run over TCP connections. Note that in contrast with `eBGP sessions` that are established between directly connected routers, `iBGP sessions` are often established between routers that are not directly connected.
 
-An important point to note about `iBGP sessions` is that a BGP router will only advertise a route over an `iBGP session` provided that :
+An important point to note about `iBGP sessions` is that a BGP router only advertises a route over an `iBGP session` provided that :
 
  - the router uses this route to forward packets, and
  - the route was learned over one of the router's `eBGP sessions`
 
-A BGP router does not advertise over an `iBGP session` a route that it has learned over another `iBGP session`. Note that a router can, of course, advertise over an `eBGP session` a route that it has learned over an `iBGP session`. This difference between the behaviour of a BGP router over `iBGP` and `eBGP` session is due to the utilisation of a full-mesh of `iBGP sessions`. Consider a network containing three BGP routers : `A`, `B` and `C` interconnected via a full-mesh of iBGP sessions. If router `A` learns a route towards prefix `p` from router `B`, router `A` does not need to advertise the received route to router `C` since router `C` will also learn the same route over the `C-B` `iBGP session`.
+A BGP router does not advertise over an `iBGP session` a route that it has learned over another `iBGP session`. Note that a router can, of course, advertise over an `eBGP session` a route that it has learned over an `iBGP session`. This difference between the behaviour of a BGP router over `iBGP` and `eBGP` session is due to the utilisation of a full-mesh of `iBGP sessions`. Consider a network containing three BGP routers : `A`, `B` and `C` interconnected via a full-mesh of iBGP sessions. If router `A` learns a route towards prefix `p` from router `B`, router `A` does not need to advertise the received route to router `C` since router `C` also learns the same route over the `C-B` `iBGP session`.
 
 To understand the utilisation of an `iBGP session`, let us consider in the network shown below what happens when router `R1` sends `U(194.100.0.0/23,195.100.0.1,AS10)`. This BGP message is processed by `R2` that advertises it over its `iBGP session` with `R4`. The `BGP Update` sent by `R2` contains the same nexthop and the same AS-Path as in the `BGP Update` received by `R2`. `R4` then sends `U(194.100.0.0/23,195.100.0.5,AS20:AS10)` to `R3`. Note that the BGP nexthop and the AS-Path are only updated [#fnexthopself]_ when a BGP route is advertised over an `eBGP session`.
 
@@ -1791,7 +1805,7 @@ To understand the utilisation of an `iBGP session`, let us consider in the netwo
 
 .. sidebar:: Loopback interfaces and iBGP sessions
 
- In addition to their physical interfaces, routers can also be configured with a special loopback interface. A loopback interface is a software interface that is always up. When a loopback interface is configured on a router, the address associated to this interface is advertised by the intradomain routing protocol inside the domain. Thus, the IP address associated to a loopback interface is always reachable while an IP address associated to a physical interface will become unreachable as soon as the corresponding physical interface fails. `iBGP sessions` are usually established by using the router's loopback addresses as endpoints. This allows the `iBGP session` and its underlying TCP connection to remain up even if physical interfaces fail on the routers.
+ In addition to their physical interfaces, routers can also be configured with a special loopback interface. A loopback interface is a software interface that is always up. When a loopback interface is configured on a router, the address associated to this interface is advertised by the intradomain routing protocol inside the domain. Thus, the IP address associated to a loopback interface is always reachable while an IP address associated to a physical interface becomes unreachable as soon as the corresponding physical interface fails. `iBGP sessions` are usually established by using the router's loopback addresses as endpoints. This allows the `iBGP session` and its underlying TCP connection to remain up even if physical interfaces fail on the routers.
 
 .. example route not selected ?
 
@@ -1808,7 +1822,7 @@ This routes indicates that to forward a packet towards `194.100.0.0/23`, `R4` ne
  - `194.100.2.0/23`  via `195.100.0.10`
  - `194.100.0.4/23`  West
 
-To build its forwarding table, `R4` must combine the routes learned from the intradomain routing protocol with the routes learned from BGP. Thanks to its intradomain routing table, `R4` will replace for each interdomain route the BGP nexthop with its shortest path computed by the intradomain routing protocol. In the figure above, `R4` will forward packets to `194.100.0.0/23` via `195.100.0.10` to which it is directly connected via its North interface. `R4` resulting forwarding table, that associates an outgoing interface for a directly connected prefix or a directly connected nexthop and an outgoing interface for prefixes learned via BGP, is shown below :
+To build its forwarding table, `R4` must combine the routes learned from the intradomain routing protocol with the routes learned from BGP. Thanks to its intradomain routing table, `R4` replaces for each interdomain route the BGP nexthop with its shortest path computed by the intradomain routing protocol. In the figure above, `R4` forwards packets to `194.100.0.0/23` via `195.100.0.10` to which it is directly connected via its North interface. `R4` resulting forwarding table, that associates an outgoing interface for a directly connected prefix or a directly connected nexthop and an outgoing interface for prefixes learned via BGP, is shown below :
 
  - `194.100.0.0/23`  via `195.100.0.10` (North)
  - `195.100.0.0/30`  via `195.100.0.10` (North)
@@ -1827,10 +1841,10 @@ The last point to be discussed before looking at the BGP decision process is tha
    
    How to deal with non-BGP routers ?
 
-In the scenario above, router `R2` needs to be able to forward a packet towards any destination in the `12.0.0.0/8` prefix inside `AS30`. Such a packet would need to be forwarded by router `R5` since this router resides on the path between `R2` and its BGP nexthop attached to `R4`. Two solutions can be used to ensure that `R2` will be able to forward such interdomain packets :
+In the scenario above, router `R2` needs to be able to forward a packet towards any destination in the `12.0.0.0/8` prefix inside `AS30`. Such a packet would need to be forwarded by router `R5` since this router resides on the path between `R2` and its BGP nexthop attached to `R4`. Two solutions can be used to ensure that `R2` is able to forward such interdomain packets :
 
  - enable BGP on router `R5` and include this router in the `iBGP` full-mesh. Two iBGP sessions would be added in the figure above : `R2-R5` and `R4-R5`. This solution works and is used by many ASes. However, it forces all routers to have enough resources (CPU and memory) to run BGP and maintain a large forwarding table
- - encapsulate the interdomain packets sent through the AS so that router `R5` never needs to forward a packet whose destination is outside the local AS. Different encapsulation mechanisms exist. MultiProtocol Label Switching (MPLS) :rfc:`3031` and the Layer 2 Tunneling Protocol (L2TP) :rfc:`3931` are frequently used in large domains, but a detailed explanation of these techniques is outside the scope of this section. The simplest encapsulation scheme to understand is in IP in IP defined in :rfc:`2003`. This encapsulation scheme places an IP packet (called the inner packet), including its payload, as the payload of a larger IP packet (called the outer packet). It can be used by border routers to forward packets via routers that do not maintain a BGP routing table. For example, in the figure above, if router `R2` needs to forward a packet towards destination `12.0.0.1`, it can add at the front of this packet an IPv4 header whose source address is set to one of its IPv4 addresses and whose destination address is one of the IPv4 addresses of `R4`. The `Protocol` field of the IP header is set to `4` to indicate that it contains an IPv4 packet. The packet will be forwarded by `R5` to `R4` based on the forwarding table that it built thanks to its intradomain routing table. Upon reception of the packet, `R4` will remove the outer header and consult its (BGP) forwarding table to forward the packet towards `R3`. 
+ - encapsulate the interdomain packets sent through the AS so that router `R5` never needs to forward a packet whose destination is outside the local AS. Different encapsulation mechanisms exist. MultiProtocol Label Switching (MPLS) :rfc:`3031` and the Layer 2 Tunneling Protocol (L2TP) :rfc:`3931` are frequently used in large domains, but a detailed explanation of these techniques is outside the scope of this section. The simplest encapsulation scheme to understand is in IP in IP defined in :rfc:`2003`. This encapsulation scheme places an IP packet (called the inner packet), including its payload, as the payload of a larger IP packet (called the outer packet). It can be used by border routers to forward packets via routers that do not maintain a BGP routing table. For example, in the figure above, if router `R2` needs to forward a packet towards destination `12.0.0.1`, it can add at the front of this packet an IPv4 header whose source address is set to one of its IPv4 addresses and whose destination address is one of the IPv4 addresses of `R4`. The `Protocol` field of the IP header is set to `4` to indicate that it contains an IPv4 packet. The packet is forwarded by `R5` to `R4` based on the forwarding table that it built thanks to its intradomain routing table. Upon reception of the packet, `R4` removes the outer header and consult its (BGP) forwarding table to forward the packet towards `R3`. 
 
 .. index:: BGP decision process
 
@@ -1844,7 +1858,7 @@ Besides the import and export filters, a key difference between BGP and the intr
 
 The first BGP attribute that is used to rank BGP routes is the `local-preference` (local-pref) attribute. This attribute is an unsigned integer that is attached to each BGP route received over an eBGP session by the associated import filter.
 
-When comparing routes towards the same destination prefix, a BGP router always prefers the routes with the highest `local-pref`. If the BGP router knows several routes with the same `local-pref`, it will prefer among the routes having this `local-pref` the ones with the shortest AS-Path.
+When comparing routes towards the same destination prefix, a BGP router always prefers the routes with the highest `local-pref`. If the BGP router knows several routes with the same `local-pref`, it prefers among the routes having this `local-pref` the ones with the shortest AS-Path.
 
 The `local-pref` attribute is often used to prefer some routes over others. This attribute is always present inside `BGP Updates` exchanged over `iBGP sessions`, but never present in the messages exchanged over `eBGP sessions`. 
 
@@ -1862,7 +1876,7 @@ As BGP routers always prefer the routes having the highest `local-pref` attribut
          from  AS2 RB at R1 set localpref=200;
          accept ANY
 
-With this import filter, all the BGP routes learned from `RB` over the high bandwidth links will be preferred over the routes learned over the backup link. If the primary link fails, the corresponding routes are removed from `R1`'s RIB and `R1` will use the route learned from `RA`. `R1` will reuse the routes via `RB` as soon as they are advertised by `RB` once the `R1-RB` link comes back.
+With this import filter, all the BGP routes learned from `RB` over the high bandwidth links are preferred over the routes learned over the backup link. If the primary link fails, the corresponding routes are removed from `R1`'s RIB and `R1` uses the route learned from `RA`. `R1` reuses the routes via `RB` as soon as they are advertised by `RB` once the `R1-RB` link comes back.
 
 The import filter above modifies the selection of the BGP routes inside `AS1`. Thus, it influences the route followed by the packets forwarded by `AS1`. In addition to using the primary link to send packets, `AS1` would like to receive its packets via the high bandwidth link. For this, `AS2` also needs to set the `local-pref` attribute in its import filter ::
 
@@ -1886,7 +1900,7 @@ Sometimes, the `local-pref` attribute is used to prefer a `cheap` link compared 
          accept ANY
 
 
-However, this import filter does not influence how `AS3` for example will prefer some routes over others. If the link between `AS3` and `AS2` is less expensive than the link between `AS3` and `AS4`, `AS3` could send all its packets via `AS2` and `AS1` would receive packets over its expensive link. An important point to remember about `local-pref` is that it can be used to prefer some routes over others to send packets, but it has no influence on the routes followed by received packets.
+However, this import filter does not influence how `AS3` for example prefers some routes over others. If the link between `AS3` and `AS2` is less expensive than the link between `AS3` and `AS4`, `AS3` could send all its packets via `AS2` and `AS1` would receive packets over its expensive link. An important point to remember about `local-pref` is that it can be used to prefer some routes over others to send packets, but it has no influence on the routes followed by received packets.
 
 Another important utilisation of the `local-pref` attribute is to support the `customer->provider` and `shared-cost` peering relationships. From an economic viewpoint, there is an important difference between these three types of peering relationships. A domain usually earns money when it sends packets over a `provider->customer` relationship. On the other hand, it must to pay its provider when it sends packets over a `customer->provider` relationship. Using a `shared-cost` peering to send packets is usually neutral from an economic viewpoint. To take into account these economic issues, domains usually configure the import filters on their routers as follows :
 
@@ -1894,7 +1908,7 @@ Another important utilisation of the `local-pref` attribute is to support the `c
  - insert a medium `local-pref` attribute in the routes learned over a shared-cost peering
  - insert a low `local-pref` attribute in the routes learned from a provider
 
-With such an import filter, the routers of a domain will always prefer to reach destinations via their customers whenever such a route exists. Otherwise, they will prefer to use `shared-cost` peering relationships and they will only send packets via their providers when they do not know any alternate route. A consequence of this setting of the `local-pref` attribute is that Internet paths are often assymetrical. Consider for example the internetwork shown in the figure below.
+With such an import filter, the routers of a domain always prefer to reach destinations via their customers whenever such a route exists. Otherwise, they prefer to use `shared-cost` peering relationships and they only send packets via their providers when they do not know any alternate route. A consequence of this setting of the `local-pref` attribute is that Internet paths are often assymetrical. Consider for example the internetwork shown in the figure below.
 
 .. figure:: fig/network-fig-135-c.png
    :align: center
@@ -1902,7 +1916,7 @@ With such an import filter, the routers of a domain will always prefer to reach 
    
    Assymetry of Internet paths
 
-Consider in this internetwork the routes available inside `AS1` to reach `AS5`. `AS1` will learn the `AS4:AS6:AS7:AS5` path from `AS4`, the `AS3:AS8:AS5` path from `AS3` and the `AS2:AS5` path from `AS2`. The first path will be chosen since it was from learned from a customer. `AS5` on the other hand will receive three paths towards `AS1` via its providers. I may select any of these paths to reach `AS1` depending on how it prefers one provider over the others.
+Consider in this internetwork the routes available inside `AS1` to reach `AS5`. `AS1` learns the `AS4:AS6:AS7:AS5` path from `AS4`, the `AS3:AS8:AS5` path from `AS3` and the `AS2:AS5` path from `AS2`. The first path is chosen since it was from learned from a customer. `AS5` on the other hand receives three paths towards `AS1` via its providers. I may select any of these paths to reach `AS1` depending on how it prefers one provider over the others.
 
 
 Coming back to the organisation of a BGP router shown in the figure :ref:`bgprouter`, the last part to be discussed is the BGP decision process. The `BGP Decision Process` is the algorithm used by routers to select the route to be installed in the FIB when there are multiple routes towards the same prefix. The BGP decision process receives a set of candidate routes towards the same prefix and uses seven steps. At each step, some routes are removed from the candidate set and the process stops when the set contains only one route [#fbgpmulti]_ :
@@ -1916,18 +1930,18 @@ Coming back to the organisation of a BGP router shown in the figure :ref:`bgprou
  7. Tie breaking rules : prefer routes learned from the router with lowest router id
 
 
-The first step of the BGP decision process ensures that a BGP router will not install in its FIB a route whose nexthop is considered to be unreachable by the intradomain routing protocol. This could happen for example when a router has crashed. The intradomain routing protocol will usually advertise the failure of this router before the failure of the BGP sessions that it terminates. This rule implies that the BGP decision process must be re-run each time the intradomain routing protocol reports a change in the reachability of a prefix containing one of more BGP nexthops.
+The first step of the BGP decision process ensures that a BGP router does not install in its FIB a route whose nexthop is considered to be unreachable by the intradomain routing protocol. This could happen for example when a router has crashed. The intradomain routing protocol usually advertises the failure of this router before the failure of the BGP sessions that it terminates. This rule implies that the BGP decision process must be re-run each time the intradomain routing protocol reports a change in the reachability of a prefix containing one of more BGP nexthops.
 
 The second rule allows each domain to define its routing preferences. The `local-pref` attribute is set by the import filter of the router that learned a route over an eBGP session. 
 
-In contrast with intradomain routing protocols, BGP does not contain an explicit metric. This is because in the global Internet it is impossible for all domains to agree on a common metric that meets the requirements of all domains. Despite of this, BGP routers prefer routes having a short AS-Path attribute over routes with a long AS-Path. This step of the BGP decision process is motivated by the fact that operators expect that a route with a long AS-Path will have a lower quality than a route with a shorter AS-Path. However studies have shown that there was not always a strong correlation between the quality of a route and the length of its AS-Path [HFPMC2002]_. 
+In contrast with intradomain routing protocols, BGP does not contain an explicit metric. This is because in the global Internet it is impossible for all domains to agree on a common metric that meets the requirements of all domains. Despite of this, BGP routers prefer routes having a short AS-Path attribute over routes with a long AS-Path. This step of the BGP decision process is motivated by the fact that operators expect that a route with a long AS-Path has a lower quality than a route with a shorter AS-Path. However studies have shown that there was not always a strong correlation between the quality of a route and the length of its AS-Path [HFPMC2002]_. 
 
 
 .. index:: Hot potato routing
 
 Before explaining the fourth step of the BGP decision process, let us first describe the fifth and the sixth steps of the BGP decision process. These two steps are used to implement `hot potato` routing. Intuitively, when a domain implements `hot potato routing`, it tries to forward as quickly as possible to other domains packets that are destined to addresses outside of its domain. 
 
-To understand `hot potato routing`, let us consider the two domains shown in the figure below. `AS2` advertises prefix `1.0.0.0/8` over the `R2-R6` and `R3-R7` peering links. The routers inside `AS1` will learn two routes towards `1.0.0.0/8`: one via `R6-R2` and the second via `R7-R3`.
+To understand `hot potato routing`, let us consider the two domains shown in the figure below. `AS2` advertises prefix `1.0.0.0/8` over the `R2-R6` and `R3-R7` peering links. The routers inside `AS1` learn two routes towards `1.0.0.0/8`: one via `R6-R2` and the second via `R7-R3`.
 
 .. _fig-med:
 
@@ -1937,14 +1951,14 @@ To understand `hot potato routing`, let us consider the two domains shown in the
    
    Hot and cold potato routing
 
-With the fifth step of the BGP decision process, a router will always prefer to use a route learned over an `eBGP session` compared to a route learned over an `iBGP session`. Thus, router `R6` (resp. `R7`)  will prefer to use the route via router `R2` (resp. `R3`) to reach prefix `1.0.0.0/8`. 
+With the fifth step of the BGP decision process, a router always prefers to use a route learned over an `eBGP session` compared to a route learned over an `iBGP session`. Thus, router `R6` (resp. `R7`)  prefers to use the route via router `R2` (resp. `R3`) to reach prefix `1.0.0.0/8`. 
 
 The sixth step of the BGP decision process takes into account the distance, measured as the length of the shortest intradomain path, between a BGP router and the BGP nexthop for routes learned over `iBGP sessions`. This rule is used on router `R8` in the example above. This router has received two routes towards `1.0.0.0/8`:
  
  - `1.0.0.0/8` via `R7` that is at a distance of `1` from `R8` 
  - `1.0.0.0/8` via `R6` that is at a distance of `50` from `R8`
 
-The first route, via `R7` is the one that router `R8` will prefer as this is the route that will minimise the cost of forwarding packets inside `AS1` before sending them to `AS2`.
+The first route, via `R7` is the one that router `R8` prefers as this is the route that minimises the cost of forwarding packets inside `AS1` before sending them to `AS2`.
 
 `Hot potato routing` allows `AS1` to minimise the cost of forwarding packets towards `AS2`. However, there are situations where this is not desirable. For example, assume that `AS1` and `AS2` are domains with routers on both the East and the West coast of the US. In these two domains, the high metric associated to links `R6-R8` and `R0-R2` correspond to the cost of forwarding a packet across the USA. If `AS2` is a customer that pays `AS1`, it would prefer to received the packets destined to `1.0.0.0/8` via the `R2-R6` link instead of the `R7-R3` link. This is the objective of `cold potato routing`.
 
@@ -1952,15 +1966,15 @@ The first route, via `R7` is the one that router `R8` will prefer as this is the
 .. index:: Multi-Exit Discriminator (MED), Cold potato routing
 
 
-`Cold potato routing` is implemented by using the `Multi-Exit Discriminator (MED)` attribute. This attribute is an optional BGP attribute that may be set [#fmed]_ by border routers when advertising a BGP route over an `eBGP session`. The MED attribute is usually used to indicate over an `eBGP session` the cost to reach the BGP nexthop for the advertised route. The `MED` attribute is set by the router that advertises a route over an `eBGP session`. In the example above, router `R2` will send `U(1.0.0.0/8,R2,AS2,MED=1)` while `R3` will send `U(1.0.0.0/8,R3,AS2,MED=98)`. 
+`Cold potato routing` is implemented by using the `Multi-Exit Discriminator (MED)` attribute. This attribute is an optional BGP attribute that may be set [#fmed]_ by border routers when advertising a BGP route over an `eBGP session`. The MED attribute is usually used to indicate over an `eBGP session` the cost to reach the BGP nexthop for the advertised route. The `MED` attribute is set by the router that advertises a route over an `eBGP session`. In the example above, router `R2` sends `U(1.0.0.0/8,R2,AS2,MED=1)` while `R3` sends `U(1.0.0.0/8,R3,AS2,MED=98)`. 
 
-Assume that the BGP session `R7-3` is the first to be established. `R7` sends `U(1.0.0.0/8,R3,AS2,MED=98)` to both `R8` and `R6`. At this point, all routers inside `AS1` send the packets towards `1.0.0.0/8` via `R7-R3`. Then, the `R6-R2` BGP session is established and router `R6` receives `U(1.0.0.0/8,R2,AS2,MED=1)`. Router `R6` runs its decision process for destination `1.0.0.0/8` and selects the route via `R2` as its chosen route to reach this prefix since this is the only route that it knows. `R6` sends `U(1.0.0.0/8,R2,AS2,MED=1)` to routers `R8` and `R7`. They both run their decision prefer and prefer the route advertised by `R6` as it contains the smallest `MED`. Now, all routers inside `AS1` forward the packets to `1.0.0.0/8` via link `R6-R2` as expected by `AS2`. As router `R7` does not anymore use the BGP route learned via `R3` it must stop advertising it over `iBGP sessions` and sends `W(1.0.0.0/8)` over its `iBGP sessions` with `R6` and `R8`. However, router `R7` still keeps the route learned from `R3` inside its Adj-RIB-In. If the `R6-R2` link fails, `R6` will send `W(1.0.0.0/8)` over its iBGP sessions and router `R7` will respond by sending `U(1.0.0.0/8,R3,AS2,MED=98)` over its iBGP sessions.
+Assume that the BGP session `R7-3` is the first to be established. `R7` sends `U(1.0.0.0/8,R3,AS2,MED=98)` to both `R8` and `R6`. At this point, all routers inside `AS1` send the packets towards `1.0.0.0/8` via `R7-R3`. Then, the `R6-R2` BGP session is established and router `R6` receives `U(1.0.0.0/8,R2,AS2,MED=1)`. Router `R6` runs its decision process for destination `1.0.0.0/8` and selects the route via `R2` as its chosen route to reach this prefix since this is the only route that it knows. `R6` sends `U(1.0.0.0/8,R2,AS2,MED=1)` to routers `R8` and `R7`. They both run their decision prefer and prefer the route advertised by `R6` as it contains the smallest `MED`. Now, all routers inside `AS1` forward the packets to `1.0.0.0/8` via link `R6-R2` as expected by `AS2`. As router `R7` does not anymore use the BGP route learned via `R3` it must stop advertising it over `iBGP sessions` and sends `W(1.0.0.0/8)` over its `iBGP sessions` with `R6` and `R8`. However, router `R7` still keeps the route learned from `R3` inside its Adj-RIB-In. If the `R6-R2` link fails, `R6` sends `W(1.0.0.0/8)` over its iBGP sessions and router `R7` responds by sending `U(1.0.0.0/8,R3,AS2,MED=98)` over its iBGP sessions.
 
 In practice, the fifth step of the BGP decision process is slightly more complex because the routes towards a given prefix can be learned from different ASes. For example, assume that in figure :ref:`fig-med`, `1.0.0.0/8` is also advertised by `AS3` (not shown in the figure) that has peering links with routers `R6` and `R8`. If `AS3` advertises a route whose MED attribute is set to `2` and another with a MED set to `3`, how should `AS1`'s router compare the four BGP routes towards `1.0.0.0/8` ? Is a MED value of `1` from `AS2` better than a MED value of `2` from `AS3` ?  The fifth step of the BGP decision process solves this problem by only comparing the MED attribute of the routes learned from the same neighbour AS. Additional details about the MED attribute may be found in :rfc:`4451`. It should be noted that using the MED attribute may cause some problems in BGP networks as explained in [GW2002]_. In practice, the `MED` attribute is not used on `eBGP sessions` unless the two domains agree to enable it.
 
 .. index: BGP router-id
 
-The last step of the BGP decision allows to select a single route when a BGP router has received several routes that are considered as equal by the first six steps of the decision process. This can happen for example in a dual-homed stub attached to two different providers. As shown in the figure below, router `R1` will receive two equally good BGP routes towards `1.0.0.0/8`. To break the ties, each router is identified by a unique `router-id` which in practice is one of the IP addresses assigned to the router. On some routers, the lowest router id step in the BGP decision process is replaced by the selection of the oldest route :rfc:`5004`. Preferring the oldest route when breaking ties is used to prefer stable paths over unstable paths. However, a drawback of this approach is that the selection of the BGP routes will depend on the arrival times of the corresponding messages. This makes the BGP selection process non-deterministic and can lead to problems that are difficult to debug.
+The last step of the BGP decision allows to select a single route when a BGP router has received several routes that are considered as equal by the first six steps of the decision process. This can happen for example in a dual-homed stub attached to two different providers. As shown in the figure below, router `R1` receives two equally good BGP routes towards `1.0.0.0/8`. To break the ties, each router is identified by a unique `router-id` which in practice is one of the IP addresses assigned to the router. On some routers, the lowest router id step in the BGP decision process is replaced by the selection of the oldest route :rfc:`5004`. Preferring the oldest route when breaking ties is used to prefer stable paths over unstable paths. However, a drawback of this approach is that the selection of the BGP routes depends on the arrival times of the corresponding messages. This makes the BGP selection process non-deterministic and can lead to problems that are difficult to debug.
 
 .. figure:: fig/network-fig-153-c.png
    :align: center
@@ -1982,15 +1996,15 @@ In the previous sections, we have explained the operation of BGP routers. Compar
    
    The disagree internetwork 
 
-In this internetwork, we will focus on the route towards `1.0.0.0/8` that is advertised by `AS1`. Let us also assume that `AS3` (resp. `AS4`) prefers, e.g. for economical reasons, a route learned from `AS4` (`AS3`) over a route learned from `AS1`. When `AS1` sends `U(1.0.0.0/8,AS1)` to `AS3` and `AS4`, three sequences of exchanges of BGP messages are possible :
+In this internetwork, we focus on the route towards `1.0.0.0/8` that is advertised by `AS1`. Let us also assume that `AS3` (resp. `AS4`) prefers, e.g. for economical reasons, a route learned from `AS4` (`AS3`) over a route learned from `AS1`. When `AS1` sends `U(1.0.0.0/8,AS1)` to `AS3` and `AS4`, three sequences of exchanges of BGP messages are possible :
 
  #. `AS3` sends first `U(1.0.0.0/8,AS3:AS1)` to `AS4`. `AS4` has learned two routes towards `1.0.0.0/8`. It runs its BGP decision process and selects the route via `AS3` and does not advertise a route to `AS3`
  #. `AS4` sends first `U(1.0.0.0/8,AS3:AS1)` to `AS3`. `AS3` has learned two routes towards `1.0.0.0/8`. It runs its BGP decision process and selects the route via `AS4` and does not advertise a route to `AS4`
- #. `AS3` sends `U(1.0.0.0/8,AS3:AS1)` to `AS4` and, at the same time, `AS4` sends `U(1.0.0.0/8,AS4:AS1)`.  `AS3` prefers the route via `AS4` and thus sends `W(1.0.0.0/8)` to `AS4`. In the mean time, `AS4` prefers the route via `AS3` and thus sends `W(1.0.0.0/8)` to `AS3`. Upon reception of the `BGP Withdraws`, `AS3` and `AS4` only know the direct route towards `1.0.0.0/8`. `AS3` (resp. `AS4`) sends `U(1.0.0.0/8,AS3:AS1)` (resp. `U(1.0.0.0/8,AS4:AS1)`) to `AS4` (resp. `AS3`). `AS3` and `AS4` could in theory continue to exchange BGP messages for ever. In practice, one of them will send one message faster than the other and BGP will converge. 
+ #. `AS3` sends `U(1.0.0.0/8,AS3:AS1)` to `AS4` and, at the same time, `AS4` sends `U(1.0.0.0/8,AS4:AS1)`.  `AS3` prefers the route via `AS4` and thus sends `W(1.0.0.0/8)` to `AS4`. In the mean time, `AS4` prefers the route via `AS3` and thus sends `W(1.0.0.0/8)` to `AS3`. Upon reception of the `BGP Withdraws`, `AS3` and `AS4` only know the direct route towards `1.0.0.0/8`. `AS3` (resp. `AS4`) sends `U(1.0.0.0/8,AS3:AS1)` (resp. `U(1.0.0.0/8,AS4:AS1)`) to `AS4` (resp. `AS3`). `AS3` and `AS4` could in theory continue to exchange BGP messages for ever. In practice, one of them sends one message faster than the other and BGP converges. 
 
 The example above has shown that the routes selected by BGP routers may sometimes depend on the ordering of the BGP messages that are exchanged. Other similar scenarios may be found in :rfc:`4264`. 
 
-From an operationnal viewpoint, the above configuration is annoying since the network operators cannot easily predict which paths will be chosen. Unfortunately, there are even more annoying BGP configurations. For example, let us consider the configuration below that is often named `Bad Gadget` [GW1999]_
+From an operationnal viewpoint, the above configuration is annoying since the network operators cannot easily predict which paths are chosen. Unfortunately, there are even more annoying BGP configurations. For example, let us consider the configuration below that is often named `Bad Gadget` [GW1999]_
 
 .. figure:: fig/network-fig-133-c.png
    :align: center
@@ -1999,7 +2013,7 @@ From an operationnal viewpoint, the above configuration is annoying since the ne
    The bad gadget internetwork
 
 
-In this internetwork, there are four ASes. `AS0` advertises one route toward one prefix and we will only analyse the routes towards this prefix. The routing preferences of `AS1`, `AS3` and `AS4` are the following :
+In this internetwork, there are four ASes. `AS0` advertises one route toward one prefix and we only analyse the routes towards this prefix. The routing preferences of `AS1`, `AS3` and `AS4` are the following :
 
  - `AS1` prefers the path `AS3:AS0` over all other paths
  - `AS3` prefers the path `AS4:AS0` over all other paths

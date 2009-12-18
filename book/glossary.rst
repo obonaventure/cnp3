@@ -106,7 +106,7 @@ Glossary
    	A packet is said to be spoofed when the sender of the packet has used as source address a different address than its own.
 
    SYN cookie
-        The SYN cookies is a technique used to compute the ISN_ 
+        The SYN cookies is a technique used to compute the initial sequence number (ISN)
 
    TCB
 	The Transmission Control Block is the set of variables that are maintained for each established TCP connection by a TCP implementation. 
@@ -148,7 +148,6 @@ Glossary
 	The Border Gateway Protocol is the interdomain routing protocol used in the global Internet.
 
    EIGRP
-
 	The Enhanced Interior Gateway Routing Protocol (EIGRP) is prorietary intradomain routing protocol that is often used in entreprise networks. EIGRP uses the DUAL algorithm described in [Garcia1993]_.
 
 
@@ -177,3 +176,50 @@ Glossary
 	
    AIMD
 	Additive Increase, Multiplicative Decrease. A rate adaption algorithm used notably by TCP where a host additively increases its transmission rate when the network is not congested and multiplicatevely decreases when congested is detected.
+
+   HTTP
+	The HyperText Transport Protocol is defined in :rfc:`2616`
+
+   SMTP
+	The Simple Mail Transfer Protocol is defined in :rfc:`821`
+
+   POP
+	The Post Office Protocol is defined in :rfc:`1939`
+
+   IMAP
+	The Internet Message Access Protocol is defined in :rfc:`3501
+
+   FTP
+	The File Transfer Protocol is defined in :rfc:`959`
+
+   SSH
+	The Secure Shell (SSH) Transport Layer Protocol is defined in :rfc:`4253`
+
+   telnet
+	The telnet protocol is defined in :rfc:`854`
+
+   X11
+	The XWindow system and the associated protocols are defined in [SG1990]_   
+   DNS
+	The Domain Name System is defined in :rfc:`1035`
+
+   RPC
+	Several types of remote procedure calls have been defined. The RPC mechanism defined in :rfc:`5531` is used by applications such as NFS
+ 
+   NFS
+	The Network File System is defined in :rfc:`1094`
+
+   NTP
+	The Network Time Protocol is defined in :rfc:`1305`
+  
+
+   X.25
+	A wide area networking technology using virtual circuits that was deployed by telecom operators.
+
+   ATM
+	Asynchronous Transfer Mode
+
+   Frame-Relay	     
+        A wide area networking 	technology using virtual circuits that is deploed by telecom operators.	     
+  
+   

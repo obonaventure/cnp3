@@ -158,3 +158,11 @@
 .. [LSP1982] Lamport, L., Shostak, R., and Pease, M. 1982. The Byzantine Generals Problem. ACM Trans. Program. Lang. Syst. 4, 3 (Jul. 1982), 382-401. DOI= http://doi.acm.org/10.1145/357172.357176
 
 .. [Mills2006] Mills, D.L. Computer Network Time Synchronization: the Network Time Protocol. CRC Press, March 2006, 304 pp.
+
+.. [Watson1981] Watson, R.  Timer-Based Mechanisms in Reliable Transport Protocol Connection Management. Computer Networks 5: 47-56 (1981)
+
+.. [Williams1993] Williams, R. A painless guide to CRC error detection algorithms, August 1993, unpublished manuscript, http://www.ross.net/crc/download/crc_v3.txt
+
+.. [SG1990] Scheifler, R., Gettys, J., X Window System: The Complete Reference to Xlib, X Protocol, ICCCM, XLFD, X Version 11, Release 4, Digital Press, http://h30097.www3.hp.com/docs/base_doc/DOCUMENTATION/V51B_ACRO_SUP/XWINSYS.PDF
+
+.. [KPS2003] Kaufman, C., Perlman, R., and Sommerfeld, B. 2003. DoS protection for UDP-based protocols. In Proceedings of the 10th ACM Conference on Computer and Communications Security (Washington D.C., USA, October 27 - 30, 2003). CCS '03. ACM, New York, NY, 2-7. DOI= http://doi.acm.org/10.1145/948109.948113
