@@ -10,8 +10,11 @@ Computer Networking : Principles, Protocols and Practice
 .. toctree:: 
    :maxdepth: 2
 
+   intro/introduction
+   application/application
    transport/transport
    network/network
+   lan/lan
    bibliography
    glossary
 
