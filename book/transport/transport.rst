@@ -1289,7 +1289,7 @@ Most TCP implementations update the congestion window when they receive an ackno
       dupacks++
       if dupacks==3:
 	retransmitsegment(snd.una)
-	ssthresh=min(cwnd/2,2*MSS)
+	ssthresh=max(cwnd/2,2*MSS)
 	cwnd=ssthresh   
       else:
 	dupacks=0
@@ -1297,7 +1297,7 @@ Most TCP implementations update the congestion window when they receive an ackno
   
  Expiration of the retransmission timer:
   send(snd.una)     # retransmit first lost segment
-  sshtresh=min(cwnd/2,2*MSS)
+  sshtresh=max(cwnd/2,2*MSS)
   cwnd=MSS
   
  
