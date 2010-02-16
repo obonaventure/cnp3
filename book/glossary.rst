@@ -222,4 +222,26 @@ Glossary
    Frame-Relay	     
         A wide area networking 	technology using virtual circuits that is deploed by telecom operators.	     
   
-   
+   hosts.txt
+	A file that initially contained the list of all Internet hosts with their IPv4 address. As the network grew, this file was replaced by the DNS, but each host still maintains a small hosts.txt file that can be used when DNS is not available.   
+
+   DNS
+	The Domain Name System is a distributed database that can be queried by hosts to map names onto IP addresses
+
+   BNF
+	 A Backus-Naur Form (BNF) is a formal way to describe a langage by using syntactic and lexical rules. BNFs are frequently used to define programming languages, but also to define the messages exchanged between networked applications. :rfc:`5234` explains how a BNF must be written to specify an Internet protocol.
+
+   TLD
+	A Top-level domain name. There are two types of TLDs. The ccTLD are the TLD that correspond to a two letters ISO-3166_ country code. The gTLD are the generic TLDs that are not assigned to a country.
+
+   ICANN
+	The Internet Corporation for Assigned Names and Numbers (ICANN) coordinates the allocation of domain names, IP addresses and AS numbers as well protocol parameters. It also coordinates the operation and the evolution of the DNS root name servers. 
+
+   root nameserver
+   	A name server that is responsible for the root of the domain names hierarchy. There are currently a dozen root nameservers and each DNS resolver See http://www.root-servers.org/ for more information about the operation of these root servers.		  
+	
+   resolver
+	A server that implements the DNS protocol and can resolve queries. A resolver usually serves a set of clients (e.g. all hosts in campus or all clients of a given ISP). It sends DNS queries to nameservers everywhere on behalf of its clients and stores the received answers in its cache. A resolver must know the IP addresses of the root nameservers.
+
+   nameserver
+	A server that implements the DNS protocol and can answer queries for names inside its own domain.

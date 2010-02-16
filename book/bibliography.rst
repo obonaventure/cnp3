@@ -165,4 +165,6 @@
 
 .. [SG1990] Scheifler, R., Gettys, J., X Window System: The Complete Reference to Xlib, X Protocol, ICCCM, XLFD, X Version 11, Release 4, Digital Press, http://h30097.www3.hp.com/docs/base_doc/DOCUMENTATION/V51B_ACRO_SUP/XWINSYS.PDF
 
-.. [KPS2003] Kaufman, C., Perlman, R., and Sommerfeld, B. 2003. DoS protection for UDP-based protocols. In Proceedings of the 10th ACM Conference on Computer and Communications Security (Washington D.C., USA, October 27 - 30, 2003). CCS '03. ACM, New York, NY, 2-7. DOI= http://doi.acm.org/10.1145/948109.948113
+.. [KPS2003] Kaufman, C., Perlman, R., and Sommerfeld, B. DoS protection for UDP-based protocols. In Proceedings of the 10th ACM Conference on Computer and Communications Security (Washington D.C., USA, October 27 - 30, 2003). CCS '03. ACM, New York, NY, 2-7. DOI= http://doi.acm.org/10.1145/948109.948113
+
+.. [Cohen1980] Cohen, D., On Holy Wars and a Plea for Peace, IEN 137, April 1980, http://www.ietf.org/rfc/ien/ien137.txt

@@ -171,3 +171,7 @@
 .. _Raj Jain: http://www.cse.wustl.edu/~jain/
 
 .. _Dah Ming Chiu: http://home.ie.cuhk.edu.hk/~dmchiu/
+
+.. _SRI: http://www.sri.com
+
+.. _ISO-3166: http://www.iso.org/iso/country_codes.htm
