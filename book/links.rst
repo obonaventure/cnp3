@@ -175,3 +175,7 @@
 .. _SRI: http://www.sri.com
 
 .. _ISO-3166: http://www.iso.org/iso/country_codes.htm
+
+.. _OpenDNS: http://www.opendns.com/
+
+.. _GoogleDNS: http://code.google.com/speed/public-dns/docs/using.html and 

@@ -45,7 +45,45 @@ If Alice wants to enter the meeting room but does not know the password, her con
  - Alice : `3.1415`
  - Bob : `This is not the correct password.`
 
-We will discuss serveral examples of application-level protocols in this chapter.
+Application-layer protocols can exchange two types of messages. Some protocols such as those used to support electronic mail exchange messages that are expressed as strings or lines of characters. As the transport layer allows hosts to exchange bytes, they need to agree on a common representation of the characters. The first and simplest method to encode characters is to use the :term:`ASCII` table. :rfc:`20` provides the ASCII table that is used by many protocols on the Internet. For example, the table defines the following binary representations :
+
+ - `A` : `1000011b` 
+ - `0` : `0110000b`
+ - `z` : `1111010b`
+ - `@` : `1000000b`
+ - `space` : `0100000b`
+
+In addition, the :term:`ASCII` table also defines several non-printable or control characters. These characters were designed to allow an application to control a printer or a terminal. The most common ones are `CR` and `LF` that are used to terminate a line or the `Bell` character that causes the terminal to emit a sound.
+
+ - `carriage return` (`CR`) : `0001101b`
+ - `line feed` (`LF`) : `0001010b`
+ - `Bell`: `0000111b`
+
+The :term:`ASCII` characters are encoded as a seven bits field, but transmitted as an eight-bits byte whose high order bit is set to `0`. Bytes are always transmitted starting from the high order or most significant bit.
+
+Besides characters, some applications also need to exchange 16 bits and 32 bits fields such as IPv4 addresses. A naive solution would have been to send the 16- or 32-bits field as it was encoded in memory. Unfortunately, there are different methods to store 16- or 32-bits fields in memory. Some CPUs store the most significant byte of a 16-bits field in the first address of the field while others store the least significant byte at this location. When networked applications running on different CPUs exchange 16 bits fields, there are two possibilies to transfer them over the transport service :
+
+  - send the most significant byte followed by the least significant byte
+  - send the least significant byte followed by the most significant byte
+
+The first possibility was named  `big-endian` in a note written by Cohen [Cohen1980]_ while the second was named `little-endian`. Vendors of CPUs that used `big-endian` in memory insisted on using `big-endian` encoding in networked applications while vendors of CPUs that used `little-endian` recommended the opposite. Several studies were written on the relative merits of each type of encoding, but the discussion became almost a religious issue [Cohen1980]_. Eventually, the Internet chose the `big-endian` encoding, i.e. multi-byte fields are always transmitted by sending the most significant byte first :rfc:`791` and refer to this encoding as the :term:`network-byte order`. Most librairies [#fhtonl]_ used to write networked applications contain functions to convert multibyte fields from memory to the network byte order and vice versa. 
+
+Besides 16 and 32 bits words, some applications need to exchange that contain bit fields of various lengths. For example, a message may be composed of a 16 bits field followed by eight one bit flags, a 24 bits field and two 8 bits bytes. Internet protocol specifications will define such as message by using a representation such as the one below. In this representation, each line corresponds to 32 bits and the vertical lines are used to delineate fields. The numbers above the lines indicate the bit positions in the 32-bits word, with the high order bit at position `0`. 
+
+::
+
+    0                   1                   2                   3   
+    0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |       First field  (16 bits)  |A|B|C|D|E|F|G|H|   Second      | 
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |       field (24 bits)         |  First Byte   | Second Byte   |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+
+The message mentionned above will be transmitted starting from the upper 32-bits word in network byte order. The first field is encoded in 16 bits. It is followed by eight one bit flags (`A-H`), a 24 bits field whose high order byte is shown in the first line and the two low order bytes appear in the second line and two one byte fields. This ascii representation is frequently used when defining binary protocols. We will use it for all the binary protocols that are discussed in this book.
+
+We will discuss several examples of application-level protocols in this chapter.
 
 .. introduce ipv4 and ipv6 addresses
 .. mention names very early, they are important
@@ -102,6 +140,7 @@ Application-level protocols
 Many protocols have been defined for networked applications. In this section, we describe some of the important applications that are used on the Internet. We first explain the domain name systems that enables hosts to be identified by human-friendly names instead of the IPv4 or IPv6 addresses that are used by the network. Then we describe the operation of electronic mail, one of the first killer applications on the global Internet and the main protocol used on world wide web. In the last section, we show how simple networked clients and servers can be written in python_ .
 
 
+.. _DNS:
 
 The Domain Name System
 ======================
@@ -148,43 +187,56 @@ A :term:`nameserver` that is reponsible for domain `dom` can directly answer the
  - the IP address of any host residing directly inside domain `dom` (e.g. `h2.dom` in the figure above)
  - the DNS server(s) that are responsible for any direct subdomain of domain `dom` (i.e. `sdom1.dom` and `sdom2.dom` in the figure above, but not `z.sdom1.dom`)
 
-To retrieve the mapping for host `h2.dom`, a client sends its query to the name server that is reponsible for domain `.dom`. The name server directly answers the query. To retrieve a mapping for `h3.a.sdom1.dom` a DNS client first sends a query to the name server that is responsible for the `.dom` domain. This nameserver returns the nameserver that is responsible for the `sdom1.dom` domain. This nameserver can now be contacted to obtain the nameserver that is responsible for the `a.sdom1.dom` domain. This nameserver can be contacted to retrieve the mapping for the `h3.a.sdom1.dom` name. Thanks to this organisation of the nameservers, it is possible for a DNS client to obtain the mapping of any host inside the `.dom` domain or any of its subdomains. To ensure that any DNS client will be able to resolve any fully qualified domain name, there are special nameservers that are responsible for the root of the domain name hierarchy. These nameservers are called :term:`root nameserver`. There are currently about a dozen of root nameservers [#fdozen]_.   
+To retrieve the mapping for host `h2.dom`, a client sends its query to the name server that is reponsible for domain `.dom`. The name server directly answers the query. To retrieve a mapping for `h3.a.sdom1.dom` a DNS client first sends a query to the name server that is responsible for the `.dom` domain. This nameserver returns the nameserver that is responsible for the `sdom1.dom` domain. This nameserver can now be contacted to obtain the nameserver that is responsible for the `a.sdom1.dom` domain. This nameserver can be contacted to retrieve the mapping for the `h3.a.sdom1.dom` name. Thanks to this organisation of the nameservers, it is possible for a DNS client to obtain the mapping of any host inside the `.dom` domain or any of its subdomains. To ensure that any DNS client will be able to resolve any fully qualified domain name, there are special nameservers that are responsible for the root of the domain name hierarchy. These nameservers are called :term:`root nameserver`. There are currently about a dozen root nameservers [#fdozen]_.   
 
-Each root nameserver maintains the list [#froot]_ of all the nameservers that are responsible for each of the top-level domain names and their IP addresses. Allroot nameservers are synchronised and provide the same answers. By querying any of the root nameservers, a DNS client can obtain the nameserver that is responsible for any top-level-domain name. From this nameserver, it is possible to resolve any domain, ... 
+Each root nameserver maintains the list [#froot]_ of all the nameservers that are responsible for each of the top-level domain names and their IP addresses [#frootv6]_. All root nameservers are synchronised and provide the same answers. By querying any of the root nameservers, a DNS client can obtain the nameserver that is responsible for any top-level-domain name. From this nameserver, it is possible to resolve any domain, ... 
 
-To be able to contact the root nameservers, each DNS client must know their IP addresses. This implies, that DNS clients must maintain an up-to-date list of the IP addresses of the root nameservers [#fnamed.root]_. Without this list, it is impossible to contact the root nameservers. Forcing all Internet hosts to maintain the most recent version of this list would be difficult from an operational viewpoint. To solve this problem, the designers of the DNS introduced a special type of DNS server : the DNS resolvers. A :term:`resolver` is a server that provides name resolution service for a set of clients. A network usually contains a few resolvers. Each host in these networks is configured to send all its DNS queries via one of its local resolvers. These queries are called `recursive queries as the :term:`resolver` must recurse through the hierarchy of nameservers to find the `answer. 
+To be able to contact the root nameservers, each DNS client must know their IP addresses. This implies, that DNS clients must maintain an up-to-date list of the IP addresses of the root nameservers [#fnamed.root]_. Without this list, it is impossible to contact the root nameservers. Forcing all Internet hosts to maintain the most recent version of this list would be difficult from an operational viewpoint. To solve this problem, the designers of the DNS introduced a special type of DNS server : the DNS resolvers. A :term:`resolver` is a server that provides name resolution service for a set of clients. A network usually contains a few resolvers. Each host in these networks is configured to send all its DNS queries via one of its local resolvers. These queries are called `recursive queries` as the :term:`resolver` must recurse through the hierarchy of nameservers to find the `answer`. 
 
-DNS resolvers have several advantages over letting each Internet host query directly nameservers. First, regular Internet hosts do not need to maintain the up-to-date list of the IP addresses of the root servers. Second, regular implements the DNS protocol and sends queries to nameservers
+DNS resolvers have several advantages over letting each Internet host query directly nameservers. First, regular Internet hosts do not need to maintain the up-to-date list of the IP addresses of the root servers. Second, regular Internet hosts do not need to send queries to nameservers all over the Internet. Furthermore, as a DNS resolver serves a large number of hosts, it can cache the received answers. This allows the resolver to quickly return answers for popular DNS queries and reduces the load on all DNS servers.  
 
-  Furthermore, to traverse the tree of all domain names, DNS clients must send and receive DNS messages.  However. This list  use stable IP addresses that do not change frequently
+The last component of the Domain Name System is the DNS protocol. The DNS protocol runs both above the datagram service and the bytestream service. In practice, the datagram service is used when short queries and responses are exchanged and the bytestream is used when longer responses are expected. In this section, we will only discuss the utilisation of the DNS protocol above the datagram service.
 
-In practice, regular Internet hosts do not usually query the nameservers directly. Most networks contain :term:`resolvers`
+DNS messages are composed of five parts that are named sections in :rfc:`1035`. The first three sections are mandatory and the last two are optionnal. The first section of a DNS message is its `Header`. It contains information about the type of message and the content of the other sections. The second section contains the `Question` sent to the name server or resolver. The third section contains the `Answer` to the `Question`. When a client sends a DNS query, the `Answer` section is empty. The fourth section, named `Authority`, contains information the servers that can provide authoritative answers if required. The last section contains addition information that was not requested in the question.
 
- 
-Any DNS client can contact a root nameserver 
+The header of DNS messages is composed of 12 bytes and its structure is shown in the figure below.
+
+::
+
+                                    1  1  1  1  1  1
+      0  1  2  3  4  5  6  7  8  9  0  1  2  3  4  5
+    +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+    |                      ID                       |
+    +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+    |QR|   Opcode  |AA|TC|RD|RA|   Z    |   RCODE   |
+    +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+    |                    QDCOUNT                    |
+    +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+    |                    ANCOUNT                    |
+    +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+    |                    NSCOUNT                    |
+    +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+    |                    ARCOUNT                    |
+    +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+
+The `ID` (identifier) is a 16-bits value chosen by the client. When a client sends a question to a DNS server, it remembers the question and its identifier. When a server returns an answer, it returns in the `ID` field the identifier chosen by the client. Thanks to this identifier, the client can match the received answer with the question that it sent. 
+
+.. dns attacks http://www.cs.columbia.edu/~smb/papers/dnshack.ps
+.. http://unixwiz.net/techtips/iguide-kaminsky-dns-vuln.html
+.. http://www.secureworks.com/research/articles/dns-cache-poisoning
+
+The `QR` flag is set to `0` in DNS queries and `1` in DNS answers. The `Opcode` is used to specify the type of query. One utilisation of this field is to distinguish between a :term:`standard query` in which a client sends a `name` and the server returns the corresponding `address` and an :term:`inverse query` in which the client sends an `address` and the server returns the corresponding `name`. 
+
+The `AA` bit is set when the server that sent the response is an `authority` for the domain name found in the question section. In the orginal DNS deployments, two types of servers were considered : `authoritative` servers and `non-authoritative` servers. The `authoritative` servers are managed by the system administrators that are responsible for a given domain. They always store the most recent information about a domain. `Non-authoritative` servers on the other are not directly managed by the owners of a domain. They may thus provide answers that are out of date. From a security viewpoint, the `authoritative` bit is not an indication about the validity of an answer. Securing the Domain Name Systems is a complex problem that was only addressed satisfactorily recently by the utilisation of cryptographic signatures in the DNSSEC extensions to DNS described in :rfc:`4033`. These extensions are outside the scope of this chapter and will be discussed later. 
+
+The `RD` (recursion desired) bit is set by a client when it sends a query to a resolver. Such a query is said to be `recursive`. In the past, all resolvers were configured to perform recursive queries on behalf of any Internet host. However, this exposes the resolvers to several security risks. The simplest one is that the resolver could become overloaded by having too many recursive queries to process. As of this writing, most resolvers [#f8888]_ only allow recursive queries from clients belonging to their company or network and discard all other recursive queries. The `RA` bit indicates whether the server supports recursion. The `RCODE` is used to distinguish between different types of errors. See :rfc:`1035`
+for addition details. The last four field indicate the size of the `Question`, `Answer`, `Authority` and `Additional` sections of the DNS message.
 
 
+The last four sections of the DNS message contain `Resource Records`. 
 
 
-In practice, regular hosts 
-
-The last component of the Domain Name System is the DNS protocol. This 
-
-
-DNS protocol runs both above the datagram service and the bytestream service. In practice, the datagram service is used when short queries and responses are exchanged.
-
-.. sidebar:: Network byte order
-
- Both the datagram and the byte-stream services used on the Internet have been designed to allow applications to exchange groups of bytes. Many applications exchange character strings encoded by using the ascii character set :rfc:`20` or one of its derivatives. Besides characters, some applications also need to exchange 16 bits and 32 bits fields such as IPv4 addresses. A naive solution would have been to send the 16- or 32-bits field as it was encoded in memory. Unfortunately, there are different methods to store 16- or 32-bits fields in memory. Some CPUs store the most significant byte of a 16-bits field in the first address of the field while others store the least significant byte at this location. When networked applications running on different CPUs exchange 16 bits fields, there are two possibilies to transfer them over the transport service :
-
-  - send the most significant byte followed by the least significant byte
-  - send the least significant byte followed by the most significant byte
-
- The first possibility was named  `big-endian` in a note written by Cohen [Cohen1980]_ while the second was named `little-endian`. Vendors of CPUs that used `big-endian` in memory insisted on using `big-endian` encoding in networked applications while vendors of CPUs that used `little-endian` recommended the opposite. Several studies were written on the relative merits of each type of encoding, but the discussion became almost a religious issue [Cohen1980]_. Eventually, the Internet chose the `big-endian` encoding, i.e. multi-byte fields are always transmitted by sending the most significant byte first :rfc:`791` and refer to this encoding as the :term:`network-byte order`. Most librairies [#fhtonl]_ used to write networked applications contain functions to convert multibyte fields from memory to the network byte order and vice versa. 
-
-
-
-
+All RRs have the same top level format shown below :
 
 ::
 
@@ -209,20 +261,25 @@ DNS protocol runs both above the datagram service and the bytestream service. In
     /                                               /
     +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
 
+In a `Resource Record` (`RR`), the `Name` indicates the name of the node to which this resource record pertains. The two bytes `Type` field indicate the type of resource record. The `Class` field was used to support the utilisation of the DNS in other environment than the Internet. 
 
-The second model is the peer-to-peer model. It appaered recently as another way to organise Internet applications. In the peer-to-peer model, all
+The `TTL` field indicates the lifetime of the `Resource Record` in seconds. This field is set by the server that returns an answer and indicates for how long a client or a resolver can store the `Resource Record` inside its cache. A long `TTL` indicates a stable `RR`. Some companies use short `TTL` values for mobile hosts and also when load must be spread among several servers.
 
+The `RDLength` field is the size of the `RData` field that contains the information of the type specified in the `Type` field.
 
-.. _DNS:
+Several types of DNS RR are used in practice. The `A` type is used to encode the IPv4 address that corresponds to the specified name. The `AAAA` type is used to encode the IPv6 address that corresponds to the specified name. A `NS` record contains the name of the DNS server that is responsible for a given domain. `CNAME` (or canonical names) are used to define aliases. For example `www.example.com` Could be a `CNAME` for `pc12.example.com` that is the actual name of the server on which the web server for `www.example.com` runs. 
 
-introduce the address
+.. sidebar:: Reverse DNS and in-addr.arpa
 
+ The DNS is mainly used to find the IP address that corresponds to a given name. However, it is sometimes useful to obtain the name that corresponds to an IP address. This done by using the `PTR` (`pointer`) `RR`. The `RData` part of a `PTR` `RR` contains the name while the `Name` part of the `RR` contains the IP address encoded in the `in-addr.arpa` domain. IPv4 addresses are encoded in the `in-addr.arpa` by reversing the four digits that compose the dotted decimal representation of the address. For example, consider IPv4 address `192.0.2.11`. The hostname associated to this address can be found by requesting the `PTR` `RR` that corresponds to `11.2.0.192.in-addr.arpa`. A similar solution is used to support IPv6 addresses, see :rfc:`3596`.
 
 .. _Email:
 
 Electronic mail
 ===============
 
+
+Electronic mail or email is a very popular application in computer networks such as the Internet. Email `appeared <http://openmap.bbn.com/~tomlinso/ray/firstemailframe.html>` in the early 1970s. It allows users to exchange messages. Email messages have a structure that is similar to the structure of postal mail, except that email messages are only composed of lines of ASCII characters.
 
 
 ascii : :rfc:`20`
@@ -422,8 +479,13 @@ Additional information about the Bittorrent protocol may be found i
 
 .. [#froot] A copy of the information maintained by each root nameserver is available at http://www.internic.net/zones/root.zone
 
+.. [#frootv6] Until February 2008, the root DNS servers only had IPv4 addresses. IPv6 addresses were added to the root DNS servers slowly to avoid creating problems as discussed in http://www.icann.org/en/committees/security/sac018.pdf In 2010, several DNS root servers are still not reachable by using IPv6. 
+
 .. [#fnamed.root] The current list of the IP addresses of the root nameservers is maintained at http://www.internic.net/zones/named.root . These IP addresses are stable and root nameservers seldom change their IP addresses. DNS resolvers must however maintain an up-to-date copy of this file. 
 
 .. [#fdozen] There are currently 13 root servers. In practice, some of these root servers are themselves implemented as a set of distinct physical servers. See http://www.root-servers.org/ for more information about the physical location of these servers. 
+
+.. [#f8888] Some DNS resolvers allow any host to send queries. OpenDNS_ and GoogleDNS_ are example of open resolvers.
+
 
 .. include:: ../links.rst
