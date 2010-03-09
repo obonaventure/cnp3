@@ -248,3 +248,13 @@ Glossary
 
    nameserver
 	A server that implements the DNS protocol and can answer queries for names inside its own domain.
+
+   MIME
+	The Multipurpose Internet Mail Extensions (MIME) defined in :rfc:`2045` are a set of extensions to the format of email messages that allow to use non-ASCII characters inside mail messages. A MIME message can be composed of several different parts each having a different format.
+
+   POP	
+   	The Post Office Protocol (POP), defined :rfc:`1939`, is an application-level protocol that allows a client to download email messages stored on a server. 
+
+   IMAP
+	The Internet Message Access Protocol (IMAP), defined in :rfc:`3501`, is an application-level protocol that allows a client to access and manipulate the emails stored on a server. With IMAP, the email messages remain on the server and are not downloaded on the client.
+	

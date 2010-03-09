@@ -178,4 +178,8 @@
 
 .. _OpenDNS: http://www.opendns.com/
 
-.. _GoogleDNS: http://code.google.com/speed/public-dns/docs/using.html and 
+.. _GoogleDNS: http://code.google.com/speed/public-dns/docs/using.html 
+
+.. _wikipedia: http://en.wikipedia.org
+
+.. _ISO-8859: http://en.wikipedia.org/wiki/ISO_8859
