@@ -621,21 +621,23 @@ A successful transfert of an email message is shown below ::
  S: 221 Bye
 
 
-In this example, the MTA running on `mta.example.org` opens a TCP connection to the SMTP server on host `smtp.example.com`. The lines prefixed with `S:` (resp. `C:`) are the responses sent by the server (resp. the commands sent by the client). The server sends its greetings as soon as the TCP connection has been established. The client then sends the `HELO` command with its fully qualified domain name. The server replies with reply-code `250` and sends its greetings. To send an email, the client must issue three commands : `RCPT TO:` that provides the address of the recipient of the email, `MAIL FROM:` that indicates the address of the sender of the email and `DATA` that starts the actual transfer of the email message. The `MAIL FROM:` and `RCPT TO:` must be issued before the `DATA` command, but the former does not need to be sent before the former. After having received the `354` reply code, the client sends the headers and the body of its email message. The client indicates that the end of the message by sending a line containing only the `.` (dot) character [#fdot]_. 
+In this example, the MTA running on `mta.example.org` opens a TCP connection to the SMTP server on host `smtp.example.com`. The lines prefixed with `S:` (resp. `C:`) are the responses sent by the server (resp. the commands sent by the client). The server sends its greetings as soon as the TCP connection has been established. The client then sends the `HELO` command with its fully qualified domain name. The server replies with reply-code `250` and sends its greetings. To send an email, the client must issue three commands : `RCPT TO:` that provides the address of the recipient of the email, `MAIL FROM:` that indicates the address of the sender of the email and `DATA` that starts the actual transfer of the email message. The `MAIL FROM:` and `RCPT TO:` must be issued before the `DATA` command, but the former does not need to be sent before the former. After having received the `354` reply code, the client sends the headers and the body of its email message. The client indicates the end of the message by sending a line containing only the `.` (dot) character [#fdot]_. The server confirms that the email message has been queued for delivery or transmission with a reply code of `250`. The client issues the `QUIT` command to close the session and the server confirms with reply-code `221` before closing the TCP connection.
 
 
 .. sidebar:: Open SMTP relays and spam 
 
- 
+ Since its creation in 1971, email was a very useful tool that was used my many users to exchange lots of information. Unfortunately, over the years, some unscrupulous users found ways to use email to 
+
+A `study <http://www.enisa.europa.eu/act/res/other-areas/anti-spam-measures>`_ carried out by ENISA_ in 2009 reveals that 95% of email was spam.
+
+http://www.templetons.com/brad/spamreact.html#msg
+allowed to quickly exchange infoUntil a few years ago, most SMTP servers agreed to relay messages sent by any user. This default configuration allowed 
+
+were configured to relay messages 
  smtp auth : rfc:`4954`
  configuration of relays :rfc:`5068`
- first spam http://www.templetons.com/brad/spamreact.html#msg
+ first spam Http://www.templetons.com/brad/spamreact.html#msg
  Unsollicited Commercial Email (UCE)
-
-
-smtp :rfc:`821`
-
-describe protocol
 
 
 .. _POP:
@@ -643,11 +645,51 @@ describe protocol
 The Post Office Protocol
 ------------------------
 
-The Post Office Protocol is defined in :rfc:`1939`
+When the first versions of SMTP were designed, the Internet was composed of minicomputers_ that were used by an entire university departement or research lab. These minicomputers_ were used by many users at the same time. Email was mainly used to send messages from a user on a given host to another user on a remote host. At that time, SMTP was the only protocol involved in the delivery of the emails as all hosts attached to the network were running a SMTP server. On such hosts, email destined to local users was delivered by placing the email in a directory owned by the user. However, the introduction of the personnal computers in the 1980s, changed the environment. Initially, users of these personnal computers used applications such as telnet_ to open a remote session on the local minicomputer to read their email. This was not user-friendly. A better solution appeared with the development of email client applications running on personnal computers. Several protocols were designed to allow these client applications to retrieve the email messages destined to a user from his/her server. Two of these protocols became popular and are still used today. The Post Office Protocol (POP), defined in :rfc:`1939`, is the simplest one. It allows a client to download all the messages destined to a given user from his/ser email server. We describe POP briefly in this section. The second protocol is the Internet Message Access Protocol (IMAP), defined in :rfc:`3501`. IMAP is more powerful, but also more complex than POP. While POP is mainly used to download email messages, IMAP was designed to allow client applications to efficiently access in real-time to messages stored in various folders on servers. IMAP assumes that all the messages of a given user are stored on a server and provides the functions that are necessary to search, download, delete or filter messages. 
 
-The IMAP :rfc:`2060`
 
-webmail (mainly implementations, no standard)
+POP is another example of a simple line-based protocol. POP runs above the bytestream service. A POP server usually listens to port 110. A POP session is composed of three parts : an `authorisation` phase during which the server verifies the client's credential, a `transaction` phase during which the client downloads messages and an `update` phase that concludes the session. The client sends commands and the server replies are prefixed by `+OK` to indicate a successful command and by `-ERR` to indicate errors.
+
+When a client opens a connection with the server, the latter sends as banner and ASCII-line starting with `+OK`. The POP session is at that time in the `authorisation` phase. In this phase, the client can send its username (resp. password) with the `USER` (resp. `PASS`) command. The server returns `+OK` if the username (resp. password) is valid and `-ERR` otherwise. 
+
+Once the username and passward have been validated, the POP session enters in the `transaction` phase. In this phase, the client can issue several commands. The `STAT` command is used to retrieve the status of the server. Upon reception of this command, the server replies with a line that contains `+OK` followed by the number of messages in the mailbox and the total size of the mailbox in bytes. The `RETR` command, followed by a space and an integer, is used to retrieve the nth message of the mailbox. The `DELE` command is used to mark for deletion the nth message of the mailbox.
+
+Once the client has retrieved and possibly deleted the emails contained in the mailbox, it must issue the `QUIT` command. This command terminates the POP session and indicates that the server can delete all messages that have been marked for deletion by using the `DELE` command. 
+
+The figure below provides a simple POP session. All lines prefixed with `C:` (resp. `S:`) are sent by the client (resp. server). ::
+
+      S:    +OK POP3 server ready 
+      C:    USER alice
+      S:    +OK
+      C	    PASS 12345pass
+      S:    +OK alice's maildrop has 2 messages (620 octets)
+      C:    STAT
+      S:    +OK 2 620
+      C:    LIST
+      S:    +OK 2 messages (620 octets)
+      S:    1 120
+      S:    2 500
+      S:    .
+      C:    RETR 1
+      S:    +OK 120 octets
+      S:    <the POP3 server sends message 1>
+      S:    .
+      C:    DELE 1
+      S:    +OK message 1 deleted
+      C:    QUIT
+      S:    +OK POP3 server signing off (1 message left)
+
+
+In this example, a POP client contacts a POP server on behalf of the user named `alice`. Note that in this example, Alice's password is sent in clear by the client. This implies that if someone is able to capture the packets sent by Alice, he will know Alice's password [#fapop]_. Then Alice's client issues the `STAT` command to know the number of messages that are stored in her mailbox. It then retrieves and deletes the first message of the mailbox.
+
+.. sidebar:: SMTP versus POP
+
+ Both SMTP and POP are involved in the delivery of email messages. They are thus complimentary protocols. However, there are two important differences between these two protocols. First, POP forces the client to be authenticated, usually by providing a username and a password. SMTP was designed without any authentication. Second, the POP client downloads email messages from the server, while the SMTP client sends email messages. 
+
+
+.. .. sidebar:: Names and passwords
+.. The simplest authentication
+.. APOP mrose c4c9334bac560ecc979e58001b3e22fb
 
 
 .. _HTTP:
@@ -655,31 +697,16 @@ webmail (mainly implementations, no standard)
 The HyperText Transfert Protocol
 ================================
 
-In the early days of the Internet, the network was mainly used for remote terminal access with telnet_, email and file transfert. The default file transfert protocol, ftp, defined in :rfc:`959` was widely used and ftp clients and servers were included in most operating systems.
+In the early days of the Internet, the network was mainly used for remote terminal access with telnet_, email and file transfert. The default file transfert protocol, ftp, defined in :rfc:`959` was widely used and ftp clients and servers are still included in most operating systems.
 
-An ftp client offers a user interface similar to a Unix shell and allows the client to browse the file system on the server and send and retrieve files. ftp servers can be configured in two modes :
+Many ftp client offer a user interface similar to a Unix shell and allows the client to browse the file system on the server and send and retrieve files. ftp servers can be configured in two modes :
 
  - authenticated : in this mode, the ftp server only accepts users with a valid userid and password. Once authenticated, they can access the files and directories according to their permissions
- - anonymous : in this mode, clients supply the anonymous` anonymous` a special zone of the file system is 
+ - anonymous : in this mode, clients supply the `anonymous` userid and their email address as password. These clients are granted access to a special zone of the file system that only contains public files. 
 
+ftp was very popular in the 1990s and early 2000s, but today it has mostly been pserseded by more recent protocols. Authenticated access to files is mainly done by using the Secure Shell (ssh) protocol defined in :rfc:`4251` and supported by clients such as scp_ or sftp_. Anonymous access is nowadays mainly provided by web protocols.
 
-.. figure:: fig/app-fig-013-c.png
-   :align: center
-   :scale: 50 
-
-   File transfer protocol 
-
-
-urls : :rfc:`1738` see also http://www.w3.org/Addressing
-
-html http://www.w3.org/MarkUp
-
-http 1.0 : :rfc:`1945`
-
-http 1.1 :rfc:`2616`
-
-Structure of email messages
-
+In the late 1980s, high energy physicists working at CERN_ had to efficiently exchange documents about their ongoing and planned experiments. `Tim Berners-Lee`_ evaluated several of the documents sharing that were available then [B1989]_. As none of the existing solutions met CERN's requirements, they choose to develop a completely new document sharing system. This system was initially called the `mesh`, but was quickly renamed the `world wide web`. The starting point for the `world wide web` is the hypertext. An hypertext is a text that contains references (hyperlinks) to other text that the reader can immediately access. Compared to the hypertexts that were used in the late 1980s, the main innovation introduced by the `world wide web` was to allow hyperlinks to reference documents stored on remote machines. 
 
 
 .. figure:: fig/app-fig-014-c.png
@@ -689,17 +716,152 @@ Structure of email messages
    World-wide web clients and servers 
 
 
+A document sharing system such as the `world wide web` is composed of three important parts.
+
+ 1. A standardised addressing scheme that allows to unambiguously identify documents 
+ 2. A standard document format. html http://www.w3.org/MarkUp
+ 3. A standardised protocol that allows to efficiently retrieve documents stored on a server
+
+
+.. sidebar:: Open standards and open implementations
+
+ Open standards have and are still playing a key role in the success of the `world wide web` as we know it today. However, open and efficient implementations of these standards have greatly contributed to the sucess of the `web`. When CERN started to work on the `web`, their objective was to build a running system that could be used by physicists. They developped open-source implementations of the `first web servers <http://www.w3.org/Daemon/>`_ and `web clients <http://www.w3.org/Library/Activity.html>`. These open-source implementations were powerful and could be used as is by institutions willing to share information on the web. They were also extended by other developpers who contributed to new features. For example, NCSA_ added support for images in their `Mosaic browser <http://en.wikipedia.org/wiki/Mosaic_(web_browser)>`_ that was eventually used to create `Netscape Communications <http://en.wikipedia.org/wiki/Netscape>`_. 
+
+
+The first component of the `world wide web` are the Uniform Resource Identifiers (URI) defined in :rfc:`3986`. A URI is a character string that unambigously identifies a resource on the world wide web. Here is a subset of the BNF for the URIs ::
+
+   URI         = scheme ":" "//" authority path [ "?" query ] [ "#" fragment ]
+   scheme      = ALPHA *( ALPHA / DIGIT / "+" / "-" / "." )
+   authority   = [ userinfo "@" ] host [ ":" port ]
+   query       = *( pchar / "/" / "?" )
+   fragment    = *( pchar / "/" / "?" )
+
+The first componet of a URI is its `scheme`. In practice, the `scheme` identifies the application-layer protocol that must used by the client to retrieve the document. The most frequent scheme is `http` that will be described later, but a URI scheme can be defined for almost any application layer protocol [#furilist]_. The characters `:` and `//` follow the `scheme` of any URI.
+
+The second part of the URI  is the `authority`. It includes the DNS name or the IP address on which the document can be retrieved by using the protocol specified in the `scheme`. This name can be preceeded by some information about the user (e.g. a username) who is requesting the information. Earlier definitions of the URI allowed to specify a username and a password before the `@` character (:rfc:`1738`), but this is now deprecated as placing a password inside a URI is insecure. The host name can be followed by the semicolon character and a port number. A default port number is defined for each `scheme` and the port number should only be included in the URI is a non-default port number is used.
+
+The third part of the URI is the path to the document. This path is structured as filenames on a Unix host. If the path is not specified, the server will provide a default document. The last two optional parts of the URI are used to provide a query and indicate a specific part (e.g. a section in an article) of the requested document. Sample URIs are shown below ::
+
+   http://tools.ietf.org/html/rfc3986.html
+   mailto:infobot@example.com?subject=current-issue   
+   http://docs.python.org/library/basehttpserver.html?highlight=http#BaseHTTPServer.BaseHTTPRequestHandler
+   ftp://cnn.example.com&story=breaking_news@10.0.0.1/top_story.htm
+
+The first URI corresponds to a document named `rfc3986.html` that is stored on the server named `tools.ietf.org` and can be accessed by using the `http` protocol on its default port. The second URI corresponds to an email message with subject `current-issue` that will be sent to user `infobot` in domain `example.com`. The `mailto:` URI scheme i sdefined in :rfc:`2368`. The third URI references the portion `BaseHTTPServer.BaseHTTPRequestHandler` of the document `basehttpserver.html` that is stored in the `library` directory on server `docs.python.org` by using `http`. The query `highlight=http` is associated to this URI. The last URI is somewhat special. Most users will assume that it corresponds to a document stored on the `cnn.example.com` server. However, to parse this URI, it is important to remember that the `@` character is used to separate the usename from the host name in the authorisation part of a URI. This implies that the URI points to a document named `top_story.htm` on host having IPv4 address `10.0.0.1`. The document will be retrieved by using the `ftp` protocol with the username set `cnn.example.com&story=breaking_news`. 
+
+The second component of the `word wide web` is the HyperText Markup Langage (HTML). HTML defines the format of the documents that are exchanged on the `web`. The `first version of HTML <http://www.w3.org/History/19921103-hypertext/hypertext/WWW/MarkUp/Tags.html>`_ was derived from the Standard Generalized Markup Language (SGML) that was standardised in 1986 by ISO_. SGML_ was designed to allow large project documents in industries such as government, law or aerospace to be shared efficiently in a machine-readable manner. These industries require documents that remain readable and editable for tens of years and insisted on a standardised format supported by multiple vendors. Today, SGML_ is not widely used anymore besides specific applications, but children like :term:`HTML` and :term:`XML` are now widespread.
+
+HTML is a markup language that contains several markers. Most markers areA very simple HTML document such as the one shown in the figure below is delineated by the `<HTML>
+The HTML document shown below is composed of two parts : a header delineated by the `<HEAD>` and `</HEAD>` markers and a body (between the `<BODY>` and `</BODY>` markers). In the example below, the header only contains a title, but other types of information can be included in the header. The body contains an image, some text and a list with three hyperlinks. The image is included in the web page by indicating its URI between brackets inside the `<IMG SRC="...">` marker. The image can, of course, reside on any server and the client will automatically download it when rendering the web page. The `<H1>...</H1>` marker is used to specify the first level of headings. The `<UL>` indicates an unnumbered list while thhe `<LI>` marker indicates a list item. The `<A HREF="URI">text</A>` indicates an hyperlink. The `text` will be rendered in the web page and client will fetch the URI if the user clicks on the link.
+
 .. figure:: fig/app-fig-015-c.png
    :align: center
    :scale: 50 
 
    A simple HTML page 
 
+Additional details about the various extensions to HTML may be found in the `official specifications <http://www.w3.org/MarkUp/>`_ maintained by W3C_.
+
+The third component of the `world wide web` is the HyperText Transport Protocol (HTTP). HTTP is a text-based protocol in which the client sends a request and the server returns a response. HTTP runs above the bytestream service and HTTP servers listen by default on port `80`. Each HTTP request contains three parts :
+
+ - a `method` that indicates the type of request, a URI and the version of the HTTP protocol used by the client 
+ - a `header` that is used by the client to indicate optionnal parameters for each request. An empty line is used to mark the end of the header.
+ - an optionnal MIME document attached to the request
+
+The response sent by the server also contains three parts :
+ - a `status line` that indicates whether the request was successful or not
+ - a `header` that contains additional information about the response. The header ends with an empty line.
+ - a MIME document 
+
 .. figure:: fig/app-fig-017-c.png
    :align: center
    :scale: 50 
 
    HTTP requests and responses
+
+
+There are three types of methods in HTTP requests :
+
+ - the `GET` method is the most popular one. It is used to retrieve a document from a server. It should be noted that the client only provides the path of URI of the requested document after the `GET` keyword. For example, if a client requests the http://www.w3.org/MarkUp/ URI, it will open a TCP on port `80` with host `www.w3.org`. The first line of its HTTP request will contain ::
+  GET /MarkUp/ HTTP/1.0
+ - the `HEAD` method is a variant of the `GET` method that allows to retrieve the header lines for a given URI without retrieveing the entire document. It can be used by a client that wants to verify whether a document has changed compared to a previous version.
+ - the `POST` method is less popular. It can be used by a client to send a document to a server. The document sent is attached to the HTTP request.
+
+
+HTTP clients and servers can include many different HTTP headers in the HTTP requests and responses. Each header is encoded as a single ASCII-line terminated by `CR` and `LF`. Several of these headers are briefly described below. A detailed discussion of all standard headers may be found in :rfc:`1945`. The MIME headers can appear in both HTTP requests and HTTP responses.
+
+ - the `Content-Length:` header is the MIME_ header that indicates the length of the MIME document in bytes`.
+ - the `Content-Type:` header is the MIME_ header that indicates the type of the attached MIME document. HTML pages use the `text/html` type.
+ - the `Content-Enconding:` header indicates how the MIME_ document has been encoded. This header would be set to `x-gzip` for a document compressed by using the gzip_ software. 
+
+:rfc:`1945` and :rfc:`2616`also defines headers that are specific to HTTP responses. These server headers include :
+
+ - the `Server:` header indicates the version of the web server that has generated the HTTP response. Some servers provide information about the software release and optionnal modules that is uses. For security reasons, some system administrators disable these headers to avoid revealing too much information about their server to potential attackers.
+ - the `Date:` header indicates when the HTTP response has been produced by the server.
+ - the `Last-Modified:` indicates the last modification date and time of the document attached to the HTTP respons. 
+ 
+Similarly, the following header lines can only appear inside HTTP requests sent by a client :
+
+ - the `User-Agent:` header provides information about the client that has generated the HTTP request. Some servers analyse this header line and return different headers and sometimes different documents for different user agents.
+ - the `If-Modified-Since:` header is followed by a date. It enables the clients to cache in memory or on disk the recent or most frequently used documents. When a client needs to request a URI from a server, it first checks whether the document is already inside its cache. If yes, it sends an HTTP request with the `If-Modified-Since:` header indicating the date of the cached document. The server will only return the document attached to the HTTP response if it is newer than the version stored in the client's cache. 
+ - the `Referer:` header is followed by a URI. It indicates the URI of the document that the client visited before sending this HTTP request. Thanks to this header, the server can know the URI of the document containing the hyperlink followed by the client, if any. This information is very useful to measurement the impact of advertisements containing hyperlinks placed on websites. 
+ - the `Host:` header contains the fully qualified domain name of the URI being requested. 
+
+.. sidebar:: The importance of the `Host:` header line
+
+ The first version of HTTP did not include the `Host:` header line. This was a severe limitation for web hosting companies. For example consider a webhosting company that wants to server both `web.example.com` and `www.dummy.net` on the same physical server. Both web sites contain a `/index.html` document. When a client sends a request for either `http://web.example.com/index.html` or `http://www.dummy.net/index.html`, The HTTP request contains the following line : ::
+
+  GET /index.html HTTP/1.0
+
+ Thanks to the `Host:` header line, the server knows whether the request is for `http://web.example.com/index.html` or `http://www.dummy.net/index.html`. Without the `Host:` header, this is impossible. The `Host:` header line allowed web hosting companies to develop their business by supporting a large number of independant web servers on the same physical server. 
+
+
+The status line of the HTTP response begins with the version of HTTP used by the server (usually `HTTP/1.0` defined in :rfc:`1945` or `HTTP/1.1` defined in :rfc:`2616`) followed by a three digits status code and additional information in English. The HTTP status codes have a similar structure as the reply codes used by STMP. 
+
+ - All status codes starting with digit `2` indicate a valid response. `200 Ok` indicates that the HTTP request was successfully processed by the server and that the response is valid.
+ - All status codes starting with digit `3` indicate that the requested document is not available anymore on the server. `301 Moved Permanently` indicates that the requested document is not anymore available on this server. A `Location:` header containing the new URI of the requested document is inserted in the HTTP response. `304 Not Modified` is used in response to an HTTP request containing the `If-Modified-Since:` header. This status line is used by the server if the document stored on the server is not more recent than the date indicated in the `If-Modified-Since:` header.
+ - All status codes starting with digit `4` indicate that the server has detected an error in the HTTP request sent by the client. `400 Bad Request` indicates a syntax error in the HTTP request. `404 Not Found` indicates that the requested document does not exist on the server.
+ - All status codes starting with digit `5` indicate an error on the server. `500 Internal Server Error` indicates that the server could not process the request due to an error on the server itself.
+
+
+In both the HTTP request and the HTTP response, the MIME document refers to a representation of the document with the MIME headers that indicate the type of document and its size.
+
+As an illustration of HTTP/1.0, here are an HTTP request for http://www.ietf.org and the corresponding HTTP respons. The HTTP request was sent by the curl_ command line tool. The `User-Agent:` header line contains more information about this client software. There is no MIME document attached to this HTTP request, it ends with a blank line. ::
+  GET / HTTP/1.0
+  User-Agent: curl/7.19.4 (universal-apple-darwin10.0) libcurl/7.19.4 OpenSSL/0.9.8l zlib/1.2.3
+  Host: www.ietf.org
+  
+
+
+The HTTP response indicates the version of the server software used with the included modules. The `Last-Modified:` header indicates that the requested document was modified about one week before the request. An HTML document (not shown) is attached to the response. Note the blank line between the header of the HTTP response and the attached MIME document. ::
+
+  HTTP/1.1 200 OK
+  Date: Mon, 15 Mar 2010 13:40:38 GMT
+  Server: Apache/2.2.4 (Linux/SUSE) mod_ssl/2.2.4 OpenSSL/0.9.8e PHP/5.2.6 with Suhosin-Patch mod_python/3.3.1 Python/2.5.1 mod_perl/2.0.3 Perl/v5.8.8
+  Last-Modified: Tue, 09 Mar 2010 21:26:53 GMT
+  Content-Length: 17019
+  Content-Type: text/html
+  
+  <!DOCTYPE HTML PUBLIC .../HTML>
+
+
+HTTP was initially designed to share text documents that were self-contained.
+
+
+
+.. figure:: fig/app-fig-016-c.png
+   :align: center
+   :scale: 50 
+
+   HTTP 1.0 and the underlying TCP connection
+
+http 1.0 : :rfc:`1945`
+
+http 1.1 :rfc:`2616`
+
+
+
+
 
 
 .. figure:: fig/app-fig-019-c.png
@@ -792,8 +954,12 @@ Additional information about the Bittorrent protocol may be found i
 
 .. [#femailheaders] The list of all standard email header lines may be found at http://www.iana.org/assignments/message-headers/message-header-index.html
 
-.. [#smtpauth] During the last years, many Internet Service Providers, campus and enterprise networks have deployed SMTP extensions :rfc:`4954` on their MSAs. These extensions for the MUAs to be authenticated before the MSA accepts an email message from the MUA. This authentication 
+.. [#smtpauth] During the last years, many Internet Service Providers, campus and enterprise networks have deployed SMTP extensions :rfc:`4954` on their MSAs. These extensions for the MUAs to be authenticated before the MSA accepts an email message from the MUA. 
 
 .. [#fdot] This implies that a valid email message cannot contain a line with one dot followed by `CR` and `LF`. If a user types such a line in an email, his email client will automatically add a space character before or after the dot when sending the message over SMTP.
+
+.. [#fapop] :rfc:`1939` defines another authentication scheme that is not vulnerable to such attackers.
+
+.. [#furilist] The list of standard URI schemes is maintained by IANA_ at http://www.iana.org/assignments/uri-schemes.html
 
 .. include:: ../links.rst

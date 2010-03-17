@@ -166,6 +166,8 @@
 
 .. _Virginie Van den Schriek: http://inl.info.ucl.ac.be/vvandens
 
+.. _Tim Berners-Lee: http://www.w3.org/People/Berners-Lee/
+
 .. _Laurent Vanbever: http://inl.info.ucl.ac.be/lvanbeve
 
 .. _Raj Jain: http://www.cse.wustl.edu/~jain/
@@ -183,3 +185,19 @@
 .. _wikipedia: http://en.wikipedia.org
 
 .. _ISO-8859: http://en.wikipedia.org/wiki/ISO_8859
+
+.. _ENISA: http://www.enisa.europa.eu/
+
+.. _scp: http://www.openssh.org
+
+.. _sftp: http://www.openssh.org
+
+.. _CERN: http://www.cern.ch
+
+.. _NCSA: http://www.ncsa.illinois.edu
+
+.. _SGML: http://en.wikipedia.org/wiki/Standard_Generalized_Markup_Language
+
+.. _W3C: http://www.w3.org
+
+.. _gzip: http://www.gzip.org

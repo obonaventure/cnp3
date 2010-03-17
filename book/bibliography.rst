@@ -4,6 +4,8 @@
 
 .. [AW05] Arlitt, M. and Williamson, C. 2005. An analysis of TCP reset behaviour on the internet. SIGCOMM Comput. Commun. Rev. 35, 1 (Jan. 2005), 37-44. DOI= http://doi.acm.org/10.1145/1052812.1052823
 
+.. [B1989] Berners-Lee, T., Information Management: A Proposal, March 1989 http://www.w3.org/History/1989/proposal.html
+
 .. [BE2007] Biondi, P. and A. Ebalard, "IPv6 Routing Header  Security", CanSecWest Security Conference 2007, April 2007. http://www.secdev.org/conf/IPv6_RH_security-csw07.pdf
 
 .. [CB2003] Cheswick, William R., Bellovin, Steven M., Rubin, Aviel D. Firewalls and internet security - Second edition - Repelling the Wily Hacker, Addison-Wesley 2003
