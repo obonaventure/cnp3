@@ -262,5 +262,6 @@ Glossary
 	The HyperText Markup Language specifies the structure and the syntax of the documents that are exchanged on the world wide web. HTML is maintained by the `HTML working group <http://www.w3.org/html/wg/>`_ of the W3C_ 
 
    XML
-	The eXtensible Markup Language (XML) is a flexible text format derived from SGML. It was originally designed for the electronic publishing industry but is now used by a wide variety of applications that need to exchange structured data. The XML specifications are maintained by `several working groups <http://www.w3.org/XML/`_ of the W3C_
+	The eXtensible Markup Language (XML) is a flexible text format derived from SGML. It was originally designed for the electronic publishing industry but is now used by a wide variety of applications that need to exchange structured data. The XML specifications are maintained by `several working groups <http://www.w3.org/XML/>`_ of the W3C_
 	
+.. include:: links.rst

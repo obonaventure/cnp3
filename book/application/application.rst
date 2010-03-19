@@ -794,7 +794,7 @@ HTTP clients and servers can include many different HTTP headers in the HTTP req
  - the `Content-Type:` header is the MIME_ header that indicates the type of the attached MIME document. HTML pages use the `text/html` type.
  - the `Content-Enconding:` header indicates how the MIME_ document has been encoded. This header would be set to `x-gzip` for a document compressed by using the gzip_ software. 
 
-:rfc:`1945` and :rfc:`2616`also defines headers that are specific to HTTP responses. These server headers include :
+:rfc:`1945` and :rfc:`2616` also define headers that are specific to HTTP responses. These server headers include :
 
  - the `Server:` header indicates the version of the web server that has generated the HTTP response. Some servers provide information about the software release and optionnal modules that is uses. For security reasons, some system administrators disable these headers to avoid revealing too much information about their server to potential attackers.
  - the `Date:` header indicates when the HTTP response has been produced by the server.
@@ -845,9 +845,7 @@ The HTTP response indicates the version of the server software used with the inc
   <!DOCTYPE HTML PUBLIC .../HTML>
 
 
-HTTP was initially designed to share text documents that were self-contained.
-
-
+HTTP was initially designed to share text documents that were self-contained. For this reason, and to ease the implementation of clients and servers, the desginers of HTTP choose to open a TCP connection for each HTTP request. This implies that a client must open one TCP connection for each URI that it wants to retrieve from a server as illustrated on the figure below. On a web containing only text documents this was a reasonable design choice as the client remains usually idle while the (human) user is reading the retrieved document. 
 
 .. figure:: fig/app-fig-016-c.png
    :align: center
@@ -855,14 +853,9 @@ HTTP was initially designed to share text documents that were self-contained.
 
    HTTP 1.0 and the underlying TCP connection
 
-http 1.0 : :rfc:`1945`
+However, as the web evolved to support richer documents containing images, opening a TCP connection for each URI became a performance problem [Mogul1995]_. Indeed, besides its HTML part, a web page may include dozens of images or more. Forcing the client to open a TCP connection for each component of a web page has two important drawbacks. First, the client and the server must exchange packets to open and close a TCP connection as we will see later. This increases the network overhead and the total delay to completely retrieve all the components of a web page. Second, a large number of established TCP connections may be a performance bootleneck on servers. 
 
-http 1.1 :rfc:`2616`
-
-
-
-
-
+This problem was solved by extending HTTP to support persistent TCP connections :rfc:`2616`. A persistent connection is a TCP connection over which a client may send several HTTP requests. This is illustrated in the figure below.  
 
 .. figure:: fig/app-fig-019-c.png
    :align: center
@@ -870,14 +863,91 @@ http 1.1 :rfc:`2616`
 
    HTTP 1.1 persistent connections
 
+To allow the clients and servers to control the utilisation of these persistent TCP connections, HTTP 1.1 :rfc:`2616` defines several new HTTP headers :
 
-.. figure:: fig/app-fig-020-c.png
+ - The `Connection:` header is used with the `Keep-Alive` argument by the client to indicate that it expects the underlying TCP connection to be persistent. When this header is used with the `Close` argument, it indicates that the entity that sent it will close the underlying TCP connection at the end of the HTTP response.
+ - The `Keep-Alive:` header is used by the server to inform the client about how it agrees to use the persistent connection. A typical `Keep-Alive:` contains two parameters : the maximum number of requests that the server agrees to serve on the underlying TCP connection and the timeout (in seconds) after which the server will close an idle connection
+
+The example below shows the operation of HTTP/1.1 over a persistent TCP connection to retrieve three URIs stored on the same server. Once the connection has been established, the client sends its first request with the `Connection: keep-alive` header to request a persistent connection. ::
+
+ GET / HTTP/1.1
+ Host: www.kame.net
+ User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_2; en-us) AppleWebKit/531.22.7 (KHTML, like Gecko) Version/4.0.5 Safari/531.22.7 
+ Connection: keep-alive
+
+The server replies with the `Connection: Keep-Alive` header and indicates that it accepts a maximum of 100 HTTP requests over this connection and the it will close the connection if it remains idle for 15 seconds. ::
+
+ HTTP/1.1 200 OK
+ Date: Fri, 19 Mar 2010 09:23:37 GMT
+ Server: Apache/2.0.63 (FreeBSD) PHP/5.2.12 with Suhosin-Patch
+ Keep-Alive: timeout=15, max=100
+ Connection: Keep-Alive
+ Content-Length: 3462
+ Content-Type: text/html
+
+ <html...   </html>
+
+The client sends a second request for the style sheeet of the retrieved webpage. ::
+
+ GET /style.css HTTP/1.1
+ Host: www.kame.net
+ Referer: http://www.kame.net/
+ User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_2; en-us) AppleWebKit/531.22.7 (KHTML, like Gecko) Version/4.0.5 Safari/531.22.7
+ Connection: keep-alive
+
+The server replies with the requested style sheet and maintains the persistent connection. Note that the server only accepts 99 remaining HTTP requests over this persistent connection. ::
+
+ HTTP/1.1 200 OK
+ Date: Fri, 19 Mar 2010 09:23:37 GMT
+ Server: Apache/2.0.63 (FreeBSD) PHP/5.2.12 with Suhosin-Patch
+ Last-Modified: Mon, 10 Apr 2006 05:06:39 GMT
+ Content-Length: 2235
+ Keep-Alive: timeout=15, max=99
+ Connection: Keep-Alive
+ Content-Type: text/css
+
+ ...
+
+The last request sent by the client is for the webserver's icon [#ffavicon]_ that could be displayed by the browser. This server does not contain such URI and thus replies with a `404` HTTP status. However, the underlying TCP connection is not immediately closed. ::
+
+ GET /favicon.ico HTTP/1.1
+ Host: www.kame.net
+ Referer: http://www.kame.net/
+ User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_2; en-us) AppleWebKit/531.22.7 (KHTML, like Gecko) Version/4.0.5 Safari/531.22.7
+ Connection: keep-alive
+
+ HTTP/1.1 404 Not Found
+ Date: Fri, 19 Mar 2010 09:23:40 GMT
+ Server: Apache/2.0.63 (FreeBSD) PHP/5.2.12 with Suhosin-Patch
+ Content-Length: 318
+ Keep-Alive: timeout=15, max=98
+ Connection: Keep-Alive
+ Content-Type: text/html; charset=iso-8859-1
+
+ <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN"> ...
+
+
+As illustrated above, a client can send several HTTP requests over the same persistent TCP connection. However, it is important to note that all these HTTP requests are considered to be independant by the server. Each HTTP request must be self-contained and must include all the header that are required by the server to understand the request. The independance of the requests is one of the important design choices of HTTP. A consequence of this design choice is that when a serer processes an HTTP request, it does not use other information that the one contained in the request itself. This explains why the client adds its `User-Agent:` header in all the HTTP requests that it sends over the persistent TCP connection.
+
+However, in practice, some servers want to provide content that is tuned for each user. For example, some servers can provide information in several languages or other servers want to provide advertisements that are targeted to different types of users. For this, servers need to maintain some information about the preferences of each user and use to information to produce the content that matches ther user's preferences. Several solutions have been tested in HTTP to solve this problem and it is interesting to discuss their advantages and drawbacks.
+
+A first solution is to force the users to be authenticated. This was the solution used by ftp to control the files that each user could access. Initially, usernames and password could be included inside URIs :rfc:`1738`. However, placing passwords in clear in a potentially publically visible URI is completely insecure and this usage is now deprecated :rfc:`3986`. HTTP supports several extension headers :rfc:`2617` that can be used by a server to request the client to be authenticated and by the client to provide his/her credentials. However, usernames and passwords have not been popular on web servers because they force the human users to remember one username and one password per server. Remembering a password is acceptable when a user needs to access protected content, but users will not accept to pick a username and password to receive targeted advertisements from the web sites that they visit.
+
+A second solution to allow servers to tune that content to the needs and capabilities of the user is to rely on the different types of `Accept-*` HTTP headers. For example, the `Accept-Language:` can be used by the client to indicate its preferred languages. Unfortunately, in practice this header is usually set based on the default language of the browser and it is not possible for a user to indicate that language that it prefers to use by selecting options on each visited web server.
+
+The third, and widely adopted, solution are the HTTP cookies. HTTP cookies were initially developped as a private extension by Netscape_. They are now part of the standard :rfc:`2965`. In a nutshell, a cookie is a short string that is chosen by a server to represent a given client. Two HTTP headers are used : `Cookie:` and `Set-Cookie:`. When a server receives an HTTP request from a new client (i.e. an HTTP request that does not contain the `Cookie:` header), it generates a cookie for the client and includes it in the `Set-Cookie:` header of the returned HTTP response. The `Set-Cookie:` header contains several additional parameters including the domain names for which the cookie is valid. The client stores all received cookies on disk and every time it sends an HTTP request, it verifies whether it already knows a cookie for this domain. If so, it attaches the `Cookie:` header to the HTTP request. This is illustrated in the figure below with HTTP 1.1, but cookies also work with HTTP 1.0.
+
+.. figure:: fig/app-fig-022-c.png
    :align: center
    :scale: 50 
 
-   HTTP proxiesrequests and responses
+   HTTP cookies
 
-Email delivery protocols
+.. sidebar: Privacy issues with HTTP cookies
+
+ The HTTP cookies introduced by Netscape_ are key for large e-commerce websites. However, they have also raised many discussions concerning their `potential miuses <http://www.nytimes.com/2001/09/04/technology/04COOK.html>`_. Consider `ad.com`, a company that delivers lots of advertisements on web sites. A web site that wishes to include `ad.com`'s advertisements next to its content will add links to `ad.com` inside its HTML pages. If `ad.com` is used by many web sites, `ad.com` could be able to track the interests of all the users thatvisit its client websites and use this information to provide targeted advertisements. Privacy advocates have even `sued <http://epic.org/privacy/internet/cookies/>`_ online advertisement companies to force them to comply with the privacy regulations. More recent related technologies also raise `privacy concerns<http://www.eff.org/deeplinks/2009/09/new-cookie-technologies-harder-see-and-remove-wide>`_.
+ 
+
 
 
 Writing simple networked applications
@@ -886,49 +956,22 @@ Writing simple networked applications
 connect by name API is key !
 http://www.stuartcheshire.org/IETF72/
 
-Practice
-########
+.. for DNS mention security as well and extensions for DNSSEC
+.. for POP, the need for much stronger authentication
+.. for SMTP the problems caused by spam and so on
+.. for HTTP lots of information to be added, mention apache, mention a simple httpd server
+.. time http://tf.nist.gov/service/its.htm
 
 
-discuss briefly various implementations and mention the evolution of the protocols
 
 
-for DNS mention security as well and extensions for DNSSEC
-for POP, the need for much stronger authentication
-for SMTP the problems caused by spam and so on
-for HTTP lots of information to be added, mention apache, mention a simple httpd server
-time http://tf.nist.gov/service/its.htm
+.. Today, Napster does not work anymore as explained due to copyright violations reasons.
 
+.. One of the most efficient file transfer protocol used today is Bittorrent. Bittorrent also divides files in blocks and allows files to be downloaded from several nodes at the same time. This provides good redundancy in case of node/link failures, but also allows an efficient utilisation of the available link bandwidth by using uncongested paths (the node with the highest bandwidth will automatically serve blocks faster than a congested node). A Bittorrent node will not necessarily receive blocks in sequence. Furthermore, to ensure that all Bittorrent users contribute to the system, Bittorrent implementations apply the tit-for-tat principle which implies that once a node has received a block, it must serve this block to other nodes before being allowed to download new blocks.
 
-Historical notes
-################
+.. Additional information about the Bittorrent protocol may be found i
 
-email
-
-Ray Tomlinson first email http://openmap.bbn.com/~tomlinso/ray/firstemailframe.html 
-First spam, decnet
-X400
-Fidonet
-uucp
-bitnet
-earn
-
-DNS
-/etc/hosts.txt
-X.500
-
-www
-ottlet
-xanadu project
-ftp
-gopher
-
-
-Today, Napster does not work anymore as explained due to copyright violations reasons.
-
-One of the most efficient file transfer protocol used today is Bittorrent. Bittorrent also divides files in blocks and allows files to be downloaded from several nodes at the same time. This provides good redundancy in case of node/link failures, but also allows an efficient utilisation of the available link bandwidth by using uncongested paths (the node with the highest bandwidth will automatically serve blocks faster than a congested node). A Bittorrent node will not necessarily receive blocks in sequence. Furthermore, to ensure that all Bittorrent users contribute to the system, Bittorrent implementations apply the tit-for-tat principle which implies that once a node has received a block, it must serve this block to other nodes before being allowed to download new blocks.
-
-Additional information about the Bittorrent protocol may be found i
+.. rubric:: Footnotes
 
 .. [#fhtonl] For example, the :manpage:`htonl(3)` (resp. :manpage:`ntohl(3)`) function the standard C library converts a 32-bits unsigned integer from the byte order used by the CPU to the network byte order (resp. from the network byte order to the CPU byte order). Similar functions exist in other programming langages.
 
@@ -954,12 +997,14 @@ Additional information about the Bittorrent protocol may be found i
 
 .. [#femailheaders] The list of all standard email header lines may be found at http://www.iana.org/assignments/message-headers/message-header-index.html
 
-.. [#smtpauth] During the last years, many Internet Service Providers, campus and enterprise networks have deployed SMTP extensions :rfc:`4954` on their MSAs. These extensions for the MUAs to be authenticated before the MSA accepts an email message from the MUA. 
+.. [#fsmtpauth] During the last years, many Internet Service Providers, campus and enterprise networks have deployed SMTP extensions :rfc:`4954` on their MSAs. These extensions for the MUAs to be authenticated before the MSA accepts an email message from the MUA. 
 
 .. [#fdot] This implies that a valid email message cannot contain a line with one dot followed by `CR` and `LF`. If a user types such a line in an email, his email client will automatically add a space character before or after the dot when sending the message over SMTP.
 
 .. [#fapop] :rfc:`1939` defines another authentication scheme that is not vulnerable to such attackers.
 
 .. [#furilist] The list of standard URI schemes is maintained by IANA_ at http://www.iana.org/assignments/uri-schemes.html
+
+.. [#ffavicon] Favorite icons are small icons that are used to represent webservers in the toolbar of Internet browsers. Microsoft added this feature in their browsers without taking into account the W3C standards. See http://www.w3.org/2005/10/howto-favicon for a discussion on how to cleanly support such favorite icons.
 
 .. include:: ../links.rst

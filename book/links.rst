@@ -201,3 +201,5 @@
 .. _W3C: http://www.w3.org
 
 .. _gzip: http://www.gzip.org
+
+.. _Netscape: http://en.wikipedia.org/wiki/Netscape
