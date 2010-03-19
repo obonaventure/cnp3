@@ -943,7 +943,7 @@ The third, and widely adopted, solution are the HTTP cookies. HTTP cookies were 
 
    HTTP cookies
 
-.. sidebar: Privacy issues with HTTP cookies
+.. sidebar:: Privacy issues with HTTP cookies
 
  The HTTP cookies introduced by Netscape_ are key for large e-commerce websites. However, they have also raised many discussions concerning their `potential miuses <http://www.nytimes.com/2001/09/04/technology/04COOK.html>`_. Consider `ad.com`, a company that delivers lots of advertisements on web sites. A web site that wishes to include `ad.com`'s advertisements next to its content will add links to `ad.com` inside its HTML pages. If `ad.com` is used by many web sites, `ad.com` could be able to track the interests of all the users thatvisit its client websites and use this information to provide targeted advertisements. Privacy advocates have even `sued <http://epic.org/privacy/internet/cookies/>`_ online advertisement companies to force them to comply with the privacy regulations. More recent related technologies also raise `privacy concerns<http://www.eff.org/deeplinks/2009/09/new-cookie-technologies-harder-see-and-remove-wide>`_.
  
@@ -953,8 +953,10 @@ The third, and widely adopted, solution are the HTTP cookies. HTTP cookies were 
 Writing simple networked applications
 =====================================
 
-connect by name API is key !
-http://www.stuartcheshire.org/IETF72/
+.. todo::
+
+ To be written : connect by name API is key !
+ http://www.stuartcheshire.org/IETF72/
 
 .. for DNS mention security as well and extensions for DNSSEC
 .. for POP, the need for much stronger authentication

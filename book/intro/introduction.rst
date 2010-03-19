@@ -205,7 +205,7 @@ Four types of primitives are defined :
 The reference models
 ####################
 
-Given the growing complexity of computer networks, network researchers proposed during the 1970s reference models that allow to describe network protocols and services. The Open Systems Interconnection (OSI) model [Zimmermann80] was probably the most influencial one. It was the basis for the standardisation work performed within the :term:`ISO` to develop global computer network standards. The  reference model that we use in this book can be considered as a simplified version of the OSI reference model [#fiso-tcp]_.
+Given the growing complexity of computer networks, network researchers proposed during the 1970s reference models that allow to describe network protocols and services. The Open Systems Interconnection (OSI) model [Zimmermann80]_ was probably the most influencial one. It was the basis for the standardisation work performed within the :term:`ISO` to develop global computer network standards. The  reference model that we use in this book can be considered as a simplified version of the OSI reference model [#fiso-tcp]_.
 
 The five layers reference model
 -------------------------------
