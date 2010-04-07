@@ -6,11 +6,7 @@
 Welcome to CNP3-Practice's documentation!
 =========================================
 
-This document contains the questions for the practical part of the
-INGI2141 course during the 2009-2010 academic year. The html and pdf
-versions will be updated every week. These exercises have been written
-by `Olivier Bonaventure`_, `Mickael Hoerdt`_, `Laurent Vanbever`_ and 
-`Virginie van den Schriek`_
+.. This document contains the questions for the practical part of the INGI2141 course during the 2009-2010 academic year. The html and pdf versions will be updated every week. These exercises have been written by `Olivier Bonaventure`_, `Mickael Hoerdt`_, `Laurent Vanbever`_ and `Virginie van den Schriek`_
 
 .. toctree::
    :maxdepth: 1

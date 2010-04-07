@@ -11,7 +11,7 @@ As the transport layer is built on top of the network layer, it is important to 
  - the connectionless network layer service may delay, reorder or even duplicate SDUs
 
 
-.. figure:: fig/transport-fig-001-c.png
+.. figure:: png/transport-fig-001-c.png
    :align: center
    :scale: 70 
 
@@ -48,7 +48,7 @@ The transport layer entity interacts with a user in the application layer and al
 
 This is illustrated in the figure below.
 
-.. figure:: fig/transport-fig-007-c.png
+.. figure:: png/transport-fig-007-c.png
    :align: center
    :scale: 70 
 
@@ -57,7 +57,7 @@ This is illustrated in the figure below.
 
 When running on top of a perfect connectionless network service, a transport level entity can simply issue a `send(SDU)` upon arrival of `DATA.req(SDU)`. Similarly, the receiver issues a `DATA.ind(SDU)` upon reception of a `recvd(SDU)`. Such a simple protocol is sufficient when a single SDU is sent. 
 
-.. figure:: fig/transport-fig-004-c.png
+.. figure:: png/transport-fig-004-c.png
    :align: center
    :scale: 70 
 
@@ -78,7 +78,7 @@ These two types of segments can be distinguished by using a segment composed of 
 
 The transport entity can then be modelled as a finite state machine containing two states for the receiver and two states for the sender. The figure below provides a graphical representation of this state machine with the sender above and the receiver below.
 
-.. figure:: fig/transport-fig-008-c.png
+.. figure:: png/transport-fig-008-c.png
    :align: center
    :scale: 70 
 
@@ -86,7 +86,7 @@ The transport entity can then be modelled as a finite state machine containing t
 
 The above FSM shows that the sender has to wait for an acknowledgement from the receiver before being able to transmit the next SDU.  The figure below illustrates the exchange of a few segments between two hosts.
 
-.. figure:: fig/transport-fig-009-c.png
+.. figure:: png/transport-fig-009-c.png
    :align: center
    :scale: 70 
 
@@ -149,7 +149,7 @@ The simplest error detection scheme is the checksum. A checksum is basically an 
 
 The second imperfection of the network layer is that it may lose segments. As we will see later, the main cause of packet losses in the network layers is the lack of buffers in intermediate routers. Since the receiver sends an acknowledgement segment after having received each segment, the simplest solution to deal with losses is to use a retransmission timer. When the sender sends a segment, it starts a retransmission timer. The value of this retransmission timer should be larger than the `round-trip-time`, i.e. the delay between the transmission of a data segment and the reception of the corresponding acknowledgement. When the retransmission timer expires, the sender assumes that the data segment has been lost and retransmits it. This is illustrated in the figure below.
 
-.. figure:: fig/transport-fig-018-c.png
+.. figure:: png/transport-fig-018-c.png
    :align: center
    :scale: 70 
 
@@ -159,7 +159,7 @@ The second imperfection of the network layer is that it may lose segments. As we
 Unfortunately, retransmission timers alone are not sufficient to recover from segment losses. Let us for example consider the situation depicted below where an acknowledgement is lost. In this case, the sender retransmits the data segment that has not been acknowledged. Unfortunately, as illustrated in the figure below, the receiver considers the retransmission as a new segment whose payload must be delivered to its user.
 
 
-.. figure:: fig/transport-fig-019-c.png
+.. figure:: png/transport-fig-019-c.png
    :align: center
    :scale: 70 
 
@@ -175,7 +175,7 @@ To solve this problem, transport protocols associate a `sequence number` to each
 
 The Alternating Bit Protocol uses a single bit to encode the sequence number. It can be implemented by using a simple Finite State Machine. 
 
-.. figure:: fig/transport-fig-021-c.png
+.. figure:: png/transport-fig-021-c.png
    :align: center
    :scale: 70 
 
@@ -187,7 +187,7 @@ The initial state of the sender is `Wait for D(0,...)`. In this state, the sende
 The receiver first waits for `D(0,...)`. If the segment has a correct `CRC`, it passes the SDU to its user and sends `OK0`. Then, the receiver waits for `D(1,...)`. In this state, it may receive a duplicate `D(0,...)` or a data segment with an invalid CRC. In both cases, it returns an `OK0` segment to allow the sender to recover from the possible loss of the previous `OK0` segment.
 
 
-.. figure:: fig/transport-fig-022-c.png
+.. figure:: png/transport-fig-022-c.png
    :align: center
    :scale: 70 
 
@@ -196,7 +196,7 @@ The receiver first waits for `D(0,...)`. If the segment has a correct `CRC`, it 
 
 The figure below illustrates the operation of the alternating bit protocol.
 
-.. figure:: fig/transport-fig-023-c.png
+.. figure:: png/transport-fig-023-c.png
    :align: center
    :scale: 70 
 
@@ -213,7 +213,7 @@ The figure below illustrates the operation of the alternating bit protocol.
 The Alternating Bit Protocol can recover from the transmission errors and the segment losses. However, it has one important drawback. Consider two hosts that are directly connected by a 50 Kbits/sec satellite link that has a 250 milliseconds propagation delay. If these hosts send 1000 bits segments, then the maximum throughput that can be achieved by the alternating bit protocol is one segment every :math:`20+250+250=520` milliseconds if we ignore the transmission time of the acknowledgement. This is less than 2 Kbits/sec ! 
 
 .. 
-  figure:: fig/transport-fig-024-c.png
+  figure:: png/transport-fig-024-c.png
   :align: center
   :scale: 70 
   Performance of the alternating bit protocol
@@ -224,7 +224,7 @@ Go-back-n and selective repeat
 
 To overcome the performance limitations of the alternating bit protocol, transport protocols rely on `pipelining`. This technique allows a sender to transmit several consecutive segments without being forced to wait for an acknowledgement after each segment. Each data segment contains a sequence number encoded in a `n` bits field.
 
-.. figure:: fig/transport-fig-025-c.png
+.. figure:: png/transport-fig-025-c.png
    :align: center
    :scale: 70 
 
@@ -234,7 +234,7 @@ To overcome the performance limitations of the alternating bit protocol, transpo
 
 This is implemented by using a `sliding window`. The sliding window is the set of consecutive sequence numbers that the sender can use when transmitting segments without being forced to wait for an acknowledgement. The figure below shows a sliding window that contains five segments (`6,7,8,9` and `10`). Two of these sequence numbers (`6` and `7`) have been used to send segments and only three sequence numbers (`8`, `9` and `10`) remain in the sliding window. The sliding window is said to be closed once all sequence numbers contained in the sliding window have been used. 
 
-.. figure:: fig/transport-fig-026-c.png
+.. figure:: png/transport-fig-026-c.png
    :align: center
    :scale: 70 
 
@@ -243,7 +243,7 @@ This is implemented by using a `sliding window`. The sliding window is the set o
 The figure below illustrates the operation of the sliding window. The sliding window contains three segments. The sender can thus transmit three segments before being forced to wait for an acknowledgement. The sliding window moves to the higher sequence numbers upon reception of acknowledgements. When the first acknowledgement (`OK0`) is received, it allows the sender to move its sliding window to the right and sequence number `3` becomes available. This sequence number is used later to transmit SDU `d`.
 
 
-.. figure:: fig/transport-fig-027-c.png
+.. figure:: png/transport-fig-027-c.png
    :align: center
    :scale: 70 
 
@@ -253,7 +253,7 @@ The figure below illustrates the operation of the sliding window. The sliding wi
 In practice, as the segment header encodes the sequence number in a `n` bits string, only the sequence numbers between :math:`0` and :math:`2^{n}-1` can be used. This implies that the same sequence number is used for different segments and that the sliding window will wrap. This is illustrated in the figure below assuming that `2` bits are used to encode the sequence number in the segment header. Note that upon reception of `OK1`, the sender slides its window and can reuse sequence number `0`.
 
 
-.. figure:: fig/transport-fig-028-c.png
+.. figure:: png/transport-fig-028-c.png
    :align: center
    :scale: 70 
 
@@ -276,7 +276,7 @@ The simplest sliding window protocol uses `go-back-n` recovery. Intuitively, `go
 The figure below shows the FSM of a simple `go-back-n` receiver. This receiver uses two variables : `lastack` and `next`. `next` is the next expected sequence number and `lastack` the sequence number of the last data segment that has been acknowledged. The receiver only accepts the segments that are received in sequence. `maxseq` is the number of different sequence numbers (:math:`2^n`).
 
 
-.. figure:: fig/transport-fig-029-c.png
+.. figure:: png/transport-fig-029-c.png
    :align: center
    :scale: 70 
 
@@ -286,7 +286,7 @@ The figure below shows the FSM of a simple `go-back-n` receiver. This receiver u
 A `go-back-n` sender is also very simple. It uses a sending buffer that can store an entire sliding window of segments [#fsizesliding]_ . The segments are sent with increasing sequence number (modulo `maxseq`). The sender must wait for an acknowledgement once its sending buffer is full. When a `go-back-n` sender receives an acknowledgement, it removes from the sending buffer all the acknowledged segments. It uses a retransmission timer to detect segment losses. A simple `go-back-n` sender maintains one retransmission timer per connection. This timer is started when the first segment is sent. When the `go-back-n sender` receives an acknowledgement, it restarts the retransmission timer only if there are still unacknowledged segments. When the retransmission timer expires, the `go-back-n` sender assumes that all the unacknowledged segments that are stored in its sending buffer have been lost. It thus retransmits all the unacknowledged segments and restarts its retransmission timer.
 
 
-.. figure:: fig/transport-fig-030-c.png
+.. figure:: png/transport-fig-030-c.png
    :align: center
    :scale: 70 
 
@@ -295,7 +295,7 @@ A `go-back-n` sender is also very simple. It uses a sending buffer that can stor
 
 The operation of `go-back-n` is illustrated in the figure below. In this figure, note that upon reception of the out-of-sequence segment `D(2,c)`, the receiver returns a cumulative acknowledgements `C(OK,0)` that acknowledges all the segments that were received in sequence. The lost segment is retransmitted upon the expiration of the retransmission timer.
 
-.. figure:: fig/transport-fig-032-c.png
+.. figure:: png/transport-fig-032-c.png
    :align: center
    :scale: 70 
 
@@ -313,7 +313,7 @@ The main advantage of `go-back-n` is that it can be easily implemented. It can p
 
 A `selective repeat` receiver maintains a sliding window of `W` segments and stores in a buffer the out-of-sequence segments that it receives. The figure below shows a five segment receive window on a receiver that has already received segments `7` and `9`.
 
-.. figure:: fig/transport-fig-033-c.png
+.. figure:: png/transport-fig-033-c.png
    :align: center
    :scale: 70 
 
@@ -327,7 +327,7 @@ The `selective repeat` sender maintains a sending buffer that can store up to `W
 
 The figure below illustrates the operation of `selective repeat` when segments are lost. In this figure, `C(OK,x)` is used to indicate that all segments, up to and including sequence number `x` have been received correctly.
 
-.. figure:: fig/transport-fig-037-c.png
+.. figure:: png/transport-fig-037-c.png
    :align: center
    :scale: 70 
 
@@ -353,7 +353,7 @@ In the figure above, when the sender receives `C(OK,0,[2])`, it knows that all s
 To deal with this issue, transport protocols allow the receiver to advertise the current size of its receiving window in all the acknowledgements that it sends. The receiving window advertised by the receiver bounds the size of the sending buffer used by the sender. In practice, the sender maintains two state variables : `swin`, the size of its sending window (that may be adjuster by the system) and `rwin`, the size of the receiving window advertised by the receiver. At any time, the number of unacknowledged segments cannot be larger than `min(swin,rwin)` [#facklost]_ . The utilisation of dynamic windows is illustrated in the figure below.
 
 
-.. figure:: fig/transport-fig-039-c.png
+.. figure:: png/transport-fig-039-c.png
    :align: center
    :scale: 70 
 
@@ -361,7 +361,7 @@ To deal with this issue, transport protocols allow the receiver to advertise the
 
 The receiver may adjust its advertised receive window based on its current memory consumption but also to limit the bandwidth used by the sender. In practice, the receive buffer can also shrink because the application is not able to process the received data quickly enough. In this case, the receive buffer may be completely full and the advertised receive window may shrink to `0`. When the sender receives an acknowledgement with a receive window set to `0`, it is blocked until it receives an acknowledgement with a positive receive window. Unfortunately, as shown in the figure below, the loss of this acknowledgement could cause a deadlock as the sender waits for an acknowledgement while the receiver is waiting for a data segment.
 
-.. figure:: fig/transport-fig-040-c.png
+.. figure:: png/transport-fig-040-c.png
    :align: center
    :scale: 70 
 
@@ -378,7 +378,7 @@ To solve this problem, transport protocols rely on a special timer : the `persis
 
 To conclude our description of the basic mechanisms found in transport protocols, we still need to discuss the impact of segments reordering. If two consecutive segments are reordered, the receiver relies on their sequence numbers to reorder them in its receive buffer. Unfortunately, as transport protocols reuse the same sequence number for different segments, if a segment is delayed for a too long time, it might still be accepted by the receiver. This is illustrated in the figure below where segment `D(1,b)` is delayed.
 
-.. figure:: fig/transport-fig-041-c.png
+.. figure:: png/transport-fig-041-c.png
    :align: center
    :scale: 70 
 
@@ -392,7 +392,7 @@ To deal with this problem, transport protocols combine two solutions. First, the
 
 Transport protocols often need to send data in both directions. To reduce the overhead caused by the acknowledgements, most transport protocols use `piggybacking`. Thanks to this technique, a transport entity can place inside the header of the data segments that it sends the acknowledgements and the receive window that it advertises for the opposite direction of the data flow. The main advantage of piggybacking is that it reduces the overhead as it is not necessary to send a complete segment to carry an acknowledgement. This is illustrated in the figure below where the acknowledgement number is underlined in the data segments. Piggybacking is only used when data flows in both directions. A receiver will generate a pure acknowledgement when it does not send data in the opposite direction as shown in the bottom of the figure.
 
-.. figure:: fig/transport-fig-043-c.png
+.. figure:: png/transport-fig-043-c.png
    :align: center
    :scale: 70 
 
@@ -403,7 +403,7 @@ Transport protocols often need to send data in both directions. To reduce the ov
 
 The last point to be discussed about the data transfer mechanisms used by transport protocols is the provision of a byte stream service. As indicated in the first chapter, the byte stream service is widely used in the transport layer. The transport protocols that provide a byte stream service associate a sequence number to all the bytes that are sent and place the sequence number of the first byte of the segment in the segment's header. This is illustrated in the figure below. In this example, the sender choose to put two bytes in each of the first three segments. This is due to graphical reasons, a real transport protocol would use larger segments in practice. However, the division of the byte stream in segments combined with the losses and retransmissions explain why the byte stream service does not preserve the SDU boundaries.
 
-.. figure:: fig/transport-fig-044-c.png
+.. figure:: png/transport-fig-044-c.png
    :align: center
    :scale: 70 
 
@@ -418,7 +418,7 @@ The last points to be discussed about the transport protocol are the mechanisms 
 
 We explained in the first chapters the service primitives that are used to establish a connection. The simplest approach to establish a transport connection would be to define two special control segments : `CR` and `CA`. The `CR` segment is sent by the transport entity that wishes to initiate a connection. If the remote entity wishes to accept the connection, it replies by sending a `CA` segment. The transport connection is considered to be established once the `CA` segment has been received and data segments can be sent in both directions.
  
-.. figure:: fig/transport-fig-045-c.png
+.. figure:: png/transport-fig-045-c.png
    :align: center
    :scale: 70 
 
@@ -431,7 +431,7 @@ Second, as the network layer is imperfect, the `CR` or `CA` segment can be lost,
 Unfortunately, this scheme is not sufficient to ensure the reliability of the transport service. Consider for example a short-lived transport connection where a single, but important (e.g. money transfer from a bank account) is sent. Such a short-lived connection starts with a `CR` segment acknowledged by a `CA` segment, then the data segment is sent, acknowledged and the connection terminates. Unfortunately, as the network layer service is unreliable, delays combined to retransmissions may lead to the situation depicted in the figure below where delayed `CR` and data segments from a former connection are accepted by the receiving entity as valid segments and the corresponding data is delivered to the user. Duplicating SDUs is not acceptable, and the transport protocol must solve this problem. 
 
 
-.. figure:: fig/transport-fig-047-c.png
+.. figure:: png/transport-fig-047-c.png
    :align: center
    :scale: 70 
 
@@ -448,7 +448,7 @@ A classical solution to avoid remembering the previous transport connections to 
  - the `transport clock` is implemented as a `k` bits counter and its clock cycle is such that :math:`2^k \times cycle >> MSL`. Furthermore, the `transport clock` counter is incremented every clock cycle and after each connection establishment. This clock is illustrated in the figure below.
  - the `transport clock` must continue to be incremented even if the transport entity stops or reboots
 
-.. figure:: fig/transport-fig-048-c.png
+.. figure:: png/transport-fig-048-c.png
    :align: center
    :scale: 70 
 
@@ -469,7 +469,7 @@ The `transport clock` is combined with an exchange of three segments that is cal
 
  The three way handshake is illustrated in the figure below.
 
-.. figure:: fig/transport-fig-049-c.png
+.. figure:: png/transport-fig-049-c.png
    :align: center
    :scale: 70 
 
@@ -479,7 +479,7 @@ Thanks to the three way handshake, transport entities avoid duplicate transport 
 
 The first scenario is when the remote entity receives an old `CR` segment. It considers this `CR` segment as a connection establishment attempt and replies by sending a `CA` segment. However, the initiating host cannot match the received `CA` segment with a previous connection attempt. It sends a control segment (`REJECT` in the figure below) to cancel the spurious connection attempt. The remote entity cancels the connection attempt upon reception of this control segment. 
 
-.. figure:: fig/transport-fig-050-c.png
+.. figure:: png/transport-fig-050-c.png
    :align: center
    :scale: 70 
 
@@ -488,7 +488,7 @@ The first scenario is when the remote entity receives an old `CR` segment. It co
 A second scenario is when the initiating entity sends a `CR` segment that does not reach the remote entity and receives a duplicate `CA` segment from a previous connection attempt. This duplicate `CA` segment cannot contain a valid acknowledgement for the `CR` segment as the sequence number of the `CR` segment was extracted from the transport clock of the initiating entity. The `CA` segment is thus rejected and the `CR` segment is retransmitted upon expiration of the retransmission timer.
 
 
-.. figure:: fig/transport-fig-051-c.png
+.. figure:: png/transport-fig-051-c.png
    :align: center
    :scale: 70 
 
@@ -496,7 +496,7 @@ A second scenario is when the initiating entity sends a `CR` segment that does n
 
 The last scenario is less likely, but it it important to consider it as well. The remote entity receives and old `CR` segment. It notes the connection attempt and acknowledges it by sending a `CA` segment. The initiating entity does not have a matching connection attempt and replies by sending a `REJECT`. Unfortunately, this segment never reaches the remote entity. Instead, the remote entity receives a retransmission of an older `CA` segment that contains the same sequence number as the first `CR` segment. This `CA` segment cannot be accepted by the remote entity as a confirmation of the transport connection as its acknowledgement number cannot have the same value as the sequence number of the first `CA` segment. 
 
-.. figure:: fig/transport-fig-052-c.png
+.. figure:: png/transport-fig-052-c.png
    :align: center
    :scale: 70 
 
@@ -510,7 +510,7 @@ When we discussed the connection-oriented service, we mentionned that there are 
 The first solution to release a transport connection is to define a new control segment (e.g. the `DR` segment) and consider the connection to be released once this segment has been sent or received. This is illustrated in the figure below.
 
 
-.. figure:: fig/transport-fig-053-c.png
+.. figure:: png/transport-fig-053-c.png
    :align: center
    :scale: 70 
 
@@ -522,7 +522,7 @@ As the entity that sends the `DR` segment cannot know whether the other entity h
 
 The second method to release a transport connection is to release independently the two directions of data transfer. Once a user of the transport service has sent all its SDUs, it performs a `DISCONNECT.req` for its direction of data transfer. The transport entity sends a control segment to request the release of the connection *after* the delivery of all previous SDUs to the remote user. This is usually done by placing in the `DR` the next sequence number and by delivering the `DISCONNECT.ind` only after all previous `DATA.ind`. The remote entity confirms the reception of the `DR` segment and the release of the corresponding direction of data transfer by returning an acknowledgement. This is illustrated in the figure below.
 
-.. figure:: fig/transport-fig-054-c.png
+.. figure:: png/transport-fig-054-c.png
    :align: center
    :scale: 70 
 
@@ -546,7 +546,7 @@ Compared to the connectionless network layer service, the main advantage of the 
 
 The figure below shows a typical usage of the UDP port numbers. The client process uses port number `1234` while the server process uses port number `5678`. When the client sends a request, it is identified as originating from port number `1234` on the client host and destined to port number `5678` on the server host. When the server process replies to this request, the server's UDP implementation will send the reply as originating from port  `5678` on the server host and destined to port `1234` on the client host.
 
-.. figure:: fig/transport-fig-056-c.png
+.. figure:: png/transport-fig-056-c.png
    :align: center
    :scale: 70 
 
@@ -564,7 +564,7 @@ UDP uses a single segment format shown below. The UDP header contains four field
  - a 16 bits checksum
 
 
-.. figure:: fig/transport-fig-055-c.png
+.. figure:: png/transport-fig-055-c.png
    :align: center
    :scale: 70 
 
@@ -620,7 +620,7 @@ On the global Internet, most of the applications used in the wide area rely on T
  
 To provide this service, TCP relies on a simple segment format. Each TCP segment contains a header described below and optionally a payload. The default length of the TCP header is twenty bytes, but some TCP headers contain options.
 
-.. figure:: fig/transport-fig-058-c.png
+.. figure:: png/transport-fig-058-c.png
    :align: center
    :scale: 70 
 
@@ -654,7 +654,7 @@ A TCP header contains the following fields :
  
 .. _fig-tcpports:
 
-.. figure:: fig/transport-fig-057-c.png
+.. figure:: png/transport-fig-057-c.png
    :align: center
    :scale: 70 
 
@@ -692,7 +692,7 @@ This segment is often called a `SYN+ACK` segment. The acknowledgment confirms to
 
 At this point, the TCP connection is open and both the client and the server are allowed to send TCP segments containing data. This is illustrated in the figure below. 
 
-.. figure:: fig/transport-fig-059-c.png
+.. figure:: png/transport-fig-059-c.png
    :align: center
    :scale: 70 
 
@@ -715,7 +715,7 @@ In the figure above, the connection is considered established by the client once
 
 A server could, of course, refuse to open a TCP connection upon reception of a `SYN` segment. This refusal may be due to various reasons. There may be no server process that is listening on the destination port of the `SYN` segment. The server could always refuse connection establishments from this particular client (e.g. due to security reasons) or the server may not have enough resources to accept a new TCP connection at that time. In this case, the server would reply with a TCP segment having its `RST` flag and containing the `sequence number` of the received `SYN` segment as its `acknowledgment number`. This is illustrated in the figure below. We discuss the other utilizations of the TCP `RST` flag later (see :ref:`TCPRelease`).
 
-.. figure:: fig/transport-fig-061-c.png
+.. figure:: png/transport-fig-061-c.png
    :align: center
    :scale: 70 
 
@@ -723,7 +723,7 @@ A server could, of course, refuse to open a TCP connection upon reception of a `
 
 The TCP connection establishment can be described as the four states Finite State Machine shown below. In this FSM, `!X` (resp. `?Y`) indicates the transmission of segment `X` (resp. reception of segment `Y`) during the corresponding transition. `Init` is the initial state. 
 
-.. figure:: fig/transport-fig-063-c.png
+.. figure:: png/transport-fig-063-c.png
    :align: center
    :scale: 70 
 
@@ -733,7 +733,7 @@ A client host starts in the `Init` state. It then sends a `SYN` segment and ente
 
 Besides these two paths in the TCP connection establishment FSM, there is a third path that corresponds to the case when both the client and the server send a `SYN` segment to open a TCP connection [#ftcpboth]_. In this case, the client and the server send a `SYN` segment and enter the `SYN Sent` state. Upon reception of the `SYN` segment sent by the other host, they reply by sending a `SYN+ACK` segment and enter the `SYN RCVD` state. The `SYN+ACK` that arrives from the other host allows it to transition to the `Established` state. The figure below illustrates such a simultaneous establishment of a TCP connection.
 
-.. figure:: fig/transport-fig-062-c.png
+.. figure:: png/transport-fig-062-c.png
    :align: center
    :scale: 70 
 
@@ -821,7 +821,7 @@ The normal way of terminating a TCP connection is by using the graceful TCP conn
 
 .. _fig-tcprelease:
 
-.. figure:: fig/transport-fig-067-c.png
+.. figure:: png/transport-fig-067-c.png
    :align: center
    :scale: 70 
 
@@ -911,7 +911,7 @@ This algorithm, called the Nagle algorithm, takes a few lines of code in all TCP
 
 The figure below provides a distribution of the packet sizes measured on a link. It shows a three-modal distribution of the packet size. 50% of the packets contain pure TCP acknowledgements and occupy 40 bytes. About 20% of the packets contain about 500 bytes [#fmss500]_ of user data and 12% of the packets contain 1460 bytes of user data. However, most of the user data is transported in large packets. This packet size distribution has implications on the design of routers as we discuss in the next chapter.
 
-.. figure:: fig/transport-fig-079-c.png
+.. figure:: png/transport-fig-079-c.png
    :align: center
    :scale: 70 
 
@@ -961,7 +961,7 @@ In a go-back-n transport protocol such as TCP, the retransmission timeout must b
 
 A good setting of the retransmission timeout clearly depends on an accurate estimation of the round-trip-time on each TCP connection. The round-trip-time differs between TCP connections, but may also change during the lifetime of a single connection. For example, the figure below shows the evolution of the round-trip-time  between two hosts during a period of 45 seconds.
 
-.. figure:: fig/transport-fig-070-c.png
+.. figure:: png/transport-fig-070-c.png
    :align: center
    :scale: 70 
 
@@ -970,7 +970,7 @@ A good setting of the retransmission timeout clearly depends on an accurate esti
 
 The easiest solution to measure the round-trip-time on a TCP connection is to measure the delay between the transmission of a data segment and the reception of a corresponding acknowledgement [#frttmes]_. As illustrated in the figure below, this measurement works well when there are no segment losses.
 
-.. figure:: fig/transport-fig-072-c.png
+.. figure:: png/transport-fig-072-c.png
    :align: center
    :scale: 70 
 
@@ -981,7 +981,7 @@ However, when a data segment is lost, as illustrated in the bottom part of the f
 
 To avoid this ambiguity in the estimation of the round-trip-time when segments are retransmitted, recent TCP implementations rely on the `timestamp option` defined in :rfc:`1323`. This option allows a TCP sender to place two 32 bits timestamps in each TCP segment that it sends. The first timestamp, TS Value (`TSval`) is chosen by the sender of the segment. It could for example be the current value of its real-time clock [#ftimestamp]_. The second value, TS Echo Reply (`TSecr`), is the last `TSval` that was received from the remote host and stored in the :term:`TCB`. The figure below shows how the utilization of this timestamp option allows the disembiguate the round-trip-time measurement when there are retransmissions.
   
-.. figure:: fig/transport-fig-073-c.png
+.. figure:: png/transport-fig-073-c.png
    :align: center
    :scale: 70  
 
@@ -1015,7 +1015,7 @@ Then, when other rtt measurements are collected, `srtt` and `rttvar` are updated
 The proposed values for the parameters are :math:`\alpha=\frac{1}{8}` and :math:`\beta=\frac{1}{4}`. This allows a TCP implementation implemented in the kernel to perform the `rtt` computation by using shift operations instead of the more costly floating point operations [Jacobson1988]_. The figure below illustrates the computation of the `rto` upon `rtt` changes.
 
 
-.. figure:: fig/transport-fig-071-c.png
+.. figure:: png/transport-fig-071-c.png
    :align: center
    :scale: 70 
 
@@ -1068,7 +1068,7 @@ The first extension that was proposed is the fast retransmit heuristics. This ex
 
 From a performance viewpoint, one issue with the TCP's `retransmission timeout` is that when there are isolated segment losses, the TCP sender often remains idle waiting for the expiration of its retransmission timeouts. Such isolated losses are frequent in the global Internet [Paxson99]_.  A heuristic to deal with isolated losses without waiting for the expiration of the retransmission timeout has been included in many TCP implementations since the early 1990s. To understand this heuristic, let us consider the figure below that shows the segments exchanged over a TCP connection when an isolated segment is lost.
 
-.. figure:: fig/transport-fig-074-c.png 
+.. figure:: png/transport-fig-074-c.png 
    :align: center
    :scale: 70 
 
@@ -1090,7 +1090,7 @@ This heuristic requires an additional variable in the TCB (`dupacks`). Most impl
 
 The figure below illustrates the operation of the `fast retransmit` heuristic.
 
-.. figure:: fig/transport-fig-075-c.png 
+.. figure:: png/transport-fig-075-c.png 
    :align: center
    :scale: 70 
 
@@ -1101,7 +1101,7 @@ The figure below illustrates the operation of the `fast retransmit` heuristic.
 
 When losses are not isolated or when the windows are small, the performance of the `fast retransmit` heuristics decreases. In such environments, it is necessary to allow a TCP sender to use a selective repeat strategy instead of the default go-back-n strategy. Implementing selective-repeat requires a change to the TCP protocol as the receiver needs to be able to inform the sender of the out-of-order segments that it has already received. This can be done by using the Selective Acknowledgements (SACK) option defined in :rfc:`2018`. This TCP option is negotiated during the establishment of a TCP connection. If both TCP hosts support the option, SACK blocks can be attached by the receiver to the segments that it sends. SACK blocks allow a TCP receiver to indicate the blocks of data that it has received correctly but out of sequence. The figure below illustrates the utilisation of the SACK blocks.
 
-.. figure:: fig/transport-fig-076-c.png 
+.. figure:: png/transport-fig-076-c.png 
    :align: center
    :scale: 70 
 
@@ -1132,7 +1132,7 @@ In the previous sections, we have explained the mechanisms that TCP uses to deal
 
 To better understand this problem, let us consider the scenario shown in the figure below where a server (`A`) attached to a `10 Mbps` link is sending TCP segments to a laptop (`C`) attached to a `2 Mbps` link.
 
-.. figure:: fig/transport-fig-090-c.png 
+.. figure:: png/transport-fig-090-c.png 
    :align: center
    :scale: 70 
 
@@ -1141,7 +1141,7 @@ To better understand this problem, let us consider the scenario shown in the fig
 In this network, the TCP segments sent by the server reach router `R1`. `R1` forward the segments towards router `R2`. Router `R2` can potentially receive segments at `10 Mbps`, but it can only forward them at `2 Mbps` to host `C`.  Router `R2` contains buffers that allow it to store the packets that cannot be immediately forwarded to their destination. To understand the operation of TCP in this environment, let us consider a simplified model of this network where host `A` is attached to a `10 Mbps` link to a queue that represents the buffers of router `R2`. This queue is emptied at a rate of `2 Mbps`.
 
 
-.. figure:: fig/transport-fig-082-c.png 
+.. figure:: png/transport-fig-082-c.png 
    :align: center
    :scale: 70 
 
@@ -1155,7 +1155,7 @@ However, TCP is not always used in this environement. In the global Internet, TC
 
 .. index:: congestion collapse
 
-.. figure:: fig/transport-fig-083-c.png 
+.. figure:: png/transport-fig-083-c.png 
    :align: center
    :scale: 70 
 
@@ -1167,7 +1167,7 @@ If many TCP senders are attached to the left part of the network above, they all
 
 The `congestion collapse` is a problem that faces all heterogenous networks. Different mechanisms have been proposed in the scientific literature to avoid or control network congestion. Some of them have been implemented and deployed in real networks. To understand this problem in more details, let us first consider a simple network with two hosts attached to a high bandwidth link that are sending segments to destination `C` attached to a low bandwidth link as depicted below.
 
-.. figure:: fig/transport-fig-080-c.png 
+.. figure:: png/transport-fig-080-c.png 
    :align: center
    :scale: 70 
 
@@ -1188,7 +1188,7 @@ Let us first consider the simple problem of a set of :math:`i` hosts that share 
 
 To visualise the different rate allocations, it is useful to consider the graph shown below. In this graph, we plot on the `x-axis` (resp. `y-axis`) the rate allocated to host `B` (resp. `A`). A point in the graph :math:`(r_B,r_A)` Corresponds to a possible allocation of the transmission rates. Since there is a `2 Mbps` bottleneck link in this network, the graph can be divided in two regions. The  lower left part of the graph contains all allocations :math:`(r_B,r_A)` that are such that the bottleneck link is not congested (:math:`r_A+r_B<2`). The right border of this region is the `efficiency line`, i.e. the set of allocations that completely utilise the bottleneck link (:math:`r_A+r_B=2`). Finally, the `fairness line` is the set of fair allocations. 
 
-.. figure:: fig/transport-fig-092-c.png 
+.. figure:: png/transport-fig-092-c.png 
    :align: center
    :scale: 70 
 
@@ -1205,7 +1205,7 @@ A congestion control scheme can be modelled as an algorithm that adapts the tran
 
 Let us focus on the binary feedback scheme which is today the most widely used. Intuitively, the congestion control scheme should decrease the transmission rate of a host when congestion has been detected in the network to avoid congestion collapse. Furthermore, the hosts should increase their transmission rate when the network is not congested. Otherwise, the hosts would not be able to efficiently utilise the network. The rate allocated to each host fluctuates with time depending on the feedback received from the network. The figure below illustrates the evolution of the transmission rates allocated to two hosts in our simple network. Initially, two hosts have a low allocation, but this is not efficient. The allocations increase until the network becomes congested. At this point, the hosts decrease their transmission rate to avoid congestion collapse. If the congestion control scheme works well, after some time the allocations should become both fair and efficient.
 
-.. figure:: fig/transport-fig-093-c.png 
+.. figure:: png/transport-fig-093-c.png 
    :align: center
    :scale: 70 
 
@@ -1252,7 +1252,7 @@ In practice, a TCP implementation considers the network to be congested once its
 The figure below illustrates the evolution of the congestion window when there is severe congestion. At the beginning of the connection, the sender performs `slow-start` until the first segments are lost and the retransmission timer expires. At this time, the `ssthresh` is set to half of the current congestion window and the congestion window is reset at one segment. The lost segments are retransmitted at the sender performs again slow-start until the congestion window reaches the `sshtresh`. Then, it switches to congestion avoidance and the congestion window increases linearily until segments are lost and the retransmission timer expires ...
 
 
-.. figure:: fig/transport-fig-088-c.png 
+.. figure:: png/transport-fig-088-c.png 
    :align: center
    :scale: 70 
 
@@ -1261,7 +1261,7 @@ The figure below illustrates the evolution of the congestion window when there i
 
 The figure below illustrates the evolution of the congestion window when the network is lightly congested and all lost segments can be retransmitted by using fast retransmit. The sender begins with a slow-start. A segment is lost but successfully retransmitted by a fast retransmit. The congestion window is divided by 2 and the senders immediately enters congestion avoidance as this was a mild congestion.
 
-.. figure:: fig/transport-fig-094-c.png 
+.. figure:: png/transport-fig-094-c.png 
    :align: center
    :scale: 70 
 
@@ -1314,7 +1314,7 @@ Thanks to its congestion control scheme, TCP adapts its transmission rate to the
 
 This model considers an hypothetical TCP connection that suffers from equally spaced segment losses. If :math:`p` is the segment loss ratio, then the TCP connection successfully transfers :math:`\frac{1}{p}-1` segments and the next segment is lost. If we ignore the slow-start at the beginning of the connection, TCP in this environment is always in congestion avoidance as there are only isolated losses that can be recovered by using fast retransmit. The evolution of the congestion window is thus as shown in the figure below. Note the that `x-axis` of this figure represents time measured in units of one round-trip-time, which is supposed to be constant in the model, and the `y-axis` represents the size of the congestion window measured in MSS-sized segments.
 
-.. figure:: fig/transport-fig-089-c.png 
+.. figure:: png/transport-fig-089-c.png 
    :align: center
    :scale: 70 
 

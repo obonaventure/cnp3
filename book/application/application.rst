@@ -12,7 +12,7 @@ Principles
 The are two important models to organise a networked application. The first and oldest model is the client-server model. In this model, a server provides services to clients that exchange information with it. This model is highly asymmetrical : clients send requests and servers perform actions and provide responses. It is illustrated in the figure below.
 
 
-.. figure:: fig/app-fig-001-c.png
+.. figure:: png/app-fig-001-c.png
    :align: center
    :scale: 50 
 
@@ -117,7 +117,7 @@ On the Internet, the `port number` is an integer and the `host` is identified by
 IPv4 addresses are usually represented by using a dotted decimal representation where each decimal number corresponds to one byte of the address, e.g. 130.104.32.107. IPv6 addresses are usually represented as a set of hexadecimal numbers separated by by semicolons, e.g. 2001:6a8:3080:2:217:f2ff:fed6:65c0. Today, most Internet hosts have an IPv4 address. A small fraction of them also have an IPv6 address. In the future, we can expect that more and more hosts will have IPv6 addresses and that some of them will not have an IPv4 address anymore. A host that only has an IPv4 address cannot communicate with a host having only an IPv6 address. Another possibility to identify an Internet host is by using its `fully qualified domain name` (usually summarised as `name`). The figure below illustrates two that are using the datagram service provided by UDP on hosts with IPv4 addresses.
 
 
-.. figure:: fig/app-fig-002-c.png
+.. figure:: png/app-fig-002-c.png
    :align: center
    :scale: 50 
 
@@ -126,7 +126,7 @@ IPv4 addresses are usually represented by using a dotted decimal representation 
 The second transport service is the connection-oriented service. On the Internet, this service is often called the `byte-stream service` as it creates a reliable byte stream between the two applications that are linked by a transport connection. As for the datagram service, the networked applications that are using the byte-stream service are identified by the host where they run and a port number. The hosts can be identified by an IPv4 address, an IPv6 address or a name. The figure below illustrates two applications that are using the byte-stream service provided by the TCP protocol on IPv6 hosts. The byte stream service provided by TCP is reliable and bidirectional. Some applications use SCTP instead of TCP for the byte-stream service.
 
 
-.. figure:: fig/app-fig-003-c.png
+.. figure:: png/app-fig-003-c.png
    :align: center
    :scale: 50 
 
@@ -155,7 +155,7 @@ However, the limitations of a flat naming scheme became clear before the end of 
 
 Each top-level domain is managed by an organisation that decides how sub-domain names can be registered. Most top-level domain names use first-come first served, an allow anyone to register domain names, but there are some exceptions. For example, `.gov` is reserved for the US government. 
 
-.. figure:: fig/app-fig-007-c.png
+.. figure:: png/app-fig-007-c.png
    :align: center
    :scale: 50 
 
@@ -176,7 +176,7 @@ This grammar speficies that a domain name is an ordered list of labels separated
 
 This hierarchical naming scheme is a key component of the Domain Name System (DNS). The DNS is a distributed database that contains mappings between fully qualified domain names and IP addresses. The DNS uses the client-server model. The clients are hosts that need to retrieve the mapping for a given name. Each :term:`nameserver` stores part of the distributed database and answer to the queries sent by the client. There is at least one :term:`nameserver` that is responsible for each domain. In the figure below, domains are represented by circles and there are three hosts inside domain `dom` and three hosts inside domain `a.sdom1.dom`. 
 
-.. figure:: fig/app-fig-006-c.png
+.. figure:: png/app-fig-006-c.png
    :align: center
    :scale: 50 
 
@@ -282,7 +282,7 @@ Electronic mail or email is a very popular application in computer networks such
 
 Before looking at the details of Internet email, let us consider a simple scenario illustrated in the figure below where Alice sends an email to Bob. Alice prepares her email by using one of the available `email clients <http://en.wikipedia.org/wiki/Comparison_of_email_clients>`_ and sends it to her email server. Alice's `email server <http://en.wikipedia.org/wiki/Comparison_of_mail_servers>`_ extracts Bob's address from the email and delivers the message to Bob's server. Bob retrieves Alice's message on his server and reads it by using his favourite email client or through a webmail. 
 
-.. figure:: fig/app-fig-009-c.png
+.. figure:: png/app-fig-009-c.png
    :align: center
    :scale: 50 
 
@@ -306,7 +306,7 @@ Email messages are entirely composed of lines of ASCII characters. Each line can
 
 .. abnf crocker : :rfc:`5234`
 
-.. figure:: fig/app-fig-010-c.png
+.. figure:: png/app-fig-010-c.png
    :align: center
    :scale: 50 
 
@@ -530,7 +530,7 @@ The last point to be discussed about `base64` is what happens when the sequence 
 
 Now that we have explained the format of the email messages, we can discuss how these messages can be exchanged through the Internet. The figure below illustrates the protocols that are used when `Alice` sends an email message to `Bob`. `Alice` prepares her email with an email client or on a webmail interface. To send her email to `Bob`, `Alice`'s client will use the Simple Mail Transfer Protocol (:term:`SMTP`) to deliver her message to her SMTP server. `Alice`'s email client is configured with the name of the default SMTP server for her domain. There is usually at least one SMTP server per domain. Do deliver the message, `Alice`'s SMTP server must find the SMTP server that contains `Bob`'s mailbox. This can be done by using the Mail eXchange (MX) records of the DNS. A set of MX records can be associated to each domain. Each MX record contains a numerical preference and the fully qualified domain name of a SMTP server that is responsible for the domain. The DNS can return several MX records for a given domain. In this case, the server with the lowest preference is used first. If this server is not reachable, the second most preferred server is used ... `Bob`'s SMTP server will store the email sent by `Alice` until `Bob` retrieves the message by using a webmail interface or protocols such as the Post Office Protocol (:term:`POP`) or the Internet Message Access Protocol (:term:`IMAP`). 
  
-.. figure:: fig/app-fig-012-c.png
+.. figure:: png/app-fig-012-c.png
    :align: center
    :scale: 50 
 
@@ -709,7 +709,7 @@ ftp was very popular in the 1990s and early 2000s, but today it has mostly been 
 In the late 1980s, high energy physicists working at CERN_ had to efficiently exchange documents about their ongoing and planned experiments. `Tim Berners-Lee`_ evaluated several of the documents sharing that were available then [B1989]_. As none of the existing solutions met CERN's requirements, they choose to develop a completely new document sharing system. This system was initially called the `mesh`, but was quickly renamed the `world wide web`. The starting point for the `world wide web` is the hypertext. An hypertext is a text that contains references (hyperlinks) to other text that the reader can immediately access. Compared to the hypertexts that were used in the late 1980s, the main innovation introduced by the `world wide web` was to allow hyperlinks to reference documents stored on remote machines. 
 
 
-.. figure:: fig/app-fig-014-c.png
+.. figure:: png/app-fig-014-c.png
    :align: center
    :scale: 50 
 
@@ -754,7 +754,7 @@ The second component of the `word wide web` is the HyperText Markup Language (HT
 HTML is a markup language that contains several markers. Most markers are very simple HTML document such as the one shown in the figure below is delineated by the `<HTML>
 The HTML document shown below is composed of two parts : a header delineated by the `<HEAD>` and `</HEAD>` markers and a body (between the `<BODY>` and `</BODY>` markers). In the example below, the header only contains a title, but other types of information can be included in the header. The body contains an image, some text and a list with three hyperlinks. The image is included in the web page by indicating its URI between brackets inside the `<IMG SRC="...">` marker. The image can, of course, reside on any server and the client will automatically download it when rendering the web page. The `<H1>...</H1>` marker is used to specify the first level of headings. The `<UL>` indicates an unnumbered list while the `<LI>` marker indicates a list item. The `<A HREF="URI">text</A>` indicates an hyperlink. The `text` will be rendered in the web page and client will fetch the URI if the user clicks on the link.
 
-.. figure:: fig/app-fig-015-c.png
+.. figure:: png/app-fig-015-c.png
    :align: center
    :scale: 50 
 
@@ -773,7 +773,7 @@ The response sent by the server also contains three parts :
  - a `header` that contains additional information about the response. The header ends with an empty line.
  - a MIME document 
 
-.. figure:: fig/app-fig-017-c.png
+.. figure:: png/app-fig-017-c.png
    :align: center
    :scale: 50 
 
@@ -847,7 +847,7 @@ The HTTP response indicates the version of the server software used with the inc
 
 HTTP was initially designed to share text documents that were self-contained. For this reason, and to ease the implementation of clients and servers, the designers of HTTP choose to open a TCP connection for each HTTP request. This implies that a client must open one TCP connection for each URI that it wants to retrieve from a server as illustrated on the figure below. On a web containing only text documents this was a reasonable design choice as the client remains usually idle while the (human) user is reading the retrieved document. 
 
-.. figure:: fig/app-fig-016-c.png
+.. figure:: png/app-fig-016-c.png
    :align: center
    :scale: 50 
 
@@ -857,7 +857,7 @@ However, as the web evolved to support richer documents containing images, openi
 
 This problem was solved by extending HTTP to support persistent TCP connections :rfc:`2616`. A persistent connection is a TCP connection over which a client may send several HTTP requests. This is illustrated in the figure below.  
 
-.. figure:: fig/app-fig-019-c.png
+.. figure:: png/app-fig-019-c.png
    :align: center
    :scale: 50 
 
@@ -937,7 +937,7 @@ A second solution to allow servers to tune that content to the needs and capabil
 
 The third, and widely adopted, solution are the HTTP cookies. HTTP cookies were initially developed as a private extension by Netscape_. They are now part of the standard :rfc:`2965`. In a nutshell, a cookie is a short string that is chosen by a server to represent a given client. Two HTTP headers are used : `Cookie:` and `Set-Cookie:`. When a server receives an HTTP request from a new client (i.e. an HTTP request that does not contain the `Cookie:` header), it generates a cookie for the client and includes it in the `Set-Cookie:` header of the returned HTTP response. The `Set-Cookie:` header contains several additional parameters including the domain names for which the cookie is valid. The client stores all received cookies on disk and every time it sends an HTTP request, it verifies whether it already knows a cookie for this domain. If so, it attaches the `Cookie:` header to the HTTP request. This is illustrated in the figure below with HTTP 1.1, but cookies also work with HTTP 1.0.
 
-.. figure:: fig/app-fig-022-c.png
+.. figure:: png/app-fig-022-c.png
    :align: center
    :scale: 50 
 

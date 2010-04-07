@@ -24,20 +24,20 @@ where
 
 #. What are the IP addresses of the resolvers that the `dig` implementation you are using relies on [#fdig]_ ?
 
- .. ucl : 130.104.230.68 130.104.1.1 130.104.1.2
+.. ucl : 130.104.230.68 130.104.1.1 130.104.1.2
 
 #. What is the IP address that corresponds to `inl.info.ucl.ac.be` ? Which type of DNS query does `dig` send to obtain this information ?
 
- .. A query, this is a CNAME for rembrandt.info.ucl.ac.be whose IP address is 130.104.229.225
+.. A query, this is a CNAME for rembrandt.info.ucl.ac.be whose IP address is 130.104.229.225
 
 #. Which type of DNS request do you need to send to obtain the nameservers that are responsible for a given domain ?
 
- .. NS
+.. NS
 
 #. What are the nameservers that are responsible for the `be` top-level domain ? Where are they located ? Is it possible to use IPv6 to query them ?
 
- .. x.dns.be, london.ns.dns.bs,  prague, brussels, amsterdam, a. b. c.
- .. dns.be is managed by a non-profit organisations and several other organisations have agreed to mirror the DNS server of .be, one is for example the belnet research network, london is on the LINX IXP in London, Prague is on the NIX in CZ, ...
+.. x.dns.be, london.ns.dns.bs,  prague, brussels, amsterdam, a. b. c.
+.. dns.be is managed by a non-profit organisations and several other organisations have agreed to mirror the DNS server of .be, one is for example the belnet research network, london is on the LINX IXP in London, Prague is on the NIX in CZ, ...
 
 #. When run without any parameter, `dig` queries one of the root DNS servers and retrieves the list of the the names of all root DNS servers. For technical reasons, there are only 13 different root DNS servers. This information is also available as a text file from http://www.internic.net/zones/named.root What are the IP addresses of all these servers. Do they all support IPv6 [#rs]_ ? 
 
