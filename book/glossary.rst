@@ -263,5 +263,8 @@ Glossary
 
    XML
 	The eXtensible Markup Language (XML) is a flexible text format derived from SGML. It was originally designed for the electronic publishing industry but is now used by a wide variety of applications that need to exchange structured data. The XML specifications are maintained by `several working groups <http://www.w3.org/XML/>`_ of the W3C_
+
+   ARP
+	The Address Resolution Protocol is a protocol used by IPv4 devices to obtain the datalink layer address that corresponds to an IPv4 address on the local area network. ARP is defined in :rfc:`826`	
 	
 .. include:: links.rst

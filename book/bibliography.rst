@@ -174,3 +174,17 @@
 .. [Cohen1980] Cohen, D., On Holy Wars and a Plea for Peace, IEN 137, April 1980, http://www.ietf.org/rfc/ien/ien137.txt
 
 .. [Unicode] The Unicode Consortium. The Unicode Standard, Version 5.0.0, defined by: The Unicode Standard, Version 5.0 (Boston, MA, Addison-Wesley, 2007. ISBN 0-321-48091-0), http://unicode.org/versions/Unicode5.0.0/
+
+.. [Metcalfe1976] R. Metcalfe and D. Boggs. Ethernet: Distributed packet-switching for local computer networks. Communications of the ACM, 19(7):395--404, 1976. http://www.acm.org/pubs/citations/journals/cacm/1976-19-7/p395-metcalfe/
+
+.. [802.11] LAN/MAN Standards Committee of the IEEE Computer Society. IEEE Standard for Information Technology - Telecommunications and information exchange between systems - local and  metropolitan area networks - specific requirements - Part 11 : Wireless LAN Medium Access Control (MAC) and Physical Layer (PHY) Specifications. IEEE, 1999. available from http://standards.ieee.org/getieee802/802.11.html.
+
+.. [802.3] LAN/MAN Standards Committee of the IEEE Computer Society. IEEE Standard for Information Technology - Telecommunications and information exchange between systems - local and metropolitan area networks - specific requirements - Part 3 : Carrier Sense multiple access with collision detection (CSMA/CD) access method and physical layer specification. IEEE, 2000. available from http://standards.ieee.org/getieee802/802.3.html
+
+.. [802.5] LAN/MAN Standards Committee of the IEEE Computer Society. IEEE Standard for Information technology--Telecommunications and information exchange between systems--Local and metropolitan area networks--Specific requirements--Part 5: Token Ring Access Method and Physical Layer Specification. IEEE, 1998. available from http://standards.ieee.org/getieee802/802.5.html
+
+.. [FDDI] ANSI. Information systems - fiber distributed data interface (FDDI) - token ring media access control (MAC). ANSI X3.139-1987 (R1997), 1997
+
+.. [802] IEEE, Std 802-2001 : IEEE Standard for Local and Metropolitan Area Networks: Overview and Architecture, http://standards.ieee.org/getieee802/download/802-2001.pdf
+
+.. [Benvenuti2005] C. Benvenuti, Understanding Linux Network Internals, O'Reilly Media, 2005, http://oreilly.com/catalog/9780596002558
