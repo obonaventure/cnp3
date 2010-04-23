@@ -80,6 +80,7 @@ Besides 16 and 32 bits words, some applications need to exchange that contain bi
    |       field (24 bits)         |  First Byte   | Second Byte   |
    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 
+   Message format
 
 The message mentioned above will be transmitted starting from the upper 32-bits word in network byte order. The first field is encoded in 16 bits. It is followed by eight one bit flags (`A-H`), a 24 bits field whose high order byte is shown in the first line and the two low order bytes appear in the second line and two one byte fields. This ASCII representation is frequently used when defining binary protocols. We will use it for all the binary protocols that are discussed in this book.
 
@@ -88,10 +89,10 @@ We will discuss several examples of application-level protocols in this chapter.
 .. introduce ipv4 and ipv6 addresses
 .. mention names very early, they are important
 
-The peer-to-peer model
-======================
+.. The peer-to-peer model
+.. ======================
 
-The peer-to-peer model 
+.. The peer-to-peer model 
 
 
 The transport services
@@ -239,7 +240,6 @@ The last four sections of the DNS message contain `Resource Records`.
 All RRs have the same top level format shown below :
 
 ::
-
                                     1  1  1  1  1  1
       0  1  2  3  4  5  6  7  8  9  0  1  2  3  4  5
     +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
@@ -626,18 +626,7 @@ In this example, the MTA running on `mta.example.org` opens a TCP connection to 
 
 .. sidebar:: Open SMTP relays and spam 
 
- Since its creation in 1971, email was a very useful tool that was used my many users to exchange lots of information. Unfortunately, over the years, some unscrupulous users found ways to use email to 
-
-A `study <http://www.enisa.europa.eu/act/res/other-areas/anti-spam-measures>`_ carried out by ENISA_ in 2009 reveals that 95% of email was spam.
-
-http://www.templetons.com/brad/spamreact.html#msg
-allowed to quickly exchange infoUntil a few years ago, most SMTP servers agreed to relay messages sent by any user. This default configuration allowed 
-
-were configured to relay messages 
- smtp auth : rfc:`4954`
- configuration of relays :rfc:`5068`
- first spam Http://www.templetons.com/brad/spamreact.html#msg
- Unsollicited Commercial Email (UCE)
+ Since its creation in 1971, email was a very useful tool that was used my many users to exchange lots of information. In the early days, all SMTP servers were open and anyone could use them to forward emails towards their final destination. Unfortunately, over the years, some unscrupulous users have found ways to use email for marketing purposes or to send malware. The first documented abuse of email for marketing purposes occured in 1978 when a marketer for a computer vendor sent a `marketing email <http://www.templetons.com/brad/spamreact.html#msg>` to many ARPANET users. At that time, the ARPANET could only be used for research purposes and this was an abuse of the acceptable use policy. Unfortunately, due to to low cost of sending emails, the problem of unsollicitated emails or spams has not stopped. A `study <http://www.enisa.europa.eu/act/res/other-areas/anti-spam-measures>`_ carried out by ENISA_ in 2009 reveals that 95% of email was spam and this number seems to continue to grow. This places a burden on the email infrastructure in Internet Service Providers and large companies that need to process many useless messages. SMTP servers are not anymore open :rfc:`5068`. Several extensions to SMTP have been developed during the recent years to deal with this problem. For example, the SMTP authentication scheme defined in :rfc:`4954` can be used by an SMTP server to authenticate a client. Several techniques have also been proposed to allow SMTP servers to `authenticate` the messages sent by their users :rfc:`4870` :rfc:`4871`.
 
 
 .. _POP:
