@@ -1,6 +1,6 @@
 
 
-.. Whenever possible, the bibliography includes hypertext links to the references cited. When there is no link, a search on http://scholar.google.com often returns a link to the article. RFC documents are cited in the text but do not appear in this version of the biblography.
+Whenever possible, the bibliography includes hypertext links to the references cited. When there is no link, a search on http://scholar.google.com often returns a link to the article. RFC documents are cited in the text but do not appear in the biblography.
 
 .. [AW05] Arlitt, M. and Williamson, C. 2005. An analysis of TCP reset behaviour on the internet. SIGCOMM Comput. Commun. Rev. 35, 1 (Jan. 2005), 37-44. DOI= http://doi.acm.org/10.1145/1052812.1052823
 
@@ -14,7 +14,7 @@
 
 .. [CK74] Vinton Cerf, Robert Kahn, A Protocol for Packet Network Intercommunication, IEEE Transactions on Communications, May 1974
 
-.. [CNPI09] CNPI, Security Assessment of the Transmission Control Protocol (TCP), http://www.cpni.gov.uk/Docs/tn-03-09-security-assessment-TCP.pdf
+.. [CNPI09] CNPI, Security Assessment of the Transmission Control Protocol (TCP), 2009, http://www.cpni.gov.uk/Docs/tn-03-09-security-assessment-TCP.pdf
 
 .. [CSP2009] Carr, B., Sury, O., Palet Martinez, J., Davidson, A., Evans, R., Yilmaz, F., Wijte, Y., IPv6 Address Allocation and Assignment Policy, RIPE document ripe-481, September 2009, http://www.ripe.net/ripe/docs/ipv6policy.html
 
@@ -61,12 +61,11 @@
 .. [Zimmermann80] Zimmermann, H., OSI Reference Model - The ISO Model of Architecture for Open Systems InterconnectionPDF (776 KB), IEEE Transactions on Communications, vol. 28, no. 4, April 1980, pp. 425 - 432. http://www.comsoc.org/livepubs/50_journals/pdf/RightsManagement_eid=136833.pdf
 
 
-
 .. [WMH2008] Wilson, P., Michaelson, G., Huston, G., Redesignation of 240/4 from "Future Use" to "Private Use", Internet draft, September 2008, work in progress, http://tools.ietf.org/html/draft-wilson-class-e-02
 
 .. [FLM2008] Fuller, V., Lear, E., Meyer, D., Reclassifying 240/4 as usable unicast address space, Internet draft, March 2008, workin progress, http://tools.ietf.org/html/draft-fuller-240space-02
 
-..  [ACO+2006] Augustin, B., Cuvellier, X., Orgogozo, B., Viger, F., Friedman, T., Latapy, M., Magnien, C., Teixeira, R., "Avoiding traceroute anomalies with Paris traceroute", Internet Measurement Conference, October 2006, http://www.paris-traceroute.net/
+..  [ACO+2006] Augustin, B., Cuvellier, X., Orgogozo, B., Viger, F., Friedman, T., Latapy, M., Magnien, C., Teixeira, R., Avoiding traceroute anomalies with Paris traceroute, Internet Measurement Conference, October 2006, http://www.paris-traceroute.net/
 
 .. [DT2007] Donnet, B. and Friedman, T.. Internet Topology Discovery: a Survey. IEEE Communications Surveys and Tutorials, 9(4):2-15, December 2007, http://inl.info.ucl.ac.be/publications/internet-topology-discovery-survey
 
@@ -188,3 +187,15 @@
 .. [802] IEEE, Std 802-2001 : IEEE Standard for Local and Metropolitan Area Networks: Overview and Architecture, http://standards.ieee.org/getieee802/download/802-2001.pdf
 
 .. [Benvenuti2005] C. Benvenuti, Understanding Linux Network Internals, O'Reilly Media, 2005, http://oreilly.com/catalog/9780596002558
+
+.. [SH2004] Senapathi, S., Hernandez, R., Introduction to TCP Offload Engines, March 2004,  http://www.dell.com/downloads/global/power/1q04-her.pdf
+
+.. [Abramson1970] Abramson, N., THE ALOHA SYSTEM: another alternative for computer communications. In Proceedings of the November 17-19, 1970, Fall Joint Computer Conference (Houston, Texas, November 17 - 19, 1970). AFIPS '70 (Fall). ACM, New York, NY, 281-285. DOI= http://doi.acm.org/10.1145/1478462.1478502
+
+.. [Roberts1975] Roberts, L., ALOHA packet system with and without slots and capture. SIGCOMM Comput. Commun. Rev. 5, 2 (Apr. 1975), 28-42. DOI= http://doi.acm.org/10.1145/1024916.1024920
+
+.. [KPD1985] Karn, P., Price, H., Diersing, R., Packet radio in amateur service, IEEE Journal on Selected Areas in Communications, 3, May, 1985.
+
+.. [BNT1997] Beech, W., Nielsen, D., Taylor, J.,  AX.25 Link Access Protocol for Amateur Packet Radio, version 2.2, Revision: July 1998, http://www.tapr.org/pdf/AX25.2.2.pdf
+
+.. [MSV1987] Molle, M., Sohraby, K., Venetsanopoulos, A., Space-Time Models of Asynchronous CSMA Protocols for Local Area Networks, IEEE Journal on Selected Areas in Communications, Volume: 5 Issue: 6, Jul 1987 Page(s): 956 -96, http://www.cs.ucr.edu/~mart/preprints/molle_sohraby_venet_ieee_sac87.pdf

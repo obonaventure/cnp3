@@ -348,7 +348,7 @@ Starting from the bottom, the first layer is the Physical layer. Two communicati
 
 An important point to note about the Physical layer is the service that it provides. This service is usually an unreliable connection-oriented service that allows the users of the Physical layer to exchange bits. The unit of information transfer in the Physical layer is the bit. The Physical layer service is unreliable because :
 
- - the Physical layer may change, e.g. due to electromagnetic interferences, the value of a bit being transmitted
+ - The Physical layer may change, e.g. due to electromagnetic interferences, the value of a bit being transmitted
  - the Physical layer may deliver `more` bits to the receiver than the bits sent by the sender
  - the Physical layer may deliver `fewer` bits to the receiver than the bits sent by the sender
 
