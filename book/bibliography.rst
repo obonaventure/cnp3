@@ -199,3 +199,6 @@ Whenever possible, the bibliography includes hypertext links to the references c
 .. [BNT1997] Beech, W., Nielsen, D., Taylor, J.,  AX.25 Link Access Protocol for Amateur Packet Radio, version 2.2, Revision: July 1998, http://www.tapr.org/pdf/AX25.2.2.pdf
 
 .. [MSV1987] Molle, M., Sohraby, K., Venetsanopoulos, A., Space-Time Models of Asynchronous CSMA Protocols for Local Area Networks, IEEE Journal on Selected Areas in Communications, Volume: 5 Issue: 6, Jul 1987 Page(s): 956 -96, http://www.cs.ucr.edu/~mart/preprints/molle_sohraby_venet_ieee_sac87.pdf
+
+.. [KT1975] Kleinrock, L., Tobagi, F., Packet Switching in Radio Channels: Part I--Carrier Sense Multiple-Access Modes and their Throughput-Delay Characteristics, IEEE Transactions on Communications, Vol. COM-23, No. 12, pp. 1400-1416, December 1975. http://www.cs.ucla.edu/~lk/PS/paper059.pdf
+

@@ -114,7 +114,10 @@ In the 1960s computers were mainly mainframes with a few dozens of terminals att
 
 .. index:: ALOHA
 
-The first version of ALOHAnet, described in [Abramson1970]_, operated as follows. First, the terminals and the mainframe exchanged fixed-length frames composed of 704 bits. Each frame contained 80 8-bits characters, some control bits and parity information to detect transmission errors. Two channels in the 400 MHz range were reserved for the operation of ALOHANet. The first channel was used by the mainframe to send frames to all terminals. The second channel was shared among all terminals to send frames to the mainframe. As all terminals share the same transmission channel, there is a risk of collision. To deal with this problem and also transmission errors the mainframe verified the parity bits of the received frame and sent an acknowledgement on its channel for each correctly received frame. The terminals on the other hand had to retransmit the unacknowledged frames. As for TCP, retransmitting these frames immediately upon expiration of a fixed timeout is not a good approach as several terminals may retransmit their frames at the same time leading to a network collapse. A better approach, but still far from perfect, is for each terminal to wait a random amount of time after the expiration of its retransmission timeout. This avoids synchronisation among multiple retransmitting terminals. The pseudocode below show the operation of an ALOHANet terminal.
+The first version of ALOHAnet, described in [Abramson1970]_, operated as follows. First, the terminals and the mainframe exchanged fixed-length frames composed of 704 bits. Each frame contained 80 8-bits characters, some control bits and parity information to detect transmission errors. Two channels in the 400 MHz range were reserved for the operation of ALOHANet. The first channel was used by the mainframe to send frames to all terminals. The second channel was shared among all terminals to send frames to the mainframe. As all terminals share the same transmission channel, there is a risk of collision. To deal with this problem and also transmission errors the mainframe verified the parity bits of the received frame and sent an acknowledgement on its channel for each correctly received frame. The terminals on the other hand had to retransmit the unacknowledged frames. As for TCP, retransmitting these frames immediately upon expiration of a fixed timeout is not a good approach as several terminals may retransmit their frames at the same time leading to a network collapse. A better approach, but still far from perfect, is for each terminal to wait a random amount of time after the expiration of its retransmission timeout. This avoids synchronisation among multiple retransmitting terminals. 
+
+
+The pseudocode below show the operation of an ALOHANet terminal. We use this python syntax for all Medium Access Control algorithms described in this chapter. The algorithm is run for each new frame that needs to be transmitted. It attempts to transmit a frame at most `max` times (`while loop`). Each transmission attempt is performed as follows. First, the frame is sent. Each frame is protected by a timeout. Then the terminal waits for either a valid acknowledgement frame or the expiration of its timeout. If the terminal receives an acknowledgement, the frame has been delivered correctly and the algorithm terminates. Otherwise, the terminal waits for a random time and attempts to retransmit the frame. 
 
 ::
  
@@ -128,65 +131,82 @@ The first version of ALOHAnet, described in [Abramson1970]_, operated as follows
 	# timeout 
 	wait(random time)
 	N=N+1
+  else:		
+    # Too many transmission attempts
 
 [Abramson1970]_ analysed the performance of ALOHANet under particular assumptions and found that ALOHANet worked well when the channel was lightly loaded. In this case, the frames are rarely retransmitted and the `channel traffic`, i.e. the total number of (correct and retransmitted) frames transmitted per unit of time is close to the `channel utilization`, i.e. the number of correctly transmitted frames per unit of time. Unfortunately, the analysis also reveals that the `channel utilization` reaches its maximum at :math:`\frac{1}{2 \times e}=0.186` times the channel bandwidth. At higher utilization, ALOHANet becomes unstable and the network collapses due to collided retransmissions.
 
 
 .. sidebar:: Amateur packet radio
 
- ax25 [KPD1985]_
- TAPR AX25 [BNT1997]_
- KA9Q
+ Packet radio technologies have evolved in various directions since the first experiments performed at the University of Hawaï. The Amateur packet radio service developed by amateur radio operators is of these descendants of ALOHANet. Many amateur radio operators are very interested in new technologies and they often spend countless hours to develop new antennas or transceivers. When the first personnal computers appeared, several amateur radio operators designed radio modems and their own datalink layers protocols [KPD1985]_ [BNT1997]_ . This network grew and it was possible by using only packet radio relays to connect to servers in several European countries. Some amateur radio operators also developed TCP/IP protocol stacks that were used over the packet radio service. Some parts of the `http://www.ampr.org/ <amateur packet radio network>`_ is connected to the global Internet and uses the `44.0.0.0/8`. 
 
 .. index:: slotted ALOHA
 
 Many improvements to ALOHANet were proposed since the publication of [Abramson1970]_ and this technique or some of its variants are still found in wireless networks today. The slotted technique proposed in [Roberts1975]_ is important because it shows that a simple modification can significantly improve the channel utilization. Instead of allowing all terminals to transmit at [Roberts1975]_ Proposed to divide time in slots and allow the terminals to transmit only at the beginning of each slot. Each slot corresponds to the time required to transmit one fixed size frame. In practice, these slots can be imposed by a single clock that is received by all terminales. In ALOHANet, it could have been located on the central mainframe. The analysis in [Roberts1975]_ reveals that this simple modification improved the channel utilization by a factor of two. 
 	
 
+
+.. index:: CSMA, Carrier Sense Multiple Access
+
+
 Carrier Sense Multiple Access
 -----------------------------
 
 
+ALOHA and slotted ALOHA can be easily implemented. Unfortunately, they can only be used in networks that are very lightly loaded. Designing a network for a very low utilisation is possible, but it clearly increases the cost of the network. To overcome these problems, many Medium Access Control mechanisms have been proposed. These mechanisms improve the channel utilization. Carrier Sense Multiple Access (CSMA) is a significant improvement compared to ALOHA. CSMA requires all nodes to listen to the transmission channel to verify that it is free before transmitting a frame [KT1975]_. When a node sense the channel to be busy, it defers its transmission until the channel becomes free again. The pseudocode below provides a more detailed description of the operation of CSMA. 
+
+.. index:: persistent CSMA, CSMA (persistent)
 
 ::
+ 
+ N=1
+ while N<= max :
+    wait(channel becomes free)
+    send(frame)
+    wait(ack or timeout)
+    if ack :
+       	break  # transmission was succesfull
+    else :
+	# timeout 
+	N=N+1
+  else:		
+    # Too many transmission attempts
 
- N=1;
- while ( N<= max) do
-	wait until channel becomes free;
-	send frame immediately;
-	wait for ack or timeout:
-	if ack received
-		exit while;
-	else
-		/* timeout */
-		/* retransmission is needed */
-		N=N+1;
- end do
- /* too many attempts */
-	
 
-non persistent
+
+The above pseudocode is often called `persistent CSMA` [KT1975]_ as the terminal will continuously listen to the channel and transmit its frame as soon as the channel becomes free. Another important variant of CSMA is the `non-persistent CSMA` [KT1975]_. The main difference between persistant and non-persistent CSMA described in the pseudocode below is that a non-persistent CSMA node does not continuously listens to the channel to determine when it becomes free. When non-persistent CSMA terminal senses the transmission channel to be busy, it waits for a random time before sensing the channel idle. This improves the channel utilization compared to persistent CSMA. With persistent CSMA, when two terminals sense the channel to be busy, they will both transmit (and thus cause a collision) as soon as the channel becomes free. With non-persistent CSMA, this synchronisationdoes not occur as the terminals wait a random time after having sensed the transmission channel. The higher channel utilization achieved by non-persistent CSMA comes at the expense of a slightly higher waiting time in the terminals when the network is lightly loaded. 
+
+
+.. index:: non-persistent CSMA, CSMA (non-persistent)
 
 ::
+ 
+ N=1
+ while N<= max :
+    listen(channel)
+    if free(channel):
+       send(frame)	
+       wait(ack or timeout)
+       if ack :
+       	  break  # transmission was succesfull
+       else :
+	  # timeout 
+	  N=N+1
+    else:
+       wait(random time)
+  else:		
+    # Too many transmission attempts
 
- N=1;
- while ( N<= max) do
-	listen channel;
-	if channel is empty
-		send frame;
-		wait for ack or timeout
-		if ack received
-			exit while;
-		else /* retransmission is needed */
-			N=N+1:
-	else
-		wait for random time; 
- end do
+[KT1975]_ analyzes in details the performance of several CSMA variants. Under some assumptions about the transmission channel and the traffic, the analysis compares ALOHA, slotted ALOHA, persistent and non-persistent CSMA. Under these assumptions, ALOHA achieves a channel utilization which is only 18.4% of the channel capacity. Slotted ALOHA is able to use 36.6% of this capacity. Persistent CSMA improves the utilization by reaching 52.9% of the capacity while non-persistent CSMA achieves 81.5% of the channel capacity. 
 
+.. index:: 
 
 
 Carrier Sense Multiple Access with Collision Detection
 ------------------------------------------------------
+
+CSMA improves the channel utilization compared to ALOHA. However, there are still collisions that may last for an entire frame duration. Consider for example a network  composed of a 1 kilometer long cable with one terminal at each end and in the middle of the cable. Assume that the two terminals located
 
 .. figure:: png/lan-fig-024-c.png
    :align: center
@@ -215,30 +235,25 @@ Carrier Sense Multiple Access with Collision Detection
    
    The worst collision on a shared bus
 
-
-
-
-
 ::
-
- N=1;
- while ( N<= max) do
-	wait until channel becomes free;
-	send frame and listen;
-	wait until (end of frame) or (collision)
-	if collision detected
-		stop transmitting;
-		/* after a special jam signal */
-		k = min (10, N);
-		r = random(0, 2k - 1) * slotTime;
-		wait for r time slots;
-	else
-		/* no collision detected */
-		wait for interframe delay;
-		exit while;
-	N=N+1;
- end do
- /* too many attempts */
+ 
+ N=1
+ while N<= max :
+    wait(channel becomes free)
+    send(frame)   
+    wait until (end of frame) or (collision)	
+    if collision detected:
+	stop transmitting
+	send(jamming)
+	k = min (10, N)
+	r = random(0, 2k - 1) * slotTime;
+	wait(r*slotTime)
+	N=N+1
+    else :	
+        wait(interframe delay)
+	break
+  else:		
+    # Too many transmission attempts
 	
 
 
