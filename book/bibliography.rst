@@ -174,11 +174,15 @@ Whenever possible, the bibliography includes hypertext links to the references c
 
 .. [Unicode] The Unicode Consortium. The Unicode Standard, Version 5.0.0, defined by: The Unicode Standard, Version 5.0 (Boston, MA, Addison-Wesley, 2007. ISBN 0-321-48091-0), http://unicode.org/versions/Unicode5.0.0/
 
-.. [Metcalfe1976] R. Metcalfe and D. Boggs. Ethernet: Distributed packet-switching for local computer networks. Communications of the ACM, 19(7):395--404, 1976. http://www.acm.org/pubs/citations/journals/cacm/1976-19-7/p395-metcalfe/
+.. [Metcalfe1976] Metcalfe R., Boggs, D. Ethernet: Distributed packet-switching for local computer networks. Communications of the ACM, 19(7):395--404, 1976. http://www.acm.org/pubs/citations/journals/cacm/1976-19-7/p395-metcalfe/
 
 .. [802.11] LAN/MAN Standards Committee of the IEEE Computer Society. IEEE Standard for Information Technology - Telecommunications and information exchange between systems - local and  metropolitan area networks - specific requirements - Part 11 : Wireless LAN Medium Access Control (MAC) and Physical Layer (PHY) Specifications. IEEE, 1999. available from http://standards.ieee.org/getieee802/802.11.html.
 
 .. [802.3] LAN/MAN Standards Committee of the IEEE Computer Society. IEEE Standard for Information Technology - Telecommunications and information exchange between systems - local and metropolitan area networks - specific requirements - Part 3 : Carrier Sense multiple access with collision detection (CSMA/CD) access method and physical layer specification. IEEE, 2000. available from http://standards.ieee.org/getieee802/802.3.html
+
+.. [DIX] The Ethernet: a local area network: data link layer and physical layer specifications. SIGCOMM Comput. Commun. Rev. 11, 3 (Jul. 1981), 20-66. DOI= http://doi.acm.org/10.1145/1015591.1015594
+
+.. [802.2] IEEE 802.2-1998 (ISO/IEC 8802-2:1998), IEEE Standard for Information technology--Telecommunications and information exchange between systems--Local and metropolitan area networks--Specific requirements--Part 2: Logical Link Control. Available from http://standards.ieee.org/getieee802/802.2.html
 
 .. [802.5] LAN/MAN Standards Committee of the IEEE Computer Society. IEEE Standard for Information technology--Telecommunications and information exchange between systems--Local and metropolitan area networks--Specific requirements--Part 5: Token Ring Access Method and Physical Layer Specification. IEEE, 1998. available from http://standards.ieee.org/getieee802/802.5.html
 
@@ -186,7 +190,7 @@ Whenever possible, the bibliography includes hypertext links to the references c
 
 .. [802] IEEE, Std 802-2001 : IEEE Standard for Local and Metropolitan Area Networks: Overview and Architecture, http://standards.ieee.org/getieee802/download/802-2001.pdf
 
-.. [Benvenuti2005] C. Benvenuti, Understanding Linux Network Internals, O'Reilly Media, 2005, http://oreilly.com/catalog/9780596002558
+.. [Benvenuti2005] Benvenuti, C., Understanding Linux Network Internals, O'Reilly Media, 2005, http://oreilly.com/catalog/9780596002558
 
 .. [SH2004] Senapathi, S., Hernandez, R., Introduction to TCP Offload Engines, March 2004,  http://www.dell.com/downloads/global/power/1q04-her.pdf
 
@@ -202,3 +206,12 @@ Whenever possible, the bibliography includes hypertext links to the references c
 
 .. [KT1975] Kleinrock, L., Tobagi, F., Packet Switching in Radio Channels: Part I--Carrier Sense Multiple-Access Modes and their Throughput-Delay Characteristics, IEEE Transactions on Communications, Vol. COM-23, No. 12, pp. 1400-1416, December 1975. http://www.cs.ucla.edu/~lk/PS/paper059.pdf
 
+.. [Seifert2008] Seifert, R., Edwards, J., The All-New Switch Book : The complete guide to LAN switching technology, Wiley, 2008, http://eu.wiley.com/WileyCDA/WileyTitle/productCd-0470287152,descCd-authorInfo.html
+
+.. [CT1980] Crane, R., Taft, E., Practical considerations in Ethernet local network design, Proc. of the 13th Hawaii International Conference on Systems Sciences, Honolulu, January, 1980, pp. 166--174, http://ethernethistory.typepad.com/papers/PracticalConsiderations.pdf
+
+.. [DP1981] Dalal, Y. K. and Printis, R. S. 1981. 48-bit absolute internet and Ethernet host numbers. In Proceedings of the Seventh Symposium on Data Communications (Mexico City, Mexico, October 27 - 29, 1981). SIGCOMM '81. ACM, New York, NY, 240-245. DOI= http://doi.acm.org/10.1145/800081.802680
+
+.. [RY1994] Ramakrishnan, K.K. and Henry Yang, The Ethernet Capture Effect: Analysis and Solution, Proceedings of IEEE 19th Conference on Local Computer Networks, MN, Oct. 1994. http://www2.research.att.com/~kkrama/papers/capture_camera.pdf
+
+.. [SH1980] Shoch, J. F. and Hupp, J. A. Measured performance of an Ethernet local network. Commun. ACM 23, 12 (Dec. 1980), 711-721. DOI= http://doi.acm.org/10.1145/359038.359044
