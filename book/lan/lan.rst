@@ -84,18 +84,45 @@ These four basic physical organisations of Local Area Networks are shown graphic
    
    Bus, ring and star-shaped Local Area Network 
 
+.. index:: collision
+
+The common problem among all these network organisations is how to efficiently share the access to the Local Area Network. If two devices send a frame at the same time, the two electrical, optical or radio signals that corresponds to these frames will appear at the same time on the transmission medium and a receiver will not be able to decode either frame. Such simultaneous transmissions are called `collisions`. A `collision` may involve frames transmitted by two or more devices attached to the Local Area Network. Collisions are the main cause of errors in wired Local Area Networks. All Local Area Network technologies rely on a `Medum Access Control` algorithm to regulate the transmissions to either minimise or avoid collisions. There are two broad families of `Meidum Access Control` algorithms :
+
+ #. `Deterministic` or `pessimistic` MAC algorithms. These algorithms assume that collisions are a very severe problem and that they must be completely avoided. These algorithms ensure that at any time at most one device is allowed to send a frame on the LAN. This is usually achieved by using a distributed protocol that allows devices to agree on which device can transmit at any time. A deterministic MAC algorithm ensures that no collision will happen, but there is some overhead in regulating the transmission of all the devices attached to the LAN.
+ #. `Stochastic` or `optimistic` MAC algorithms. These algorithm assume that collisions are part of the normal operation of a Local Area Network. They aim at minimising the number of collisions, but they do not try to avoid all collisions. Stochastic algorithms are usually easier to implement than deterministic ones.
+
+
+We'll first discuss a simple deterministic MAC algorithm and then we'll describe several important optimistic algorithms before coming back to a distributed and deterministic MAC algorithm.
+
+
 Static allocation methods
 -------------------------
 
-FDM and TDM
+A first solution to share the available resources among all the devices attached to one Local Area Network is to define, `a priori`, the distribution of the transmission resources to the different devices. If `N` devices need to share the transmission capacities of a LAN operating at `b` Mbps, each device could be allocated a bandwidth of :math:`\frac{b}{N}` Mbps. 
+
+.. index:: Frequency Division Multiplexing, FDM
+
+Limited resources need to be shared in other environments than Local Area Networks. Since the first radio transmissions by `Marconi <http://en.wikipedia.org/wiki/Guglielmo_Marconi>` more than one century ago, many applications that exchange information through radio signals have been developed. Each radio signal is an electromagntic wave whose power is centered around a given frequency. The radio spectrum corresponds to frequencies ranging between roughly 3 KHz and 300 GHz. Frequency allocation plans negotiate between governements reserve most frequency ranges for specific applications such as broadcast radio, broadcast television, mobile communications, aeronautical radio navigation, amateur radio, satellite, ... Each frequency range is then subdivided in channels and each channel can be reserved for a given application, e.g. a radio broadcaster in a given region.
+
+.. index:: Wavelength Division Multiplexing, WDM
+
+`Frequency Division Multiplexing` (FDM) is an allocation scheme where a frequency is allocated to each device attached to the shared medium. As each device uses a different transmission frequency, collisions cannot occur. In optical networks, a variant of FDM called `Wavelength Division Multiplexing` (WDM) is used. An optical fiber can transport light at different wavelengths without interference. With WDM, a different wavelength is allocated to each of the devices that share the same optical fiber.
+
+.. index:: Time Division Multiplexing
+
+`Time Division Multiplexing` (TDM) Is a static bandwidth allocation method that was initially defined for the telephone network. In the fixed telephone network, a voice conversation is usually transmitted as a 64 Kbps signal. Thus, a telephone conservation generates 8 KBytes per second or one byte every 125 microsecond. Telephone conversations often need to be multiplexed together on a single line. For example, in Europe, thirty 64 Kbps voice signals are multiplexed over a single 2 Mbps (E1) line. This is done by using  `Time Division Multiplexing` (TDM). TDM divides the transmission opportunities in slots. In the telephone network, a slot corresponds to 125 microsecond. A position inside each slot is reserved for each voice signal. The figure below illustrates TDM on a link used to carry four voice conversations. The vertical lines represent the slot boundaries and the letters the different voice conversations. One byte from each voice conversation is sent during each 125 microsecond slot. The byte corresponding to a given conversation is always sent at the same position in each slot.
+
 
 .. figure:: png/lan-fig-012-c.png
    :align: center
    :scale: 70
    
-   Time-division multiplexing in a ring-shaped LAN
+   Time-division multiplexing 
 
-explain collision
+
+TDM as shown above can be completely static, i.e. the same conversations always share the link, or dynamic. In the latter case, the two endpoints of the link will exchange signalling messages that specify which conversation uses which byte inside each slot. Thanks to these signalling messages, it is possible to dynamically add and remove voice conversations from a given link. 
+
+TDM and FDM are widely used in telephone networks to support fixed bandwidth conversations. Using them in Local Area Networks that support computers would probably be inefficient. Computers usually do not send information at a fixed rate. Instead, they often have a on-off behaviour. During the on period, the computer tries to send at the highest possible rate, e.g. to transfer a file. During the off period, which is often much longer than the on period, the computer does not transmit any packet. Using a static allocation for computers would lead to huge inefficiencies as they would only be able to transmit at :math:`\frac{1}{N}` of the total bandwidth during their on period despite the fact that the other computers are in their off period and thus do not need to transmit any information. The dynamic MAC algorithms discussed in the remainder of this chapter aim at solving this problem.
 
 
 ALOHANet
@@ -377,27 +404,48 @@ Token Ring and FDDI
 
 Datalink layer technologies
 ###########################
+
 In this section, we review the key characteristics of the several datalink layer technologies. We discuss in more details the technologies that are widely used and briefly mention other interesting technologies. A detailed survey of all datalink layer technologies would be outside the scope of this book.
+
+.. index:: Point-to-Point Protocol, PPP
 
 The Point-to-Point Protocol
 ===========================
 
-Many point-to-point datalink layers have been developed starting in the 1960s. 
+Many point-to-point datalink layers have been developed starting in the 1960s. In this section, we focus on the protocols that are often used to transport IP packets between hosts or routers that are directly connected by a point-to-point link. This link can be a dedicated physical cable, a leased line through the telephone network or a dialup connection with modems on the two communicating hosts.
 
-:rfc:`1548`
+.. index:: Serial Line IP
 
-Goal
-Allow the transmission of network layer (IP but also other protocols) packets over serial lines
-modems, leased lines, ISDN, ...
-Architecture
-PPP is composed of three different protocols
-PPP 
-transmission of data frames (e.g. IP packets)
-LCP : Link Control Protocol
-Negotiation of some options and authentication (username, password) and end of connection
-NCP : Network Control Protocol
-Negotiation of options related to the network layer protocol used above PPP
-(ex: IP address, IP address of DNS resolver, ...)
+The first solution to transport IP packets over a serial line was proposed in :rfc:`1055` and is know as `Serial Line IP` (SLIP). SLIP is a simple character stuffing technique applied to IP packets. SLIP defines two special characters : `END` (decimal 192) and `ESC` is (decimal 219). `END` appears at the begining and at the end of each transmitted IP packet and the sender adds `ESC` before each `END` character inside each transmitted IP packet. SLIP only support the transmission of IP packets and it assumes that the two communicating hosts/routers have been manually configured with each other's IP address. SLIP was mainly used over links offering bandwidth of often less than 20 Kbps.  On such a low bandwidth link, sending 20 bytes of IP header followed by 20 bytes of TCP header for each TCP segment takes a lot of time. This initiated the development of a family of compression techniques that efficiently compress the TCP/IP headers. The first header compression technique proposed in :rfc:`1144` noticed that there is a lot of redundancy between several consecutive segments that belong to the same TCP connection. In all these segments, the IP addresses, the port numbers are always the same. Furthermore, fields such as the sequence and acknowledgement numbers do not change in a random way. :rfc:`1144` defined simple techniques to reduce the redundancy found in successive segments. The development of header compression techniques continued and there are still improvements being developed nowadays :rfc:`5795`.
+
+While SLIP was implemented and used in some environments, it had several limitations discussed in :rfc:`1055`. The `Point-to-Point Protocol` (PPP) was designed shortly after :rfc:`1548`. PPP aims at supporting IP and other network layer protocols over various types of serial lines. PPP is in fact a family of three protocols that are used together :
+ 
+ #. The `Point-to-Point Protocol` defines the framing technique that allows the transport network layer packets.
+ #. The `Link Control Protocol` that is used to negotiate options and authenticate the session with username and password or other types of credentials
+ #. The `Network Control Protocol` that is specific for each network layer protocol. It is used to negotiate options that are specific for each protocol. For example, IPv4's NCP :rfc:`1548` can negotiate the IPv4 address to be used, the IPv4 address of the DNS resolver, ... IPv6's NCP is defined in :rfc:`5072`.
+
+The PPP framing was inspired from a family of datalink layer protocols standardised by ITU-T and ISO :rfc:`1331`. A typical PPP frame is composed of the fields shown in the figure below. A PPP frame starts with a one byte flag containing `01111110`. PPP can use bit stuffing or character stuffing depending on the environment where the protocol is used. LCP can be used to negotiate the type of framing used. The address and control fields are present for backward compatibility reasons. The 16 bits Protocol field contains the identifier of the network layer protocol that is carried in the PPP frame. `0x002d` is used for an IPv4 packet compressed with :rfc:`1144` while `0x002f` is used for an IPv4 packet compressed with :rfc:`1144`. `0xc021` is used by the Link Control Protocol, `0xc023` is used by the Password Authentication Protocol (PAP). `0x0057` is used for IPv6 packets. PPP supports variable length packets, but LCP can negotiate a maxium packet length. The PPP frame ends with a Frame Check Sequence. The default is a 16 bits CRC, but some implementations can negotiate a 32 bits CRC. The frame ends with the `01111110` flag.
+
+::
+  
+    0                   1                   2                   3
+    0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |   Flag	   | Address       |    Control    | Protocol      | 
+   |   01111110    | 11111111      |    0000011    |               |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |  Protocol     |						   |
+   |		   |                                               |
+   +-+-+-+-+-+-+-+-+		Network layer Packet		   |	
+   |					      			   |
+   ~								   ~
+   |								   |
+   +               +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |	           |  Frame Check  Sequence        |	Flag	   |
+   |               |         16 bits               |    01111110   |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+   PPP frame format
 
 
 Ethernet
@@ -606,11 +654,98 @@ The `MAC address learning` algorithm allows switches to be plug-and-play. Unfort
 The Spanning Tree Protocol (802.1d) 
 ------------------------------------
 
+The `Spanning Tree Protocol` (STP), proposed in [Perlman1985]_, is a distributed protocol that is used by switches to reduce the network topology to a spanning so that there are no cycles in the topology. For example, consider the network shown in the figure below. In this figure, each bold line corresponds to an Ethernet to which two Ethernet switches are attached. This network contains several cycles that must be broken to allow Ethernet switches that are using the MAC address learning algorithm to exchange frames. 
+
+
+.. figure:: png/lan-fig-067-c.png
+   :align: center
+   :scale: 70
+   
+   Spanning tree computed in a switched Ethernet network
+
+
+In this network, the STP will compute the following spanning tree. `Switch1` will be the root of the tree. All the interfaces of `Switch1`, `Switch2` and `Switch7` are part of the spanning tree. Only the interface connected to `LANB` will be active on `Switch9`. `LANH` will only be served by `Switch7` and the port of `Switch44` on `LANG` will be disabled. A frame originated on `LANB` and destined to `LANA` will be forwarded by `Switch7` on `LANC`, then by `Switch1` on `LANE`, then by `Switch44` on `LANF` and eventually by `Switch2` on `LANA`. 
+
+Switches running the `Spanning Tree Protocol` exchange `BPDUs`. These `BPDUs` are always sent as frames whose destination MAC address is the `ALL_BRIDGES` reserved multicast MAC address. Each switch has a unique 64 bits `identifier`. To ensure unicity, the lower 48 bits of the identifier are set to the unique MAC address allocated to the switch by its manufacturer. The high order 16 bits of the switch identifier can be configured by the network administrator to influence the topology of the spanning tree. The default value for these high order bits is 32768.
+
+The switches exchange `BPDUs` to build the spanning tree. Intuitively, the spanning tree is built by first selecting the switch with the smallest `identifier` as the root of the tree. The branches of the spanning tree are then composed of the shortest paths that allow to reach all the switches that compose the network. 
+The `BPDUs` exchanged by the switches contain the following information :
+
+ - the `identifier` of the root switch (`R`)
+ - the `cost` of the shortest path between the switch that sent the `BPDU` and the root switch (`c`)
+ - the `identifier` of the switch that sent the `BPDU` (`T`)
+ - the number of the switch port over which the `BPDU` was sent (`p`)
+
+We will use the notation `<R,c,T,p>` to represent a `BPDU` whose `root identifier` is `R`, `cost` is `c` and that was sent on port `p` of switch `T`.  The construction of the spanning depends on an ordering relationship among the `BPDUs`. This ordering relationship could be implemented by the python function below. 
+
+.. code-block:: python
+ 
+ # returns True if bpdu b1 is better than bpdu b2
+ def better( b1, b2) :
+     return ( (b1.R < b2.R) or
+     	      ( (b1.R==b2.R) and (b1.c<b2.c) ) or
+	      ( (b1.R==b2.R) and (b1.c==b2.c) and (b1.T<b2.T) ) or
+	      ( (b1.R==b2.R) and (b1.c==b2.c) and (b1.T==b2.T) and (b1.p==b2.p) ) )
+
+In addition to the `identifier` discussed above, the network admnistrator can also configure a `cost` associated to each switch port. Usually, the `cost` of a port depends on its bandwidth and the [8021.d]_ standard recommends the values below. Of course, the network administrator may choose other values. We will use the notation `cost[p]` to indicate the cost associated to port `p` in this section.
+
+=========     =======
+Bandwidth     Cost
+=========     =======
+10 Mbps       2000000
+100 Mbps      200000
+1 Gbps 	      20000
+10 Gbps       2000
+100 Gbps      200
+=========     =======
+
+The `Spanning Tree Protocol` uses its own terminology that we will illustrate on the figure above. A switch port can be in three different states : `Root` port, `Designated` port and `Blocked` port. All the ports of the `root` switch are in the `Designated` state. The state of the ports on the other switches is determined based on the `BPDU` received on each port.
+
+The `Spanning Tree Protocol` uses the ordering relationship to build the spanning tree. Each switch listens to `BPDUs` on each port. When `BPDU=<R,c,T,p>` is received on port `q`, the switch computes the port's `priority vector`, `V[q]=<R,c+cost[q],T,p,q]` where `cost[q]` is the cost associated to the port over which the `BPDU` was received. The switch stores in a table the last `priority vector` received on each port. The switch then compares its own `identifier` with the smallest `root identifier` stored in this table. If its own `identifier` is smaller, then the switch is the root of the spanning tree and is by definition at a distance `0` of the root. The `BPDU` of the switch is then `<R,0,R,p>` where `R` is the switch `identifier` and `p` will be set to the port number over which the `BPDU` is sent. Otherwise, the switch chooses the best priority vector from its table, `bv=<R,c,T,p,x>`. The port over which this best priority vector was learned is the switch port that is closest to the `root` switch. This port becomes the `Root` port of the switch. There is only one `Root` port per switch. The switch can then compute its `BPDU` as `BPDU=<R,c,S,p>` when `R` is the `root identifier`, `c` the cost from the best priority vector, `S` the identifier of the switch and `p` will be replaced by the number of the port over which the `BPDU` will be sent. The switch can then determine the state of all its ports by comparing its own `BPDU` with the priority vector received on each port. If the switch's `BPDU` is better than the priority vector, the port becomes a `Designated` port. Otherwise, the port becomes a `Blocked` port. 
+
+The states of the ports are important when considering the transmission of the `BPDUs`. The root switch sends regularly its own `BPDU` over all its (`Designated`) ports. This `BPDU` is received on the `Root` port of all the switches that are directly connected to the `root switch`. Each of these switches computes its own `BPDU` and sends this `BPDU` over all its `Designated` ports. These `BPDUs` are then received on the `Root` port of downstream switches that compute their own `BPDU` ... When the network topology is stable, switches send their own `BPDU` on all their `Designated` ports once they receive a `BPDU` on their `Root` port. No `BPDU` is sent on the `Blocked` port. Switches listen for `BPDUs` on their `Blocked` and `Designated` ports, but no `BPDU` should be received over these ports when the topology is stable.
+ 
+==========   ==============   ========== 
+Port state   Receives BPDUs   Sends BPDU
+==========   ==============   ==========
+Blocked	     yes [#fno]	      no
+Root	     yes	      no
+Designated   yes [#fno]_      yes
+==========   ==============   ==========
+
+.. [#fno] No `BPDU` should be received on a `Designated` or `Blocked` port when the topology is stable. The reception of a `BPDU` on such a port usually indicates a change in the topology.
+
+To illustrate the operation of the `Spanning Tree Protocol`, let us consider the simple network topology in the figure below. 
+
+
+.. figure:: png/lan-fig-069-c.png
+   :align: center
+   :scale: 70
+   
+   A simple Spanning tree computed in a switched Ethernet network
+
+Assume that `Switch4` is the first to boot. It sends its own `BPDU=<4,0,4,?>` on its two ports. When `Switch1` boots, it sends `BPDU=<1,0,1,1>`. This `BPDU`is received by `Switch4` that updates its table and computes a new `BPDU=<1,3,4,?>'. Port 1 of `Switch4` becomes the `Root` port while its second port is still in the `Designated` state. Assume now that `Switch9` boots and immediately receives `Switch1`'s BPDU on port 1. `Switch9` computes its own `BPDU=<1,1,9,?>` and port 1 becomes the `Root` port of this switch. This `BPDU` is sent on port 2 of `Switch9` and reaches `Switch4`. `Switch4` compares the piority vector built from this `BPDU` (i.e. `<1,2,9,2>`) and notices that it is better than `Switch4`'s `BPDU=<1,3,4,2>`. Thus, port 2 becomes a `Blocked` port on `Switch4`. `Switch9` received `BPDU=<1,1,9,2>` on both ports 2 and 3. In this case, the priority vector on port 2  will be better than the priority vector on port 3. Port 2 will become a `Designated` port while port `3` will be blocked. 
+
+During the computation of the spanning tree, switches discard all received data frames as at that time the network topology is not guaranteed to be loop-free. Once that topology has been stable for some time, the switches will restart to use the MAC learning algorithm to forward data frames. Only the `Root` and `Designated` ports are used to forward data frames. Switches discard all the data frames received on their `Blocked` ports and never forward frames on these ports.
+
+Switches, ports and links can fail in a switched Ethernet network. When such an event occur, the switches must be able to recompute the spanning to adapt it to the failure. The `Spanning Tree Protocol` relies on regular transmissions of the `BPDUs` to detect these failures. The `BPDU` contains two additional fields : the `Age` of the `BPDU` and the `Maximum Age`. The `Age` contains the length of time that has passed since the root switch initially originated the `BPDU`. The root switch sends its `BPDU` with an `Age` of zero and each switch that computes its own `BPDU` increments its `Age` by one. The `Age` of the `BPDUs` stored on a switch's table is also incremented every second. A `BPDU` expires when its `Age` reaches the `Maximum Age`. When the network is stable, this does not happen as `BPDU` are sent regularly by the `root` switch and downstream switches. However, if the `root` fails or the network becomes partionned, `BPDU` will expire and switches will recompute their own `BPDU` and restart the `Spanning Tree Protocol`. Once a topology change has been detected, the forwarding of the data frames stops as the topology is not guaranteed to be loop-free. Additional details about the reaction to failures may be found in [802.1d]_
 
 
 
 
+802.1q header defined in [802.1q]_
 
+::
+
+    0                   1                   2                   3
+    0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   | Tag Protocol Identifier       | PCP |C|   VLAN Identifier     |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+		
+
+   Format of the 802.1q header
+
+The 802.1q header is inserted immediately after the source MAC address in the Ethernet frame (i.e. before the EtherType field). The maximum frame size is increased by 4 bytes. It is encoded in 32 bits and contains four fields. The Tag Protocol Identifier is set to `0x8100` to allow the receiver to detect the presence of this additional header. The `Priority Code Point` (PCP) is a three bits field that is used to support different transmission priorities for the frame. Value `0` is the lowest priority and value `7` the highest. Frames with a higher priority can be expected to be forwarded earlier than frames having a lower priority. The `C` bit is used for compatibility between Ethernet and Token Ring networks. The last 12 bits of the 802.1q header contain the VLAN identifier. Value `0` indicates that the frame does not belong to any VLAN while value `0xFFF` is reserved. This implies that 4094 different VLAN identifiers can be used in an Ethernet network. 
 
 802.11
 ======
