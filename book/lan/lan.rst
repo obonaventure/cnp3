@@ -73,7 +73,7 @@ Point-to-point datalink layers need to select one of the framing techniques desc
 
  - a bus-shaped network where all hosts are attached to the same physical cable
  - a ring-shaped where all hosts are attached to an upstream and a downstream node so that the entire network forms a ring
- - a star-shaped n
+ - a star-shaped network where all hosts are attached to the same device
  - a wireless network where all hosts can send and receive frames by using radio signals
 
 These four basic physical organisations of Local Area Networks are shown graphically in the figure below. We will first focus on one physical organisation at a time and will discuss later in the next section how to build networks combining several of these building blocks.
@@ -426,7 +426,7 @@ The original 10 Mbps Ethernet specification [DIX]_ defined a simple frame format
    :align: center
    :scale: 70
    
-   Impact of the frame length of the maximum utilisation [SH1980]_
+   Impact of the frame length on the maximum channel utilisation [SH1980]_
 
 
 The last field of the Ethernet frame is a 32 bits Cyclical Redundancy Check (CRC). This CRC is able to catch a much larger number of transmission errors than the Internet checksum used by IP, UDP and TCP [SGP98]_. The format of the Ethernet frame is shown below.
@@ -537,44 +537,76 @@ Ethernet Switches
 
 .. index:: Ethernet switch, Ethernet bridge, bridge, switch
 
-Increasing the physical layer bandwidth as in `Fast Ethernet` was only of the solutions to improve the performance of Ethernet LANs. A second solution was to replace the hubs by more intelligent devices. As `Ethernet hubs` operate, they can only regenerate the electrical signal to extend the geographical reach of the network. `Ethernet switches` [#fbridges]_ are relays that operate in the datalink layer. An `Ethernet switch` understands the format of the Ethernet frames and can selectively decide to forward some frames over a given interface.
-
-If the `Ethernet hubs` were replaced by devices that operate in the datalink layer, these devices would be able to 
-
+Increasing the physical layer bandwidth as in `Fast Ethernet` was only of the solutions to improve the performance of Ethernet LANs. A second solution was to replace the hubs by more intelligent devices. As `Ethernet hubs` operate in the physical layer, they can only regenerate the electrical signal to extend the geographical reach of the network. From a performance viewpoint, it would be more interesting to have devices that operate in the datalink layer and can analyse the destination address of each frame and forward the frames selectively on each link. This selective forwarding would ensure that frames are only sent on the links that are required to reach their destination. Such devices are usually called `Ethernet switches` [#fbridges]_.  An `Ethernet switch` is a relay that operates in the datalink layer as illustrated in the figure below.
 
 .. figure:: png/lan-fig-060-c.png
    :align: center
    :scale: 70
    
-   Ethernet switches in the reference model
+   Ethernet switches and the reference model 
+
+.. index:: MAC address table (Ethernet switch)
+
+An `Ethernet switch` understands the format of the Ethernet frames and can selectively decide to forward some frames over a given interface. For this, each `Ethernet switch` maintains a `MAC address table`. This table contains, for each MAC address known by the switch, the identifier of the switc's port over which a frame sent towards this address must be forwarded to reach its destination. This is illustrated below with the `MAC address table` of the bottom switch. When the switch receives a frame destined to address `B`, it forwards the frame on its South port. If it receives a frame destined to address `D`, it forwards it only on its North port.
+
+.. figure:: png/lan-fig-062-c.png
+   :align: center
+   :scale: 70
+   
+   Operation of Ethernet switches 
+
+.. index:: address learning, MAC address learning
+
+
+One of the selling points of Ethernet networks is that, thanks to the utilisation of 48 bits MAC addresses, an Ethernet LAN is plug and play at the datalink layer. When two hosts are attached to the same Ethernet segment or hub, they can immediately exchange Ethernet frames without requiring any configuration. It was important to retain this plug and play capability for Ethernet switches as well. This implies that Ethernet switches must be able to build their MAC address table automatically without requiring any manual configuration. This automatic configuration is performed by the the `MAC address learning` algorithm that runs on al Ethernet switches. This algorithm extracts the source address of the received frames and remembers the port over which a frame from each source Ethernet address has been received. This information is inserted in the MAC address table that the switch uses to forward frames. This allows the switch to automatically learn the ports that they can use to reach each destination address, provided that each Ethernet host sends at least one frame. In practice, most upport layer protocols use acknowledgements at some layer and thus even an Ethernet printer sends Ethernet frames as well.
+
+The pseudocode below details how an Ethernet switch forwards Ethernet frames. It first updates its `MAC address table` with the source of the frame. The `MAC address table` used by some switches also contains a timestamp that is updated each time a frame is received from each know source address. This timestamp is used to remove from the `MAC address table` entries that have not been active during the last `n` minutes. This limits the growth of the `MAC address table`, but also allows hosts to move from one port to another. Then, the switch uses its `MAC address table` to forward the received unicast frame. If there is an entry for the frame's destination in the `MAC address table`, the frame is forwarded selectively on the port listed in this entry. Otherwise, the switch does not know how to reach the destination and it must forward the frame on all its ports except the ports from which the frame has been received. This ensures that the frame will reach its destination at the expense of some unnecessary transmissions. These unnecessary transmissions will only last until the destination has sent its first frame. Multicast and Broadcast frames are also forwarded in a similar way.
 
 ::
 
- Arrival of frame F on port P
- src=F.Source_Address;
- dst=F.Destination_Address;
- UpdateTable(src, P); // src heard on port P
- if (dst==broadcast) || (dst is multicast)
- {
- for(Port p!=P)       // forward all ports
- ForwardFrame(F,p);
- }
- else
- {  
-  if(dst isin AddressPortTable)
- {
-   ForwardFrame(F,AddressPortTable(dst));
- }
- else
- {
-  for(Port p!=P)    // forward all ports
-     ForwardFrame(F,p);
- }
- }
-  
+ # Arrival of frame F on port P
+ # Table : MAC address table dictionnary : addr->port 
+ # Ports : list of all ports on the switch
+ src=F.SourceAddress
+ dst=F.DestinationAddress
+ Table[src]=P  #src heard on port P
+ if isUnicast(dst) :
+    if dst in Table: 
+      ForwardFrame(F,Table[dst])
+    else:
+      for o in Ports :
+       	  if o!= P :  ForwardFrame(F,o)
+ else:
+   for o in Ports :
+       if o!= P :  ForwardFrame(F,o)
+
+
+.. sidebar:: Are switches more secure than hubs ?
+
+ Ethernet hubs have the same drawbacks as the older coaxial cable from a security viewpoint. A host attached to a hub will be able to capture all the frames exchanged between any pair of hosts attached to the same hub. Ethernet switches are much better from this viewpoint as thanks to the selective forwarding, a host will usually only receive the frames destined to itself and the multicast, broadcast and unknown frames. However, this does not imply that switches are completely secure. There are unfortunately attacks against Ethernet switches. From a security viewpoint, the `MAC address table` is one of the fragile points of Ethernet switch. This table has a fixed size. Some low-end switches can store a few tens or a few hundreds of addresses while higher-end switches can store tens of thousands of addresses or more. From a security viewpoint, a limited resource can be the target of Denial of Service attacks. Such attacks are unfortunately also possible on Ethernet switches. A malicious host could overflow the `MAC address table` by generating thousands of frames with random source addresses. Once the `MAC address table` is full, the switch needs to broadcast all the frames that it receives... The ARP attack discussed in the previous chapter could also occur with Ethernet switches. Fortunately, recent switches implement several types of defences against these attacks, but they need to be carefully configured by the network administrator. See [Vyncke2007]_ for a detailed discussion on security issues with Ethernet switches.
+
+
+
+
+The `MAC address learning` algorithm combined to the forwarding algorithm work well in a tree-shaped network such as the one shown above. However, to deal with link and switch failures, network administrators often add redundant links to ensure that their network remains connected even after a failure. Let us consider what happens in the Ethernet network shown in the figure below.
+
+
+.. figure:: png/lan-fig-066-c.png
+   :align: center
+   :scale: 70
+   
+   Ethernet switches in a loop
+
+
+When all switches boot, their `MAC address table` is empty. Assume that host `A` sends a frame towards host `C`. Upon reception of this frame, switch1 updates its `MAC address table` to remember that address `A` is reachable via its West port. As there is no entry for address `C` in switch1's `MAC address table`, the frame is forwarded to switch2 and switch3. When switch2 receives the frame, its updates its `MAC address table` for address `A` and forwards the frame to host `C` and also to switch3. switch3 has thus received two copies of the same frame. The frame received from switch1 will be forwarded to switch2 while the frame received from switch2 will be forwarde to switch1... The single frame sent by host `A` will be continuously duplicated by the switches until their `MAC address table` contains an entry for address `C`. Quickly, all the available link bandwidth will be used to forward all the copies of this frame. As Ethernet does not contain any `TTL` or `HopLimit`, this loop will never stop. 
+
+The `MAC address learning` algorithm allows switches to be plug-and-play. Unfortunately, the loops that arise when the network topology is not a tree are a severe problem. Forcing the switches to be only used in tree-shaped networks as hubs would be a severe limitation. To solve this problem, the inventors of Ethernet switches have developed the `Spanning Tree Protocol`. This protocol allows switches to automatically disable ports on Ethernet switches to ensure that the network does not contain any cycle that could cause frames to loop forever. 
+
 
 The Spanning Tree Protocol (802.1d) 
 ------------------------------------
+
+
 
 
 

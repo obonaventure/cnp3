@@ -266,5 +266,16 @@ Glossary
 
    ARP
 	The Address Resolution Protocol is a protocol used by IPv4 devices to obtain the datalink layer address that corresponds to an IPv4 address on the local area network. ARP is defined in :rfc:`826`	
+ 
+   ISO
+	The International Standardization Organisation
+
+   minicomputer
+	todo
+
+   MIME
+	The Multi-purpose Internet Mail Extensions
+
+	
 	
 .. include:: links.rst

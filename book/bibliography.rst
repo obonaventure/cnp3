@@ -215,3 +215,5 @@ Whenever possible, the bibliography includes hypertext links to the references c
 .. [RY1994] Ramakrishnan, K.K. and Henry Yang, The Ethernet Capture Effect: Analysis and Solution, Proceedings of IEEE 19th Conference on Local Computer Networks, MN, Oct. 1994. http://www2.research.att.com/~kkrama/papers/capture_camera.pdf
 
 .. [SH1980] Shoch, J. F. and Hupp, J. A. Measured performance of an Ethernet local network. Commun. ACM 23, 12 (Dec. 1980), 711-721. DOI= http://doi.acm.org/10.1145/359038.359044
+
+.. [Vyncke2007] Vyncke, E., Paggen, C., LAN Switch Security: What Hackers Know About Your Switches, Cisco Press, 2007, http://www.ciscopress.com/bookstore/product.asp?isbn=1587052563
