@@ -222,8 +222,8 @@ Whenever possible, the bibliography includes hypertext links to the references c
 
 .. [802.1d] LAN/MAN Standards Committee of the IEEE Computer Society, IEEE Standard for Local and metropolitan area networks Media Access Control (MAC) Bridges, IEEE Std 802.1DTM- 2004, 2004, http://standards.ieee.org/getieee802/download/802.1D-2004.pdf
 
-
 .. [Perlman1985] Perlman, R. 1985. An algorithm for distributed computation of a spanningtree in an extended LAN. SIGCOMM Comput. Commun. Rev. 15, 4 (Sep. 1985), 44-53. DOI= http://doi.acm.org/10.1145/318951.319004
 
 .. [Perlman2004] Perlman, R., RBridges: Transparent Routing, Proc. IEEE Infocom , March 2004. http://www.ieee-infocom.org/2004/Papers/26_1.PDF
 
+.. [802.11] LAN/MAN Standards Committee of the IEEE Computer Society, IEEE Standard for Information technology— Telecommunications and information exchange between systems— Local and metropolitan area networks— Specific requirements Part 11: Wireless LAN Medium Access Control (MAC) and Physical Layer (PHY) Specifications, 2007, http://standards.ieee.org/getieee802/download/802.11-2007.pdf

@@ -200,15 +200,16 @@ The above pseudo-code is often called `persistent CSMA` [KT1975]_ as the termina
 
 .. index:: non-persistent CSMA, CSMA (non-persistent)
 
-::
- 
+.. code-block:: python
+
+ # Non persistent CSMA
  N=1
  while N<= max :
     listen(channel)
     if free(channel):
        send(frame)	
        wait(ack or timeout)
-       if ack :
+       if received(ack) :
        	  break  # transmission was successful
        else :
 	  # timeout 
@@ -220,8 +221,8 @@ The above pseudo-code is often called `persistent CSMA` [KT1975]_ as the termina
 
 [KT1975]_ analyzes in details the performance of several CSMA variants. Under some assumptions about the transmission channel and the traffic, the analysis compares ALOHA, slotted ALOHA, persistent and non-persistent CSMA. Under these assumptions, ALOHA achieves a channel utilization which is only 18.4% of the channel capacity. Slotted ALOHA is able to use 36.6% of this capacity. Persistent CSMA improves the utilization by reaching 52.9% of the capacity while non-persistent CSMA achieves 81.5% of the channel capacity. 
 
-.. index:: 
 
+.. index:: Carrier Sense Multiple Access with Collision Detection, CSMA/CD
 
 Carrier Sense Multiple Access with Collision Detection
 ------------------------------------------------------
@@ -289,7 +290,8 @@ If two hosts are competing, the algorithm above will avoid a second collision 50
 
 
 .. code-block:: python
- 
+
+ # CSMA/CD pseudocode
  N=1
  while N<= max :
     wait(channel becomes free)
@@ -299,7 +301,7 @@ If two hosts are competing, the algorithm above will avoid a second collision 50
 	stop transmitting
 	send(jamming)
 	k = min (10, N)
-	r = random(0, 2k - 1) * slotTime;
+	r = random(0, 2k - 1) * slotTime
 	wait(r*slotTime)
 	N=N+1
     else :	
@@ -312,37 +314,43 @@ If two hosts are competing, the algorithm above will avoid a second collision 50
 The inter-frame delay used in this pseudo-code is a short delay that corresponds to the time required by a network adapter to switch from transmit to receive mode. It is also used to prevent a host from sending a continuous stream of frames without leaving any transmission opportunities for other hosts on the network. Unfortunately, there are still conditions whether CSMA/CD is not completely fair [RY1994]_. Consider for example a network with two hosts : a server sending long frames and a client sending acknowledgments. Measurements reported in [RY1994]_ have shown that there situations where the client could suffer from repeated collisions that lead it to wait for long periods of time due to the exponential back-off algorithm. How
 
 
+.. index:: Carrier Sense Multiple Access with Collision Avoidance, CSMA/CA
 
 Carrier Sense Multiple Access with Collision Avoidance
 ------------------------------------------------------
 
-TODO
+The `Carrier Sence Multiple Access with Collision Avoidance` (CSMA/CA) Medium Access Control algorithm was designed for the popular WiFi wireless network technology [802.11]_. CSMA/CA also senses the transmission channel before transmitting a frame. Furthermore, CSMA/CA tries to avoid collisions by carefully tuning the timers used by CSMA/CA devices.
 
-receiver
+.. index:: Short InterFrame Spacing, SIFS
 
-::
- 
- While (true)
- {
-  Wait for data frame;
-	if not(duplicate)
-		{ deliver (frame) }
-  wait during SIFS;
-  send ack (frame) ;
- }
+CSMA/CA uses acknowledgements like CSMA. Each frame contains a sequence number and a CRC. The CRC is used to detect transmission errors while the sequence number allows to avoid frame duplication. When a device receives a correct frame, it returns a special acknowledgement frame to the sender. CSMA/CA introduces a small delay, named `Short InterFrame Spacing`  (SIFS), Between the reception of a frame and the transmission of the acknowledgement frame. This delay corresponds to the time that is required to switch the radio of a device between the reception and transmission modes.
+
+.. index:: Distributed Coordination Function Inter Frame Space, DIFS, Extended Inter Frame Space, EIFS
+
+
+Compared to CSMA, CSMA/CA defines more precisely when a device is allowed to send a frame. First, CSMA/CA defines two delays : `DIFS` and `EIFS`. When a device wants to send a frame, it must first wait until the channel has been idle for at least the `Distributed Coordination Function Inter Frame Space` (DIFS) if the previous frame was received correctly. However, if the previously received frame was corrupted, this indicates that there are collisions and the device must sense the channel idle during at least the `Extended Inter Frame Space` (EIFS), with :math:`SIFS<DIFS<EIFS`. The exact values for SIFS, DIFS and EIFS depend on the underlying physical layer [802.11]_. 
+
+The figure below shows the basic operation of CSMA/CA devices. Before transmitting, host `A` verifies that the channel is empty during a long enough period. Then, its sends its data frame. After having checked the validity of the received frame, the recipient sends an acknowledgement frame after a short SIFS delay. Hos `C`, which does not participate in the frame exchange, senses the channel to be busy at the beginning of the data frame. Protocols using CSMA/CA include an indication of the duration of each frame at the beginning of the frame. Host `C` can use this information to determine for how long the channel will be busy. If host `C` is battery-powered, it may choose to disable its WiFi interface during this period to spare its batteries. Note that as :math:`SIFS<DIFS<EIFS`, even a device that would start to sense the channel immediately after the last bit of the data frame could not decide to transmit its own frame during the transmission of the acknowledgement frame.
 
 .. figure:: png/lan-fig-031-c.png
    :align: center
    :scale: 70
    
-   Basic scenario with CSMA/CA
+   Operation of a CSMA/CA device
 
+
+.. index:: slotTime (CSMA/CA)
+
+The main difficulty with CSMA/CA is when two or more devices transmit at the same time and create collisions. This is illustrated in the figure below, assuming a fixed timeout after the transmission of a data frame. With CSMA/CA, the timeout after the transmission of a data frame is very small since it corresponds to the SIFS plus the time required to transmit the acknowledgement frame.
 
 .. figure:: png/lan-fig-032-c.png
    :align: center
    :scale: 70
    
-   Effect of collision with CSMA/CA
+   Collisions with CSMA/CA 
+
+To deal with this problem, CSMA/CA relies on a backoff timer. This backoff timer is a random delay that is chosen by each device in a range that depends on the number of retransmissions for the current frame. The range grows exponentially with the retransmissions as in CSMA/CD. The minimum range for the backoff timer is :math:`[0,7*slotTime]` where the `slotTime` is a parameter that depends on the underlying physical layer. Compared to CSMA/CD's exponential backoff, there are two important differences to notice. First, the initial range for the backoff timer is seven times larger. This is because it is impossible in CSMA/CA to detect collissions while they happen. With CSMA/CA, a collision may affect the entire frame while with CSMA/CD it can only affect the beginning of the frame. Second, a CSMA/CA device must regularly sense the transmission channel during its back off timer. If the channel becomes busy (i.e. because another device is transmitting), then the back off timer must be frozen until the channel becomes free again. Once the channel becomes free, the back off timer is restarted. This is in contrast with CSMA/CD where the back off is recomputed after each collision. This is illustrated in the figure below.
+
 
 .. figure:: png/lan-fig-034-c.png
    :align: center
@@ -351,12 +359,46 @@ receiver
    Detailed example with CSMA/CA
 
 
+The pseudo-code below summarises the operation of a CSMA/CA device. The values of the SIFS, DIFS, EIFS and slotTimes depends on the underlying physical layer technology [802.11]_
+
+.. code-block:: python
+ 
+ # CSMA/CA simplified pseudocode
+ N=1
+ while N<= max :
+    waitUntil(free(channel)) 
+    if correct(last_frame) :
+       wait(channel free during t>=DIFS)
+    else:
+       wait(channel free during t>=EIFS)
+       	
+    back-off_time = int(random[0,min(255,7*(2^(N-1)))])*slotTime
+    wait(channel free during backoff_time)
+    # backoff timer is frozen while channel is sensed to be busy
+    send(frame) 
+    wait(ack or timeout)
+    if received(ack)
+       # frame received correctly
+       break
+    else:
+       # retransmission required
+       N=N+1
+
+.. index:: hidden station problem
+
+Another problem faced by wireless networks is often called the `hidden station problem`. In a wireless networks, radio signals are not always propagated in the same way in all directions. For example, two devices separated by a wall may not be able to receive each other's signal while thy could both be receiving the signal produced by a third host. This is illustrated in the figure below, but it can happen in other environments. For example, two devices that are on different sides of a hill may not be able to receive each other's signal while they are both able to receive the signal sent by a station at the top of the hill. Furthermore, the radio propagation conditions may change with time. For example, a truck may block temporarily the communication between two nearby devices. 
+
+
 .. figure:: png/lan-fig-035-c.png
    :align: center
    :scale: 70
    
    The hidden station problem 
 
+.. index:: Request To Send, RTS, Clear To Send, CTS
+
+
+To avoid collisions in these situations, CSMA/CA allows devices to reserve the transmission channel for some time. This is done by using two control frames : `Request To Send` (RTS) and `Clear To Send` (CTS). Both are very short frames to minimize the risk of collisions. To reserve the transmission channel, a device sends a RTS frame to the intended reciption of the data frame. The RTS frame contains the duration of the requested reservation. The recipient replies, after a SIFS delay, with a CTS frame that also contains the duration of the reservation. As the duration of the reservation has been sent in both RTS and CTS, all hosts that could collide with either the sender or the reciption of the data frame are informed of the reservation. They can compute the end of the acknowledgement frame and defer their access to the transmission channel until then. This is illustrated in the figure below where host `A` reserves the transmission channel to send a data frame to host `B`. Host `C` notices the reservation and defers its transmission.
 
 .. figure:: png/lan-fig-036-c.png
    :align: center
@@ -364,41 +406,19 @@ receiver
    
    Reservations with CSMA/CA
 
+The utilization of the reservations with CSMA/CA is an optimisation that is useful when collisions are frequent. If there are few collisions, the time required to transmit the RTS and CTS frames can become significant and in particular when short frames are exchanged. Some devices only turn on RTS/CTS after transmission errors.
 
-
-
-
-
-
-sender
-
-::
-
- N=1;
- while ( N<= max) do
-	if (channel is empty)
-	{ wait until channel free during t>=EIFS; }
-	else
-	{ wait until endofframe;
-	  wait until channel free during t>=DIFS; }
-	back-off_time = int(random[0,min(255,7*2N-1)])*T
-     wait(backoff_time)
-	if (channel still free)
-	{ send data  frame ;
-	     wait for ack or timeout:
-	    if ack received
-		 exit while;
-	   else /* timeout retransmission is needed */
-		N=N+1; }
- end do
 	
-
-.. 802.15.4 ?
 
 
 Token Ring and FDDI
 -------------------
 
+.. figure:: png/lan-fig-096-c.png
+   :align: center
+   :scale: 70
+   
+   Token Ring
 
 
 
@@ -490,13 +510,13 @@ The last field of the Ethernet frame is a 32 bits Cyclical Redundancy Check (CRC
     0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
    |								   |	
-   +    48 bits                      +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+    
-   |    Destination Address	     |			           |
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+    48 bits   		   +
+   +    48 bits                    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+    
+   |    Destination Address	   |			           |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+    48 bits   		   +
    |                    		  Source Address	   |
    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-   |		Type (16 bits)	     |				   |
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+				   |
+   |		Type (16 bits)	   |				   |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+				   |
    |								   |
    ~ 			Payload (46-1500 bytes)			   |
    |								   |
@@ -530,13 +550,13 @@ The Ethernet frame format shown above is specified in [DIX]_. This is the format
     0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
    |								   |	
-   +    48 bits                      +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+    
-   |    Destination Address	     |			           |
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+    48 bits   		   +
+   +    48 bits                    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+    
+   |    Destination Address	   |			           |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+      48 bits   		   +
    |                    		  Source Address	   |
    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-   |	  Length (16 bits)	     |				   |
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+				   |
+   |	  Length (16 bits)	   |				   |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+				   |
    |								   |
    ~ 		Payload and padding (46-1500 bytes)		   |
    |								   |
@@ -705,13 +725,13 @@ The `Spanning Tree Protocol` uses the ordering relationship to build the spannin
 
 The states of the ports are important when considering the transmission of the `BPDUs`. The root switch sends regularly its own `BPDU` over all its (`Designated`) ports. This `BPDU` is received on the `Root` port of all the switches that are directly connected to the `root switch`. Each of these switches computes its own `BPDU` and sends this `BPDU` over all its `Designated` ports. These `BPDUs` are then received on the `Root` port of downstream switches that compute their own `BPDU` ... When the network topology is stable, switches send their own `BPDU` on all their `Designated` ports once they receive a `BPDU` on their `Root` port. No `BPDU` is sent on the `Blocked` port. Switches listen for `BPDUs` on their `Blocked` and `Designated` ports, but no `BPDU` should be received over these ports when the topology is stable.
  
-==========   ==============   ========== 
-Port state   Receives BPDUs   Sends BPDU
-==========   ==============   ==========
-Blocked	     yes [#fno]	      no
-Root	     yes	      no
-Designated   yes [#fno]_      yes
-==========   ==============   ==========
+==========   ==============   ==========  ===================
+Port state   Receives BPDUs   Sends BPDU  Handles data frames
+==========   ==============   ==========  ===================
+Blocked	     yes [#fno]_      no          no
+Root	     yes	      no          yes
+Designated   yes [#fno]_      yes         yes
+==========   ==============   ==========  ===================
 
 .. [#fno] No `BPDU` should be received on a `Designated` or `Blocked` port when the topology is stable. The reception of a `BPDU` on such a port usually indicates a change in the topology.
 
@@ -730,10 +750,23 @@ During the computation of the spanning tree, switches discard all received data 
 
 Switches, ports and links can fail in a switched Ethernet network. When such an event occur, the switches must be able to recompute the spanning to adapt it to the failure. The `Spanning Tree Protocol` relies on regular transmissions of the `BPDUs` to detect these failures. The `BPDU` contains two additional fields : the `Age` of the `BPDU` and the `Maximum Age`. The `Age` contains the length of time that has passed since the root switch initially originated the `BPDU`. The root switch sends its `BPDU` with an `Age` of zero and each switch that computes its own `BPDU` increments its `Age` by one. The `Age` of the `BPDUs` stored on a switch's table is also incremented every second. A `BPDU` expires when its `Age` reaches the `Maximum Age`. When the network is stable, this does not happen as `BPDU` are sent regularly by the `root` switch and downstream switches. However, if the `root` fails or the network becomes partionned, `BPDU` will expire and switches will recompute their own `BPDU` and restart the `Spanning Tree Protocol`. Once a topology change has been detected, the forwarding of the data frames stops as the topology is not guaranteed to be loop-free. Additional details about the reaction to failures may be found in [802.1d]_
 
+.. index:: VLAN, Virtual LAN
+
+Virtual LANs
+------------
+
+Another important advantage of Ethernet switches is the ability to create Virtual Local Area Networks (VLANs). A virtual LAN can be defined as a `set of ports attached to one or more Ethernet switches`. A switch can support several VLANs and it runs one MAC learning algorithm for each Virtual LAN. This implies that when a frame with an unknown or a multicast destination, it is forwarded over all ports that belong to the same Virtual LAN but not to the ports that belong to other Virtual LANs. Similarly, when a switch learns a source address on a port, it associates it to the Virtual LAN of this port and uses this information only when forwarding frames on this Virtual LAN.
+
+The figure below illustrates a switched Ethernet network with three Virtual LANs. `VLAN2` and `VLAN3` only require a local configuration of switch `S1`. Host `C` can exchange frames with host `D`, but not with hosts that are oustide of its VLAN. `VLAN1` is more complex as there are ports of this VLAN on several switches. To support such VLANs, local configuration is not sufficient anymore. When a switch receives a frame from another switch, it must be able to determine the VLAN in which the frame was originated to use the correct MAC table to forward the frame. This is done by assigning an identifier to each Virtual LAN in a switch Ethernet and placing these identifiers inside the frames that are exchanged between switches. 
 
 
+.. figure:: png/lan-fig-081-c.png
+   :align: center
+   :scale: 70
+   
+   Virtual Local Area Networks in a switched Ethernet network 
 
-802.1q header defined in [802.1q]_
+Some proprietary protocols were initially proposed to allow switches to exchanged tagged frames, but quickly the IEEE defined an extension to the Ethernet frame format in [802.1q]_. This extension is a new 32 bits header than includes a 20 bits VLAN header that indicates the VLAN identifier of each frame. The format of the [802.1q]_ header is described below.
 
 ::
 
@@ -745,18 +778,114 @@ Switches, ports and links can fail in a switched Ethernet network. When such an 
 
    Format of the 802.1q header
 
-The 802.1q header is inserted immediately after the source MAC address in the Ethernet frame (i.e. before the EtherType field). The maximum frame size is increased by 4 bytes. It is encoded in 32 bits and contains four fields. The Tag Protocol Identifier is set to `0x8100` to allow the receiver to detect the presence of this additional header. The `Priority Code Point` (PCP) is a three bits field that is used to support different transmission priorities for the frame. Value `0` is the lowest priority and value `7` the highest. Frames with a higher priority can be expected to be forwarded earlier than frames having a lower priority. The `C` bit is used for compatibility between Ethernet and Token Ring networks. The last 12 bits of the 802.1q header contain the VLAN identifier. Value `0` indicates that the frame does not belong to any VLAN while value `0xFFF` is reserved. This implies that 4094 different VLAN identifiers can be used in an Ethernet network. 
+The [802.1q]_ header is inserted immediately after the source MAC address in the Ethernet frame (i.e. before the EtherType field). The maximum frame size is increased by 4 bytes. It is encoded in 32 bits and contains four fields. The Tag Protocol Identifier is set to `0x8100` to allow the receiver to detect the presence of this additional header. The `Priority Code Point` (PCP) is a three bits field that is used to support different transmission priorities for the frame. Value `0` is the lowest priority and value `7` the highest. Frames with a higher priority can be expected to be forwarded earlier than frames having a lower priority. The `C` bit is used for compatibility between Ethernet and Token Ring networks. The last 12 bits of the 802.1q header contain the VLAN identifier. Value `0` indicates that the frame does not belong to any VLAN while value `0xFFF` is reserved. This implies that 4094 different VLAN identifiers can be used in an Ethernet network. 
 
 802.11
 ======
 
+
+
+
+========        =========       ==========      ===========     ==============
+Standard	Frequency	Typical		Max		Range (m)
+				throughput	bandwidth	indoor/outdoor
+========        =========       ==========      ===========     ==============
+802.11		2.4 GHz		0.9 Mbps	2 Mbps		20/100
+802.11a		5 GHz		23 Mbps		54 Mbps		35/120
+802.11b		2.4 GHz		4.3 Mbps	11 Mbps		38/140
+802.11g		2.4 GHz		19 Mbps		54 Mbps		38/140
+802.11n		2.4/5 GHz	74 Mbps		150 Mbps	70/250
+========        =========       ==========      ===========     ==============
+
+
+
+
 Todo
 
+.. figure:: png/lan-fig-083-c.png
+   :align: center
+   :scale: 70
+   
+   802.11 adhoc
 
-802.15.4
-========
 
-Todo
+.. figure:: png/lan-fig-084-c.png
+   :align: center
+   :scale: 70
+   
+   802.11 infrastructure
+
+
+
+::
+
+    0                   1                   2                   3
+    0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |	 Frame  Control            |		Duration	   |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+		
+   |								   |	 
+   |    Address 1 (48 bits)        +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+    
+   |      	        	   |			           |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+  Address 2 (48 bits)	   |
+   |                    		      	    		   |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |								   |	 
+   |    Address 3 (48 bits)        +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+    
+   |      	        	   |     Sequence control	   |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |								   |	 
+   |    Address 4 (48 bits)        +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+    
+   |      	        	   |          QoS control	   |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |								   |
+   ~ 			Payload (0-2324 bytes)			   ~
+   |								   |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |			32 bits		CRC			   |	
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+   Ethernet 802.11 frame format
+
+
+::
+
+    0                   1                   2                   3
+    0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |	 Frame  Control            |		Duration	   |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+		
+   |								   |	 
+   |    Receiver Address           +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+    
+   |      	        	   |			           |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+  Transmitter Address	   |
+   |                    		      	    		   |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |			32 bits		CRC			   |	
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+   Ethernet 802.11 RTS frame format
+
+
+
+::
+
+    0                   1                   2                   3
+    0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |	 Frame  Control            |		Duration	   |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+		
+   |								   |	 
+   |    Receiver Address           +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+    
+   |      	        	   |	     CRC	           |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+		
+   |        CRC  (cont.)           |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+ 	
+
+
+   Ethernet 802.11 ACK and CTS frames
+
+
 
 
 Token Ring
