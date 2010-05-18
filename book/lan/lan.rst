@@ -144,12 +144,12 @@ The pseudo-code below show the operation of an ALOHANet terminal. We use this py
  N=1
  while N<= max :
     send(frame)
-    wait(ack on return channel or timeout)
-    if ack on return channel:
+    wait(ack_on_return_channel or timeout)
+    if (ack_on_return_channel):
        	break  # transmission was successful
     else:
 	# timeout 
-	wait(random time)
+	wait(random_time)
 	N=N+1
   else:		
     # Too many transmission attempts
@@ -182,7 +182,7 @@ ALOHA and slotted ALOHA can be easily implemented. Unfortunately, they can only 
  
  N=1
  while N<= max :
-    wait(channel becomes free)
+    wait(channel_becomes_free)
     send(frame)
     wait(ack or timeout)
     if ack :
@@ -215,7 +215,7 @@ The above pseudo-code is often called `persistent CSMA` [KT1975]_ as the termina
 	  # timeout 
 	  N=N+1
     else:
-       wait(random time)
+       wait(random_time)
   else:		
     # Too many transmission attempts
 
@@ -294,9 +294,9 @@ If two hosts are competing, the algorithm above will avoid a second collision 50
  # CSMA/CD pseudocode
  N=1
  while N<= max :
-    wait(channel becomes free)
+    wait(channel_becomes_free)
     send(frame)   
-    wait until (end of frame) or (collision)	
+    wait_until (end_of_frame) or (collision)	
     if collision detected:
 	stop transmitting
 	send(jamming)
@@ -305,7 +305,7 @@ If two hosts are competing, the algorithm above will avoid a second collision 50
 	wait(r*slotTime)
 	N=N+1
     else :	
-        wait(inter-frame delay)
+        wait(inter-frame_delay)
 	break
   else:		
     # Too many transmission attempts

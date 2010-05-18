@@ -939,7 +939,7 @@ As mentionned in the first section of this chapter, there are three main types o
 
 On a `point-to-point` link, the IPv4 addresses of the communicating devices can be configured manually or through a protocol. IPv4 addresses are often configured manually on `point-to-point` links between routers. When `point-to-point` links are used to attach hosts to the network, automatic configuration is often preferred to avoid problems with incorrect IPv4 addresses. For example, the :abbr:`PPPP (Point-to-Point Protocol)`, specified in :rfc:`1661` includes an IP network control protocol that can be used by the router in the figure below to advertise the IPv4 address that the attached hosts must configure for its interface. The transmission of IPv4 packets on a point-to-point link is usually easy. Depending on the particular datalink layer considered, this may require some fragmentation and reassembly mechanisms in the datalink layer. Furthermore, IPv4 should be informed of the link's MTU. We will discuss these issues in the next chapter.
 
-.. figure:: ../lan/png/lan-fig-045-c.png
+.. figure:: ../lan/png/lan-fig-044-c.png
    :align: center
    :scale: 70
    
