@@ -227,3 +227,13 @@ Whenever possible, the bibliography includes hypertext links to the references c
 .. [Perlman2004] Perlman, R., RBridges: Transparent Routing, Proc. IEEE Infocom , March 2004. http://www.ieee-infocom.org/2004/Papers/26_1.PDF
 
 .. [802.11] LAN/MAN Standards Committee of the IEEE Computer Society, IEEE Standard for Information technology— Telecommunications and information exchange between systems— Local and metropolitan area networks— Specific requirements Part 11: Wireless LAN Medium Access Control (MAC) and Physical Layer (PHY) Specifications, 2007, http://standards.ieee.org/getieee802/download/802.11-2007.pdf
+
+.. [Gast2002] Gast, M., 802.11 Wireless Networks : The Definitive Guide, O'Reilly, 2002
+
+.. [802.5]  LAN MAN Standards Committee of the IEEE Computer Society, Information technology— Telecommunications and information exchange between systems— Local and metropolitan area networks— Specific requirements—Part 5: Token ring access method and Physical Layer specifications, ANSI/IEEE Std 802.5-1998E, 1998, http://standards.ieee.org/getieee802/download/802.5-1998.pdf
+
+.. [Bux1989] Bux, W., Token-ring local-area networks and their performance, Proceedings of the IEEE, Vol 77, No 2, p. 238-259, Feb. 1989 http://ieeexplore.ieee.org/xpls/abs_all.jsp?arnumber=18625	
+ 
+.. [DYGU2004] Davik, F.  Yilmaz, M.  Gjessing, S.  Uzun, N., IEEE 802.17 resilient packet ring tutorial, IEEE Communications Magazine, Mar 2004, Vol 42, N 3, p. 112-118
+
+.. [Ross1989] Ross, F., An overview of FDDI: The fiber distributed data interface, IEEE J. Selected Areas in Comm., vol. 7, no. 7, pp. 1043-1051, Sept. 1989
