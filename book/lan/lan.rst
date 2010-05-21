@@ -102,7 +102,7 @@ A first solution to share the available resources among all the devices attached
 
 .. index:: Frequency Division Multiplexing, FDM
 
-Limited resources need to be shared in other environments than Local Area Networks. Since the first radio transmissions by `Marconi <http://en.wikipedia.org/wiki/Guglielmo_Marconi>` more than one century ago, many applications that exchange information through radio signals have been developed. Each radio signal is an electromagntic wave whose power is centered around a given frequency. The radio spectrum corresponds to frequencies ranging between roughly 3 KHz and 300 GHz. Frequency allocation plans negotiate between governements reserve most frequency ranges for specific applications such as broadcast radio, broadcast television, mobile communications, aeronautical radio navigation, amateur radio, satellite, ... Each frequency range is then subdivided in channels and each channel can be reserved for a given application, e.g. a radio broadcaster in a given region.
+Limited resources need to be shared in other environments than Local Area Networks. Since the first radio transmissions by `Marconi <http://en.wikipedia.org/wiki/Guglielmo_Marconi>`_ more than one century ago, many applications that exchange information through radio signals have been developed. Each radio signal is an electromagntic wave whose power is centered around a given frequency. The radio spectrum corresponds to frequencies ranging between roughly 3 KHz and 300 GHz. Frequency allocation plans negotiate between governements reserve most frequency ranges for specific applications such as broadcast radio, broadcast television, mobile communications, aeronautical radio navigation, amateur radio, satellite, ... Each frequency range is then subdivided in channels and each channel can be reserved for a given application, e.g. a radio broadcaster in a given region.
 
 .. index:: Wavelength Division Multiplexing, WDM
 
@@ -421,14 +421,45 @@ The IEEE 802.5 Token Ring technology is defined in [802.5]_. We will use Token R
 
 A Token Ring network is composed of a set of stations that are attached to a unidirectional ring. The basic principle of the Token Ring MAC is that there two types of frames that can travel on the ring : tokens and data frame. When the Tokein Ring starts, one of the stations sends the token. The token is a small frame that represents the authorization to transmit data frames on the ring. To transmit a data frame on the ring, a station must first capture the token by removing it from the ring. As only one station can capture the token at a time, the station that owns the token can safely transmit a data frame on the ring without risking collisions. After having transmitted its frame, the station must remove it from the ring and resend the token so that other stations can transmit their own frames.
 
+.. _fig-tokenring:
+
 .. figure:: png/lan-fig-096-c.png
    :align: center
    :scale: 70
    
    A Token Ring network
 
-While the basic principles of the Token Ring are simple, there are several subtle implementation details that add complexity to Token Ring networks. For this, we need to understand in more details the operation of a Token Ring interface on a station. A Token Ring interface serves for three different purposes. Like other LAN interfaces, it must be able to send and receive frames. In addition, a Token Ring interface is part of the ring and as such it must be able to forward the electrical signal that passes on the ring even if its station is powered off.
+While the basic principles of the Token Ring are simple, there are several subtle implementation details that add complexity to Token Ring networks. For this, we need to understand in more details the operation of a Token Ring interface on a station. A Token Ring interface serves for three different purposes. Like other LAN interfaces, it must be able to send and receive frames. In addition, a Token Ring interface is part of the ring and as such it must be able to forward the electrical signal that passes on the ring even when its station is powered off.
 
+For this, Token Ring interfaces operate in two different modes : `listen` and `transmit`. When operating in `listen` mode, a Token Ring interface receives an electrical signal from its upstream neighbour on the ring, introduces a delay equal to the transmission time of one bit on the ring and regenerates the signal before sending it to its downstream neighbour on the ring.
+
+The first problem faced by a Token Ring network is that as the token represents the authorization to transmit, it must continuously travel on the ring when no data frame is being transmitted. Let us assume that a token has been produced and sent on the by one station. In Token Ring networks, the token is a 24 bits frame whose structure is shown below.
+
+
+.. index:: Token Ring token frame, 802.5 token frame
+
+::
+
+    0                   1                   2         
+    0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+    | Start Delim.  |Access Control | Ending Delim. |
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+    802.5 token format
+
+.. index:: Starting Delimiter (Token Ring), Ending Delimiter
+
+
+The token is composed of three fields. First, the `Starting Delimiter` is the marker that indicates the beginning of a frame. The first Token Ring networks used Manchester coding and the `Starting Delimiter` contained both symbols representing `0` and symbols that do not represent bits. The last field is the `Ending Delimiter` that marks the end of the token. The `Access Control` field contains several bit flags. The most important is the `Token` bit that is set in token frames and reset in other frames.
+
+
+.. index:: Token Ring Monitor
+
+Let us consider the five stations network depicted in figure :ref:`fig-tokenring` and assume that station `S1` sends a token. If we neglect the propagation delay on the inter-station links, as each station introduces a one bit delay, the first bit of the frame would return to `S1` while it sends the fifth bit of the token. If station `S1` is powered off at that time, only the first five bits of the token will travel on the ring. To avoid this problem, there is a special station called the `Monitor` on each Token Ring. To ensure that the token can travel forever on the ring, this `Monitor` inserts a delay that is equal to at least 24 bit transmission times. If station `S3` was the `Monitor` in figure :ref:`fig-tokenring`, `S1` would have been able to transmit the entire token before receiving the first bit of the token from its upstream neighbour.
+
+
+Now that we have explained how the token can be forwarded on the ring, let us analyse how a station can capture a token to transmit a data frame. For this, we need some information about the format of the data frames. An 802.5 data frame begins with the `Starting Delimiter` followed by the `Access Control` field whose `Token` bit is reset, a `Frame Control` field that allows to define several types of frames, destination and source address, a playload, a CRC, the `Ending Delimiter` and a `Frame Status` field. The format of the Token Ring data frames is illustrated below.
 
 .. index:: Token Ring data frame, 802.5 data frame
 
@@ -457,26 +488,24 @@ While the basic principles of the Token Ring are simple, there are several subtl
    802.5 data frame format
 
 
-::
+To understand how a station can capture a token, it must operate in `Listen` mode. In this mode, the station receives bits from its upstream neighbour. If the bits correspond to a data frame, they must be forwarded to the downstream neighbour. If they correspond to a token, the station can capture it and transmit its data frame. Both the data frame and the token are encoded as a bitstring that begins with the `Starting Delimiter` followed by the `Access Control` field. When the station receives the first bit of a `Starting Delimiter`, it cannot know whether this is a data frame or a token and must forward the entire delimiter to its downstream neighbour. It is only when it receives the fourth bit of the `Access Control` field (i.e. the `Token` bit) that the station knows whether the frame is a data frame or a token. If the `Token` bit is reset, it indicates a data frame and the remaining bits of the data frame must be forwarded to the downstream station. Otherwise (`Token` bit is set), this is a token and the station can capture it by reseting the bit that is currently in its buffer. Thanks to this modification, the beginning of the token is now the beginning of a data frame and the station can switch to `Transmit` mode and send its data frame. Thus, the one-bit delay introduced by Token Ring station plays a key role in enabling the stations to efficiently capture the token. 
 
-    0                   1                   2                   3
-    0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
-    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-    | Start Delim.  |Access Control | Frame Control |
-    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+After having transmitted its data frame, the station must remain in `Transmit` mode until it has received the last bit of its data frame. This ensures that the bits sent by a station do not remain forever in the network. A data frame sent by a station in a Token Ring network passes in front of all stations attached to the network. Each station can detect the data frame and analyse the destination address to possibly capture the frame. 
 
-    802.5 token format
+The `Frame Status` field that appears after the `Ending Delimiter` is used to provide acknowledgements without requiring special frames. The `Frame Status` contains two bit flags : `A` and `C`. Both flags are reset when a station sends a data frame. These flags can be modified by the station that is the destination of the frame. When a station sense its address as the destination address of a frame, it can capture the frame, check its CRC and place it in its own buffers. The destination of a frame must set the `A` bit (resp. `C` bit) of the `Frame Status` field once it has seen (resp. copied) a data frame. By inspecting the `Frame Status` of the returning frame, the sender of a frame can verify whether the frame was received correctly by its destination.
 
+.. index:: Monitor station, Token Holding Time
 
+The text above describes the basic operation of a Token Ring network when all stations work correctly. Unfortunately, a real Token Ring network must be able to handle various types of anomalies and this increases the complexity of Token Ring stations. We briefly list the problems and outline their solutions below. A detailed description of the operation of Token Ring stations may be found in [802.5]_. The first problem is when all the stations attached to the network start. One of them must bootstrap the network by sending the first token. For this, all stations implement a distributed election mechanism that is used to select the `Monitor`. All stations must have the capabilities to become a `Monitor`. The `Monitor` manages the Token Ring network and ensures that it operates correctly. Its first role is to introduce a delay of 24 bits transmission times to ensure that the token can travel smoothly on the ring. Second, the `Monitor` sends the first token on the ring. It must also verify that the token passes regularly. According to the Token Ring standard [802.5]_, a station cannot retain the token to transmit data frames for a duration longer than the `Token Holding Time` (THT) (slightly less than 10 milliseconds). On a network containing `N` stations, the `Monitor` must receive the token at least every :math:`N \times THT` seconds. If the `Monitor` does not receive a token during such a period, it cuts the ring for some time and restarts a token.
 
-
+Several other anomalies may occur in a Token Ring network. For example, a station could capture a token and be powered off before having resent the token. Another station could have captured the token, sent its data frame and be powered off before having received all its data frame. In this case, the bit string corresponding to the end of a frame would remain in the ring without being removed by its sender. The `Monitor` must handle all these problems by using the techniques described in [802.5]_. If unfortunately the `Monitor` fails, another station will be elected to become the new `Monitor`.
 
 
 
 Datalink layer technologies
 ###########################
 
-In this section, we review the key characteristics of the several datalink layer technologies. We discuss in more details the technologies that are widely used and briefly mention other interesting technologies. A detailed survey of all datalink layer technologies would be outside the scope of this book.
+In this section, we review the key characteristics of several datalink layer technologies. We discuss in more details the technologies that are widely used today and briefly mention other interesting technologies. A detailed survey of all datalink layer technologies would be outside the scope of this book.
 
 .. index:: Point-to-Point Protocol, PPP
 
