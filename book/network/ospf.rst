@@ -81,3 +81,9 @@ To better represent LANs and reduce the number of OSPF packets that are exchange
  - all routers update their routing table 
 
 
+.. rubric:: Footnotes
+
+
+.. [#fvirtual] OSPF can support `virtual links` to connect together routers that belong to the same area but are not directly connected. However, this goes beyond this introduction to OSPF.
+
+.. [#felection] The OSPF Designated Router election procedure is defined in :rfc:`2328`. Each router can be configured with a router priority that influences the election process since the router with the highest priority is preferred when an election is run. 

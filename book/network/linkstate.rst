@@ -116,3 +116,6 @@ To compute its routing table, each router computes the spanning rooted at itself
    Computation of the routing table
 
 
+.. rubric:: Footnotes
+
+.. [#foverload] It should be noted that link state routing assumes that all routers in the network have enough memory to store the entire LSDB. The routers that do not have enough memory to store the entire LSDB cannot participate in link state routing. Some link state routing protocols allow routers to report that they do not have enough memory and must be removed from the graph by the other routers in the network.

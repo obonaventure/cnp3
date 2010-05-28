@@ -204,7 +204,7 @@ Among all the commands supported by this router, the `show ip bgp` command is ve
 
 #. Consider the network  below.
 
- .. figure:: path_explo.png
+ .. figure:: exercises/fig/path_explo.png
     :align: center
     :scale: 50
    

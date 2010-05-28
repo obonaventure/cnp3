@@ -85,3 +85,8 @@ We will discuss several examples of application-level protocols in this chapter.
 .. ======================
 
 .. The peer-to-peer model 
+
+
+.. rubric:: Footnotes
+
+.. [#fhtonl] For example, the :manpage:`htonl(3)` (resp. :manpage:`ntohl(3)`) function the standard C library converts a 32-bits unsigned integer from the byte order used by the CPU to the network byte order (resp. from the network byte order to the CPU byte order). Similar functions exist in other programming languages.

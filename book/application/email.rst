@@ -405,4 +405,14 @@ In this example, a POP client contacts a POP server on behalf of the user named 
 .. The simplest authentication
 .. APOP mrose c4c9334bac560ecc979e58001b3e22fb
 
+.. rubric:: Footnotes
+
+.. [#femailheaders] The list of all standard email header lines may be found at http://www.iana.org/assignments/message-headers/message-header-index.html
+
+.. [#fsmtpauth] During the last years, many Internet Service Providers, campus and enterprise networks have deployed SMTP extensions :rfc:`4954` on their MSAs. These extensions for the MUAs to be authenticated before the MSA accepts an email message from the MUA. 
+
+.. [#fdot] This implies that a valid email message cannot contain a line with one dot followed by `CR` and `LF`. If a user types such a line in an email, his email client will automatically add a space character before or after the dot when sending the message over SMTP.
+
+.. [#fapop] :rfc:`1939` defines another authentication scheme that is not vulnerable to such attackers.
+
 
