@@ -83,7 +83,7 @@ An 802.11 access point is a relay that operates in the datalink layer like switc
    |			32 bits		CRC			   |	
    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 
-   Ethernet 802.11 data frame format
+   802.11 data frame format
  
 
 The first part of the 802.11 header is the 16 bits `Frame Control` field. This field contains bit flags that indicate the type of frame (data frame, RTS/CTS, acknowledgement, management frames, ...), whether the frame is sent to or from a fixed LAN, ... [802.11]_. The `Duration` is a 16 bits field that is used to reserve the transmission channel. In data frames, the `Duration` field is usually set to the time required to transmit one acknowledgement frame after a SIFS delay. Note that the `Duration` is set to zero for multicast and broadcast frames. As these frames are not acknowledged, there is not need to reserve the transmission channel after their transmission. The `Sequence control` field contains a 12 bits sequence number that is incremented for each data frame.
@@ -140,12 +140,46 @@ When a frame is sent from a WiFi device to a server attached to the same LAN as 
 
  Despite the utilization of acknowledgements, the 802.11 layer only provides an unreliable connectionless service like Ethernet networks that do not use acknowledgements. The 802.11 acknowledgements are used to minimize the probability of frame duplication. They do not guarantee that all frames will be correctly received by their destination. Like Ethernet, 802.11 networks provide a high probability of successful delivery of the frames, not a guarantee. However, it should be noted that 802.11 networks do not use acknowledgements for multicast and broadcast frames. This implies that in practice such frames are more likely to suffer from transmission errors than unicast frames.
 
-.. index:: beacon frame (802.11)
+.. index:: beacon frame (802.11), Service Set Identity (SSID), SSID
 
-In addition to the data and control frames that we have briefly described above, 802.11 networks use several types of management frames. These management frames are used for various purposes. We briefly describe some of these frames below. A detailed discussion may be found in [802.11]_ and [Gast2002]_. A first type of management frames are the `beacon` A first utilisation of the management frames
+In addition to the data and control frames that we have briefly described above, 802.11 networks use several types of management frames. These management frames are used for various purposes. We briefly describe some of these frames below. A detailed discussion may be found in [802.11]_ and [Gast2002]_. A first type of management frames are the `beacon` frames. These frames are broadcated regularly by access points. Each `beacon frame` contains information on the capabilities of the access point (e.g. the supported 802.11 transmission rates) and a `Service Set Identity` (SSID). The SSID is a null-terminated ASCII string that can contain up to 32 characters. An access point may support several SSIDs and announce them in beacon frames. An access point may also choose to remain silent and not advertise beacon frames. In this case, WiFi stations may send `Probe request` frames to force the available access points to return a `Probe response` frame.
 
 
 .. sidebar:: IP over 802.11
 
- todo
+ As explained earlier, two types of encapsulation schemes were defined to support IP in Ethernet networks : the original encapuslation scheme built above the Ethernet DIX format defined in :rfc:`894` and a second encapsulation :rfc:`1042` scheme build above the LLC/SNAP protocol [802.2]_. In 802.11 networks, the situation is simpler and only the :rfc:`1042` encapsulation is used. In practice, this encapsulation adds 6 bytes to the 802.11 header. The first four bytes correspond to the LLC/SNAP header. They are followed by the two bytes Ethernet Type field (`0x800` for IP and `0x806` for ARP). The figure below shows 
+
+ ::
+
+    0                   1                   2                   3
+    0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+		
+   |								   |
+   ~			    802.11 header			   ~
+   |								   |	 
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |  SNAP/DSAP    |   SNAP/SSAP   |     Control   |  RFC 1042	   |
+   |    0xAA	   |     0xAA	   |	   0x03	   |     0x00	   |	
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |              Type		   |				   |
+   | 		  0x800		   |				   |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+				   |
+   |								   |
+   ~ 			                     IP packet 		   ~
+   |								   |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |			32 bits		CRC			   |	
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+   IP over 802.11
+ 
+
+
+ 
+
+The second important utilisation of the management frames is to allow a WiFi station to be associated with an access point. When a WiFi station starts, it listens to beacon frames to find the available SSIDs. To be allowed to send and receive frames via an access point, a WiFi station must be associated to this access point. If the access point does not use any security mechanism to secure the wireless transmission, the WiFi station simply sends an `Association request` frame to its preferred access point (usually the access point that it receives with the strongest radio signel). This frame contains some parameters chosen by the WiFi station and the SSID that it requests to join. The access point replies with an `Association response frame` if it accepts the WiFI station. 
+
+
+
+
 
