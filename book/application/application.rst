@@ -34,6 +34,9 @@ Writing simple networked applications
 Summary
 #######
 
+In this chapter, we have first described the client-server and the peer-to-peer models. Then, we have described in details three important families of protocols in the application layer. The Internet identifies hosts by using 32 bits IPv4 or 128 bits IPv6. However, using these addresses directly inside applications would be difficult for the humans that use them. We have explained how the Domain Name System allows to map names on addresses. We have described both the DNS protocol that runs above UDP and the naming hierarchy. We have then discussed one of the oldest applications on the Internet : electronic mail. We have described the format of email messages and described the SMTP protocol that is used to send email messages and the POP protocol that is used by email recipients to retrieve their email messages from their server. Finally, we have explained the protocols that are used in the world wide web and the HyperText Transfert Protocol in particular. 
+
+
 .. for DNS mention security as well and extensions for DNSSEC
 .. for POP, the need for much stronger authentication
 .. for SMTP the problems caused by spam and so on

@@ -52,6 +52,10 @@ This chapter is organised as follows. We first explain how it is possible to pro
 Summary
 #######
 
+In this chapter, we have studied the transport layer. This layer provides two types of services to the application layer. The unreliable connectionless service is the simplest service offered to applications. On the Internet, this is the service offered by UDP. However, most applications prefer to use a reliable and connection-oriented transport service. We have shown that providing this service was much more complex than providing an unreliable service as the transport layer needs to recover from the errors that occur in the network layer. For this, transport layer protocols rely on several mechanisms. First, they use a handshake mechanism, such as the three-way handshake mechanism, to correctly establish a transport connection. Once the connection has been established, transport entities exchange segments. Each segment contains a sequence number and the transport layer uses acknowledgements to confirm the segments that have been correctly received. In addition, timers are used to recover from segment losses and sliding windows are used to avoid overflowing the buffers of the transport entities. Finally, we have explained how a transport connection can be safely released. We have then discussed the mechanisms that are used in TCP, the reliable transport protocol that is used by most applications on the Internet. We have notably described the congestion control mechanism that has been included in TCP since the late 1980s and have explained how the reliability mechanisms used by TCP have been tuned over the years.
+
+
+
 
 .. include:: ../links.rst
 
