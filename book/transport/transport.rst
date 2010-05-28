@@ -48,6 +48,13 @@ Summary
 #######
 
 
+.. include:: ../links.rst
+
+.. include:: exercises/ex-transport.rst
+
+.. include:: exercises/cha-transport.rst
+
+
 .. rubric:: Footnotes
 
 
@@ -116,11 +123,4 @@ Summary
 .. [#fflowslink] For example, the measurements performed in the Sprint network in 2004 reported more than 10k active TCP connections on a link, see https://research.sprintlabs.com/packstat/packetoverview.php. More recent information about backbone links may be obtained from caida_ 's realtime measurements, see e.g.  http://www.caida.org/data/realtime/passive/ 
 
 .. [#fwrap] In this pseudo-code, we assume that TCP uses unlimited sequence and acknowledgement numbers. Furthermore, we do not detail how the `cwnd` is adjusted after the retransmission of the lost segment by fast retransmit. Additional details may be found in :rfc:`5681`.
-
-.. include:: ../links.rst
-
-.. include:: exercises/ex-transport.rst
-
-.. include:: exercises/cha-transport.rst
-
 

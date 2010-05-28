@@ -49,6 +49,12 @@ Summary
 
 .. Additional information about the Bittorrent protocol may be found i
 
+.. include:: ../links.rst
+
+
+.. include:: exercises/ex-application.rst
+
+
 .. rubric:: Footnotes
 
 .. [#fhtonl] For example, the :manpage:`htonl(3)` (resp. :manpage:`ntohl(3)`) function the standard C library converts a 32-bits unsigned integer from the byte order used by the CPU to the network byte order (resp. from the network byte order to the CPU byte order). Similar functions exist in other programming languages.
@@ -85,8 +91,3 @@ Summary
 
 .. [#ffavicon] Favorite icons are small icons that are used to represent web servers in the toolbar of Internet browsers. Microsoft added this feature in their browsers without taking into account the W3C standards. See http://www.w3.org/2005/10/howto-favicon for a discussion on how to cleanly support such favorite icons.
 
-.. include:: ../links.rst
-
-
-
-.. include:: exercises/ex-application.rst
