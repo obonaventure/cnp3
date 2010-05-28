@@ -1,0 +1,151 @@
+802.11 wireless networks
+========================
+
+The radio spectrum is a limited resource that must be shared by everyone. During most of the twentieth century, governments and international organisations have regulated most of the radio spectrum. This regulation allows to control the utilisation of the radio spectrum to ensure that there are no interferences between different users. A company that wants to use a frequency range in a given region must for a license to the regulator. Most regulators charge a fee for the utilisation of radio spectrum and some governments have benefited from competition among companies that bid for the same frequency range by asking huge fees. 
+
+In the 1970s, after the first experiments with ALOHANet, interest in wireless networks grew. In 1973, the `first mobile phone <http://news.bbc.co.uk/2/hi/programmes/click_online/8639590.stm>`_ was developed and tested. This invention led to the development of a new industry. Given the growing demand for mobile phones, researchers worked on the development of digital cellular networks. In 1987, several European countries decided to develop the standards for a common cellular telephone system across Europe : the `Global System for Mobile Communications` (GSM). Since then, the standards have evolved and more than three billion users are connected to GSM networks today.
+
+.. index:: WiFi
+
+While most of the frequency ranges of the radio spectrum are reserved for specific applications and require a special licence, there are a few exceptions. These exceptions are known as the `Industrial, Scientific and Medical <http://en.wikipedia.org/wiki/ISM_band>`_ (ISM) radio bands. These bands can be used for industrial, scientific and medical applications without requiring a licence from the regulator. For example, some radio-controlled devices use the  27 MHz ISM band and some cordless telephones operate in the 915 MHz ISM. In 1985, the 2.400-2.500 GHz band was added to the list of ISM bands. This frequency range corresponds to the frequencies that are emitted by microwave ovens. Sharing this band with licensed applications would have likely caused interferences given the large number of microwave ovens that are used. Despite of the risk of interferences with microwave ovens, the opening of the 2.400-2.500 GHz allowed the networking industry to develop several wireless network techniques to allow computers to exchange data without using cables. In this section, we discuss in more details the most popular one, i.e. the WiFi [802.11]_ family of wireless networks. However, other wireless networking techniques such as `BlueeTooth <http://en.wikipedia.org/wiki/BlueTooth>`_ or `HiperLAN <http://en.wikipedia.org/wiki/HiperLAN>`_.
+
+WiFi is today a very popular wireless networking technology. There are more than several hundreds of millions of devices using WiFi. The development of this technology started in the late 1980s with the `WaveLAN <http://en.wikipedia.org/wiki/WaveLAN>`_ proprietary wireless network. WaveLAN operated at 2 Mbps and used different frequency bands in different regions of the world. In the early 1990s, the IEEE_ create the `802.11 working group <http://www.ieee802.org/11/>`_ to standardise a family of wireless network technology. This working group was very prolific and produced several wireless networking standards that use different frequency ranges and different physical layers. The table below provides a summary of the main 802.11 standards.
+
+
+========        =========       ==========      ===========     ==============
+Standard	Frequency	Typical		Max		Range (m)
+				throughput	bandwidth	indoor/outdoor
+========        =========       ==========      ===========     ==============
+802.11		2.4 GHz		0.9 Mbps	2 Mbps		20/100
+802.11a		5 GHz		23 Mbps		54 Mbps		35/120
+802.11b		2.4 GHz		4.3 Mbps	11 Mbps		38/140
+802.11g		2.4 GHz		19 Mbps		54 Mbps		38/140
+802.11n		2.4/5 GHz	74 Mbps		150 Mbps	70/250
+========        =========       ==========      ===========     ==============
+
+When developing its family of standards, the `IEEE 802.11 working group <http://www.ieee802.org/11/>`_ took a similar approach as the `IEEE 802.3 working group <http://www.ieee802.org/3/>`_ that developed various types of physical layers for Ethernet networks. 802.11 networks use the CSMA/CA Medium Access Control technique described earlier and they all assume the same architecture and use the same frame format.
+
+.. index:: Basic Service Set (BSS), BSS, adhoc network, independent network
+
+The architecture of WiFi networks is slightly different from the Local Area Networks that we have discussed until now. There are in practice two main types of WiFi networks : `independent` or `adhoc` network  and `infrastructure` networks [#fBSS]_. An `independent` or `adhoc` network is composed of a set of devices that communicate with each other. These devices play the same role and the `adhoc` network is usually not connected to the global Internet. `Adhoc` networks are used when for example a few laptops need to exchange information, but in practice these usages of WiFi networks are not frequent.
+
+.. figure:: png/lan-fig-083-c.png
+   :align: center
+   :scale: 70
+   
+   An 802.11 independent or adhoc network
+
+.. index:: infrastructure network
+
+
+Most WiFi networks are `infrastructure` networks. An `infrastructure` network contains one or more `access points` that are attached to a fixed Local Area Network (usually an Ethernet network) that is connected to other networks such as the Internet. The figure below shows shows such a network with two access points and four WiFi devices. Each WiFi device is associated to one access point and uses this access point as a relay to exchange frames with the devices that are associated to another access point or attached to the LAN.
+
+
+.. figure:: png/lan-fig-084-c.png
+   :align: center
+   :scale: 70
+   
+   An 802.11 infrastructure network
+
+An 802.11 access point is a relay that operates in the datalink layer like switches. The figure below represents the layers of the reference model that are involved when a WiFi host communicates with a host attached to an Ethernet network through an access point.
+
+.. figure:: png/lan-fig-103-c.png
+   :align: center
+   :scale: 70
+   
+   An 802.11 access point
+
+.. index:: 802.11 frame format
+
+802.11 devices exchange variable length that have a slightly different structure than the simple frame formats used in Ethernet LANs. We review the key parts of the 802.11 frames. Additional details may be found in [802.11]_ and [Gast2002]_ . An 802.11 frame contains a fixed length header, a variable length payload that may contain up 2324 bytes and a 32 bits CRC. Although the payload can contain up to 2324 bytes, most 802.11 deployments use a maximum payload size of 1500 bytes as they are used in `infrastructure` networks attached to Ethernet LANs. An 802.11 data frame is shown below.
+
+::
+
+    0                   1                   2                   3
+    0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |	 Frame  Control            |		Duration	   |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+		
+   |								   |	 
+   |    Address 1 (48 bits)        +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+    
+   |      	        	   |			           |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+  Address 2 (48 bits)	   |
+   |                    		      	    		   |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |								   |	 
+   |    Address 3 (48 bits)        +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+    
+   |      	        	   |     Sequence control	   |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |								   |
+   ~ 			Payload (0-2324 bytes)			   ~
+   |								   |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |			32 bits		CRC			   |	
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+   Ethernet 802.11 data frame format
+ 
+
+The first part of the 802.11 header is the 16 bits `Frame Control` field. This field contains bit flags that indicate the type of frame (data frame, RTS/CTS, acknowledgement, management frames, ...), whether the frame is sent to or from a fixed LAN, ... [802.11]_. The `Duration` is a 16 bits field that is used to reserve the transmission channel. In data frames, the `Duration` field is usually set to the time required to transmit one acknowledgement frame after a SIFS delay. Note that the `Duration` is set to zero for multicast and broadcast frames. As these frames are not acknowledged, there is not need to reserve the transmission channel after their transmission. The `Sequence control` field contains a 12 bits sequence number that is incremented for each data frame.
+
+
+The astute reader may have noticed that the 802.11 data frames contain three 48-bits address fields [#f4addresses]_ . This is surprising compared to other protocols in the network and datalink layers whose headers only contain a source and destination address. The need for a third address in the 802.11 header comes from the `infrastructure` networks. In such a network, frames are usually exchanged between routers and servers attached to the LAN and WiFi devices attached to one of the access points. The role of the three address fields is specified by bit flags in the `Frame Control` field. 
+
+When a frame is sent from a WiFi device to a server attached to the same LAN as the access point, the first address of the frame is set to the MAC address of the access point, the second address is set to the MAC address of the source WiFi device and the third address is the address of the final destination on the LAN. When the server replies, it sends an Ethernet frame whose source address is its MAC address and the destination address is the MAC address of the WiFi device. This frame is captured by the access point that converts the Ethernet header into an 802.11 frame header. The 802.11 frame sent by the access point contains three addresses : the first address is the MAC address of the WiFi device, the second address is the MAC address of the access point and the third address the MAC address of the server that sent the frame.
+
+802.11 control frames are simpler than data frames. They contain a `Frame Control`, a `Duration` field and one or two addresses. The acknowledgement frames are very small. They only contain the address of the destination of the acknowledgement. There is no source address and now `Sequence Control` field in the acknowledgement frames. This is because the acknowledgement frame can be easily associated to the previous frame that it acknowledges. Indeed, each unicast data frame contains a `Duration` field that is used to reserve the transmission channel to ensure that no collision will affect the acknowledgement frame. In 802.11, the `Sequence Control` field is mainly used by the receiver to remove duplicate frames. Duplicate frames are detected as follows. Each data frame contains a 12 bits sequence and the `Frame Control` field contains the `Retry` bit flag that is set when a frame is transmitted.  Each 802.11 receiver stores the most recent sequence number received from each source address in frames whose `Retry` bit is reset. Upon reception of a frame with the `Retry` bit set, the receiver verifies its sequence number to determine whether it is a duplicated frame or not. 
+
+
+
+::
+
+    0                   1                   2                   3
+    0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |	 Frame  Control            |		Duration	   |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+		
+   |								   |	 
+   |    Receiver Address           +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+    
+   |      	        	   |	     CRC	           |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+		
+   |        CRC  (cont.)           |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+ 	
+
+
+   Ethernet 802.11 ACK and CTS frames
+
+.. index:: RTS frame (802.11), CTS frame (802.11)
+
+802.11 RTS/CTS frames are used to reserve the transmission channel to transmit one data frame and its acknowledgement. The RTS frames contain a `Duration` and the transmitter and receiver addresses. The `Duration` field of the RTS frame indicates the duration of the entire reservation (i.e. the time required to transmit the CTS, the data frame, the acknowledgements and the required SIFS delays). The CTS frame has the same format as the acknowledgement frame.
+
+::
+
+    0                   1                   2                   3
+    0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |	 Frame  Control            |		Duration	   |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+		
+   |								   |	 
+   |    Receiver Address           +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+    
+   |      	        	   |			           |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+  Transmitter Address	   |
+   |                    		      	    		   |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |			32 bits		CRC			   |	
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+   Ethernet 802.11 RTS frame format
+
+.. sidebar:: The 802.11 service
+
+ Despite the utilization of acknowledgements, the 802.11 layer only provides an unreliable connectionless service like Ethernet networks that do not use acknowledgements. The 802.11 acknowledgements are used to minimize the probability of frame duplication. They do not guarantee that all frames will be correctly received by their destination. Like Ethernet, 802.11 networks provide a high probability of successful delivery of the frames, not a guarantee. However, it should be noted that 802.11 networks do not use acknowledgements for multicast and broadcast frames. This implies that in practice such frames are more likely to suffer from transmission errors than unicast frames.
+
+.. index:: beacon frame (802.11)
+
+In addition to the data and control frames that we have briefly described above, 802.11 networks use several types of management frames. These management frames are used for various purposes. We briefly describe some of these frames below. A detailed discussion may be found in [802.11]_ and [Gast2002]_. A first type of management frames are the `beacon` A first utilisation of the management frames
+
+
+.. sidebar:: IP over 802.11
+
+ todo
+
