@@ -1,3 +1,5 @@
+.. _chapter-datalink:
+
 ==============================================
 The datalink layer and the Local Area Networks
 ==============================================

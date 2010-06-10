@@ -1,3 +1,5 @@
+.. _chapter-application:
+
 =====================
 The Application Layer
 =====================
@@ -23,9 +25,6 @@ Many protocols have been defined for networked applications. In this section, we
 
 .. include:: http.rst
 
-
-Writing simple networked applications
-#####################################
 
 
 .. include:: socket.rst

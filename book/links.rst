@@ -22,6 +22,16 @@
 
 .. _Louis Pouzin: http://conferences.sigcomm.org/sigcomm/1999/pouzin.html
 
+.. _Joseph Licklider: http://en.wikipedia.org/wiki/J._C._R._Licklider
+
+.. _Douglas Comer: http://www.cs.purdue.edu/people/comer
+
+.. _Larry Peterson: http://www.cs.princeton.edu/~llp/
+
+.. _Bruce Davie: http://nms.lcs.mit.edu/~bdavie/
+
+.. _Richard Stevens: http://www.kohala.com/
+
 .. _Van Jacobson: http://www.parc.com/about/people/88/van-jacobson.html
 
 .. _Sally Floyd: http://www.icir.org/floyd/

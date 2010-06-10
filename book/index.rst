@@ -10,6 +10,7 @@ Computer Networking : Principles, Protocols and Practice
 .. toctree:: 
    :maxdepth: 3
 
+   preface
    intro/introduction
    application/application
    transport/transport

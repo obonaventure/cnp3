@@ -1,3 +1,5 @@
+.. _chapter-network: 
+
 ================== 
 The network layer
 ==================
