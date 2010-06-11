@@ -10,9 +10,19 @@ The second reason is that that the computer networking community is a strong par
 
 This open textbook aims at filling the gap between the open-source implementations and the open-source network specifications by providing a detailed but pedagogical description of the key principles that guide the operation of the Internet.  The book is released under a `creative commons licence <http://creativecommons.org/licenses/by-sa/3.0/>`_. Such an open-source license is motivated by two reasons. The first is that we hope that this will allow many students to use the book to learn computer networks. The second is that I hope that other teachers will reuse, adapt and improve it. Time will tell if it is possible to build a community of contributors to improve and develop the book further. As a starting point, the first release contains all the material for a one-semester first upper undergraduate or a graduate networking course.
 
+.. sidebar:: How to contribute ?
+
+ Like any open-source project, the future of `Computer Networking Principles, Protocols and Practice` will depend on its contributors. The development of the textbook is managed through a trac platform at http://scm.info.ucl.ac.be/trac/cnp3 . You can contribute to the project by :
+ 
+  - filling `tickets <https://scm.info.ucl.ac.be/trac/cnp3/newticket>`_ with comments, suggestions or bug reports 
+  - proposing new exercices 
+  - writing new sections or chapters
+  
+ A stable release of the textbook will be issued at least once per year on http://inl.info.ucl.ac.be/CNP3 and the development version will always be available from http://scm.info.ucl.ac.be/trac/cnp3
+
 .. The overall objective of the book is to explain the principles and the protocols used in computer networks and also provide the students with some intuition about the important practical issues that arise often. The course follows a hybrid problem-based learning (:term:`PBL`) approach. During each week, the students follow a 2 hours theoretical course that describes the principles and some of the protocols. They also receive a set of small problems that they need to solve in groups. These problems are designed to reinforce the student's knowledge but also to explore the practical problems that arise in real networks by allowing the students to perform experiments by writing prototype networking code. 
 
 
 
-
+.. include:: links.rst
 

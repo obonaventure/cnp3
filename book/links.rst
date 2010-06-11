@@ -38,6 +38,10 @@
 
 .. _Jon Postel: http://www.postel.org/postel.html
 
+.. _Jim Kurose: http://www-net.cs.umass.edu/personnel/kurose.html
+
+.. _Keith Ross: http://cis.poly.edu/~ross/
+
 .. _sendmail: http://www.sendmail.org
 
 .. _X25: http://en.wikipedia.org/wiki/X.25

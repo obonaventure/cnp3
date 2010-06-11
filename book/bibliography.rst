@@ -24,7 +24,8 @@ Whenever possible, the bibliography includes hypertext links to the references c
 .. [BNT1997] Beech, W., Nielsen, D., Taylor, J.,  AX.25 Link Access Protocol for Amateur Packet Radio, version 2.2, Revision: July 1998, http://www.tapr.org/pdf/AX25.2.2.pdf
 .. [BOP1994] Brakmo, L. S., O'Malley, S. W., and Peterson, L. L. 1994. TCP Vegas: new techniques for congestion detection and avoidance. In Proceedings of the Conference on Communications Architectures, Protocols and Applications (London, United Kingdom, August 31 - September 02, 1994). SIGCOMM '94. ACM, New York, NY, 24-35. DOI= http://doi.acm.org/10.1145/190314.190317
 .. [Benvenuti2005] Benvenuti, C., Understanding Linux Network Internals, O'Reilly Media, 2005, http://oreilly.com/catalog/9780596002558
-.. [Bux1989] Bux, W., Token-ring local-area networks and their performance, Proceedings of the IEEE, Vol 77, No 2, p. 238-259, Feb. 1989 http://ieeexplore.ieee.org/xpls/abs_all.jsp?arnumber=18625	
+.. [Bux1989] Bux, W., Token-ring local-area networks and their performance, Proceedings of the IEEE, Vol 77, No 2, p. 238-259, Feb. 1989 http://ieeexplore.ieee.org/xpls/abs_all.jsp?arnumber=18625
+.. [BYL2008] Buford, J., Yu, H., Lua, E.K., P2P Networking and Applications, Morgan Kaufmann, 2008
 .. [CB2003] Cheswick, William R., Bellovin, Steven M., Rubin, Aviel D. Firewalls and internet security - Second edition - Repelling the Wily Hacker, Addison-Wesley 2003
 .. [CD2008] Calvert, K., Donahoo, M., TCP/IP Sockets in Java : Practical Guide for Programmers, Morgan Kaufman, 2008
 .. [CJ1989] Chiu, D., Jain, R., Analysis of the Increase and Decrease Algorithms for Congestion Avoidance in Computer Networks, Computer Networks and ISDN Systems Vol 17, pp 1-14, 1989.
@@ -67,6 +68,7 @@ Whenever possible, the bibliography includes hypertext links to the references c
 .. [HRX2008] Ha, S., Rhee, I., and Xu, L. 2008. CUBIC: a new TCP-friendly high-speed TCP variant. SIGOPS Oper. Syst. Rev. 42, 5 (Jul. 2008), 64-74. DOI= http://doi.acm.org/10.1145/1400097.1400105
 .. [ISO10589] Information technology — Telecommunications and information exchange between systems — Intermediate System to Intermediate System intra-domain routeing information exchange protocol for use in conjunction with the protocol for providing the connectionless-mode network service (ISO 8473), 2002, http://standards.iso.org/ittf/PubliclyAvailableStandards/c030932_ISO_IEC_10589_2002(E).zip 
 .. [Jacobson1988] Jacobson, V. 1988. Congestion avoidance and control. In Symposium Proceedings on Communications Architectures and Protocols (Stanford, California, United States, August 16 - 18, 1988). V. Cerf, Ed. SIGCOMM '88. ACM, New York, NY, 314-329. DOI= http://doi.acm.org/10.1145/52324.52356
+.. [JSBM2002] Jung, J., Sit, E., Balakrishnan, H., and Morris, R. 2002. DNS performance and the effectiveness of caching. IEEE/ACM Trans. Netw. 10, 5 (Oct. 2002), 589-603. DOI= http://dx.doi.org/10.1109/TNET.2002.803905
 .. [KM1995] Kent, C. A. and Mogul, J. C. 1995. Fragmentation considered harmful. SIGCOMM Comput. Commun. Rev. 25, 1 (Jan. 1995), 75-87. DOI= http://doi.acm.org/10.1145/205447.205456
 .. [KP91] Karn, P. and Partridge, C. 1991. Improving round-trip time estimates in reliable transport protocols. ACM Trans. Comput. Syst. 9, 4 (Nov. 1991), 364-373. DOI= http://doi.acm.org/10.1145/118544.118549
 .. [KPD1985] Karn, P., Price, H., Diersing, R., Packet radio in amateur service, IEEE Journal on Selected Areas in Communications, 3, May, 1985.
