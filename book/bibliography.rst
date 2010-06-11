@@ -24,6 +24,7 @@ Whenever possible, the bibliography includes hypertext links to the references c
 .. [BNT1997] Beech, W., Nielsen, D., Taylor, J.,  AX.25 Link Access Protocol for Amateur Packet Radio, version 2.2, Revision: July 1998, http://www.tapr.org/pdf/AX25.2.2.pdf
 .. [BOP1994] Brakmo, L. S., O'Malley, S. W., and Peterson, L. L. 1994. TCP Vegas: new techniques for congestion detection and avoidance. In Proceedings of the Conference on Communications Architectures, Protocols and Applications (London, United Kingdom, August 31 - September 02, 1994). SIGCOMM '94. ACM, New York, NY, 24-35. DOI= http://doi.acm.org/10.1145/190314.190317
 .. [Benvenuti2005] Benvenuti, C., Understanding Linux Network Internals, O'Reilly Media, 2005, http://oreilly.com/catalog/9780596002558
+.. [Bush1993] Bush, R. 1993. FidoNet: technology, tools, and history. Commun. ACM 36, 8 (Aug. 1993), 31-35. DOI= http://doi.acm.org/10.1145/163381.163383
 .. [Bux1989] Bux, W., Token-ring local-area networks and their performance, Proceedings of the IEEE, Vol 77, No 2, p. 238-259, Feb. 1989 http://ieeexplore.ieee.org/xpls/abs_all.jsp?arnumber=18625
 .. [BYL2008] Buford, J., Yu, H., Lua, E.K., P2P Networking and Applications, Morgan Kaufmann, 2008
 .. [CB2003] Cheswick, William R., Bellovin, Steven M., Rubin, Aviel D. Firewalls and internet security - Second edition - Repelling the Wily Hacker, Addison-Wesley 2003
@@ -55,6 +56,8 @@ Whenever possible, the bibliography includes hypertext links to the references c
 .. [FTY99] Theodore Faber, Joe Touch, and Wei Yue, The TIME-WAIT state in TCP and Its Effect on Busy Servers, Proc. Infocom '99, pp. 1573, http://www.isi.edu/touch/pubs/infocomm99/
 .. [Feldmeier95] Feldmeier, D. C. 1995. Fast software implementation of error detection codes. IEEE/ACM Trans. Netw. 3, 6 (Dec. 1995), 640-651. DOI= http://dx.doi.org/10.1109/90.477710
 .. [GAVE1999] Govindan, R., Alaettinoglu, C., Varadhan, K., Estrin, D., An Architecture for Stable, Analyzable Internet Routing, IEEE Network Magazine, Vol. 13, No. 1, pp. 29--35, January 1999.
+.. [GC2000] Grier, D., Campbell, M., A social history of Bitnet and Listserv, 1985-1991, Annals of the History of Computing, IEEE, Volume 22, Issue 2, Apr-Jun 2000, pp. 32 - 41, http://www.computer.org/portal/web/csdl/doi/10.1109/85.841135
+.. [Genilloud1990] Genilloud, G. 1990. X.400 MHS: first steps towards an EDI communication standard. SIGCOMM Comput. Commun. Rev. 20, 2 (Apr. 1990), 72-86. DOI= http://doi.acm.org/10.1145/378570.378712
 .. [GGR2001] Gao, L., Griffin, T., Rexford, J., Inherently safe backup routing with BGP, Proc. IEEE INFOCOM, April 2001 
 .. [GR2001] Gao, L., Rexford, J., Stable Internet routing without global coordination, IEEE/ACM Transactions on Networking, December 2001, pp. 681-692 
 .. [GSW2002] Griffin, T. G., Shepherd, F. B., and Wilfong, G. 2002. The stable paths problem and interdomain routing. IEEE/ACM Trans. Netw. 10, 2 (Apr. 2002), 232-243.
