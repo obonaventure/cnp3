@@ -14,11 +14,13 @@ This open textbook aims at filling the gap between the open-source implementatio
 
  Like any open-source project, the future of `Computer Networking Principles, Protocols and Practice` will depend on its contributors. The development of the textbook is managed through a trac platform at http://scm.info.ucl.ac.be/trac/cnp3 . You can contribute to the project by :
  
-  - filling `tickets <https://scm.info.ucl.ac.be/trac/cnp3/newticket>`_ with comments, suggestions or bug reports 
-  - proposing new exercices 
-  - writing new sections or chapters
+  - send comments, suggestions or bug reports  by filing `tickets <https://scm.info.ucl.ac.be/trac/cnp3/newticket>`_ or via the CNP3 mailing list at https://listes-2.sipr.ucl.ac.be/sympa/subscribe/cnp3
+  - proposing new exercices on the `CNP3 mailing list <https://listes-2.sipr.ucl.ac.be/sympa/subscribe/cnp3>`_
+  - proposing new sections or chapters on the `CNP3 mailing list <https://listes-2.sipr.ucl.ac.be/sympa/subscribe/cnp3>`_
   
  A stable release of the textbook will be issued at least once per year on http://inl.info.ucl.ac.be/CNP3 and the development version will always be available from http://scm.info.ucl.ac.be/trac/cnp3
+
+
 
 .. The overall objective of the book is to explain the principles and the protocols used in computer networks and also provide the students with some intuition about the important practical issues that arise often. The course follows a hybrid problem-based learning (:term:`PBL`) approach. During each week, the students follow a 2 hours theoretical course that describes the principles and some of the protocols. They also receive a set of small problems that they need to solve in groups. These problems are designed to reinforce the student's knowledge but also to explore the practical problems that arise in real networks by allowing the students to perform experiments by writing prototype networking code. 
 

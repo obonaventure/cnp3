@@ -8,7 +8,7 @@ The network layer contains two types of protocols :
 
 
 
-#. Routing protocols used in IP networks only use positive link weights. What would happen with a distance vector routing protocol in the network below that contains a negative link weight ?
+1. Routing protocols used in IP networks only use positive link weights. What would happen with a distance vector routing protocol in the network below that contains a negative link weight ?
 
 .. figure:: exercises/fig/routing-fig-001-c.png 
    :align: center 
@@ -16,7 +16,7 @@ The network layer contains two types of protocols :
 
    Simple network
 
-#. When a network specialist designs a network, one of the problems that he needs to solve is to set the metrics the links in his network. In the USA, the Abilene network interconnects most of the research labs and universities. The figure below shows the topology [#fabilene]_ of this network in 2009.
+2. When a network specialist designs a network, one of the problems that he needs to solve is to set the metrics the links in his network. In the USA, the Abilene network interconnects most of the research labs and universities. The figure below shows the topology [#fabilene]_ of this network in 2009.
 
 .. figure:: exercises/fig/abilene-web-map.png
    :align: center
@@ -36,7 +36,7 @@ In this network, assume that all the link weights are set to 1. What is the path
 
  * Assume that the routers located in `Denver` and `Kansas City` need to exchange lots of packets. Can you configure the link metrics such that the link between these two routers does not carry any packet sent by another router in the network ?
 
-#. In the five nodes network shown below, can you configure the link metrics so that the packets sent by router `E` to router `A` use link `B->A` while the packets sent by router `B` use links `B->D` and `D->A`?
+3. In the five nodes network shown below, can you configure the link metrics so that the packets sent by router `E` to router `A` use link `B->A` while the packets sent by router `B` use links `B->D` and `D->A`?
 
 .. figure:: exercises/fig/routing-fig-003-c.png 
    :align: center 
@@ -45,9 +45,9 @@ In this network, assume that all the link weights are set to 1. What is the path
    Simple five nodes network
 
 
-#. In the five nodes network shown above, can you configure the link weights so that the packets sent by router `E` (resp. `F`) follow the `E->B->A` path (resp. `F->D->B->A`) ?
+4. In the five nodes network shown above, can you configure the link weights so that the packets sent by router `E` (resp. `F`) follow the `E->B->A` path (resp. `F->D->B->A`) ?
 
-#. In the above questions, you have worked on the stable state of the routing tables computed by routing protocols. Let us now consider the transient problems that main happen when the network topology changes [#ffailures]_. For this, consider the network topology shown in the figure below and assume that all routers use a distance vector protocol that uses split horizon.
+5. In the above questions, you have worked on the stable state of the routing tables computed by routing protocols. Let us now consider the transient problems that main happen when the network topology changes [#ffailures]_. For this, consider the network topology shown in the figure below and assume that all routers use a distance vector protocol that uses split horizon.
 
 .. figure:: exercises/fig/routing-fig-004-c.png
    :align: center
@@ -76,7 +76,7 @@ If you compute the routing tables of all routers in this network, you would obta
 
  * Consider the same distance vector protocol, but now with `triggered updates`. When link `B-C` fails, assume that `B` updates its routing table immediately and sends its distance vector to `A` and `D`. Assume that both `A` and `D` process the received distance vector and that `A` sends its own distance vector, ... Indicate all the distance vectors that are exchanged and update the table above each time a distance vector is sent by a router (and received by other routers) until all routers have learned a new route to each destination. How many distance vector messages must be exchanged until the network converges to a stable state ?
 
-#. Consider the network shown below. In this network, the metric of each link is set to `1` except link `A-B` whose metric is set to `4` in both directions. In this network, there are two paths with the same cost between `D` and `C`. Old routers would randomly select one of these equal cost paths and install it in their forwarding table. Recent routers are able to use up to `N` equal cost paths towards the same destination. 
+6. Consider the network shown below. In this network, the metric of each link is set to `1` except link `A-B` whose metric is set to `4` in both directions. In this network, there are two paths with the same cost between `D` and `C`. Old routers would randomly select one of these equal cost paths and install it in their forwarding table. Recent routers are able to use up to `N` equal cost paths towards the same destination. 
 
  .. figure:: exercises/fig/BGP-figs-010-c.png
     :align: center
@@ -86,7 +86,7 @@ If you compute the routing tables of all routers in this network, you would obta
 
  On recent routers, a lookup in the forwarding table for a destination address returns a set of outgoing interfaces. How would you design an algorithm that selects the outgoing interface used for each packet, knowing that to avoid reordering, all segments of a given TCP connection should follow the same path ? 
 
-#. Consider again the network shown above. After some time, OSPF converges and all routers compute the following routing tables :
+7. Consider again the network shown above. After some time, OSPF converges and all routers compute the following routing tables :
 
  ===========  ========  =========  =========  =========  =========
  Destination   Routes   Routes     Routes     Routes   	 Routes  
@@ -103,12 +103,12 @@ An important difference between OSPF and RIP is that OSPF routers flood link sta
 
 Router `B` will flood its updated link state packet through the entire network and all routers will recompute their forwarding table. Upon reception of a link state packet, routers usually first flood the received link-state packet and then recompute their forwarding table. Assume that `B` is the first to recompute its forwarding table, followed by `D`, `A`, `C` and finally `E`
 
-#. After each update of a forwarding table, verify which pairs of routers are able to exchange packets. Provide your answer using a table similar to the one shown above.
+8. After each update of a forwarding table, verify which pairs of routers are able to exchange packets. Provide your answer using a table similar to the one shown above.
 
-#. Can you find an ordering of the updates of the forwarding tables that avoids all transient problems ?
+9. Can you find an ordering of the updates of the forwarding tables that avoids all transient problems ?
 
 
-#. Consider the network shown in the figure below and explain the path that will be followed by the packets to reach `194.100.10.0/23`
+10. Consider the network shown in the figure below and explain the path that will be followed by the packets to reach `194.100.10.0/23`
 
  .. figure:: exercises/fig/BGP-figs-001-c.png
     :align: center
@@ -116,7 +116,7 @@ Router `B` will flood its updated link state packet through the entire network a
    
     A stub connected to one provider
 
-#. Consider, now, as shown in the figure below that the stub AS is now also connected to provider `AS789`. Via which provider will the packets destined to `194.100.10.0/23` will be received by `AS4567` ? Should `AS123` change its configuration ? 
+11. Consider, now, as shown in the figure below that the stub AS is now also connected to provider `AS789`. Via which provider will the packets destined to `194.100.10.0/23` will be received by `AS4567` ? Should `AS123` change its configuration ? 
 
  .. figure:: exercises/fig/BGP-figs-002-c.png
     :align: center
@@ -124,7 +124,7 @@ Router `B` will flood its updated link state packet through the entire network a
    
     A stub connected to two providers
 
-#. Consider that stub shown in the figure below decides to advertise two `/24` prefixes instead of its allocated `/23` prefix. 
+12. Consider that stub shown in the figure below decides to advertise two `/24` prefixes instead of its allocated `/23` prefix. 
 
   #. Via which provider does `AS4567` receive the packets destined to `194.100.11.99` and `194.100.10.1` ? 
   #. How is the reachabilty of these addresses affected when link `R1-R3` fails ?
@@ -136,7 +136,7 @@ Router `B` will flood its updated link state packet through the entire network a
    
     A stub connected to two providers
 
-#. Researchers and network operators collect and expose lots of BGP data. For this, they establish eBGP sessions between `data collection` routers and production routers located operationnal networks. Several `data collection` routers are available, the most popular ones are :
+13. Researchers and network operators collect and expose lots of BGP data. For this, they establish eBGP sessions between `data collection` routers and production routers located operationnal networks. Several `data collection` routers are available, the most popular ones are :
 
  - http://www.routeviews.org
  - http://www.ripe.net/ris
@@ -192,7 +192,7 @@ Among all the commands supported by this router, the `show ip bgp` command is ve
 
 
 
-#. Consider the network shown in the figure below and assume that R1` advertises a single prefix. R1` receives a lot of packets from `R9`. Without any help from `R2`, `R9` or `R4`, how could `R1` configure its BGP advertisement such that it receives the packets from `R9` via `R3` ? What happens when a link fails ?
+14. Consider the network shown in the figure below and assume that R1` advertises a single prefix. R1` receives a lot of packets from `R9`. Without any help from `R2`, `R9` or `R4`, how could `R1` configure its BGP advertisement such that it receives the packets from `R9` via `R3` ? What happens when a link fails ?
 
  .. figure:: exercises/fig/BGP-figs-004-c.png
     :align: center
@@ -202,7 +202,7 @@ Among all the commands supported by this router, the `show ip bgp` command is ve
 
 
 
-#. Consider the network  below.
+15. Consider the network  below.
 
  .. figure:: exercises/fig/path_explo.png
     :align: center
@@ -215,7 +215,7 @@ Among all the commands supported by this router, the `show ip bgp` command is ve
  #. Assume now that the link between `R1` and `R2` fails.  Show the messages exchanged due to this event.  Which BGP messages are sent to `R6` ?
 
 
-#. Consider the network shown in the figure below where `R1` advertises a single prefix. In this network, the link between `R1` and `R2` is considered as a backup link. It should only be used only when the primary link (`R1-R4`) fails. This can be implemented on `R2` by setting a low `local-pref` to the routes received on link `R2-R1`
+16. Consider the network shown in the figure below where `R1` advertises a single prefix. In this network, the link between `R1` and `R2` is considered as a backup link. It should only be used only when the primary link (`R1-R4`) fails. This can be implemented on `R2` by setting a low `local-pref` to the routes received on link `R2-R1`
 
   #. In this network, what are the paths used by all routers to reach `R1` ?
   #. Assume now that the link `R1-R4` fails. Which BGP messages are exchanged and what are now the paths used to reach `R1` ?
@@ -228,7 +228,7 @@ Among all the commands supported by this router, the `show ip bgp` command is ve
     A simple internetwork with a backup link 
 
 
-#. On February 22, 2008, the Pakistan Telecom Authority issued an `order <http://www.teeth.com.pk/blog/wp-content/uploads/2008/02/22-02-08_pta_blocking_of_websities.pdf>`_ to Pakistan ISPs to block access to three IP addresses belonging to `youtube <http://www.youtube.com>`_: `208.65.153.238`, `208.65.153.253`, `208.65.153.251`. One operator noted that these addresses were belonging to the same `/24` prefix. Read http://www.ripe.net/news/study-youtube-hijacking.html to understand what happened really.
+17. On February 22, 2008, the Pakistan Telecom Authority issued an `order <http://www.teeth.com.pk/blog/wp-content/uploads/2008/02/22-02-08_pta_blocking_of_websities.pdf>`_ to Pakistan ISPs to block access to three IP addresses belonging to `youtube <http://www.youtube.com>`_: `208.65.153.238`, `208.65.153.253`, `208.65.153.251`. One operator noted that these addresses were belonging to the same `/24` prefix. Read http://www.ripe.net/news/study-youtube-hijacking.html to understand what happened really.
 
  #. What should have done youtube_ to avoid this problem ?
  #. What kind of solutions would you propose to improve the security of interdomain routing ?

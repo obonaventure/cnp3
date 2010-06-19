@@ -3,16 +3,16 @@
 The HyperText Transfer Protocol
 ================================
 
-In the early days of the Internet, the network was mainly used for remote terminal access with telnet_, email and file transfer. The default file transfer protocol, ftp, defined in :rfc:`959` was widely used and ftp clients and servers are still included in most operating systems.
+In the early days of the Internet, the network was mainly used for remote terminal access with telnet_, email and file transfer. The default file transfer protocol, `ftp`, defined in :rfc:`959` was widely used and `ftp` clients and servers are still included in most operating systems.
 
-Many ftp client offer a user interface similar to a Unix shell and allows the client to browse the file system on the server and send and retrieve files. ftp servers can be configured in two modes :
+Many `ftp` clients offer a user interface similar to a Unix shell and allow the client to browse the file system on the server and send and retrieve files. `ftp` servers can be configured in two modes :
 
- - authenticated : in this mode, the ftp server only accepts users with a valid userid and password. Once authenticated, they can access the files and directories according to their permissions
+ - authenticated : in this mode, the ftp server only accepts users with a valid username and password. Once authenticated, they can access the files and directories according to their permissions
  - anonymous : in this mode, clients supply the `anonymous` userid and their email address as password. These clients are granted access to a special zone of the file system that only contains public files. 
 
 ftp was very popular in the 1990s and early 2000s, but today it has mostly been superseded by more recent protocols. Authenticated access to files is mainly done by using the Secure Shell (ssh) protocol defined in :rfc:`4251` and supported by clients such as scp_ or sftp_. Anonymous access is nowadays mainly provided by web protocols.
 
-In the late 1980s, high energy physicists working at CERN_ had to efficiently exchange documents about their ongoing and planned experiments. `Tim Berners-Lee`_ evaluated several of the documents sharing that were available then [B1989]_. As none of the existing solutions met CERN's requirements, they choose to develop a completely new document sharing system. This system was initially called the `mesh`, but was quickly renamed the `world wide web`. The starting point for the `world wide web` is the hypertext. An hypertext is a text that contains references (hyperlinks) to other text that the reader can immediately access. Compared to the hypertexts that were used in the late 1980s, the main innovation introduced by the `world wide web` was to allow hyperlinks to reference documents stored on remote machines. 
+In the late 1980s, high energy physicists working at CERN_ had to efficiently exchange documents about their ongoing and planned experiments. `Tim Berners-Lee`_ evaluated several of the documents sharing techniques that were available at that time [B1989]_. As none of the existing solutions met CERN's requirements, they choose to develop a completely new document sharing system. This system was initially called the `mesh`, but was quickly renamed the `world wide web`. The starting point for the `world wide web` is the hypertext. An hypertext is a text that contains references (hyperlinks) to other documents that the reader can immediately access. Hypertext was not invented for the world wide web. The idea of hypertext documents was proposed in 1945 [Bush1945]_ and the first experiments were done during the 1960s [Nelson1965]_ [Myers1998]_ . Compared to the hypertexts that were used in the late 1980s, the main innovation introduced by the `world wide web` was to allow hyperlinks to reference documents stored on remote machines. 
 
 
 .. figure:: png/app-fig-014-c.png
@@ -31,7 +31,7 @@ A document sharing system such as the `world wide web` is composed of three impo
 
 .. sidebar:: Open standards and open implementations
 
- Open standards have and are still playing a key role in the success of the `world wide web` as we know it today. However, open and efficient implementations of these standards have greatly contributed to the success of the `web`. When CERN started to work on the `web`, their objective was to build a running system that could be used by physicists. They developed open-source implementations of the `first web servers <http://www.w3.org/Daemon/>`_ and `web clients <http://www.w3.org/Library/Activity.html>`. These open-source implementations were powerful and could be used as is by institutions willing to share information on the web. They were also extended by other developers who contributed to new features. For example, NCSA_ added support for images in their `Mosaic browser <http://en.wikipedia.org/wiki/Mosaic_(web_browser)>`_ that was eventually used to create `Netscape Communications <http://en.wikipedia.org/wiki/Netscape>`_. 
+ Open standards have and are still playing a key role in the success of the `world wide web` as we know it today. Without open standards, the world wide web would have never reached its current size. In addition to open standards, another important factor for the success of the web was the availability of open and efficient implementations of these standards. When CERN started to work on the `web`, their objective was to build a running system that could be used by physicists. They developed open-source implementations of the `first web servers <http://www.w3.org/Daemon/>`_ and `web clients <http://www.w3.org/Library/Activity.html>`_. These open-source implementations were powerful and could be used as is by institutions willing to share information on the web. They were also extended by other developers who contributed to new features. For example, NCSA_ added support for images in their `Mosaic browser <http://en.wikipedia.org/wiki/Mosaic_(web_browser)>`_ that was eventually used to create `Netscape Communications <http://en.wikipedia.org/wiki/Netscape>`_. 
 
 
 The first component of the `world wide web` are the Uniform Resource Identifiers (URI) defined in :rfc:`3986`. A URI is a character string that unambiguously identifies a resource on the world wide web. Here is a subset of the BNF for the URIs ::
@@ -41,24 +41,40 @@ The first component of the `world wide web` are the Uniform Resource Identifiers
    authority   = [ userinfo "@" ] host [ ":" port ]
    query       = *( pchar / "/" / "?" )
    fragment    = *( pchar / "/" / "?" )
+   pchar         = unreserved / pct-encoded / sub-delims / ":" / "@"
+   query         = *( pchar / "/" / "?" )
+   fragment      = *( pchar / "/" / "?" )
+   pct-encoded   = "%" HEXDIG HEXDIG
+   unreserved    = ALPHA / DIGIT / "-" / "." / "_" / "~"
+   reserved      = gen-delims / sub-delims
+   gen-delims    = ":" / "/" / "?" / "#" / "[" / "]" / "@"
+   sub-delims    = "!" / "$" / "&" / "'" / "(" / ")" / "*" / "+" / "," / ";" / "="
 
-The first component of a URI is its `scheme`. In practice, the `scheme` identifies the application-layer protocol that must used by the client to retrieve the document. The most frequent scheme is `http` that will be described later, but a URI scheme can be defined for almost any application layer protocol [#furilist]_. The characters `:` and `//` follow the `scheme` of any URI.
 
-The second part of the URI  is the `authority`. It includes the DNS name or the IP address on which the document can be retrieved by using the protocol specified in the `scheme`. This name can be preceded by some information about the user (e.g. a username) who is requesting the information. Earlier definitions of the URI allowed to specify a username and a password before the `@` character (:rfc:`1738`), but this is now deprecated as placing a password inside a URI is insecure. The host name can be followed by the semicolon character and a port number. A default port number is defined for each `scheme` and the port number should only be included in the URI is a non-default port number is used.
+The first component of a URI is its `scheme`. In practice, the `scheme` identifies the application-layer protocol that must used by the client to retrieve the document. The most frequent scheme is `http` that will be described later. A URI scheme can be defined for almost any application layer protocol [#furilist]_. The characters `:` and `//` follow the `scheme` of any URI.
 
-The third part of the URI is the path to the document. This path is structured as filenames on a Unix host. If the path is not specified, the server will provide a default document. The last two optional parts of the URI are used to provide a query and indicate a specific part (e.g. a section in an article) of the requested document. Sample URIs are shown below ::
+The second part of the URI  is the `authority`. It includes the DNS name or the IP address of the server where the document can be retrieved by using the protocol specified in the `scheme`. This name can be preceded by some information about the user (e.g. a username) who is requesting the information. Earlier definitions of the URI allowed to specify a username and a password before the `@` character (:rfc:`1738`), but this is now deprecated as placing a password inside a URI is insecure. The host name can be followed by the semicolon character and a port number. A default port number is defined for each `scheme` and the port number should only be included in the URI if a non-default port number is used.
+
+The third part of the URI is the path to the document. This path is structured as filenames on a Unix host. If the path is not specified, the server will returna default document. The last two optional parts of the URI are used to provide a query and indicate a specific part (e.g. a section in an article) of the requested document. Sample URIs are shown below ::
 
    http://tools.ietf.org/html/rfc3986.html
    mailto:infobot@example.com?subject=current-issue   
    http://docs.python.org/library/basehttpserver.html?highlight=http#BaseHTTPServer.BaseHTTPRequestHandler
    ftp://cnn.example.com&story=breaking_news@10.0.0.1/top_story.htm
 
-The first URI corresponds to a document named `rfc3986.html` that is stored on the server named `tools.ietf.org` and can be accessed by using the `http` protocol on its default port. The second URI corresponds to an email message with subject `current-issue` that will be sent to user `infobot` in domain `example.com`. The `mailto:` URI scheme i sidelined in :rfc:`2368`. The third URI references the portion `BaseHTTPServer.BaseHTTPRequestHandler` of the document `basehttpserver.html` that is stored in the `library` directory on server `docs.python.org` by using `http`. The query `highlight=http` is associated to this URI. The last URI is somewhat special. Most users will assume that it corresponds to a document stored on the `cnn.example.com` server. However, to parse this URI, it is important to remember that the `@` character is used to separate the username from the host name in the authorisation part of a URI. This implies that the URI points to a document named `top_story.htm` on host having IPv4 address `10.0.0.1`. The document will be retrieved by using the `ftp` protocol with the username set `cnn.example.com&story=breaking_news`. 
+The first URI corresponds to a document named `rfc3986.html` that is stored on the server named `tools.ietf.org` and can be accessed by using the `http` protocol on its default port. The second URI corresponds to an email message with subject `current-issue` that will be sent to user `infobot` in domain `example.com`. The `mailto:` URI scheme is defined in :rfc:`2368`. The third URI references the portion `BaseHTTPServer.BaseHTTPRequestHandler` of the document `basehttpserver.html` that is stored in the `library` directory on server `docs.python.org`. This document can be retrieved by using the `http` protocol. The query `highlight=http` is associated to this URI. The last URI is somewhat special. Most users will assume that it corresponds to a document stored on the `cnn.example.com` server. However, to parse this URI, it is important to remember that the `@` character is used to separate the username from the host name in the authorisation part of a URI. This implies that the URI points to a document named `top_story.htm` on host having IPv4 address `10.0.0.1`. The document will be retrieved by using the `ftp` protocol with the username set to `cnn.example.com&story=breaking_news`. 
 
-The second component of the `word wide web` is the HyperText Markup Language (HTML). HTML defines the format of the documents that are exchanged on the `web`. The `first version of HTML <http://www.w3.org/History/19921103-hypertext/hypertext/WWW/MarkUp/Tags.html>`_ was derived from the Standard Generalized Markup Language (SGML) that was standardised in 1986 by ISO_. SGML_ was designed to allow large project documents in industries such as government, law or aerospace to be shared efficiently in a machine-readable manner. These industries require documents that remain readable and editable for tens of years and insisted on a standardised format supported by multiple vendors. Today, SGML_ is not widely used anymore besides specific applications, but children like :term:`HTML` and :term:`XML` are now widespread.
+The second component of the `word wide web` is the HyperText Markup Language (HTML). HTML defines the format of the documents that are exchanged on the `web`. The `first version of HTML <http://www.w3.org/History/19921103-hypertext/hypertext/WWW/MarkUp/Tags.html>`_ was derived from the Standard Generalized Markup Language (SGML) that was standardised in 1986 by :term:`ISO`. SGML_ was designed to allow large project documents in industries such as government, law or aerospace to be shared efficiently in a machine-readable manner. These industries require documents that remain readable and editable for tens of years and insisted on a standardised format supported by multiple vendors. Today, SGML_ is not widely used anymore besides specific applications, but its descendants including like :term:`HTML` and :term:`XML` are now widespread.
 
-HTML is a markup language that contains several markers. Most markers are very simple HTML document such as the one shown in the figure below is delineated by the `<HTML>
-The HTML document shown below is composed of two parts : a header delineated by the `<HEAD>` and `</HEAD>` markers and a body (between the `<BODY>` and `</BODY>` markers). In the example below, the header only contains a title, but other types of information can be included in the header. The body contains an image, some text and a list with three hyperlinks. The image is included in the web page by indicating its URI between brackets inside the `<IMG SRC="...">` marker. The image can, of course, reside on any server and the client will automatically download it when rendering the web page. The `<H1>...</H1>` marker is used to specify the first level of headings. The `<UL>` indicates an unnumbered list while the `<LI>` marker indicates a list item. The `<A HREF="URI">text</A>` indicates an hyperlink. The `text` will be rendered in the web page and client will fetch the URI if the user clicks on the link.
+A markup language is structured way of adding annotations about the formatting of the document in the document itself. Example markup langages include troff that is used to write the Unix man pages or Latex. HTML uses markers to annotate text. An HTML document is composed of `HTML elements`. An element is usually composed of three elements : a start tag that potentially includes some specific attributes, some text and an end tag. An HTML tag is a keyword enclosed in angle brackets. The generic form of an HTML element is ::
+
+ <tag>Some text to be displayed</tag>
+
+More complex HTML elements can also include optionnal attributes in the start tag ::
+ 
+ <tag attribute1="value1" attribute2="value2">some text to be displayed</tag>
+
+The HTML document shown below is composed of two parts : a header delineated by the `<HEAD>` and `</HEAD>` markers and a body (between the `<BODY>` and `</BODY>` markers). In the example below, the header only contains a title, but other types of information can be included in the header. The body contains an image, some text and a list with three hyperlinks. The image is included in the web page by indicating its URI between brackets inside the `<IMG SRC="...">` marker. The image can, of course, reside on any server and the client will automatically download it when rendering the web page. The `<H1>...</H1>` marker is used to specify the first level of headings. The `<UL>` indicates an unnumbered list while the `<LI>` marker indicates a list item. The `<A HREF="URI">text</A>` indicates an hyperlink. The `text` will be underlines in the rendered web page and client will fetch the specified URI when the user clicks on the link.
 
 .. figure:: png/app-fig-015-c.png
    :align: center
@@ -68,15 +84,16 @@ The HTML document shown below is composed of two parts : a header delineated by 
 
 Additional details about the various extensions to HTML may be found in the `official specifications <http://www.w3.org/MarkUp/>`_ maintained by W3C_.
 
-The third component of the `world wide web` is the HyperText Transport Protocol (HTTP). HTTP is a text-based protocol in which the client sends a request and the server returns a response. HTTP runs above the bytestream service and HTTP servers listen by default on port `80`. Each HTTP request contains three parts :
+The third component of the `world wide web` is the HyperText Transport Protocol (HTTP). HTTP is a text-based protocol in which the client sends one request and the server returns one response. HTTP runs above the bytestream service and HTTP servers listen by default on port `80`. The design of HTTP has been largely inspired by the Internet email protocols. Each HTTP request contains three parts :
 
  - a `method` that indicates the type of request, a URI and the version of the HTTP protocol used by the client 
- - a `header` that is used by the client to indicate optional parameters for each request. An empty line is used to mark the end of the header.
+ - a `header` that is used by the client to specify optional parameters for the request. An empty line is used to mark the end of the header
  - an optional MIME document attached to the request
 
 The response sent by the server also contains three parts :
+
  - a `status line` that indicates whether the request was successful or not
- - a `header` that contains additional information about the response. The header ends with an empty line.
+ - a `header` that contains additional information about the response. The response header ends with an empty line.
  - a MIME document 
 
 .. figure:: png/app-fig-017-c.png
@@ -86,40 +103,40 @@ The response sent by the server also contains three parts :
    HTTP requests and responses
 
 
-There are three types of methods in HTTP requests :
+Three types of methods can be used in HTTP requests :
 
- - the `GET` method is the most popular one. It is used to retrieve a document from a server. It should be noted that the client only provides the path of URI of the requested document after the `GET` keyword. For example, if a client requests the http://www.w3.org/MarkUp/ URI, it will open a TCP on port `80` with host `www.w3.org`. The first line of its HTTP request will contain ::
+ - the `GET` method is the most popular one. It is used to retrieve a document from a server. The `GET` method is encoded as `GET` followed by the path of URI of the requested document and the version of HTTP used by the client. For example, to retrieve the http://www.w3.org/MarkUp/ URI, a client must open a TCP on port `80` with host `www.w3.org` and send a HTTP request that contains ::
   GET /MarkUp/ HTTP/1.0
- - the `HEAD` method is a variant of the `GET` method that allows to retrieve the header lines for a given URI without retrieving the entire document. It can be used by a client that wants to verify whether a document has changed compared to a previous version.
- - the `POST` method is less popular. It can be used by a client to send a document to a server. The document sent is attached to the HTTP request.
+ - the `HEAD` method is a variant of the `GET` method that allows to retrieve the header lines for a given URI without retrieving the entire document. It can be used by a client that wants to verify whether a document has changed compared to the copy that the client already has
+ - the `POST` method is less popular. It can be used by a client to send a document to a server. The sent document is attached to the HTTP request as a MIME document.
 
 
-HTTP clients and servers can include many different HTTP headers in the HTTP requests and responses. Each header is encoded as a single ASCII-line terminated by `CR` and `LF`. Several of these headers are briefly described below. A detailed discussion of all standard headers may be found in :rfc:`1945`. The MIME headers can appear in both HTTP requests and HTTP responses.
+HTTP clients and servers can include many different HTTP headers in HTTP requests and responses. Each HTTP header is encoded as a single ASCII-line terminated by `CR` and `LF`. Several of these headers are briefly described below. A detailed discussion of all standard headers may be found in :rfc:`1945`. The MIME headers can appear in both HTTP requests and HTTP responses.
 
- - the `Content-Length:` header is the MIME_ header that indicates the length of the MIME document in bytes`.
- - the `Content-Type:` header is the MIME_ header that indicates the type of the attached MIME document. HTML pages use the `text/html` type.
- - the `Content-Encoding:` header indicates how the MIME_ document has been encoded. This header would be set to `x-gzip` for a document compressed by using the gzip_ software. 
+ - the `Content-Length:` header is the :term:`MIME` header that indicates the length of the MIME document in bytes.
+ - the `Content-Type:` header is the :term:`MIME` header that indicates the type of the attached MIME document. HTML pages use the `text/html` type.
+ - the `Content-Encoding:` header indicates how the :term:`MIME document has been encoded. For example, this header would be set to `x-gzip` for a document compressed by using the gzip_ software. 
 
-:rfc:`1945` and :rfc:`2616` also define headers that are specific to HTTP responses. These server headers include :
+:rfc:`1945` and :rfc:`2616` define headers that are specific to HTTP responses. These server headers include :
 
- - the `Server:` header indicates the version of the web server that has generated the HTTP response. Some servers provide information about the software release and optional modules that is uses. For security reasons, some system administrators disable these headers to avoid revealing too much information about their server to potential attackers.
+ - the `Server:` header indicates the version of the web server that has generated the HTTP response. Some servers provide information about their software release and optional modules that they use. For security reasons, some system administrators disable these headers to avoid revealing too much information about their server to potential attackers.
  - the `Date:` header indicates when the HTTP response has been produced by the server.
- - the `Last-Modified:` indicates the last modification date and time of the document attached to the HTTP response. 
+ - the `Last-Modified:` header indicates the date and time of the last modification of the document attached to the HTTP response. 
  
 Similarly, the following header lines can only appear inside HTTP requests sent by a client :
 
  - the `User-Agent:` header provides information about the client that has generated the HTTP request. Some servers analyse this header line and return different headers and sometimes different documents for different user agents.
  - the `If-Modified-Since:` header is followed by a date. It enables the clients to cache in memory or on disk the recent or most frequently used documents. When a client needs to request a URI from a server, it first checks whether the document is already inside its cache. If yes, it sends an HTTP request with the `If-Modified-Since:` header indicating the date of the cached document. The server will only return the document attached to the HTTP response if it is newer than the version stored in the client's cache. 
- - the `Referrer:` header is followed by a URI. It indicates the URI of the document that the client visited before sending this HTTP request. Thanks to this header, the server can know the URI of the document containing the hyperlink followed by the client, if any. This information is very useful to measurement the impact of advertisements containing hyperlinks placed on websites. 
+ - the `Referrer:` header is followed by a URI. It indicates the URI of the document that the client visited before sending this HTTP request. Thanks to this header, the server can know the URI of the document containing the hyperlink followed by the client, if any. This information is very useful to measure the impact of advertisements containing hyperlinks placed on websites. 
  - the `Host:` header contains the fully qualified domain name of the URI being requested. 
 
 .. sidebar:: The importance of the `Host:` header line
 
- The first version of HTTP did not include the `Host:` header line. This was a severe limitation for web hosting companies. For example consider a web hosting company that wants to server both `web.example.com` and `www.dummy.net` on the same physical server. Both web sites contain a `/index.html` document. When a client sends a request for either `http://web.example.com/index.html` or `http://www.dummy.net/index.html`, The HTTP request contains the following line : ::
+ The first version of HTTP did not include the `Host:` header line. This was a severe limitation for web hosting companies. For example consider a web hosting company that wants to serve both `web.example.com` and `www.dummy.net` on the same physical server. Both web sites contain a `/index.html` document. When a client sends a request for either `http://web.example.com/index.html` or `http://www.dummy.net/index.html`, the HTTP 1.0 request contains the following line : ::
 
   GET /index.html HTTP/1.0
 
- Thanks to the `Host:` header line, the server knows whether the request is for `http://web.example.com/index.html` or `http://www.dummy.net/index.html`. Without the `Host:` header, this is impossible. The `Host:` header line allowed web hosting companies to develop their business by supporting a large number of independent web servers on the same physical server. 
+ By parsing this line, a server cannot determine which `index.html` file is requested. Thanks to the `Host:` header line, the server knows whether the request is for `http://web.example.com/index.html` or `http://www.dummy.net/index.html`. Without the `Host:` header, this is impossible. The `Host:` header line allowed web hosting companies to develop their business by supporting a large number of independent web servers on the same physical server. 
 
 
 The status line of the HTTP response begins with the version of HTTP used by the server (usually `HTTP/1.0` defined in :rfc:`1945` or `HTTP/1.1` defined in :rfc:`2616`) followed by a three digits status code and additional information in English. The HTTP status codes have a similar structure as the reply codes used by SMTP. 

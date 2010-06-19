@@ -74,11 +74,11 @@ Summary
 #######
 
 
+.. include:: exercises/ex-network.rst
+
+.. include:: exercises/cha-network.rst
 
 
 
 .. include:: ../links.rst
 
-.. include:: exercises/ex-network.rst
-
-.. include:: exercises/cha-network.rst

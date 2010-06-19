@@ -54,6 +54,10 @@
 
 .. _IETF: http://www.ietf.org
 
+.. _IEEE: http://www.ieee.org
+
+.. _ISO: http://www.iso.int
+
 .. _python: http://www.python.org
 
 .. _scapy: http://www.secdev.org/projects/scapy/ 

@@ -100,7 +100,7 @@ Glossary
 	The Abstract Syntax Notation One (ASN.1) was designed by ISO and ITU-T. It is a stadard and flexible notation that can be used to describe data structures for representing, encoding, transmitting, and decoding data between applications. It was designed to be used in the Presentation layer of the OSI reference model but is now used in other protocols such as :term:`SNMP`.
 
    ftp
-	The File Transfert Protocol defined in :rfc:`959` has been the de facto protocol to exchange files over the Internet before the widespread adoption of :rfc:`http`
+	The File Transfert Protocol defined in :rfc:`959` has been the de facto protocol to exchange files over the Internet before the widespread adoption of HTTP :rfc:`2616`
 
    ISN
 	The Initial Sequence Number of a TCP connection is the sequence number chosen by the client ( resp. server) that is placed in the `SYN` (resp. `SYN+ACK`) segment during the establishment of the TCP connection.
@@ -190,7 +190,7 @@ Glossary
 	The Post Office Protocol is defined in :rfc:`1939`
 
    IMAP
-	The Internet Message Access Protocol is defined in :rfc:`3501
+	The Internet Message Access Protocol is defined in :rfc:`3501`
 
    FTP
 	The File Transfer Protocol is defined in :rfc:`959`
@@ -276,6 +276,17 @@ Glossary
    MIME
 	The Multi-purpose Internet Mail Extensions
 
+
+   modem
+	A modem (modulator-demodulator) is a device that encodes (resp. decodes) digital information by modulating (resp. demodulating) an analog signal. Modems are frequently used to transmit digital information over telephone lines and radio links. See http://en.wikipedia.org/wiki/Modem for a survey of various types of modems
+
+   dial-up line
+   	A synonym for a regular telephone line, i.e. a line that can be used to dial any telephone number.
+
+   leased line
+        A telephone line that is permanentaly available between two endpoints. 
+
+     
 	
 	
 .. include:: links.rst

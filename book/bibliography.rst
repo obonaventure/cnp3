@@ -24,6 +24,7 @@ Whenever possible, the bibliography includes hypertext links to the references c
 .. [BNT1997] Beech, W., Nielsen, D., Taylor, J.,  AX.25 Link Access Protocol for Amateur Packet Radio, version 2.2, Revision: July 1998, http://www.tapr.org/pdf/AX25.2.2.pdf
 .. [BOP1994] Brakmo, L. S., O'Malley, S. W., and Peterson, L. L. 1994. TCP Vegas: new techniques for congestion detection and avoidance. In Proceedings of the Conference on Communications Architectures, Protocols and Applications (London, United Kingdom, August 31 - September 02, 1994). SIGCOMM '94. ACM, New York, NY, 24-35. DOI= http://doi.acm.org/10.1145/190314.190317
 .. [Benvenuti2005] Benvenuti, C., Understanding Linux Network Internals, O'Reilly Media, 2005, http://oreilly.com/catalog/9780596002558
+.. [Bush1945]  Bush, V. “As we may think.” The Atlantic Monthly 176 (July 1945), pp. 101–108.
 .. [Bush1993] Bush, R. 1993. FidoNet: technology, tools, and history. Commun. ACM 36, 8 (Aug. 1993), 31-35. DOI= http://doi.acm.org/10.1145/163381.163383
 .. [Bux1989] Bux, W., Token-ring local-area networks and their performance, Proceedings of the IEEE, Vol 77, No 2, p. 238-259, Feb. 1989 http://ieeexplore.ieee.org/xpls/abs_all.jsp?arnumber=18625
 .. [BYL2008] Buford, J., Yu, H., Lua, E.K., P2P Networking and Applications, Morgan Kaufmann, 2008
@@ -85,6 +86,7 @@ Whenever possible, the bibliography includes hypertext links to the references c
 .. [LCCD09] Leiner, B. M., Cerf, V. G., Clark, D. D., Kahn, R. E., Kleinrock, L., Lynch, D. C., Postel, J., Roberts, L. G., and Wolff, S. 2009. A brief history of the internet. SIGCOMM Comput. Commun. Rev. 39, 5 (Oct. 2009), 22-31. DOI= http://doi.acm.org/10.1145/1629607.1629613
 .. [LSP1982] Lamport, L., Shostak, R., and Pease, M. 1982. The Byzantine Generals Problem. ACM Trans. Program. Lang. Syst. 4, 3 (Jul. 1982), 382-401. DOI= http://doi.acm.org/10.1145/357172.357176
 .. [Leboudec2008] Leboudec, J.-Y., Rate Adaptation Congestion Control and Fairness : a tutorial, Dec. 2008, http://ica1www.epfl.ch/PS_files/LEB3132.pdf
+.. [McFadyen1976]  McFadyen, J., Systems Network Architecture: An overview, IBM Systems Journal, Vol. 15, N. 1, pp. 4-23, 1976, http://ieeexplore.ieee.org//xpls/abs_all.jsp?arnumber=5388105
 .. [McKusick1999] McKusick, M., Twenty Years of Berkeley Unix : From AT&T-Owned to Freely Redistributable, http://oreilly.com/catalog/opensources/book/kirkmck.html
 .. [MRR1979] McQuillan, J. M., Richer, I., and Rosen, E. C. 1979. An overview of the new routing algorithm for the ARPANET. In Proceedings of the Sixth Symposium on Data Communications (Pacific Grove, California, United States, November 27 - 29, 1979). SIGCOMM '79. ACM, New York, NY, 63-68. DOI= http://doi.acm.org/10.1145/800092.802981
 .. [MSMO1997] Mathis, M., Semke, J., Mahdavi, J., and Ott, T. 1997. The macroscopic behavior of the TCP congestion avoidance algorithm. SIGCOMM Comput. Commun. Rev. 27, 3 (Jul. 1997), 67-82. DOI= http://doi.acm.org/10.1145/263932.264023
@@ -97,6 +99,8 @@ Whenever possible, the bibliography includes hypertext links to the references c
 .. [Mogul1995] Mogul, J. , The case for persistent-connection HTTP. In Proceedings of the Conference on Applications, Technologies, Architectures, and Protocols For Computer Communication (Cambridge, Massachusetts, United States, August 28 - September 01, 1995). D. Oran, Ed. SIGCOMM '95. ACM, New York, NY, 299-313. DOI= http://doi.acm.org/10.1145/217382.217465
 .. [Moore] Moore, R., Packet switching history, http://rogerdmoore.ca/PS/
 .. [Moy1998] Moy, J., OSPF: Anatomy of an Internet Routing Protocol, Addison Wesley, 1998
+.. [Myers1998] Myers, B. A. 1998. A brief history of human-computer interaction technology. interactions 5, 2 (Mar. 1998), 44-54. DOI= http://doi.acm.org/10.1145/274430.274436
+.. [Nelson1965] Nelson, T. H. 1965. Complex information processing: a file structure for the complex, the changing and the indeterminate. In Proceedings of the 1965 20th National Conference (Cleveland, Ohio, United States, August 24 - 26, 1965). L. Winner, Ed. ACM '65. ACM, New York, NY, 84-100. DOI= http://doi.acm.org/10.1145/800197.806036
 .. [Paxson99] Paxson, V. End-to-end Internet packet dynamics. SIGCOMM Comput. Commun. Rev. 27, 4 (Oct. 1997), 139-152. DOI= http://doi.acm.org/10.1145/263109.263155
 .. [Perlman1985] Perlman, R. 1985. An algorithm for distributed computation of a spanningtree in an extended LAN. SIGCOMM Comput. Commun. Rev. 15, 4 (Sep. 1985), 44-53. DOI= http://doi.acm.org/10.1145/318951.319004
 .. [Perlman2000] Perlman, R., Interconnections : Bridges, routers, switches and internetworking protocols, 2nd edition, Addison Wesley, 2000
