@@ -196,7 +196,8 @@ The first version of ALOHANet, described in [Abramson1970]_, operated as follows
 The pseudo-code below show the operation of an ALOHANet terminal. We use this python syntax for all Medium Access Control algorithms described in this chapter. The algorithm is applied to each new frame that needs to be transmitted. It attempts to transmit a frame at most `max` times (`while loop`). Each transmission attempt is performed as follows. First, the frame is sent. Each frame is protected by a timeout. Then the terminal waits for either a valid acknowledgement frame or the expiration of its timeout. If the terminal receives an acknowledgement, the frame has been delivered correctly and the algorithm terminates. Otherwise, the terminal waits for a random time and attempts to retransmit the frame. 
 
 ::
- #ALOHA
+
+ # ALOHA
  N=1
  while N<= max :
     send(frame)
