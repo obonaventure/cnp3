@@ -1,3 +1,7 @@
+.. Copyright |copy| 2010 by Olivier Bonaventure
+.. This file is licensed under a `creative commons licence <http://creativecommons.org/licenses/by-sa/3.0/>`_
+
+
 .. Computer Networking : Principles, Protocols and Practice, created by
    sphinx-quickstart on Tue Sep  8 22:48:38 2009.
    You can adapt this file completely to your liking, but it should at least
