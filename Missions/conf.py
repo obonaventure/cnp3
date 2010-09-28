@@ -38,7 +38,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'CNP3-Practice'
-copyright = u'2009, Olivier Bonaventure'
+copyright = u'2010, Olivier Bonaventure'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -91,7 +91,8 @@ pygments_style = 'sphinx'
 
 # The theme to use for HTML and HTML Help pages.  Major themes that come with
 # Sphinx are currently 'default' and 'sphinxdoc'.
-html_theme = 'sphinxdoc'
+#html_theme = 'sphinxdoc'
+html_theme = 'agogo'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
