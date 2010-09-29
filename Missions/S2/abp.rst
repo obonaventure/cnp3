@@ -10,7 +10,7 @@ socket interface with the connectionless transport service.
  - How does the protocol recover from the loss of a data segment ? 
  - How does the protocol recovers from the loss of an acknowledgement ?
 
-2. A student proposed to optimise the Alternating Bit Protocol by adding a negative acknowledgment, i.e. the receiver sends a `NAK` control segment when it receives a corrupted data segment. What kind of information should be placed in this control segment and how should the sender react when receiving such as `NAK` ?
+2. A student proposed to optimise the Alternating Bit Protocol by adding a negative acknowledgment, i.e. the receiver sends a `NAK` control segment when it receives a corrupted data segment. What kind of information should be placed in this control segment and how should the sender react when receiving such a `NAK` ?
 
 3. Transport protocols rely on different types of checksums to verify whether segments have been affected by transmission errors. The most frequently used checksums are :
 
@@ -24,9 +24,9 @@ socket interface with the connectionless transport service.
 4. The CRCs are efficient error detection codes that are able to detect :
 
  - all errors that affect an odd number of bits
- - all errors that affect a string a bits which is shorter than the length of the CRC
+ - all errors that affect a sequence of bits which is shorter than the length of the CRC
 
- Experiment with one implementation of CRC-32 to verify that this is indeed the case.
+ Carry experiments with one implementation of CRC-32 to verify that this is indeed the case.
 
 5. Checksums and CRCs should not be confused with secure hash functions such as MD5 defined in :rfc:`1321` or SHA-1 described in :rfc:`4634`. Secure hash functions are used to ensure that files or sometimes packets/segments have not been modified. Secure hash functions aim at detecting malicious changes while checksums and CRCs only detect random transmission errors. Perform some experiments with hash functions such as those defined in the http://docs.python.org/library/hashlib.html python hashlib module to verify that this is indeed the case.
 
@@ -56,7 +56,7 @@ socket interface with the connectionless transport service.
 
 .. what are the factors that affect the performance of the alternating bit protocol ?
 
-10. Links are often symmetrical, i.e. they offer the same bandwidth in both directions, but there are some asymmetrical link technologies. The most common example are the various types of ADSL and CATV technologies. Consider an implementation of the Alternating Bit Protocol that is used between two hosts that are directly connected by using an asymmetric link. Assume that a host is sending segments containing 10 bytes of control information and 90 bytes of data and that the acknowledgements are 10 bytes long. If the round-trip-time is negligible, what is the minimum bandwidth required on the return link to ensure that the transmission of acknowledgements is not a bottleneck ?
+10. Links are often considered as symmetrical, i.e. they offer the same bandwidth in both directions. Symmetrical links are widely used in Local Area Networks and in the core of the Internet, but there are many asymmetrical link technologies. The most common example are the various types of ADSL and CATV technologies. Consider an implementation of the Alternating Bit Protocol that is used between two hosts that are directly connected by using an asymmetric link. Assume that a host is sending segments containing 10 bytes of control information and 90 bytes of data and that the acknowledgements are 10 bytes long. If the round-trip-time is negligible, what is the minimum bandwidth required on the return link to ensure that the transmission of acknowledgements is not a bottleneck ?
 
 11. Derive a mathematical expression that provides the `goodput` achieved by the Alternating Bit Protocol assuming that :
 
@@ -67,17 +67,27 @@ socket interface with the connectionless transport service.
 
  The goodput is defined as the amount of SDUs (measured in bytes) that is successfully transferred during a period of time
 
-12. The socket interface allows you to use the UDP protocol on a Unix host. UDP provides a connectionless unreliable service that in theory allows you to send SDUs of up to 64 KBytes. Implement a small UDP client and a small UDP server (in python, you can start from the example provided in http://docs.python.org/library/socket.html ) and run them on different workstations to determine experimentally the largest SDU that is supported by your language and OS. If possible, use different languages and Operating Systems in each group.
+12. The socket interface allows you to use the UDP protocol on a Unix host. UDP provides a connectionless unreliable service that in theory allows you to send SDUs of up to 64 KBytes. 
+
+ - Implement a small UDP client and a small UDP server (in python, you can start from the example provided in http://docs.python.org/library/socket.html but you can also use C or java ) 
+ - run the client and the servers on different workstations to determine experimentally the largest SDU that is supported by your language and OS. If possible, use different languages and Operating Systems in each group.
 
 .. socket layer with UDP, what is the larget data that you can send by usinc C, Java or python, is it 64KBytes or less ?
 
 13. By using the socket interface, implement on top of the connectionless unreliable service provided by UDP a simple client that sends the following message shown in the figure below.
 
- In this message, the bit flags should be set to `01010011b`, the value of the 16 bits field must be the square root of the value contained in the 32 bits field, the character string must be an ASCII representation (without any trailing `\0`) of the number contained in the 32 bits character field.
+ In this message, the bit flags should be set to `01010011b`, the value of the 16 bits field must be the square root of the value contained in the 32 bits field, the character string must be an ASCII representation (without any trailing `\0`) of the number contained in the 32 bits character field. The last 16 bits of the message contain an Internet checksum that has been computed over the entire message.
 
- Upon reception of such a message, the server verifies the value of the bit flags, the 16 bits integer, the 32 bits integer, the character string. If they all match and the Internet checksum is correct, it returns a SDU containing `11111111b`. Otherwise it returns `01010101b`
+ Upon reception of a message, the server verifies that : 
 
- Inside each group, implement at least two different clients and two different servers. The clients and the servers must run on both the Linux workstations and the Sun server (sirius). Verify the interoperability of the clients and the servers inside the group. You can use C, Java or python to write these implementations.
+ - the flag has the correct value
+ - the 32 bits integer is the square of the 16 bits integer
+ - the character string is an ASCII representation of the 32 bits integer
+ - the Internet checksum is correct
+
+ If the verification succeeds, the server returns a SDU containing `11111111b`. Otherwise it returns `01010101b`
+
+ Inside each group, implement two different clients and two different servers (both using different langages). The clients and the servers must run on both the Linux workstations and the Sun server (`sirius`). Verify the interoperability of the clients and the servers inside the group. You can use C, Java or python to write these implementations. 
 
 
 :: 
@@ -89,12 +99,12 @@ socket interface with the connectionless transport service.
       +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+  
       |                  32 bits field	                              |   
       +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-      | Type=1        |Len (8 bits) |   Character string ...          |
+      | Type=1        |Len (8 bits)   |   Character string ...        |
       +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
       |                    Character string (cont.)		      |
       +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-      |   16 bits Internet checksum |
-      +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+      |   16 bits Internet checksum   |
+      +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 
 
 14. Consider an Alternating Bit Protocol that is used over a link that suffers from deterministic errors. When the error ratio is set to :math:`\frac{1}{p}`, this means that :math:`p-1` bits are transmitted correctly and the :math:`p^{th}` bit is corrupted. Discuss the factors that affect the performance of the Alternating Bit Protocol over such a link.
