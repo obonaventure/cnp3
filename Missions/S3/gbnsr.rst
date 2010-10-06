@@ -2,253 +2,64 @@ Go-back-n and selective repeat
 ==============================
 
 Go-back-n and selective repeat are the basic mechanisms used in
-reliable window-based transport-layer protocols. During this exercise,
-you will implement a go-back-n (GBN) sender using scapy_. In each
-group, you will write one sender per team of two students.
+reliable window-based transport-layer protocols. These questions cover these two mechanisms in details. You do not need to upload the time sequence diagrams on the svn repository, bring them with you on paper. 
 
-The deadline for this exercise is Tuesday October 13th, 2009 at 13.00.
+#. Amazon provides the S3 storage service (https://s3.amazonaws.com/) where companies and researchers can store lots of information and perform computations on the stored information. Amazon allows users to send files through the Internet, but also by sending hard-disks. Assume that a 1 Terabyte hard-disk can be delivered within 24 hours to Amazon by courier service. What is the minimum bandwidth required to match the bandwidth of this courier service ? 
 
-Partial implementation of a simplified GBN receiver in scapy_
--------------------------------------------------------------
+#. What are the techniques used by a go-back-n sender to recover from :
 
-Our go-back-n protocol relies on a very simple header that can be
-implemented by the following scapy_ class ::
-
- NBITS=4      # number of bits used to encode the sequence number field
- assert NBITS<=8 # precondition
-
- # the header of the simplified Go-Back-N protocol
-
- class GBN(Packet):
-    name = "Go-Back-N (INGI2141) "
-    fields_desc=[ BitEnumField("type",0,1, {0:"data", 1:"ack"}), # type of segment : data or ack 
-                  BitField("padding" , 0 , 7), # padding
-                  ShortField("len", None), # segment length in bytes
-                  ByteField("num",0),  # sequence number in data, ack number in ack segments, incremented by one in each segment
-                  ByteField("win",0) # receiving window (ignored in data) in number of segments
-		  # real protocol would contain a checksum
-                  ,]
-
-    # automatic computation of the length
-    def post_build(self, p, pay):
-        p += pay
-        l = self.len
-        if l is None:
-                l = len(p)
-                p = p[:1]+struct.pack("!H",l)+p[3:]
-        return p
-
- bind_layers(IP,GBN,proto=222)
-
-Our header contains the following information :
- - the first bit indicates whether the segment contains data or only
-   an acknowledgment
- - the second and third bytes contain the segment length. This length
-   is automatically computed by the `post_build` method
- - the fourth byte contains an 8 bits integer. When used in a `data`
-   segment, this integer is the sequence number of the segment. In our
-   simple go-back-n protocol, the sequence number is incremented by
-   one every time a segment is sent. When used in an `ack` segment, 
-   the fourth byte contains the sequence number of the next segment
-   that is expected by the receiver. The constant NBITS allows you to
-   change the number of bits used to encode the sequence number. Of course, as the sequence number is encoded as a one byte field, the NBITS cannot be larger than 8. Note that the size of the `num` field is not adjusted if you change the NBITS constant.
- - the last byte contains the receiver's window. 
+ - transmission errors
+ - losses of data segments
+ - losses of acknowledgements
 
 
-The class `GBNReceiver` below is a simple FSM of a receiver for our
-simple go-back-n protocol ::
+#. Consider a go-back-n sender and a go-back receiver that are directly connected. Assume that the one-way delay between the two hosts is one second and the retransmission timer is set to three seconds. If each segment takes 100 milliseconds to reach the destination and the window has a length of 4 segments, draw a time-sequence diagram showing the transmission of 10 segments :
 
- ## This class implements the receiver side of the GBN protocol by using scapy Automaton facilities
+ - when there are no losses
+ - when the third and seventh segments are lost
+ - when the second, fourth, sixth, eighth, ... acknowledgements are lost
+ - when the third and fourth data segments are reordered (i.e. the fourth arrives before the third)
 
- class GBNReceiver(Automaton):
-	def parse_args(self, window, pdata, pack, debug, sender, **kargs):
-		Automaton.parse_args(self, **kargs)
-                self.win=window       # window size advertised by receiver in segments
-                assert self.win <= pow(2,NBITS)
-                self.pdata=pdata      # loss probability for data segments 0<= proba < 1
-                assert 0<=pdata and pdata<1
-                self.pack=pack        # loss probability for acks  0<= proba < 1
-                assert 0<=pack and pack<1
-                self.dbg=debug        # True if debug output is requested, false otherwise
-		self.sender = sender  # ip address of sender
-                self.next=0           # next expected sequence number
- 
-	def master_filter(self, pkt):
-        	return (IP in pkt and pkt[IP].src == self.sender and GBN in pkt)
- 
-	@ATMT.state(initial=1)
-	def WAIT_SEGMENT (self):
-            if self.dbg:
-                print "Waiting for segment ",self.next
-            pass
-	
-	@ATMT.receive_condition(WAIT_SEGMENT)
-	def wait_segment (self, pkt):
-            if random.random() < self.pdata :
-                # received segment was lost/corrupted in the network
-                if self.dbg:
-                    print " Lost : [type=",pkt.getlayer(GBN).type,",
-	num=",pkt.getlayer(GBN).num," ,win=",pkt.getlayer(GBN).win,"]"
- 	
-	        raise self.WAIT_SEGMENT()
-                     
-            else:
-                # segment was received correctly
-                if self.dbg:
-                    print " Received : [type=",pkt.getlayer(GBN).type,", num=",pkt.getlayer(GBN).num," ,win=",pkt.getlayer(GBN).win,"] payload=",pkt.getlayer(GBN).payload
- 
-                # check if segment is a data segment    
-		ptype = pkt.getlayer(GBN).type
-                if ptype==0:
-                    if pkt.getlayer(GBN).num==self.next:
-                        # this is the segment with the expected sequence number
-                        print "data received :",pkt.getlayer(GBN).payload
-                        self.next=int((self.next+1) %  pow(2,NBITS))
-                    else:
-                        # this was not the expected segment
-                        if self.dbg:
-                            print "Out of sequence segment [",pkt.getlayer(GBN).num,"] received "
-                else:
-                    # we received an ack while we are supposed to receive only data segments
-                    print "ERROR: Received ack segment : ",pkt.show()
-                    sys.exit(-1)
- 
-                # send ack back to sender    
-                if random.random() < self.pack :
-                    # the ack will be lost, discard it
-                    if self.dbg:
-                        print " Lost ack:",self.next
-                else:
-                    # the ack will be received correctly
-                    if self.dbg:
-                        print " Sending ack :",self.next
-                    send(IP(dst=self.sender)/GBN(type="ack",num=self.next,win=self.win))  
-                # transition to WAIT_SEGMENT to receive next segment     
-                raise self.WAIT_SEGMENT()
+#. Same question when using selective repeat instead of go-back-n. Note that the answer is not necessarily the same.
+
+#. Consider a `b` bits per second link between two hosts that has a propagation delay of `t` seconds. Derive a formula that computes the time elapsed between the transmission of the first bit of a `d` bytes segment from and sending host and the reception of the last bit of this segment on the receiving host.
 
 
-The `GBNReceiver` constructor takes the following arguments :
- - the receiving window (in segments)
- - the loss probabilities for the `data` and `ack` segments. In our emulated network, the `GBNReceiver` models segment losses by probabilistically discarding the received `data` segments or probabilistically discarding the `ack` segments before sending them
- - a debug flag that causes the FSM to print debugging information when set to `True`
- - the IP address of the sender
+#. Consider two high-end servers connected back-to-back by using a 10 Gbps interface. If the delay between the two servers is one millisecond, what is the throughput that can be achieved by a transport protocol that is using 10,000 bits segments and a window of
 
-The `GBNReceiver` is implemented as a single state FSM. This FSM
-receives data segments in the `WAIT_SEGMENT` state. These segments are
-handled by the `wait_segment` receive condition that operates as follows.
- - the receive condition first checks whether the received segment should be probabilistically discarded. 
- - the segment is verified to check that it is a `data` segment
- - the FSM verifies that the received segment has the expected sequence number. This is done thanks to the `self.next` state variable that is maintained by the FSM. If the expected sequence number was received `self.next` is incremented by :math:`~1~mod~2^{NBITS}`
- - the acknowledgment is sent. In our simple protocol, the `num` field in the `ack` segment always contains the sequence number of the next expected segment (i.e. the sequence number of the last segment received in sequence :math:`~+1~mod~2^{NBITS}`)
+ - one segment
+ - ten segments
+ - hundred segments
 
+#. Consider two servers are directly connected by using a `b` bits per second link with a round-trip-time of `r` seconds. The two servers are using a transport protocol that sends segments containing `s` bytes and acknowledgements composed of `a` bytes. Can you derive a formula that computes the smallest window (measured in segments) that is required to ensure that the servers will be able to completely utilise the link ?
 
-Preliminary questions
----------------------
+#. Same question as above if the two servers are connected through and asymmetrical link that transmits `bu` bits per second in the upstream direction and `bd` bits per second in the downstream direction.
 
-The following questions should help you to prepare your implementation of the go-back-n sender FSM.
+#. The Trivial File Transfer Protocol is a very simple file transfer protocol that is often used by diskless hosts when booting from a server. Read the TFTP specification in :rfc:`1350` and explain how TFTP recovers from transmission errors and losses.
 
-#. As the sequence number are encoded by using NBITS, there are only :math:`2^{NBITS}` different sequence numbers. How do you compute the sequence number that follows sequence number `x` ?
+#. Is it possible for a go-back-n receiver to interoperate with a selective-repeat sender ? Justify your answer.
 
-#. A go-back-n sender must contain a sending buffer where it stores the segments that have been sent without having already been acknowledged. Which kind of python_ data structure [#fpythondata]_ will you use to build this buffer ? ( do not develop your own optimized data structure, reuse a data structure that python already supports - the chosen data structure should allow you to easily associate a sequence number with a corresponding segment/payload, count the number of segments/payloads stored and check whether a given sequence number is already in the sending buffer or not)
+#. Is it possible for a selective-repeat receiver to interoperate with a go-back-n sender ? Justify your answer.
 
-#. The maximum capacity of your sending buffer is the window size of your FSM. How do you check whether your sending buffer is full ?
+#. The go-back-n and selective repeat mechanisms that are described in the book exclusively rely on cumulative acknowledgements. This implies that a receiver always returns to the sender information about the last segment that was received in-sequence. If there are frequent losses or reordering, a selective repeat receiver could return several times the same cumulative acknowledgment. Design an additional type of acknowledgement that would provide more information to the sender aboutCan you think of other types of acknowledgements that could be used by a selective repeat receiver to provide additional information about the out-of-sequence segments that it has received. Explain how the sender should react upon reception of this information. 
 
-#. When there are no losses, you will need to remove from your sending buffer a `data` segment every time an `ack` segment is received. How do you remove from the chosen data structure `the` segment that is acknowledged by the received `ack` ?
+#. The `goodput` achieved by a transport protocol is usually defined as the number of application layer bytes that are exchanged per unit of time. What are the factors that can influence the `goodput` achieved by a given transport protocol ? 
 
-#. `data` segments are protected against losses by using the retransmission timer and the go-back-n mechanism. `ack` segments are protected against losses due to the fact that when an `ack` segment with `num` set to `x` is received, it acknowledges all `data` segments that were sent before segment `x`. Thus, when you receive an `ack`, you may need to remove `0`, `1` or more acknowledged `data` segments from your sending buffer. How do you decide which data segments must be removed from the sending buffer when you receive an acknowledgment ?
+#. The Transmission Control Protocol (TCP) attaches a 40 bytes header to each segment sent. Assuming an infinite window and no losses nor transmission errors, derive a formula that computes the maximum TCP goodput in function of the size of the segments that are sent.
 
-#. How can you detect that all the data segments that you have sent have been acknowledged ?
+#. A go-back-n sender uses a window size encoded in a `n` bits field. How many segments can it send without receiving an acknowledgement ?
 
-#. When the timer expires, what are the segments that should be retransmitted ? How do you retransmit them ?
+#. Consider the following situation. A go-back-n receiver has sent a full window of data segments. All the segments have been received correctly and in-order by the receiver, but all the returned acknowledgements have been lost. Show by using a time sequence diagram (e.g. by considering a window of four segments) what happens in this case. Can you fix the problem on the go-back-n sender ?
 
-Implementation of the sender FSM
---------------------------------
+#. Same question as above, but assume now that both the sender and the receiver implement selective repeat. Note the the answer will be different from the above question.
 
-To implement the FSM for your go-back-n sender, you can start from the
-skeleton FSM below that is composed of two states, one timeout and one
-receive condition ::
+#. Explain under which circumstances a transport entity could advertise a window of 0 segments ?
 
- ## This class implements the sender side of the go-back-n Protocol by
-   using scapy Automaton facilities
+#. 127.0.0.1 ? ::1 ?
 
- TIMEOUT=1  # default timeout in seconds
+#. socket tcp, see Damien
 
- class GBNSender(Automaton):
-	def parse_args(self, sdus, win, receiver,**kargs):
-        	Automaton.parse_args(self, **kargs)
-                self.win=win # the maximum window size of the sender
-                assert self.win<pow(2,NBITS)
-        	self.receiver = receiver # the IP address of the receiver
-       		self.q = Queue.Queue()
-		for item in sdus:
-			self.q.put(item)
-
-                ## Additional state variables to be maintained        
-                       
-	# filter for GBN segments	       
-	def master_filter(self, pkt):
-        	return (IP in pkt and pkt[IP].src == self.receiver and GBN in pkt)
-		
-
-	@ATMT.state(initial=1)
-	def BEGIN (self):
-            raise self.WAIT_ACK()
-            
-
-        @ATMT.state()
-        def WAIT_ACK(self):
-              # to be completed
-	
-	@ATMT.receive_condition(WAIT_ACK)
-	def wait_for_ack(self,pkt):
-            # to be completed, wait for acks
-
-	@ATMT.timeout(WAIT_ACK, TIMEOUT)
-	def timeout_wait_ack(self):
-            # to be completed
-            # retransmit unacked segments
-            
-           
-The constructor of the `GBNSender` takes a list of SDUs as arguments and places them in a `Queue <http://docs.python.org/library/queue.html>`_ . This can be used to model the `data.request()` primitives from the sending user. The `payloads` list should be a list of Strings. You can easily create a long list of Strings by using ::
-
- l=[]
- for f in range(1000) : l.append(str(f))
-
-To extract the next SDU from the Queue, you can use e.g. ::
-
- try:
-      # extract one additional SDU
-      payload = self.q.get()
-      ...
- except Queue.Empty:
-      # All SDUs have been sent
-      # stop sender only once all data has been acknowledged
-
-
-To test your `GBNSender`, you can use the `GBNReceiver` shown above. The `GBNReceiver` expects to receive a first `data` segment with sequence number `0`. Your `GBNSender` must thus start to number the segments that it sends at `0`. You should first try to test it with loss probabilities set to 0 for both `data` and `ack` segments. Then, try to see how your `GBNSender` works when `data` segments are lost and after that add losses for the `ack` segments as well. Do not forget to send a list of SDUs that contains more than :math:`2^{NBITS}` Strings.      
-
-To implement the go-back-n receiver, you can reuse the UML machines that you used for the Alternating Bit Protocol. A new protocol can be added to the scapy_ distribution as follows :
-
- - create the file `scapy/layers/gbn.py` that will contain your protocol. Reuse the python imports that were defined for the Alternating Bit Protocol and copy the code of the go-back-receiver shown above
- - change the `scapy/config.py` and add "gbn" at the end of the `load_layers` line ::
-    
-    load_layers = ["l2", "inet", "dhcp", "dns", "dot11", "gprs", "hsrp", "inet6", "ir", "isakmp", "l2tp", "mgcp", "mobileip", "netbios", "netflow", "ntp", "ppp", "radius", "rip", "rtp", "sebek", "skinny", "smb", "snmp", "tftp", "x509", "bluetooth", "dhcp6", "llmnr", "abp", "gbn" ]
-
- - recompile scapy (`python setup clean` and `python setup install`) and you are ready to implement your go-back-n sender.
-
-Deliverables
-------------
-
-For this week, you need to provide in your group's subversion repository :
-
- - one implementation in python per team of two students (if the number of students in the group is odd, one team can be composed of three students). The code should be readable, of course
- - a short description in ASCII of the tests that you performed with your implementation and its limitations
-
-.. rubric:: Footnotes
-
-.. [#fpythondata] The basic data structures of the python_ library are described in http://docs.python.org/tutorial/datastructures.html and http://docs.python.org/library/stdtypes.html
-
-
+#. dns resolution with sockets ? try v4 and v6 ?
 
 .. include:: ../../book/links.rst
 
