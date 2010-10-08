@@ -12,9 +12,9 @@ This document contains the questions for the practical part of the INGI2141 cour
    :maxdepth: 1
 
    S2/abp
-
+   S3/gbnsr
 ..  S1/application  
-..  S3/gbnsr
+
 ..  S4/tcp1
 ..  S5/tcp2
 ..  S6/ip1

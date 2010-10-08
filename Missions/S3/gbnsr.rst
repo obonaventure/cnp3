@@ -57,18 +57,100 @@ reliable window-based transport-layer protocols. These questions cover these two
 
 20. Explain under which circumstances a transport entity could advertise a window of 0 segments ?
 
-21. The socket library is also used to develop applications above the reliable bytestream service provided by TCP. We have installed on the `sirius` server a simple server that provides a simple client-server service. The service operates as follows :
+21. The socket library is also used to develop applications above the reliable bytestream service provided by TCP. We have installed on the `sirius.info.ucl.ac.be` server a simple server that provides a simple client-server service. The service operates as follows :
 
- - the server listens on port `21410` for a TCP connection
- - upon arrival of a TCP connection, the server sends an integer by using the following TLV format :
+ - the server listens on port `62141` for a TCP connection
+ - upon the establishment of a TCP connection, the server sends an integer by using the following TLV format :
    
-    - the first byte indicates the type of information (1 for ASCII, 2 for boolean)
-    - the second and third bytes indicate the length of the information (in bytes)
+    - the first two bits indicate the type of information (01 for ASCII, 10 for boolean)
+    - the next six bits indicate the length of the information (in bytes)
     - An ASCII TLV has a variable length and the next bytes contain one ASCII charater per byte. A boolean TLV has a length of one byte. The byte is set to `00000000b` for `true` and `00000001b` for false. 
  - the client replies by sending the received integer encoded as a 32 bits integer in `network byte order`
  - the server returns a TLV containing `true` if the integer was correct and a TLV containing `false` otherwise and closes the TCP connection
 
  Each group of two students must implement a client to interact with this server in C, Java or python. 
+
+Programming project
+===================
+
+Your objective in this project is to implement a simple reliable
+transport protocol by groups of 2 students. These groups must be
+subgroups of the main groups that are registered on icampus. If the
+number of students in an icampus group is odd, there can be one group of
+three students.
+
+The protocol uses a sliding window to transmit more than one segment
+without being forced to wait for an acknowledgment. Your implementation
+must support variable size sliding window as the other end of
+the flow can send its maximum window size. The window size is encoded as a three bits unsigned integer. 
+
+The protocol identifies the DATA segments by using sequence numbers. The
+sequence number of the first segment must be 0. It is incremented by one
+for each new segment. The receiver must acknowledge the delivered
+segments by sending an ACK segment. The sequence number field in the ACK
+segment always contains the sequence number of the next expected
+in-sequence segment at the receiver. The flow of data is unidirectional,
+meaning that the sender only sends DATA segments and the receiver only
+sends ACK segments.
+
+To deal with segments losses, the protocol must implement a recovery
+technique such as go-back-n or selective repeat and use retransmission
+timers. The project will partially be evaluated on the quality of the
+recovery technique. Groups of three must implement the selective repeat
+technique while groups of two can implement a simpler recovery scheme such as
+go-back-n.
+
+::
+
+ Segment format
+
+        0                   1                   2                   3
+        0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+       +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+       |   Type  | WIN |    Sequence   |          Length               |
+       +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+       |                                                               |
+       .                         Payload                               .
+       .                                                               .
+       +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+ 
+
+
+- `Type`: segment type
+
+  - 0x1 DATA segment.
+  - 0x2 ACK segment
+
+- `WIN`: the size of the current window (an integer encoded as a 3 bits field). In DATA segments, this field indicates the size of the sending window of the sender. In ACK segments, this field indicates the current value of the receiving window.
+
+- `Sequence`: Sequence number (8 bits unsigned integer), starts at 0. The sequence number is incremented by 1 for each new DATA segment sent by the sender. Inside an ACK segment, the sequence field carries the sequence number of the next in-sequence segment that is expected by the receiver.
+
+- `Length`: length of the payload in multiple of one byte. All DATA segments contain a payload with 512 bytes of data, except the last DATA segment of a transfert that can be shorter. The reception of a DATA segment whose length is different than 512 indicates the end of the data transert.
+
+- Payload: the data to send
+
+Deliverables
+------------
+
+Before October 22nd, 2010 at 23:59 each sub-group must submit its
+commented source code (with a Makefile) on the SVN and a short report
+(up to four pages in pdf format) describing the chosen recovery
+technique, the architecture of the client and server and the tests that
+have been carried out. Each group must implement both a receiver and a
+sender. The implementation language can be chosen among C, Java and Python.
+
+The client and the server exchange UDP datagrams that contain the DATA and ACK segments. They must be command-line tools that allow to transmit one binary file and support the following parameters :
+::
+ sender <destination_DNS_name> <destination_port_number> <window_size> <input_file>
+
+ receiver <listening_port_number> <window_size> <output_file>
+
+A demo session will be organised on Tuesday October 26th. During the
+demo session, you will be invited to demonstrate that your
+implementation is operational and is interoperable with another. You also need to perform tests to show that your implementations works well in case of segment losses. For these tests, you can use a random number generator to probabilistically drop received segments and introduce random delays upon the arrival of a segment.
+
+
+
 
 
 .. include:: ../../book/links.rst
