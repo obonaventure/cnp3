@@ -1,7 +1,7 @@
 The Transmission Control Protocol
 =================================
 
-The Transmission Control Protocol plays a key role in the TCP/IP protocol suite by providing a reliable byte stream service on top of the unreliable connectionless service provided by IP. During this exercise session, you will learn how to establish correctly a TCP connection and analyse packet traces that contain TCP segments. Note that some of exercices involve the creation of non-standard TCP segments. These exercices cannot be performed outside the netkit environment that is described below.
+The Transmission Control Protocol plays a key role in the TCP/IP protocol suite by providing a reliable byte stream service on top of the unreliable connectionless service provided by IP. During this exercise session, you will learn how to establish correctly a TCP connection and analyse packet traces that contain TCP segments. Note that some of exercises involve the creation of non-standard TCP segments. These exercises cannot be performed outside the netkit_ environment that is described below.
 
 
 
@@ -10,7 +10,7 @@ Packet trace analysis tools
 
 When debugging networking problems or to analyse performance problems, it is sometimes useful to capture the segments that are exchanged between two hosts and to analyse them.  
 
-Several packet trace analysis softwares are available, either as commercial or open-source tools. These tools are able to capture all the packets exchanged on a link. Of course, capturing packets require administrator privileges. They can also analyse the content of the captured packets and display information about them. The captured packets can be stored in a file for offline analysis.
+Several packet trace analysis tools are available, either as commercial or open-source tools. These tools are able to capture all the packets exchanged on a link. Of course, capturing packets require administrator privileges. They can also analyse the content of the captured packets and display information about them. The captured packets can be stored in a file for offline analysis.
 
 tcpdump_ is probably one of the most well known packet capture software. It is able to both capture packets and display their content. tcpdump_ is a text-based tool that can display the value of the most important fields of the captured packets. Additional information about tcpdump_ may be found in :manpage:`tcpdump(1)`. The text below is an example of the output of tcpdump_ for the first TCP segments exchanged on an scp transfer between two hosts ::
 
@@ -94,27 +94,27 @@ Questions
  - `sndnxt` : the sequence number of the next byte in the byte stream (the first byte of a new data segment that you send will use this sequence number)
  - `snduna` : the earliest sequence number that has been sent but has not yet been acknowledged
  - `rcvnxt` : the sequence number of the next byte that your implementation expects to receive from the remote host. For this exercise, you do not need to maintain a receive buffer and your implementation can discard the out-of-sequence segments that it receives
- - `self.sndwnd` : the current sending window
- - `self.rcvwnd` : the current window advertised by the receiver
+ - `sndwnd` : the current sending window
+ - `rcvwnd` : the current window advertised by the receiver
 
 Using the :download:`traces/trace.sirius.info.ucl.ac.be.pcap` packet trace, what is the TCB of the connection on host `130.104.78.8` when it sends the third segment of the trace ?
 
 #. The packet trace :download:`traces/trace.maps.google.com` was collected by containing a popular web site that provides mapping information. How many TCP connections were used to retrieve the information from this server ?
 
-#. Using the netkit_ lab explained above, perform some tests by using :man:`hping3(8)`. :man:`hping3(8)` is a command line tool that allows anyone (having system administrator priviledges) to send special IP packets and TCP segments. :man:`hping3(8)` can be used to verify the configuration of firewalls or diagnose problems. We will use it to test the operation of the Linux TCP stack running inside netkit_.
+#. Using the netkit_ lab explained above, perform some tests by using :man:`hping3(8)`. :man:`hping3(8)` is a command line tool that allows anyone (having system administrator privileges) to send special IP packets and TCP segments. :man:`hping3(8)` can be used to verify the configuration of firewalls or diagnose problems. We will use it to test the operation of the Linux TCP stack running inside netkit_.
 
  #. On the server host, launch :man:`tcpdump(1)` with `-vv` as parameter to collect all packets received from the client and display them. Using :man:`hping3(8)` on the client host, send a valid SYN segment to one unused port on the server host (e.g. `12345`). What are the contents of the segment returned by the server ?
 
  #. Perform the same experiment, but now send a SYN segment towards port `7`. This port is the default port for the discard service (see :man:`services(5)`) launched by :man:`xinetd(8)`). What segment does the server sends in reply ? What happens upon reception of this segment ? Explain your answer. 
 
-#. The Linux TCP/IP stack can be easily configured by using :man:`sysctl(8)` to change kernel configuration variables. See http://fasterdata.es.net/TCP-tuning/ip-sysctl-2.6.txt for a recent list of the sysctl variables on the Linux TCP/IP stack. Try to disable the selective acknwoledgements and the RFC1323 timestamp and large window options and open a TCP connection on port `7` on the server by using :man:telnet`(1)`. Check by using :man:`tcpdump(1)` the effect of these kernel variables on the segments sent by the Linux stack in netkit_.
+#. The Linux TCP/IP stack can be easily configured by using :man:`sysctl(8)` to change kernel configuration variables. See http://fasterdata.es.net/TCP-tuning/ip-sysctl-2.6.txt for a recent list of the sysctl variables on the Linux TCP/IP stack. Try to disable the selective acknowledgements and the RFC1323 timestamp and large window options and open a TCP connection on port `7` on the server by using :man:telnet`(1)`. Check by using :man:`tcpdump(1)` the effect of these kernel variables on the segments sent by the Linux stack in netkit_.
 
 %see http://fasterdata.es.net/TCP-tuning/linux.html and in particular 
 
-#. Network administrators sometimes need to verify which networking daemons are active on a server. When logged on the server, several tools can be used to verify this. A first solution is to use the :manpage:`netstat(8)` command. This command allows you to extract various statistics from the networking stack on the Linux kernel. For TCP, `netstat` can list all the active TCP connections with the state of their FSM. `netstat` supports the following options that could be useful during this exercices :
+#. Network administrators sometimes need to verify which networking daemons are active on a server. When logged on the server, several tools can be used to verify this. A first solution is to use the :manpage:`netstat(8)` command. This command allows you to extract various statistics from the networking stack on the Linux kernel. For TCP, `netstat` can list all the active TCP connections with the state of their FSM. `netstat` supports the following options that could be useful during this exercises :
 
  - `-t` requests information about the TCP connections
- - `-n` requests numeric output (by default, `netstat` sends DNS queries to resolve IP addresses in hosts and uses `/etc/services` to convert port number in service names, `-n` is recommended on netkit machines)
+ - `-n` requests numeric output (by default, `netstat` sends DNS queries to resolve IP addresses in hosts and uses `/etc/services` to convert port number in service names, `-n` is recommended on netkit_ machines)
  - `-e` provides more information about the state of the TCP connections
  - `-o` provides information about the timers
  - `-a` provides information about all TCP connections, not only those in the Established state
@@ -124,7 +124,7 @@ Using the :download:`traces/trace.sirius.info.ucl.ac.be.pcap` packet trace, what
  A second solution to determine which network daemons are running on a server is to use a tool like :manpage:`nmap(1)`. :manpage:`nmap(1)` can be run remotely and thus can provide information about a host on which the system administrator cannot login. Use :manpage:`tcpdump(1)` to collect the segments sent by :manpage:`nmap(1)`  running on the client and explain how :manpage:`nmap(1)` operates.
 
 
-#. Long lived TCP connections are succeptible to the so-called `RST attacks`. Try to find additional information about this attack and explain how a TCP stack could mitigate such attacks.
+#. Long lived TCP connections are susceptible to the so-called `RST attacks`. Try to find additional information about this attack and explain how a TCP stack could mitigate such attacks.
 
 #.  
 
