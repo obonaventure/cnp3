@@ -76,13 +76,13 @@ Questions
 
 #. Is it possible for a TCP/IP stack to return a SYN+ACK segment with the acknowledgement number set to `0` ? If no, explain why. If yes, what was the content of the received SYN segment.
 
-#. Open the packet trace :download:`traces/trace.5connections_opening_closing.pcap` and identify the number of different TCP connections that are established and closed. For each connection, explain by which mechanism they are closed. Analyse the initial sequence numbers that are used in the SYN and SYN+ACK segments. How do these initial sequence numbers evolve ? Are they increased every 4 microseconds ?
+#. Open the tcpdump_ packet trace :download:`traces/trace.5connections_opening_closing.pcap` and identify the number of different TCP connections that are established and closed. For each connection, explain by which mechanism they are closed. Analyse the initial sequence numbers that are used in the SYN and SYN+ACK segments. How do these initial sequence numbers evolve ? Are they increased every 4 microseconds ?
 
-#. The packet trace :download:`traces/trace.5connections.pcap` contains several connection attempts. Can you explain what is happening with these connection attempts ?
+#. The tcpdump_ packet trace :download:`traces/trace.5connections.pcap` contains several connection attempts. Can you explain what is happening with these connection attempts ?
 
-#. The packet trace :download:`traces/trace.ipv6.google.com.pcap` was collected from a popular website that is accessible by using IPv6. Explain the TCP options that are supported by the client and the server.
+#. The tcpdump_ packet trace :download:`traces/trace.ipv6.google.com.pcap` was collected from a popular website that is accessible by using IPv6. Explain the TCP options that are supported by the client and the server.
 
-#. The packet trace :download:`traces/trace.sirius.info.ucl.ac.be.pcap` Was collected on the departmental server. What are the TCP options supported by this server ?
+#. The tcpdump_ packet trace :download:`traces/trace.sirius.info.ucl.ac.be.pcap` Was collected on the departmental server. What are the TCP options supported by this server ?
 
 
 #. A TCP implementation maintains a Transmission Control Block (TCB) for each TCP connection. This TCB is a data structure that contains the complete "`state`"  of each TCP connection. The TCB is described in :rfc:`793`. It contains first the identification of the TCP connection : 
@@ -99,9 +99,14 @@ Questions
 
 Using the :download:`traces/trace.sirius.info.ucl.ac.be.pcap` packet trace, what is the TCB of the connection on host `130.104.78.8` when it sends the third segment of the trace ?
 
-#. The packet trace :download:`traces/trace.maps.google.com` was collected by containing a popular web site that provides mapping information. How many TCP connections were used to retrieve the information from this server ?
+#. The tcpdump_ packet trace :download:`traces/trace.maps.google.com` was collected by containing a popular web site that provides mapping information. How many TCP connections were used to retrieve the information from this server ?
 
-#. Using the netkit_ lab explained above, perform some tests by using :man:`hping3(8)`. :man:`hping3(8)` is a command line tool that allows anyone (having system administrator privileges) to send special IP packets and TCP segments. :man:`hping3(8)` can be used to verify the configuration of firewalls or diagnose problems. We will use it to test the operation of the Linux TCP stack running inside netkit_.
+#. Some network monitoring tools such as ntop_ collect all the TCP segments sent and received by a host or a group of hosts and provide interesting statistics such as the number of TCP connections, the number of bytes exchanged over each TCP connection, ... Assuming that you can capture all the TCP segments sent by a host, propose the pseudocode of an application that would list all the TCP connections established and accepted by this host and the number of bytes exchanged over each connection. Do you need to count the number of bytes contained inside each segment to report the number of bytes exchanged over each TCP connection ?
+
+
+#. There are two types of firewalls [#ffirewall]_ : special devices that are placed at the border of campus or enterprise networks and software that runs on endhosts. Software firewalls typically analyse all the packets that are received by a host and decide based on the packet's header and contents whether it can be processed by the host's network stack or must be discarded. System administrators often configure firewalls on laptop or student machines to prevent students from installing servers on their machines. How would you design a simple firewall that blocks all incoming TCP connections but still allows the host to establish TCP connections to any remote server ?
+
+#. Using the netkit_ lab explained above, perform some tests by using :man:`hping3(8)`. :man:`hping3(8)` is a command line tool that allows anyone (having system administrator privileges) to send special IP packets and TCP segments. :man:`hping3(8)` can be used to verify the configuration of firewalls [#ffirewall]_ or diagnose problems. We will use it to test the operation of the Linux TCP stack running inside netkit_.
 
  #. On the server host, launch :man:`tcpdump(1)` with `-vv` as parameter to collect all packets received from the client and display them. Using :man:`hping3(8)` on the client host, send a valid SYN segment to one unused port on the server host (e.g. `12345`). What are the contents of the segment returned by the server ?
 
@@ -131,8 +136,9 @@ Using the :download:`traces/trace.sirius.info.ucl.ac.be.pcap` packet trace, what
 .. # sctp ? http://wiki.wireshark.org/SampleCaptures?action=AttachFile&do=get&target=sctp-www.cap
 
 
+.. rubric:: Footnotes
 
-
+.. [#ffirewall] A firewall is a software or hardware device that analyses TCP/IP packets and decides, based on a set of rules, to accept or discard the packets received or sent. The rules used by a firewall usually depend on the value of some fields of the packets (e.g. type of transport protocols, ports, ...). We will discuss in more details the operation of firewalls in the network layer chapter. 
 
 .. include:: ../../book/links.rst
 
