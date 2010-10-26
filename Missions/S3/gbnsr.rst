@@ -149,6 +149,61 @@ A demo session will be organised on Tuesday October 26th. During the
 demo session, you will be invited to demonstrate that your
 implementation is operational and is interoperable with another. You also need to perform tests to show that your implementations works well in case of segment losses. For these tests, you can use a random number generator to probabilistically drop received segments and introduce random delays upon the arrival of a segment.
 
+Demonstration
+-------------
+
+The demonstration of your project will take place in the intel room at :
+
+        * group 1, 2, 3: October 26th 10:45 am 
+        * group 4, 5, 6: October 26th 11:45 am
+
+
+We will test your implementations. For that, we will link you with each
+sub-group of the other groups with the same subgroup number. You personally
+assign the sub-group number inside your group. The receivers will be tested on
+sirius, the senders from the Intel room. Group 1 (resp. 4) sends to group 2
+(resp. 5); Group 1 (resp. 4) receives from 3 (resp. 6); group 2 (resp. 5) sends
+to group 3 (resp. 6). The sender window size will be set to 6 at startup. The
+receiver window size will be set to 3 at startup.
+
+We will provide you 6 files to each sender. The receiver must receive all of
+them and prove the transfer correctness by giving the md5 hashes (digest -v -a
+md5 <file>.`).
+
+The receiver port number is computed is defined as 6SGsg, where
+        * S: sender sub-group number
+        * G: sender group number
+        * s: receiver sub-group number
+        * g: receiver group number
+
+e.g., port 61213 means that sub-group 1 of group 2 sends traffic to sub-group 1 of group 3.
+
+Evaluation
+
+
+ Code: 50%
+
+        * no compilation -> 0
+        * increment of sequence number/ack (1)
+        * ack processing should be decoupled from data processing (1)
+        * window management (2)
+        * timer management (2)
+        * network byte order (1)
+        * architecture (2)
+        * code readability/documentation/synopsis (1)
+
+ Report: 25%
+
+        * architecture description (2)
+        * pitfall highlighting (2)
+        * validation (5)
+        * further work (1)
+
+ Demo: 25%
+
+        * correct transfers (6)
+        * support random loss/delay (2)
+        * ability to explain the code/events (2)
 
 
 

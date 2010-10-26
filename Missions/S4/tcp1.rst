@@ -63,8 +63,72 @@ A second interesting graph is the `round-trip-time` graph that shows the evoluti
    Wireshark : round-trip-time graph
 
 
-Netkit
-______
+Emulating a network with Netkit
+-------------------------------
+
+
+Netkit_ is network emulator based on User Mode Linux.  It allows to easily set up an emulated network of Linux machines, that can act as end-host or routers.  
+
+
+Where can I find Netkit?
+........................
+
+Netkit_ is available online.  Files can be downloaded from http://wiki.netkit.org/index.php/Download_Official, and instructions for the installations are available here : http://wiki.netkit.org/download/netkit/INSTALL . 
+
+Netkit has already been installed in the student labs, in `/etinfo/applications/netkit` . All you have to do in order to use it is to set the following environment variables :
+
+::
+
+ export NETKIT_HOME=/etinfo/applications/netkit
+ export MANPATH=:$NETKIT_HOME/man
+ export PATH=$NETKIT_HOME/bin:$PATH
+
+
+It is usually convenient to put those lines in your shell initialization file.  
+
+
+How do I use Netkit? 
+....................
+
+There are two ways to use Netkit : The manual way, and by using pre-configured labs.  In the first case, you boot and control each machine individually, using the commands starting with a "v" (for virtual machine).   In the second case, you can start a whole network in a single operation.  The commands for controlling the lab start with a "l".  The man pages of those commands is available from `http://wiki.netkit.org/man/man7/netkit.7.html`
+
+You must be careful not to forgot to stop your virtual machines and labs, using either `vhalt` or `lhalt`.  
+
+Example of using a lab
+......................
+
+A lab is simply a directory containing at least a configuration file called `lab.conf`, and one directory for each virtual machine.  In the case the lab available on iCampus, the network is composed of two pc, pc1 and pc2, both of them being connected to a router r1.  The lab.conf file contains the following lines : 
+
+::
+ pc1[0]=A
+ pc2[0]=B
+ r1[0]=A
+ r1[1]=B
+
+This means that pc1 and r1 are connected to a "virtual LAN" named A via their interface eth0, while pc2 and r1 are connected to the "virtual LAN" B via respectively their interfaces eth0 and eth1.  
+
+The directory of each device is initially empty, but will be used by Netkit to store their filesystem. 
+
+The lab directory can contain optional files.  In the lab provided to you, the "pc1.startup" file contains the shell instructions to be executed on startup of the virtual machine.  In this specific case, the script configures the interface eth0 to allow traffic exchanges between pc1 and r1, as well as the routing table entry to join pc2.   
+
+Starting a lab consists thus simply in unpacking the provided archive, going into the lab directory and typing `lstart` to start the network.  
+
+
+File sharing between virtual machines and host
+..............................................
+
+Virtual machines can access to the directory of the lab they belong to.  This repertory is mounted in their filesystem at the path  `/hostlab`.  
+
+
+Tools available on Netkit
+.........................
+
+As the virtual machines run Linux, standard networking tools such as hping, tcpdump, netstats etc. are available as usual.  
+
+Note that capturing network traces can be facilitated by using the `uml_dump` extension available here : http://kartoch.msi.unilim.fr/blog/?p=19 .  This extension is already installed in the Netkit installation on the student lab.  In order to capture the traffic exchanged on a given 'virtual LAN', you simply need to issue the command `vdump <LAN name>` on the host. If you want to pipe the trace to wireshark, you can use `vdump A | wireshark -i - -k`
+
+In the lab provided in iCampus, you can find a simple Python_ client/server application that establishes TCP connections. Feel free to re-use this code to perform your analysis.    
+
 
 To be provided by Virginie
 
@@ -84,7 +148,6 @@ Questions
 
 #. The tcpdump_ packet trace :download:`traces/trace.sirius.info.ucl.ac.be.pcap` Was collected on the departmental server. What are the TCP options supported by this server ?
 
-
 #. A TCP implementation maintains a Transmission Control Block (TCB) for each TCP connection. This TCB is a data structure that contains the complete "`state`"  of each TCP connection. The TCB is described in :rfc:`793`. It contains first the identification of the TCP connection : 
 
  - `localip` : the IP address of the local host
@@ -103,7 +166,6 @@ Using the :download:`traces/trace.sirius.info.ucl.ac.be.pcap` packet trace, what
 
 #. Some network monitoring tools such as ntop_ collect all the TCP segments sent and received by a host or a group of hosts and provide interesting statistics such as the number of TCP connections, the number of bytes exchanged over each TCP connection, ... Assuming that you can capture all the TCP segments sent by a host, propose the pseudocode of an application that would list all the TCP connections established and accepted by this host and the number of bytes exchanged over each connection. Do you need to count the number of bytes contained inside each segment to report the number of bytes exchanged over each TCP connection ?
 
-
 #. There are two types of firewalls [#ffirewall]_ : special devices that are placed at the border of campus or enterprise networks and software that runs on endhosts. Software firewalls typically analyse all the packets that are received by a host and decide based on the packet's header and contents whether it can be processed by the host's network stack or must be discarded. System administrators often configure firewalls on laptop or student machines to prevent students from installing servers on their machines. How would you design a simple firewall that blocks all incoming TCP connections but still allows the host to establish TCP connections to any remote server ?
 
 #. Using the netkit_ lab explained above, perform some tests by using :man:`hping3(8)`. :man:`hping3(8)` is a command line tool that allows anyone (having system administrator privileges) to send special IP packets and TCP segments. :man:`hping3(8)` can be used to verify the configuration of firewalls [#ffirewall]_ or diagnose problems. We will use it to test the operation of the Linux TCP stack running inside netkit_.
@@ -113,8 +175,6 @@ Using the :download:`traces/trace.sirius.info.ucl.ac.be.pcap` packet trace, what
  #. Perform the same experiment, but now send a SYN segment towards port `7`. This port is the default port for the discard service (see :man:`services(5)`) launched by :man:`xinetd(8)`). What segment does the server sends in reply ? What happens upon reception of this segment ? Explain your answer. 
 
 #. The Linux TCP/IP stack can be easily configured by using :man:`sysctl(8)` to change kernel configuration variables. See http://fasterdata.es.net/TCP-tuning/ip-sysctl-2.6.txt for a recent list of the sysctl variables on the Linux TCP/IP stack. Try to disable the selective acknowledgements and the RFC1323 timestamp and large window options and open a TCP connection on port `7` on the server by using :man:telnet`(1)`. Check by using :man:`tcpdump(1)` the effect of these kernel variables on the segments sent by the Linux stack in netkit_.
-
-%see http://fasterdata.es.net/TCP-tuning/linux.html and in particular 
 
 #. Network administrators sometimes need to verify which networking daemons are active on a server. When logged on the server, several tools can be used to verify this. A first solution is to use the :manpage:`netstat(8)` command. This command allows you to extract various statistics from the networking stack on the Linux kernel. For TCP, `netstat` can list all the active TCP connections with the state of their FSM. `netstat` supports the following options that could be useful during this exercises :
 
@@ -128,10 +188,7 @@ Using the :download:`traces/trace.sirius.info.ucl.ac.be.pcap` packet trace, what
 
  A second solution to determine which network daemons are running on a server is to use a tool like :manpage:`nmap(1)`. :manpage:`nmap(1)` can be run remotely and thus can provide information about a host on which the system administrator cannot login. Use :manpage:`tcpdump(1)` to collect the segments sent by :manpage:`nmap(1)`  running on the client and explain how :manpage:`nmap(1)` operates.
 
-
 #. Long lived TCP connections are susceptible to the so-called `RST attacks`. Try to find additional information about this attack and explain how a TCP stack could mitigate such attacks.
-
-#.  
 
 .. # sctp ? http://wiki.wireshark.org/SampleCaptures?action=AttachFile&do=get&target=sctp-www.cap
 
