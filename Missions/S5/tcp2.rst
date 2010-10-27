@@ -4,7 +4,28 @@ TCP congestion control
 The TCP congestion control mechanisms, defined in :rfc:`5681` plays a key role in today's Internet. Without this mechanism that was first defined and implemented in the late 1980s, the Internet would not have been able to continue to work until now. The objective of this exercise is to allow you to have a better understanding of the operation of TCP's congestion control mechanism by analysing all the segments exchanged over a TCP connection.
 
 
-The deadline for this exercise is Tuesday October 27th, 13.00.
+#. To understand the operation of the TCP congestion control mechanism, it is useful to draw some time sequence diagrams. Let us consider a simple scenario of a web client connected to the Interne that wishes to retrieve a simple web page from a remote web server. For simplicity, we will assume that the delay between the client and the server is 0.5 seconds and that the packet transmission times on the client and the servers are negligible (e.g. they are both connected to a 1 Gbps network). We will also assume that the client and the server use 1 KBytes segments.
+
+ a. Compute the time required to open a TCP connection, send an HTTP request and retrieve a 16 KBytes web page. This page size is typical of the results returned by search engines like google_ or bing_. An important factor in this delay is the initial size of the TCP congestion window on the server. Assume first that the initial window is set to 1 segment as defined in :rfc:`2001`, 4 KBytes (i.e. 4 segments in this case) as proposed in :rfc:`3390` or 16 KBytes as proposed in a recent `paper<http://ccr.sigcomm.org/drupal/?q=node/621>`_.
+
+ b. Perform the same analysis with an initial window of one segment is the third segment sent by the server is lost and the retransmission timeout is fixed and set to 2 seconds.
+
+ c. Same question as above but assume now that the 6th segment is lost. 
+
+ d. Same question as above, but consider now the loss of the second and seventh acknowledgements sent by the client. 
+
+ e. Does the analysis above changes if the initial window is set to 16 KBytes instead of one segment ?
+
+#. Several MBytes have been sent on a TCP connection and it becomes idle for several minutes. Discuss which values should be used for the congestion window, slow start threshold and retransmission timers.
+
+#. To operate reliably, a transport protocol that uses Go-back-n (resp. selective repeat) cannot use a window that is larger than :math:`{2^n}-1` (resp. :math:`2^{n-1}`) segments. Does this limitation affects TCP ? Explain your answer.
+
+#. Consider the simple network shown in the figure below. In this network, the router between the client and the server can only store on each outgoing interface one packet in addition to the packet that it is currently transmitting. It dscards all the packets that arrive while its buffer is full. Assuming that you can neglect the transmission time of acknowledgements and that the server uses an initial window of one segment and has a retransmission timer set to 500 milliseconds, what is the time required to transmit 10 segments from the client to the server. Does the performance increase if the server uses an initial window of 16 segments instead ?
+
+.. figure:: fig/emulated-network-002-c.png
+   :align: center
+
+   Simple network network
 
 
 Experimental setup
@@ -51,96 +72,6 @@ Each team of two students will analyse these three traces, first by using wiresh
 
  7. When displaying TCP segments, recent versions of wireshark_ contain `expert analysis` heuristics that indicate whether the segment has been retransmitted, whether it is a duplicate ack or whether the retransmission timeout has expired. Explain how you would implement the same heuristics as wireshark_. 
  
-
-
-Packet trace analysis tools
----------------------------
-
-When debugging networking problems or to analyse performance problems, it is sometimes useful to capture the segments that are exchanged between two hosts and to analyse them.  
-
-Several packet trace analysis softwares are available, either as commercial or open-source tools. These tools are able to capture all the packets exchanged on a link. Of course, capturing packets require administrator privileges. They can also analyse the content of the captured packets and display information about them. The captured packets can be stored in a file for offline analysis.
-
-tcpdump_ is probably one of the most well known packet capture software. It is able to both capture packets and display their content. tcpdump_ is a text-based tool that can display the value of the most important fields of the captured packets. Additional information about tcpdump_ may be found in :manpage:`tcpdump(1)`. The text below is an example of the output of tcpdump_ for the first TCP segments exchanged on an scp transfer between two hosts ::
-
- 21:05:56.230737 IP 192.168.1.101.54150 > 130.104.78.8.22: S 1385328972:1385328972(0) win 65535 <mss 1460,nop,wscale 3,nop,nop,timestamp 274527749 0,sackOK,eol>
- 21:05:56.251468 IP 130.104.78.8.22 > 192.168.1.101.54150: S 3627767479:3627767479(0) ack 1385328973 win 49248 <nop,nop,timestamp 1212093352 274527749,mss 1452,nop,wscale 0,nop,nop,sackOK>
- 21:05:56.251560 IP 192.168.1.101.54150 > 130.104.78.8.22: . ack 1 win 65535 <nop,nop,timestamp 274527749 1212093352>
- 21:05:56.279137 IP 130.104.78.8.22 > 192.168.1.101.54150: P 1:21(20) ack 1 win 49248 <nop,nop,timestamp 1212093355 274527749>
- 21:05:56.279241 IP 192.168.1.101.54150 > 130.104.78.8.22: . ack 21 win 65535 <nop,nop,timestamp 274527749 1212093355>
- 21:05:56.279534 IP 192.168.1.101.54150 > 130.104.78.8.22: P 1:22(21) ack 21 win  65535 <nop,nop,timestamp 274527749 1212093355> 
- 21:05:56.303527 IP 130.104.78.8.22 > 192.168.1.101.54150: . ack 22 win 49248 <nop,nop,timestamp 1212093357 274527749>
- 21:05:56.303623 IP 192.168.1.101.54150 > 130.104.78.8.22: P 22:814(792) ack 21 win 65535 <nop,nop,timestamp 274527749 1212093357>
-
-
-You can easily recognise in the output above the `SYN` segment containing the `MSS`, `window scale`, `timestamp` and `sackOK` options, the `SYN+ACK` segment whose `wscale` option indicates that the server uses window scaling for this connection and then the first few segments exchanged on the connection.
-
-
-wireshark_ is more recent than tcpdump_. It evolved from the ethereal packet trace analysis software. It can be used as a text tool like tcpdump_. For a TCP connection, wireshark_ would provide almost the same output as tcpdump_. The main advantage of wireshark_ is that it also includes a graphical user interface that allows to perform various types of analysis on a packet trace.
-
-.. figure:: fig/wireshark-open.png
-   :align: center
-   :scale: 50
-
-   Wireshark : default window
-
-The wireshark window is divided in three parts. The top part of the window is a summary of the first packets from the trace. By clicking on one of the lines, you can show the detailed content of this packet in the middle part of the window. The middle of the window allows you to inspect all the fields of the captured packet. The bottom part of the window is the hexadecimal representation of the packet, with the field selected in the middle window being highlighted.
-
-wireshark_ is very good at displaying packets, but it also contains several analysis tools that can be very useful. The first tool is `Follow TCP stream`. It is part of the `Analyze` menu and allows you to reassemble and display all the payload exchanged during a TCP connection. This tool can be useful if you need to analyse for example the commands exchanged during a SMTP session.
-
-The second tool is the flow graph that is part of the `Statistics` menu. It provides a time sequence diagram of the packets exchanged with some comments about the packet contents. See blow for an example.
-
-.. figure:: fig/wireshark-flowgraph.png
-   :align: center
-   :scale: 50
-
-   Wireshark : flow graph
-
-The third set of tools are the `TCP stream graph` tools that are part of the `Statistics menu`. These tools allow you to plot various types of information extracted from the segments exchanged during a TCP connection. A first interesting graph is the `sequence number graph` that shows the evolution of the sequence number field of the captured segments with time. This graph can be used to detect graphically retransmissions.
-
-.. figure:: fig/wireshark-seqgraph.png
-   :align: center
-   :scale: 50
-
-   Wireshark : sequence number graph
-
-A second interesting graph is the `round-trip-time` graph that shows the evolution of the round-trip-time in function of time. This graph can be used to check whether the round-trip-time remains stable or not. Note that from a packet trace, wireshark_ can plot two `round-trip-time` graphs, One for the flow from the client to the server and the other one. wireshark_ will plot the `round-trip-time` graph that corresponds to the selected packet in the top wireshark_ window. 
-
-.. figure:: fig/wireshark-rttgraph.png
-   :align: center
-   :scale: 50
-
-   Wireshark : round-trip-time graph
-
-scapy_
-......
-
-In addition to allowing you to send and receive packets, scapy_ also allows you to easily read packet traces captured by tools such as tcpdump_ or wireshark_ provided that they are in the libpcap_ format. The `rdpcap` method allows you to read an entire trace in memory and convert it into a list of scapy_ packets ::
-
-   >>> l=rdpcap("/mnt/host/tcp.pcap")
-   >>> l   
-   <tcp.pcap: TCP:2863 UDP:48 ICMP:0 Other:14>
-
-This packet trace contains 2863 TCP segments, 48 UDP segments and 14 other packets. You can easily access any of the TCP segments of the trace ::
-
- >>> l[1234]
- <Ether  dst=00:19:e3:d7:12:04 src=00:0f:66:5b:53:9a type=0x800 |<IP  version=4L ihl=5L tos=0x0 len=64 id=27625 flags=DF frag=0L ttl=48 proto=tcp chksum=0x4c51 src=130.104.78.8 dst=192.168.1.101 options='' |<TCP  sport=ssh dport=54150 seq=3627769700L ack=1386377058 dataofs=11L reserved=0L flags=A window=49248 chksum=0xcab2 urgptr=0 options=[('NOP', None), ('NOP', None), ('Timestamp', (1212095749, 274527976)), ('NOP', None), ('NOP', None), ('SAck', (1386379938, 1386400098))] |>>>
- >>> ls(l[1234][TCP])      
- sport      : ShortEnumField       = 22              (20)
- dport      : ShortEnumField       = 54150           (80)
- seq        : IntField             = 3627769700L     (0)
- ack        : IntField             = 1386377058      (0)
- dataofs    : BitField             = 11L             (None)
- reserved   : BitField             = 0L              (0)
- flags      : FlagsField           = 16L             (2)
- window     : ShortField           = 49248           (8192)
- chksum     : XShortField          = 51890           (None)
- urgptr     : ShortField           = 0               (0)
- options    : TCPOptionsField      = [('NOP', None), ('NOP', None), ('Timestamp', (1212095749, 274527976)), ('NOP', None), ('NOP', None), ('SAck', (1386379938, 1386400098))] ({})
- >>> l[1234][TCP].window
- 49248
-
-You can write python scripts to extract information from a libpcap trace. When writing such a script, do not forget that the trace contains the segments sent and received by a host. For this exercise, scapy_ is not required. You can answer the questions without using scapy_
-
 tcpprobe_
 .........
 
