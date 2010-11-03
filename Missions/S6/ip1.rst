@@ -8,7 +8,6 @@ The network layer contains two types of protocols :
 
 Several types of routing protocols are used in IP networks. In this set of exercises, you will study intradomain routing protocols. More precisely, you  will analyse the operation of a routing protocol that uses distance vectors with split horizon.
 
-The deadline for this exercise is Tuesday November 3rd, at 13.00. Inside each group, each team of two students will write a small report in ASCII or pdf format containing the answers to the questions below.
 
 Questions
 ---------
@@ -21,7 +20,9 @@ Questions
 
    Simple network
 
-2. When a network specialist designs a network, one of the problems that he needs to solve is to set the metrics the links in his network. In the USA, the Abilene network interconnects most of the research labs and universities. The figure below shows the topology [#fabilene]_ of this network in 2009.
+2. Same question as above with a link weight set to zero.
+
+3. When a network specialist designs a network, one of the problems that he needs to solve is to set the metrics the links in his network. In the USA, the Abilene network interconnects most of the research labs and universities. The figure below shows the topology [#fabilene]_ of this network in 2009.
 
 .. figure:: fig/abilene-web-map.png
    :align: center
@@ -41,7 +42,7 @@ In this network, assume that all the link weights are set to 1. What is the path
 
  * Assume that the routers located in `Denver` and `Kansas City` need to exchange lots of packets. Can you configure the link metrics such that the link between these two routers does not carry any packet sent by another router in the network ?
 
-3. In the five nodes network shown below, can you configure the link metrics so that the packets sent by router `E` to router `A` use link `B->A` while the packets sent by router `B` use links `B->D` and `D->A`?
+4. In the five nodes network shown below, can you configure the link metrics so that the packets sent by router `E` to router `A` use link `B->A` while the packets sent by router `B` use links `B->D` and `D->A`?
 
 .. figure:: fig/routing-fig-003-c.png 
    :align: center 
@@ -50,9 +51,20 @@ In this network, assume that all the link weights are set to 1. What is the path
    Simple five nodes network
 
 
-4. In the five nodes network shown above, can you configure the link weights so that the packets sent by router `E` (resp. `F`) follow the `E->B->A` path (resp. `F->D->B->A`) ?
+5. In the five nodes network shown above, assuming that all link weights are set to `1`, what is the path followed by `E` to reach `D` ?
 
-5. In the above questions, you have worked on the stable state of the routing tables computed by routing protocols. Let us now consider the transient problems that main happen when the network topology changes [#ffailures]_. For this, consider the network topology shown in the figure below and assume that all routers use a distance vector protocol that uses split horizon.
+6. In the five nodes network shown above, can you configure the link weights so that the packets sent by router `E` (resp. `F`) follow the `E->B->A` path (resp. `F->D->B->A`) ?
+
+7. In the five nodes network shown above, can you configure the link weights so that no packet is ever sent on the link between routers `B` and `D` ?
+
+8. In the five nodes network shown above, can you configure the link weigths so that the packets sent by `A` towards `E` follow the path `A->D->B->E` while the packets sent by `B` towards `E` follow the path `B->D->F`?
+
+9. In the five nodes network shown above, assuming unitary link weights, is it possible that the packets sent by `X` towards `Y` follow the reverse path of the packets sent by `Y` towards `X` ?
+
+
+10. In the network above, is it possible to configure the link weights so that the paths `E->F->D->A`, `E->B->D->A` and `E->B->A` have the same cost ?
+
+10. In the above questions, you have worked on the stable state of the routing tables computed by routing protocols. Let us now consider the transient problems that main happen when the network topology changes [#ffailures]_. For this, consider the network topology shown in the figure below and assume that all routers use a distance vector protocol that uses split horizon.
 
 .. figure:: fig/routing-fig-004-c.png
    :align: center

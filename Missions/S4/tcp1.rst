@@ -90,7 +90,7 @@ It is usually convenient to put those lines in your shell initialization file.
 How do I use Netkit? 
 ....................
 
-There are two ways to use Netkit : The manual way, and by using pre-configured labs.  In the first case, you boot and control each machine individually, using the commands starting with a "v" (for virtual machine).   In the second case, you can start a whole network in a single operation.  The commands for controlling the lab start with a "l".  The man pages of those commands is available from `http://wiki.netkit.org/man/man7/netkit.7.html`
+There are two ways to use Netkit : The manual way, and by using pre-configured labs.  In the first case, you boot and control each machine individually, using the commands starting with a "v" (for virtual machine).   In the second case, you can start a whole network in a single operation.  The commands for controlling the lab start with a "l".  The man pages of those commands is available from http://wiki.netkit.org/man/man7/netkit.7.html
 
 You must be careful not to forgot to stop your virtual machines and labs, using either `vhalt` or `lhalt`.  
 
@@ -100,6 +100,7 @@ Example of using a lab
 A lab is simply a directory containing at least a configuration file called `lab.conf`, and one directory for each virtual machine.  In the case the lab available on iCampus, the network is composed of two pc, pc1 and pc2, both of them being connected to a router r1.  The lab.conf file contains the following lines : 
 
 ::
+
  pc1[0]=A
  pc2[0]=B
  r1[0]=A
@@ -125,12 +126,9 @@ Tools available on Netkit
 
 As the virtual machines run Linux, standard networking tools such as hping, tcpdump, netstats etc. are available as usual.  
 
-Note that capturing network traces can be facilitated by using the `uml_dump` extension available here : http://kartoch.msi.unilim.fr/blog/?p=19 .  This extension is already installed in the Netkit installation on the student lab.  In order to capture the traffic exchanged on a given 'virtual LAN', you simply need to issue the command `vdump <LAN name>` on the host. If you want to pipe the trace to wireshark, you can use `vdump A | wireshark -i - -k`
+Note that capturing network traces can be facilitated by using the `uml_dump` extension available at http://kartoch.msi.unilim.fr/blog/?p=19 .  This extension is already installed in the Netkit installation on the student lab.  In order to capture the traffic exchanged on a given 'virtual LAN', you simply need to issue the command `vdump <LAN name>` on the host. If you want to pipe the trace to wireshark, you can use `vdump A | wireshark -i - -k`
 
 In the lab provided in iCampus, you can find a simple Python_ client/server application that establishes TCP connections. Feel free to re-use this code to perform your analysis.    
-
-
-To be provided by Virginie
 
 
 Questions
@@ -168,13 +166,13 @@ Using the :download:`traces/trace.sirius.info.ucl.ac.be.pcap` packet trace, what
 
 #. There are two types of firewalls [#ffirewall]_ : special devices that are placed at the border of campus or enterprise networks and software that runs on endhosts. Software firewalls typically analyse all the packets that are received by a host and decide based on the packet's header and contents whether it can be processed by the host's network stack or must be discarded. System administrators often configure firewalls on laptop or student machines to prevent students from installing servers on their machines. How would you design a simple firewall that blocks all incoming TCP connections but still allows the host to establish TCP connections to any remote server ?
 
-#. Using the netkit_ lab explained above, perform some tests by using :man:`hping3(8)`. :man:`hping3(8)` is a command line tool that allows anyone (having system administrator privileges) to send special IP packets and TCP segments. :man:`hping3(8)` can be used to verify the configuration of firewalls [#ffirewall]_ or diagnose problems. We will use it to test the operation of the Linux TCP stack running inside netkit_.
+#. Using the netkit_ lab explained above, perform some tests by using :manpage:`hping3(8)`. :manpage:`hping3(8)` is a command line tool that allows anyone (having system administrator privileges) to send special IP packets and TCP segments. :manpage:`hping3(8)` can be used to verify the configuration of firewalls [#ffirewall]_ or diagnose problems. We will use it to test the operation of the Linux TCP stack running inside netkit_.
 
- #. On the server host, launch :man:`tcpdump(1)` with `-vv` as parameter to collect all packets received from the client and display them. Using :man:`hping3(8)` on the client host, send a valid SYN segment to one unused port on the server host (e.g. `12345`). What are the contents of the segment returned by the server ?
+ #. On the server host, launch :manpage:`tcpdump(1)` with `-vv` as parameter to collect all packets received from the client and display them. Using :manpage:`hping3(8)` on the client host, send a valid SYN segment to one unused port on the server host (e.g. `12345`). What are the contents of the segment returned by the server ?
 
- #. Perform the same experiment, but now send a SYN segment towards port `7`. This port is the default port for the discard service (see :man:`services(5)`) launched by :man:`xinetd(8)`). What segment does the server sends in reply ? What happens upon reception of this segment ? Explain your answer. 
+ #. Perform the same experiment, but now send a SYN segment towards port `7`. This port is the default port for the discard service (see :manpage:`services(5)`) launched by :manpage:`xinetd(8)`). What segment does the server sends in reply ? What happens upon reception of this segment ? Explain your answer. 
 
-#. The Linux TCP/IP stack can be easily configured by using :man:`sysctl(8)` to change kernel configuration variables. See http://fasterdata.es.net/TCP-tuning/ip-sysctl-2.6.txt for a recent list of the sysctl variables on the Linux TCP/IP stack. Try to disable the selective acknowledgements and the RFC1323 timestamp and large window options and open a TCP connection on port `7` on the server by using :man:telnet`(1)`. Check by using :man:`tcpdump(1)` the effect of these kernel variables on the segments sent by the Linux stack in netkit_.
+#. The Linux TCP/IP stack can be easily configured by using :manpage:`sysctl(8)` to change kernel configuration variables. See http://fasterdata.es.net/TCP-tuning/ip-sysctl-2.6.txt for a recent list of the sysctl variables on the Linux TCP/IP stack. Try to disable the selective acknowledgements and the RFC1323 timestamp and large window options and open a TCP connection on port `7` on the server by using :manpage:telnet`(1)`. Check by using :manpage:`tcpdump(1)` the effect of these kernel variables on the segments sent by the Linux stack in netkit_.
 
 #. Network administrators sometimes need to verify which networking daemons are active on a server. When logged on the server, several tools can be used to verify this. A first solution is to use the :manpage:`netstat(8)` command. This command allows you to extract various statistics from the networking stack on the Linux kernel. For TCP, `netstat` can list all the active TCP connections with the state of their FSM. `netstat` supports the following options that could be useful during this exercises :
 
