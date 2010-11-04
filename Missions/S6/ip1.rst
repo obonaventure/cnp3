@@ -4,7 +4,7 @@ Routing protocols
 The network layer contains two types of protocols :
 
  - the *data plane* protocols such as IP that define the format of the packets that are exchanged between routers and how they must be forwarded
- - the *routing protocols*, that are part of the *control plane*. Routers exchange routing messages in order to build their routing tables and forwarding tables to forward the packets in the data plane
+ - the *routing protocols*, that are part of the *control plane*. Routers exchange routing messages in order to build their routing and forwarding tables to forward the packets in the data plane
 
 Several types of routing protocols are used in computer networks. In this set of exercises, you will study intradomain routing protocols. More precisely, you  will analyse the operation of routing protocols that use distance vectors or link-state. 
 
@@ -22,7 +22,7 @@ Questions
 
 2. Same question as above with a link weight set to zero.
 
-3. When a network specialist designs a network, one of the problems that he needs to solve is to set the metrics the links in his network. In the USA, the Abilene network interconnects most of the research labs and universities. The figure below shows the topology [#fabilene]_ of this network in 2009.
+3. When a network specialist designs a network, one of the problems that he needs to solve is to set the metrics of the links in his network. In the USA, the Abilene network interconnects most of the research labs and universities. The figure below shows the topology [#fabilene]_ of this network in 2009.
 
 .. figure:: fig/abilene-web-map.png
    :align: center
@@ -79,7 +79,6 @@ In this network, assume that all the link weights are set to 1. What is the path
  - What are the routing tables computed by using the Dijkstra algorithm on each router ?
  - Which link state packets are sent when link `B-C` fails ?
  - Which link state packets are sent when the network administrator reconfigures the link `B-D` to use a weight of `9` ? Does this change affects the routing tables ? 
- - What happens
 
 15. Consider the six-routers network shown in the figure below. 
 
