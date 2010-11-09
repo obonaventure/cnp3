@@ -16,7 +16,7 @@ This document contains the questions for the practical part of the INGI2141 cour
    S4/tcp1
    S5/tcp2
    S6/ip1
-..  S7/ip2
+   S7/ip2
 ..  S8/routing1
 ..  S9/routing2
 ..  S10/routing3

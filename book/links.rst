@@ -162,6 +162,8 @@
 
 .. _google: http://www.google.com
 
+.. _bing: http://www.bing.com
+
 .. _geant: http://www.geant.net
 
 .. _abilene: http://www.internet2.edu
@@ -191,6 +193,8 @@
 .. _Tim Berners-Lee: http://www.w3.org/People/Berners-Lee/
 
 .. _Laurent Vanbever: http://inl.info.ucl.ac.be/lvanbeve
+
+.. _Damien Saucez: http://inl.info.ucl.ac.be/dsaucez
 
 .. _Raj Jain: http://www.cse.wustl.edu/~jain/
 
@@ -225,3 +229,11 @@
 .. _gzip: http://www.gzip.org
 
 .. _Netscape: http://en.wikipedia.org/wiki/Netscape
+
+.. _netkit: http://www.netkit.org
+
+.. _hping: http://www.hping.org
+
+.. _nmap: http://nmap.org
+
+.. _ntop: http://www.ntop.org
