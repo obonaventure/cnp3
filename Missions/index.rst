@@ -18,10 +18,11 @@ This document contains the questions for the practical part of the INGI2141 cour
    S6/ip1
    S7/ip2
    S7/project
-..  S8/routing1
-..  S9/routing2
-..  S10/routing3
-..  S11/lan2
+   S7/ip3
+..   S8/routing1
+..   S9/routing2
+..   S10/routing3
+..   S11/lan2
 ..  S1/application  
 
 
