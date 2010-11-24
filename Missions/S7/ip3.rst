@@ -78,7 +78,7 @@ Internet Protocol
 
 10. There are two main types of Network Address Translators (NAT). The simplest NATs use a single public IP address and can serve many hosts using private addresses. Entreprise-grade NATs often use an IPv4 prefix and can serve and entire enterprise using private addresses. Compare these two types of NATs.
 
-11. A student has installed a NAT router at home and would like to setup a web server on his laptop. What does it need to do to ensure that his web server is reachable from the Internet ?
+11. A student has installed a NAT router at home and would like to setup a web server on his laptop. What does he need to do to ensure that his web server is reachable from the Internet ?
 
 12. NATs translate port numbers and IP addresses. Sometimes, IPv4 packets are fragmented. Discuss how should a NAT process fragments of IPv4 packets ? Assume that only TCP is used through the NAT. 
 
@@ -86,7 +86,9 @@ Internet Protocol
 
 14. Assume that you use a laptop with a private IPv4 address behind a NAT to surf the web. To reduce cost, the implementor of your NAT chose to discard all ICMP messages that you laptop sends and all ICMP that are received from the Internet. What could be the consequences of this reduced NAT ?
 
-15. 
+
+.. include:: ../../book/links.rst
+
 
 .. rubric:: Footnotes
 
