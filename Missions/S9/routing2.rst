@@ -1,23 +1,6 @@
-IP Routing protocols
-====================
+Interdomain Routing 
+===================
 
-
-OSPF
-----
-
-1. Consider the network shown below. In this network, the metric of each link is set to `1` except link `A-B` whose metric is set to `4` in both directions. In this network, there are two paths with the same cost between `D` and `C`. Old routers would randomly select one of these equal cost paths and install it in their forwarding table. Recent routers are able to use up to `N` equal cost paths towards the same destination. 
-
- .. figure:: fig/BGP-figs-010-c.png
-    :align: center
-    :scale: 70
-   
-    A simple network running OSPF
-
- On recent routers, a lookup in the forwarding table for a destination address returns a set of outgoing interfaces. How would you design an algorithm that selects the outgoing interface used for each packet, knowing that to avoid reordering, all segments of a given TCP connection should follow the same path ? 
-
-
-BGP
----
 
 1. Consider the network shown in the figure below and explain the path that will be followed by the packets to reach `194.100.10.0/23`
 

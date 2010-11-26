@@ -3,10 +3,10 @@ Internet Protocol
 
 
 
-1. Consider the simple network depicted in the figure below. On each subnet, each router has one IP address whose host identifier is the numerical id of the router. Assume that all the hosts and routers have been booted and no packet has been sent. Explain in details all the packets and frames that are exchanged when :
+1. Consider the simple network depicted in the figure below. On each subnet, each router has one IP address whose host identifier is the numerical id of the router (.e.g router `R1` uses addresses `10.1.0.1` and `10.2.0.1`). Assume that all the hosts and routers have been booted and no packet has been sent. Explain in details all the packets and frames that are exchanged when :
 
  a.  `10.1.0.10` performs a :manpage:`ping(8)` towards `10.3.0.3` 
- b.  `10.1.0.10` performs a :manpage:`traceroute(8)` Towards `10.3.0.3`. Assume that :manpage:`traceroute(8)` is used with the `-n` option so that no reverse DNS lookup is performed for each IP address
+ b.  `10.1.0.10` performs a :manpage:`traceroute(8)` Towards `10.3.0.3`. Assume that :manpage:`traceroute(8)` is used with the `-n` option so that no reverse DNS lookup is performed for each IP address and that all devices have been rebooted after the first question.
 
  .. figure:: fig/ip-figs-001-c.png
     :align: center
@@ -17,7 +17,7 @@ Internet Protocol
 2. Consider the simple network depicted in the figure below. On each subnet, each router has one IPv6 address whose host identifier is the numerical id of the router. Assume that all the hosts and routers have been booted and no packet has been sent. Explain in details all the packets and frames that are exchanged when :
 
  a.  `2001:db8:cafe::abcd` performs a :manpage:`ping6(8)` towards `2001:db8:dead::3` 
- b.  `2001:db8:cafe::abcd` performs a :manpage:`traceroute6(8)` Towards `2001:db8:dead::3. Assume that :manpage:`traceroute(8)` is used with the `-n` option so that no reverse DNS lookup is performed for each IP`v6 address
+ b.  `2001:db8:cafe::abcd` performs a :manpage:`traceroute6(8)` towards `2001:db8:dead::3`. Assume that :manpage:`traceroute(8)` is used with the `-n` option so that no reverse DNS lookup is performed for each IPv6 address and that all devices have been rebooted after the first question.
 
  .. figure:: fig/ip-figs-002-c.png
     :align: center
@@ -27,15 +27,15 @@ Internet Protocol
 
 3. Many TCP/IP implementations today send an ARP request for their own IP address before sending their first IP packet using this address. Can you explain why this is useful in practice ?
 
-4. Consider now the transmission of IPv4 packets. One security issue with IPv4 is the Address Resolution Protocol (ARP). Can you explain what ARP spoofing or ARP poisoning is and show how host `A` in the network below could intercept all the IP packets sent by host `B` via the default router ?
+4. Consider now the transmission of IPv4 packets. One security issue with IPv4 is the Address Resolution Protocol (ARP). Can you explain what ARP spoofing or ARP poisoning is and show how host `A` in the network below could intercept all the IP packets sent by host `B` via the default router ? Can router `R` do something to improve the security of ARP ?
 
  .. figure:: fig/ip-figs-008-c.png
     :align: center
     :scale: 70
    
-    A small Ethernet 
+    A small Ethernet network
 
-5. Consider the network shown in the figure below that is using only static routes as shown in the figure. Assuming that there are only point-to-point links, show all the packets that are exchanged in the network when `S` (`1.0.0.1/8`) performs a :manpage:`traceroute(8)` towards `2.0.0.2`. Provide in answer in a table such as the one shown below where each line corresponds to one IP packet.
+5. Consider the network shown in the figure below that is using only static routes as shown in the figure. Assuming that there are only point-to-point links, show all the packets that are exchanged in the network when `S` (`1.0.0.1/8`) performs a :manpage:`traceroute(8)` towards `2.0.0.2`. `S` (resp. `D`) uses `A` (resp. `E`) as its default router. Provide your answer in a table such as the one shown below where each line corresponds to one IP packet.
 
  ===========  ========   =========  =========== 
  Link	      IP	 IP	    Explanation
@@ -50,7 +50,7 @@ Internet Protocol
    
     A small network
 
-6. IPv4 addresses are scarce and network operators often need to minimise the number of IPv4 addresses that they use when deploying a network.  You are responsible for the entreprise network shown below and were assigned IP prefix `172.16.12.128/25`. How to you assign IP prefixes to the various subnets to maximise the number of addresses that are available for hosts on the left and right networks. As a practical constraint, note that inside each subnet, the IPv4 addresses whose host identifier bits are all set to `0` or all set to `1` cannot be used. In practice, the address where all host identifiers bits are set to `0` is used to represent the subnetwork itself while the address where all host identifiers bits are set to `1` is reserved for backward compatibility reason for the subnet broadcast address. This implies that one a point-to-point link you can only assign a `/30` prefix and not a `/31` prefix although there are only two IPv4 addresses in use on such a link [#frfc3021]_.
+6. IPv4 addresses are scarce and network operators often need to minimise the number of IPv4 addresses that they use when deploying a network.  You are responsible for the entreprise network shown below and must use IP prefix `172.16.12.128/25` for all IP addresses (hosts and routers) in this network. How to you assign IP prefixes to the various subnets to maximise the number of addresses that are available for hosts on the left and right networks. As a practical constraint, note that inside each subnet, the IPv4 addresses whose host identifier bits are all set to `0` or all set to `1` cannot be used. In practice, the address where all host identifiers bits are set to `0` is used to represent the subnetwork itself while the address where all host identifiers bits are set to `1` is reserved for backward compatibility reason for the subnet broadcast address. This implies that on a point-to-point link you can only assign a `/30` prefix and not a `/31` prefix although there are usually only two IPv4 addresses in use on such a link [#frfc3021]_.
 
  .. figure:: fig/ip-figs-004-c.png
     :align: center
@@ -76,7 +76,7 @@ Internet Protocol
 
 9. Salesman often explain that a Network Address Translator is equivalent to a firewall because it protects the hosts that reside behind the NAT. What is your technical opinion about this ?
 
-10. There are two main types of Network Address Translators (NAT). The simplest NATs use a single public IP address and can serve many hosts using private addresses. Entreprise-grade NATs often use an IPv4 prefix and can serve and entire enterprise using private addresses. Compare these two types of NATs.
+10. There are two main types of Network Address Translators (NAT). The simplest NATs use a single public IP address and can serve many hosts using private addresses. Entreprise-grade and carrier-grade NATs often use an IPv4 prefix and can serve an entire enterprise using private addresses. Compare these two types of NATs.
 
 11. A student has installed a NAT router at home and would like to setup a web server on his laptop. What does he need to do to ensure that his web server is reachable from the Internet ?
 
@@ -84,7 +84,7 @@ Internet Protocol
 
 13. Same question as above for a firewall.
 
-14. Assume that you use a laptop with a private IPv4 address behind a NAT to surf the web. To reduce cost, the implementor of your NAT chose to discard all ICMP messages that you laptop sends and all ICMP that are received from the Internet. What could be the consequences of this reduced NAT ?
+14. Assume that you use a laptop with a private IPv4 address behind a NAT to surf the web. To reduce cost, the implementor of your NAT chose to discard all ICMP messages that your laptop sends and all ICMP that are received from the Internet. What could be the consequences of this reduced NAT ?
 
 
 .. include:: ../../book/links.rst
