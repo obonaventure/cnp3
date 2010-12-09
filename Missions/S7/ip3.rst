@@ -1,8 +1,6 @@
 Internet Protocol
 =================
 
-
-
 1. Consider the simple network depicted in the figure below. On each subnet, each router has one IP address whose host identifier is the numerical id of the router (.e.g router `R1` uses addresses `10.1.0.1` and `10.2.0.1`). Assume that all the hosts and routers have been booted and no packet has been sent. Explain in details all the packets and frames that are exchanged when :
 
  a.  `10.1.0.10` performs a :manpage:`ping(8)` towards `10.3.0.3` 

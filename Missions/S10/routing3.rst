@@ -1,14 +1,5 @@
-BGP and IP over Ethernet
-========================
-
-In this set of exercises, we will discuss about the BGP decision process and analyse in more details the operation of IP in an Ethernet network. For each exercise, try to provide a detailed justification for your answer.
-
-
-The deadline for this exercise is Tuesday December 8th, 13.00.
-
-
-BGP
----
+BGP 
+===
 
 
 1. In the network shown below, draw the iBGP and eBGP sessions that must be established among the routers.
@@ -49,50 +40,28 @@ BGP
  - prefix `p2` is advertised by `RA` with an AS Path length of 2 and by `RB` and `RC` with an AS Path of length 1
  - What happens in these two situations when the link `R3-R5` fails ?
 
-.. figure:: ../S9/fig/BGP-figs-008-c.png
-   :align: center
-   :scale: 70
+ .. figure:: ../S9/fig/BGP-figs-008-c.png
+    :align: center
+    :scale: 70
   
-   A small internetwork
+    A small internetwork
 
+5. There are currently 13 IPv4 addresses that are associated to the root servers of the Domain Name System. However, http://www.root-servers.org/ indicates that there are more than 100 different physical servers that support. This is a large anycast service. How would you configure BGP routers to provide such anycast service ?
 
-IP over Ethernet
-----------------
+6. Consider the network shown in the figure below. In this network, `R0` advertises prefix `p` and all link metrics are set to `1`
 
-1. Consider the network shown below. In this network, write the routing tables that need to be configured on all routers. Assume that host `154.112.3.5` sends an IP packet towards host `154.112.0.15` and that this host sends a reply. Show all Ethernet frames that are exchanged. Provide your answer in a table such as the following that lists for each frame :
+ - Draw the iBGP and eBGP sessions
+ - Assume that session `R0-R8` is down when `R0` advertises `p` over `R0-R7`. What are the BGP messages exchanged and the routes chosen by each router in the network ?
+ - Session `R0-R8` is established and `R0` advertises prefix `p` over this session as well
+ - Do the routes selected by each router change if the `MED` attribute is used on the `R7-R6` and `R3-R10` sessions, but not on the `R4-R9` and `R6-R8` sessions ?
+ - Is it possible to configure the routers in the `R1 - R6` network such that `R4` reaches prefix `p` via `R6-R8` while `R2`uses the `R3-R10` link ?
 
- - the link on which the frame is sent
- - the Ethernet source and destination addresses
- - the IP source and destination addresses (if any)
- - indicate in the explanation any change to the state of ARP tables on hosts and routers and port/station tables on switches
-
- ===========  ========  =========  =========  =========  ===========
- Link	      Ethernet	Ethernet   IP	      IP	 Explanation
- 	      source	dest.	   source     dest.	 
- -----------  --------  ---------  ---------  ---------  -----------
- ...	      ...	...	   ...	      ...	 ...
- ===========  ========  =========  =========  =========  ===========
-
- .. figure:: fig/topologie2.png
+ .. figure:: ../S11/fig/revision-figs-003-c.png
     :align: center
-    :scale: 50
-   
-    A small enterprise network 
+    :scale: 30 
 
-2. Many TCP/IP implementations today send an ARP request for their own IP address before sending their first IP packet using this address. Can you explain why this is useful in practice ?
+    A simple Internet
 
-3. Consider now the transmission of IPv4 packets. One security issue with IPv4 is the Address Resolution Protocol (ARP). Can you explain what ARP spoofing or ARP poisoning is and show how host `A` in the network below could intercept all the IP packets sent by host `B` via the default router ?
+7. The `MED` attribute is often set at the IGP cost to reach the BGP nexthop of the advertised prefix. However, routers can also be configured to always use the same `MED` values for all routes advertised over a given session. How would you use it in the figure above so that link `R10-R3` is the primary link while `R7-R6` is a backup link ? Is there an advantage or drawback of using the `MED` attribute for this application compared to `local-pref` ?
 
- .. figure:: fig/IPEth-003-c.png
-    :align: center
-    :scale: 70
-   
-    A small Ethernet 
-
-4. Same question as above, but now consider that the Ethernet network is not a coaxial cable but an Ethernet switch.  Is it possible to do something on the switches against these ARP spoofing attacks ? If so how ?
-
- .. figure:: fig/IPEth-001-c.png
-    :align: center
-    :scale: 70
-   
-    A small switched Ethernet 
+8. In the figure above, assume that the managers of `R8` and `R9` would like to use the `R8-R6` link as a backup link, but the managers of `R4` and `R6` do no agree to use the `MED` attribute nor to use a different `local-pref` for the routes learned from 
