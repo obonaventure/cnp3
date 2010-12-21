@@ -296,7 +296,7 @@ We will use the notation `<R,c,T,p>` to represent a `BPDU` whose `root identifie
      return ( (b1.R < b2.R) or
      	      ( (b1.R==b2.R) and (b1.c<b2.c) ) or
 	      ( (b1.R==b2.R) and (b1.c==b2.c) and (b1.T<b2.T) ) or
-	      ( (b1.R==b2.R) and (b1.c==b2.c) and (b1.T==b2.T) and (b1.p==b2.p) ) )
+	      ( (b1.R==b2.R) and (b1.c==b2.c) and (b1.T==b2.T) and (b1.p<b2.p) ) )
 
 In addition to the `identifier` discussed above, the network administrator can also configure a `cost` associated to each switch port. Usually, the `cost` of a port depends on its bandwidth and the [802.1d]_ standard recommends the values below. Of course, the network administrator may choose other values. We will use the notation `cost[p]` to indicate the cost associated to port `p` in this section.
 
@@ -330,14 +330,16 @@ To illustrate the operation of the `Spanning Tree Protocol`, let us consider the
 
 
 .. figure:: png/lan-fig-069-c.png
-   :align: center
+   :Align: center
    :scale: 70
    
    A simple Spanning tree computed in a switched Ethernet network
 
 Assume that `Switch4` is the first to boot. It sends its own `BPDU=<4,0,4,?>` on its two ports. When `Switch1` boots, it sends `BPDU=<1,0,1,1>`. This `BPDU` is received by `Switch4` that updates its table and computes a new `BPDU=<1,3,4,?>`. Port 1 of `Switch4` becomes the `Root` port while its second port is still in the `Designated` state. 
 
-Assume now that `Switch9` boots and immediately receives `Switch1` 's BPDU on port 1. `Switch9` computes its own `BPDU=<1,1,9,?>` and port 1 becomes the `Root` port of this switch. This `BPDU` is sent on port 2 of `Switch9` and reaches `Switch4`. `Switch4` compares the priority vector built from this `BPDU` (i.e. `<1,2,9,2>`) and notices that it is better than `Switch4`'s `BPDU=<1,3,4,2>`. Thus, port 2 becomes a `Blocked` port on `Switch4`. `Switch9` received `BPDU=<1,1,9,2>` on both ports 2 and 3. In this case, the priority vector on port 2  will be better than the priority vector on port 3. Port 2 will become a `Designated` port while port `3` will be blocked. 
+Assume now that `Switch9` boots and immediately receives `Switch1` 's BPDU on port 1. `Switch9` computes its own `BPDU=<1,1,9,?>` and port 1 becomes the `Root` port of this switch. This `BPDU` is sent on port 2 of `Switch9` and reaches `Switch4`. `Switch4` compares the priority vector built from this `BPDU` (i.e. `<1,2,9,2>`) and notices that it is better than `Switch4`'s `BPDU=<1,3,4,2>`. Thus, port 2 becomes a `Blocked` port on `Switch4`. 
+
+.. error ? `Switch9` received `BPDU=<1,1,9,2>` on both ports 2 and 3. In this case, the priority vector on port 2  will be better than the priority vector on port 3. Port 2 will become a `Designated` port while port `3` will be blocked. 
 
 During the computation of the spanning tree, switches discard all received data frames as at that time the network topology is not guaranteed to be loop-free. Once that topology has been stable for some time, the switches restart to use the MAC learning algorithm to forward data frames. Only the `Root` and `Designated` ports are used to forward data frames. Switches discard all the data frames received on their `Blocked` ports and never forward frames on these ports.
 

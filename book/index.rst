@@ -1,4 +1,4 @@
-.. Copyright |copy| 2010 by Olivier Bonaventure
+.. Copyright |copy| 2010 by `Olivier Bonaventure <http://inl.info.ucl.ac.be/obo>`_
 .. This file is licensed under a `creative commons licence <http://creativecommons.org/licenses/by-sa/3.0/>`_
 
 
@@ -15,7 +15,8 @@ Computer Networking : Principles, Protocols and Practice
    :scale: 150
 
 .. toctree:: 
-   :maxdepth: 3
+   :maxdepth: 4
+   :numbered:
 
    preface
    intro/introduction
@@ -30,6 +31,7 @@ Computer Networking : Principles, Protocols and Practice
 ==================
 Indices and tables
 ==================
+
 
 * :ref:`genindex`
 * :ref:`search`
