@@ -52,9 +52,9 @@ As the LSPs are used to distribute the network topology that allows routers to c
   # LSP has already been flooded 
 
 
-In this pseudocode, `LSDB(r)` returns the most recent `LSP` originated by router `r` that is stored in the `LSDB`. `newer(lsp1,lsp2)` returns true if `lsp1` is more recent than `lsp2`. See the sidebar below for a discussion on how `newer` can be implemented.
+In this pseudocode, `LSDB(r)` returns the most recent `LSP` originated by router `r` that is stored in the `LSDB`. `newer(lsp1,lsp2)` returns true if `lsp1` is more recent than `lsp2`. See the note below for a discussion on how `newer` can be implemented.
 
-.. sidebar:: Which is the most recent LSP ?
+.. note:: Which is the most recent LSP ?
 
  A router that implements flooding must be able to detect whether a received LSP is newer than the received LSP. This requires a comparison between the sequence number of the received LSP and the sequence number of the LSP stored in the link state database. The ARPANET routing protocol [MRR1979]_ used a 6 bits sequence number and implemented the comparison as follows :rfc:`789` ::
 
@@ -90,7 +90,7 @@ To ensure that all routers receive all LSPs even when there are transmissions er
    Link state databases received by all routers 
 
 
-.. sidebar:: Static or dynamic link metrics ?
+.. note:: Static or dynamic link metrics ?
 
  As link state packets are flooded regularly, routers could measure the quality (e.g. delay or load) and their links and adjust the metric of each link according to its current quality. Such dynamic adjustements were included in the ARPANET routing protocol [MRR1979]_ . However, experience showed that it was difficult to tune the dynamic adjustements and ensure that no forwarding loops happen in the network [KZ1989]_. Today's link state routing protocols use metrics that are manually configured on the routers and are only changed by the network operators or network management tools [FRT2002]_.
 

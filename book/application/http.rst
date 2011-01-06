@@ -32,7 +32,7 @@ A document sharing system such as the `world wide web` is composed of three impo
  3. A standardised protocol that allows to efficiently retrieve documents stored on a server
 
 
-.. sidebar:: Open standards and open implementations
+.. note:: Open standards and open implementations
 
  Open standards have and are still playing a key role in the success of the `world wide web` as we know it today. Without open standards, the world wide web would have never reached its current size. In addition to open standards, another important factor for the success of the web was the availability of open and efficient implementations of these standards. When CERN started to work on the `web`, their objective was to build a running system that could be used by physicists. They developed open-source implementations of the `first web servers <http://www.w3.org/Daemon/>`_ and `web clients <http://www.w3.org/Library/Activity.html>`_. These open-source implementations were powerful and could be used as is by institutions willing to share information on the web. They were also extended by other developers who contributed to new features. For example, NCSA_ added support for images in their `Mosaic browser <http://en.wikipedia.org/wiki/Mosaic_(web_browser)>`_ that was eventually used to create `Netscape Communications <http://en.wikipedia.org/wiki/Netscape>`_. 
 
@@ -133,7 +133,7 @@ Similarly, the following header lines can only appear inside HTTP requests sent 
  - the `Referrer:` header is followed by a URI. It indicates the URI of the document that the client visited before sending this HTTP request. Thanks to this header, the server can know the URI of the document containing the hyperlink followed by the client, if any. This information is very useful to measure the impact of advertisements containing hyperlinks placed on websites. 
  - the `Host:` header contains the fully qualified domain name of the URI being requested. 
 
-.. sidebar:: The importance of the `Host:` header line
+.. note:: The importance of the `Host:` header line
 
  The first version of HTTP did not include the `Host:` header line. This was a severe limitation for web hosting companies. For example consider a web hosting company that wants to serve both `web.example.com` and `www.dummy.net` on the same physical server. Both web sites contain a `/index.html` document. When a client sends a request for either `http://web.example.com/index.html` or `http://www.dummy.net/index.html`, the HTTP 1.0 request contains the following line : ::
 
@@ -269,7 +269,7 @@ The third, and widely adopted, solution are the HTTP cookies. HTTP cookies were 
 
    HTTP cookies
 
-.. sidebar:: Privacy issues with HTTP cookies
+.. note:: Privacy issues with HTTP cookies
 
  The HTTP cookies introduced by Netscape_ are key for large e-commerce websites. However, they have also raised many discussions concerning their `potential misuses <http://www.nytimes.com/2001/09/04/technology/04COOK.html>`_. Consider `ad.com`, a company that delivers lots of advertisements on web sites. A web site that wishes to include `ad.com`'s advertisements next to its content will add links to `ad.com` inside its HTML pages. If `ad.com` is used by many web sites, `ad.com` could be able to track the interests of all the users that visit its client websites and use this information to provide targeted advertisements. Privacy advocates have even `sued <http://epic.org/privacy/internet/cookies/>`_ online advertisement companies to force them to comply with the privacy regulations. More recent related technologies also raise `privacy concerns <http://www.eff.org/deeplinks/2009/09/new-cookie-technologies-harder-see-and-remove-wide>`_ 
  

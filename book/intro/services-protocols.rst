@@ -203,7 +203,7 @@ To ensure a reliable delivery of the SDUs sent by each user over a connection, w
    Graceful connection release
 
 
-.. sidebar:: Reliability of the connection-oriented service
+.. note:: Reliability of the connection-oriented service
 
  An important point to note about the connection-oriented service is its reliability. A `connection-oriented` service can only guarantee the correct delivery of all SDUs provided that the connection has been released gracefully. This implies that while the connection is active, there is no guarantee for the actual delivery of the SDUs exchanged as the connection may need to be released abruptly at any time. 
 

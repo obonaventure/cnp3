@@ -60,7 +60,7 @@ In most Unix variants, only processes having system administrator privileges can
 
 .. index:: UDP Checksum, Checksum computation
 
-.. sidebar:: Computation of the UDP checksum
+.. note:: Computation of the UDP checksum
 
  The checksum of the UDP segment is computed over :
  

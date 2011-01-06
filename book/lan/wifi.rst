@@ -145,7 +145,7 @@ When a frame is sent from a WiFi device to a server attached to the same LAN as 
    Ethernet 802.11 RTS frame format
 
 
-.. sidebar:: The 802.11 service
+.. note:: The 802.11 service
 
  Despite the utilization of acknowledgements, the 802.11 layer only provides an unreliable connectionless service like Ethernet networks that do not use acknowledgements. The 802.11 acknowledgements are used to minimize the probability of frame duplication. They do not guarantee that all frames will be correctly received by their recipients. Like Ethernet, 802.11 networks provide a high probability of successful delivery of the frames, not a guarantee. Furthermore, it should be noted that 802.11 networks do not use acknowledgements for multicast and broadcast frames. This implies that in practice such frames are more likely to suffer from transmission errors than unicast frames.
 
@@ -157,7 +157,7 @@ In addition to the data and control frames that we have briefly described above,
 A first type of management frames are the `beacon` frames. These frames are broadcated regularly by access points. Each `beacon frame` contains information on the capabilities of the access point (e.g. the supported 802.11 transmission rates) and a `Service Set Identity` (SSID). The SSID is a null-terminated ASCII string that can contain up to 32 characters. An access point may support several SSIDs and announce them in beacon frames. An access point may also choose to remain silent and not advertise beacon frames. In this case, WiFi stations may send `Probe request` frames to force the available access points to return a `Probe response` frame.
 
 
-.. sidebar:: IP over 802.11
+.. note:: IP over 802.11
 
  Two types of encapsulation schemes were defined to support IP in Ethernet networks : the original encapuslation scheme built above the Ethernet DIX format defined in :rfc:`894` and a second encapsulation :rfc:`1042` scheme built above the LLC/SNAP protocol [802.2]_. In 802.11 networks, the situation is simpler and only the :rfc:`1042` encapsulation is used. In practice, this encapsulation adds 6 bytes to the 802.11 header. The first four bytes correspond to the LLC/SNAP header. They are followed by the two bytes Ethernet Type field (`0x800` for IP and `0x806` for ARP). The figure below shows an IP packet encapsulated in an 802.11 frame.
 

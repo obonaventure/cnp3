@@ -122,7 +122,7 @@ In the figure above, the connection is considered established by the client once
 
 .. index:: TCP Initial Sequence Number
 
-.. sidebar:: Computing TCP's initial sequence number
+.. topic:: Computing TCP's initial sequence number
 
  In the original TCP specification :rfc:`793`, each TCP entity maintained a clock to compute the initial sequence number (:term:`ISN`) placed in the `SYN` and `SYN+ACK` segments. This made the ISN predictable and caused a security issue. The typical security problem was the following. Consider a server that trusts a host based on its IP address and allows the system administrator to login from this host without giving a password [#frlogin]_. Consider now an attacker who knows this particular configuration and is able to send IP packets having the client's address as source. He can send fake TCP segments to the server, but does not receive the server's answers. If he can predict the `ISN` that is chosen by the server, he can send a fake `SYN` segment and shortly after the fake `ACK` segment that confirms the reception of the `SYN+ACK` segment sent by the server. Once the TCP connection is open, he can use it to send any command on the server. To counter this attack, current TCP implementations add randomness to the `ISN`. One of the solutions, proposed in :rfc:`1948` is to compute the `ISN` as ::
  
@@ -162,7 +162,7 @@ Besides these two paths in the TCP connection establishment FSM, there is a thir
 
 .. index:: SYN cookies, Denial of Service
 
-.. sidebar:: Denial of Service attacks
+.. topic:: Denial of Service attacks
 
  When a TCP entity opens a TCP connection, it creates a Transmission Control Block (:term:`TCB`). The TCB contains all the state that is maintained by the TCP entity for each TCP connection. During connection establishment, the TCB contains the local IP address, the remote IP address, the local port number, the remote port number, the current local sequence number, the last sequence number received from the remote entity, ... Until the mid 1990s, TCP implementations had a limit on the number of TCP connections that could be in the `SYN RCVD` state at a given time. Many implementations set this limit to about 100 TCBs. This limit was considered sufficient even for heavily load http servers given the small delay between the reception of a `SYN` segment and the reception of the `ACK` segment that terminates the establishment of the TCP connection. When the limit of 100 TCBs in the `SYN Rcvd` state is reached, the TCP entity discard all received TCP `SYN` segments that do not correspond to an existing TCB. 
 
@@ -176,7 +176,7 @@ Besides these two paths in the TCP connection establishment FSM, there is a thir
  The advantage of the `SYN cookies`_ is that by using them, the server does not need to create a :term:`TCB` upon reception of the `SYN` segment and can still check the returned `ACK` segment by recomputing the `SYN cookie`.
 
 
-.. sidebar:: Retransmitting the first `SYN` segment
+.. topic:: Retransmitting the first `SYN` segment
 
    As IP provides an unreliable connectionless service, the `SYN` and `SYN+ACK` segments sent to open a TCP connection could be lost. Current TCP implementations start a retransmission timer when then send the first `SYN` segment. This timer is often set to a three seconds for the first retransmission and then doubles after each retransmission :rfc:`2988`. TCP implementations also enforce a maximum number of retransmissions for the initial `SYN` segment.  
 
@@ -201,7 +201,7 @@ The TCP options are encoded by using a Type Length Value format where :
 
 :rfc:`793` also defines two special options that must be supported by all TCP implementations. The first option is `End of option`. It is encoded as a single byte having value `0x00` and can be used to ensure that the TCP header extension ends on a 32 bits boundary. The `No-Operation` option, encoded as a single byte having value `0x01`, can be used when the TCP header extension contains several TCP options that should be aligned on 32 bits boundaries. All other options [#ftcpoptions]_ are encoded by using the TLV format. 
 
-.. sidebar:: The robustness principle
+.. note:: The robustness principle
 
  The handling of the TCP options by TCP implementations is one of the many applications of the `robustness principle` which is usually attributed to `Jon Postel`_ and is often quoted as `"Be liberal in what you accept, and conservative in what you send"` :rfc:`1122`
 
@@ -229,7 +229,7 @@ The abrupt connection release mechanism is very simple and relies on a single se
 
 When an `RST` segment is sent by a TCP entity, it should contain the current value of the `sequence number` for the connection (or 0 if it does not belong to any existing connection) and the `acknowledgement number` should be set to the next expected in-sequence `sequence number` on this connection.  
 
-.. sidebar:: TCP `RST` wars
+.. note:: TCP `RST` wars
 
  .. index:: Robustness principle
  
@@ -255,13 +255,13 @@ The second path is when the host decides first to send a `FIN` segment. In this 
 
 The `TIME\_WAIT` state is different from the other states of the TCP FSM. A TCP entity enters this state after having sent the last `ACK` segment on a TCP connection. This segment indicates to the remote host that all the data that it has sent have been correctly received and that it can safely release the TCP connection and discard the corresponding :term:`TCB`. After having sent the last `ACK` segment, a TCP connection enters the `TIME\_WAIT` and remains in this state during :math:`2*MSL` seconds. During this period, the TCB of the connection is maintained. This ensures that the TCP entity that sent the last `ACK` maintains enough state to be able to retransmit this segment if this `ACK` segment is lost and the remote host retransmits its last `FIN` segment or another one. The delay of :math:`2*MSL` seconds ensures that any duplicate segments on the connection would be handled correctly without causing the transmission of a `RST` segment. Without the `TIME\_WAIT` state and the :math:`2*MSL` seconds delay, the connection release would not be graceful when the last `ACK` segment is lost. 
 
-.. sidebar:: TIME\_WAIT on busy TCP servers
+.. note:: TIME\_WAIT on busy TCP servers
 
  The :math:`2*MSL` seconds delay in the `TIME\_WAIT` state is an important operationnal problem on servers having thousands of simultaneously opened TCP connections [FTY99]_. Consider for example a busy web server that processes 10.000 TCP connections every second. If each of these connections remains in the `TIME\_WAIT` state during 4 minutes, this implies that the server would have to maintain more than 2 millions TCBs at any time. For this reason, some TCP implementations prefer to perform an abrupt connection release by sending a `RST` segment to close the connection [AW05]_ and immediately discard the corresponding :term:`TCB`. However, if the `RST` segment is lost, the remote host continues to maintain a :term:`TCB` for a connection that does not exist anymore. This optimisation reduces the number of TCBs maintained by the host sending the `RST` segment but at the cost of possibly more processing on the remote host when the `RST` segment is lost.
 
 .. tuning timewait http://publib.boulder.ibm.com/infocenter/wasinfo/v7r0/index.jsp?topic=/com.ibm.websphere.edge.doc/cp/admingd45.htm bad idea
 
-.. sidebar TCP RST attacks  Explain TCP reset and the risks of attacks rfc4953
+.. note TCP RST attacks  Explain TCP reset and the risks of attacks rfc4953
 
 .. _TCPReliable:
 
@@ -278,7 +278,7 @@ TCP is a window-based transport protocol that provides a bi-directionnal byte st
 
 .. index:: Transmission Control Block
 
-.. sidebar:: The Transmission Control Block
+.. note:: The Transmission Control Block
 
  For each established TCP connection, a TCP implementation must maintain a Transmission Control Block (:term:`TCB`). A TCB contains all the information required to send and receive segments on this connection :rfc:`793`. This includes [#ftcpurgent]_ :
 
@@ -533,7 +533,7 @@ To deal with the limited size of the SACK option, a TCP receiver that has curren
 
 When a sender receives a SACK option that indicates a new block and thus a new possible segment loss, it usually does not retransmit the missing segment(s) immediately. To deal with reordering, a TCP sender can use a heuristic similar to `fast retransmit` by retransmitting a gap only once it has received three SACK options indicating this gap. It should be noted that the SACK option does not supersede the `acknowledgement number` of the TCP header. A TCP sender can only remove data from its sending buffer once they have been acknowledged by TCP's cumulative acknowledgements. This design was chosen for two reasons. First, it allows the receiver to discard parts of its receiving buffer when it is running out of memory without loosing data. Second, as the SACK option is not transmitted reliably, the cumulative acknowledgements are still required to deal with losses of `ACK` segments carrying only SACK information. Thus, the SACK option only serves as a hint to allow the sender to optimise its retransmissions.
 
-.. oldsidebar:: Protection agains wrapped sequence numbers
+.. oldnote:: Protection agains wrapped sequence numbers
   
 .. todo
 
@@ -650,7 +650,7 @@ The analysis of [CJ1989]_ shows that to be fair and efficient, such a binary rat
     rate=rate+alphaN    # additive increase, v0>0
 
 
-.. sidebar:: Which binary feedback ?
+.. note:: Which binary feedback ?
 
  Two types of binary feedback are possible in computer networks. A first solution is to rely on implicit feedback. This is the solution chosen for TCP. TCP's congestion control scheme [Jacobson1988]_ does not require any cooperation from the router. It only assumes that they use buffers and that they discard packets when there is congestion. TCP uses the segment losses as an indication of congestion. When there are no losses, the network is assumed to be not congested. This implies that congestion is the main cause of packet losses. This is true in wired networks, but unfortunately not always true in wireless networks. 
  Another solution is to rely on explicit feedback. This is the solution proposed in the DECBit congestion control scheme [RJ1995]_ and used in Frame Relay and ATM networks. This explicit feedback can be implemented in two ways. A first solution would be to define a special message that could be sent by routers to hosts when they are congested. Unfortunately, generating such messages may increase the amount of congestion in the network. Such a congestion indication packet is thus discouraged :rfc:`1812`. A better approach is to allow the intermediate routers to indicate, in the packets that they forward, their current congestion status. A binary feedback can be encoded by using one bit in the packet header. With such a scheme, congested routers set a special bit in the packets that they forward while non-congested routers leave this bit unmodified. The destination host returns the congestion status of the network in the acknowledgements that it sends. Details about such a solution in IP networks may be found in :rfc:`3168`. Unfortunately, as of this writing, this solution is still not deployed despite its potential benefits.
@@ -724,7 +724,7 @@ Most TCP implementations update the congestion window when they receive an ackno
  
 Furthermore when a TCP connection has been idle for more than its current retransmission timer, it should reset its congestion window to the congestion window size that it uses when the connection begins as it does not know anymore the current congestion state of th e network.
 
-.. sidebar:: Initial congestion window
+.. note:: Initial congestion window
 
  The original TCP congestion control mechanism proposed in [Jacobson1988]_ recommended that each TCP connection begins by setting :math:`cwnd=MSS`. However, in today's higher bandwidth networks, using such a small initial congestion window severely affects the performance for short TCP connections, such as those used by web servers. Since the publication of :rfc:`3390`, TCP hosts are allowed to use an initial congestion window of about 4 KBytes, which corresponds to 3 segments in many environments. 
 
@@ -761,7 +761,7 @@ In general, the maximum throughput that can be achieved by a TCP connection depe
  :math:`Throughput<min(\frac{window}{rtt},\frac{k \times MSS}{rtt \times \sqrt{p}})`
 
 
-.. sidebar:: The TCP congestion control zoo
+.. note:: The TCP congestion control zoo
 
  The first TCP congestion control scheme was proposed by `Van Jacobson`_ in [Jacobson1988]_. In addition to writing the scientific paper, `Van Jacobson`_ also implemented the slow-start and congestion avoidance schemes in release 4.3 `Tahoe` of the BSD Unix distributed by the University of Berkeley. Later, he improved the congestion control by adding the fast retransmit and the fast recovery mechanisms in the `Reno` release of 4.3 BSD Unix. Since then, many researchers have proposed, simulated and implemented modifications to the TCP congestion control scheme. Some of these modifications are still used today, e.g. :
 

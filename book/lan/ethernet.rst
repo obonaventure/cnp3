@@ -64,7 +64,7 @@ The last field of the Ethernet frame is a 32 bits Cyclical Redundancy Check (CRC
 
    Ethernet DIX frame format
 
-.. Sidebar:: Where should the CRC be located in a frame ?
+.. Note:: Where should the CRC be located in a frame ?
 
  The transport and datalink layers usually chose different strategies to place their CRCs or checksums. Transport layer protocols usually place their CRCs or checksums in the segment header. Datalink layer protocols sometimes place their CRC in the frame header, but often in a trailer at the end of the frame. This choice reflects implementation assumptions but also influences performance :rfc:`893`. When the CRC is placed in the trailer, as in Ethernet, the datalink layer can compute it while transmitting the frame and insert it at the end of the transmission. All Ethernet interfaces use this optimisation today. When the checksum is placed in the header, as in a TCP segment, it is impossible for the network interface to compute it while transmitting the segment. Some network interfaces provide hardware assistance to compute the TCP checksum, but this is more complex than if the TCP checksum were placed a trailer [#ftso]_. 
 
@@ -99,7 +99,7 @@ The Ethernet frame format shown above is specified in [DIX]_. This is the format
    Ethernet 802.3 frame format
 
 
-.. sidebar:: What is the Ethernet service ?
+.. note:: What is the Ethernet service ?
 
  An Ethernet network provides an unreliable connectionless. It supports three different transmission modes : `unicast`, `multicast` and `broadcast`. While the Ethernet service is unreliable in theory, a good Ethernet network should in practice provide a service that :
   - delivers frames to their destination with a very high probability of successful delivery
@@ -233,7 +233,7 @@ The pseudo-code below details how an Ethernet switch forwards Ethernet frames. I
        if o!= P :  ForwardFrame(F,o)
 
 
-.. sidebar:: Security issues with Ethernet hubs and switches
+.. note:: Security issues with Ethernet hubs and switches
 
  Ethernet hubs have the same drawbacks as the older coaxial cable from a security viewpoint. A host attached to a hub will be able to capture all the frames exchanged between any pair of hosts attached to the same hub. 
  Ethernet switches are much better from this viewpoint as thanks to the selective forwarding, a host will usually only receive the frames destined to itself and the multicast, broadcast and unknown frames. However, this does not imply that switches are completely secure. There are unfortunately attacks against Ethernet switches. From a security viewpoint, the `MAC address table` is one of the fragile elements of an Ethernet switch. This table has a fixed size. Some low-end switches can store a few tens or a few hundreds of addresses while higher-end switches can store tens of thousands of addresses or more. From a security viewpoint, a limited resource can be the target of Denial of Service attacks. Such attacks are unfortunately also possible on Ethernet switches. A malicious host could overflow the `MAC address table` of the switch by generating thousands of frames with random source addresses. Once the `MAC address table` is full, the switch needs to broadcast all the frames that it receives... At this point, an attacker will receive unicast frames that are not destined to its address. The ARP attack discussed in the previous chapter could also occur with Ethernet switches [Vyncke2007]_. Recent switches implement several types of defences against these attacks, but they need to be carefully configured by the network administrator. See [Vyncke2007]_ for a detailed discussion on security issues with Ethernet switches.

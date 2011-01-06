@@ -176,9 +176,8 @@ When a BGP session starts, the routers first exchange `OPEN` messages to negotia
  Initialize_BGP_Session(RemoteAS, RemoteIP)
  { 
  /* Initialize and start BGP session */
- /* Send BGP OPEN Message to RemoteIP on port 179*/
+ /* Send BGP OPEN Message to RemoteIP on port 179 */
  /* Follow BGP state machine */ 
-
  /* advertise local routes and routes learned from peers*/
  foreach (destination=d inside BGP Loc-RIB)
  {
@@ -259,7 +258,7 @@ When a BGP message is received, the router first applies the peer's `import filt
  }
 
 
-.. sidebar:: The bogon filters
+.. note:: The bogon filters
 
  Another example of a frequently used `import filters` are the filters that Internet Service Providers use to ignore bogon routes. In the ISP community, a bogon route is a route that should not be advertised on the global Internet. Typical examples include the private IPv4 prefixes defined in :rfc:`1918`, the loopback prefixes (`127.0.0.1/8` and `::1/128`) or the IP prefixes that have not yet been allocated by IANA. A well managed BGP router should ensure that it never advertises bogons on the global Internet. Detailed information about these bogons may be found at http://www.team-cymru.org/Services/Bogons/
 
@@ -295,7 +294,7 @@ Once the `R2-R3` has been established, `R3` sends `U(194.100.1.0/24,195.100.0.6,
 If the link between `R2` and `R3` fails, `R3` detects the failure because it did not receive `KEEPALIVE` messages recently from `R2`. At this time, `R3` removes from its RIB all the routes learned over the `R2-R3` BGP session. `R2` also removes from its RIB the routes learned from `R3`. `R2` also sends  `W(194.100.1.0/24)` to `R1` over the `R1-R3` BGP session since it does not have a route anymore towards this prefix.
 
 
-.. sidebar:: Origin of the routes advertised by a BGP router
+.. note:: Origin of the routes advertised by a BGP router
 
  A frequent practical question about the operation of BGP is how a BGP router decides to originate or advertise a route for the first time. In practice, this occurs in two situations :
 
@@ -347,7 +346,7 @@ To understand the utilisation of an `iBGP session`, let us consider in the netwo
 
 .. index:: loopback interface
 
-.. sidebar:: Loopback interfaces and iBGP sessions
+.. note:: Loopback interfaces and iBGP sessions
 
  In addition to their physical interfaces, routers can also be configured with a special loopback interface. A loopback interface is a software interface that is always up. When a loopback interface is configured on a router, the address associated to this interface is advertised by the intradomain routing protocol inside the domain. Thus, the IP address associated to a loopback interface is always reachable while an IP address associated to a physical interface becomes unreachable as soon as the corresponding physical interface fails. `iBGP sessions` are usually established by using the router's loopback addresses as endpoints. This allows the `iBGP session` and its underlying TCP connection to remain up even if physical interfaces fail on the routers.
 
@@ -608,7 +607,7 @@ The domains on the Internet can be divided in about four categories according to
 Due to this organisation of the Internet and due to the BGP decision process, most AS-level paths on the Internet have a length of 3-5 AS hops. 
 
 
-.. nosidebar:: BGP security
+.. nonote:: BGP security
 
 .. no   explain Youtube attack and briefly discuss the work in SIDR
 

@@ -75,7 +75,7 @@ To better represent LANs and reduce the number of OSPF packets that are exchange
 
 .. tp: :rfc:`2991` ECMP
 
-.. sidebar:: How to quickly detect a link failure ?
+.. note:: How to quickly detect a link failure ?
 
  Network operators expect an OSPF network to be able to quickly recover from link or router failures [VPD2004]_. In an OSPF network, the recovery after a failure is performed in three steps [FFEB2005] :
 

@@ -12,7 +12,7 @@ Computer Networking : Principles, Protocols and Practice
 ########################################################
 
 .. figure:: cnp3.png
-   :scale: 150
+   :scale: 80
 
 .. toctree:: 
    :maxdepth: 4

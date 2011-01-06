@@ -1,6 +1,9 @@
 .. Copyright |copy| 2010 by Olivier Bonaventure
 .. This file is licensed under a `creative commons licence <http://creativecommons.org/licenses/by-sa/3.0/>`_
 
+Bibliography
+============
+
 Whenever possible, the bibliography includes hypertext links to the references cited. When there is no link, a search on http://scholar.google.com often returns a link to the article. RFC documents are cited in the text but do not appear in the biblography.
 
 
