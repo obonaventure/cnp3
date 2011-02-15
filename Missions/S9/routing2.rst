@@ -43,7 +43,7 @@ Interdomain Routing
  - Do the routes selected by each router change if the `MED` attribute is used on the `R7-R6` and `R3-R10` sessions, but not on the `R4-R9` and `R6-R8` sessions ?
  - Is it possible to configure the routers in the `R1 - R6` network such that `R4` reaches prefix `p` via `R6-R8` while `R2`uses the `R3-R10` link ?
 
-.. figure:: ../S10/fig/revision-figs-003-c.png
+.. figure:: ../S11/fig/revision-figs-003-c.png
    :align: center
    :scale: 30 
 
