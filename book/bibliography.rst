@@ -8,7 +8,6 @@ Whenever possible, the bibliography includes hypertext links to the references c
 
 
 .. [ACO+2006] Augustin, B., Cuvellier, X., Orgogozo, B., Viger, F., Friedman, T., Latapy, M., Magnien, C., Teixeira, R., Avoiding traceroute anomalies with Paris traceroute, Internet Measurement Conference, October 2006, http://www.paris-traceroute.net/
-.. [802.11] LAN/MAN Standards Committee of the IEEE Computer Society, IEEE Standard for Information technology— Telecommunications and information exchange between systems— Local and metropolitan area networks— Specific requirements Part 11: Wireless LAN Medium Access Control (MAC) and Physical Layer (PHY) Specifications, 2007, http://standards.ieee.org/getieee802/download/802.11-2007.pdf
 .. [802.11] LAN/MAN Standards Committee of the IEEE Computer Society. IEEE Standard for Information Technology - Telecommunications and information exchange between systems - local and  metropolitan area networks - specific requirements - Part 11 : Wireless LAN Medium Access Control (MAC) and Physical Layer (PHY) Specifications. IEEE, 1999. available from http://standards.ieee.org/getieee802/802.11.html.
 .. [802.1d] LAN/MAN Standards Committee of the IEEE Computer Society, IEEE Standard for Local and metropolitan area networks Media Access Control (MAC) Bridges, IEEE Std 802.1DTM- 2004, 2004, http://standards.ieee.org/getieee802/download/802.1D-2004.pdf
 .. [802.1q] LAN/MAN Standards Committee of the IEEE Computer Society, IEEE Standard for Local and metropolitan area networks— Virtual Bridged Local Area Networks, 2005, http://standards.ieee.org/getieee802/download/802.1Q-2005.pdf
@@ -24,20 +23,20 @@ Whenever possible, the bibliography includes hypertext links to the references c
 .. [Baran] Baran, P., On distributed communications series, http://www.rand.org/about/history/baran.list.html
 .. [BE2007] Biondi, P. and A. Ebalard, "IPv6 Routing Header  Security", CanSecWest Security Conference 2007, April 2007. http://www.secdev.org/conf/IPv6_RH_security-csw07.pdf
 .. [BF1995] Bonomi, F.   Fendick, K.W., The rate-based flow control framework for the available bit rate ATM service, IEEE Network, Mar/Apr 1995, Volume: 9,  Issue: 2, pages : 25-39, DOI= 10.1109/65.372653
-.. [BG1992] Bertsekas, D., Gallager, G., Data networks, second edition, Prentice Hall, 1992
+.. [BG1992] Bertsekas, D., Gallager, G., Data networks, second edition, Prentice Hall, 1992, http://books.google.com/books?id=FfpSAAAAMAAJ&pgis=1
 .. [BMO2006] Bhatia, M., Manral, V., Ohara, Y., IS-IS and OSPF Difference Discussions, Internet draft, Jan. 2006, http://tools.ietf.org/html/draft-bhatia-manral-diff-isis-ospf-01, work in progress
 .. [BMvB2009] Bagnulo, M., Matthews, P., van Beijnum, I., NAT64: Network Address and Protocol Translation from IPv6 Clients to IPv4 Servers, Internet draft, work in progress, October 2009, http://tools.ietf.org/html/draft-ietf-behave-v6v4-xlate-stateful-02
 .. [BNT1997] Beech, W., Nielsen, D., Taylor, J.,  AX.25 Link Access Protocol for Amateur Packet Radio, version 2.2, Revision: July 1998, http://www.tapr.org/pdf/AX25.2.2.pdf
 .. [BOP1994] Brakmo, L. S., O'Malley, S. W., and Peterson, L. L. 1994. TCP Vegas: new techniques for congestion detection and avoidance. In Proceedings of the Conference on Communications Architectures, Protocols and Applications (London, United Kingdom, August 31 - September 02, 1994). SIGCOMM '94. ACM, New York, NY, 24-35. DOI= http://doi.acm.org/10.1145/190314.190317
 .. [Benvenuti2005] Benvenuti, C., Understanding Linux Network Internals, O'Reilly Media, 2005, http://oreilly.com/catalog/9780596002558
-.. [Bush1945]  Bush, V. “As we may think.” The Atlantic Monthly 176 (July 1945), pp. 101–108.
+.. [Bush1945]  Bush, V. “As we may think.” The Atlantic Monthly 176 (July 1945), pp. 101–108, http://www.theatlantic.com/magazine/archive/1969/12/as-we-may-think/3881/
 .. [Bush1993] Bush, R. 1993. FidoNet: technology, tools, and history. Commun. ACM 36, 8 (Aug. 1993), 31-35. DOI= http://doi.acm.org/10.1145/163381.163383
 .. [Bux1989] Bux, W., Token-ring local-area networks and their performance, Proceedings of the IEEE, Vol 77, No 2, p. 238-259, Feb. 1989 http://ieeexplore.ieee.org/xpls/abs_all.jsp?arnumber=18625
-.. [BYL2008] Buford, J., Yu, H., Lua, E.K., P2P Networking and Applications, Morgan Kaufmann, 2008
-.. [CB2003] Cheswick, William R., Bellovin, Steven M., Rubin, Aviel D. Firewalls and internet security - Second edition - Repelling the Wily Hacker, Addison-Wesley 2003
-.. [CD2008] Calvert, K., Donahoo, M., TCP/IP Sockets in Java : Practical Guide for Programmers, Morgan Kaufman, 2008
-.. [CJ1989] Chiu, D., Jain, R., Analysis of the Increase and Decrease Algorithms for Congestion Avoidance in Computer Networks, Computer Networks and ISDN Systems Vol 17, pp 1-14, 1989.
-.. [CK74] Vinton Cerf, Robert Kahn, A Protocol for Packet Network Intercommunication, IEEE Transactions on Communications, May 1974
+.. [BYL2008] Buford, J., Yu, H., Lua, E.K., P2P Networking and Applications, Morgan Kaufmann, 2008, http://books.google.com/books?id=O9NkAaY9YxMC&pgis=1
+.. [CB2003] Cheswick, William R., Bellovin, Steven M., Rubin, Aviel D. Firewalls and internet security - Second edition - Repelling the Wily Hacker, Addison-Wesley 2003, http://books.google.com/books?id=XI52je-zaW8C&pgis=1
+.. [CD2008] Calvert, K., Donahoo, M., TCP/IP Sockets in Java : Practical Guide for Programmers, Morgan Kaufman, 2008, http://books.google.com/books?id=lfHo7uMk7r4C&pgis=1
+.. [CJ1989] Chiu, D., Jain, R., Analysis of the Increase and Decrease Algorithms for Congestion Avoidance in Computer Networks, Computer Networks and ISDN Systems Vol 17, pp 1-14, 1989, http://dx.doi.org/10.1016/0169-7552(89)90019-6
+.. [CK74] V. Cerf, R. Kahn, A Protocol for Packet Network Intercommunication, IEEE Transactions on Communications, May 1974
 .. [CNPI09] CNPI, Security Assessment of the Transmission Control Protocol (TCP), 2009, http://www.cpni.gov.uk/Docs/tn-03-09-security-assessment-TCP.pdf
 .. [COZ2008] Chi, Y., Oliveira, R., Zhang, L., Cyclops: The Internet AS-level Observatory, ACM SIGCOMM Computer Communication Review (CCR), October 2008
 .. [CSP2009] Carr, B., Sury, O., Palet Martinez, J., Davidson, A., Evans, R., Yilmaz, F., Wijte, Y., IPv6 Address Allocation and Assignment Policy, RIPE document ripe-481, September 2009, http://www.ripe.net/ripe/docs/ipv6policy.html
@@ -47,7 +46,7 @@ Whenever possible, the bibliography includes hypertext links to the references c
 .. [Comer1988] Comer, D., Internetworking with TCP/IP : principles, protocols & architecture, Prentice Hall, 1988
 .. [Comer1991] Comer D., Internetworking With TCP/IP : Design Implementation and Internals,  Prentice Hall, 1991
 .. [Cohen1980] Cohen, D., On Holy Wars and a Plea for Peace, IEN 137, April 1980, http://www.ietf.org/rfc/ien/ien137.txt
-.. [DC2009] Donahoo, M., Calvert, K., TCP/IP Sockets in C: Practical Guide for Programmers, Morgan Kaufman, 2009
+.. [DC2009] Donahoo, M., Calvert, K., TCP/IP Sockets in C: Practical Guide for Programmers, Morgan Kaufman, 2009, http://books.google.com/books?id=dmt_mERzxV4C&pgis=1
 .. [DIX] The Ethernet: a local area network: data link layer and physical layer specifications. SIGCOMM Comput. Commun. Rev. 11, 3 (Jul. 1981), 20-66. DOI= http://doi.acm.org/10.1145/1015591.1015594
 .. [DKF+2007] Dimitropoulos, X., Krioukov, D., Fomenkov, M., Huffaker, B., Hyun, Y., Claffy, K., Riley, G.  AS Relationships: Inference and Validation, ACM SIGCOMM Computer Communication Review (CCR), Jan. 2007
 .. [DP1981] Dalal, Y. K. and Printis, R. S. 1981. 48-bit absolute internet and Ethernet host numbers. In Proceedings of the Seventh Symposium on Data Communications (Mexico City, Mexico, October 27 - 29, 1981). SIGCOMM '81. ACM, New York, NY, 240-245. DOI= http://doi.acm.org/10.1145/800081.802680
@@ -71,9 +70,9 @@ Whenever possible, the bibliography includes hypertext links to the references c
 .. [GW1999] Griffin, T. G. and Wilfong, G. 1999. An analysis of BGP convergence properties. SIGCOMM Comput. Commun. Rev. 29, 4 (Oct. 1999), 277-288. DOI= http://doi.acm.org/10.1145/316194.316231
 .. [GW2002] Griffin, T. and Wilfong, G. T. 2002. Analysis of the MED Oscillation Problem in BGP. In Proceedings of the 10th IEEE international Conference on Network Protocols (November 12 - 15, 2002). ICNP. IEEE Computer Society, Washington, DC, 90-99.
 .. [Garcia1993] Garcia-Lunes-Aceves, J., Loop-Free Routing Using Diffusing Computations, IEEE/ACM Transcations on Networking, Vol. 1, No, 1, Feb. 1993
-.. [Gast2002] Gast, M., 802.11 Wireless Networks : The Definitive Guide, O'Reilly, 2002
+.. [Gast2002] Gast, M., 802.11 Wireless Networks : The Definitive Guide, O'Reilly, 2002, http://books.google.com/books?id=9rHnRzzMHLIC&pgis=1
 .. [Gill2004] Gill, V. , Lack of Priority Queuing Considered Harmful, ACM Queue, December 2004, http://queue.acm.org/detail.cfm?id=1036502
-.. [Goralski2009] Goralski, W., The Illustrated network : How TCP/IP works in a modern network, Morgan Kaufmann, 2009
+.. [Goralski2009] Goralski, W., The Illustrated network : How TCP/IP works in a modern network, Morgan Kaufmann, 2009, http://books.google.com/books?id=6nDtNA6VJ5YC&pgis=1
 .. [HFPMC2002] Huffaker, B., Fomenkov, M., Plummer, D., Moore, D., Claffy, K., Distance Metrics in the Internet, Presented at the IEEE International Telecommunications Symposium (ITS) in 2002. http://www.caida.org/outreach/papers/2002/Distance/
 .. [HRX2008] Ha, S., Rhee, I., and Xu, L. 2008. CUBIC: a new TCP-friendly high-speed TCP variant. SIGOPS Oper. Syst. Rev. 42, 5 (Jul. 2008), 64-74. DOI= http://doi.acm.org/10.1145/1400097.1400105
 .. [ISO10589] Information technology — Telecommunications and information exchange between systems — Intermediate System to Intermediate System intra-domain routeing information exchange protocol for use in conjunction with the protocol for providing the connectionless-mode network service (ISO 8473), 2002, http://standards.iso.org/ittf/PubliclyAvailableStandards/c030932_ISO_IEC_10589_2002(E).zip 
@@ -87,7 +86,7 @@ Whenever possible, the bibliography includes hypertext links to the references c
 .. [KT1975] Kleinrock, L., Tobagi, F., Packet Switching in Radio Channels: Part I--Carrier Sense Multiple-Access Modes and their Throughput-Delay Characteristics, IEEE Transactions on Communications, Vol. COM-23, No. 12, pp. 1400-1416, December 1975. http://www.cs.ucla.edu/~lk/PS/paper059.pdf
 .. [KW2009] Katz, D., Ward, D.,  Bidirectional Forwarding Detection, Internet draft, http://tools.ietf.org/html/draft-ietf-bfd-base-09, Feb 2009, work in progress
 .. [KZ1989] Khanna, A. and Zinky, J. 1989. The revised ARPANET routing metric. SIGCOMM Comput. Commun. Rev. 19, 4 (Aug. 1989), 45-56. DOI= http://doi.acm.org/10.1145/75247.75252
-.. [KuroseRoss09] Kurose J. and Ross K., Computer networking : a top-down approach featuring the Internet, Addison-Wesley, 2009
+.. [KuroseRoss09] Kurose J. and Ross K., Computer networking : a top-down approach featuring the Internet, Addison-Wesley, 2009, http://books.google.com/books?id=2hv3PgAACAAJ&pgis=1
 .. [Licklider1963] Licklider, J., Memorandum For Members and Affiliates of the Intergalactic Computer Network, 1963, http://www.kurzweilai.net/articles/art0366.html?printable=1
 .. [LCCD09] Leiner, B. M., Cerf, V. G., Clark, D. D., Kahn, R. E., Kleinrock, L., Lynch, D. C., Postel, J., Roberts, L. G., and Wolff, S. 2009. A brief history of the internet. SIGCOMM Comput. Commun. Rev. 39, 5 (Oct. 2009), 22-31. DOI= http://doi.acm.org/10.1145/1629607.1629613
 .. [LSP1982] Lamport, L., Shostak, R., and Pease, M. 1982. The Byzantine Generals Problem. ACM Trans. Program. Lang. Syst. 4, 3 (Jul. 1982), 382-401. DOI= http://doi.acm.org/10.1145/357172.357176
@@ -98,18 +97,18 @@ Whenever possible, the bibliography includes hypertext links to the references c
 .. [MSMO1997] Mathis, M., Semke, J., Mahdavi, J., and Ott, T. 1997. The macroscopic behavior of the TCP congestion avoidance algorithm. SIGCOMM Comput. Commun. Rev. 27, 3 (Jul. 1997), 67-82. DOI= http://doi.acm.org/10.1145/263932.264023
 .. [MSV1987] Molle, M., Sohraby, K., Venetsanopoulos, A., Space-Time Models of Asynchronous CSMA Protocols for Local Area Networks, IEEE Journal on Selected Areas in Communications, Volume: 5 Issue: 6, Jul 1987 Page(s): 956 -96, http://www.cs.ucr.edu/~mart/preprints/molle_sohraby_venet_ieee_sac87.pdf
 .. [MUF+2007] Mühlbauer, W., Uhlig, S., Fu, B., Meulle, M., and Maennel, O. 2007. In search for an appropriate granularity to model routing policies. In Proceedings of the 2007 Conference on Applications, Technologies, Architectures, and Protocols For Computer Communications (Kyoto, Japan, August 27 - 31, 2007). SIGCOMM '07. ACM, New York, NY, 145-156. DOI= http://doi.acm.org/10.1145/1282380.1282398
-.. [Malkin1999] Malkin, G., RIP: An Intra-Domain Routing Protocol, Addison Wesley, 1999
+.. [Malkin1999] Malkin, G., RIP: An Intra-Domain Routing Protocol, Addison Wesley, 1999, http://books.google.com/books?id=BtJpQgAACAAJ&pgis=1
 .. [Metcalfe1976] Metcalfe R., Boggs, D. Ethernet: Distributed packet-switching for local computer networks. Communications of the ACM, 19(7):395--404, 1976. http://www.acm.org/pubs/citations/journals/cacm/1976-19-7/p395-metcalfe/
-.. [Mills2006] Mills, D.L. Computer Network Time Synchronization: the Network Time Protocol. CRC Press, March 2006, 304 pp.
+.. [Mills2006] Mills, D.L. Computer Network Time Synchronization: the Network Time Protocol. CRC Press, March 2006, 304 pp., http://books.google.com/books?id=pdTcJBfnbq8C&pgis=1
 .. [Miyakawa2008] Miyakawa, S., From IPv4 only To v4/v6 Dual Stack, IETF72 IAB Technical Plenary, July 2008, http://www.nttv6.jp/~miyakawa/IETF72/IETF-IAB-TECH-PLENARY-NTT-miyakawa-extended.pdf
 .. [Mogul1995] Mogul, J. , The case for persistent-connection HTTP. In Proceedings of the Conference on Applications, Technologies, Architectures, and Protocols For Computer Communication (Cambridge, Massachusetts, United States, August 28 - September 01, 1995). D. Oran, Ed. SIGCOMM '95. ACM, New York, NY, 299-313. DOI= http://doi.acm.org/10.1145/217382.217465
 .. [Moore] Moore, R., Packet switching history, http://rogerdmoore.ca/PS/
-.. [Moy1998] Moy, J., OSPF: Anatomy of an Internet Routing Protocol, Addison Wesley, 1998
+.. [Moy1998] Moy, J., OSPF: Anatomy of an Internet Routing Protocol, Addison Wesley, 1998, http://books.google.com/books?id=YXUWsqVhx60C&pgis=1
 .. [Myers1998] Myers, B. A. 1998. A brief history of human-computer interaction technology. interactions 5, 2 (Mar. 1998), 44-54. DOI= http://doi.acm.org/10.1145/274430.274436
 .. [Nelson1965] Nelson, T. H. 1965. Complex information processing: a file structure for the complex, the changing and the indeterminate. In Proceedings of the 1965 20th National Conference (Cleveland, Ohio, United States, August 24 - 26, 1965). L. Winner, Ed. ACM '65. ACM, New York, NY, 84-100. DOI= http://doi.acm.org/10.1145/800197.806036
 .. [Paxson99] Paxson, V. End-to-end Internet packet dynamics. SIGCOMM Comput. Commun. Rev. 27, 4 (Oct. 1997), 139-152. DOI= http://doi.acm.org/10.1145/263109.263155
 .. [Perlman1985] Perlman, R. 1985. An algorithm for distributed computation of a spanningtree in an extended LAN. SIGCOMM Comput. Commun. Rev. 15, 4 (Sep. 1985), 44-53. DOI= http://doi.acm.org/10.1145/318951.319004
-.. [Perlman2000] Perlman, R., Interconnections : Bridges, routers, switches and internetworking protocols, 2nd edition, Addison Wesley, 2000
+.. [Perlman2000] Perlman, R., Interconnections : Bridges, routers, switches and internetworking protocols, 2nd edition, Addison Wesley, 2000, http://books.google.com/books?id=AIRitf5C-QQC&pgis=1
 .. [Perlman2004] Perlman, R., RBridges: Transparent Routing, Proc. IEEE Infocom , March 2004. http://www.ieee-infocom.org/2004/Papers/26_1.PDF
 .. [Pouzin1975] Pouzin, L., The CYCLADES Network - Present state and development trends, Symposium on Computer Networks, 1975 pp 8-13., http://rogerdmoore.ca/PS/CIGALE/CYCL2.html
 .. [RE1989] Rochlis, J. A. and Eichin, M. W. 1989. With microscope and tweezers: the worm from MIT's perspective. Commun. ACM 32, 6 (Jun. 1989), 689-698. DOI= http://doi.acm.org/10.1145/63526.63528
@@ -126,23 +125,23 @@ Whenever possible, the bibliography includes hypertext links to the references c
 .. [SMM1998] Semke, J., Mahdavi, J., and Mathis, M. 1998. Automatic TCP buffer tuning. SIGCOMM Comput. Commun. Rev. 28, 4 (Oct. 1998), 315-323. DOI= http://doi.acm.org/10.1145/285243.285292
 .. [SPMR09] Stigge, M., Plotz, H., Muller, W., Redlich, J., Reversing CRC - Theory and Practice. Berlin: Humboldt University Berlin. pp. 24. http://sar.informatik.hu-berlin.de/research/publications/SAR-PR-2006-05/SAR-PR-2006-05_.pdf
 .. [STBT2009] Sridharan, M., Tan, K., Bansal, D., Thaler, D., Compound TCP: A New TCP Congestion Control for High-Speed and Long Distance Networks, Internet draft, work in progress, April 2009, http://tools.ietf.org/html/draft-sridharan-tcpm-ctcp-02
-.. [Seifert2008] Seifert, R., Edwards, J., The All-New Switch Book : The complete guide to LAN switching technology, Wiley, 2008, http://eu.wiley.com/WileyCDA/WileyTitle/productCd-0470287152,descCd-authorInfo.html
+.. [Seifert2008] Seifert, R., Edwards, J., The All-New Switch Book : The complete guide to LAN switching technology, Wiley, 2008, http://books.google.com/books?id=wgeusf8tgTMC&pgis=1
 .. [Selinger] Selinger, P., MD5 collision demo, http://www.mscs.dal.ca/~selinger/md5collision/
 .. [Sklower89] Sklower, K. 1989. Improving the efficiency of the OSI checksum calculation. SIGCOMM Comput. Commun. Rev. 19, 5 (Oct. 1989), 32-43. DOI= http://doi.acm.org/10.1145/74681.74684
 .. [Smm98] Semke, J., Mahdavi, J., and Mathis, M. 1998. Automatic TCP buffer tuning. SIGCOMM Comput. Commun. Rev. 28, 4 (Oct. 1998), 315-323. DOI= http://doi.acm.org/10.1145/285243.285292
-.. [Stevens1994] Stevens, R., TCP/IP Illustrated : the Protocols, Addison-Wesley, 1994
-.. [Stevens1998] Stevens, R., UNIX Network Programming, Volume 1, Second Edition: Networking APIs: Sockets and XTI, Prentice Hall, 1998
-.. [Stewart1998] Stewart, J., BGP4: Inter-Domain Routing In The Internet, Addison-Wesley, 1998 
+.. [Stevens1994] Stevens, R., TCP/IP Illustrated : the Protocols, Addison-Wesley, 1994, http://books.google.com/books?id=-btNds68w84C&pgis=1
+.. [Stevens1998] Stevens, R., UNIX Network Programming, Volume 1, Second Edition: Networking APIs: Sockets and XTI, Prentice Hall, 1998, http://books.google.com/books?id=ptSC4LpwGA0C&pgis=1
+.. [Stewart1998] Stewart, J., BGP4: Inter-Domain Routing In The Internet, Addison-Wesley, 1998, http://books.google.com/books?id=UEcHpN4QHrAC&pgis=1
 .. [Stoll1988] Stoll, C. 1988. Stalking the wily hacker. Commun. ACM 31, 5 (May. 1988), 484-497. DOI= http://doi.acm.org/10.1145/42411.42412
 .. [TE1993] Tsuchiya, P. F. and Eng, T. 1993. Extending the IP internet through address reuse. SIGCOMM Comput. Commun. Rev. 23, 1 (Jan. 1993), 16-33. DOI= http://doi.acm.org/10.1145/173942.173944
 .. [Thomborson1992] Thomborson, C., The V.42bis Standard for Data-Compressing Modems, IEEE Micro, September/October 1992 (vol. 12 no. 5), pp. 41-53, http://www.computer.org/portal/web/csdl/doi/10.1109/40.166712
 .. [Unicode] The Unicode Consortium. The Unicode Standard, Version 5.0.0, defined by: The Unicode Standard, Version 5.0 (Boston, MA, Addison-Wesley, 2007. ISBN 0-321-48091-0), http://unicode.org/versions/Unicode5.0.0/
-.. [VPD2004] Vasseur, J., Pickavet, M., and Demeester, P. 2004 Network Recovery: Protection and Restoration of Optical, Sonet-Sdh, Ip, and MPLS. Morgan Kaufmann Publishers Inc.
-.. [Varghese2005] Varghese, G. , Network Algorithmics: An Interdisciplinary Approach to Designing Fast Networked Devices, Morgan Kaufmann, 2005
-.. [Vyncke2007] Vyncke, E., Paggen, C., LAN Switch Security: What Hackers Know About Your Switches, Cisco Press, 2007, http://www.ciscopress.com/bookstore/product.asp?isbn=1587052563
+.. [VPD2004] Vasseur, J., Pickavet, M., and Demeester, P. 2004 Network Recovery: Protection and Restoration of Optical, SONET-SDH, IP, and MPLS. Morgan Kaufmann Publishers Inc., http://books.google.com/books?id=nYO305Y5eNAC&pgis=1
+.. [Varghese2005] Varghese, G. , Network Algorithmics: An Interdisciplinary Approach to Designing Fast Networked Devices, Morgan Kaufmann, 2005, http://books.google.com/books?id=01QORuRF6fIC&pgis=1
+.. [Vyncke2007] Vyncke, E., Paggen, C., LAN Switch Security: What Hackers Know About Your Switches, Cisco Press, 2007, http://www.ciscopress.com/bookstore/product.asp?isbn=1587052563 and http://books.google.com/books?id=HkraAQAACAAJ&pgis=1
 .. [WB2008] Waserman, M., Baker, F., IPv6-to-IPv6 Network Address Translation (NAT66), Internet draft, November 2008, http://tools.ietf.org/html/draft-mrw-behave-nat66-02
 .. [WMH2008] Wilson, P., Michaelson, G., Huston, G., Redesignation of 240/4 from "Future Use" to "Private Use", Internet draft, September 2008, work in progress, http://tools.ietf.org/html/draft-wilson-class-e-02
-.. [WMS2004] White, R., Mc Pherson, D., Srihari, S., Practical BGP, Addison-Wesley, 2004, http://my.safaribooksonline.com/0321127005/
+.. [WMS2004] White, R., Mc Pherson, D., Srihari, S., Practical BGP, Addison-Wesley, 2004, http://books.google.com/books?id=9OlSAAAAMAAJ&pgis=1
 .. [Watson1981] Watson, R.  Timer-Based Mechanisms in Reliable Transport Protocol Connection Management. Computer Networks 5: 47-56 (1981)
 .. [Williams1993] Williams, R. A painless guide to CRC error detection algorithms, August 1993, unpublished manuscript, http://www.ross.net/crc/download/crc_v3.txt
 .. [X200] ITU-T, recommendation X.200, Open Systems Interconnection - Model and Notation, 1994, http://www.itu.int/rec/T-REC-X.200-199407-I/en
