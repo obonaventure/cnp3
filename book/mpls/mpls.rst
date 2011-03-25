@@ -12,11 +12,11 @@ On such software-based routers, the longest prefix match that is used to forwar
 
 Given the growth in network bandwidth, researchers and vendors feared that the MultiProtocol Label Switching (MPLS) was invented
 
-While IP was already deployed in the early 1990s, other networking technologies were being developed. IP was used mainly in research networks and there were only few commercial network operators that were using IP. The public telecommunication operators had developped other networking technologies to carry data. X.25 started in the 1970s and was deployed on a larger scale during the 1980s. X.25 was used mainly to provide data services to enterprises, but some research networks, notably in Europe used IP over X.25. In France, the minitel service was built on top of the Transpac X.25 network. However, X.25 was rather complex and included several mechanisms for error and flow control at different layers. During the 1980s, the quality of the data transmission links improved significantly both in bandwidth and in transmission error rates. These improvements lead to the development of two techniques to carry data over virtual circuits in public telecommunication networks : Frame Relay [Buckwalter2000]_ and Asynchronous Transfer Mode (ATM) [LeBoudec1992]_ [dePrycker1995]_. These two techniques rely on virtual circuits to forward from their source to their destination along a precomputed path. In ATM and Frame relay networks, intermediate nodes are called switches. Frame relay networks carry variable length frames while ATM switches process fixed-size frames [#fcell]_. 
+While IP was already deployed in the early 1990s, other networking technologies were being developed. IP was used mainly in research networks and there were only few commercial network operators that were using IP. The public telecommunication operators had developped other networking technologies to carry data. X.25 started in the 1970s and was deployed on a larger scale during the 1980s. X.25 was used mainly to provide data services to enterprises, but some research networks, notably in Europe used IP over X.25. In France, the minitel service was built on top of the Transpac X.25 network. However, X.25 was rather complex and included several mechanisms for error and flow control at different layers. During the 1980s, the quality of the data transmission links improved significantly both in bandwidth and in transmission error rates. These improvements lead to the development of two techniques to carry data over virtual circuits in public telecommunication networks : Frame Relay [Buckwalter2000]_ and Asynchronous Transfer Mode (ATM) [LeBoudec1992]_ [dePrycker1995]_ . These two techniques rely on virtual circuits to forward from their source to their destination along a precomputed path. In ATM and Frame relay networks, intermediate nodes are called switches. Frame relay networks carry variable length frames while ATM switches process fixed-size frames [#fcell]_. 
 
 .. In ATM and frame relay networks, when two hosts need to exchange data, they first need to establish a virtual circuit through intermediate switches. This is done by using  that are called cellsreEach frame contains a label and intermediate nod
+.. Forward(interface in, label l) -> interface out, label
 
-Forward(interface in, label l) -> interface out, label
 
 The virtual circuits that are used in frame relay and ATM networks have several advantages and some drawbacks. First, once the virtual circuit has been established all the data that is sent over the virtual circuit follows exactly the same path. Thus, there is no reordering on the virtual circuit. Second, thanks to the utilisation of virtual circuits, an ATM or frame relay switch only needs a single memory lookup to forward a frame while an IP router needs to find a longest match. This simple forwarding scheme is a key advantage from an implementation viewpoint. In the early 1990s, this was a strong motivation for the development of the ATM technology. To understand the issue, it is interesting to analyse the delay between packets received at line rate. The table 
 
@@ -37,7 +37,6 @@ The virtual circuits that are used in frame relay and ATM networks have several 
 .. rubric:: Footnote
 
 .. [#fcell] In ATM networks, the unit of transfer of information is the cell. A cell contains five bytes of header and 48 bytes of payload. Endsystems implement an ATM Adapation Layer that is able to fragment and reassemble variable length packets in a sequence of cells.
-
 
 
 .. frame relay
@@ -89,41 +88,174 @@ CR-LDP and RSVP-TE were developed together, but after some time the IETF decided
 .. (draft-ietf-mpls-cosfield-def)	Multiprotocol Label Switching (MPLS) Label Stack Entry: "EXP" Field Renamed to "Traffic Class" Field	2009-02	 RFC 5462 (Proposed Standard) 
 
 
-
-
 The label swapping forwarding paradigm
 ######################################
 
 
-.. montrer que cela fonctionne en mettant une forme d'algorithme en python par exemple
+The operation of a switch in a network that uses the label swapping forwarding paradigm can be represented as a simple set of operations. Each packet that must be forwarded contains a label. We use the notation `p.label` as a shortcut for the label contained inside packet `p`. Each switch maintains a label forwarding table that stores for each incoming label the outgoing interface and the outgoing label. Using python syntax, we can represent this table as a list that stores couples containg the outgoing label and the outgoing interface.
 
-.. function that from an incoming label returns an operation and a nexthop
+.. code-block:: python
+
+   LFT=[100] # number of entries
+   LFT[1]=(2,3) # packet with label 1 is forwarded on interface 3 with label 3
+   LFT[2]=(1,1) # packet with label 2 is forwarded on interface 1 with label 1
+   
+With such a forwarding table, the forwarding operation can be expressed as the following python method :
+
+.. code-block:: python
+
+ def forward(packet):
+    outlif,outlabel=LFT[packet.label]
+    packet.label=outlabel
+    send(packet,outif)
+
+A label switch needs to update the label of the packets that it forwards to allow a network to support a large number of virtual circuits. If the label switches were not allowed to update the packet labels, then there would be a direct mapping between each label and one virtual circuit inside a given network. Thus, a technology that uses :math:`n` bits to encode the label could not support more than :math:`~2^{n}` Different virtual circuits. This would be a severe limitation. By allowing each label switch to change the value of the packet label when a packet is forwarded, a maximum of :math:`~2^{n}` virtual circuits can be supported on each link. If :math:`n` is large enough, this is not a limitation in practice. Note that a low-end label switch can support a much smaller number of virtual circuits than :math:`~2^{n}` and still use the `forward` method described above by simply only using labels between `0` and `k` where `k` is the size of its label forwarding table.
+
+Virtual circuits are then established by combining the Label Forwarding Tables of the label switches that are on the path chosen for the virtual circuit.
+
+.. figure:: png/mpls-figs-004-c.png
+   :align: center
+
+   Figure : Example virtual circuits
+
+In a large network, the number of virtual circuits that are required may be large and label switches that are located at the core of the network may need to support a large number of virtual circuits. These core label switches often also have high bandwidth interfaces and supporting a large number of circuits at high speed may be difficult from an implementation viewpoint. For scalability reasons, technologies that rely on the label swapping paradigm usually use a hierarchy of virtual circuits. For example ATM uses a two-levels hierarchy with virtual circuits and virtual paths. A virtual path may contain a large number of virtual circuits. In a typical deployment, virtual circuits are used at the network edge and several virtual circuits are grouped together in a single virtual path when entering the core network so that core label switches can forward the labelled packets by inspecting only the virtual path information. Each ATM cell contains two labels : a virtual circuit identifier and a virtual path identifier. Core switches only use the virtual path identifier while edge switches can forward the packet by using the virtual circuit and the virtual path identifiers. 
+
+.. index:: Label Switching Router (LSR), LSR
+
+MultiProtocol Label Switching started as a technique that allows IP packets to be efficiently transmitted by using the label switches of the underlying network, e.g. ATM or Frame Relay. A typical initial deployment of MPLS was a network with IP routers at the edge of the network and ATM switches in the network backbone. A router that supports MPLS is often called a Label Switching Router :rfc:`3031`. We use this terminology in the chapter and reserve the word Router for a traditional router that does not implement MPLS. When an IP packet was received by an ingress LSR at the edge of the network, the LSR had to insert a label inside the packet before forwarding it through the backbone. The packet was then processed by the core LSRs in the backbone before reaching the egress LSR. The egress LSR then removed the packet's label before forwarding it as a normal IP packet ousite the MPLS network. This is illustrated in in the figure below.
+
+.. figure:: png/mpls-figs-006-c.png
+   :align: center
+
+   Figure : Core and edge routers in an MPLS network 
 
 
-.. Label entry
+Such an utilization of MPLS can be modelled by defining the behaviour of a LSR as three basic operations :
+
+ - `push` : when an edge LSR receives a network packet it pushes a label in front of the packet before forwarding it as a labelled packet
+ - `swap` : when a LSR receives a labelled packet, it can change the value of the packet label before forwarding it on the chosen outgoing interface
+ - `pop` : when a LSR receives a labelled packet, it can remove the label before forwarding 
+
+The figure below illustrates these operations in a simple network.
+
+.. figure:: png/mpls-figs-007-c.png
+   :align: center
+
+   Figure : The basic operations performed on labelled packets
+
+
+One of the main innovations introduced by MultiProtocol Label Switching compared to the other label switching techniques is that an MPLS packet contains a `stack` of labels that has a potential unlimited depth. All labels are placed before the network-layer packet header and the  `label stack` is encoded in the packet header by adding one `bottom of stack` bit after the label. This `bottom of stack` bit is set only in the label that occupies the bottom position in the stack. As we will see throughout the chapter, this label stack has enabled very innovative and scalable solutions in MPLS networks. MPLS can use different types of labels. In the past, the first deployments used the underlying ATM or frame relay labels. However, today most of the MPLS deployments use the 32 bits shim header defined in :rfc:`3032` and represented below.
 
 ::
+
  0                   1                   2                   3
-  0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+ 
  |                Label                  | TC  |S|       TTL     | 
  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+ 
 
- Figure : The MPLS label 
+ The MPLS shim header 
+
+
+The MPLS header contains four fields :
+
+ - Label. The MPLS label is encoded as a twenty bits field that represents an unsigned integer. The sixteen smallest values are reserved for specific utilisations [#freserved]. The other MPLS Labels can be used by all LSRs.
+ - TC. The Traffic Class is a 3 bits field defined in :rfc:`5462`. This field can be used to specify classes of packets that should be handled differently by the intermediate LSR from a traffic control viewpoint. Its usage will be discussed in chapter XX.
+ - Bottom of stack bit (S). This bit is only set in the 
+ - Time-to-Live. This field as the same purpose as in the IP header. When an ingress LSR adds a label to a regular IP packet, it copies the TTL of the packet in the MPLS header. Intermediate LSRs decrement the value of the TTL field in the  outer MPLS header and discard the packet if the TTL value becomes smaller than `0` :rfc:`3443`. This allows MPLS LSRs to discard packets when there is a forwarding loop as IP routers would do with regular IP packets. Another utilisation is an MPLS specific `traceroute` that relies on ICMP extensions defined in :rfc:`4950` that can be used by an MPLS LSR to to provide information about the MPLS labels in the ICMP message that it returns after having discard an MPLS packet whose TTL has reached `0`.
+
+The MPLS header is inserted between the datalink layer header and the network layer header. As an example, the figure below shows an Ethernet frame that contains an MPLS header with a label stack containing labels `123` and `456` that is followed by an IP packet. Ethertype `0x8447` is reserved for the transport of MPLS labelled packets in Ethernet frames :rfc:`5332`.
+
+::
+
+    0                   1                   2                   3
+    0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |								   |	
+   +          48 bits              +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+    
+   |    Destination Address	   |			           |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+       48 bits       	   +
+   |                    		Source Address	           |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |		Type (0x8847)	   |	Label (123)		   |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |	   |  TC |0|    TTL	   | 	Label (456)		   |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |	   |  TC |1|    TTL	   |Ver(4) |  IHL  |    DS Field   |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |       Total Length            |     Identification		   |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |								   |
+   ~                        IP packet (cont.)	                   ~
+   |								   |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |			32 bits		CRC			   |	
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+   IPv4 packet with a stack of two MPLS labels in an Ethernet frame
+
+
+.. [#freserved] See http://www.iana.org/assignments/mpls-label-values/mpls-label-values.xml for the list of the currently reserved MPLS label values.
+
+By using python pseudocode, an MPLS packet can be represented as a packet that contains a stack of labels (with `packet.lstack` representing the label stack). The MPLS Label Forwarding Table used by an MPLS LSR becomes a table that for each label returns a tuple containing an outgoing interface and an operation to be performed on the packet with optional parameters for the push and swap operations:
+
+.. code-block:: python
+
+ def forward(packet) :
+    # packet.lstack[0] is the uppermost label of the stack
+    outif,operation,l1,l2=LFT[packet.lstack[0]] 
+    if operation=="push" :
+        packet.lstack.insert(0,l1) # push l1 on top of stack
+    elif operation=="swap" :
+    	packet.lstack[0]=l1  # swap first label of stack
+    else : # operation == "push"
+    	packet.lstack.[0]=l1  # swap first label of stack
+	packet.lstack.insert(0,l2) # push label on stack
+    send(packet,outif)
+
+.. index:: per-platform label space, per-interface label space
+
+.. note:: The platform and per interface labels
+
+ To ensure The MPLS Label Forwarding Table can be organised in two different ways. A first solution, called `per-interface label space` in :rfc:`3031`, is to assign the MPLS labels independently on each interface. In this case, the same label can be used for different Label Switches Paths on different interfaces. Today, MPLS LSR use the shim header defined in :rfc:`3032`. This header uses twenty bits to encode the MPLS label. This implies that a switch that uses `per-interface label space` could support up to :math:`2^20` different LSPs on each interface. This implies, of course, that a different Label Forwarding Table is used on each interface of the LSR. The second solution, `per-platform label space` :rfc:`3032`, is to ensure that a given MPLS label is never used on two different interfaces. Conceptually, the LSR can use a single LFT that is downloaded on all its interfaces. A drawback of this approach is that an LSR that uses `per-platform label space` cannot support more than :math:`2^20` different LSPs. This could be a limitation on LSRs with a large number of interfaces. Despite of this limitation, most LSRs today support `per-platform label space` because it enables them to efficiently provide fast-restoration services as explained in section XX.
+
+
+
+
+
+.. Label entry
 
 .. expliquer comment on peut construire un LSP de bout en bout avec un petit exemple
 
 .. expliquer comment faire merger deux LSPs vers la mÃªme destination en un routeur, cela motivera LDP qui est mal motivÃ© aujourd'hui
+
+.. besoin de scalabilite avec des LSP
+
+::
+
+
+
+
+.. rubric:: Footnotes
+
 
 
 
 Integrating label swapping and IP
 ################################# 
 
+.. definir FEC
+.. creation de LSP
+
+
+
+
 Destination-based packet forwarding
 ===================================
 
 .. expliquer LDP, dÃ©couverte des voisins (mais c'est anecdotique), surtout le fait qu'il y a une connexion TCP et expliquer comment les label-FEC mapping sont Ã©changÃ©s, liberal versus ordered
+
+.. définition d'une FEC
 
 LDP :rfc:`5036`
 
@@ -370,6 +502,9 @@ RFC 5036                   LDP Specification                October 2007
             An address prefix encoded according to the Address Family
             field, whose length, in bits, was specified in the PreLen
             field, padded to a byte boundary.
+
+.. Bien montrer la différence entre un LSP de end-to-end à un LSP établir par LDP qui forme un arbre centré vers la destination. il faudra probablement parler de l'ecmp également dans cette discussion
+
 
 .. (draft-ietf-mpls-ldp-interarea)	LDP Extension for Inter-Area Label Switched Paths (LSPs)	2008-07	 RFC 5283 (Proposed Standard)  
 .. don't think that this is required
