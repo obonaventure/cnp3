@@ -15,7 +15,7 @@
    inkscape:version="0.48.0 r9654"
    width="100%"
    height="100%"
-   sodipodi:docname="4-Network.svg">
+   sodipodi:docname="network-fig-001.svg">
   <metadata
      id="metadata1265">
     <rdf:RDF>
@@ -24,7 +24,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -42,7 +42,7 @@
      id="namedview1263"
      showgrid="false"
      inkscape:zoom="0.028284271"
-     inkscape:cx="14000"
+     inkscape:cx="16340.37"
      inkscape:cy="16185.274"
      inkscape:window-x="0"
      inkscape:window-y="0"
@@ -1412,7 +1412,8 @@
   </g>
   <g
      style="visibility:visible"
-     id="g705">
+     id="g705"
+     transform="translate(31,0)">
     <desc
        id="desc707">Group</desc>
     <g
@@ -1489,7 +1490,8 @@
   </g>
   <g
      style="visibility:visible"
-     id="g747">
+     id="g747"
+     transform="translate(31,0)">
     <desc
        id="desc749">Group</desc>
     <g
@@ -1845,7 +1847,8 @@
   </g>
   <g
      style="visibility:visible"
-     id="g927">
+     id="g927"
+     transform="translate(31,0)">
     <desc
        id="desc929">Group</desc>
     <g
@@ -1922,7 +1925,8 @@
   </g>
   <g
      style="visibility:visible"
-     id="g969">
+     id="g969"
+     transform="translate(26,0)">
     <desc
        id="desc971">Group</desc>
     <g
@@ -2077,7 +2081,8 @@
   </g>
   <g
      style="visibility:visible"
-     id="g1055">
+     id="g1055"
+     transform="translate(48,4)">
     <desc
        id="desc1057">Drawing</desc>
     <g
@@ -2186,7 +2191,8 @@
   </g>
   <g
      style="visibility:visible"
-     id="g1159">
+     id="g1159"
+     transform="matrix(1.005713,0,0,1,-89.324681,0)">
     <desc
        id="desc1161">Group</desc>
     <g
@@ -2345,7 +2351,8 @@
   </g>
   <g
      style="visibility:visible"
-     id="g1245">
+     id="g1245"
+     transform="matrix(0.95579477,0,0,1,767.2701,0)">
     <desc
        id="desc1247">Drawing</desc>
     <g
@@ -2463,12 +2470,12 @@
      transform="scale(0.96659254,1.0345621)"
      sodipodi:linespacing="125%"
      id="text4807"
-     y="6337.5981"
-     x="13244.13"
+     y="6478.7217"
+     x="13200.678"
      style="font-size:818.95166016px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:FreeSans;-inkscape-font-specification:FreeSans"
      xml:space="preserve"><tspan
-       y="6337.5981"
-       x="13244.13"
+       y="6478.7217"
+       x="13200.678"
        id="tspan4809"
        sodipodi:role="line">Network</tspan></text>
   <text
