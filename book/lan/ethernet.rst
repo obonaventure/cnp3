@@ -133,7 +133,7 @@ The introduction of the twisted pairs lead to two major changes to Ethernet. The
 Computers can be directly attached to Ethernet hubs. Ethernet hubs themselves can be attached to other Ethernet hubs to build a larger network. However, some important guidelines must be followed when building a complex network with hubs. First, the network topology must be a tree. As hubs are relays in the physical layer, adding a link between `Hub2` and `Hub3` in the network below would create an electrical shortcut that would completely disrupt the network. This implies that there cannot be any redundancy in a hub-based network. A failure of a hub or of a link between two hubs would partition the network into two isolated networks. Second, as hubs are relays in the physical layer, collisions can happen and must be handled by CSMA/CD as in a 10Base5 network. This implies that the maximum delay between any pair of devices in the network cannot be longer than the 51.2 microseconds `slot time`. If the delay is longer, collisions between short frames may not be correctly detected. This constraint limits the geographical spread of 10BaseT networks containing hubs.
 
 
-.. figure:: png/lan-fig-061-c.png
+.. figure:: svg/datalink-fig-012-c.png
    :align: center
    :scale: 70
    
@@ -199,7 +199,7 @@ Increasing the physical layer bandwidth as in `Fast Ethernet` was only of the so
 An `Ethernet switch` understands the format of the Ethernet frames and can selectively forward frames over each interface. For this, each `Ethernet switch` maintains a `MAC address table`. This table contains, for each MAC address known by the switch, the identifier of the switch's port over which a frame sent towards this address must be forwarded to reach its destination. This is illustrated below with the `MAC address table` of the bottom switch. When the switch receives a frame destined to address `B`, it forwards the frame on its South port. If it receives a frame destined to address `D`, it forwards it only on its North port.
 
 
-.. figure:: png/lan-fig-062-c.png
+.. figure:: svg/datalink-fig-013-c.png
    :align: center
    :scale: 70
    
@@ -244,9 +244,9 @@ The pseudo-code below details how an Ethernet switch forwards Ethernet frames. I
 The `MAC address learning` algorithm combined with the forwarding algorithm work well in a tree-shaped network such as the one shown above. However, to deal with link and switch failures, network administrators often add redundant links to ensure that their network remains connected even after a failure. Let us consider what happens in the Ethernet network shown in the figure below.
 
 
-.. figure:: png/lan-fig-066-c.png
+.. figure:: svg/datalink-fig-014-c.png
    :align: center
-   :scale: 70
+   :scale: 100
    
    Ethernet switches in a loop
 
@@ -268,7 +268,7 @@ The `Spanning Tree Protocol` (STP), proposed in [Perlman1985]_, is a distributed
 
 
 
-.. figure:: png/lan-fig-067-c.png
+.. figure:: svg/datalink-fig-015-c.png
    :align: center
    :scale: 70
    
@@ -329,7 +329,7 @@ Designated   yes              yes         yes
 To illustrate the operation of the `Spanning Tree Protocol`, let us consider the simple network topology in the figure below. 
 
 
-.. figure:: png/lan-fig-069-c.png
+.. figure:: svg/datalink-fig-016-c.png
    :Align: center
    :scale: 70
    
@@ -355,7 +355,7 @@ Another important advantage of Ethernet switches is the ability to create Virtua
 The figure below illustrates a switched Ethernet network with three Virtual LANs. `VLAN2` and `VLAN3` only require a local configuration of switch `S1`. Host `C` can exchange frames with host `D`, but not with hosts that are outside of its VLAN. `VLAN1` is more complex as there are ports of this VLAN on several switches. To support such VLANs, local configuration is not sufficient anymore. When a switch receives a frame from another switch, it must be able to determine the VLAN in which the frame was originated to use the correct MAC table to forward the frame. This is done by assigning an identifier to each Virtual LAN and placing this identifier inside the headers of the frames that are exchanged between switches. 
 
 
-.. figure:: png/lan-fig-081-c.png
+.. figure:: svg/datalink-fig-017-c.png
    :align: center
    :scale: 70
    

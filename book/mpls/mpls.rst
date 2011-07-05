@@ -91,7 +91,6 @@ CR-LDP and RSVP-TE were developed together, but after some time the IETF decided
 The label swapping forwarding paradigm
 ######################################
 
-
 The operation of a switch in a network that uses the label swapping forwarding paradigm can be represented as a simple set of operations. Each packet that must be forwarded contains a label. We use the notation `p.label` as a shortcut for the label contained inside packet `p`. Each switch maintains a label forwarding table that stores for each incoming label the outgoing interface and the outgoing label. Using python syntax, we can represent this table as a list that stores couples containg the outgoing label and the outgoing interface.
 
 .. code-block:: python
@@ -215,12 +214,48 @@ By using python pseudocode, an MPLS packet can be represented as a packet that c
 
 .. index:: per-platform label space, per-interface label space
 
-.. note:: The platform and per interface labels
+.. note:: per-platform and per-interface label spaces
 
  To ensure The MPLS Label Forwarding Table can be organised in two different ways. A first solution, called `per-interface label space` in :rfc:`3031`, is to assign the MPLS labels independently on each interface. In this case, the same label can be used for different Label Switches Paths on different interfaces. Today, MPLS LSR use the shim header defined in :rfc:`3032`. This header uses twenty bits to encode the MPLS label. This implies that a switch that uses `per-interface label space` could support up to :math:`2^20` different LSPs on each interface. This implies, of course, that a different Label Forwarding Table is used on each interface of the LSR. The second solution, `per-platform label space` :rfc:`3032`, is to ensure that a given MPLS label is never used on two different interfaces. Conceptually, the LSR can use a single LFT that is downloaded on all its interfaces. A drawback of this approach is that an LSR that uses `per-platform label space` cannot support more than :math:`2^20` different LSPs. This could be a limitation on LSRs with a large number of interfaces. Despite of this limitation, most LSRs today support `per-platform label space` because it enables them to efficiently provide fast-restoration services as explained in section XX.
 
 
+By correctly configuring the Label Forwarding Tables on the LSRs inside a network, it is possible to build Label Switched Paths (LSPs). A LSP is defined in :rfc:`3031` as a sequence of LSRs. The first (resp. last) LSR is the ingress (resp. egress) LSR and the LFTs of all the LSRs are such that if the ingress LSR sends a labelled packet to the second LSR on the LSP, the packet will be label-switched by all the intermediate LSRs listed in the LSR sequence. A common utilisation of LSPs is to establish unidirectonnal LSPs between an ingress LSR and an egress LSR. This is illustrated in the figure below.
 
+.. figure:: png/mpls-figs-008-c.png
+   :align: center
+
+   Figure : Unidirectionnal LSPs in a simple network
+
+An interesting point to discuss in such a network is the Label Forwarding Table that will be used by LSR3. In the example above, three LSPs have been established. The first LSP (black plain arrow) goes from LSR1 to LSR4 via LSR3. The second LSR (dotted blue arrow) goes from LS2 to LSR4 via LSR3. The third LSP (dashed red arrow) goes from LSR3 to LSR4. A classical implementation of such LSPs is to create one entry per LSP on each intermediate LSR. For example, LSR3's LFT could be configured as shown by the pseudocode below :
+
+.. code-block:: python
+
+    LSR3.LFT[black]=("East","swap",41)
+    LSR3.LFT[blue]=("East","swap",42)
+    LSR3.LFT[red]=("East","push",43)
+
+With this configuration of the LFT, LSR4 would receive the packets with a different label on the three LSPs that it terminates. This could allow LSR4 to process differently the packets received on the three LSPs. However, in practice there are many situations where the egress LSR processes all the labelled packets that it receives in the same manner, e.g. because it is the final destination for these packets. In this case, a better solution is to allow several LSPs that have the same destination to share the same MPLS label on the intermediate links. In the example above, the LSR3's LFT could have been configured as shown below :
+
+.. code-block:: python
+
+    LSR3.LFT[black]=("East","swap",40)
+    LSR3.LFT[blue]=("East","swap",40)
+    LSR3.LFT[red]=("East","push",40)
+
+
+.. todo explain organisation et rooted LSPs
+
+
+.. figure:: png/mpls-figs-008-c.png
+   :align: center
+
+   Figure : Destination-rooted LSPs in a simple network
+
+
+Such a configuration minimises the number of labels that are used inside the network. Consider the common deployment of a network with :math:`n` LSRs where a full-mesh of unidirectionnal LSPs must be established. With unidirectionnal LSPs, :math:`{n \times (n-1)}` LSPs must be established and links in the backbone may have to carry a large fraction of these LSPs. With the solution above, LSPs that have the same destination are merged at intermediate LSRs and there are at most :math:`n` different LSPs passing through a link, an important difference from a scalability viewpoint.
+
+
+:rfc:`3031` 
 
 
 .. Label entry
@@ -231,14 +266,9 @@ By using python pseudocode, an MPLS packet can be represented as a packet that c
 
 .. besoin de scalabilite avec des LSP
 
-::
-
-
 
 
 .. rubric:: Footnotes
-
-
 
 
 Integrating label swapping and IP

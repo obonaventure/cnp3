@@ -36,7 +36,7 @@ When developing its family of standards, the `IEEE 802.11 working group <http://
 The architecture of WiFi networks is slightly different from the Local Area Networks that we have discussed until now. There are in practice two main types of WiFi networks : `independent` or `adhoc` networks  and `infrastructure` networks [#fBSS]_. An `independent` or `adhoc` network is composed of a set of devices that communicate with each other. These devices play the same role and the `adhoc` network is usually not connected to the global Internet. `Adhoc` networks are used when for example a few laptops need to exchange information or to connect a computer with a WiFi printer.
 
 
-.. figure:: png/lan-fig-083-c.png
+.. figure:: svg/datalink-fig-018-c.png
    :align: center
    :scale: 70
    
@@ -49,7 +49,7 @@ The architecture of WiFi networks is slightly different from the Local Area Netw
 Most WiFi networks are `infrastructure` networks. An `infrastructure` network contains one or more `access points` that are attached to a fixed Local Area Network (usually an Ethernet network) that is connected to other networks such as the Internet. The figure below shows shows such a network with two access points and four WiFi devices. Each WiFi device is associated to one access point and uses this access point as a relay to exchange frames with the devices that are associated to another access point or reachable through the LAN.
 
 
-.. figure:: png/lan-fig-084-c.png
+.. figure:: svg/datalink-fig-019-c.png
    :align: center
    :scale: 70
    

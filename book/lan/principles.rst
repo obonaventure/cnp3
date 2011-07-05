@@ -133,7 +133,7 @@ Point-to-point datalink layers need to select one of the framing techniques desc
 
 These four basic physical organisations of Local Area Networks are shown graphically in the figure below. We will first focus on one physical organisation at a time.
 
-.. figure:: png/lan-fig-007-c.png
+.. figure:: svg/lan-fig-001-c.png
    :align: center
    :scale: 70
    
@@ -406,7 +406,7 @@ Compared to CSMA, CSMA/CA defines more precisely when a device is allowed to sen
 The figure below shows the basic operation of CSMA/CA devices. Before transmitting, host `A` verifies that the channel is empty during a long enough period. Then, its sends its data frame. After having checked the validity of the received frame, the recipient sends an acknowledgement frame after a short SIFS delay. Host `C`, which does not participate in the frame exchange, senses the channel to be busy at the beginning of the data frame. Host `C` can use this information to determine for how long the channel will be busy. Note that as :math:`SIFS<DIFS<EIFS`, even a device that would start to sense the channel immediately after the last bit of the data frame could not decide to transmit its own frame during the transmission of the acknowledgement frame.
 
 
-.. figure:: png/lan-fig-031-c.png
+.. figure:: svg/datalink-fig-006-c.png
    :align: center
    :scale: 70
    
@@ -418,7 +418,7 @@ The figure below shows the basic operation of CSMA/CA devices. Before transmitti
 
 The main difficulty with CSMA/CA is when two or more devices transmit at the same time and cause collisions. This is illustrated in the figure below, assuming a fixed timeout after the transmission of a data frame. With CSMA/CA, the timeout after the transmission of a data frame is very small since it corresponds to the SIFS plus the time required to transmit the acknowledgement frame.
 
-.. figure:: png/lan-fig-032-c.png
+.. figure:: svg/datalink-fig-007-c.png
    :align: center
    :scale: 70
    
@@ -427,7 +427,7 @@ The main difficulty with CSMA/CA is when two or more devices transmit at the sam
 To deal with this problem, CSMA/CA relies on a backoff timer. This backoff timer is a random delay that is chosen by each device in a range that depends on the number of retransmissions for the current frame. The range grows exponentially with the retransmissions as in CSMA/CD. The minimum range for the backoff timer is :math:`[0,7*slotTime]` where the `slotTime` is a parameter that depends on the underlying physical layer. Compared to CSMA/CD's exponential backoff, there are two important differences to notice. First, the initial range for the backoff timer is seven times larger. This is because it is impossible in CSMA/CA to detect collisions while they happen. With CSMA/CA, a collision may affect the entire frame while with CSMA/CD it can only affect the beginning of the frame. Second, a CSMA/CA device must regularly sense the transmission channel during its back off timer. If the channel becomes busy (i.e. because another device is transmitting), then the back off timer must be frozen until the channel becomes free again. Once the channel becomes free, the back off timer is restarted. This is in contrast with CSMA/CD where the back off is recomputed after each collision. This is illustrated in the figure below. Host `A` chooses a smaller backoff than host `C`. When `C` senses the channel to be busy, it freezes its backoff timer and only restarts it once the channel is free again.
 
 
-.. figure:: png/lan-fig-034-c.png
+.. figure:: svg/datalink-fig-008-c.png
    :align: center
    :scale: 70
    
@@ -464,7 +464,7 @@ The pseudo-code below summarises the operation of a CSMA/CA device. The values o
 Another problem faced by wireless networks is often called the `hidden station problem`. In a wireless networks, radio signals are not always propagated in the same way in all directions. For example, two devices separated by a wall may not be able to receive each other's signal while they could both be receiving the signal produced by a third host. This is illustrated in the figure below, but it can happen in other environments. For example, two devices that are on different sides of a hill may not be able to receive each other's signal while they are both able to receive the signal sent by a station at the top of the hill. Furthermore, the radio propagation conditions may change with time. For example, a truck may block temporarily the communication between two nearby devices. 
 
 
-.. figure:: png/lan-fig-035-c.png
+.. figure:: svg/datalink-fig-009-c.png
    :align: center
    :scale: 70
    
@@ -476,7 +476,7 @@ Another problem faced by wireless networks is often called the `hidden station p
 
 To avoid collisions in these situations, CSMA/CA allows devices to reserve the transmission channel for some time. This is done by using two control frames : `Request To Send` (RTS) and `Clear To Send` (CTS). Both are very short frames to minimize the risk of collisions. To reserve the transmission channel, a device sends a RTS frame to the intended reception of the data frame. The RTS frame contains the duration of the requested reservation. The recipient replies, after a SIFS delay, with a CTS frame that also contains the duration of the reservation. As the duration of the reservation has been sent in both RTS and CTS, all hosts that could collide with either the sender or the reception of the data frame are informed of the reservation. They can compute the total duration of the transmission and defer their access to the transmission channel until then. This is illustrated in the figure below where host `A` reserves the transmission channel to send a data frame to host `B`. Host `C` notices the reservation and defers its transmission.
 
-.. figure:: png/lan-fig-036-c.png
+.. figure:: svg/datalink-fig-010-c.png
    :align: center
    :scale: 70
    
@@ -499,7 +499,7 @@ A Token Ring network is composed of a set of stations that are attached to a uni
 
 
 .. _fig-tokenring:
-.. figure:: png/lan-fig-096-c.png
+.. figure:: svg/datalink-fig-011-c.png
    :align: center
    :scale: 70
    
