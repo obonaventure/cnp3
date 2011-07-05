@@ -23,28 +23,14 @@ On the global Internet, most of the applications used in the wide area rely on T
 
 .. index:: TCP header
  
-To provide this service, TCP relies on a simple segment format. Each TCP segment contains a header described below and optionally a payload. The default length of the TCP header is twenty bytes, but some TCP headers contain options.
+To provide this service, TCP relies on a simple segment format that is shown in the figure below. Each TCP segment contains a header described below and optionally a payload. The default length of the TCP header is twenty bytes, but some TCP headers contain options.
 
-::
+.. figure:: pkt/tcp.png
+   :align: center
+   :scale: 100
 
-    0                   1                   2                   3
-    0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-   |          Source Port          |       Destination Port        |
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-   |                        Sequence Number                        |
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-   |                    Acknowledgment Number                      |
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-   |  Data |       |C|E|U|A|P|R|S|F|                               |
-   | Offset| Res.  |W|C|R|C|S|S|Y|I|            Window             |
-   |       |       |R|E|G|K|H|T|N|N|                               |
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-   |           Checksum            |         Urgent Pointer        |
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   TCP header format
 
-
-   TCP Header Format
 
 A TCP header contains the following fields :
 
@@ -74,7 +60,7 @@ A TCP header contains the following fields :
  
 .. _fig-tcpports:
 
-.. figure:: png/transport-fig-057-c.png
+.. figure:: svg/tcp-ports.png
    :align: center
    :scale: 70 
 
@@ -552,7 +538,7 @@ In the previous sections, we have explained the mechanisms that TCP uses to deal
 
 To better understand this problem, let us consider the scenario shown in the figure below where a server (`A`) attached to a `10 Mbps` link is sending TCP segments to a laptop (`C`) attached to a `2 Mbps` link.
 
-.. figure:: png/transport-fig-090-c.png 
+.. figure:: svg/tcp-2mbps.png 
    :align: center
    :scale: 70 
 
@@ -561,7 +547,7 @@ To better understand this problem, let us consider the scenario shown in the fig
 In this network, the TCP segments sent by the server reach router `R1`. `R1` forward the segments towards router `R2`. Router `R2` can potentially receive segments at `10 Mbps`, but it can only forward them at `2 Mbps` to host `C`.  Router `R2` contains buffers that allow it to store the packets that cannot be immediately forwarded to their destination. To understand the operation of TCP in this environment, let us consider a simplified model of this network where host `A` is attached to a `10 Mbps` link to a queue that represents the buffers of router `R2`. This queue is emptied at a rate of `2 Mbps`.
 
 
-.. figure:: png/transport-fig-082-c.png 
+.. figure:: svg/tcp-self-clocking.png 
    :align: center
    :scale: 70 
 
@@ -587,7 +573,7 @@ If many TCP senders are attached to the left part of the network above, they all
 
 The `congestion collapse` is a problem that faces all heterogenous networks. Different mechanisms have been proposed in the scientific literature to avoid or control network congestion. Some of them have been implemented and deployed in real networks. To understand this problem in more details, let us first consider a simple network with two hosts attached to a high bandwidth link that are sending segments to destination `C` attached to a low bandwidth link as depicted below.
 
-.. figure:: png/transport-fig-080-c.png 
+.. figure:: svg/congestion-problem.png 
    :align: center
    :scale: 70 
 

@@ -42,25 +42,9 @@ The last field of the Ethernet frame is a 32 bits Cyclical Redundancy Check (CRC
 
 .. index:: Ethernet DIX frame format
 
-::
-
-    0                   1                   2                   3
-    0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-   |								   |	
-   +    48 bits                    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+    
-   |    Destination Address	   |			           |
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+    48 bits   		   +
-   |                    		  Source Address	   |
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-   |		Type (16 bits)	   |				   |
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+				   |
-   |								   |
-   ~ 			Payload (46-1500 bytes)			   |
-   |								   |
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-   |			32 bits		CRC			   |	
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+.. figure:: pkt/dix.png
+   :align: center
+   :scale: 100
 
    Ethernet DIX frame format
 
@@ -76,25 +60,9 @@ The Ethernet frame format shown above is specified in [DIX]_. This is the format
 
 
 
-::
-
-    0                   1                   2                   3
-    0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-   |								   |	
-   +    48 bits                    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+    
-   |    Destination Address	   |			           |
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+      48 bits   		   +
-   |                    		  Source Address	   |
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-   |	  Length (16 bits)	   |				   |
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+				   |
-   |								   |
-   ~ 		Payload and padding (46-1500 bytes)		   |
-   |								   |
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-   |			32 bits		CRC			   |	
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+.. figure:: pkt/8023.png
+   :align: center
+   :scale: 100
 
    Ethernet 802.3 frame format
 
@@ -363,14 +331,10 @@ The figure below illustrates a switched Ethernet network with three Virtual LANs
 
 IEEE defined in the [802.1q]_ standard a special header to encode the VLAN identifiers. This 32 bits header includes a 20 bits VLAN field that contains the VLAN identifier of each frame. The format of the [802.1q]_ header is described below.
 
-::
-
-    0                   1                   2                   3
-    0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-   | Tag Protocol Identifier       | PCP |C|   VLAN Identifier     |
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+		
-   										
+.. figure:: pkt/8021q.png
+   :align: center
+   :scale: 100
+  										
    Format of the 802.1q header
 
 The [802.1q]_ header is inserted immediately after the source MAC address in the Ethernet frame (i.e. before the EtherType field). The maximum frame size is increased by 4 bytes. It is encoded in 32 bits and contains four fields. The Tag Protocol Identifier is set to `0x8100` to allow the receiver to detect the presence of this additional header. The `Priority Code Point` (PCP) is a three bits field that is used to support different transmission priorities for the frame. Value `0` is the lowest priority and value `7` the highest. Frames with a higher priority can be expected to be forwarded earlier than frames having a lower priority. The `C` bit is used for compatibility between Ethernet and Token Ring networks. The last 12 bits of the 802.1q header contain the VLAN identifier. Value `0` indicates that the frame does not belong to any VLAN while value `0xFFF` is reserved. This implies that 4094 different VLAN identifiers can be used in an Ethernet network. 

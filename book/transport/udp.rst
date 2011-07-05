@@ -18,7 +18,7 @@ Compared to the connectionless network layer service, the main advantage of the 
 
 The figure below shows a typical usage of the UDP port numbers. The client process uses port number `1234` while the server process uses port number `5678`. When the client sends a request, it is identified as originating from port number `1234` on the client host and destined to port number `5678` on the server host. When the server process replies to this request, the server's UDP implementation will send the reply as originating from port  `5678` on the server host and destined to port `1234` on the client host.
 
-.. figure:: png/transport-fig-056-c.png
+.. figure:: svg/udp-ports.png
    :align: center
    :scale: 70 
 
@@ -28,24 +28,20 @@ The figure below shows a typical usage of the UDP port numbers. The client proce
 
 
 
-UDP uses a single segment format shown below. The UDP header contains four fields :
+UDP uses a single segment format shown in the figure below. 
+
+.. figure:: pkt/udp.png
+   :align: center
+   :scale: 100
+
+   UDP Header Format
+
+The UDP header contains four fields :
 
  - a 16 bits source port
  - a 16 bits destination port
  - a 16 bits length field 
  - a 16 bits checksum
-
-::
-
-    0                   1                   2                   3
-    0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-   |          Source Port          |       Destination Port        |
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-   |        Length		   |         Checksum              |
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
- 
-   UDP Header Format
 
 
 As the port numbers are encoded as a 16 bits field, there can be only up to 65535 different server processes that are bound to a different UDP port at the same time on a given server. In practice, this limit is never reached. However, it is worth to notice that most implementations divide the range of allowed UDP port numbers in three different ranges :

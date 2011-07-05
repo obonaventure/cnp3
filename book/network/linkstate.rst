@@ -23,7 +23,7 @@ However, in some cases, these weights can differ (e.g. because the uplink and do
 
 When a link-state router boots, it first needs to discover to which routers it is directly connected. For this, each router sends every `N` seconds a HELLO message on all its interfaces. This message contains the router's address. Each router has a unique address. As its neighbouring routers also send HELLO messages, the router automatically discovers to which neighbours it is connected. These HELLO messages are only sent to the direct neighbour. A router never forwards the HELLO messages that they receive. HELLO messages are also used to detect link and router failures. A link is considered to have failed if no HELLO message has been received from the neighboring router during a period of :math:`k \times N` seconds.
 
-.. figure:: png/network-fig-041-c.png
+.. figure:: svg/ls-hello.png
    :align: center
    :scale: 70   
 
@@ -72,7 +72,7 @@ In this pseudocode, `LSDB(r)` returns the most recent `LSP` originated by router
 Flooding is illustrated in the figure below. By exchanging HELLO messages, each router learns its direct neighbours. For example, router `E` learns that it is directly connected to routers `D`, `B` and `C`. Its first LSP has sequence number `0` and contains the directed links `E->D`, `E->B` and `E->C`. Router `E` sends its LSP on all its links and routers `D`, `B` and `C` insert the LSP in their LSDB and forward it over their other links. 
 
 
-.. figure:: png/network-fig-045-c.png
+.. figure:: svg/ls-flooding.png
    :align: center
    :scale: 70   
 
@@ -83,7 +83,7 @@ Flooding allows LSPs to be distributed to all routers inside the network without
 
 To ensure that all routers receive all LSPs even when there are transmissions errors, link state routing protocols use `reliable flooding`. With `reliable flooding`, routers use acknowledgements and if necessary retransmissions to ensure that all link state packets are successfully transferred to all neighboring routers.  Thanks to reliable flooding, all routers store in their LSDB the most recent LSP sent by each router in the network. By combining the received LSPs with its own LSP, each router can compute the entire network topology.
 
-.. figure:: png/network-fig-047-c.png
+.. figure:: svg/ls-lsdb.png
    :align: center
    :scale: 70   
 
@@ -99,7 +99,7 @@ To ensure that all routers receive all LSPs even when there are transmissions er
 When a link fails, the two routers attached to the link detect the failure by the lack of HELLO messages during the last :math:`k \times N` seconds. Once a router has detected a local link failure, it generates and floods a new LSP that does not contain anymore the failed link. The new LSP replaces the previous LSP in the network. As the two routers attached to a link do not detect this failure exactly at the same time, some links may be announced in only one direction. This is illustrated in the figure below. Router `E` has detected the failures of link `E-B` and flooded a new LSP, but router `B` has not yet detected the failure.
 
 
-.. figure:: png/network-fig-048-c.png
+.. figure:: svg/ls-twoway.png
    :align: center
    :scale: 70   
 
@@ -112,7 +112,7 @@ When a router has failed, its LSP must be removed from the LSDB of all routers [
 
 To compute its routing table, each router computes the spanning rooted at itself by using Dijkstra's shortest path algorithm [Dijkstra1959]_. The routing table can be derived automatically from the spanning as shown in the figure below.
 
-.. figure:: png/network-fig-049-c.png
+.. figure:: svg/ls-computation.png
    :align: center
    :scale: 70   
 

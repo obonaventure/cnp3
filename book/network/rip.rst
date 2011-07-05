@@ -10,19 +10,9 @@ The Routing Information Protocol (RIP) is the simplest routing protocol that was
 
 RIP routers periodically exchange RIP messages. The format of these messages is show below. A RIP message is sent inside a UDP segment whose destination port is set to `521`. A RIP message contains several fields. The `Cmd` field indicates whether the RIP message is a request or a response. Routers send one of more RIP response messages every 30 seconds. These messages contain the distance vectors that summarize the router's routing table. The RIP requests messages can be used by routers or hosts to query other routers about the content of their routing table. A typical usage is when a router boots and wants to receive quickly the RIP responses from its neighbours to compute its own routing table. The current version of RIP is version 2 defined in :rfc:`2453` for IPv4 and :rfc:`2080` for IPv6. 
 
-::
-
-    0                   1                   2                   3 
-    0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-   | Command (1)   | Version (1)   |            unused             |
-   +---------------+---------------+-------------------------------+
-   |             0xFFFF            |    Authentication Type (2)    |
-   +-------------------------------+-------------------------------+
-   ~                       Authentication (16)                     ~
-   +---------------------------------------------------------------+
-   ~                     Up to 20 Route Entries                    ~
-   +---------------------------------------------------------------+
+.. figure:: pkt/rip-header.png
+   :align: center
+   :scale: 100
 
    RIP message format
 
@@ -31,39 +21,19 @@ The RIP header contains an authentication field. This authentication can be used
 
 Each RIP message contains a set of route entries. Each route entry is encoded as a 20 bytes field whose format is shown below. RIP was designed initially to be suitable for different network layer protocols. Some implementations of RIP were used in XNS or IPX networks. The first field of the RIP route entry is the `Address Family Identifier` (`AFI`). This identifier indicates the type of address found in the route entry [#fafi]_. IPv4 uses `AFI=1`. The other important fields of the route entry are the IPv4 prefix, the netmask that indicates the length of the subnet identifier and is encoded as a 32 bits netmask and the metric. Although the metric is encoded as a 32 bits field, the maximum RIP metric is `15` (for RIP, :math:`16=\infty`)
 
-::
-
-    0                   1                   2                   3 3
-    0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-   | Address Family Identifier (2) |        Route Tag (2)          |
-   +-------------------------------+-------------------------------+
-   |                         IP Address (4)                        |
-   +---------------------------------------------------------------+
-   |                         Subnet Mask (4)                       |
-   +---------------------------------------------------------------+
-   |                         Next Hop (4)                          |
-   +---------------------------------------------------------------+
-   |                         Metric (4)                            |
-   +---------------------------------------------------------------+
+.. figure:: pkt/rip-route-entry.png
+   :align: center
+   :scale: 100
 
    Format of the RIP IPv4 route entries (:rfc:`2453`)
 
 With a 20 bytes route entry, it was difficult to use the same format as above to support IPv6. Instead of defining a variable length route entry format, the designers of :rfc:`2080` defined a new format that does not include an `AFI` field. The format of the route entries used by :rfc:`2080` is shown below. `Plen` is the length of the subnet identifier in bits and the metric is encoded as one byte. The maximum metric is still `15`.
 
-::
+.. figure:: pkt/rip-route-entre-v6.png
+   :align: center
+   :scale: 100
 
-       0                   1                   2                   3
-       0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
-      +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-      |                                                               |
-      ~                        IPv6 prefix (16)                       ~
-      |                                                               |
-      +---------------------------------------------------------------+
-      |         route tag (2)         | prefix len (1)|  metric (1)   |
-      +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-   
-      Format of the RIP IPv6 route entries
+   Format of the RIP IPv6 route entries
 
 .. note:: A note on timers
 

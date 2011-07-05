@@ -133,7 +133,7 @@ Point-to-point datalink layers need to select one of the framing techniques desc
 
 These four basic physical organisations of Local Area Networks are shown graphically in the figure below. We will first focus on one physical organisation at a time.
 
-.. figure:: svg/lan-fig-001-c.png
+.. figure:: svg/bus-ring-star.png
    :align: center
    :scale: 70
    
@@ -516,17 +516,11 @@ The first problem faced by a Token Ring network is that as the token represents 
 
 .. index:: Token Ring token frame, 802.5 token frame
 
-::
+.. figure:: pkt/token.png
+   :align: center
+   :scale: 50
 
-    802.5 token format
-
-    0                   1                   2         
-    0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 
-    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-    | Start Delim.  |Access Control | Ending Delim. |
-    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-
-
+   802.5 token format
 
 
 .. index:: Starting Delimiter (Token Ring), Ending Delimiter (Token Ring)
@@ -543,27 +537,9 @@ Now that we have explained how the token can be forwarded on the ring, let us an
 
 .. index:: Token Ring data frame, 802.5 data frame
 
-::
-
-    0                   1                   2                   3
-    0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
-      	      	   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-   		   | Start Delim.  |Access Control | Frame Control |
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-   |								   |	
-   +    48 bits                    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+    
-   |    Destination Address	   |			           |
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+        48 bits   		   +
-   |                     		  Source Address	   |
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-   |								   |
-   ~ 			Payload 		   		   |
-   |								   |
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-   |			32 bits		CRC			   |	
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-   | End Delim.	   | Frame Status  |
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+.. figure:: pkt/8025.png
+   :align: center
+   :scale: 50
 
    802.5 data frame format
 

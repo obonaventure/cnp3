@@ -19,25 +19,10 @@ While SLIP was implemented and used in some environments, it had several limitat
  #. The `Network Control Protocol` that is specific for each network layer protocol. It is used to negotiate options that are specific for each protocol. For example, IPv4's NCP :rfc:`1548` can negotiate the IPv4 address to be used, the IPv4 address of the DNS resolver, ... IPv6's NCP is defined in :rfc:`5072`.
 
 The PPP framing :rfc:`1662` was inspired from the datalink layer protocols standardised by ITU-T and ISO. A typical PPP frame is composed of the fields shown in the figure below. A PPP frame starts with a one byte flag containing `01111110`. PPP can use bit stuffing or character stuffing depending on the environment where the protocol is used. The address and control fields are present for backward compatibility reasons. The 16 bits Protocol field contains the identifier [#fpppid]_ of the network layer protocol that is carried in the PPP frame. `0x002d` is used for an IPv4 packet compressed with :rfc:`1144` while `0x002f` is used for an uncompressed IPv4 packet. `0xc021` is used by the Link Control Protocol, `0xc023` is used by the Password Authentication Protocol (PAP). `0x0057` is used for IPv6 packets. PPP supports variable length packets, but LCP can negotiate a maximum packet length. The PPP frame ends with a Frame Check Sequence. The default is a 16 bits CRC, but some implementations can negotiate a 32 bits CRC. The frame ends with the `01111110` flag.
-
-::
   
-    0                   1                   2                   3
-    0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-   |   Flag	   | Address       |    Control    | Protocol      | 
-   |   01111110    | 11111111      |    0000011    |               |
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-   |  Protocol     |						   |
-   |		   |                                               |
-   +-+-+-+-+-+-+-+-+		Network layer Packet		   |	
-   |					      			   |
-   ~								   ~
-   |								   |
-   +               +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-   |	           |  Frame Check  Sequence        |	Flag	   |
-   |               |         16 bits               |    01111110   |
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+.. figure:: pkt/ppp.png
+   :align: center
+   :scale: 50
 
    PPP frame format
 

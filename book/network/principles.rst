@@ -7,7 +7,7 @@ Principles
 The main objective of the network layer is to allow endsystems connected to different networks to exchange information through intermediate systems that are called :term:`router`. The unit of information in the network layer is called a :term:`packet`.
 
 
-.. figure:: png/network-fig-001-c.png
+.. figure:: svg/osi-network.png
    :align: center
    :scale: 70
    
@@ -16,7 +16,7 @@ The main objective of the network layer is to allow endsystems connected to diff
 Before explaining the network layer in details, it is useful to first analyse the service provided by the `datalink` layer. There are many variants of the datalink layer. Some provide a connection-oriented service while others provide a connectionless service. In this section, we focus on connectionless datalink layer services that are the most widely used. Using a connection-oriented datalink layer causes some problems that are beyond the scope of this chapter. See :rfc:`3819` for a discussion on this topic.
 
 
-.. figure:: png/network-fig-003-c.png
+.. figure:: svg/osi-datalink.png
    :align: center
    :scale: 70   
 
@@ -26,7 +26,7 @@ There are three main types of datalink layers. The simplest datalink layer is wh
 
 The second type of datalink layer is the one used in Local Area Networks (LAN). Conceptually, a LAN is a set of communicating devices such that any two devices can directly exchange frames through the datalink layer. Both endsystems and routers can be connected to a LAN. Some LANs only connect a few devices, but there are LANs may connect hundreds or even thousands of devices.
 
-.. figure:: png/network-fig-002-c.png
+.. figure:: svg/simple-lan.png
    :align: center
    :scale: 70    
    
@@ -82,7 +82,7 @@ The network layer limits the maximum packet size. Thus, the information must hav
 
 To understand the datagram organisation, let us consider the figure below. A network layer address, represented by a letter, has been assigned to each host and router. To send some information to host `J`, host `A` creates a packet containing its own address, the destination address and the information to be exchanged.
 
-.. figure:: png/network-fig-006-c.png
+.. figure:: svg/simple-internetwork.png
    :align: center
    :scale: 70   
 
@@ -114,7 +114,7 @@ The second organisation of the network layer, called `virtual circuits` has been
 In a network using virtual circuits all hosts are identified with a network layer address. However, a host must explicitely request the establishment of a `virtual circuit before being able to send packets to a destination host. 
 The request to establish a virtual circuit is processed by the `control plane` that installs state to create the virtual circuit between the source and the destination through intermediate routers. All the packets that are sent on the virtual circuit contain a virtual circuit identifier that allows the routers to determine to which virtual circuit each packet belongs. This is illustrated in the figure below with one virtual circuit between host `A` and host `I` and another one between host `A` and host `J`. 
 
-.. figure:: png/network-fig-008-c.png
+.. figure:: svg/simple-internetwork-vc.png
    :align: center
    :scale: 70   
 
@@ -125,7 +125,7 @@ The establishment of a virtual circuit is performed by using a `signalling proto
 
 A first solution is for the router to consult its routing table, remember the characteristics of the requested virtual circuit and forward it over its outgoing interface towards the destination. The signalling message is thus forwarded hop-by-hop until it reaches the destination and the virtual circuit is opened along the path followed by the signalling message. This is illustrated with the red virtual circuit in the figure below.
 
-.. figure:: png/network-fig-007-c.png
+.. figure:: svg/simple-internetwork-vc-estab.png
    :align: center
    :scale: 70   
 
@@ -140,7 +140,7 @@ The last point to be discussed about the virtual circuit organisation is its `da
 
 Each host maintains a flow table that associates a label with each virtual circuit that is has established. When a router receives a packet that contains a label, it extracts the label and consults its `label forwarding table`. This table is a data structure that maps each couple `(incoming interface, label)` to the outgoing interface to be used to forward the packet and the label that must be placed in the outgoing packets. In practice, the label forwarding table can be implemented as a vector and the couple `(incoming interface, label)` is the index of the entry in the vector that contains the outgoing interface and the outgoing label. Thus a single memory access is sufficient to consult the label forwarding table. The utilisation of the label forwarding table is illustrated in the figure below.
 
-.. figure:: png/network-fig-009-c.png
+.. figure:: svg/label-forwarding.svg
    :align: center
    :scale: 70   
 
@@ -175,7 +175,7 @@ The simplest solution is to pre-compute all the routing tables of all routers so
 
 The figure below shows sample routing tables in a five routers network.
 
-.. figure:: png/network-fig-011-c.png
+.. figure:: svg/routing-tables.svg
    :align: center
    :scale: 70   
 

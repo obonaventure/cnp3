@@ -147,9 +147,24 @@ Whenever possible, the bibliography includes hypertext links to the references c
 .. [X200] ITU-T, recommendation X.200, Open Systems Interconnection - Model and Notation, 1994, http://www.itu.int/rec/T-REC-X.200-199407-I/en
 .. [X224] ITU-T, recommendation X.224 : Information technology - Open Systems Interconnection - Protocol for providing the connection-mode transport service, 1995, http://www.itu.int/rec/T-REC-X.224-199511-I/en/
 .. [Zimmermann80] Zimmermann, H., OSI Reference Model - The ISO Model of Architecture for Open Systems InterconnectionPDF (776 KB), IEEE Transactions on Communications, vol. 28, no. 4, April 1980, pp. 425 - 432. http://www.comsoc.org/livepubs/50_journals/pdf/RightsManagement_eid=136833.pdf
-
+.. [RFC20] Cerf, V., ASCII format for network interchange, :rfc:`20`, Oct. 1969
+.. [RFC768] Postel, J., User Datagram Protocol, :rfc:`768`, Aug. 1980
+.. [RFC789] Rosen, E., Vulnerabilities of network control protocols: An example, :rfc:`789`, July 1981
 .. [RFC791] Postel, J., Internet Protocol, :rfc:`791`, Sep. 1981
 .. [RFC792] Postel, J., Internet Control Message Protocol, :rfc:`792`, Sep. 1981
+.. [RFC793] Postel, J., Transmission Control Protocol, :rfc:`793`, Sept. 1981
+.. [RFC813] Clark, D., Window and Acknowledgement Strategy in TCP, :rfc:`813`, July 1982
+.. [RFC819] Su, Z. and Postel, J., Domain naming convention for Internet user applications, :rfc:`819`, Aug. 1982
+.. [RFC821] Postel, J., Simple Mail Transfer Protocol, :rfc:`821`, Aug. 1982
+.. [RFC822] Crocker, D., Standard for the format of ARPA Internet text messages, :rfc:`822`, Aug. 1982
+.. [RFC826] Plummer, D., Ethernet Address Resolution Protocol: Or Converting Network Protocol Addresses to 48.bit Ethernet Address for Transmission on Ethernet Hardware, :rfc:`826`, Nov. 1982
+.. [RFC879] Postel, J., TCP maximum segment size and related topics, :rfc:`879`, Nov. 1983
+.. [RFC893] Leffler, S. and Karels, M., Trailer encapsulations, :rfc:`893`, April 1984
+.. [RFC894] Hornig, C., A Standard for the Transmission of IP Datagrams over Ethernet Networks, :rfc:`894`, April 1984
+.. [RFC896] Nagle, J., Congestion Control in IP/TCP Internetworks, :rfc:`896`, Jan. 1984
+.. [RFC952] Harrenstien, K. and Stahl, M. and Feinler, E., DoD Internet host table specification, :rfc:`952`, Oct. 1985
+.. [RFC959] Postel, J. and Reynolds, J., File Transfer Protocol, :rfc:`959`, Oct. 1985
+.. [RFC974] Partridge, C., Mail routing and the domain system, :rfc:`974`, Jan. 1986
 .. [RFC1032] Stahl, M., Domain administrators guide, :rfc:`1032`, Nov. 1987
 .. [RFC1035] Mockapteris, P., Domain names - implementation and specification, :rfc:`1035`, Nov. 1987
 .. [RFC1042] Postel, J. and Reynolds, J., Standard for the transmission of IP datagrams over IEEE 802 networks, :rfc:`1042`, Feb. 1988
@@ -196,7 +211,6 @@ Whenever possible, the bibliography includes hypertext links to the references c
 .. [RFC2050] Hubbard, K. and Kosters, M. and Conrad, D. and Karrenberg, D. and Postel, J., Internet Registry IP Allocation Guidelines, :rfc:`2050`, Nov. 1996
 .. [RFC2080] Malkin, G. and Minnear, R., RIPng for IPv6, :rfc:`2080`, Jan. 1997
 .. [RFC2082] Baker, F. and Atkinson, R., RIP-2 MD5 Authentication, :rfc:`2082`, Jan. 1997
-.. [RFC20] Cerf, V., ASCII format for network interchange, :rfc:`20`, Oct. 1969
 .. [RFC2131] Droms, R., Dynamic Host Configuration Protocol, :rfc:`2131`, March 1997
 .. [RFC2140] Touch, J., TCP Control Block Interdependence, :rfc:`2140`, April 1997
 .. [RFC2225] Laubach, M., Halpern, J., Classical IP and ARP over ATM, :rfc:`2225`, April 1998
@@ -269,4 +283,18 @@ Whenever possible, the bibliography includes hypertext links to the references c
 .. [RFC4954] Simeborski, R. and Melnikov, A., SMTP Service Extension for Authentication, :rfc:`4954`, July 2007
 .. [RFC4963] Heffner, J. and Mathis, M. and Chandler, B., IPv4 Reassembly Errors at High Data Rates, :rfc:`4963`, July 2007
 .. [RFC4966] Aoun, C. and Davies, E., Reasons to Move the Network Address Translator - Protocol Translator (NAT-PT) to Historic Status, :rfc:`4966`, July 2007
-.. [RFC4987] Eddy, W., TCP SYN Flooding Attacks and Common Mitigations, :rfc:`4987`, Aug. 2007 
+.. [RFC4987] Eddy, W., TCP SYN Flooding Attacks and Common Mitigations, :rfc:`4987`, Aug. 2007
+.. [RFC5004] Chen, E. and Sangli, S., Avoid BGP Best Path Transitions from One External to Another, :rfc:`5004`, Sept. 2007
+.. [RFC5065] Traina, P. and McPherson, D. and Scudder, J., Autonomous System Confederations for BGP, :rfc:`5065`, Aug. 2007
+.. [RFC5068] Hutzler, C. and Crocker, D. and Resnick, P. and Allman, E. and Finch, T., Email Submission Operations: Access and Accountability Requirements, :rfc:`5068`, Nov. 2007
+.. [RFC5072] Varada, S. and Haskins, D. and Allen, E., IP Version 6 over PPP, :rfc:`5072`, Sept. 2007 
+.. [RFC5095] Abley, J. and Savola, P. and Neville-Neil, G., Deprecation of Type 0 Routing Headers in IPv6, :rfc:`5095`, Dec. 2007
+.. [RFC5227] Cheshire, S., IPv4 Address Conflict Detection, :rfc:`5227`, July 2008
+.. [RFC5234] Crocker, D. and Overell, P., Augmented BNF for Syntax Specifications: ABNF, :rfc:`5234`, Jan. 2008
+.. [RFC5321] Klensin, J., Simple Mail Transfer Protocol, :rfc:`5321`, Oct. 2008
+.. [RFC5322] Resnick, P., Internet Message Format, :rfc:`5322`, Oct. 2008
+.. [RFC5340] Coltun, R. and Ferguson, D. and Moy, J. and Lindem, A., OSPF for IPv6, :rfc:`5340`, July 2008
+.. [RFC5646] Phillips, A. and Davis, M., Tags for Identifying Languages, :rfc:`5646`, Sept. 2009
+.. [RFC5681] Allman, M. and Paxson, V. and Blanton, E., TCP congestion control, :rfc:`5681`, Sept. 2009
+.. [RFC5795] Sandlund, K. and Pelletier, G. and Jonsson, L-E., The RObust Header Compression (ROHC) Framework, :rfc:`5795`, March 2010
+

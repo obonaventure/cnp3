@@ -10,7 +10,7 @@ Electronic mail or email is a very popular application in computer networks such
 
 Before looking at the details of Internet email, let us consider a simple scenario illustrated in the figure below where Alice sends an email to Bob. Alice prepares her email by using an `email clients <http://en.wikipedia.org/wiki/Comparison_of_email_client>`_ and sends it to her email server. Alice's `email server <http://en.wikipedia.org/wiki/Comparison_of_mail_servers>`_ extracts Bob's address from the email and delivers the message to Bob's server. Bob retrieves Alice's message on his server and reads it by using his favourite email client or through his webmail interface. 
 
-.. figure:: png/app-fig-009-c.png
+.. figure:: svg/email-arch.png
    :align: center
    :scale: 50 
 
@@ -257,7 +257,7 @@ The last point to be discussed about `base64` is what happens when the length of
 
 Now that we have explained the format of the email messages, we can discuss how these messages can be exchanged through the Internet. The figure below illustrates the protocols that are used when `Alice` sends an email message to `Bob`. `Alice` prepares her email with an email client or on a webmail interface. To send her email to `Bob`, `Alice`'s client will use the Simple Mail Transfer Protocol (:term:`SMTP`) to deliver her message to her SMTP server. `Alice`'s email client is configured with the name of the default SMTP server for her domain. There is usually at least one SMTP server per domain. To deliver the message, `Alice`'s SMTP server must find the SMTP server that contains `Bob`'s mailbox. This can be done by using the Mail eXchange (MX) records of the DNS. A set of MX records can be associated to each domain. Each MX record contains a numerical preference and the fully qualified domain name of a SMTP server that is able to deliver email messages destined to all valid email addresses of this domain. The DNS can return several MX records for a given domain. In this case, the server with the lowest preference is used first. If this server is not reachable, the second most preferred server is used ... `Bob`'s SMTP server will store the message sent by `Alice` until `Bob` retrieves it by using a webmail interface or protocols such as the Post Office Protocol (:term:`POP`) or the Internet Message Access Protocol (:term:`IMAP`). 
  
-.. figure:: png/app-fig-012-c.png
+.. figure:: svg/email-delivery.png
    :align: center
    :scale: 50 
 

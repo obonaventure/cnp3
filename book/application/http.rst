@@ -18,7 +18,7 @@ ftp was very popular in the 1990s and early 2000s, but today it has mostly been 
 In the late 1980s, high energy physicists working at CERN_ had to efficiently exchange documents about their ongoing and planned experiments. `Tim Berners-Lee`_ evaluated several of the documents sharing techniques that were available at that time [B1989]_. As none of the existing solutions met CERN's requirements, they choose to develop a completely new document sharing system. This system was initially called the `mesh`, but was quickly renamed the `world wide web`. The starting point for the `world wide web` is the hypertext. An hypertext is a text that contains references (hyperlinks) to other documents that the reader can immediately access. Hypertext was not invented for the world wide web. The idea of hypertext documents was proposed in 1945 [Bush1945]_ and the first experiments were done during the 1960s [Nelson1965]_ [Myers1998]_ . Compared to the hypertexts that were used in the late 1980s, the main innovation introduced by the `world wide web` was to allow hyperlinks to reference documents stored on remote machines. 
 
 
-.. figure:: png/app-fig-014-c.png
+.. figure:: svg/www-basics.png
    :align: center
    :scale: 50 
 
@@ -79,7 +79,7 @@ More complex HTML elements can also include optionnal attributes in the start ta
 
 The HTML document shown below is composed of two parts : a header delineated by the `<HEAD>` and `</HEAD>` markers and a body (between the `<BODY>` and `</BODY>` markers). In the example below, the header only contains a title, but other types of information can be included in the header. The body contains an image, some text and a list with three hyperlinks. The image is included in the web page by indicating its URI between brackets inside the `<IMG SRC="...">` marker. The image can, of course, reside on any server and the client will automatically download it when rendering the web page. The `<H1>...</H1>` marker is used to specify the first level of headings. The `<UL>` indicates an unnumbered list while the `<LI>` marker indicates a list item. The `<A HREF="URI">text</A>` indicates an hyperlink. The `text` will be underlines in the rendered web page and client will fetch the specified URI when the user clicks on the link.
 
-.. figure:: png/app-fig-015-c.png
+.. figure:: svg/app-fig-015-c.png
    :align: center
    :scale: 50 
 
@@ -99,7 +99,7 @@ The response sent by the server also contains three parts :
  - a `header` that contains additional information about the response. The response header ends with an empty line.
  - a MIME document 
 
-.. figure:: png/app-fig-017-c.png
+.. figure:: svg/http-requests-responses.png
    :align: center
    :scale: 50 
 
@@ -183,7 +183,7 @@ However, as the web evolved to support richer documents containing images, openi
 
 This problem was solved by extending HTTP to support persistent TCP connections :rfc:`2616`. A persistent connection is a TCP connection over which a client may send several HTTP requests. This is illustrated in the figure below.  
 
-.. figure:: png/app-fig-019-c.png
+.. figure:: svg/http-persistent.png
    :align: center
    :scale: 50 
 
@@ -263,7 +263,7 @@ A second solution to allow servers to tune that content to the needs and capabil
 
 The third, and widely adopted, solution are the HTTP cookies. HTTP cookies were initially developed as a private extension by Netscape_. They are now part of the standard :rfc:`2965`. In a nutshell, a cookie is a short string that is chosen by a server to represent a given client. Two HTTP headers are used : `Cookie:` and `Set-Cookie:`. When a server receives an HTTP request from a new client (i.e. an HTTP request that does not contain the `Cookie:` header), it generates a cookie for the client and includes it in the `Set-Cookie:` header of the returned HTTP response. The `Set-Cookie:` header contains several additional parameters including the domain names for which the cookie is valid. The client stores all received cookies on disk and every time it sends an HTTP request, it verifies whether it already knows a cookie for this domain. If so, it attaches the `Cookie:` header to the HTTP request. This is illustrated in the figure below with HTTP 1.1, but cookies also work with HTTP 1.0.
 
-.. figure:: png/app-fig-022-c.png
+.. figure:: svg/http-cookies.png
    :align: center
    :scale: 50 
 
