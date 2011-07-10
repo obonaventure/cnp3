@@ -29,7 +29,7 @@ Each RIP message contains a set of route entries. Each route entry is encoded as
 
 With a 20 bytes route entry, it was difficult to use the same format as above to support IPv6. Instead of defining a variable length route entry format, the designers of :rfc:`2080` defined a new format that does not include an `AFI` field. The format of the route entries used by :rfc:`2080` is shown below. `Plen` is the length of the subnet identifier in bits and the metric is encoded as one byte. The maximum metric is still `15`.
 
-.. figure:: pkt/rip-route-entre-v6.png
+.. figure:: pkt/rip-route-entry-v6.png
    :align: center
    :scale: 100
 

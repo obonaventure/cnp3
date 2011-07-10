@@ -66,10 +66,9 @@ The header of DNS messages is composed of 12 bytes and its structure is shown in
 
 .. figure:: pkt/dnsheader.png
    :align: center
-   :scale: 50
+   :scale: 100
 
    DNS header
-
 
 The `ID` (identifier) is a 16-bits random value chosen by the client. When a client sends a question to a DNS server, it remembers the question and its identifier. When a server returns an answer, it returns in the `ID` field the identifier chosen by the client. Thanks to this identifier, the client can match the received answer with the question that it sent. 
 
@@ -89,7 +88,7 @@ The last four sections of the DNS message contain `Resource Records` (RR).  All 
 
 .. figure:: pkt/dnsrr.png
    :align: center
-   :scale: 50
+   :scale: 100
 
    DNS Resource Records
 

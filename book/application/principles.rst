@@ -91,7 +91,7 @@ Besides 16 and 32 bits words, some applications need to exchange that contain bi
 
 .. figure:: pkt/message.png
    :align: center
-   :scale: 10 
+   :scale: 100 
 
    Message format
 
