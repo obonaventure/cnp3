@@ -63,20 +63,13 @@ In addition, the :term:`ASCII` table also defines several non-printable or contr
 
 The :term:`ASCII` characters are encoded as a seven bits field, but transmitted as an eight-bits byte whose high order bit is usually set to `0`. Bytes are always transmitted starting from the high order or most significant bit.
 
-Most applications exchange strings that are composed of fixed or variable numbers of characters. A common solution to define the character strings that are acceptable is to define them as a grammar using a Backus-Naur Form (:term:`BNF`) such as the Augmented BNF defined in :rfc:`5234`. A BNF is a set of production rules that generate all valid character strings. For example, consider a networked application that uses two commands where the user can supply a username and a passwords. The BNF for this application could be defined them as follows ::
+Most applications exchange strings that are composed of fixed or variable numbers of characters. A common solution to define the character strings that are acceptable is to define them as a grammar using a Backus-Naur Form (:term:`BNF`) such as the Augmented BNF defined in :rfc:`5234`. A BNF is a set of production rules that generate all valid character strings. For example, consider a networked application that uses two commands where the user can supply a username and a passwords. The BNF for this application could be defined them as shown in the figure below.
 
- command     	 = usercommand / passworcommand
- usercommand     = "user" SP username CRLF
- passwordcommand = "pass" SP password CRLF
- username	 = 1*8ALPHA
- password	 = (ALPHA) *(ALPHA/DIGIT)
- ALPHA           =  %x41-5A / %x61-7A   ; A-Z / a-z
- CR              =  %x0D  ; carriage return
- CRLF            =  CR LF ; Internet standard newline
- DIGIT    	 =  "0" / "1" / "2" / "3" / "4" / "5" / "6" / "7" / "8" / "9"
- LF              =  %x0A  ; linefeed
- SP              =  %x20 / %x09 ; space or tabulation
+.. figure:: pkt/bnf.png
+   :align: center
+   :scale: 100 
 
+   A simple BNF specification
 
 The example above defines several terminals and two commands : `usercommand` and `passwordcommand`. The `ALPHA` terminal contains all letters in upper and lower case. The `CR` and `LF` terminals correspond to the carriage return and linefeed control characters. The `CRLF` rule concatenates these two terminals to match the standard end of line termination. The `DIGIT` terminal contains all digits. The `SP` terminal corresponds to the white space characters. The `usercommand` is composed of two strings separated a white space. In the ABNF rules that define the messages used by Internet applications, the commands are case-insentitive. The rule `"user"` corresponds to all possible cases of the letters that compose the word between brackets, e.g. `user`, `uSeR`, `USER`, `usER`, ... A `username` contains at least one letter and up to 8 letters. Usernames are case-sensitive  as they are not defined as a string between brackets. The `password` rule indicates that a password starts with a letter and can contain any number of letters or digits. The white space and the control characters cannot appear in a `password` defined by the above rule.
 

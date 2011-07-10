@@ -23,16 +23,12 @@ Each top-level domain is managed by an organisation that decides how sub-domain 
 
    The tree of domain names
 
-:rfc:`1035` clarified the definition of the fully qualified domain names by using the following :term:`BNF` :: 
+:rfc:`1035` clarified the definition of the fully qualified domain names by using the following :term:`BNF`.
 
- <domain> ::= <subdomain> | " "
- <subdomain> ::= <label> | <subdomain> "." <label>
- <label> ::= <letter> [ [ <ldh-str> ] <let-dig> ]
- <ldh-str> ::= <let-dig-hyp> | <let-dig-hyp> <ldh-str>
- <let-dig-hyp> ::= <let-dig> | "-"
- <let-dig> ::= <letter> | <digit>
- <letter> ::= any one of the 52 alphabetic characters A through Z in upper case and a through z in lower case
- <digit> ::= any one of the ten digits 0 through 9
+.. figure:: pkt/dns-bnf.png
+   :align: center
+
+   BNF of the fully qualified domain names
 
 This grammar speficies that a domain name is an ordered list of labels separated by the dot (`.`) character. Each label can contain letters, numbers and the hyphen character (`-`) but must start with a letter [#fidn]_. Fully qualified domain names are read from left to right. The first label is a hostname or a domain name followed by the hierarchy of domains and ending with the root implicitly at the right. The top-level domain name must be one of the registered TLDs [#ftld]_. For example, in the above figure, `www.whitehouse.gov` corresponds to a host named `www` inside the `whitehouse` domain that belongs to the `gov` top-level domain. `info.ucl.ac.be` corresponds to the `info` domain inside the `ucl` domain that is included in the `ac` sub-domain of the `be` top-level domain.
 
@@ -98,37 +94,12 @@ The `TTL` field indicates the lifetime of the `Resource Record` in seconds. This
 
 The `RDLength` field is the length of the `RData` field that contains the information of the type specified in the `Type` field.
 
-Several types of DNS RR are used in practice. The `A` type is used to encode the IPv4 address that corresponds to the specified name. The `AAAA` type is used to encode the IPv6 address that corresponds to the specified name. A `NS` record contains the name of the DNS server that is responsible for a given domain. For example, a query for the `A` record associated to the `www.ietf.org` name returns the following answer : ::
+Several types of DNS RR are used in practice. The `A` type is used to encode the IPv4 address that corresponds to the specified name. The `AAAA` type is used to encode the IPv6 address that corresponds to the specified name. A `NS` record contains the name of the DNS server that is responsible for a given domain. For example, a query for the `A` record associated to the `www.ietf.org` name returns the following answer.
 
- ; <<>> DiG 9.6.0-APPLE-P2 <<>> -t A www.ietf.org
- ;; global options: +cmd
- ;; Got answer:
- ;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 33431
- ;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 6, ADDITIONAL: 9
- ;; QUESTION SECTION:
- ;www.ietf.org.			IN	A
+.. figure:: pkt/www.ietf.org.pkt
+   :align: center
 
- ;; ANSWER SECTION:
- www.ietf.org.		1800	IN	A	64.170.98.32
-
- ;; AUTHORITY SECTION:
- ietf.org.		592	IN	NS	ns0.ietf.org.
- ietf.org.		592	IN	NS	ns1.yyz1.afilias-nst.info.
- ietf.org.		592	IN	NS	ns1.hkg1.afilias-nst.info.
- ietf.org.		592	IN	NS	ns1.ams1.afilias-nst.info.
- ietf.org.		592	IN	NS	ns1.mia1.afilias-nst.info.
- ietf.org.		592	IN	NS	ns1.sea1.afilias-nst.info.
-
- ;; ADDITIONAL SECTION:
- ns0.ietf.org.		1800	IN	AAAA	2001:1890:1112:1::14
- ns1.ams1.afilias-nst.info. 1235	IN	A	199.19.48.79
- ns1.ams1.afilias-nst.info. 3204	IN	AAAA	2001:500:6::79
- ns1.hkg1.afilias-nst.info. 1428	IN	A	199.19.51.79
- ns1.hkg1.afilias-nst.info. 1428	IN	AAAA	2001:500:9::79
- ns1.mia1.afilias-nst.info. 2870	IN	A	199.19.52.79
- ns1.sea1.afilias-nst.info. 3324	IN	A	199.19.50.79
- ns1.sea1.afilias-nst.info. 3314	IN	AAAA	2001:500:8::79
- ns1.yyz1.afilias-nst.info. 587	IN	A	199.19.49.79
+   Query for the `A` record of `www.ietf.org` 
 
 This answer contains several information. First, the name `www.ietf.org` is associated to IP address `64.170.98.32`. Second, the `ietf.org` domain is managed by six different nameservers. Three of these nameservers are reachable via IPv4 and IPv6. Two of them are not reachable via IPv4 and `ns0.ietf.org` is only reachable via IPv6. A query for the `AAAA` record associated to `www.ietf.org` returns `2001:1890:1112:1::20` and the same authority and additional sections.
 
