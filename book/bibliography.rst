@@ -41,6 +41,7 @@ Whenever possible, the bibliography includes hypertext links to the references c
 .. [COZ2008] Chi, Y., Oliveira, R., Zhang, L., Cyclops: The Internet AS-level Observatory, ACM SIGCOMM Computer Communication Review (CCR), October 2008, http://dx.doi.org/10.1145/1452335.1452337
 .. [CSP2009] Carr, B., Sury, O., Palet Martinez, J., Davidson, A., Evans, R., Yilmaz, F., Wijte, Y., IPv6 Address Allocation and Assignment Policy, RIPE document ripe-481, September 2009, http://www.ripe.net/ripe/docs/ipv6policy.html
 .. [CT1980] Crane, R., Taft, E., Practical considerations in Ethernet local network design, Proc. of the 13th Hawaii International Conference on Systems Sciences, Honolulu, January, 1980, pp. 166--174, http://ethernethistory.typepad.com/papers/PracticalConsiderations.pdf
+.. [Cheshire2010] Cheshire, S., Connect-By-Name for IPv6, presentation at IETF 79th, November 2010, http://www.ietf.org/proceedings/79/slides/nbs-8.pdf
 .. [Cheswick1990] Cheswick, B., An Evening with Berferd In Which a Cracker is Lured, Endured, and Studied, Proc. Winter USENIX Conference, 1990, pp. 163-174, http://cheswick.com/ches/papers/berferd.pdf
 .. [Clark88] Clark D., "The Design Philosophy of the DARPA Internet Protocols", Computer Communications Review 18:4, August 1988, pp. 106-114, http://dx.doi.org/10.1145/205447.205458
 .. [Comer1988] Comer, D., Internetworking with TCP/IP : principles, protocols & architecture, Prentice Hall, 1988
@@ -78,6 +79,7 @@ Whenever possible, the bibliography includes hypertext links to the references c
 .. [ISO10589] Information technology — Telecommunications and information exchange between systems — Intermediate System to Intermediate System intra-domain routeing information exchange protocol for use in conjunction with the protocol for providing the connectionless-mode network service (ISO 8473), 2002, http://standards.iso.org/ittf/PubliclyAvailableStandards/c030932_ISO_IEC_10589_2002(E).zip 
 .. [Jacobson1988] Jacobson, V. 1988. Congestion avoidance and control. In Symposium Proceedings on Communications Architectures and Protocols (Stanford, California, United States, August 16 - 18, 1988). V. Cerf, Ed. SIGCOMM '88. ACM, New York, NY, 314-329. http://doi.acm.org/10.1145/52324.52356
 .. [JSBM2002] Jung, J., Sit, E., Balakrishnan, H., and Morris, R. 2002. DNS performance and the effectiveness of caching. IEEE/ACM Trans. Netw. 10, 5 (Oct. 2002), 589-603. http://dx.doi.org/10.1109/TNET.2002.803905
+.. [Kerrisk2010] Kerrisk, M., The Linux Programming Interface, No Starch Press, 2010, http://nostarch.com/tlpi
 .. [KM1995] Kent, C. A. and Mogul, J. C. 1995. Fragmentation considered harmful. SIGCOMM Comput. Commun. Rev. 25, 1 (Jan. 1995), 75-87. http://doi.acm.org/10.1145/205447.205456
 .. [KP91] Karn, P. and Partridge, C. 1991. Improving round-trip time estimates in reliable transport protocols. ACM Trans. Comput. Syst. 9, 4 (Nov. 1991), 364-373. http://doi.acm.org/10.1145/118544.118549
 .. [KPD1985] Karn, P., Price, H., Diersing, R., Packet radio in amateur service, IEEE Journal on Selected Areas in Communications, 3, May, 1985, http://dx.doi.org/10.1109/JSAC.1985.1146214
@@ -89,6 +91,7 @@ Whenever possible, the bibliography includes hypertext links to the references c
 .. [KuroseRoss09] Kurose J. and Ross K., Computer networking : a top-down approach featuring the Internet, Addison-Wesley, 2009, http://books.google.com/books?id=2hv3PgAACAAJ&pgis=1
 .. [Licklider1963] Licklider, J., Memorandum For Members and Affiliates of the Intergalactic Computer Network, 1963, http://www.kurzweilai.net/articles/art0366.html?printable=1
 .. [LCCD09] Leiner, B. M., Cerf, V. G., Clark, D. D., Kahn, R. E., Kleinrock, L., Lynch, D. C., Postel, J., Roberts, L. G., and Wolff, S. 2009. A brief history of the internet. SIGCOMM Comput. Commun. Rev. 39, 5 (Oct. 2009), 22-31. http://doi.acm.org/10.1145/1629607.1629613
+.. [LFJLMT] Leffler, S., Fabry, R., Joy, W., Lapsley, P., Miller, S., Torek, C., An Advanced 4.4BSD Interprocess Communication Tutorial, 4.4 BSD Programmer's Supplementary Documentation, http://docs.freebsd.org/44doc/psd/21.ipc/paper.pdf
 .. [LSP1982] Lamport, L., Shostak, R., and Pease, M. 1982. The Byzantine Generals Problem. ACM Trans. Program. Lang. Syst. 4, 3 (Jul. 1982), 382-401. http://doi.acm.org/10.1145/357172.357176
 .. [Leboudec2008] Leboudec, J.-Y., Rate Adaptation Congestion Control and Fairness : a tutorial, Dec. 2008, http://ica1www.epfl.ch/PS_files/LEB3132.pdf
 .. [McFadyen1976]  McFadyen, J., Systems Network Architecture: An overview, IBM Systems Journal, Vol. 15, N. 1, pp. 4-23, 1976, http://ieeexplore.ieee.org//xpls/abs_all.jsp?arnumber=5388105
@@ -111,6 +114,7 @@ Whenever possible, the bibliography includes hypertext links to the references c
 .. [Perlman2000] Perlman, R., Interconnections : Bridges, routers, switches and internetworking protocols, 2nd edition, Addison Wesley, 2000, http://books.google.com/books?id=AIRitf5C-QQC&pgis=1
 .. [Perlman2004] Perlman, R., RBridges: Transparent Routing, Proc. IEEE Infocom , March 2004. http://www.ieee-infocom.org/2004/Papers/26_1.PDF
 .. [Pouzin1975] Pouzin, L., The CYCLADES Network - Present state and development trends, Symposium on Computer Networks, 1975 pp 8-13., http://rogerdmoore.ca/PS/CIGALE/CYCL2.html
+.. [Rago1993] S. Rago, UNIX System V network programming, Addison Wesley, 1993, http://www.pearsonhighered.com/educator/product/UNIX-System-V-Network-Programming/9780201563184.page
 .. [RE1989] Rochlis, J. A. and Eichin, M. W. 1989. With microscope and tweezers: the worm from MIT's perspective. Commun. ACM 32, 6 (Jun. 1989), 689-698. http://doi.acm.org/10.1145/63526.63528
 .. [RFC20] Cerf, V., ASCII format for network interchange, :rfc:`20`, Oct. 1969
 .. [RFC768] Postel, J., User Datagram Protocol, :rfc:`768`, Aug. 1980
@@ -268,6 +272,7 @@ Whenever possible, the bibliography includes hypertext links to the references c
 .. [Ross1989] Ross, F., An overview of FDDI: The fiber distributed data interface, IEEE J. Selected Areas in Comm., vol. 7, no. 7, pp. 1043-1051, Sept. 1989
 .. [Russel06] Russell A., Rough Consensus and Running Code and the Internet-OSI Standards War, IEEE Annals of the History of Computing, July-September 2006, http://www.computer.org/portal/cms_docs_annals/annals/content/promo2.pdf
 .. [SARK2002] Subramanian, L., Agarwal, S., Rexford, J., Katz, R.. Characterizing the Internet hierarchy from multiple vantage points. In IEEE INFOCOM, 2002, http://dx.doi.org/10.1109/INFCOM.2002.1019307
+.. [Sechrest] Sechrest, S., An Introductory 4.4BSD Interprocess Communication Tutorial, 4.4BSD Programmer's Supplementary Documentation, http://docs.freebsd.org/44doc/psd/20.ipctut/paper.pdf
 .. [SG1990] Scheifler, R., Gettys, J., X Window System: The Complete Reference to Xlib, X Protocol, ICCCM, XLFD, X Version 11, Release 4, Digital Press, http://h30097.www3.hp.com/docs/base_doc/DOCUMENTATION/V51B_ACRO_SUP/XWINSYS.PDF
 .. [SGP98] Stone, J., Greenwald, M., Partridge, C., and Hughes, J. 1998. Performance of checksums and CRC's over real data. IEEE/ACM Trans. Netw. 6, 5 (Oct. 1998), 529-543. http://dx.doi.org/10.1109/90.731187
 .. [SH1980] Shoch, J. F. and Hupp, J. A. Measured performance of an Ethernet local network. Commun. ACM 23, 12 (Dec. 1980), 711-721. http://doi.acm.org/10.1145/359038.359044
@@ -277,6 +282,7 @@ Whenever possible, the bibliography includes hypertext links to the references c
 .. [STBT2009] Sridharan, M., Tan, K., Bansal, D., Thaler, D., Compound TCP: A New TCP Congestion Control for High-Speed and Long Distance Networks, Internet draft, work in progress, April 2009, http://tools.ietf.org/html/draft-sridharan-tcpm-ctcp-02
 .. [Seifert2008] Seifert, R., Edwards, J., The All-New Switch Book : The complete guide to LAN switching technology, Wiley, 2008, http://books.google.com/books?id=wgeusf8tgTMC&pgis=1
 .. [Selinger] Selinger, P., MD5 collision demo, http://www.mscs.dal.ca/~selinger/md5collision/
+.. [SFR2004] Stevens R. and Fenner, and Rudoff, A., UNIX Network Programming: The sockets networking API, Addison Wesley, 2004, http://books.google.com/books?id=ptSC4LpwGA0C&printsec=frontcover&source=gbs_atb#v=onepage&q&f=false
 .. [Sklower89] Sklower, K. 1989. Improving the efficiency of the OSI checksum calculation. SIGCOMM Comput. Commun. Rev. 19, 5 (Oct. 1989), 32-43. http://doi.acm.org/10.1145/74681.74684
 .. [Smm98] Semke, J., Mahdavi, J., and Mathis, M. 1998. Automatic TCP buffer tuning. SIGCOMM Comput. Commun. Rev. 28, 4 (Oct. 1998), 315-323. http://doi.acm.org/10.1145/285243.285292
 .. [Stevens1994] Stevens, R., TCP/IP Illustrated : the Protocols, Addison-Wesley, 1994, http://books.google.com/books?id=-btNds68w84C&pgis=1

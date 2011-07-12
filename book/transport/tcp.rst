@@ -16,7 +16,7 @@ TCP provides a reliable bytestream connection-oriented transport service on top 
  - Email (:term:`SMTP`, :term:`POP`, :term:`IMAP`)
  - World wide web ( :term:`HTTP`, ...)
  - Most file transfer protocols ( :term:`ftp`, peer-to-peer file sharing applications , ...)
- - remote computer access : :term:`telnet`, :term:`ssh`, :term:`X11, VNC, ...
+ - remote computer access : :term:`telnet`, :term:`ssh`, :term:`X11`, :term:`VNC`, ...
  - non-interactive multimedia applications : flash
 
 On the global Internet, most of the applications used in the wide area rely on TCP. Many studies [#ftcpusage]_ have reported that TCP was responsible for more than 90% of the data exchange`d in the global Internet.
