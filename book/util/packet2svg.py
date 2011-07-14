@@ -33,7 +33,7 @@ for fileName in (sys.argv[1:]) :
         line = file.readline()
         if not line:
             break
-        line=escape(line)  # to be XML compatible
+        line=escape(line.expandtabs(8))  # to be XML compatible
         newFile.write(" <tspan x=\"0\" dy=\"18\">")
         newFile.write(line)
         newFile.write("</tspan>")

@@ -17,7 +17,11 @@ Like any open-source project, the future of Computer Networking Principles, Prot
   
  A stable release of the textbook will be issued at least once per year on http://inl.info.ucl.ac.be/CNP3 and the development version will always be available from https://scm.info.ucl.ac.be/trac/cnp3 . 
 
-You can download the sources via subversion by using `svn co https://scm.info.ucl.ac.be/svn/cnp3/book`. The book was compiled on MacOS/X Snow Leopard using sphinx. inkscape is required to convert some of the images in png format. Most of the images will be converted to the SVG format to improve the portability of the textbook.
+You can download the sources via subversion by using
+ 
+    svn co https://scm.info.ucl.ac.be/svn/cnp3/book 
+
+The book was compiled on MacOS/X Snow Leopard using sphinx. inkscape is required to convert some of the images in png format. Most of the images will be converted to the SVG format to improve the portability of the textbook. python is also required
 
 The textbook was written on a Mac running Snow Leopard, but it should rebuild on other Unix based systems. Comments on issues in rebuilding the textbook are welcome.
 
