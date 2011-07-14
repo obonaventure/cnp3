@@ -120,7 +120,7 @@ HTTP clients and servers can include many different HTTP headers in HTTP request
 
  - the `Content-Length:` header is the :term:`MIME` header that indicates the length of the MIME document in bytes.
  - the `Content-Type:` header is the :term:`MIME` header that indicates the type of the attached MIME document. HTML pages use the `text/html` type.
- - the `Content-Encoding:` header indicates how the :term:`MIME document has been encoded. For example, this header would be set to `x-gzip` for a document compressed by using the gzip_ software. 
+ - the `Content-Encoding:` header indicates how the :term:`MIME document` has been encoded. For example, this header would be set to `x-gzip` for a document compressed by using the gzip_ software. 
 
 :rfc:`1945` and :rfc:`2616` define headers that are specific to HTTP responses. These server headers include :
 

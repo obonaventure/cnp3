@@ -88,6 +88,9 @@ Glossary
    IPv6
 	is the version 6 of the Internet Protocol, the connectionless network layer protocol which is intended to replace :term:`IPv4` . IPv6 addresses are encoded as a 128 bits field.
 
+   TCP/IP
+        refers to the :term:`TCP` and :term:`IP` protocols	
+
    TCP
 	The Transmission Control Protocol is a protocol of the transport layer in the TCP/IP protocol suite that provides a reliable bytestream connection-oriented service on top of IP
 
@@ -165,11 +168,9 @@ Glossary
 	A Network Address Translator is a middlebox that translates IP packets.
 
    iBGP
-
    	An iBGP session is a BGP between two routers belonging to the same Autonomous System. Also called an internal BGP session.
 
-   eBGP
-   	
+   eBGP	
 	An eBGP session is a BGP session between two directly connected routers that belong to two different Autonomous Systems. Also called an external BGP session.
 
    router
@@ -277,8 +278,8 @@ Glossary
    minicomputer
 	A minicomputer is a multi-user system that was typically used in the 1960s/1970s to serve departments. See the corresponding wikipedia article for additional information : http://en.wikipedia.org/wiki/Minicomputer
 
-   MIME
-	The Multi-purpose Internet Mail Extensions are a set of extensions to the standard format of email messages that enable the transmission of non-ASCII messages.
+   MIME document
+	A MIME document is a document, encoded by using the :term:`MIME` format.
 
    modem
 	A modem (modulator-demodulator) is a device that encodes (resp. decodes) digital information by modulating (resp. demodulating) an analog signal. Modems are frequently used to transmit digital information over telephone lines and radio links. See http://en.wikipedia.org/wiki/Modem for a survey of various types of modems

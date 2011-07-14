@@ -3,6 +3,8 @@
 
 .. index:: link-state routing
 
+.. _linkstate:
+
 Link state routing
 ------------------
 
