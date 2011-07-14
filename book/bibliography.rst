@@ -266,6 +266,7 @@ Whenever possible, the bibliography includes hypertext links to the references c
 .. [RFC5646] Phillips, A. and Davis, M., Tags for Identifying Languages, :rfc:`5646`, Sept. 2009
 .. [RFC5681] Allman, M. and Paxson, V. and Blanton, E., TCP congestion control, :rfc:`5681`, Sept. 2009
 .. [RFC5795] Sandlund, K. and Pelletier, G. and Jonsson, L-E., The RObust Header Compression (ROHC) Framework, :rfc:`5795`, March 2010
+.. [RG2010] Rhodes, B. and Goerzen, J., Foundations of Python Network Programming: The Comprehensive Guide to Building Network Applications with Python, Second Edition, http://books.google.com/books?id=9HGUc8AO2xQC
 .. [RJ1995] Ramakrishnan, K. K. and Jain, R. 1995. A binary feedback scheme for congestion avoidance in computer networks with a connectionless network layer. SIGCOMM Comput. Commun. Rev. 25, 1 (Jan. 1995), 138-156. http://doi.acm.org/10.1145/205447.205461
 .. [RY1994] Ramakrishnan, K.K. and Henry Yang, The Ethernet Capture Effect: Analysis and Solution, Proceedings of IEEE 19th Conference on Local Computer Networks, MN, Oct. 1994. http://www2.research.att.com/~kkrama/papers/capture_camera.pdf
 .. [Roberts1975] Roberts, L., ALOHA packet system with and without slots and capture. SIGCOMM Comput. Commun. Rev. 5, 2 (Apr. 1975), 28-42. http://doi.acm.org/10.1145/1024916.1024920
@@ -300,7 +301,13 @@ Whenever possible, the bibliography includes hypertext links to the references c
 .. [WMS2004] White, R., Mc Pherson, D., Srihari, S., Practical BGP, Addison-Wesley, 2004, http://books.google.com/books?id=9OlSAAAAMAAJ&pgis=1
 .. [Watson1981] Watson, R.  Timer-Based Mechanisms in Reliable Transport Protocol Connection Management. Computer Networks 5: 47-56 (1981), http://dx.doi.org/10.1016/0376-5075(81)90031-3
 .. [Williams1993] Williams, R. A painless guide to CRC error detection algorithms, August 1993, unpublished manuscript, http://www.ross.net/crc/download/crc_v3.txt
+.. [WY2011] Wing, D. and Yourtchenko, A., Happy Eyeballs:  Success with Dual-Stack Hosts, Internet draft, work in progress, July 2011, http://tools.ietf.org/html/draft-ietf-v6ops-happy-eyeballs-03
 .. [X200] ITU-T, recommendation X.200, Open Systems Interconnection - Model and Notation, 1994, http://www.itu.int/rec/T-REC-X.200-199407-I/en
 .. [X224] ITU-T, recommendation X.224 : Information technology - Open Systems Interconnection - Protocol for providing the connection-mode transport service, 1995, http://www.itu.int/rec/T-REC-X.224-199511-I/en/
 .. [Zimmermann80] Zimmermann, H., OSI Reference Model - The ISO Model of Architecture for Open Systems InterconnectionPDF (776 KB), IEEE Transactions on Communications, vol. 28, no. 4, April 1980, pp. 425 - 432. http://www.comsoc.org/livepubs/50_journals/pdf/RightsManagement_eid=136833.pdf
 
+
+
+
+             
+                   

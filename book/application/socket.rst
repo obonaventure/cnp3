@@ -53,7 +53,7 @@ In today's Internet where hosts are capable of supporting both IPv4 and IPv6, al
 
 In the example above, `socket.getaddrinfo` returns two tuples. The first one corresponds to the sockaddr containing the IPv6 address of the remote server and the second corresponds to the IPv4 information. Due to some peculiarities of IPv6 and IPv4, the format of the two tuples is not exactly the same, but the key information in both cases are the network layer address (`2001:6a8:3080:3::2` and `130.104.229.225`) and the port number (`80`). The other parameters are seldom used.
 
-`socket.getaddrinfo` can be used to build a simple client that queries the DNS and contact the server by using either IPv4 or IPv6 depending on the addresses returned by the `socket.getaddrinfo` method. The client below iterates over the list of addresses returned by the DNS and sends its request to the first destination address for which it can create a socket. Other strategies are of course possible. For example, a host running in an IPv6 network might prefer to always use IPv6 when IPv6 are available [#fipv6pref]_. 
+`socket.getaddrinfo` can be used to build a simple client that queries the DNS and contact the server by using either IPv4 or IPv6 depending on the addresses returned by the `socket.getaddrinfo` method. The client below iterates over the list of addresses returned by the DNS and sends its request to the first destination address for which it can create a socket. Other strategies are of course possible. For example, a host running in an IPv6 network might prefer to always use IPv6 when IPv6 are available [#fipv6pref]_. Another example is the happy eyeballs approach which is being discussed within the IETF_ [WY2011]_ . For example, [WY2011]_ mentions that some web browsers try to use the first address returned by `socket.getaddrinfo`. If there is no answer within some small delay (e.g. 300 milliseconds), the second address is tried, ...
 
 .. literalinclude:: python/simpleclientname.py
    :language: python
@@ -75,6 +75,26 @@ With these methods, it is now possible to write a simple HTTP client. This clien
    :language: python
 
 
+The second type of applications that can be written by using the socket API are the servers. A server is typically a server that runs forever waiting to process requests coming from remote clients. A server using the connectionless will typically start with the creation of a `socket` with the `socket.socket`. This socket can be created above the TCP/IPv4 networking stack (`socket.AF_INET`) or the TCP/IPv6 networking stack (`socket.AF_INET6`), but not both by default. If a server is willing to use the two networking stacks, it must create two threads, one to handle the TCP/IPv4 socket and the other to handle the TCP/IPv6 socket. It is unfortunately impossible to define a socket that can receive data from both networking stacks at the same time in the python_ socket API.
+
+.. index:: socket.bind, socket.recvfrom
+
+A server using the connectionless service will typically use two methods from the socket API in addition to those that we have already discussed.
+
+ - `socket.bind` is used to bind a socket to a port number and optionally an IP address. Most servers will bind their socket to all available interfaces on the servers, but there are some situations where the server may prefer to be bound only to specific IP addresses. For example, a server running on smartphone might be bound to the IP address of the WiFi interface but not on the 3G interface that is more expensive.
+ - `socket.recvfrom` is used to receive data from the underlying networking stack. This method returns both the sender's address and the received data.
+
+The code below illustrates a very simple server running above the connectionless transport service that simply prints on the standard output all the received messages. This server uses the TCP/IPv6 networking stack.
+
+.. literalinclude:: python/simpleserverudp.py
+   :language: python
+
+A server that uses the reliable byte stream service can also be built above the socket API. Such a server starts by creating a socket that is bound to the port that has been chosen for the server. Then the server calls the `socket.listen` method. This informs the underlying networking stack of the number of transport connection attempts that can be queued in the underlying networking stack waiting to be accepted and processed by the server. The server typically has a thread waiting on the `socket.accept()` method. This method returns as soon as a connection attempt is received by the underlying stack. It returns a socket that is bound to the established connection and the address of the remote host. With these methods, it is possible to write a very simple web server that always returns a `404` error to all `GET` requests and a `501` errors to all other requests. 
+
+.. literalinclude:: python/simplehttpserver.py
+   :language: python
+
+This server is far from a production-quality web server. A real web server would use multiple threads and/or non-blocking IO to process a large number of concurrent requests. Furthermore, it would also need to handle all the errors that could happen while receiving data over a transport connection. These are outside the scope of this section and additional information on more complex networked applications may be found elsewhere. For example, [RG2010]_ provides an in-depth discussion of the utilisation of the socket API with python while [SFR2004]_ remains an excellent source of information on the socket API in C.
 
 
 

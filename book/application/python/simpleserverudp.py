@@ -1,12 +1,14 @@
 import socket, sys
 
-HOST_IP=sys.argv[1]   
-HOST_PORT=int(sys.argv[2])
+PORT=int(sys.argv[1])
 BUFF_LEN=8192
 
-s = socket.socket( socket.AF_INET, socket.SOCK_DGRAM ) # UDP
-s.bind( (HOST_IP,HOST_PORT) )
-
+s=socket.socket(socket.AF_INET6, socket.SOCK_DGRAM)
+s.bind(('',PORT,0,0))
 while True:
-    data, addr = s.recvfrom( BUFF_LEN ) # buffer size is 1024 bytes
-    print "received message:", data
+    data, addr = s.recvfrom( BUFF_LEN ) 
+    if data=="STOP" :
+        print "Stopping server"
+        sys.exit(0)
+    print "received from ", addr, " message:", data
+
