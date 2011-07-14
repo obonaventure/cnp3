@@ -165,7 +165,7 @@ The HyperText Transfer Protocol
 
 .. [#rs] You may obtain additional information about the root DNS servers from http://www.root-servers.org
 
-.. [#fblock] Note that using `telnet` to connect to a remote host on port 25 may not work in all networks. Due to the spam_ problem, many ISP_ networks do not allow their customers to use port TCP 25 directly and force them to use the ISP's mail relay to forward their email. Thanks to this, if a software sending spam has been installed on the PC of one of the ISP's customers, this software will not be able to send a huge amount of spam. If you connect to `nostromo.info.ucl.ac.be` from the fixed stations in INGI's lab, you should not be blocked.
+.. [#fblock] Note that using `telnet` to connect to a remote host on port 25 may not work in all networks. Due to the spam_ problem, many :term:`ISP` networks do not allow their customers to use port TCP 25 directly and force them to use the ISP's mail relay to forward their email. Thanks to this, if a software sending spam has been installed on the PC of one of the ISP's customers, this software will not be able to send a huge amount of spam. If you connect to `nostromo.info.ucl.ac.be` from the fixed stations in INGI's lab, you should not be blocked.
 
 .. [#fmonitoring] There are many `monitoring tools <http://en.wikipedia.org/wiki/Comparison_of_network_monitoring_systems>`_ available. nagios_ is a very popular open source monitoring system. 
 

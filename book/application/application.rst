@@ -56,9 +56,9 @@ In this chapter, we have first described the client-server and the peer-to-peer 
 
 .. Additional information about the Bittorrent protocol may be found i
 
-.. include:: ../links.rst
-
 
 .. include:: exercises/ex-application.rst
+
+.. include:: ../links.rst
 
 

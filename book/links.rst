@@ -126,8 +126,6 @@
 
 .. _RPC: http://en.wikipedia.org/wiki/Remote_procedure_call
 
-.. _ISP: Internet Service Provider
-
 .. _spam: http://en.wikipedia.org/wiki/Spam_(electronic)
 
 .. _datacenter: http://en.wikipedia.org/wiki/Data_center
@@ -238,4 +236,8 @@
 
 .. _ntop: http://www.ntop.org
 
+.. _sphinx: http://sphinx.pocoo.org
 
+.. _inkscape: http://www.inkscape.org 
+
+.. _email clients: http://en.wikipedia.org/wiki/Comparison_of_email_client

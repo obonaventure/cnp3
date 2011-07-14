@@ -45,7 +45,7 @@ Whenever possible, the bibliography includes hypertext links to the references c
 .. [Comer1988] Comer, D., Internetworking with TCP/IP : principles, protocols & architecture, Prentice Hall, 1988
 .. [Comer1991] Comer D., Internetworking With TCP/IP : Design Implementation and Internals,  Prentice Hall, 1991
 .. [Cohen1980] Cohen, D., On Holy Wars and a Plea for Peace, IEN 137, April 1980, http://www.ietf.org/rfc/ien/ien137.txt
-.. [DC2009] Donahoo, M., Calvert, K., TCP/IP Sockets in C: Practical Guide for Programmers, Morgan Kaufman, 2009, http://books.google.com/books?id=dmt_mERzxV4C&pgis=1
+.. [DC2009] Donahoo, M., Calvert, K., TCP/IP Sockets in C: Practical Guide for Programmers, Morgan Kaufman, 2009, http://books.google.com/books?id=dmt_mERzxV4C
 .. [DIX] The Ethernet: a local area network: data link layer and physical layer specifications. SIGCOMM Comput. Commun. Rev. 11, 3 (Jul. 1981), 20-66. http://doi.acm.org/10.1145/1015591.1015594
 .. [DKF+2007] Dimitropoulos, X., Krioukov, D., Fomenkov, M., Huffaker, B., Hyun, Y., Claffy, K., Riley, G.  AS Relationships: Inference and Validation, ACM SIGCOMM Computer Communication Review (CCR), Jan. 2007, http://doi.acm.org/10.1145/1198255.1198259
 .. [DP1981] Dalal, Y. K. and Printis, R. S. 1981. 48-bit absolute internet and Ethernet host numbers. In Proceedings of the Seventh Symposium on Data Communications (Mexico City, Mexico, October 27 - 29, 1981). SIGCOMM '81. ACM, New York, NY, 240-245. http://doi.acm.org/10.1145/800081.802680
@@ -209,7 +209,7 @@ Whenever possible, the bibliography includes hypertext links to the references c
 .. [RFC3315] Droms, R. and Bound, J. and Volz, B. and Lemon, T. and Perkins, C. and Carney, M., Dynamic Host Configuration Protocol for IPv6 (DHCPv6), :rfc:`3315`, July 2003
 .. [RFC3330] IANA, Special-Use IPv4 Addresses, :rfc:`3330`, Sept. 2002
 .. [RFC3360] Floyd, S., Inappropriate TCP Resets Considered Harmful, :rfc:`3360`, Aug. 2002
-.. [RFC3390] Allman, M. and Floyd, S. and Partridge, C., Increasing TCP's Initial Window, :rfc:`3390, Oct. 2002
+.. [RFC3390] Allman, M. and Floyd, S. and Partridge, C., Increasing TCP's Initial Window, :rfc:`3390`, Oct. 2002
 .. [RFC3490] Faltstrom, P. and Hoffman, P. and Costello, A., Internationalizing Domain Names in Applications (IDNA), :rfc:`3490`, March 2003
 .. [RFC3501] Crispin, M., Internet Message Access Protocol - Version 4 rev1, :rfc:`3501`, March 2003
 .. [RFC3513] Hinden, R. and Deering, S., Internet Protocol Version 6 (IPv6) Addressing Architecture, :rfc:`3513`, April 2003

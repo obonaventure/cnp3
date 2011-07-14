@@ -80,9 +80,13 @@ exclude_patterns = [ 'intro/organisation.rst',
                      'application/principles.rst',
                      'application/socket.rst',
                      'application/transport-service.rst',
+                     'application/exercises/ex-application.rst',
+                     'application/Mission/*',
                      'transport/principles.rst',
                      'transport/tcp.rst',
                      'transport/udp.rst',
+                     'transport/footnotes.rst',
+                     'transport/exercises/*',
                      'network/bgp.rst',
                      'network/dv.rst',
                      'network/ipv4.rst',
@@ -92,12 +96,22 @@ exclude_patterns = [ 'intro/organisation.rst',
                      'network/ospf.rst',
                      'network/principles.rst',
                      'network/rip.rst',
+                     'network/exercises/*',
+                     'network/footnotes.rst',
                      'lan/ethernet.rst',
                      'lan/ppp.rst',
                      'lan/principles.rst',
                      'lan/technologies.rst',
+                     'lan/exercises/ex-lan.rst',
+                     'lan/lan-footnotes.rst',
                      'lan/wifi.rst',
+                     'links.rst',
                      'mpls/*', 'tc/*']
+
+# epilog add to all included files
+#rst_epilog = """
+#.. include:: links.rst
+#"""
 
 
 # The reST default role (used for this markup: `text`) to use for all documents.

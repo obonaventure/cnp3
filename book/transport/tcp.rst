@@ -43,7 +43,7 @@ A TCP header contains the following fields :
    - TCP
 
  - the `sequence number` (32 bits), `acknowledgement number` (32 bits) and `window` (16 bits) fields are used to provide a reliable data transfer by using a window-based protocol. In a TCP bytestream, each byte of the stream consumes one sequence number. Their utilisation will be described in more details in section :ref:`TCPReliable`
- - the `Urgent pointer` is used to indicate that some data should be considered as urgent in a TCP bytestream. However, it is rarely used in practice and will not be described here. Additional details about the utilisation of this pointer may be found in :rfc:`793`, :rfc:`1122` or [StevensTCP]_
+ - the `Urgent pointer` is used to indicate that some data should be considered as urgent in a TCP bytestream. However, it is rarely used in practice and will not be described here. Additional details about the utilisation of this pointer may be found in :rfc:`793`, :rfc:`1122` or [Stevens1994]_
  - the flags field contain a set of bit flags that indicate how a segment should be interpreted by the TCP entity receiving it : 
 
     - the `SYN` flag is used during connection establishment
@@ -519,7 +519,7 @@ To deal with the limited size of the SACK option, a TCP receiver that has curren
 
 When a sender receives a SACK option that indicates a new block and thus a new possible segment loss, it usually does not retransmit the missing segment(s) immediately. To deal with reordering, a TCP sender can use a heuristic similar to `fast retransmit` by retransmitting a gap only once it has received three SACK options indicating this gap. It should be noted that the SACK option does not supersede the `acknowledgement number` of the TCP header. A TCP sender can only remove data from its sending buffer once they have been acknowledged by TCP's cumulative acknowledgements. This design was chosen for two reasons. First, it allows the receiver to discard parts of its receiving buffer when it is running out of memory without loosing data. Second, as the SACK option is not transmitted reliably, the cumulative acknowledgements are still required to deal with losses of `ACK` segments carrying only SACK information. Thus, the SACK option only serves as a hint to allow the sender to optimise its retransmissions.
 
-.. oldnote:: Protection agains wrapped sequence numbers
+..  Protection agains wrapped sequence numbers
   
 .. todo
 

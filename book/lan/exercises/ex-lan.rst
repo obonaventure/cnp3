@@ -5,7 +5,7 @@ Exercises
 
 1. Consider the switched network shown in the figure below. What is the spanning tree that will be computed by 802.1d in this network assuming that all links have a unit cost ? Indicate the state of each port.
 
-.. figure:: exercices/fig/switchesok.png
+.. figure:: exercises/fig/switchesok.png
    :align: center
    :scale: 50 
 
@@ -15,7 +15,7 @@ Exercises
 
 3. Many enterprise networks are organized with a set of backbone devices interconnected by using a full mesh of links as shown in the figure below. In this network, what are the benefits and drawbacks of using Ethernet switches and IP routers running OSPF ?
 
-.. figure:: exercices/fig/backbone.png
+.. figure:: exercises/fig/backbone.png
    :align: center
    :scale: 30 
 

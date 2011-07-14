@@ -66,8 +66,8 @@ This is mainly due to the fact that the communicating devices use their own cloc
 
 The physical layer allows thus two or more entities that are directly attached to the same transmission medium to exchange bits. Being able to exchange bits is important because virtually any information can be encoded as a sequence of bits. Electrical engineers are used to process streams of bits, but computer scientists usually prefer to deal with higher level concepts. A similar issue arises with file storage. Storage devices such as hard-disks also store streams of bits. There are hardware devices that process the bit stream produced by a hard-disk, but computer scientists have designed filesystems to allow applications to easily access such storage devices. These filesystems are typically divided in several layers as well. Hard-disks store sectors of 512 bytes or more. Unix filesystems groups sectors in larger blocks that can contain data or inodes that represent the structure of the filesystem. Finally, applications manipulate files and directories that are translated in blocks, sectors and eventually bits by the operating system.
 
-.. index:: Datalink layer
-.. index:: frame
+.. index:: Datalink layer, frame
+
 Computer networks use a similar approach and each layer provides a service that is built above the underlying layer and is closer to the needs of the applications. 
 
 
@@ -84,6 +84,7 @@ An important point to note about the `Datalink layer` is that although the figur
 
 
 .. index:: Network layer, packet
+
 The `Datalink layer` allows directly connected hosts to exchange information, but it is often necessary to exchange information between hosts that are not attached to the same physical medium. This is the task of the `network layer`. The `network layer` is built above the `datalink layer`. Network layer entities exchange `packets`. A `packet` is a finite sequence of bytes that is transported by the datalink layer inside one or more frames. A packet usually contains information about its origin and its destination. A packet usually passes through several intermediate devices called routers on its way from its origin to its destination.
 
 
@@ -94,6 +95,7 @@ The `Datalink layer` allows directly connected hosts to exchange information, bu
    The network layer
 
 .. index:: Transport layer, segment
+
 Most realisations, including the Internet, of the network layer do not provide a reliable service. However, many applications need to exchange information reliably and using the network layer service directly would be very difficult for them. Ensuring a reliable delivery of the data produced by applications is the task of the `transport layer`. `Transport layer` entities exchange `segments`. A segment is a finite sequence of bytes that are transported inside one or more packets. A transport layer entity issues segments (or sometimes part of segments) as `Data.request` to the underlying network layer entity. 
 
 There are different types of transport layers. The most widely used transport layers on the Internet are :term:`TCP` that provides a reliable connection-oriented bytestream transport service and :term:`UDP` that provides an unreliable connection-less transport service.
