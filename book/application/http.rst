@@ -109,6 +109,7 @@ The response sent by the server also contains three parts :
 Three types of methods can be used in HTTP requests :
 
  - the `GET` method is the most popular one. It is used to retrieve a document from a server. The `GET` method is encoded as `GET` followed by the path of URI of the requested document and the version of HTTP used by the client. For example, to retrieve the http://www.w3.org/MarkUp/ URI, a client must open a TCP on port `80` with host `www.w3.org` and send a HTTP request that contains the following line ::
+
   GET /MarkUp/ HTTP/1.0
 
  - the `HEAD` method is a variant of the `GET` method that allows to retrieve the header lines for a given URI without retrieving the entire document. It can be used by a client that wants to verify whether a document has changed compared to the copy that the client already has

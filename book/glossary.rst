@@ -131,7 +131,7 @@ Glossary
 	Classless InterDomain Routing is the current address allocation architecture for IPv4. It was defined in :rfc:`1518` and :rfc:`4632`. 
 
    RIR
-	Regional Internet Registry. An organisation that manages IP addresses and AS numbers on behalf of IANA.
+	Regional Internet Registry. An organisation that manages IP addresses and AS numbers on behalf of :term:`IANA`.
 
    RIP
 	Routing Information Protocol. An intradomain routing protocol based on distance vectors that is sometimes used in entreprise networks. RIP is defined in :rfc:`2453`.
@@ -290,7 +290,10 @@ Glossary
    leased line
         A telephone line that is permanentaly available between two endpoints. 
 
-     
+   ISO-3166
+	An :term:`ISO` standard that defines codes to represent countries and their subdivisions. See http://www.iso.org/iso/country_codes.htm    
 	
+   IANA
+	The Internet Assigned Numbers Authority (IANA) is responsible for the coordination of the DNS Root, IP addressing, and other Internet protocol resources
 	
 .. include:: links.rst
