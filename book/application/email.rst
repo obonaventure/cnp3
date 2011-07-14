@@ -27,6 +27,7 @@ An email system is always composed of four components :
 We first discuss the format of email messages and then the protocols that are used on today's Internet to exchange and retrieve emails. Other email systems have been developed in the past [Bush1993]_ [Genilloud1990]_ [GC2000]_, but today most email solutions have migrated to the Internet email. Information about the software that is used to compose and deliver emails may be found on wikipedia_ among others for both `email clients <http://en.wikipedia.org/wiki/Comparison_of_email_clients>`_ and `email servers <http://en.wikipedia.org/wiki/Comparison_of_mail_servers>`_.
 
 .. index:: email message format
+
 Email messages, like postal mail, are composed of two parts :
 
  - a `header` that plays the same role as an enveloppe in regular mail. It contains control information that is used by the email servers to deliver the email message to its recipient
@@ -113,6 +114,7 @@ The figure below shows the header lines of one email message. The message was or
 Initially, email was used to exchange small messages of ASCII text between computer scientists. However, with the growth of the Internet, supporting only ASCII text became a severe limitation for two reasons. First, non-English speakers wanted to write emails in their mother language that often requires more characters than those of the ASCII character table. Second, many users wanted to send other content than ASCII text by email such as binary files, images or sound. 
 
 .. index Multipurpose Internet Mail Extensions, MIME
+
 To solve this problem, the IETF_ developed the Multipurpose Internet Mail Extensions (:term:`MIME`). These extensions were carefully designed to allow Internet email to carry non-ASCII characters and binary files without breaking the email servers that were deployed at that time. This requirement for backward compatibility forced the MIME designers to develop extensions to the existing email message format :rfc:`822` instead of defining a completely new format that would have been better suited to support the new types of emails. 
 
 
@@ -171,6 +173,7 @@ The last MIME header line is `Content-Transfer-Encoding:`. This header line is u
 
 
 .. index:: Base64 encoding
+
 `Base64` divides the sequence of bytes to be encoded in groups of three bytes (with the last group being possibly partially filled). Each group of three bytes is divided in four six-bits fields and each six bits field is encoded as a character from the table below. 
 
 +-------+----------+-------+----------+-------+----------+-------+----------+
@@ -358,11 +361,11 @@ In this example, the MTA running on `mta.example.org` opens a TCP connection to 
 
 .. _POP:
 .. index:: Post Office Protocol
+
 The Post Office Protocol
 ------------------------
 
-When the first versions of SMTP were designed, the Internet was composed of minicomputers_ that were used by an entire university department or research lab. These minicomputers_ were used by many users at the same time. Email was mainly used to send messages from a user on a given host to another user on a remote host. At that time, SMTP was the only protocol involved in the delivery of the emails as all hosts attached to the network were running a SMTP server. On such hosts, email destined to local users was delivered by placing the email in a special directory or file owned by the user. However, the introduction of the personal computers in the 1980s, changed the environment. Initially, users of these personal computers used applications such as telnet_ to open a remote session on the local minicomputer to read their email. This was not user-friendly. A better solution appeared with the development of user friendl email client applications on personal computers. Several protocols were designed to allow these client applications to retrieve the email messages destined to a user from his/her server. Two of these protocols became popular and are still used today. The Post Office Protocol (POP), defined in :rfc:`1939`, is the simplest one. It allows a client to download all the messages destined to a given user from his/her email server. We describe POP briefly in this section. The second protocol is the Internet Message Access Protocol (IMAP), defined in :rfc:`3501`. IMAP is more powerful, but also more complex than POP. IMAP was designed to allow client applications to efficiently access in real-time to messages stored in various folders on servers. IMAP assumes that all the messages of a given user are stored on a server and provides the functions that are necessary to search, download, delete or filter messages. 
-
+When the first versions of SMTP were designed, the Internet was composed of :term:`minicomputers` that were used by an entire university department or research lab. These :term:`minicomputers were used by many users at the same time. Email was mainly used to send messages from a user on a given host to another user on a remote host. At that time, SMTP was the only protocol involved in the delivery of the emails as all hosts attached to the network were running a SMTP server. On such hosts, email destined to local users was delivered by placing the email in a special directory or file owned by the user. However, the introduction of the personal computers in the 1980s, changed the environment. Initially, users of these personal computers used applications such as `:term:`telnet` to open a remote session on the local minicomputer to read their email. This was not user-friendly. A better solution appeared with the development of user friendl email client applications on personal computers. Several protocols were designed to allow these client applications to retrieve the email messages destined to a user from his/her server. Two of these protocols became popular and are still used today. The Post Office Protocol (POP), defined in :rfc:`1939`, is the simplest one. It allows a client to download all the messages destined to a given user from his/her email server. We describe POP briefly in this section. The second protocol is the Internet Message Access Protocol (IMAP), defined in :rfc:`3501`. IMAP is more powerful, but also more complex than POP. IMAP was designed to allow client applications to efficiently access in real-time to messages stored in various folders on servers. IMAP assumes that all the messages of a given user are stored on a server and provides the functions that are necessary to search, download, delete or filter messages. 
 
 POP is another example of a simple line-based protocol. POP runs above the bytestream service. A POP server usually listens to port 110. A POP session is composed of three parts : an `authorisation` phase during which the server verifies the client's credential, a `transaction` phase during which the client downloads messages and an `update` phase that concludes the session. The client sends commands and the server replies are prefixed by `+OK` to indicate a successful command or by `-ERR` to indicate errors.
 

@@ -275,7 +275,7 @@ Glossary
 	The International Standardization Organisation
 
    minicomputer
-	todo
+	A minicomputer is a multi-user system that was typically used in the 1960s/1970s to serve departments. See the corresponding wikipedia article for additional information : http://en.wikipedia.org/wiki/Minicomputer
 
    MIME
 	The Multi-purpose Internet Mail Extensions

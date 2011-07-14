@@ -5,7 +5,8 @@
 PKT2SVG= ../../util/packet2svg.py
 SVG2PNG= ../../util/convert.sh
 
-
+SVGFILES := $(patsubst %.pkt,%.svg,$(wildcard *.pkt))
+IMAGES := $(patsubst %.pkt,%.png,$(wildcard *.pkt))
 
 %.svg: %.pkt
 	$(PKT2SVG) $<
@@ -14,5 +15,5 @@ SVG2PNG= ../../util/convert.sh
 	@echo converting $<
 	$(SVG2PNG) $<
 
-images: *.png
+images: ${SVGFILES} ${IMAGES}
 	@echo "All images converted"

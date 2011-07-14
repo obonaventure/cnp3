@@ -2,17 +2,14 @@
 # OB additions
 # Automatic conversion of images
 #
-PKT2SVG= ../../util/packet2svg.py
 SVG2PNG= ../../util/convert.sh
 
 
-
-%.svg: %.pkt
-	$(PKT2SVG) $<
+IMAGES := $(patsubst %.svg,%.png,$(wildcard *.svg))
 
 %.png: %.svg
 	@echo converting $<
 	$(SVG2PNG) $<
 
-images: *.png
+images: ${IMAGES}
 	@echo "All images converted"

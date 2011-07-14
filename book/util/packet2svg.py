@@ -5,6 +5,7 @@ This module converts packet descriptions in SVG format by outputing a simplified
 """
 
 import sys
+from xml.sax.saxutils import escape
 
 #See http://tutorials.jenkov.com/svg/tspan-element.html
 # <svg xmlns="http://www.w3.org/2000/svg"
@@ -32,9 +33,10 @@ for fileName in (sys.argv[1:]) :
         line = file.readline()
         if not line:
             break
+        line=escape(line)  # to be XML compatible
         newFile.write(" <tspan x=\"0\" dy=\"18\">")
         newFile.write(line)
         newFile.write("</tspan>")
     newFile.write("</text> </svg>")
-#    print "saving ", newName    
+
 
