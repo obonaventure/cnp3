@@ -112,7 +112,7 @@ Whenever possible, the bibliography includes hypertext links to the references c
 .. [Perlman2000] Perlman, R., Interconnections : Bridges, routers, switches and internetworking protocols, 2nd edition, Addison Wesley, 2000, http://books.google.com/books?id=AIRitf5C-QQC&pgis=1
 .. [Perlman2004] Perlman, R., RBridges: Transparent Routing, Proc. IEEE Infocom , March 2004. http://www.ieee-infocom.org/2004/Papers/26_1.PDF
 .. [Pouzin1975] Pouzin, L., The CYCLADES Network - Present state and development trends, Symposium on Computer Networks, 1975 pp 8-13., http://rogerdmoore.ca/PS/CIGALE/CYCL2.html
-.. [Rago1993] S. Rago, UNIX System V network programming, Addison Wesley, 1993, http://www.pearsonhighered.com/educator/product/UNIX-System-V-Network-Programming/9780201563184.page
+.. [Rago1993] Rago, S., UNIX System V network programming, Addison Wesley, 1993, http://www.pearsonhighered.com/educator/product/UNIX-System-V-Network-Programming/9780201563184.page
 .. [RE1989] Rochlis, J. A. and Eichin, M. W. 1989. With microscope and tweezers: the worm from MIT's perspective. Commun. ACM 32, 6 (Jun. 1989), 689-698. http://doi.acm.org/10.1145/63526.63528
 .. [RFC20] Cerf, V., ASCII format for network interchange, :rfc:`20`, Oct. 1969
 .. [RFC768] Postel, J., User Datagram Protocol, :rfc:`768`, Aug. 1980
