@@ -4,7 +4,7 @@
 Exercises
 #########
 
-This section contains several exercices and small challenges about the application layer protocols.
+This section contains several exercises and small challenges about the application layer protocols.
 
 The Domain Name System
 ======================
@@ -96,9 +96,9 @@ Many Internet protocols are ASCII_-based protocols where the client sends reques
 
  telnet cnp3.info.ucl.ac.be 25
  
- *Warning* : Do *not* try this on a random SMTP server. The exercises proposed in this section should only be run on the SMTP server dedicated for these exercices : `cnp3.info.ucl.ac.be`. If you try them on a production SMTP server, the administrator of this server may become angry.
+ *Warning* : Do *not* try this on a random SMTP server. The exercises proposed in this section should only be run on the SMTP server dedicated for these exercises : `cnp3.info.ucl.ac.be`. If you try them on a production SMTP server, the administrator of this server may become angry.
 
-8. Continue the SMTP session that you started above by sending the greetings command (`HELO` followed by the fully qualified domain name of your host) and termine the session by sending the `QUIT` command.
+8. Continue the SMTP session that you started above by sending the greetings command (`HELO` followed by the fully qualified domain name of your host) and end the session by sending the `QUIT` command.
 
 9. The minimum SMTP session above allows to verify that the SMTP is running. However, this does not always imply that mail can be delivered. For example, large SMTP servers often use a database to store all the email addresses that they serve. To verify the correct operation of such a server, one possibility is to use the `VRFY` command. Open a SMTP session on the lab's SMTP server (`cnp3.info.ucl.ac.be`) and use this command to verify that your account is active. 
 

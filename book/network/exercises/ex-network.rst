@@ -144,7 +144,9 @@ Router `B` will flood its updated link state packet through the entire network a
  - http://www.routeviews.org
  - http://www.ripe.net/ris
 
-For this exercice, you will use one of the `routeviews` BGP routers. You can access this router by using telnet. Once logged on the router, you can use the router's command line interface to analyse its BGP routing table ::
+For this exercise, you will use one of the `routeviews` BGP routers. You can access one of these routers by using telnet_. Once logged on the router, you can use the router's command line interface to analyse its BGP routing table.
+
+.. code-block:: text
 
  telnet route-views.routeviews.org
  Trying 128.223.51.103...
@@ -152,33 +154,31 @@ For this exercice, you will use one of the `routeviews` BGP routers. You can acc
  Escape character is '^]'.
  C
  **********************************************************************
-
+ 
                     Oregon Exchange BGP Route Viewer
           route-views.oregon-ix.net / route-views.routeviews.org
-
+ 
  route views data is archived on http://archive.routeviews.org
-
+ 
  This hardware is part of a grant from Cisco Systems.
  Please contact help@routeviews.org if you have questions or
  comments about this service, its use, or if you might be able to
  contribute your view. 
-
+ 
  This router has views of the full routing tables from several ASes.
  The list of ASes is documented under "Current Participants" on
  http://www.routeviews.org/.
-
+ 
                           **************
-
+ 
  route-views.routeviews.org is now using AAA for logins.  Login with
  username "rviews".  See http://routeviews.org/aaa.html
 
  **********************************************************************
-
- 
  User Access Verification
-
  Username: rviews
  route-views.oregon-ix.net>
+
 
 This router has eBGP sessions with routers from several ISPs. See http://www.routeviews.org/peers/route-views.oregon-ix.net.txt for an up-to-date list of all eBGP sessions maintained by this router.
 
