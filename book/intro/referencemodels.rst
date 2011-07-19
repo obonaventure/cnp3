@@ -27,7 +27,7 @@ Starting from the bottom, the first layer is the Physical layer. Two communicati
 
  - `electrical cable`. Information can be transmitted over different types of electrical cables. The most common ones are the twisted pairs that are used in the telephone network, but also in enterprise networks and coaxial cables. Coaxial cables are still used in cable TV networks, but not anymore in enterprise networks. Some networking technologies operate over the classical electrical cable.
  - `optical fiber`. Optical fibers are frequently used in public and enterprise networks when the distance between the communication devices is larger than one kilometer. There are two main types of optical fibers : multimode and monomode. Multimode is much cheaper than monomode fiber because a LED can be used to send signal over a multimode fiber while a monomode fiber must be driven by a laser. Due to the different modes of propagation of light, monomode fibers are limited to distance of a few kilometers while multimode fibers can be used over distances larger than several tens of kilometers. In both cases, repeaters can be used to regenerate the optical signal and one endpoint of a fiber to send it over another fiber. 
- - `wireless`. In this case, a radio signal is used to encode the information exchanged between the communicating devices. Many types of modulation techniques are used to send information over a wireless channel and there is lot of innovation in this field with new techniques appearing every year. While most wireless networks rely on radio signals, some use a laser that sends light pulses to a remote detector. These optical techniques allow to create point-to-point links while radio-based techniques, depending on the directionnality of the antennas, can be used to build Local Area Networks containing devices spread over a small geographical area.
+ - `wireless`. In this case, a radio signal is used to encode the information exchanged between the communicating devices. Many types of modulation techniques are used to send information over a wireless channel and there is lot of innovation in this field with new techniques appearing every year. While most wireless networks rely on radio signals, some use a laser that sends light pulses to a remote detector. These optical techniques allow to create point-to-point links while radio-based techniques, depending on the directionnality of the antennas, can be used to build networks containing devices spread over a small geographical area.
 
 
 An important point to note about the Physical layer is the service that it provides. This service is usually an unreliable connection-oriented service that allows the users of the Physical layer to exchange bits. The unit of information transfer in the Physical layer is the bit. The Physical layer service is unreliable because :
@@ -42,7 +42,7 @@ This is mainly due to the fact that the communicating devices use their own cloc
 
 .. note:: Bandwidth
 
- In computer networks, the bandwidth of the physical layer is always expressed in bits per second. One Mbps is one million bits per second and one Gbps is one billion bits per second. This is in contrast with memory specifications that are usually expressed in bytes (8 bits), KiloBytes ( 1024 bytes) or MegaBytes (1048576 bytes). Thus transferring one MByte through a 1 Mbps link lasts 1.048 seconds.
+ In computer networks, the bandwidth of the physical layer is always expressed in bits per second. One Mbps is one million bits per second and one Gbps is one billion bits per second. This is in contrast with memory specifications that are usually expressed in bytes (8 bits), KiloBytes ( 1024 bytes) or MegaBytes (1048576 bytes). Thus transferring one MByte through a 1 Mbps link lasts 1.049 seconds.
 
   =========       ===============
   Bandwidth       Bits per second
@@ -71,7 +71,7 @@ The physical layer allows thus two or more entities that are directly attached t
 Computer networks use a similar approach and each layer provides a service that is built above the underlying layer and is closer to the needs of the applications. 
 
 
-The `Datalink layer` builds on the service provided by the underlying physical layer. The `Datalink layer` allows two hosts that are directly connected through the physical layer to exchange information. The unit of information exchanged between two entities in the `Datalink layer` is a frame. A frame is a finite sequence of bits. Some `Datalink layers` user variable-length frames while others only use fixed-length frames. Some `Datalink layers` provide a connection-oriented service while others provide a connectionless service. Some `Datalink layers` provide a reliable delivery while others do not guarantee the correct delivery of the information.
+The `Datalink layer` builds on the service provided by the underlying physical layer. The `Datalink layer` allows two hosts that are directly connected through the physical layer to exchange information. The unit of information exchanged between two entities in the `Datalink layer` is a frame. A frame is a finite sequence of bits. Some `Datalink layers` use variable-length frames while others only use fixed-length frames. Some `Datalink layers` provide a connection-oriented service while others provide a connectionless service. Some `Datalink layers` provide a reliable delivery while others do not guarantee the correct delivery of the information.
 
 An important point to note about the `Datalink layer` is that although the figure below indicates that two entities of the `Datalink layer` exchange frames directly, in reality this is slightly different. When the `Datalink layer` entity on the left needs to transmit a frame, it issues as many `Data.request` primitives to the underlying `physical layer` as there are bits in the frame. The physical layer will then convert the sequence of bits in an electromagnetic or optical signal that will be sent over the physical medium. The `physical layer` on the right side of the figure will decode the received signal, recover the bits and issue the corresponding `Data.indication` primitives to its `Datalink layer` entity. If there are no transmission errors, this entity will receive the frame sent earlier. 
 
@@ -125,10 +125,10 @@ The TCP/IP reference model
 
 In contrast with OSI, the TCP/IP community did not spend a lot of effort to define a detailed reference model and in fact the goals of the Internet architecture were only documented after TCP/IP had been deployed [Clark88]_. :rfc:`1122` that defines the requirements for Internet hosts mentions four different layers. Starting from the top, these are :
 
-- the application layer
-- the transport layer
-- the internet layer which is equivalent to the network layer of our reference model
-- the link layer which combines the functionalities of the physical and datalink layers of our five-layers reference model
+- an Application layer
+- a Transport layer
+- an Internet layer which is equivalent to the network layer of our reference model
+- a Link layer which combines the functionalities of the physical and datalink layers of our five-layers reference model
 
 Besides this difference in the lower layers, the TCP/IP reference model is very close to the five layers that we use throughout this document.
 

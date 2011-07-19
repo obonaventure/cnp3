@@ -1,0 +1,14 @@
+ helo = "HELO" SP Domain CRLF
+ mail = "MAIL FROM:" Path CRLF
+ rcpt = "RCPT TO:" ( "<Postmaster@" Domain ">" / "<Postmaster>" / Path ) CRLF
+ data = "DATA" CRLF
+ quit = "QUIT" CRLF
+ Path           = "<" Mailbox ">"
+ Domain         = sub-domain *("." sub-domain)
+ sub-domain     = Let-dig [Ldh-str]
+ Let-dig        = ALPHA / DIGIT
+ Ldh-str        = *( ALPHA / DIGIT / "-" ) Let-dig
+ Mailbox        = Local-part "@" Domain 
+ Local-part     = Dot-string 
+ Dot-string     = Atom *("."  Atom)
+ Atom           = 1*atext

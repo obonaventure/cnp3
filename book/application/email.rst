@@ -50,13 +50,13 @@ The email header contains several lines that all begin by a keyword followed by 
 
 Other header lines appear in most email messages. The `Subject:` header line allows the sender to indicate the topic discussed in the email. Three types of header lines can be used to specify the recipients of a message :
 
- - the `To:` header line contains the email addresses of the primary recipients of the message. Several addresses are separated by using commas.
+ - the `To:` header line contains the email addresses of the primary recipients of the message [#fto]_ . Several addresses can be separated by using commas.
  - the `cc:` header line is used by the sender to provide a list of email addresses that must receive a carbon copy of the message. Several addresses can be listed in this header line, separated by commas. All recipients of the email message receive the `To:` and `cc:` header lines. 
  - the `bcc:` header line is used by the sender to provide a list of comma separated email addresses that must receive a blind carbon copy of the message. The `bcc:` header line is not delivered to the recipients of the email message. 
 
 A simple email message containing the `From:`, `To:`, `Subject:` and `Date:` header lines and two lines of body is shown below.
 
-::
+.. code-block:: text
 
  From: Bob Smith <Bob@machine.example>
  To: Alice Doe <alice@example.net>, Alice Smith <Alice@machine.example>
@@ -77,7 +77,7 @@ Several other optionnal header lines are defined in :rfc:`5322` and other option
 
 The figure below shows the header lines of one email message. The message was originated at a host named `wira.firstpr.com.au` and was received by `smtp3.sgsi.ucl.ac.be`. The `Received:` lines have been wrapped for readability.
 
-::
+.. code-block:: text
 
  Received: from smtp3.sgsi.ucl.ac.be (Unknown [10.1.5.3])
      by mmp.sipr-dc.ucl.ac.be
@@ -133,7 +133,7 @@ To support these two types of MIME messages, the recipient of a message must be 
 
 The email message below, copied from :rfc:`2046` shows a MIME message that contains two parts that are both in plain text and encoded by using the ASCII character set. Note that the string `simple boundary` is defined in the `Content-Type:` header as the string that marks the boundary between the header and the first part and also between the first and the second part and at the end of the message. Other example of MIME messages may be found in :rfc:`2046`.
 
-::
+.. code-block:: text
 
  Date: Mon, 20 Sep 1999 16:33:16 +0200
  From: Nathaniel Borenstein <nsb@bellcore.com>
@@ -141,19 +141,20 @@ The email message below, copied from :rfc:`2046` shows a MIME message that conta
  Subject: Test
  MIME-Version: 1.0
  Content-Type: multipart/mixed; boundary="simple boundary"
-
+ 
  preamble, to be ignored
-
+ 
  --simple boundary
  Content-Type: text/plain; charset=us-ascii
-
+ 
  First part
-
+ 
  --simple boundary
  Content-Type: text/plain; charset=us-ascii
-
+ 
  Second part
  --simple boundary
+
 
 The `Content-Type:` header can also be used inside a MIME part. In this case, it indicates the type of data placed in this part. Each data type is specified as a type followed by a subtype. A detailed description may be found in :rfc:`2046`. Some of the most popular `Content-Type:` header lines are :
 
@@ -274,23 +275,12 @@ The Simple Mail Transfer Protocol (:term:`SMTP`) defined in :rfc:`5321` is a cli
 
 SMTP is a text-based protocol like many other application-layer protocols on the Internet. SMTP uses the byte-stream service and SMTP servers listen on port `21`. SMTP clients sends commands that are each composed of one line of ASCII text terminated by `CR+LF`. SMTP servers reply by sending ASCII lines that contain a three digits numerical error/success code and optionnal comments.
 
-The SMTP protocol, like most text-based protocols, is specified as a :term:`BNF`. The full BNF is defined in :rfc:`5321`. The main SMTP commands are defined by the following BNF rules : ::
+The SMTP protocol, like most text-based protocols, is specified as a :term:`BNF`. The full BNF is defined in :rfc:`5321`. The main SMTP commands are defined by the BNF rules shown in the figure below.
 
- helo = "HELO" SP Domain CRLF
- mail = "MAIL FROM:" Path CRLF
- rcpt = "RCPT TO:" ( "<Postmaster@" Domain ">" / "<Postmaster>" / Path ) CRLF
- data = "DATA" CRLF
- quit = "QUIT" CRLF
- Path           = "<" Mailbox ">"
- Domain         = sub-domain *("." sub-domain)
- sub-domain     = Let-dig [Ldh-str]
- Let-dig        = ALPHA / DIGIT
- Ldh-str        = *( ALPHA / DIGIT / "-" ) Let-dig
- Mailbox        = Local-part "@" Domain 
- Local-part     = Dot-string 
- Dot-string     = Atom *("."  Atom)
- Atom           = 1*atext
+.. figure:: pkt/smtp-bnf.png
+   :align: center
 
+   BNF specification of the SMTP commands
 
 In this BNF, `atext` corresponds to the printable ASCII characters. This BNF rule is defined in :rfc:`5322`. The five main commands are `HELO`, `MAIL FROM:`, `RCPT TO:`, `DATA` and `QUIT`. `Postmaster` is the alias of the system administrator who is responsible for a given domain or SMTP server. All domains must have a `Postmaster` alias.
 
@@ -410,6 +400,8 @@ In this example, a POP client contacts a POP server on behalf of the user named 
 .. rubric:: Footnotes
 
 .. [#femailheaders] The list of all standard email header lines may be found at http://www.iana.org/assignments/message-headers/message-header-index.html
+
+.. [#fto] It could be surprising that the `To:` is not mandatory inside an email message. While most email messages will contain this header line an email that does not contain a `To:` header line and that relies on the `bcc:` to specify the recipient is valid as well.
 
 .. [#fsmtpauth] During the last years, many Internet Service Providers, campus and enterprise networks have deployed SMTP extensions :rfc:`4954` on their MSAs. These extensions force the MUAs to be authenticated before the MSA accepts an email message from the MUA. 
 

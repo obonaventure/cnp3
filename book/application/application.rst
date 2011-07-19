@@ -9,7 +9,7 @@ The application Layer
 
 The Application Layer is the most important and most visible layer in computer networks. Applications reside in this layer and human users interact via those applications through the network. 
 
-In this chapter, we first briefly describe the main principles of the application layer and focus on the two most important models :  the client-server model and the peer-to-peer models. Then, we review in details two families of protocols that have proved to be very useful in networks such as the Internet : electronic mail and the protocols that allow to access information on the world wide web. We also describe the Domain Name System that allows humans to use user-friendly names while the hosts use 32 bits or 128 bits long IP addresses. 
+In this chapter, we first briefly describe the main principles of the application layer and focus on the two most important application models :  the client-server and the peer-to-peer models. Then, we review in details two families of protocols that have proved to be very useful in the Internet : electronic mail and the protocols that allow to access information on the world wide web. We also describe the Domain Name System that allows humans to use user-friendly names while the hosts use 32 bits or 128 bits long IP addresses. 
 
 .. include:: principles.rst
 

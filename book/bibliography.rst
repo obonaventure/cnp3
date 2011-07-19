@@ -4,9 +4,9 @@
 Bibliography
 ============
 
-Whenever possible, the bibliography includes hypertext links to the references cited. When there is no link, a search on http://scholar.google.com often returns a link to the article. RFC documents are cited in the text but do not appear in the biblography.
+Whenever possible, the bibliography includes hypertext links to the references cited. When there is no link, a search on http://scholar.google.com often returns a link to the article. 
 
-.. [ACO+2006] Augustin, B., Cuvellier, X., Orgogozo, B., Viger, F., Friedman, T., Latapy, M., Magnien, C., Teixeira, R., Avoiding traceroute anomalies with Paris traceroute, Internet Measurement Conference, October 2006, http://www.paris-traceroute.net/
+
 .. [802.11] LAN/MAN Standards Committee of the IEEE Computer Society. IEEE Standard for Information Technology - Telecommunications and information exchange between systems - local and  metropolitan area networks - specific requirements - Part 11 : Wireless LAN Medium Access Control (MAC) and Physical Layer (PHY) Specifications. IEEE, 1999. available from http://standards.ieee.org/getieee802/802.11.html.
 .. [802.1d] LAN/MAN Standards Committee of the IEEE Computer Society, IEEE Standard for Local and metropolitan area networks Media Access Control (MAC) Bridges, IEEE Std 802.1DTM- 2004, 2004, http://standards.ieee.org/getieee802/download/802.1D-2004.pdf
 .. [802.1q] LAN/MAN Standards Committee of the IEEE Computer Society, IEEE Standard for Local and metropolitan area networks— Virtual Bridged Local Area Networks, 2005, http://standards.ieee.org/getieee802/download/802.1Q-2005.pdf
@@ -14,6 +14,8 @@ Whenever possible, the bibliography includes hypertext links to the references c
 .. [802.3] LAN/MAN Standards Committee of the IEEE Computer Society. IEEE Standard for Information Technology - Telecommunications and information exchange between systems - local and metropolitan area networks - specific requirements - Part 3 : Carrier Sense multiple access with collision detection (CSMA/CD) access method and physical layer specification. IEEE, 2000. available from http://standards.ieee.org/getieee802/802.3.html
 .. [802.5] LAN/MAN Standards Committee of the IEEE Computer Society. IEEE Standard for Information technology--Telecommunications and information exchange between systems--Local and metropolitan area networks--Specific requirements--Part 5: Token Ring Access Method and Physical Layer Specification. IEEE, 1998. available from http://standards.ieee.org/getieee802/802.5.html
 .. [802] IEEE, Std 802-2001 : IEEE Standard for Local and Metropolitan Area Networks: Overview and Architecture, http://standards.ieee.org/getieee802/download/802-2001.pdf
+.. [ACO+2006] Augustin, B., Cuvellier, X., Orgogozo, B., Viger, F., Friedman, T., Latapy, M., Magnien, C., Teixeira, R., Avoiding traceroute anomalies with Paris traceroute, Internet Measurement Conference, October 2006, http://www.paris-traceroute.net/
+.. [AS2004] Androutsellis-Theotokis, S. and Spinellis, D.. 2004. A survey of peer-to-peer content distribution technologies. ACM Comput. Surv. 36, 4 (December 2004), 335-371. http://doi.acm.org/10.1145/1041680.1041681
 .. [ATLAS2009] Labovitz, C., Iekel-Johnson, S., McPherson, D., Oberheide, J. and Jahanian, F., Internet inter-domain traffic. In Proceedings of the ACM SIGCOMM 2010 conference on SIGCOMM (SIGCOMM '10). ACM, New York, NY, USA, 75-86. http://doi.acm.org/10.1145/1851182.1851194
 .. [AW05] Arlitt, M. and Williamson, C. 2005. An analysis of TCP reset behaviour on the internet. SIGCOMM Comput. Commun. Rev. 35, 1 (Jan. 2005), 37-44. http://doi.acm.org/10.1145/1052812.1052823
 .. [Abramson1970] Abramson, N., THE ALOHA SYSTEM: another alternative for computer communications. In Proceedings of the November 17-19, 1970, Fall Joint Computer Conference (Houston, Texas, November 17 - 19, 1970). AFIPS '70 (Fall). ACM, New York, NY, 281-285. http://doi.acm.org/10.1145/1478462.1478502
@@ -89,6 +91,7 @@ Whenever possible, the bibliography includes hypertext links to the references c
 .. [KuroseRoss09] Kurose J. and Ross K., Computer networking : a top-down approach featuring the Internet, Addison-Wesley, 2009, http://books.google.com/books?id=2hv3PgAACAAJ&pgis=1
 .. [Licklider1963] Licklider, J., Memorandum For Members and Affiliates of the Intergalactic Computer Network, 1963, http://www.kurzweilai.net/articles/art0366.html?printable=1
 .. [LCCD09] Leiner, B. M., Cerf, V. G., Clark, D. D., Kahn, R. E., Kleinrock, L., Lynch, D. C., Postel, J., Roberts, L. G., and Wolff, S. 2009. A brief history of the internet. SIGCOMM Comput. Commun. Rev. 39, 5 (Oct. 2009), 22-31. http://doi.acm.org/10.1145/1629607.1629613
+.. [LCP2005] Eng Keong Lua, Crowcroft, J., Pias, M., Sharma, R., Lim, S., A survey and comparison of peer-to-peer overlay network schemes, Communications Surveys & Tutorials, IEEE, Volume: 7 , Issue: 2, 2005, pp. 72-93, http://dx.doi.org/10.1109/COMST.2005.1610546 
 .. [LFJLMT] Leffler, S., Fabry, R., Joy, W., Lapsley, P., Miller, S., Torek, C., An Advanced 4.4BSD Interprocess Communication Tutorial, 4.4 BSD Programmer's Supplementary Documentation, http://docs.freebsd.org/44doc/psd/21.ipc/paper.pdf
 .. [LSP1982] Lamport, L., Shostak, R., and Pease, M. 1982. The Byzantine Generals Problem. ACM Trans. Program. Lang. Syst. 4, 3 (Jul. 1982), 382-401. http://doi.acm.org/10.1145/357172.357176
 .. [Leboudec2008] Leboudec, J.-Y., Rate Adaptation Congestion Control and Fairness : a tutorial, Dec. 2008, http://ica1www.epfl.ch/PS_files/LEB3132.pdf
@@ -276,6 +279,7 @@ Whenever possible, the bibliography includes hypertext links to the references c
 .. [SGP98] Stone, J., Greenwald, M., Partridge, C., and Hughes, J. 1998. Performance of checksums and CRC's over real data. IEEE/ACM Trans. Netw. 6, 5 (Oct. 1998), 529-543. http://dx.doi.org/10.1109/90.731187
 .. [SH1980] Shoch, J. F. and Hupp, J. A. Measured performance of an Ethernet local network. Commun. ACM 23, 12 (Dec. 1980), 711-721. http://doi.acm.org/10.1145/359038.359044
 .. [SH2004] Senapathi, S., Hernandez, R., Introduction to TCP Offload Engines, March 2004,  http://www.dell.com/downloads/global/power/1q04-her.pdf
+.. [SMKKB2001] Stoica, I., Morris, R., Karger, D., Kaashoek, F., and Balakrishnan, H. Chord: A scalable peer-to-peer lookup service for internet applications. In Proceedings of the 2001 conference on Applications, technologies, architectures, and protocols for computer communications (SIGCOMM '01). ACM, New York, NY, USA, 149-160 http://doi.acm.org/10.1145/383059.383071
 .. [SMM1998] Semke, J., Mahdavi, J., and Mathis, M. 1998. Automatic TCP buffer tuning. SIGCOMM Comput. Commun. Rev. 28, 4 (Oct. 1998), 315-323. http://doi.acm.org/10.1145/285243.285292
 .. [SPMR09] Stigge, M., Plotz, H., Muller, W., Redlich, J., Reversing CRC - Theory and Practice. Berlin: Humboldt University Berlin. pp. 24. http://sar.informatik.hu-berlin.de/research/publications/SAR-PR-2006-05/SAR-PR-2006-05\_.pdf
 .. [STBT2009] Sridharan, M., Tan, K., Bansal, D., Thaler, D., Compound TCP: A New TCP Congestion Control for High-Speed and Long Distance Networks, Internet draft, work in progress, April 2009, http://tools.ietf.org/html/draft-sridharan-tcpm-ctcp-02

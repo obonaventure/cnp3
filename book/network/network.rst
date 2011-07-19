@@ -14,8 +14,6 @@ In this chapter, we first explain the principles of the network layer. These pri
 .. include:: principles.rst
 
 
-.. todo explain broadcast address IPv4 ?
-
 Internet Protocol
 #################
 
