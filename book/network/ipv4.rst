@@ -253,8 +253,9 @@ The basic operation of the IPv4 fragmentation is as follows. A large packet is f
   In the pseudo-code used in this section, we use the scapy_ notations for the fields of the IPv4 header. `ihl` is the `IP Header Length`, `tos` is the `DS` byte, `len` is the packet length, `id` the packet identifier, `flags` contains the `DF` and `More` flags, `proto` is the `Protocol` field, `chksum` contains the Internet checksum and `src` (resp. `dst`) the source (resp. destination) IPv4 address. 
 
 
-The following pseudo-code details the IPv4 fragmentation, assuming that the packet does not contain options ::
+The following pseudo-code details the IPv4 fragmentation, assuming that the packet does not contain options.
 
+.. code-block:: python
 
  #mtu : maximum size of the packet (including header) of outgoing link
  if p.len <  mtu : 
@@ -369,7 +370,9 @@ The main types of ICMP messages are :
 
 .. index:: ping
 
-:manpage:`ping(8)` is often used by network operators to verify that a given IP address is reachable. Each host is supposed [#fpingproblems]_ to reply with an ICMP `Echo reply` message when its receives an  ICMP `Echo request` message. A sample usage of :manpage:`ping(8)` is shown below ::
+:manpage:`ping(8)` is often used by network operators to verify that a given IP address is reachable. Each host is supposed [#fpingproblems]_ to reply with an ICMP `Echo reply` message when its receives an  ICMP `Echo request` message. A sample usage of :manpage:`ping(8)` is shown below.
+
+.. code-block::  text
 
   ping 130.104.1.1
   PING 130.104.1.1 (130.104.1.1): 56 data bytes
@@ -384,7 +387,9 @@ The main types of ICMP messages are :
 
 .. index:: traceroute
 
-Another very useful debugging tool is :manpage:`traceroute(8)`. The traceroute man page describes this tool as `"print the route packets take to network host"`. traceroute uses the `TTL exceeded` ICMP messages to discover the intermediate routers on the path towards a destination. The principle behind traceroute is very simple. When a router receives an IP packet whose `TTL` is set to `1` it decrements the `TTL` and is forced to return to the sending host a `TTL exceeded` ICMP message containing the header and the first bytes of the discarded IP packet. To discover all routers on a network path, a simple solution is to first send a packet whose `TTL` is set to `1`, then a packet whose `TTL` is set to `2`, ... A sample traceroute output is shown below ::
+Another very useful debugging tool is :manpage:`traceroute(8)`. The traceroute man page describes this tool as `"print the route packets take to network host"`. traceroute uses the `TTL exceeded` ICMP messages to discover the intermediate routers on the path towards a destination. The principle behind traceroute is very simple. When a router receives an IP packet whose `TTL` is set to `1` it decrements the `TTL` and is forced to return to the sending host a `TTL exceeded` ICMP message containing the header and the first bytes of the discarded IP packet. To discover all routers on a network path, a simple solution is to first send a packet whose `TTL` is set to `1`, then a packet whose `TTL` is set to `2`, ... A sample traceroute output is shown below.
+
+.. code-block:: text
 
  traceroute www.ietf.org
  traceroute to www.ietf.org (64.170.98.32), 64 hops max, 40 byte packets

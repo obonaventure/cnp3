@@ -4,10 +4,10 @@
 Exercises
 #########
 
-This section is divided in three parts. The first part contains exercises on the theory of transport protocols. The second contains programming challenges and the third uses packet analysis tools to observe the behaviour of transport protocols.
+This section is divided in two parts. The first part contains exercises on the principles of transport protocols, including TCP. The second part contains programming challenges packet analysis tools to observe the behaviour of transport protocols.
 
-Theory
-======
+Principles
+==========
 
 1. Consider the Alternating Bit Protocol as described in this chapter
 

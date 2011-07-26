@@ -18,7 +18,63 @@ Practice
  - `2001:db8::/48`
  - `2001:6a8:3080::/48`
 
-3. netkit_ allows to easily perform experiments by using an emulated environment is is composed of virtual machines running User Model Linux. netkit_ allows to setup a small network in a lab and configure it as if you had access to several PCs interconnected by using cables and network equipments.
+3. Researchers and network operators collect and expose lots of BGP data. For this, they establish eBGP sessions between `data collection` routers and production routers located operationnal networks. Several `data collection` routers are available, the most popular ones are :
+
+  - http://www.routeviews.org
+  - http://www.ripe.net/ris
+
+ For this exercise, you will use one of the `routeviews` BGP routers. You can access one of these routers by using telnet_. Once logged on the router, you can use the router's command line interface to analyse its BGP routing table.
+
+ .. code-block:: text
+
+   telnet route-views.routeviews.org
+   Trying 128.223.51.103...
+   Connected to route-views.routeviews.org.
+   Escape character is '^]'.
+   C
+   **********************************************************************
+ 
+                    Oregon Exchange BGP Route Viewer
+          route-views.oregon-ix.net / route-views.routeviews.org
+ 
+   route views data is archived on http://archive.routeviews.org
+ 
+   This hardware is part of a grant from Cisco Systems.
+   Please contact help@routeviews.org if you have questions or
+   comments about this service, its use, or if you might be able to
+   contribute your view. 
+ 
+   This router has views of the full routing tables from several ASes.
+   The list of ASes is documented under "Current Participants" on
+   http://www.routeviews.org/.
+ 
+                          **************
+ 
+   route-views.routeviews.org is now using AAA for logins.  Login with
+   username "rviews".  See http://routeviews.org/aaa.html
+
+   **********************************************************************
+   User Access Verification
+   Username: rviews
+   route-views.oregon-ix.net>
+
+
+ This router has eBGP sessions with routers from several ISPs. See http://www.routeviews.org/peers/route-views.oregon-ix.net.txt for an up-to-date list of all eBGP sessions maintained by this router.
+
+ Among all the commands supported by this router, the `show ip bgp` command is very useful. This command takes an IPv4 prefix as parameter and allows you to retrieve all the routes that this routers has received in its Adj-RIB-In for the specified prefix.
+
+ #. Use `show ip bgp 130.104.0.0/16` to find the best path used by this router to reach UCLouvain
+ #. Knowing that `130.104.0.0/16` is announced by belnet (AS2611), what are, according to this BGP routing tables, the ASes that peer with belnet
+ #. Do the same analysis for one of the IPv4 prefixes assigned to Skynet (AS5432) : `62.4.128.0/17`. The output of the `show ip bgp 62.4.128.0/17` reveals something strange as it seems that one of the paths towards this prefix passes twice via `AS5432`. Can you explain this ? ::
+
+  .. code-block:: text
+
+     2905 702 1239 5432 5432
+       196.7.106.245 from 196.7.106.245 (196.7.106.245)
+         Origin IGP, metric 0, localpref 100, valid, external
+
+
+4. netkit_ allows to easily perform experiments by using an emulated environment is is composed of virtual machines running User Model Linux. netkit_ allows to setup a small network in a lab and configure it as if you had access to several PCs interconnected by using cables and network equipments.
 
  A netkit_ lab is defined as a few configuration files and scripts :
   
@@ -130,7 +186,7 @@ Practice
  e. Since hosts `h1` and `h2` are attached to a local area network that contains a single router, this router can act as a default router. Add a default route on `h1` and `h2` so that they can use `router1` as their default router to reach any remote IPv4 address. Verify by using :manpage:`ping(8)` that `h1` can reach address `172.16.2.1`. 
  f. What do you need to configure on `router2`, `h3` and `h4` so that all hosts and routers can reach all hosts and routers in the emulated network ? Add the `ifconfig` and `route` commands in the `.startup` files of all the hosts so that the network is correctly configured when it is started by using `lstart`.
 
-4. Use the network configured above to test how IP packets are fragmented. The `ifconfig` command allows you to specify the Maximum Transmission Unit (MTU), i.e. the largest size of the frames that are allowed on a given interface. The default MTU on the `eth?` interfaces is 1500 bytes. 
+5. Use the network configured above to test how IP packets are fragmented. The `ifconfig` command allows you to specify the Maximum Transmission Unit (MTU), i.e. the largest size of the frames that are allowed on a given interface. The default MTU on the `eth?` interfaces is 1500 bytes. 
 
  a. Force an MTU of 500 bytes on the three interfaces attached to `lan2`.
  b. Use `ping -s 1000` to send a 1000 bytes ping packet from `h3` to one of the routers attached to `lan2` and capture the packets on the other router by using :manpage:`tcpdump(8)`. In which order does the emulated host sends the IP fragments ?
@@ -140,7 +196,7 @@ Practice
 
 .. 4. Do the same exercise as above by using IPv6. Assume that the subnet `2001:db8:1::/64` is used for `lan1`, `2001:db8:2::/64` is used for `lan2` and `2001:db8:3::/64` is used for `lan3`. Note that you should use :manpage:`ping6(8)` to ping an IPv6 address instead of :manpage:`ping(8)` 
 
-5. The Routing Information Protocol (RIP) is a distance vector protocol that is often used in small IP networks. There are various implementations of RIP. For this exercise, you will use quagga_, an open-source implementation of several IP routing protocols that runs on Linux and other Unix compatible operating systems. :manpage:`quagga(8)` is in fact a set of daemons that interact together and with the Linux kernel. For this exercise, you will use two of these daemons : :manpage:`zebra(8)` and :manpage:`ripd(8)`. :manpage:`zebra(8)` is the master daemon that handles the interactions between the Linux kernel routing table and the routing protocols. :manpage:`ripd(8)` is the implementation of the RIP protocol. It interacts with the Linux routing tables through the :manpage:`zebra(8)` daemon.
+6. The Routing Information Protocol (RIP) is a distance vector protocol that is often used in small IP networks. There are various implementations of RIP. For this exercise, you will use quagga_, an open-source implementation of several IP routing protocols that runs on Linux and other Unix compatible operating systems. :manpage:`quagga(8)` is in fact a set of daemons that interact together and with the Linux kernel. For this exercise, you will use two of these daemons : :manpage:`zebra(8)` and :manpage:`ripd(8)`. :manpage:`zebra(8)` is the master daemon that handles the interactions between the Linux kernel routing table and the routing protocols. :manpage:`ripd(8)` is the implementation of the RIP protocol. It interacts with the Linux routing tables through the :manpage:`zebra(8)` daemon.
 
  To use a Linux real or virtual machine as a router, you need to first configure the IP addresses of the interfaces of the machine. Once this configuration has been verified, you can configure the :manpage:`zebra(8)` and :manpage:`ripd(8)` daemons. The configuration files for these daemons reside in `/etc/zebra`. The first configuration file is `/etc/zebra/daemons`. It lists the daemons that are launched when zebra is started by `/etc/init.d/zebra`. To enable :manpage:`ripd(8)` and :manpage:`zebra(8)`, this file will be configured as follows.
 
@@ -238,7 +294,7 @@ Practice
   d. Do the same with the `eth1` interface on router `r3`.
   e. Edit the `/etc/zebra/ripd.conf` configuration file on router `r5` so that this router becomes part of the network. Verify that `192.168.5.5` is reachable by all routers inside the network.
  
-6. The Open Shortest Path First (OSPF) protocol is a link-state protocol that is often used in enterprise IP networks. OSPF is implemented in the :manpage:`ospfd(8)` daemon that is part of quagga_. We use the same topology as in the previous exercise. The netkit lab may be downloaded from :download:`exercises/labs/lab-5routers-ospf.tar.gz`.
+7. The Open Shortest Path First (OSPF) protocol is a link-state protocol that is often used in enterprise IP networks. OSPF is implemented in the :manpage:`ospfd(8)` daemon that is part of quagga_. We use the same topology as in the previous exercise. The netkit lab may be downloaded from :download:`exercises/labs/lab-5routers-ospf.tar.gz`.
 
  The :manpage:`ospfd(8)` daemon supports a more complex configuration that the :manpage:`ripd(8)` daemon. A sample configuration is shown below.
 

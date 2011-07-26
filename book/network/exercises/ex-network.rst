@@ -139,63 +139,8 @@ Principles
    
      A stub connected to two providers
 
-13. Researchers and network operators collect and expose lots of BGP data. For this, they establish eBGP sessions between `data collection` routers and production routers located operationnal networks. Several `data collection` routers are available, the most popular ones are :
 
-  - http://www.routeviews.org
-  - http://www.ripe.net/ris
-
- For this exercise, you will use one of the `routeviews` BGP routers. You can access one of these routers by using telnet_. Once logged on the router, you can use the router's command line interface to analyse its BGP routing table.
-
- .. code-block:: text
-
-   telnet route-views.routeviews.org
-   Trying 128.223.51.103...
-   Connected to route-views.routeviews.org.
-   Escape character is '^]'.
-   C
-   **********************************************************************
- 
-                    Oregon Exchange BGP Route Viewer
-          route-views.oregon-ix.net / route-views.routeviews.org
- 
-   route views data is archived on http://archive.routeviews.org
- 
-   This hardware is part of a grant from Cisco Systems.
-   Please contact help@routeviews.org if you have questions or
-   comments about this service, its use, or if you might be able to
-   contribute your view. 
- 
-   This router has views of the full routing tables from several ASes.
-   The list of ASes is documented under "Current Participants" on
-   http://www.routeviews.org/.
- 
-                          **************
- 
-   route-views.routeviews.org is now using AAA for logins.  Login with
-   username "rviews".  See http://routeviews.org/aaa.html
-
-   **********************************************************************
-   User Access Verification
-   Username: rviews
-   route-views.oregon-ix.net>
-
-
- This router has eBGP sessions with routers from several ISPs. See http://www.routeviews.org/peers/route-views.oregon-ix.net.txt for an up-to-date list of all eBGP sessions maintained by this router.
-
- Among all the commands supported by this router, the `show ip bgp` command is very useful. This command takes an IPv4 prefix as parameter and allows you to retrieve all the routes that this routers has received in its Adj-RIB-In for the specified prefix.
-
- #. Use `show ip bgp 130.104.0.0/16` to find the best path used by this router to reach UCLouvain
- #. Knowing that `130.104.0.0/16` is announced by belnet (AS2611), what are, according to this BGP routing tables, the ASes that peer with belnet
- #. Do the same analysis for one of the IPv4 prefixes assigned to Skynet (AS5432) : `62.4.128.0/17`. The output of the `show ip bgp 62.4.128.0/17` reveals something strange as it seems that one of the paths towards this prefix passes twice via `AS5432`. Can you explain this ? ::
-
-  .. code-block:: text
-
-     2905 702 1239 5432 5432
-       196.7.106.245 from 196.7.106.245 (196.7.106.245)
-         Origin IGP, metric 0, localpref 100, valid, external
-
-
-14. Consider the network shown in the figure below. In this network, each AS contains a single BGP router. Assume that `R1` advertises a single prefix. `R1` receives a lot of packets from `R9`. Without any help from `R2`, `R9` or `R4`, how could `R1` configure its BGP advertisement such that it receives the packets from `R9` via `R3` ? What happens when a link fails ?
+13. Consider the network shown in the figure below. In this network, each AS contains a single BGP router. Assume that `R1` advertises a single prefix. `R1` receives a lot of packets from `R9`. Without any help from `R2`, `R9` or `R4`, how could `R1` configure its BGP advertisement such that it receives the packets from `R9` via `R3` ? What happens when a link fails ?
 
  .. figure:: svg/ex-bgp-internetwork.png
     :align: center
@@ -203,7 +148,7 @@ Principles
    
     A simple internetwork 
 
-15. Consider the network show in the figure below.
+14. Consider the network show in the figure below.
 
  .. figure:: svg/ex-bgp-path-explo.png
     :align: center
@@ -215,7 +160,7 @@ Principles
  #. How many and which routes are known by router `R5` ? Which route does it advertise to `R6`?
  #. Assume now that the link between `R1` and `R2` fails.  Show the messages exchanged due to this event.  Which BGP messages are sent to `R6` ?
 
-16. Consider the network shown in the figure below where `R1` advertises a single prefix. In this network, the link between `R1` and `R2` is considered as a backup link. It should only be used only when the primary link (`R1-R4`) fails. This can be implemented on `R2` by setting a low `local-pref` to the routes received on link `R2-R1`
+15. Consider the network shown in the figure below where `R1` advertises a single prefix. In this network, the link between `R1` and `R2` is considered as a backup link. It should only be used only when the primary link (`R1-R4`) fails. This can be implemented on `R2` by setting a low `local-pref` to the routes received on link `R2-R1`
 
   #. In this network, what are the paths used by all routers to reach `R1` ?
   #. Assume now that the link `R1-R4` fails. Which BGP messages are exchanged and what are now the paths used to reach `R1` ?
@@ -227,14 +172,14 @@ Principles
    
     A simple internetwork with a backup link 
 
-17. On February 22, 2008, the Pakistan Telecom Authority issued an `order <http://www.teeth.com.pk/blog/wp-content/uploads/2008/02/22-02-08_pta_blocking_of_websities.pdf>`_ to Pakistan ISPs to block access to three IP addresses belonging to `youtube <http://www.youtube.com>`_: `208.65.153.238`, `208.65.153.253`, `208.65.153.251`. One operator noted that these addresses were belonging to the same `/24` prefix. Read http://www.ripe.net/news/study-youtube-hijacking.html to understand what happened really.
+16. On February 22, 2008, the Pakistan Telecom Authority issued an `order <http://www.teeth.com.pk/blog/wp-content/uploads/2008/02/22-02-08_pta_blocking_of_websities.pdf>`_ to Pakistan ISPs to block access to three IP addresses belonging to `youtube <http://www.youtube.com>`_: `208.65.153.238`, `208.65.153.253`, `208.65.153.251`. One operator noted that these addresses were belonging to the same `/24` prefix. Read http://www.ripe.net/news/study-youtube-hijacking.html to understand what happened really.
 
  #. What should have done youtube_ to avoid this problem ?
  #. What kind of solutions would you propose to improve the security of interdomain routing ?
 
-18. There are currently 13 IPv4 addresses that are associated to the root servers of the Domain Name System. However, http://www.root-servers.org/ indicates that there are more than 100 different physical servers that support. This is a large anycast service. How would you configure BGP routers to provide such anycast service ?
+17. There are currently 13 IPv4 addresses that are associated to the root servers of the Domain Name System. However, http://www.root-servers.org/ indicates that there are more than 100 different physical servers that support. This is a large anycast service. How would you configure BGP routers to provide such anycast service ?
 
-19. Consider the network shown in the figure below. In this network, `R0` advertises prefix `p` and all link metrics are set to `1`
+18. Consider the network shown in the figure below. In this network, `R0` advertises prefix `p` and all link metrics are set to `1`
 
  - Draw the iBGP and eBGP sessions
  - Assume that session `R0-R8` is down when `R0` advertises `p` over `R0-R7`. What are the BGP messages exchanged and the routes chosen by each router in the network ?
@@ -248,9 +193,9 @@ Principles
 
     A simple Internet
 
-20. The BGP `MED` attribute is often set at the IGP cost to reach the BGP nexthop of the advertised prefix. However, routers can also be configured to always use the same `MED` values for all routes advertised over a given session. How would you use it in the figure above so that link `R10-R3` is the primary link while `R7-R6` is a backup link ? Is there an advantage or drawback of using the `MED` attribute for this application compared to `local-pref` ?
+19. The BGP `MED` attribute is often set at the IGP cost to reach the BGP nexthop of the advertised prefix. However, routers can also be configured to always use the same `MED` values for all routes advertised over a given session. How would you use it in the figure above so that link `R10-R3` is the primary link while `R7-R6` is a backup link ? Is there an advantage or drawback of using the `MED` attribute for this application compared to `local-pref` ?
 
-21. In the figure above, assume that the managers of `R8` and `R9` would like to use the `R8-R6` link as a backup link, but the managers of `R4` and `R6` do no agree to use the BGP `MED` attribute nor to use a different `local-pref` for the routes learned from 
+20. In the figure above, assume that the managers of `R8` and `R9` would like to use the `R8-R6` link as a backup link, but the managers of `R4` and `R6` do no agree to use the BGP `MED` attribute nor to use a different `local-pref` for the routes learned from 
 
 .. rubric:: Footnotes
 

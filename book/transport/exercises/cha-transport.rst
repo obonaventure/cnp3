@@ -1,8 +1,8 @@
 .. Copyright |copy| 2010 by Olivier Bonaventure
 .. This file is licensed under a `creative commons licence <http://creativecommons.org/licenses/by-sa/3.0/>`_
 
-Programming challenges
-======================
+Practice
+========
 
 1. The socket_ interface allows you to use the UDP protocol on a Unix host. UDP provides a connectionless unreliable service that in theory allows you to send SDUs of up to 64 KBytes. 
 
@@ -83,7 +83,7 @@ Programming challenges
 
 
 Packet trace analysis
-=====================
+---------------------
 
 When debugging networking problems or to analyse performance problems, it is sometimes useful to capture the segments that are exchanged between two hosts and to analyse them.  
 
@@ -140,8 +140,8 @@ A second interesting graph is the `round-trip-time` graph that shows the evoluti
 
    Wireshark : round-trip-time graph
 
-Emulating a network with Netkit
--------------------------------
+Emulating a network with netkit_
+................................
 
 Netkit_ is network emulator based on User Mode Linux.  It allows to easily set up an emulated network of Linux machines, that can act as end-host or routers.  
 
@@ -192,8 +192,6 @@ In the netkit lab (:download:`exercises/netkit/netkit_lab_2hosts_1rtr_ipv4.tar.t
 
  Note that capturing network traces can be facilitated by using the `uml_dump` extension available at http://kartoch.msi.unilim.fr/blog/?p=19 .  This extension is already installed in the Netkit installation on the student lab.  In order to capture the traffic exchanged on a given 'virtual LAN', you simply need to issue the command `vdump <LAN name>` on the host. If you want to pipe the trace to wireshark, you can use `vdump A | wireshark -i - -k`
 
-Questions
----------
 
 1. A TCP/IP stack receives a SYN segment with the sequence number set to 1234. What will be the value of the acknowledgement number in the returned SYN+ACK segment ?
 
