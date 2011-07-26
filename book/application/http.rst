@@ -142,9 +142,9 @@ Similarly, the following header lines can only appear inside HTTP requests sent 
 
  The first version of HTTP did not include the `Host:` header line. This was a severe limitation for web hosting companies. For example consider a web hosting company that wants to serve both `web.example.com` and `www.example.net` on the same physical server. Both web sites contain a `/index.html` document. When a client sends a request for either `http://web.example.com/index.html` or `http://www.example.net/index.html`, the HTTP 1.0 request contains the following line :
 
-.. code-block:: text
+ .. code-block:: text
 
-  GET /index.html HTTP/1.0
+   GET /index.html HTTP/1.0
 
  By parsing this line, a server cannot determine which `index.html` file is requested. Thanks to the `Host:` header line, the server knows whether the request is for `http://web.example.com/index.html` or `http://www.dummy.net/index.html`. Without the `Host:` header, this is impossible. The `Host:` header line allowed web hosting companies to develop their business by supporting a large number of independent web servers on the same physical server. 
 
@@ -155,16 +155,15 @@ The status line of the HTTP response begins with the version of HTTP used by the
  - All status codes starting with digit `4` indicate that the server has detected an error in the HTTP request sent by the client. `400 Bad Request` indicates a syntax error in the HTTP request. `404 Not Found` indicates that the requested document does not exist on the server.
  - All status codes starting with digit `5` indicate an error on the server. `500 Internal Server Error` indicates that the server could not process the request due to an error on the server itself.
 
-
 In both the HTTP request and the HTTP response, the MIME document refers to a representation of the document with the MIME headers that indicate the type of document and its size.
 
 As an illustration of HTTP/1.0, the transcript below shown a HTTP request for `http://www.ietf.org <http://www.ietf.org>`_ and the corresponding HTTP response. The HTTP request was sent by using the curl_ command line tool. The `User-Agent:` header line contains more information about this client software. There is no MIME document attached to this HTTP request, it ends with a blank line. 
 
 .. code-block:: text
  
-  GET / HTTP/1.0
-  User-Agent: curl/7.19.4 (universal-apple-darwin10.0) libcurl/7.19.4 OpenSSL/0.9.8l zlib/1.2.3
-  Host: www.ietf.org
+   GET / HTTP/1.0
+   User-Agent: curl/7.19.4 (universal-apple-darwin10.0) libcurl/7.19.4 OpenSSL/0.9.8l zlib/1.2.3
+   Host: www.ietf.org
   
 
 The HTTP response indicates the version of the server software used with the included modules. The `Last-Modified:` header indicates that the requested document was modified about one week before the request. An HTML document (not shown) is attached to the response. Note the blank line between the header of the HTTP response and the attached MIME document. The `Server:` header line has been truncated in this output.
@@ -208,27 +207,29 @@ The example below shows the operation of HTTP/1.1 over a persistent TCP connecti
 
 .. code-block:: text
  
- GET / HTTP/1.1
- Host: www.kame.net
- User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_2; en-us) 
- Connection: keep-alive
+  GET / HTTP/1.1
+  Host: www.kame.net
+  User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_2; en-us) 
+  Connection: keep-alive
+
 
 The server replies with the `Connection: Keep-Alive` header and indicates that it accepts a maximum of 100 HTTP requests over this connection and the it will close the connection if it remains idle for 15 seconds. 
 
 .. code-block:: text
 
- HTTP/1.1 200 OK
- Date: Fri, 19 Mar 2010 09:23:37 GMT
- Server: Apache/2.0.63 (FreeBSD) PHP/5.2.12 with Suhosin-Patch
- Keep-Alive: timeout=15, max=100
- Connection: Keep-Alive
- Content-Length: 3462
- Content-Type: text/html
+  HTTP/1.1 200 OK
+  Date: Fri, 19 Mar 2010 09:23:37 GMT
+  Server: Apache/2.0.63 (FreeBSD) PHP/5.2.12 with Suhosin-Patch
+  Keep-Alive: timeout=15, max=100
+  Connection: Keep-Alive
+  Content-Length: 3462
+  Content-Type: text/html
 
- <html...   </html>
+  <html...   </html>
 
 
-The client sends a second request for the style sheet of the retrieved web page. 
+The client sends a second request for the style sheet of the retrieved web page.
+
 .. code-block:: text
  
  GET /style.css HTTP/1.1

@@ -535,7 +535,7 @@ If the packet is not addressed to the router, it must be forwarded on an outgoin
 
 .. [#fciscoags] Example routers from this period include the Cisco AGS http://www.knossos.net.nz/don/wn1.html and AGS+ http://www.ciscopress.com/articles/article.asp?p=25296
 
-.. [#fdladdress] In practice, most local area networks use addresses encoded as a 48 bits field [802]_. Some recent local area network technologies use 64 bits addresses.
+.. [#fdladdress] In practice, most local area networks use addresses encoded as a 48 bits field [802]_ . Some recent local area network technologies use 64 bits addresses.
 
 .. [#farplinux] See chapter 28 of [Benvenuti2005] for a description of the implementation of ARP in the Linux kernel. 
 

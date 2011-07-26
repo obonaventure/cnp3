@@ -162,11 +162,7 @@ Netkit_ is network emulator based on User Mode Linux.  It allows to easily set u
 .. export PATH=$NETKIT_HOME/bin:$PATH
 .. It is usually convenient to put those lines in your shell initialization file.  
 
-
-A simple netkit_ lab
---------------------
-
-A lab is simply a directory containing at least a configuration file called `lab.conf`, and one directory for each virtual machine.  In the case the lab available on iCampus, the network is composed of two pcs, `pc1` and `pc2`, both of them being connected to a router `r1`.  The lab.conf file contains the following lines : 
+A netkit_ lab is simply a directory containing at least a configuration file called `lab.conf`, and one directory for each virtual machine.  In the case the lab available on iCampus, the network is composed of two pcs, `pc1` and `pc2`, both of them being connected to a router `r1`.  The lab.conf file contains the following lines : 
 
 .. code-block:: text
 
@@ -286,6 +282,8 @@ Questions
   7. Can you find which file has been exchanged during the transfer ? 
 
 16. You have been hired as an networking expert by a company. In this company, users of a networked application complain that the network is very slow. The developers of the application argue that any delays are caused by packet losses and a buggy network. The network administrator argues that the network works perfectly and that the delays perceived by the users are caused by the applications or the servers where the application is running. To resolve the case and determine whether the problem is due to the network or the server on which the application is running. The network administrator has collected a representative packet trace that you can download from :download:`exercises/traces/trace9.pcap`. By looking at the trace, can you resolve this case and indicate whether the network or the application is the culprit ?
+
+
 
 
 .. rubric:: Footnotes

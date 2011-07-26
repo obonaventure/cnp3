@@ -39,7 +39,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'Computer networking : Principles, Protocols and Practice'
-copyright = u'2010, Olivier Bonaventure'
+copyright = u'2010 Olivier Bonaventure <http://inl.info.ucl.ac.be/obo>'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -69,7 +69,8 @@ exclude_trees = ['_build']
 
 # List of files that should not be automatically compiled by sphynx because they are included
 
-exclude_patterns = [ 'intro/organisation.rst',
+exclude_patterns = [ '.#*',   # emacs backups
+                     'intro/organisation.rst',
                      'intro/referencemodels.rst',
                      'intro/services-protocols.rst',
                      'application/dns.rst',
