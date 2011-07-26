@@ -4,6 +4,7 @@ import socket, sys, time
 HOST=''
 # 8080 can be used without root priviledges
 PORT=8080 
+BUFLEN=8192 # buffer size
 
 s = socket.socket(socket.AF_INET6, socket.SOCK_STREAM)
 try:
@@ -19,7 +20,9 @@ while True:
     # a real server would be multithreaded and would catch exceptions
     conn, addr = s.accept()
     print "Connection from ", addr
-    data = conn.recv(8192) 
+    data=''
+    while not '\n' in data :  # wait until first line has been received
+        data = data+conn.recv(BUFLEN) 
     if data.startswith('GET'):
         # GET request
         conn.send('HTTP/1.0 404 Not Found\n')

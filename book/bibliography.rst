@@ -56,6 +56,7 @@ Whenever possible, the bibliography includes hypertext links to the references c
 .. [DYGU2004] Davik, F.  Yilmaz, M.  Gjessing, S.  Uzun, N., IEEE 802.17 resilient packet ring tutorial, IEEE Communications Magazine, Mar 2004, Vol 42, N 3, p. 112-118, http://dx.doi.org/10.1109/MCOM.2004.1273782
 .. [Dijkstra1959] Dijkstra, E. A Note on Two Problems in Connection with Graphs. Numerische Mathematik, 1:269- 271, 1959, http://dx.doi.org/10.1007/BF01386390
 .. [FDDI] ANSI. Information systems - Fiber Distributed Data Interface (FDDI) - token ring media access control (MAC). ANSI X3.139-1987 (R1997), 1997
+.. [Fletcher1982] Fletcher, J., An Arithmetic Checksum for Serial Transmissions, Communications, IEEE Transactions on, Jan. 1982, Vol. 30, N. 1, pp. 247-252, http://dx.doi.org/10.1109/TCOM.1982.1095369 	
 .. [FFEB2005] Francois, P., Filsfils, C., Evans, J., and Bonaventure, O. 2005. Achieving sub-second IGP convergence in large IP networks. SIGCOMM Comput. Commun. Rev. 35, 3 (Jul. 2005), 35-44. http://doi.acm.org/10.1145/1070873.1070877
 .. [FJ1994] Floyd, S., and Jacobson, V., The Synchronization of Periodic Routing Messages , IEEE/ACM Transactions on Networking, V.2 N.2, p. 122-136, April 1994, http://dx.doi.org/10.1109/90.298431
 .. [FLM2008] Fuller, V., Lear, E., Meyer, D., Reclassifying 240/4 as usable unicast address space, Internet draft, March 2008, workin progress, http://tools.ietf.org/html/draft-fuller-240space-02

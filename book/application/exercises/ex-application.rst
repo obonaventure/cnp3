@@ -66,7 +66,7 @@ where
      - sends DNS requests containing identifiers that are incremented by one after each request
      - sends DNS requests containing random identifiers
 
-#. The DNS protocol can run over UDP and over TCP. Most DNS servers prefer to use UDP because it consumes fewer resources on the server. However, TCP is useful when a large answer is expected or when a large answer must Use `time dig +tcp` to query a root DNS server. Is it faster to receive an answer via TCP or via UDP ?
+#. The DNS protocol can run over UDP and over TCP. Most DNS servers prefer to use UDP because it consumes fewer resources on the server. However, TCP is useful when a large answer is expected or when a large answer must. You can force the utilisation of TCP by using `dig +tcp`. Use TCP and UDP to query a root DNS server. Is it faster to receive an answer via TCP or via UDP ?
 
 
 Internet email protocols
@@ -79,16 +79,16 @@ Many Internet protocols are ASCII_-based protocols where the client sends reques
    - it is possible to test a server manually by using telnet Telnet is a protocol that allows to obtain a terminal on a remote server. For this, telnet opens a TCP connection with the remote server on port 23. However, most `telnet` implementations allow the user to specify an alternate port as `telnet hosts port` When used with a port number as parameter, `telnet` opens a TCP connection to the remote host on the specified port. `telnet` can thus be used to test any server using an ASCII-based protocol on top of TCP. Note that if you need to stop a running `telnet` session, Ctrl-C will not work as it will be sent by `telnet` to the remote host over the TCP connection. On many `telnet` implementations you can type `Ctrl-]` to freeze the TCP connection and return to the telnet interface.
 
 
-#. Assume that your are sending an email from your `@student.uclouvain.be` inside the university to another student's `@student.uclouvain.be` address. Which protocols are involved in the transmission of this email ?
+#. Assume that Alice sends an email from her `alice@yahoo.com` account to `Bob` who uses `bob@yahoo.com`. Which protocols are involved in the transmission of this email ?
 
-#. Same question when you are sending an email from  your `@student.uclouvain.be` inside the university to another student's `@gmail.com` address
+#. Same question when Alice sends an email to her friend Trudy, `trudy@gmail.com`. 
 
 #. Before the advent of webmail and feature rich mailers, email was written and read by using command line tools on servers. Using your account on `sirius.info.ucl.ac.be` use the `/bin/mail` command line tool to send an email to yourself *on this host*. This server stores local emails in the `/var/mail` directory with one file per user. Check with `/bin/more` the content of your mail file and try to understand which lines have been added by the server in the header of your email.
 
 
 #. Use your preferred email tool to send an email message to yourself containing a single line of text. Most email tools have the ability to show the `source` of the message, use this function to look at the message that you sent and the message that you received. Can you find an explanation for all the lines that have been added to your single line email [#fsmtpevol]_ ?
 
-#. The first version of the SMTP protocol was defined in :rfc:`821`. The current draft standard for SMTP is defined in :rfc:`5321` Considering only :rfc:`821` what are the main commands of the `SMTP` protocol [#fsmtp]_ ? 
+#. The first version of the SMTP protocol was defined in :rfc:`821`. The current standard for SMTP is defined in :rfc:`5321` Considering only :rfc:`821` what are the main commands of the `SMTP` protocol [#fsmtp]_ ? 
 
 
 #. When using SMTP, how do you recognise a positive reply from a negative one ?
@@ -107,17 +107,20 @@ Many Internet protocols are ASCII_-based protocols where the client sends reques
 
 .. look at the emails sent by the students
  
-#. By using SMTP, is it possible to send an email that contains exactly the following ASCII art ? ::
+#. By using SMTP, is it possible to send an email that contains exactly the following ASCII art ? 
+
+.. code-block:: text
 
    .
    ..
    ...
 
+
 #. Most email agents allow you to send email in carbon-copy (`cc:`) and also in blind-carbon-copy (`bcc:`) to a recipient. How does a SMTP server supports these two types of recipients ?
 
-#. In the early days, email was read by using tools such as `/bin/mail` or more advanced text-based mail readers such as pine_ or elm_ . Today, emails are stored on dedicated servers and retrieved by using protocols such as POP_ or IMAP_ From the user's viewpoint, can you list the advantages and drawbacks of these two protocols ?
+#. In the early days, email was read by using tools such as `/bin/mail` or more advanced text-based mail readers such as pine_ or elm_ . Today, emails are stored on dedicated servers and retrieved by using protocols such as POP_ or IMAP_. From the user's viewpoint, can you list the advantages and drawbacks of these two protocols ?
 
-#. The TCP protocol supports 65536 different ports numbers. Many of these port numbers have been reserved for some applications. The official repository of the reserved port numbers is maintained by the Internet Assigned Numbers Authority (IANA_) on http://www.iana.org/assignments/port-numbers [#fservices]_ Using this information, what is the default port number for the POP3 protocol ? Does it run on top of UDP or TCP ?
+#. The TCP protocol supports 65536 different ports numbers. Many of these port numbers have been reserved for some applications. The official repository of the reserved port numbers is maintained by the Internet Assigned Numbers Authority (IANA_) on http://www.iana.org/assignments/port-numbers [#fservices]_. Using this information, what is the default port number for the POP3 protocol ? Does it run on top of UDP or TCP ?
 
 #. The Post Office Protocol (POP) is a rather simple protocol described in :rfc:`1939`. POP operates in three phases. The first phase is the authorization phase where the client provides a username and a password. The second phase is the transaction phase where the client can retrieve emails. The last phase is the update phase where the client finalises the transaction. What are the main POP commands and their parameters ? When a POP server returns an answer, how can you easily determine whether the answer is positive or negative ? 
 

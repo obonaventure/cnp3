@@ -6,14 +6,14 @@
 The HyperText Transfer Protocol
 ================================
 
-In the early days of the Internet, the network was mainly used for remote terminal access with telnet_, email and file transfer. The default file transfer protocol, `ftp`, defined in :rfc:`959` was widely used and `ftp` clients and servers are still included in most operating systems.
+In the early days of the Internet, the network was mainly used for remote terminal access with telnet_, email and file transfer. The default file transfer protocol, `FTP`, defined in :rfc:`959` was widely used and `FTP` clients and servers are still included in most operating systems.
 
-Many `ftp` clients offer a user interface similar to a Unix shell and allow the client to browse the file system on the server and send and retrieve files. `ftp` servers can be configured in two modes :
+Many `FTP` clients offer a user interface similar to a Unix shell and allow the client to browse the file system on the server and send and retrieve files. `FTP` servers can be configured in two modes :
 
  - authenticated : in this mode, the ftp server only accepts users with a valid username and password. Once authenticated, they can access the files and directories according to their permissions
  - anonymous : in this mode, clients supply the `anonymous` userid and their email address as password. These clients are granted access to a special zone of the file system that only contains public files. 
 
-ftp was very popular in the 1990s and early 2000s, but today it has mostly been superseded by more recent protocols. Authenticated access to files is mainly done by using the Secure Shell (ssh) protocol defined in :rfc:`4251` and supported by clients such as scp_ or sftp_. Anonymous access is nowadays mainly provided by web protocols.
+ftp was very popular in the 1990s and early 2000s, but today it has mostly been superseded by more recent protocols. Authenticated access to files is mainly done by using the Secure Shell (ssh_) protocol defined in :rfc:`4251` and supported by clients such as scp_ or sftp_. Anonymous access is nowadays mainly provided by web protocols.
 
 In the late 1980s, high energy physicists working at CERN_ had to efficiently exchange documents about their ongoing and planned experiments. `Tim Berners-Lee`_ evaluated several of the documents sharing techniques that were available at that time [B1989]_. As none of the existing solutions met CERN's requirements, they choose to develop a completely new document sharing system. This system was initially called the `mesh`, but was quickly renamed the `world wide web`. The starting point for the `world wide web` is the hypertext. An hypertext is a text that contains references (hyperlinks) to other documents that the reader can immediately access. Hypertext was not invented for the world wide web. The idea of hypertext documents was proposed in 1945 [Bush1945]_ and the first experiments were done during the 1960s [Nelson1965]_ [Myers1998]_ . Compared to the hypertexts that were used in the late 1980s, the main innovation introduced by the `world wide web` was to allow hyperlinks to reference documents stored on remote machines. 
 
@@ -58,14 +58,17 @@ The first component of a URI is its `scheme`. In practice, the `scheme` identifi
 
 The second part of the URI  is the `authority`. It includes the DNS name or the IP address of the server where the document can be retrieved by using the protocol specified in the `scheme`. This name can be preceded by some information about the user (e.g. a username) who is requesting the information. Earlier definitions of the URI allowed to specify a username and a password before the `@` character (:rfc:`1738`), but this is now deprecated as placing a password inside a URI is insecure. The host name can be followed by the semicolon character and a port number. A default port number is defined for each `scheme` and the port number should only be included in the URI if a non-default port number is used.
 
-The third part of the URI is the path to the document. This path is structured as filenames on a Unix host. If the path is not specified, the server will returna default document. The last two optional parts of the URI are used to provide a query and indicate a specific part (e.g. a section in an article) of the requested document. Sample URIs are shown below ::
+The third part of the URI is the path to the document. This path is structured as filenames on a Unix host. If the path is not specified, the server will return a default document. The last two optional parts of the URI are used to provide a query and indicate a specific part (e.g. a section in an article) of the requested document. Sample URIs are shown below 
+
+.. code-block:: text
 
    http://tools.ietf.org/html/rfc3986.html
    mailto:infobot@example.com?subject=current-issue   
    http://docs.python.org/library/basehttpserver.html?highlight=http#BaseHTTPServer.BaseHTTPRequestHandler
+   telnet://[2001:6a8:3080:3::2]:80/
    ftp://cnn.example.com&story=breaking_news@10.0.0.1/top_story.htm
 
-The first URI corresponds to a document named `rfc3986.html` that is stored on the server named `tools.ietf.org` and can be accessed by using the `http` protocol on its default port. The second URI corresponds to an email message with subject `current-issue` that will be sent to user `infobot` in domain `example.com`. The `mailto:` URI scheme is defined in :rfc:`2368`. The third URI references the portion `BaseHTTPServer.BaseHTTPRequestHandler` of the document `basehttpserver.html` that is stored in the `library` directory on server `docs.python.org`. This document can be retrieved by using the `http` protocol. The query `highlight=http` is associated to this URI. The last URI is somewhat special. Most users will assume that it corresponds to a document stored on the `cnn.example.com` server. However, to parse this URI, it is important to remember that the `@` character is used to separate the username from the host name in the authorisation part of a URI. This implies that the URI points to a document named `top_story.htm` on host having IPv4 address `10.0.0.1`. The document will be retrieved by using the `ftp` protocol with the username set to `cnn.example.com&story=breaking_news`. 
+The first URI corresponds to a document named `rfc3986.html` that is stored on the server named `tools.ietf.org` and can be accessed by using the `http` protocol on its default port. The second URI corresponds to an email message with subject `current-issue` that will be sent to user `infobot` in domain `example.com`. The `mailto:` URI scheme is defined in :rfc:`2368`. The third URI references the portion `BaseHTTPServer.BaseHTTPRequestHandler` of the document `basehttpserver.html` that is stored in the `library` directory on server `docs.python.org`. This document can be retrieved by using the `http` protocol. The query `highlight=http` is associated to this URI. The fourth example is a server that operates the telnet_ protocol, uses IPv6 address `2001:6a8:3080:3::2` and is reachable on port 80. The last URI is somewhat special. Most users will assume that it corresponds to a document stored on the `cnn.example.com` server. However, to parse this URI, it is important to remember that the `@` character is used to separate the username from the host name in the authorisation part of a URI. This implies that the URI points to a document named `top_story.htm` on host having IPv4 address `10.0.0.1`. The document will be retrieved by using the `ftp` protocol with the username set to `cnn.example.com&story=breaking_news`. 
 
 The second component of the `word wide web` is the HyperText Markup Language (HTML). HTML defines the format of the documents that are exchanged on the `web`. The `first version of HTML <http://www.w3.org/History/19921103-hypertext/hypertext/WWW/MarkUp/Tags.html>`_ was derived from the Standard Generalized Markup Language (SGML) that was standardised in 1986 by :term:`ISO`. SGML_ was designed to allow large project documents in industries such as government, law or aerospace to be shared efficiently in a machine-readable manner. These industries require documents that remain readable and editable for tens of years and insisted on a standardised format supported by multiple vendors. Today, SGML_ is not widely used anymore besides specific applications, but its descendants including like :term:`HTML` and :term:`XML` are now widespread.
 
@@ -113,7 +116,7 @@ Three types of methods can be used in HTTP requests :
   GET /MarkUp/ HTTP/1.0
 
  - the `HEAD` method is a variant of the `GET` method that allows to retrieve the header lines for a given URI without retrieving the entire document. It can be used by a client that wants to verify whether a document has changed compared to the copy that the client already has
- - the `POST` method is less popular. It can be used by a client to send a document to a server. The sent document is attached to the HTTP request as a MIME document.
+ - the `POST` method can be used by a client to send a document to a server. The sent document is attached to the HTTP request as a MIME document.
 
 
 HTTP clients and servers can include many different HTTP headers in HTTP requests and responses. Each HTTP header is encoded as a single ASCII-line terminated by `CR` and `LF`. Several of these headers are briefly described below. A detailed discussion of all standard headers may be found in :rfc:`1945`. The MIME headers can appear in both HTTP requests and HTTP responses.
@@ -137,12 +140,13 @@ Similarly, the following header lines can only appear inside HTTP requests sent 
 
 .. note:: The importance of the `Host:` header line
 
- The first version of HTTP did not include the `Host:` header line. This was a severe limitation for web hosting companies. For example consider a web hosting company that wants to serve both `web.example.com` and `www.dummy.net` on the same physical server. Both web sites contain a `/index.html` document. When a client sends a request for either `http://web.example.com/index.html` or `http://www.dummy.net/index.html`, the HTTP 1.0 request contains the following line : ::
+ The first version of HTTP did not include the `Host:` header line. This was a severe limitation for web hosting companies. For example consider a web hosting company that wants to serve both `web.example.com` and `www.example.net` on the same physical server. Both web sites contain a `/index.html` document. When a client sends a request for either `http://web.example.com/index.html` or `http://www.example.net/index.html`, the HTTP 1.0 request contains the following line :
+
+.. code-block:: text
 
   GET /index.html HTTP/1.0
 
  By parsing this line, a server cannot determine which `index.html` file is requested. Thanks to the `Host:` header line, the server knows whether the request is for `http://web.example.com/index.html` or `http://www.dummy.net/index.html`. Without the `Host:` header, this is impossible. The `Host:` header line allowed web hosting companies to develop their business by supporting a large number of independent web servers on the same physical server. 
-
 
 The status line of the HTTP response begins with the version of HTTP used by the server (usually `HTTP/1.0` defined in :rfc:`1945` or `HTTP/1.1` defined in :rfc:`2616`) followed by a three digits status code and additional information in English. The HTTP status codes have a similar structure as the reply codes used by SMTP. 
 
@@ -154,18 +158,22 @@ The status line of the HTTP response begins with the version of HTTP used by the
 
 In both the HTTP request and the HTTP response, the MIME document refers to a representation of the document with the MIME headers that indicate the type of document and its size.
 
-As an illustration of HTTP/1.0, here are an HTTP request for http://www.ietf.org and the corresponding HTTP response. The HTTP request was sent by the curl_ command line tool. The `User-Agent:` header line contains more information about this client software. There is no MIME document attached to this HTTP request, it ends with a blank line. ::
+As an illustration of HTTP/1.0, the transcript below shown a HTTP request for `http://www.ietf.org <http://www.ietf.org>`_ and the corresponding HTTP response. The HTTP request was sent by using the curl_ command line tool. The `User-Agent:` header line contains more information about this client software. There is no MIME document attached to this HTTP request, it ends with a blank line. 
+
+.. code-block:: text
+ 
   GET / HTTP/1.0
   User-Agent: curl/7.19.4 (universal-apple-darwin10.0) libcurl/7.19.4 OpenSSL/0.9.8l zlib/1.2.3
   Host: www.ietf.org
   
 
+The HTTP response indicates the version of the server software used with the included modules. The `Last-Modified:` header indicates that the requested document was modified about one week before the request. An HTML document (not shown) is attached to the response. Note the blank line between the header of the HTTP response and the attached MIME document. The `Server:` header line has been truncated in this output.
 
-The HTTP response indicates the version of the server software used with the included modules. The `Last-Modified:` header indicates that the requested document was modified about one week before the request. An HTML document (not shown) is attached to the response. Note the blank line between the header of the HTTP response and the attached MIME document. ::
-
+.. code-block:: text
+ 
   HTTP/1.1 200 OK
   Date: Mon, 15 Mar 2010 13:40:38 GMT
-  Server: Apache/2.2.4 (Linux/SUSE) mod_ssl/2.2.4 OpenSSL/0.9.8e PHP/5.2.6 with Suhosin-Patch mod_python/3.3.1 Python/2.5.1 mod_perl/2.0.3 Perl/v5.8.8
+  Server: Apache/2.2.4 (Linux/SUSE) mod_ssl/2.2.4 OpenSSL/0.9.8e (truncated)
   Last-Modified: Tue, 09 Mar 2010 21:26:53 GMT
   Content-Length: 17019
   Content-Type: text/html
@@ -196,14 +204,18 @@ To allow the clients and servers to control the utilisation of these persistent 
  - The `Connection:` header is used with the `Keep-Alive` argument by the client to indicate that it expects the underlying TCP connection to be persistent. When this header is used with the `Close` argument, it indicates that the entity that sent it will close the underlying TCP connection at the end of the HTTP response.
  - The `Keep-Alive:` header is used by the server to inform the client about how it agrees to use the persistent connection. A typical `Keep-Alive:` contains two parameters : the maximum number of requests that the server agrees to serve on the underlying TCP connection and the timeout (in seconds) after which the server will close an idle connection
 
-The example below shows the operation of HTTP/1.1 over a persistent TCP connection to retrieve three URIs stored on the same server. Once the connection has been established, the client sends its first request with the `Connection: keep-alive` header to request a persistent connection. ::
+The example below shows the operation of HTTP/1.1 over a persistent TCP connection to retrieve three URIs stored on the same server. Once the connection has been established, the client sends its first request with the `Connection: keep-alive` header to request a persistent connection. 
 
+.. code-block:: text
+ 
  GET / HTTP/1.1
  Host: www.kame.net
- User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_2; en-us) AppleWebKit/531.22.7 (KHTML, like Gecko) Version/4.0.5 Safari/531.22.7 
+ User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_2; en-us) 
  Connection: keep-alive
 
-The server replies with the `Connection: Keep-Alive` header and indicates that it accepts a maximum of 100 HTTP requests over this connection and the it will close the connection if it remains idle for 15 seconds. ::
+The server replies with the `Connection: Keep-Alive` header and indicates that it accepts a maximum of 100 HTTP requests over this connection and the it will close the connection if it remains idle for 15 seconds. 
+
+.. code-block:: text
 
  HTTP/1.1 200 OK
  Date: Fri, 19 Mar 2010 09:23:37 GMT
@@ -215,15 +227,20 @@ The server replies with the `Connection: Keep-Alive` header and indicates that i
 
  <html...   </html>
 
-The client sends a second request for the style sheet of the retrieved web page. ::
 
+The client sends a second request for the style sheet of the retrieved web page. 
+.. code-block:: text
+ 
  GET /style.css HTTP/1.1
  Host: www.kame.net
  Referer: http://www.kame.net/
- User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_2; en-us) AppleWebKit/531.22.7 (KHTML, like Gecko) Version/4.0.5 Safari/531.22.7
+ User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_2; en-us) 
  Connection: keep-alive
 
-The server replies with the requested style sheet and maintains the persistent connection. Note that the server only accepts 99 remaining HTTP requests over this persistent connection. ::
+
+The server replies with the requested style sheet and maintains the persistent connection. Note that the server only accepts 99 remaining HTTP requests over this persistent connection. 
+
+.. code-block:: text
 
  HTTP/1.1 200 OK
  Date: Fri, 19 Mar 2010 09:23:37 GMT
@@ -236,12 +253,14 @@ The server replies with the requested style sheet and maintains the persistent c
 
  ...
 
-The last request sent by the client is for the webserver's icon [#ffavicon]_ that could be displayed by the browser. This server does not contain such URI and thus replies with a `404` HTTP status. However, the underlying TCP connection is not immediately closed. ::
+The last request sent by the client is for the webserver's icon [#ffavicon]_ that could be displayed by the browser. This server does not contain such URI and thus replies with a `404` HTTP status. However, the underlying TCP connection is not immediately closed. 
+
+.. code-block:: text
 
  GET /favicon.ico HTTP/1.1
  Host: www.kame.net
  Referer: http://www.kame.net/
- User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_2; en-us) AppleWebKit/531.22.7 (KHTML, like Gecko) Version/4.0.5 Safari/531.22.7
+ User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_2; en-us) 
  Connection: keep-alive
 
  HTTP/1.1 404 Not Found
@@ -259,7 +278,7 @@ As illustrated above, a client can send several HTTP requests over the same pers
 
 However, in practice, some servers want to provide content that is tuned for each user. For example, some servers can provide information in several languages or other servers want to provide advertisements that are targeted to different types of users. For this, servers need to maintain some information about the preferences of each user and use to information to produce the content that matches their user's preferences. Several solutions have been tested in HTTP to solve this problem and it is interesting to discuss their advantages and drawbacks.
 
-A first solution is to force the users to be authenticated. This was the solution used by ftp to control the files that each user could access. Initially, usernames and password could be included inside URIs :rfc:`1738`. However, placing passwords in clear in a potentially publicly visible URI is completely insecure and this usage is now deprecated :rfc:`3986`. HTTP supports several extension headers :rfc:`2617` that can be used by a server to request the client to be authenticated and by the client to provide his/her credentials. However, usernames and passwords have not been popular on web servers because they force the human users to remember one username and one password per server. Remembering a password is acceptable when a user needs to access protected content, but users will not accept to pick a username and password to receive targeted advertisements from the web sites that they visit.
+A first solution is to force the users to be authenticated. This was the solution used by `FTP` to control the files that each user could access. Initially, usernames and password could be included inside URIs :rfc:`1738`. However, placing passwords in clear in a potentially publicly visible URI is completely insecure and this usage is now deprecated :rfc:`3986`. HTTP supports several extension headers :rfc:`2617` that can be used by a server to request the client to be authenticated and by the client to provide his/her credentials. However, usernames and passwords have not been popular on web servers because they force the human users to remember one username and one password per server. Remembering a password is acceptable when a user needs to access protected content, but users will not accept to pick a username and password to receive targeted advertisements from the web sites that they visit.
 
 A second solution to allow servers to tune that content to the needs and capabilities of the user is to rely on the different types of `Accept-*` HTTP headers. For example, the `Accept-Language:` can be used by the client to indicate its preferred languages. Unfortunately, in practice this header is usually set based on the default language of the browser and it is not possible for a user to indicate that language that it prefers to use by selecting options on each visited web server.
 

@@ -46,7 +46,7 @@ To preserve the scalability of the routing system, it is important to minimize t
 
 .. index:: Class A IPv4 address, Class B IPv4 address, Class C IPv4 address
 
-When a router needs to forward a packet, it must know the `subnet` of the destination address to be able to consult its forwarding table to forward the packet. :rfc:`791` proposed to use the high-order bits of the address to encode the length of the subnet identifier. This lead to the definition of three `classes` of unicast addresses [#fclasses]_
+When a router needs to forward a packet, it must know the `subnet` of the destination address to be able to consult its forwarding table to forward the packet. :rfc:`791` proposed to use the high-order bits of the address to encode the length of the subnet identifier. This led to the definition of three `classes` of unicast addresses [#fclasses]_
 
 =======  ==========  =========  =============	=============
 Class    High-order  Length of  Number of	Addresses per

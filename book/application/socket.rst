@@ -68,7 +68,7 @@ Now that we have described the utilisation of the socket API to write a simple c
  - `socket.shutdown` : this method is used to release the underlying connection. On some platforms, it is possible to specify the direction of transfer to be released (e.g. `socket.SHUT_WR` to release the outgoing direction or `socket.SHUT_RDWR` to release both directions).
  - `socket.close`: this method is used to close the socket. It calls `socket.shutdown` if the underlying connection is still open.
 
-With these methods, it is now possible to write a simple HTTP client. This client operates over both IPv6 and IPv4 and writes the homepage of the remote server on the standard output. It also reports the number of `socket.recv` calls that were used to retrieve the homepage[#fnumrecv]_. 
+With these methods, it is now possible to write a simple HTTP client. This client operates over both IPv6 and IPv4 and writes the homepage of the remote server on the standard output. It also reports the number of `socket.recv` calls that were used to retrieve the homepage [#fnumrecv]_. 
 
 
 .. literalinclude:: python/httpclient.py

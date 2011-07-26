@@ -129,7 +129,7 @@ Inside the email header, the `Content-Type:` header line indicates how the MIME 
  - `Content-Type: multipart/mixed`. This header line indicates that the MIME message contains several independent parts. For example, such a message may contain a part in plain text and a binary file.
  - `Content-Type: multipart/alternative`. This header line indicates that the MIME message contains several representations of the same information. For example, a `multipart/alternative` message may contain both a plain text and an HTML version of the same text. 
 
-To support these two types of MIME messages, the recipient of a message must be able to extract the different parts from the message. In :rfc:`822`, an empty line was used to separate the header lines from the body. Using an empty line to separate the different parts of an email body would be difficult as the body of email messages often contains one or more empty lines. Another possible option would be to define a special line, e.g. `*-*-*-*-*-*-*-*-*-*` to mark the boundary between two parts of a MIME message. Unfortunately, this is not possible as some emails may contain this string in their body (e.g. emails sent to students to explain the format of MIME messages). To solve this problem, the `Content-Type:` header line contains a second parameter that specifies the string that has been used by the sender of the MIME message to delineate the different parts. In practice, this string is often chosen randomly by the mail client.
+To support these two types of MIME messages, the recipient of a message must be able to extract the different parts from the message. In :rfc:`822`, an empty line was used to separate the header lines from the body. Using an empty line to separate the different parts of an email body would be difficult as the body of email messages often contains one or more empty lines. Another possible option would be to define a special line, e.g. `*-LAST_LINE-*` to mark the boundary between two parts of a MIME message. Unfortunately, this is not possible as some emails may contain this string in their body (e.g. emails sent to students to explain the format of MIME messages). To solve this problem, the `Content-Type:` header line contains a second parameter that specifies the string that has been used by the sender of the MIME message to delineate the different parts. In practice, this string is often chosen randomly by the mail client.
 
 The email message below, copied from :rfc:`2046` shows a MIME message that contains two parts that are both in plain text and encoded by using the ASCII character set. Note that the string `simple boundary` is defined in the `Content-Type:` header as the string that marks the boundary between the header and the first part and also between the first and the second part and at the end of the message. Other example of MIME messages may be found in :rfc:`2046`.
 
@@ -159,9 +159,9 @@ The email message below, copied from :rfc:`2046` shows a MIME message that conta
 The `Content-Type:` header can also be used inside a MIME part. In this case, it indicates the type of data placed in this part. Each data type is specified as a type followed by a subtype. A detailed description may be found in :rfc:`2046`. Some of the most popular `Content-Type:` header lines are :
 
  - `text`. The message part contains information in textual format. There are several subtypes : `text/plain` for regular ASCII text, `text/html` defined in :rfc:`2854` for documents in :term:`HTML` format or the `text/enriched` format defined in :rfc:`1896`. The `Content-Type:` header line may contain a second parameter that specifies the character set used to encode the text. `charset=us-ascii` is the standard ASCII character table.  Other frequent character sets include `charset=UTF8` or `charset=iso-8859-1`. The `list of standard character sets <http://www.iana.org/assignments/character-sets>`_ is maintained by :term:`IANA`
- - `image`. The message part contains a binary representation of an image. The subtype indicates the format of the image such as `gif`, `jpg` or `png`. 
- - `audio`. The message part contains an audio clip. The subtype indicates the format of the audio clip like `wav` or `mp3`
- - `video`. The message part contains a video clip. The subtype indicates the format of the video clip like `avi` or `mp4`
+ - `image`. The message part contains a binary representation of an image. The subtype indicates the format of the image such as `gif <http://en.wikipedia.org/wiki/Graphics_Interchange_Format>`_, `jpg <http://en.wikipedia.org/wiki/Jpeg>`_ or `png <http://en.wikipedia.org/wiki/Portable_Network_Graphics>`_. 
+ - `audio`. The message part contains an audio clip. The subtype indicates the format of the audio clip like `wav <http://en.wikipedia.org/wiki/Wav>`_ or `mp3 <http://en.wikipedia.org/wiki/Mp3>`_
+ - `video`. The message part contains a video clip. The subtype indicates the format of the video clip like `avi <http://en.wikipedia.org/wiki/Audio_Video_Interleave>`_ or `mp4 <http://en.wikipedia.org/wiki/Mp4>`_
  - `application`. The message part contains binary information that was produced by a particular application that is listed as the subtype. Email clients use the subtype to launch the application that is able to decode the received binary information. 
 
 .. note:: From ASCII to Unicode
@@ -284,17 +284,18 @@ The SMTP protocol, like most text-based protocols, is specified as a :term:`BNF`
 
 In this BNF, `atext` corresponds to the printable ASCII characters. This BNF rule is defined in :rfc:`5322`. The five main commands are `HELO`, `MAIL FROM:`, `RCPT TO:`, `DATA` and `QUIT`. `Postmaster` is the alias of the system administrator who is responsible for a given domain or SMTP server. All domains must have a `Postmaster` alias.
 
-The SMTP responses are defined by the following BNF rules ::
+The SMTP responses are defined by the BNF shown in the figure below. 
 
-   Greeting       = "220 " Domain [ SP textstring ] CRLF
-   textstring     = 1*atext
-   Reply-line     = *( Reply-code "-" [ textstring ] CRLF )
-                    Reply-code [ SP textstring ] CRLF
-   Reply-code     = %x32-35 %x30-35 %x30-39 
+.. figure:: pkt/smtp-responses.png
+   :align: center
+
+   BNF specification of the SMTP responses
 
 SMTP servers use structured reply codes containing three digits and an optionnal comment. The first digit of the reply code indicates whether the command was successful or not. A reply code of `2xy` indicates that the command has been accepted. A reply code of `3xy` indicates that the command has been accepted, but additional information from the client is expected. A reply code of `4xy` indicates a transient negative reply. For some reasons, indicated by the other digits or the comment, the command cannot be processed immediately, but there is some hope that the problem will be transient. This is a hint to the client that it should try again the same command later. In contrast, a reply code of `5xy` indicates a permanent failure or error. In this case, it is useless for the client to retry the same command later. Other application layer protocols such as FTP :rfc:`959`  or HTTP :rfc:`2616` use a similar structure for their reply codes. Additional details about the other reply codes may be found in :rfc:`5321`.
 
-Example of SMTP reply codes include the following : ::
+Example of SMTP reply codes include the following :
+
+.. code-block:: text
 
    500  Syntax error, command unrecognized 
    501  Syntax error in parameters or arguments
@@ -309,11 +310,14 @@ Example of SMTP reply codes include the following : ::
    550  Requested action not taken: mailbox unavailable 
    354  Start mail input; end with <CRLF>.<CRLF>
 
+
 The first four reply codes correspond to errors in the commands sent by the client. The fourth reply code would be sent by the server when the client sends command in an incorrect order (e.g. the client tries to send an email before providing the destination address of the message). Reply code `220` is used by the server as the first message when it agrees to interact with the client. Reply code `221` is sent by the server before closing the underlying transport connection. Reply code `421` is returned when there is a problem (e.g. lack of memory/disk resources) that prevents the server from accepting the transport connection. Reply code `250` is the standard positive reply that indicates the success of the previous command. Reply codes `450` and `452` indicate that the destination mailbox is temporarily unavailable, for different reasons while reply code `550` indicates that the mailbox does not exist or cannot be used for policy reasons. Reply code `354` indicates that the client can start transmit its email message.
 
 The transfer of an email message is performed in three phases. During the first phase, the client opens a transport connection with the server. Once the connection has been established, the client and the server exchange greetings messages (`HELO` command). Most servers insist on receiving valid greeting messages and some of them drop the underlying transport connection if they do not receive valid greetings. Once the greetings have been exchanged, the email transfer phase can start. During this phase, the client transfers one or more email messages by indicating the email address of the sender (`MAIL FROM:` command), the email address of the recipient (`RCPT TO:` command) followed by the headers and the body of the email message (`DATA` command). Once the client has sent all the email messages to the SMTP server, it terminates the SMTP association (`QUIT` command).
 
-A successful transfer of an email message is shown below ::
+A successful transfer of an email message is shown below 
+
+.. code-block:: text
 
  S: 220 smtp.example.com ESMTP MTA information
  C: HELO mta.example.org
@@ -353,7 +357,7 @@ In this example, the MTA running on `mta.example.org` opens a TCP connection to 
 The Post Office Protocol
 ------------------------
 
-When the first versions of SMTP were designed, the Internet was composed of minicomputers that were used by an entire university department or research lab. These minicomputers were used by many users at the same time. Email was mainly used to send messages from a user on a given host to another user on a remote host. At that time, SMTP was the only protocol involved in the delivery of the emails as all hosts attached to the network were running a SMTP server. On such hosts, email destined to local users was delivered by placing the email in a special directory or file owned by the user. However, the introduction of the personal computers in the 1980s, changed the environment. Initially, users of these personal computers used applications such as `:term:`telnet` to open a remote session on the local :term:`minicomputer` to read their email. This was not user-friendly. A better solution appeared with the development of user friendl email client applications on personal computers. Several protocols were designed to allow these client applications to retrieve the email messages destined to a user from his/her server. Two of these protocols became popular and are still used today. The Post Office Protocol (POP), defined in :rfc:`1939`, is the simplest one. It allows a client to download all the messages destined to a given user from his/her email server. We describe POP briefly in this section. The second protocol is the Internet Message Access Protocol (IMAP), defined in :rfc:`3501`. IMAP is more powerful, but also more complex than POP. IMAP was designed to allow client applications to efficiently access in real-time to messages stored in various folders on servers. IMAP assumes that all the messages of a given user are stored on a server and provides the functions that are necessary to search, download, delete or filter messages. 
+When the first versions of SMTP were designed, the Internet was composed of minicomputers that were used by an entire university department or research lab. These minicomputers were used by many users at the same time. Email was mainly used to send messages from a user on a given host to another user on a remote host. At that time, SMTP was the only protocol involved in the delivery of the emails as all hosts attached to the network were running a SMTP server. On such hosts, email destined to local users was delivered by placing the email in a special directory or file owned by the user. However, the introduction of the personal computers in the 1980s, changed the environment. Initially, users of these personal computers used applications such as `:term:`telnet` to open a remote session on the local :term:`minicomputer` to read their email. This was not user-friendly. A better solution appeared with the development of user friendly email client applications on personal computers. Several protocols were designed to allow these client applications to retrieve the email messages destined to a user from his/her server. Two of these protocols became popular and are still used today. The Post Office Protocol (POP), defined in :rfc:`1939`, is the simplest one. It allows a client to download all the messages destined to a given user from his/her email server. We describe POP briefly in this section. The second protocol is the Internet Message Access Protocol (IMAP), defined in :rfc:`3501`. IMAP is more powerful, but also more complex than POP. IMAP was designed to allow client applications to efficiently access in real-time to messages stored in various folders on servers. IMAP assumes that all the messages of a given user are stored on a server and provides the functions that are necessary to search, download, delete or filter messages. 
 
 POP is another example of a simple line-based protocol. POP runs above the bytestream service. A POP server usually listens to port 110. A POP session is composed of three parts : an `authorisation` phase during which the server verifies the client's credential, a `transaction` phase during which the client downloads messages and an `update` phase that concludes the session. The client sends commands and the server replies are prefixed by `+OK` to indicate a successful command or by `-ERR` to indicate errors.
 
@@ -363,7 +367,9 @@ Once the username and password have been validated, the POP session enters in th
 
 Once the client has retrieved and possibly deleted the emails contained in the mailbox, it must issue the `QUIT` command. This command terminates the POP session and allows the server to delete all the messages that have been marked for deletion by using the `DELE` command. 
 
-The figure below provides a simple POP session. All lines prefixed with `C:` (resp. `S:`) are sent by the client (resp. server). ::
+The figure below provides a simple POP session. All lines prefixed with `C:` (resp. `S:`) are sent by the client (resp. server). 
+
+.. code-block:: text
 
       S:    +OK POP3 server ready 
       C:    USER alice
@@ -407,7 +413,7 @@ In this example, a POP client contacts a POP server on behalf of the user named 
 
 .. [#fdot] This implies that a valid email message cannot contain a line with one dot followed by `CR` and `LF`. If a user types such a line in an email, his email client will automatically add a space character before or after the dot when sending the message over SMTP.
 
-.. [#fapop] :rfc:`1939` defines another authentication scheme that is not vulnerable to such attackers.
+.. [#fapop] :rfc:`1939` defines the APOP authentication scheme that is not vulnerable to such attacks.
 
 
 .. include:: ../links.rst

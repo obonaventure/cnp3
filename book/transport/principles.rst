@@ -17,7 +17,7 @@ We will remove these assumptions one after the other in order to better understa
 Reliable data transfer on top of a perfect network service
 ==========================================================
 
-The transport layer entity interacts with a user in the application layer and also with an entity in the network layer. According to the reference model, these interactions will be performed by using `DATA.req`and DATA.ind` primitives. However, to simplify the presentation and avoid a confusion between a `DATA.req` primitive issued by the user of the transport layer entity and a `DATA.req` issued by the transport layer entity itself, we use the following terminology :
+The transport layer entity interacts with a user in the application layer and also with an entity in the network layer. According to the reference model, these interactions will be performed by using `DATA.req` and `DATA.ind` primitives. However, to simplify the presentation and avoid a confusion between a `DATA.req` primitive issued by the user of the transport layer entity and a `DATA.req` issued by the transport layer entity itself, we use the following terminology :
 
  - the interactions between the user and the transport layer entity are represented by using the classical `DATA.req`, `DATA.ind`, ... primitives
  - the interactions between the transport layer entity and the network layer service are represented by using `send` instead of `DATA.req` and `recvd` instead of `DATA.ind`
@@ -50,8 +50,8 @@ To solve this problem, we need to introduce inside our transport protocol, and d
 
 These two types of segments can be distinguished by using a segment composed of two parts :
 
- - a `header` that contains one bit set to `0` in data segments and to `1` in control segments
- - the payload containing the SDU supplied by the user application
+ - the `header` that contains one bit set to `0` in data segments and to `1` in control segments
+ - the payload that contains the SDU supplied by the user application
 
 The transport entity can then be modelled as a finite state machine containing two states for the receiver and two states for the sender. The figure below provides a graphical representation of this state machine with the sender above and the receiver below.
 
@@ -80,9 +80,9 @@ The transport layer must deal with the imperfections of the network layer servic
  #. Segments can be reordered or duplicated
 
 
-To deal with these four types of imperfections, transport protocols rely on different types of mechanisms. The first problem are the transmission errors. The segments sent by a transport entity is processed by the network and datalink layers and finally transmitted by the physical layer. All these layers are imperfect. For example, the physical layer may be affected different types of errors :
+To deal with these four types of imperfections, transport protocols rely on different types of mechanisms. The first problem are the transmission errors. The segments sent by a transport entity is processed by the network and datalink layers and finally transmitted by the physical layer. All these layers are imperfect. For example, the physical layer may be affected by different types of errors :
 
- - random isolated errors where the value of single bit has been modified changed due to a transmission error.
+ - random isolated errors where the value of a single bit has been modified due to a transmission error
  - random burst errors where the values of `n` consecutive bits have been changed due to transmission errors
  - random bit creations and random bit removals where bits have been added or removed due to transmission errors
 
@@ -146,11 +146,9 @@ Unfortunately, retransmission timers alone are not sufficient to recover from se
 
 To solve this problem, transport protocols associate a `sequence number` to each data segment. This `sequence number` is one of the fields found in the header of the data segments. We use the notation `D(S,...)` to indicate a data segment whose sequence number field is set to `S`. The acknowledgements also contain a sequence number that indicates the data segments that it acknowledges. We use `OKS` to indicate an acknowledgement segment that confirms the reception of `D(S,...)`. The sequence number is encoded as a bit string of fixed length. The simplest transport is the Alternating Bit Protocol (ABP). 
 
-
-
 .. index:: Alternating Bit Protocol
 
-The Alternating Bit Protocol uses a single bit to encode the sequence number. It can be implemented by using a simple Finite State Machine. 
+The Alternating Bit Protocol uses a single bit to encode the sequence number. It can be implemented easily. The sender and the receivers only require a four states Finite State Machine. 
 
 .. figure:: png/transport-fig-021-c.png
    :align: center
@@ -161,7 +159,7 @@ The Alternating Bit Protocol uses a single bit to encode the sequence number. It
 
 The initial state of the sender is `Wait for D(0,...)`. In this state, the sender waits for a `Data.request`. The first data segment that it sends uses sequence number `0`. After having sent this segment, the sender waits for an `OK0` acknowledgement. A segment is retransmitted upon expiration of the retransmission timer or if an acknowledgement with an incorrect sequence number has been received.
 
-The receiver first waits for `D(0,...)`. If the segment has a correct `CRC`, it passes the SDU to its user and sends `OK0`. Then, the receiver waits for `D(1,...)`. In this state, it may receive a duplicate `D(0,...)` or a data segment with an invalid CRC. In both cases, it returns an `OK0` segment to allow the sender to recover from the possible loss of the previous `OK0` segment.
+The receiver first waits for `D(0,...)`. If the segment contains a correct `CRC`, it passes the SDU to its user and sends `OK0`. If the segment contains and invalid CRC, it is immediately discarded. Then, the receiver waits for `D(1,...)`. In this state, it may receive a duplicate `D(0,...)` or a data segment with an invalid CRC. In both cases, it returns an `OK0` segment to allow the sender to recover from the possible loss of the previous `OK0` segment.
 
 
 .. figure:: png/transport-fig-022-c.png
@@ -169,6 +167,10 @@ The receiver first waits for `D(0,...)`. If the segment has a correct `CRC`, it 
    :scale: 70 
 
    Alternating bit protocol : Receiver FSM
+
+.. note:: Dealing with corrupted segments
+
+ The receiver FSM of the Alternating bit protocol discards all segments that contain an invalid CRC. This is the safest approach since the received segment can be completely different from the segment sent by the remote host. Some mig
 
 
 The figure below illustrates the operation of the alternating bit protocol.
@@ -207,7 +209,7 @@ To overcome the performance limitations of the alternating bit protocol, transpo
 
    Pipelining to improve the performance of transport protocols
 
-`Pipelining` allows the sender to transmit segments faster, but we need to ensure that the receiver does not become overloaded. Otherwise, the segments sent by the sender are not correctly received by the destination. The transport protocols that rely on pipelining allow the sender to transmit `W` unacknowledged segments before being forced to wait for an acknowledgement from the receiving entity. 
+`Pipelining` allows the sender to transmit segments at a higher rate, but we need to ensure that the receiver does not become overloaded. Otherwise, the segments sent by the sender are not correctly received by the destination. The transport protocols that rely on pipelining allow the sender to transmit `W` unacknowledged segments before being forced to wait for an acknowledgement from the receiving entity. 
 
 This is implemented by using a `sliding window`. The sliding window is the set of consecutive sequence numbers that the sender can use when transmitting segments without being forced to wait for an acknowledgement. The figure below shows a sliding window that contains five segments (`6,7,8,9` and `10`). Two of these sequence numbers (`6` and `7`) have been used to send segments and only three sequence numbers (`8`, `9` and `10`) remain in the sliding window. The sliding window is said to be closed once all sequence numbers contained in the sliding window have been used. 
 
@@ -224,10 +226,10 @@ The figure below illustrates the operation of the sliding window. The sliding wi
    :align: center
    :scale: 70 
 
-   Utilisation of the sliding window 
+   Sliding window example 
 
 
-In practice, as the segment header encodes the sequence number in a `n` bits string, only the sequence numbers between :math:`0` and :math:`2^{n}-1` can be used. This implies that the same sequence number is used for different segments and that the sliding window will wrap. This is illustrated in the figure below assuming that `2` bits are used to encode the sequence number in the segment header. Note that upon reception of `OK1`, the sender slides its window and can reuse sequence number `0`.
+In practice, as the segment header encodes the sequence number in a `n` bits string, only the sequence numbers between :math:`0` and :math:`2^{n}-1` can be used. This implies that the same sequence number is used for different segments and that the sliding window will wrap. This is illustrated in the figure below assuming that `2` bits are used to encode the sequence number in the segment header. Note that upon reception of `OK1`, the sender slides its window and can use sequence number `0` again.
 
 
 .. figure:: png/transport-fig-028-c.png
@@ -248,7 +250,7 @@ Unfortunately, segment losses do not disappear because a transport protocol is u
 
 .. index:: cumulative acknowledgements
 
-The simplest sliding window protocol uses `go-back-n` recovery. Intuitively, `go-back-n` operates as follows. A `go-back-n` receiver is as simple as possible. It only accepts the segments that arrive in-sequence. A `go-back-n` receiver discards any out-of-sequence segment that it receives. When a `go-back-n` receives a data segment, it always returns an acknowledgement that contains the sequence number of the last in-sequence segment that it received. This acknowledgement is said to be `cumulative`. When a `go-back-n` receiver send an acknowledgement for sequence number `x`, it implicitly acknowledges the reception of all segments whose sequence number is earlier than `x`. A key advantage of these cumulative acknowledgements is that it is easy to receove from the loss of an acknowledgement. Consider for example a `go-back-n` receiver that received segments `1`, `2` and `3`. It sent `OK1`, `OK2` and `OK3`. Unfortunately, `OK1` and `OK2` were lost. Thanks to the cumulative acknowledgements, when the receiver receives `OK3`, it knows that all three segments have been correctly received. 
+The simplest sliding window protocol uses `go-back-n` recovery. Intuitively, `go-back-n` operates as follows. A `go-back-n` receiver is as simple as possible. It only accepts the segments that arrive in-sequence. A `go-back-n` receiver discards any out-of-sequence segment that it receives. When a `go-back-n` receives a data segment, it always returns an acknowledgement that contains the sequence number of the last in-sequence segment that it received. This acknowledgement is said to be `cumulative`. When a `go-back-n` receiver sends an acknowledgement for sequence number `x`, it implicitly acknowledges the reception of all segments whose sequence number is earlier than `x`. A key advantage of these cumulative acknowledgements is that it is easy to recover from the loss of an acknowledgement. Consider for example a `go-back-n` receiver that received segments `1`, `2` and `3`. It sent `OK1`, `OK2` and `OK3`. Unfortunately, `OK1` and `OK2` were lost. Thanks to the cumulative acknowledgements, when the receiver receives `OK3`, it knows that all three segments have been correctly received. 
 
 The figure below shows the FSM of a simple `go-back-n` receiver. This receiver uses two variables : `lastack` and `next`. `next` is the next expected sequence number and `lastack` the sequence number of the last data segment that has been acknowledged. The receiver only accepts the segments that are received in sequence. `maxseq` is the number of different sequence numbers (:math:`2^n`).
 
@@ -257,7 +259,7 @@ The figure below shows the FSM of a simple `go-back-n` receiver. This receiver u
    :align: center
    :scale: 70 
 
-   Go-back-n : receiver
+   Go-back-n : receiver FSM
 
 
 A `go-back-n` sender is also very simple. It uses a sending buffer that can store an entire sliding window of segments [#fsizesliding]_ . The segments are sent with increasing sequence number (modulo `maxseq`). The sender must wait for an acknowledgement once its sending buffer is full. When a `go-back-n` sender receives an acknowledgement, it removes from the sending buffer all the acknowledged segments. It uses a retransmission timer to detect segment losses. A simple `go-back-n` sender maintains one retransmission timer per connection. This timer is started when the first segment is sent. When the `go-back-n sender` receives an acknowledgement, it restarts the retransmission timer only if there are still unacknowledged segments. When the retransmission timer expires, the `go-back-n` sender assumes that all the unacknowledged segments that are stored in its sending buffer have been lost. It thus retransmits all the unacknowledged segments and restarts its retransmission timer.
@@ -267,7 +269,7 @@ A `go-back-n` sender is also very simple. It uses a sending buffer that can stor
    :align: center
    :scale: 70 
 
-   Go-back-n : sender
+   Go-back-n : sender FSM
 
 
 The operation of `go-back-n` is illustrated in the figure below. In this figure, note that upon reception of the out-of-sequence segment `D(2,c)`, the receiver returns a cumulative acknowledgements `C(OK,0)` that acknowledges all the segments that were received in sequence. The lost segment is retransmitted upon the expiration of the retransmission timer.

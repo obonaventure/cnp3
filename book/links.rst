@@ -216,6 +216,8 @@
 
 .. _sftp: http://www.openssh.org
 
+.. _ssh: http://en.wikipedia.org/wiki/Secure_Shell
+
 .. _CERN: http://www.cern.ch
 
 .. _NCSA: http://www.ncsa.illinois.edu
@@ -230,14 +232,22 @@
 
 .. _netkit: http://www.netkit.org
 
+.. _netstat: http://en.wikipedia.org/wiki/Netstat
+
 .. _hping: http://www.hping.org
 
 .. _nmap: http://nmap.org
 
 .. _ntop: http://www.ntop.org
 
+.. _x86: http://en.wikipedia.org/wiki/X86
+
+.. _SPARC: http://en.wikipedia.org/wiki/SPARC
+
 .. _sphinx: http://sphinx.pocoo.org
 
 .. _inkscape: http://www.inkscape.org 
 
 .. _email clients: http://en.wikipedia.org/wiki/Comparison_of_email_client
+
+.. _ISP: http://en.wikipedia.org/wiki/Internet_service_provider
