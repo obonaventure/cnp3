@@ -11,7 +11,9 @@ The Domain Name System
 
 The Domain Name System (DNS) plays a key role in the Internet today as it allows applications to use fully qualified domain names (FQDN) instead of IPv4 or IPv6 addresses. Many tools allow to perform queries through DNS servers. For this exercise, we will use dig_ which is installed on most Unix systems. 
 
-A typical usage of dig is as follows :: 
+A typical usage of dig is as follows 
+
+.. code-block:: text
 
   dig @server -t type fqdn 
 
@@ -48,7 +50,9 @@ where
    - `www.google.com`
    - `ipv6.google.com`
 
-10. When `dig` is run, the header section in its output indicates the `id` the DNS identifier used to send the query. Does your implementation of `dig` generates random identifiers ? ::
+10. When `dig` is run, the header section in its output indicates the `id` the DNS identifier used to send the query. Does your implementation of `dig` generates random identifiers ? 
+
+.. code-block:: text
 
 	dig -t MX gmail.com
 
@@ -92,9 +96,11 @@ Many Internet protocols are ASCII_-based protocols where the client sends reques
 
 6. When using SMTP, how do you recognise a positive reply from a negative one ?
 
-7. A SMTP server is a daemon process that can fail due to a bug or lack of resources (e.g. memory). Network administrators often install tools [#fmonitoring]_ that regularly connect to their servers to check that they are operating correctly. A simple solution is to open a TCP connection on port 25 to the SMTP server's host [#fblock]_ . If the connection is established, this implies that there is a process listening. What is the reply sent by the SMTP server when you type the following command ? ::
+7. A SMTP server is a daemon process that can fail due to a bug or lack of resources (e.g. memory). Network administrators often install tools [#fmonitoring]_ that regularly connect to their servers to check that they are operating correctly. A simple solution is to open a TCP connection on port 25 to the SMTP server's host [#fblock]_ . If the connection is established, this implies that there is a process listening. What is the reply sent by the SMTP server when you type the following command ? 
 
- telnet cnp3.info.ucl.ac.be 25
+ .. code-block:: text
+
+   telnet cnp3.info.ucl.ac.be 25
  
  *Warning* : Do *not* try this on a random SMTP server. The exercises proposed in this section should only be run on the SMTP server dedicated for these exercises : `cnp3.info.ucl.ac.be`. If you try them on a production SMTP server, the administrator of this server may become angry.
 
@@ -108,11 +114,11 @@ Many Internet protocols are ASCII_-based protocols where the client sends reques
  
 11. By using SMTP, is it possible to send an email that contains exactly the following ASCII art ? 
 
-::
+ .. code-block:: text
 
-   .
-   ..
-   ...
+    .
+    ..
+    ...
 
 12. Most email agents allow you to send email in carbon-copy (`cc:`) and also in blind-carbon-copy (`bcc:`) to a recipient. How does a SMTP server supports these two types of recipients ?
 
