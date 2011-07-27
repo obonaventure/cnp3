@@ -202,7 +202,7 @@ The first version of ALOHANet, described in [Abramson1970]_, operated as follows
 
 The pseudo-code below show the operation of an ALOHANet terminal. We use this python syntax for all Medium Access Control algorithms described in this chapter. The algorithm is applied to each new frame that needs to be transmitted. It attempts to transmit a frame at most `max` times (`while loop`). Each transmission attempt is performed as follows. First, the frame is sent. Each frame is protected by a timeout. Then the terminal waits for either a valid acknowledgement frame or the expiration of its timeout. If the terminal receives an acknowledgement, the frame has been delivered correctly and the algorithm terminates. Otherwise, the terminal waits for a random time and attempts to retransmit the frame. 
 
-::
+.. code-block:: text
 
  # ALOHA
  N=1
@@ -223,7 +223,7 @@ The pseudo-code below show the operation of an ALOHANet terminal. We use this py
 
 .. note:: Amateur packet radio
 
- Packet radio technologies have evolved in various directions since the first experiments performed at the University of Hawaii. The Amateur packet radio service developed by amateur radio operators is of these descendants of ALOHANet. Many amateur radio operators are very interested in new technologies and they often spend countless hours to develop new antennas or transceivers. When the first personal computers appeared, several amateur radio operators designed radio modems and their own datalink layers protocols [KPD1985]_ [BNT1997] _. This network grew and it was possible by using only packet radio relays to connect to servers in several European countries. Some amateur radio operators also developed TCP/IP protocol stacks that were used over the packet radio service. Some parts of the `amateur packet radio network <http://www.ampr.org/>`_ is connected to the global Internet and uses the `44.0.0.0/8`. 
+ Packet radio technologies have evolved in various directions since the first experiments performed at the University of Hawaii. The Amateur packet radio service developed by amateur radio operators is of these descendants of ALOHANet. Many amateur radio operators are very interested in new technologies and they often spend countless hours to develop new antennas or transceivers. When the first personal computers appeared, several amateur radio operators designed radio modems and their own datalink layers protocols [KPD1985]_ [BNT1997]_. This network grew and it was possible by using only packet radio relays to connect to servers in several European countries. Some amateur radio operators also developed TCP/IP protocol stacks that were used over the packet radio service. Some parts of the `amateur packet radio network <http://www.ampr.org/>`_ are connected to the global Internet and use the `44.0.0.0/8` prefix. 
 
 .. index:: slotted ALOHA
 
@@ -240,11 +240,11 @@ ALOHA and slotted ALOHA can be easily implemented. Unfortunately, they can only 
 
 .. index:: persistent CSMA, CSMA (persistent)
 
-.. code-block:: python
+.. code-block:: text
 
- # persistent CSMA
- N=1
- while N<= max :
+  # persistent CSMA
+  N=1
+  while N<= max :
     wait(channel_becomes_free)
     send(frame)
     wait(ack or timeout)
@@ -253,7 +253,7 @@ ALOHA and slotted ALOHA can be easily implemented. Unfortunately, they can only 
     else :
 	# timeout 
 	N=N+1
-  else:		
+  # end of while loop 
     # Too many transmission attempts
 
 The above pseudo-code is often called `persistent CSMA` [KT1975]_ as the terminal will continuously listen to the channel and transmit its frame as soon as the channel becomes free. Another important variant of CSMA is the `non-persistent CSMA` [KT1975]_. The main difference between persistent and non-persistent CSMA described in the pseudo-code below is that a non-persistent CSMA node does not continuously listens to the channel to determine when it becomes free. When a non-persistent CSMA terminal senses the transmission channel to be busy, it waits for a random time before sensing the channel again. This improves the channel utilization compared to persistent CSMA. With persistent CSMA, when two terminals sense the channel to be busy, they will both transmit (and thus cause a collision) as soon as the channel becomes free. With non-persistent CSMA, this synchronisation does not occur as the terminals wait a random time after having sensed the transmission channel. The higher channel utilization achieved by non-persistent CSMA comes at the expense of a slightly higher waiting time in the terminals when the network is lightly loaded. 
@@ -261,7 +261,7 @@ The above pseudo-code is often called `persistent CSMA` [KT1975]_ as the termina
 
 .. index:: non-persistent CSMA, CSMA (non-persistent)
 
-.. code-block:: python
+.. code-block:: text
 
  # Non persistent CSMA
  N=1
@@ -277,7 +277,7 @@ The above pseudo-code is often called `persistent CSMA` [KT1975]_ as the termina
 	  N=N+1
     else:
        wait(random_time)
-  else:		
+  # end of while loop		
     # Too many transmission attempts
 
 [KT1975]_ analyzes in details the performance of several CSMA variants. Under some assumptions about the transmission channel and the traffic, the analysis compares ALOHA, slotted ALOHA, persistent and non-persistent CSMA. Under these assumptions, ALOHA achieves a channel utilization which is only 18.4% of the channel capacity. Slotted ALOHA is able to use 36.6% of this capacity. Persistent CSMA improves the utilization by reaching 52.9% of the capacity while non-persistent CSMA achieves 81.5% of the channel capacity. 
@@ -360,7 +360,7 @@ In the second and third cases, both hosts have flipped different coins. The dela
 If two hosts are competing, the algorithm above will avoid a second collision 50% of the time. However, if the network is heavily loaded, several hosts may be competing at the same time. In this case, the hosts should be able to automatically adapt their retransmission delay. The `binary exponential back-off` performs this adaptation based on the number of collisions that have affected a frame. After the first collision, the host flips a coin and waits 0 or 1 `slot time`. After the second collision, it generates a random number and waits 0, 1, 2 or 3 `slot times`... The duration of the waiting time is doubled after each collision. The complete pseudo-code for the CSMA/CD algorithm is shown in the figure below. 
 
 
-.. code-block:: python
+.. code-block:: text
 
  # CSMA/CD pseudo-code
  N=1
@@ -378,7 +378,7 @@ If two hosts are competing, the algorithm above will avoid a second collision 50
     else :	
         wait(inter-frame_delay)
 	break
-  else:		
+  # end of while loop	
     # Too many transmission attempts
 	
 
@@ -438,7 +438,7 @@ To deal with this problem, CSMA/CA relies on a backoff timer. This backoff timer
 
 The pseudo-code below summarises the operation of a CSMA/CA device. The values of the SIFS, DIFS, EIFS and slotTime depend on the underlying physical layer technology [802.11]_
 
-.. code-block:: python
+.. code-block:: text
 
  # CSMA/CA simplified pseudo-code
  N=1
@@ -520,7 +520,7 @@ The first problem faced by a Token Ring network is that as the token represents 
 
 .. figure:: pkt/token.png
    :align: center
-   :scale: 50
+   :scale: 100
 
    802.5 token format
 
@@ -541,7 +541,7 @@ Now that we have explained how the token can be forwarded on the ring, let us an
 
 .. figure:: pkt/8025.png
    :align: center
-   :scale: 50
+   :scale: 100
 
    802.5 data frame format
 

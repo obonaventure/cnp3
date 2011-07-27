@@ -251,3 +251,5 @@
 .. _email clients: http://en.wikipedia.org/wiki/Comparison_of_email_client
 
 .. _ISP: http://en.wikipedia.org/wiki/Internet_service_provider
+
+.. _Unix BSD: http://en.wikipedia.org/wiki/Berkeley_Software_Distribution

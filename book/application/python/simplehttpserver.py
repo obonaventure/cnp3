@@ -1,3 +1,5 @@
+# A too simple HTTP server
+
 import socket, sys, time
 
 # Server runs on all IP addresses by default
@@ -26,7 +28,9 @@ while True:
     if data.startswith('GET'):
         # GET request
         conn.send('HTTP/1.0 404 Not Found\n')
+        # a real server should serve files
     else:
+        # other type of HTTP request
         conn.send('HTTP/1.0 501 Not implemented\n')
 
     now = time.strftime("%a, %d %b %Y %H:%M:%S", time.localtime())

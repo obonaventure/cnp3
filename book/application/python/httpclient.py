@@ -1,5 +1,5 @@
 #!/usr/bin/python 
-# A simple http client that retrieves the first page of a site
+# A simple http client that retrieves the first page of a web site
 
 import socket, sys
 
@@ -32,7 +32,7 @@ for res in socket.getaddrinfo(hostname, port, socket.AF_UNSPEC, socket.SOCK_STRE
         s.close()
         s = None
         continue
-    if s is not None:
+    if s :
         print "Connected to "+sa[0]
         s.send('GET / HTTP/1.1\nHost:'+hostname+'\n\n')
         finished=False

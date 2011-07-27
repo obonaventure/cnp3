@@ -7,11 +7,11 @@ MSG="Hello, World!"
 for a in socket.getaddrinfo(HOSTNAME, PORT, socket.AF_UNSPEC,socket.SOCK_DGRAM,0, socket.AI_PASSIVE) :
     address_family,sock_type,protocol,canonicalname, sockaddr=a
     try:
-        s = socket.socket( address_family, sock_type ) 
+        s = socket.socket(address_family, sock_type) 
     except socket.error:
-        s= None
+        s = None
         print "Could not create socket"
         continue
     if s is not None:
-        s.sendto( MSG, sockaddr)
+        s.sendto(MSG, sockaddr)
         break

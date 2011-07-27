@@ -1,3 +1,4 @@
+# A simple client of the connectionless service
 import socket
 import sys
 HOSTIP=sys.argv[1]

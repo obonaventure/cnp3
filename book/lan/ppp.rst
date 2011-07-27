@@ -22,7 +22,7 @@ The PPP framing :rfc:`1662` was inspired from the datalink layer protocols stand
   
 .. figure:: pkt/ppp.png
    :align: center
-   :scale: 50
+   :scale: 100
 
    PPP frame format
 
