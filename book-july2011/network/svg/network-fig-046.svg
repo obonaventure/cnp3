@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg id="svg8132" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 744.09 1052.4" version="1.1" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/">
+ <metadata id="metadata8137">
+  <rdf:RDF>
+   <cc:Work rdf:about="">
+    <dc:format>image/svg+xml</dc:format>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:title/>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <g id="layer1">
+  <g id="g8851" transform="translate(-57.282 -4.8544)">
+   <rect id="rect8799" stroke-opacity=".97333" height="117.15" width="77.479" stroke="#000" y="290.09" x="428.11" stroke-width="1.012" fill="none"/>
+   <rect id="rect8801" stroke-opacity=".97333" height="117.15" width="77.479" stroke="#000" y="292.04" x="505.01" stroke-width="1.012" fill="none"/>
+   <rect id="rect8803" stroke-opacity=".97333" height="117.15" width="77.479" stroke="#000" y="290.95" x="583.45" stroke-width="1.012" fill="none"/>
+   <rect id="rect8281" height="283.03" width="416.81" stroke="#000" y="122.89" x="243.37" stroke-width="1.502" fill="none"/>
+   <rect id="rect8283" stroke-opacity=".97333" height="84.027" width="416.82" stroke="#000" y="208.39" x="243.38" stroke-width="2.806" fill="#fff"/>
+   <rect id="rect8797" stroke-opacity=".97333" height="60.439" width="416.81" stroke="#000" y="404.91" x="243.37" stroke-width="1.086" fill="#fff"/>
+   <text id="text8805" style="word-spacing:0px;letter-spacing:0px" font-weight="bold" transform="scale(1.1061 .90409)" line-height="125%" xml:space="preserve" font-size="6.0185px" y="266.22122" x="360.47327" font-family="FreeSans" fill="#000000"><tspan id="tspan8807" y="266.22122" x="360.47327"/></text>
+   <text id="text8809" style="word-spacing:0px;letter-spacing:0px" line-height="125%" font-weight="bold" font-size="9.9479px" y="255.27481" x="434.95148" font-family="FreeSans" xml:space="preserve" fill="#000000"><tspan id="tspan8811" font-size="22px" y="255.27481" x="434.95148" fill="#ff0000">IP</tspan></text>
+   <text id="text8813" style="word-spacing:0px;letter-spacing:0px" line-height="125%" font-weight="bold" font-size="22px" y="324.20685" x="314.56308" font-family="FreeSans" xml:space="preserve" fill="#000000"><tspan id="tspan8815" y="324.20685" x="314.56308">LLC</tspan></text>
+   <text id="text8817" style="word-spacing:0px;letter-spacing:0px" line-height="125%" font-weight="bold" font-size="22px" y="382.45929" x="246.60196" font-family="FreeSans" xml:space="preserve" fill="#000000"><tspan id="tspan8819" y="382.45929" x="246.60196">802.3 802.5 FDDI</tspan></text>
+   <text id="text8821" style="word-spacing:0px;letter-spacing:0px" line-height="125%" font-weight="bold" font-size="22px" y="356.24573" x="446.60193" font-family="FreeSans" xml:space="preserve" fill="#000000"><tspan id="tspan8823" y="356.24573" x="446.60193">Eth.</tspan></text>
+   <text id="text8825" style="word-spacing:0px;letter-spacing:0px" line-height="125%" font-weight="bold" font-size="22px" y="356.24573" x="520.7132" font-family="FreeSans" xml:space="preserve" fill="#000000"><tspan id="tspan8827" y="356.24573" x="520.7132">PPP</tspan></text>
+   <text id="text8829" style="word-spacing:0px;letter-spacing:0px" line-height="125%" font-weight="bold" font-size="22px" y="356.50974" x="590.29126" font-family="FreeSans" xml:space="preserve" fill="#000000"><tspan id="tspan8831" y="356.50974" x="590.29126">HDLC</tspan></text>
+   <text id="text8833" style="word-spacing:0px;letter-spacing:0px" line-height="125%" font-weight="bold" font-size="22px" y="442.65344" x="380.58252" font-family="FreeSans" xml:space="preserve" fill="#000000"><tspan id="tspan8835" y="442.65344" x="380.58252">Physical Layer</tspan></text>
+   <text id="text8837" style="word-spacing:0px;letter-spacing:0px" line-height="125%" font-weight="bold" font-size="22px" y="342.65344" x="81.553398" font-family="FreeSans" xml:space="preserve" fill="#000000"><tspan id="tspan8839" y="342.65344" x="81.553398">Datalink Layer</tspan></text>
+   <text id="text8841" style="word-spacing:0px;letter-spacing:0px" line-height="125%" font-weight="bold" font-size="22px" y="249.44955" x="80.651054" font-family="FreeSans" xml:space="preserve" fill="#ff0000"><tspan id="tspan8843" y="249.44955" x="80.651054">Network Layer</tspan></text>
+   <path id="path8845" d="m243.69 343.68 185.44 0.97087" stroke="#000" stroke-dasharray="1, 3" fill="none"/>
+   <rect id="rect8849" stroke-opacity=".97333" height="21.154" width="416.81" stroke="#000" y="467.05" x="358.9" stroke-width=".64250" fill="#fff"/>
+  </g>
+ </g>
+</svg>

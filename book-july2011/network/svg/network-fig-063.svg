@@ -1,0 +1,1078 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg id="svg2" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" height="100%" width="100%" version="1.1" preserveAspectRatio="xMidYMid" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" viewBox="0 0 28000 21000">
+ <metadata id="metadata1958">
+  <rdf:RDF>
+   <cc:Work rdf:about="">
+    <dc:format>image/svg+xml</dc:format>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:title/>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs id="defs4">
+  <marker id="Arrow1Mend" refY="0.0" refX="0.0" orient="auto" overflow="visible">
+   <path id="path9366" d="m0 0l5-5-17.5 5 17.5 5-5-5z" fill-rule="evenodd" transform="scale(.4) rotate(180) translate(10)" stroke="#000" stroke-width="1pt"/>
+  </marker>
+  <font id="EmbeddedFont_1" horiz-adv-x="2048">
+   <font-face id="font-face7" font-family="Arial embedded" ascent="1860" descent="431" units-per-em="2048"/>
+   <missing-glyph id="missing-glyph9" horiz-adv-x="2048">
+    <path id="path11" d="m0 2048h2047v-2047h-2047v2047z" stroke="#000" stroke-width="33" fill="none"/>
+   </missing-glyph>
+   <glyph id="glyph13" horiz-adv-x="1021" unicode=" "/>
+   <glyph id="glyph15" horiz-adv-x="183" unicode=",">
+    <path id="path17" d="m277 0h-92v185h185v-185c0-78-12-140-34-188-23-48-59-85-108-111l-43 71c31 18 53 44 68 79 14 35 22 84 24 149z"/>
+   </glyph>
+   <glyph id="glyph19" horiz-adv-x="183" unicode=".">
+    <path id="path21" d="m370 0h-185v185h185v-185z"/>
+   </glyph>
+   <glyph id="glyph23" horiz-adv-x="613" unicode="/">
+    <path id="path25" d="m162 0h-162l427 1465h162l-427-1465z"/>
+   </glyph>
+   <glyph id="glyph27" horiz-adv-x="953" unicode="0">
+    <path id="path29" d="m100 725c0 174 17 316 52 425s87 191 156 246 156 83 261 83c77 0 146-16 207-48 60-32 108-78 144-138s64-133 86-219c21-86 32-203 32-349 0-173-17-314-52-423-34-109-86-191-155-247-70-56-157-83-262-83-139 0-248 48-327 146-95 127-142 330-142 607zm184 0c0-238 28-395 82-470 55-75 123-113 203-113s148 38 202 113c55 76 82 232 82 470 0 235-26 391-80 468-53 77-122 115-206 115-80 0-146-34-196-102-58-86-87-247-87-481z"/>
+   </glyph>
+   <glyph id="glyph31" horiz-adv-x="545" unicode="1">
+    <path id="path33" d="m768 1479v-1479h-185v1153c-43-42-99-83-168-125-70-41-132-73-187-93v174c100 48 187 105 262 173s128 133 159 197h119z"/>
+   </glyph>
+   <glyph id="glyph35" horiz-adv-x="954" unicode="2">
+    <path id="path37" d="m304 185h720v-185h-967c-1 45 5 88 20 130 24 68 62 135 114 201 53 65 130 138 231 219 157 132 263 234 319 307s84 143 84 210c0 68-25 125-75 171-51 47-116 70-197 70-85 0-154-23-205-71s-77-114-78-199l-185 29c13 134 60 236 142 307 82 70 192 105 330 105 139 0 250-39 331-118 81-78 122-176 122-292 0-59-12-117-34-174-23-57-61-117-114-180-52-63-142-148-269-255-108-88-177-148-209-180s-59-63-80-95z"/>
+   </glyph>
+   <glyph id="glyph39" horiz-adv-x="953" unicode="3">
+    <path id="path41" d="m100 384l184 28c20-95 53-164 99-206 45-43 105-64 179-64 86 0 156 29 210 86s81 127 81 212c0 80-26 146-78 198-52 53-119 79-199 79-33 0-74-7-123-20l20 171c11-2 20-2 27-2 73 0 138 18 195 56 58 37 87 95 87 172 0 62-21 113-64 154-43 40-98 60-166 60-67 0-123-20-167-60-45-40-74-101-86-181l-185 28c21 122 70 217 147 284 76 67 171 100 285 100 79 0 151-17 217-51s117-81 152-140 52-121 52-188c0-63-17-120-51-172-34-51-84-93-151-123 87-20 154-63 202-127 47-64 71-144 71-240 0-130-45-240-137-331-91-90-206-135-346-135-126 0-230 38-313 114-83 77-131 176-142 298z"/>
+   </glyph>
+   <glyph id="glyph43" horiz-adv-x="1021" unicode="4">
+    <path id="path45" d="m853 0h-185v356h-640v184l683 911h142v-911h185v-184h-185v-356zm-597 540h412v551l-412-551z"/>
+   </glyph>
+   <glyph id="glyph47" horiz-adv-x="976" unicode="6">
+    <path id="path49" d="m1010 1095l-185-14c-16 70-39 120-68 152-49 50-109 75-180 75-57 0-110-15-158-45-52-40-94-97-126-173-33-76-50-186-51-332 43 66 97 115 160 147s130 48 199 48c121 0 224-45 310-133 85-89 127-204 127-345 0-92-20-178-60-258-40-79-96-140-166-182s-150-63-239-63c-152 0-276 55-372 166s-144 294-144 550c0 285 53 492 159 622 92 113 216 169 373 169 117 0 212-34 287-102 74-68 119-162 134-282zm-768-616c0-59 14-116 42-170 28-55 65-96 113-124 48-29 102-43 162-43 85 0 155 30 211 88 56 59 83 139 83 239 0 97-27 174-82 230-55 55-128 83-220 83-86 0-159-28-219-83-60-56-90-129-90-220z"/>
+   </glyph>
+   <glyph id="glyph51" horiz-adv-x="953" unicode="7">
+    <path id="path53" d="m811 1266h-726v185h953v-150c-90-100-180-232-268-396-89-163-157-332-206-505-34-121-57-255-66-400h-185c2 115 24 253 66 415 42 163 102 319 181 470 78 151 162 278 251 381z"/>
+   </glyph>
+   <glyph id="glyph55" horiz-adv-x="953" unicode="8">
+    <path id="path57" d="m376 816c-75 27-130 65-166 114-36 50-54 109-54 179 0 104 38 192 112 263 75 72 174 107 298 107 125 0 225-36 301-109s114-162 114-266c0-67-17-125-53-174-35-49-89-87-161-114 88-30 156-79 202-146 46-68 69-148 69-241 0-129-43-238-129-326s-200-131-340-131c-141 0-254 44-340 132s-129 198-129 330c0 98 23 180 71 246 48 67 116 112 205 136zm-35 292c0-63 20-113 61-153 40-39 96-59 169-59 71 0 126 20 166 59s59 87 59 144c0 59-20 109-61 149s-97 60-166 60c-70 0-126-19-166-59-41-39-62-86-62-141zm-57-671c0-51 11-99 32-147 20-47 55-83 103-109s99-39 151-39c87 0 156 27 207 82 51 54 76 123 76 207 0 85-26 155-79 211-52 56-122 83-209 83-86 0-154-27-205-82-50-55-76-124-76-206z"/>
+   </glyph>
+   <glyph id="glyph59" horiz-adv-x="977" unicode="=">
+    <path id="path61" d="m1081 1038v-185h-967v185h967zm0-441v-185h-967v185h967z"/>
+   </glyph>
+   <glyph id="glyph63" horiz-adv-x="1429" unicode="A">
+    <path id="path65" d="m185 0h-211l585 1465h205l585-1465h-211l-168 455h-618l-167-455zm395 1032l-165-406h493l-142 383c-45 124-80 219-105 285-20-82-47-169-81-262z"/>
+   </glyph>
+   <glyph id="glyph67" horiz-adv-x="1112" unicode="B">
+    <path id="path69" d="m724 0h-553v1465h551c112 0 202-15 270-44 68-30 121-75 159-137 39-61 58-125 58-192 0-63-18-121-53-176-35-56-89-100-160-134 87-26 153-70 200-133 46-63 70-137 70-223 0-69-15-133-43-192-29-59-64-105-107-137-42-32-95-56-158-72-64-17-142-25-234-25zm-354 1294v-441h311c85 0 146 6 182 17 49 15 85 39 110 73 24 34 37 76 37 127 0 49-12 91-35 128s-55 62-98 76c-43 13-116 20-219 20h-288zm0-611v-512h357c61 0 104 2 129 7 44 8 80 21 110 40 29 19 53 47 72 83s29 78 29 126c0 55-14 103-40 144-27 41-64 70-113 87-49 16-119 25-211 25h-333z"/>
+   </glyph>
+   <glyph id="glyph71" horiz-adv-x="1293" unicode="C">
+    <path id="path73" d="m1180 514l200-49c-41-160-113-283-217-367-105-84-232-126-383-126-156 0-283 32-381 96-97 65-172 159-223 281s-76 254-76 395c0 153 28 286 86 400 57 115 139 201 245 260 106 60 223 89 350 89 144 0 266-37 364-113 99-75 167-181 206-318l-199-44c-33 106-81 183-144 232-62 48-141 73-236 73-109 0-201-27-274-81-74-54-125-126-155-217-29-91-44-184-44-281 0-124 17-232 53-325s91-162 166-208 156-69 243-69c106 0 196 31 270 94 74 62 123 155 149 278z"/>
+   </glyph>
+   <glyph id="glyph75" horiz-adv-x="1225" unicode="D">
+    <path id="path77" d="m698 0h-527v1465h503c114 0 201-7 261-21 84-19 155-54 214-105 77-65 135-149 173-250 38-102 58-218 58-349 0-111-13-209-39-295s-60-157-100-214c-41-56-85-100-133-133-49-32-107-56-175-73s-146-25-235-25zm-328 1294v-1123h310c96 0 171 9 225 27 55 18 98 43 131 76 45 46 81 108 106 186 26 78 38 172 38 284 0 153-24 272-74 354-50 83-111 138-182 166-52 20-135 30-249 30h-305z"/>
+   </glyph>
+   <glyph id="glyph79" horiz-adv-x="1089" unicode="E">
+    <path id="path81" d="m1252 0h-1081v1465h1052v-171h-853v-455h796v-171h-796v-497h882v-171z"/>
+   </glyph>
+   <glyph id="glyph83" horiz-adv-x="999" unicode="F">
+    <path id="path85" d="m370 0h-199v1465h981v-171h-782v-455h668v-171h-668v-668z"/>
+   </glyph>
+   <glyph id="glyph87" horiz-adv-x="1157" unicode="H">
+    <path id="path89" d="m370 0h-199v1465h199v-597h739v597h199v-1465h-199v697h-739v-697z"/>
+   </glyph>
+   <glyph id="glyph91" horiz-adv-x="206" unicode="I">
+    <path id="path93" d="m384 0h-199v1465h199v-1465z"/>
+   </glyph>
+   <glyph id="glyph95" horiz-adv-x="908" unicode="L">
+    <path id="path97" d="m1067 0h-896v1465h199v-1294h697v-171z"/>
+   </glyph>
+   <glyph id="glyph99" horiz-adv-x="1430" unicode="M">
+    <path id="path101" d="m341 0h-199v1465h304l333-1038c31-97 53-169 67-217 16 53 40 132 73 235l329 1020h302v-1465h-199v1237l-396-1237h-219l-395 1237v-1237z"/>
+   </glyph>
+   <glyph id="glyph103" horiz-adv-x="1157" unicode="N">
+    <path id="path105" d="m370 0h-199v1465h211l727-1116v1116h199v-1465h-211l-727 1116v-1116z"/>
+   </glyph>
+   <glyph id="glyph107" horiz-adv-x="1407" unicode="O">
+    <path id="path109" d="m100 713c0 244 65 435 194 573 130 138 298 207 503 207 135 0 256-32 364-97s191-155 247-271c57-116 85-248 85-395 0-149-29-283-89-400-60-118-144-207-254-268-109-60-227-90-354-90-137 0-259 33-367 100s-190 158-246 274c-56 115-83 238-83 367zm199-3c0-176 47-314 141-416 95-101 213-152 356-152 145 0 264 51 358 154 93 102 140 247 140 436 0 119-20 222-60 311s-99 157-176 206-164 74-260 74c-136 0-253-47-352-141-98-95-147-252-147-472z"/>
+   </glyph>
+   <glyph id="glyph111" horiz-adv-x="1112" unicode="P">
+    <path id="path113" d="m370 0h-199v1465h541c95 0 168-5 218-14 71-12 130-35 177-68 48-34 86-81 115-142 29-60 44-127 44-199 0-124-39-229-115-316-77-86-216-129-417-129h-364v-597zm0 1294v-526h364c121 0 206 23 257 70 50 47 76 113 76 198 0 62-15 114-45 158s-69 73-118 87c-31 9-89 13-174 13h-360z"/>
+   </glyph>
+   <glyph id="glyph115" horiz-adv-x="1271" unicode="R">
+    <path id="path117" d="m370 0h-199v1465h637c125 0 220-13 285-39 66-27 118-73 157-139 39-67 58-140 58-221 0-103-32-191-96-262-65-71-165-116-300-136 49-24 86-49 112-73 54-52 105-117 154-195l243-400h-231l-187 306c-54 88-99 155-134 202s-67 80-95 99c-27 19-56 33-84 40-22 5-56 7-104 7h-216v-654zm0 1294v-469h400c85 0 151 9 197 27 47 17 82 46 106 85s36 81 36 127c0 67-23 122-70 165-47 44-122 65-224 65h-445z"/>
+   </glyph>
+   <glyph id="glyph119" horiz-adv-x="1157" unicode="S">
+    <path id="path121" d="m100 498h199c8-77 27-141 57-190s76-89 139-120 134-46 213-46c70 0 132 12 186 35 53 23 93 55 119 95 26 41 39 83 39 127 0 45-10 84-32 117-21 34-61 62-120 86-38 15-122 39-251 72-130 33-223 63-278 92-72 37-126 83-162 137-35 55-53 116-53 184 0 74 21 144 63 209 42 64 104 113 184 147 81 34 171 50 269 50 109 0 205-17 288-53 83-35 147-87 191-155 45-69 69-146 72-233h-199c-10 89-42 157-98 202-55 46-137 69-246 69-113 0-195-22-247-65-52-44-77-96-77-157 0-53 18-97 54-131s130-70 282-105c152-36 257-68 314-94 84-40 146-90 186-150 40-61 60-130 60-209s-22-152-67-221c-44-70-107-123-190-162-82-38-175-57-279-57-131 0-240 20-329 61-88 41-158 103-208 185-50 83-77 176-79 280z"/>
+   </glyph>
+   <glyph id="glyph123" horiz-adv-x="1158" unicode="T">
+    <path id="path125" d="m725 0h-199v1294h-483v171h1166v-171h-484v-1294z"/>
+   </glyph>
+   <glyph id="glyph127" horiz-adv-x="1430" unicode="V">
+    <path id="path129" d="m805 0h-215l-588 1465h211l397-1051c32-84 58-163 80-236 22 79 49 158 79 236l397 1051h211l-572-1465z"/>
+   </glyph>
+   <glyph id="glyph131" horiz-adv-x="953" unicode="a">
+    <path id="path133" d="m811 128c-65-52-127-89-186-110-59-22-123-32-191-32-112 0-198 28-258 83-61 56-91 127-91 214 0 51 12 97 34 139 23 43 53 76 90 102 37 25 78 44 124 57 34 10 85 18 154 27 140 17 242 37 308 60 1 23 1 37 1 44 0 67-15 115-47 142-43 38-107 56-192 56-79 0-137-13-175-41-37-27-65-75-83-144l-185 29c16 75 42 136 78 182 36 47 89 82 158 107 68 25 148 38 238 38s163-11 219-33 98-49 124-82c27-33 45-75 56-125 6-31 9-84 9-158v-223c0-155 3-259 11-311s23-101 45-149h-184c-30 36-49 79-57 128zm-16 317l1 53c-62-22-157-41-282-56-72-9-122-19-151-30-30-11-53-27-69-48s-24-44-24-70c0-39 18-72 53-98 34-26 86-40 153-40 66 0 125 14 177 42s90 63 115 105c18 32 27 80 27 142z"/>
+   </glyph>
+   <glyph id="glyph135" horiz-adv-x="931" unicode="b">
+    <path id="path137" d="m313 167v-167h-185v1465h185v-549c76 110 173 165 290 165 66 0 127-13 185-39 59-26 107-63 144-110 38-47 67-103 89-170 21-66 31-137 31-213 0-179-44-318-132-416s-194-147-318-147c-123 0-219 60-289 181zm0 374c0-118 17-203 50-256 55-86 130-129 223-129 77 0 142 32 198 95 56 64 84 158 84 283 0 129-27 223-80 285-54 61-118 91-194 91s-142-31-198-95c-55-63-83-154-83-274z"/>
+   </glyph>
+   <glyph id="glyph139" horiz-adv-x="908" unicode="c">
+    <path id="path141" d="m825 398l185-28c-19-120-69-214-149-282-79-68-177-102-293-102-145 0-262 47-350 140-89 94-133 228-133 403 0 114 19 213 57 297 37 85 94 149 171 191 76 43 160 64 250 64 114 0 207-29 279-85 72-57 119-138 139-242l-185-29c-16 62-44 108-85 139-40 31-89 46-147 46-87 0-158-30-212-90-55-60-82-156-82-286 0-132 27-228 81-288s124-90 211-90c69 0 128 20 174 60 47 39 76 100 89 182z"/>
+   </glyph>
+   <glyph id="glyph143" horiz-adv-x="931" unicode="d">
+    <path id="path145" d="m996 0h-185v168c-66-122-164-182-292-182-83 0-159 23-229 69-69 46-123 110-162 193-38 82-57 177-57 284 0 105 18 200 53 285s88 150 158 196c71 45 150 68 237 68 63 0 120-16 170-46 50-31 90-72 122-121v551h185v-1465zm-740 533c0-126 28-220 83-283 56-62 122-94 197-94 77 0 141 30 195 90 53 60 80 151 80 273 0 135-27 234-82 297-54 63-121 94-201 94-77 0-142-30-194-91-52-60-78-156-78-286z"/>
+   </glyph>
+   <glyph id="glyph147" horiz-adv-x="999" unicode="e">
+    <path id="path149" d="m866 341l180-28c-29-104-83-184-163-241-79-58-181-86-305-86-155 0-279 47-370 141-91 95-137 227-137 397 0 177 46 314 138 411 93 97 212 146 359 146 143 0 259-48 349-144s135-231 135-406c0-10 0-26-1-47h-795c7-106 40-187 100-243 61-56 136-85 226-85 67 0 124 15 171 45 47 29 85 76 113 140zm-610 313h612c-9 75-32 131-71 169-59 58-135 87-229 87-86 0-157-23-216-69-58-47-90-109-96-187z"/>
+   </glyph>
+   <glyph id="glyph151" horiz-adv-x="636" unicode="f">
+    <path id="path153" d="m363 0h-185v896h-156v171h156v112c0 71 7 124 20 158 17 47 49 84 94 113s107 43 186 43c50 0 106-6 168-18l-27-162c-37 6-73 10-106 10-55 0-93-12-116-34-23-23-34-65-34-127v-95h199v-171h-199v-896z"/>
+   </glyph>
+   <glyph id="glyph155" horiz-adv-x="931" unicode="g">
+    <path id="path157" d="m88-71l185-29c7-50 27-86 59-109 43-31 102-47 178-47 80 0 143 15 187 46 44 30 74 73 89 127 9 34 13 104 13 211-77-85-174-128-289-128-143 0-254 52-333 157-78 105-118 231-118 377 0 101 18 194 53 280 35 85 86 151 153 197 67 47 146 70 236 70 121 0 220-52 298-157v143h185v-919c0-165-17-282-50-351-34-69-87-124-160-164s-162-60-268-60c-126 0-228 30-306 89-77 59-115 148-112 267zm156 618c0-131 27-226 79-286 53-60 119-90 198-90s145 30 198 89c53 60 80 154 80 281 0 122-28 214-82 276-55 62-121 93-199 93-76 0-141-30-194-91s-80-152-80-272z"/>
+   </glyph>
+   <glyph id="glyph159" horiz-adv-x="863" unicode="h">
+    <path id="path161" d="m327 0h-185v1465h185v-545c82 107 185 161 310 161 77 0 144-16 201-46 56-31 97-74 121-128 24-55 37-134 37-237v-670h-185v658c0 88-19 152-56 192-38 40-90 60-159 60-51 0-99-13-144-40-45-28-77-64-96-111-19-46-29-110-29-191v-568z"/>
+   </glyph>
+   <glyph id="glyph163" horiz-adv-x="183" unicode="i">
+    <path id="path165" d="m327 1280h-185v185h185v-185zm0-1280h-185v1067h185v-1067z"/>
+   </glyph>
+   <glyph id="glyph167" horiz-adv-x="886" unicode="k">
+    <path id="path169" d="m321 0h-185v1465h185v-787l401 389h259l-411-398 440-669h-219l-354 540-116-113v-427z"/>
+   </glyph>
+   <glyph id="glyph171" horiz-adv-x="183" unicode="l">
+    <path id="path173" d="m327 0h-185v1465h185v-1465z"/>
+   </glyph>
+   <glyph id="glyph175" horiz-adv-x="1453" unicode="m">
+    <path id="path177" d="m320 0h-185v1067h185v-173c32 56 75 101 128 135 53 35 113 52 181 52 76 0 137-18 186-53 48-35 82-84 102-147 84 133 193 200 327 200 105 0 186-29 243-87 56-58 85-148 85-268v-726h-185v655c0 70-6 121-18 152-11 31-32 56-62 75s-65 28-106 28c-73 0-134-24-183-73-48-48-72-126-72-233v-604h-185v675c0 79-14 137-43 176-29 40-76 59-141 59-49 0-95-13-137-39s-73-64-92-115c-19-50-28-122-28-217v-539z"/>
+   </glyph>
+   <glyph id="glyph179" horiz-adv-x="863" unicode="n">
+    <path id="path181" d="m327 0h-185v1067h185v-151c74 110 182 165 322 165 61 0 117-12 169-34 51-23 89-53 115-91 25-37 43-81 53-132 6-33 10-91 10-174v-650h-185v632c0 72-7 126-21 161-13 36-37 64-71 85-35 22-75 32-121 32-74 0-137-24-191-71-53-48-80-138-80-271v-568z"/>
+   </glyph>
+   <glyph id="glyph183" horiz-adv-x="953" unicode="o">
+    <path id="path185" d="m85 533c0 194 53 338 160 431 89 78 197 117 324 117 142 0 258-47 348-142 90-94 135-224 135-391 0-135-19-241-59-318s-98-137-174-180-160-64-250-64c-144 0-261 47-350 141s-134 229-134 406zm185 1c0-126 29-221 85-283 57-63 128-95 214-95s157 32 213 95c57 63 86 159 86 288 0 122-29 214-86 277s-128 94-213 94c-86 0-157-31-214-93-56-63-85-157-85-283z"/>
+   </glyph>
+   <glyph id="glyph187" horiz-adv-x="931" unicode="p">
+    <path id="path189" d="m313-412h-185v1479h185v-176c38 63 80 111 128 142 47 32 105 48 172 48 89 0 167-23 235-69 67-46 118-111 153-195 34-84 51-176 51-276 0-107-19-203-58-289s-95-152-169-198c-74-45-152-68-234-68-60 0-113 14-161 44-48 29-87 66-117 110v-552zm0 937c0-126 27-219 80-279s118-90 194-90c77 0 143 32 198 94s83 158 83 288c0 125-27 218-81 279-54 62-118 93-192 93s-140-33-197-98c-57-66-85-162-85-287z"/>
+   </glyph>
+   <glyph id="glyph191" horiz-adv-x="931" unicode="q">
+    <path id="path193" d="m997-412h-185v556c-28-46-67-83-117-113-51-30-104-45-161-45-126 0-234 49-325 149-91 99-137 235-137 408 0 105 18 200 55 283 36 84 88 147 157 190 68 43 144 65 226 65 128 0 229-64 302-193v179h185v-1479zm-740 945c0-125 28-220 84-282 55-63 122-95 199-95 74 0 138 30 192 90 53 60 80 151 80 273 0 130-28 227-85 293-56 65-122 98-199 98-75 0-139-30-192-91-52-61-79-156-79-286z"/>
+   </glyph>
+   <glyph id="glyph195" horiz-adv-x="568" unicode="r">
+    <path id="path197" d="m327 0h-185v1067h157v-156c41 69 79 115 113 137 35 22 74 33 115 33 61 0 122-16 184-47l-62-167c-42 29-84 43-127 43-38 0-72-12-102-36s-51-57-64-100c-19-64-29-135-29-212v-562z"/>
+   </glyph>
+   <glyph id="glyph199" horiz-adv-x="886" unicode="s">
+    <path id="path201" d="m71 327l185 29c10-65 36-114 80-148s105-52 184-52 138 15 176 45c39 29 58 64 58 103 0 36-22 64-65 84-30 14-89 32-176 53-118 34-203 63-255 87-52 25-91 59-118 102s-40 91-40 143c0 48 10 92 31 132 21 41 49 75 85 101 27 21 64 39 110 53 47 15 97 22 150 22 81 0 151-13 212-38 60-25 105-59 134-102s49-101 60-173l-185-28c-7 53-28 95-62 125s-83 45-145 45c-74 0-127-12-158-35-32-24-48-52-48-83 0-20 7-39 20-55s34-30 62-41c16-6 63-19 142-40 113-34 198-62 253-84s99-53 130-95c32-41 48-93 48-154 0-60-18-117-52-170s-84-94-149-124c-65-29-138-43-220-43-136 0-240 28-311 86-71 57-116 142-136 255z"/>
+   </glyph>
+   <glyph id="glyph203" horiz-adv-x="522" unicode="t">
+    <path id="path205" d="m526 161l29-159c-51-11-96-16-136-16-65 0-115 10-151 30s-61 46-75 79c-15 33-22 102-22 207v594h-128v171h128v263l185 108v-371h170v-171h-170v-598c0-49 3-81 9-95s15-26 29-34c13-8 33-13 58-13 19 0 43 2 74 5z"/>
+   </glyph>
+   <glyph id="glyph207" horiz-adv-x="863" unicode="u">
+    <path id="path209" d="m996 0h-185v181c-79-130-187-195-322-195-60 0-116 12-168 36-52 23-90 53-115 90-25 36-43 80-53 132-7 36-11 91-11 168v655h185v-576c0-92 4-154 11-186 11-46 34-83 69-109 36-26 79-40 131-40s101 14 147 41 78 64 97 111c19 46 29 114 29 202v557h185v-1067z"/>
+   </glyph>
+   <glyph id="glyph211" horiz-adv-x="976" unicode="v">
+    <path id="path213" d="m624 0h-205l-391 1067h197l226-639c25-69 47-141 68-215 16 56 39 124 67 203l227 651h197l-386-1067z"/>
+   </glyph>
+   <glyph id="glyph215" horiz-adv-x="1475" unicode="w">
+    <path id="path217" d="m523 0h-205l-325 1067h193l176-618 54-227c2 11 20 85 54 220l164 625h200l162-620 49-203 57 205 177 618h193l-327-1067h-205l-163 636-45 185-209-821z"/>
+   </glyph>
+   <glyph id="glyph219" horiz-adv-x="999" unicode="x">
+    <path id="path221" d="m240 0h-226l396 540-367 527h222l174-249c32-46 60-87 85-123 27 37 53 72 78 106l194 266h226l-388-529 376-538h-222l-227 324-40 59-281-383z"/>
+   </glyph>
+   <glyph id="glyph223" horiz-adv-x="953" unicode="y">
+    <path id="path225" d="m128-405l-28 165c37-11 70-16 98-16 38 0 68 7 91 20 23 14 41 32 56 56 11 18 28 63 52 135 3 10 8 24 15 44l-398 1068h196l215-584c28-74 52-152 75-233 19 56 43 124 70 203l212 614h195l-379-1095c-43-113-76-190-100-233-32-57-68-99-109-126-41-26-90-40-146-40-34 0-73 7-115 22z"/>
+   </glyph>
+   <glyph id="glyph227" horiz-adv-x="1498" unicode="©">
+    <path id="path229" d="m754 1493c127 0 250-32 371-97 120-65 214-158 282-279 67-121 101-247 101-378 0-130-34-255-100-375-66-119-159-212-279-279-119-66-244-99-375-99-130 0-255 33-375 99-119 67-213 160-279 279-67 120-100 245-100 375 0 131 34 257 101 378 68 121 162 214 283 279 120 65 244 97 370 97zm0-142c-103 0-203-26-300-79-98-53-174-128-229-226-55-99-83-201-83-307s27-207 81-304c54-96 130-172 227-226s199-81 304-81c106 0 207 27 304 81s173 130 227 226c53 97 80 198 80 304s-27 208-82 307c-55 98-131 173-229 226-97 53-197 79-300 79zm227-739l143-29c-21-86-64-155-129-207-66-52-146-77-239-77-119 0-215 39-289 117s-111 187-111 326c0 90 16 169 50 236s82 117 144 151c63 34 134 51 214 51 90 0 165-21 224-65 59-43 100-102 121-176l-142-29c-19 42-47 73-85 95-37 22-81 33-131 33-74 0-134-26-182-78-47-52-71-127-71-224s22-170 68-220c45-50 104-75 176-75 58 0 109 15 152 46 44 31 73 72 87 125z"/>
+   </glyph>
+  </font>
+ </defs>
+ <defs id="defs231">
+  <font id="EmbeddedFont_2" horiz-adv-x="2048">
+   <font-face id="font-face234" font-family="Times New Roman embedded" ascent="1814" descent="454" units-per-em="2048"/>
+   <missing-glyph id="missing-glyph236" horiz-adv-x="2048">
+    <path id="path238" d="m0 2048h2047v-2047h-2047v2047z" stroke="#000" stroke-width="33" fill="none"/>
+   </missing-glyph>
+   <glyph id="glyph240" horiz-adv-x="817" unicode="»">
+    <path id="path242" d="m768 475l-256 478h71l370-478-370-475h-71l256 475zm-427 0l-256 478h71l370-478-370-475h-71l256 475z"/>
+   </glyph>
+   <glyph id="glyph244" horiz-adv-x="1067" unicode="–">
+    <path id="path246" d="m1038 540v-85h-1052v85h1052z"/>
+   </glyph>
+   <glyph id="glyph248" horiz-adv-x="500" unicode="•">
+    <path id="path250" d="m348 924c69 0 128-24 176-72 49-49 73-108 73-176 0-69-24-128-73-176-48-49-107-73-176-73-68 0-127 24-176 73-48 48-72 107-72 176 0 68 24 127 72 176 48 48 107 72 176 72z"/>
+   </glyph>
+  </font>
+ </defs>
+ <g id="g10168">
+  <g id="g342" transform="translate(881.68 -1923.7)">
+   <desc id="desc344">Group</desc>
+   <g id="g346">
+    <desc id="desc348">Drawing</desc>
+    <g id="g350" fill="none">
+     <g id="g352" stroke-width="35" stroke="#000">
+      <path id="path354" fill="none" d="m6344 5437c-2 0-4 2-4 4v962c0 2 2 5 4 5h9817c2 0 5-3 5-5v-962c0-2-3-4-5-4h-9817"/>
+     </g>
+     <g id="g356">
+      <rect id="rect358" y="5437" x="6341" height="971" width="9826"/>
+     </g>
+    </g>
+   </g>
+   <g id="g362">
+    <desc id="desc364">Drawing</desc>
+    <g id="g366" fill="none">
+     <g id="g368" stroke-width="35" stroke="#000">
+      <path id="path370" fill="none" d="m6344 6412c-2 0-4 2-4 4v962c0 2 2 5 4 5h9817c2 0 5-3 5-5v-962c0-2-3-4-5-4h-9817"/>
+     </g>
+     <g id="g372">
+      <rect id="rect374" y="6412" x="6341" height="971" width="9826"/>
+     </g>
+    </g>
+   </g>
+   <g id="g378">
+    <desc id="desc380">Drawing</desc>
+    <g id="g382" fill="none">
+     <g id="g384" stroke-width="35" stroke="#000">
+      <path id="path386" fill="none" d="m6344 7382c-2 0-4 2-4 4v962c0 2 2 5 4 5h9817c2 0 5-3 5-5v-962c0-2-3-4-5-4h-9817"/>
+     </g>
+     <g id="g388">
+      <rect id="rect390" y="7382" x="6341" height="971" width="9826"/>
+     </g>
+    </g>
+   </g>
+   <g id="g394">
+    <desc id="desc396">Drawing</desc>
+    <g id="g398" fill="none">
+     <g id="g400" stroke-width="35" stroke="#000">
+      <path id="path402" fill="none" d="m6344 8355c-2 0-4 2-4 4v963c0 2 2 5 4 5h9817c2 0 5-3 5-5v-963c0-2-3-4-5-4h-9817"/>
+     </g>
+     <g id="g404">
+      <rect id="rect406" y="8356" x="6341" height="972" width="9826"/>
+     </g>
+    </g>
+   </g>
+   <g id="g410">
+    <desc id="desc412">Drawing</desc>
+    <g id="g414" fill="none">
+     <g id="g416" stroke-width="35" stroke="#000">
+      <path id="path418" fill="none" d="m6344 9327c-2 0-4 2-4 4v962c0 2 2 5 4 5h9817c2 0 5-3 5-5v-962c0-2-3-4-5-4h-9817"/>
+     </g>
+     <g id="g420">
+      <rect id="rect422" y="9327" x="6341" height="971" width="9826"/>
+     </g>
+    </g>
+   </g>
+  </g>
+  <g id="g448" transform="translate(881.68 -1923.7)">
+   <desc id="desc450">Drawing</desc>
+   <g id="g452" fill="none">
+    <g id="g454" stroke-width="35" stroke="#000">
+     <path id="path456" fill="none" d="m6344 10300c-2 0-4 2-4 4v8573c0 2 2 5 4 5h9821c2 0 5-3 5-5v-8573c0-2-3-4-5-4h-9821"/>
+    </g>
+    <g id="g458">
+     <rect id="rect460" y="10301" x="6341" height="8582" width="9830"/>
+    </g>
+   </g>
+  </g>
+  <g id="g464" transform="translate(881.68 -1923.7)">
+   <desc id="desc466">Drawing</desc>
+   <g id="g468">
+    <g id="g470" stroke-width="35" stroke="#000" fill="none">
+     <path id="path472" fill="none" d="m6403 5098 9652 4"/>
+    </g>
+    <g id="g474">
+     <path id="path476" d="m6235 5098 210-105v210l-210-105z"/>
+     <path id="path478" d="m16223 5102-210 105v-210l210 105z"/>
+    </g>
+   </g>
+  </g>
+  <g id="g504" transform="translate(881.68 -1923.7)">
+   <desc id="desc506">Drawing</desc>
+   <g id="g508">
+    <g id="g510" stroke-width="35" stroke="#000" fill="none">
+     <path id="path512" fill="none" d="m11324 5415 5 917"/>
+    </g>
+   </g>
+  </g>
+  <g id="g568" transform="translate(881.68 -1923.7)">
+   <desc id="desc570">Drawing</desc>
+   <g id="g572">
+    <g id="g574" stroke-width="35" stroke="#000" fill="none">
+     <path id="path576" fill="none" d="m6112 5605 4 4577"/>
+    </g>
+    <g id="g578">
+     <path id="path580" d="m6112 5437 105 210h-210l105-210z"/>
+     <path id="path582" d="m6116 10350-105-210h210l-105 210z"/>
+    </g>
+   </g>
+  </g>
+  <g id="g630" transform="translate(881.68 -1923.7)">
+   <desc id="desc632">Drawing</desc>
+   <g id="g634">
+    <g id="g636" stroke-width="35" stroke="#000" fill="none">
+     <path id="path638" fill="none" d="m7558 5481 5 918"/>
+    </g>
+   </g>
+  </g>
+  <g id="g642" transform="translate(881.68 -1923.7)">
+   <desc id="desc644">Drawing</desc>
+   <g id="g646">
+    <g id="g648" stroke-width="35" stroke="#000" fill="none">
+     <path id="path650" fill="none" d="m9102 5481 4 918"/>
+    </g>
+   </g>
+  </g>
+  <g id="g654" transform="translate(881.68 -1923.7)">
+   <desc id="desc656">Drawing</desc>
+   <g id="g658">
+    <g id="g660" stroke-width="35" stroke="#000" fill="none">
+     <path id="path662" fill="none" d="m11311 6469 4 917"/>
+    </g>
+   </g>
+  </g>
+  <g id="g666" transform="translate(881.68 -1923.7)">
+   <desc id="desc668">Drawing</desc>
+   <g id="g670">
+    <g id="g672" stroke-width="35" stroke="#000" fill="none">
+     <path id="path674" fill="none" d="m12616 6429 5 918"/>
+    </g>
+   </g>
+  </g>
+  <g id="g678" transform="translate(881.68 -1923.7)">
+   <desc id="desc680">Drawing</desc>
+   <g id="g682">
+    <g id="g684" stroke-width="35" stroke="#000" fill="none">
+     <path id="path686" fill="none" d="m11311 7417 4 917"/>
+    </g>
+   </g>
+  </g>
+  <g id="g690" transform="translate(881.68 -1923.7)">
+   <desc id="desc692">Drawing</desc>
+   <g id="g694">
+    <g id="g696" stroke-width="35" stroke="#000" fill="none">
+     <path id="path698" fill="none" d="m9088 7444 5 917"/>
+    </g>
+   </g>
+  </g>
+  <g id="g724" transform="translate(881.68 -1923.7)">
+   <desc id="desc726">Drawing</desc>
+   <g id="g728" fill="none">
+    <g id="g730" stroke-width="35" stroke="#000">
+     <path id="path732" fill="none" d="m11296 5450c-2 0-4 2-4 4v954c0 2 2 5 4 5h4883c2 0 5-3 5-5v-954c0-2-3-4-5-4h-4883"/>
+    </g>
+    <g id="g734">
+     <rect id="rect736" y="5450" x="11293" height="963" width="4892"/>
+    </g>
+   </g>
+  </g>
+  <g id="g762" transform="translate(881.68 -1923.7)">
+   <desc id="desc764">Drawing</desc>
+   <g id="g766">
+    <g id="g768" fill="none">
+     <rect id="rect770" y="10491" x="7298" height="499" width="3043"/>
+     <rect id="rect772" y="10491" x="7298" height="499" width="3043"/>
+    </g>
+    <g id="g774">
+     <g id="g776" font-family="Arial embedded" font-weight="700" font-size="494px">
+      <g id="g778" fill="none">
+       <text id="text780">
+        <tspan id="tspan782" y="10890" x="7298 7565 7840 8140 8416 9101 9457 9758 10062">Type Code</tspan>
+       </text>
+      </g>
+     </g>
+    </g>
+   </g>
+  </g>
+  <g id="g784" transform="translate(881.68 -1923.7)">
+   <desc id="desc786">Drawing</desc>
+   <g id="g788">
+    <g id="g790" stroke-width="35" stroke="#000" fill="none">
+     <path id="path792" fill="none" d="m11311 10380 4 918"/>
+    </g>
+   </g>
+  </g>
+  <g id="g796" transform="translate(881.68 -1923.7)">
+   <desc id="desc798">Drawing</desc>
+   <g id="g800">
+    <g id="g802" stroke-width="35" stroke="#000" fill="none">
+     <path id="path804" fill="none" d="m6332 11302 9781 5"/>
+    </g>
+   </g>
+  </g>
+  <g id="g808" transform="translate(881.68 -1923.7)">
+   <desc id="desc810">Group</desc>
+   <g id="g812">
+    <desc id="desc814">Drawing</desc>
+    <g id="g816" fill="none">
+     <g id="g818" stroke-width="35" stroke="#000">
+      <path id="path820" fill="none" d="m6335 12202c-2 0-4 2-4 4v962c0 2 2 5 4 5h9817c2 0 5-3 5-5v-962c0-2-3-4-5-4h-9817"/>
+     </g>
+     <g id="g822">
+      <rect id="rect824" y="12202" x="6332" height="971" width="9826"/>
+     </g>
+    </g>
+   </g>
+   <g id="g828">
+    <desc id="desc830">Drawing</desc>
+    <g id="g832" fill="none">
+     <g id="g834" stroke-width="35" stroke="#000">
+      <path id="path836" fill="none" d="m6335 13172c-2 0-4 2-4 4v962c0 2 2 5 4 5h9817c2 0 5-3 5-5v-962c0-2-3-4-5-4h-9817"/>
+     </g>
+     <g id="g838">
+      <rect id="rect840" y="13172" x="6332" height="971" width="9826"/>
+     </g>
+    </g>
+   </g>
+   <g id="g844">
+    <desc id="desc846">Drawing</desc>
+    <g id="g848" fill="none">
+     <g id="g850" stroke-width="35" stroke="#000">
+      <path id="path852" fill="none" d="m6335 14142c-2 0-4 2-4 4v962c0 2 2 5 4 5h9817c2 0 5-3 5-5v-962c0-2-3-4-5-4h-9817"/>
+     </g>
+     <g id="g854">
+      <rect id="rect856" y="14142" x="6332" height="971" width="9826"/>
+     </g>
+    </g>
+   </g>
+   <g id="g860">
+    <desc id="desc862">Drawing</desc>
+    <g id="g864" fill="none">
+     <g id="g866" stroke-width="35" stroke="#000">
+      <path id="path868" fill="none" d="m6335 15117c-2 0-4 2-4 4v962c0 2 2 5 4 5h9817c2 0 5-3 5-5v-962c0-2-3-4-5-4h-9817"/>
+     </g>
+     <g id="g870">
+      <rect id="rect872" y="15117" x="6332" height="971" width="9826"/>
+     </g>
+    </g>
+   </g>
+   <g id="g876">
+    <desc id="desc878">Drawing</desc>
+    <g id="g880" fill="none">
+     <g id="g882" stroke-width="35" stroke="#000">
+      <path id="path884" fill="none" d="m6335 16087c-2 0-4 2-4 4v962c0 2 2 5 4 5h9817c2 0 5-3 5-5v-962c0-2-3-4-5-4h-9817"/>
+     </g>
+     <g id="g886">
+      <rect id="rect888" y="16087" x="6332" height="971" width="9826"/>
+     </g>
+    </g>
+   </g>
+  </g>
+  <g id="g892" transform="translate(881.68 -1923.7)">
+   <desc id="desc894">Drawing</desc>
+   <g id="g896">
+    <g id="g898" fill="none">
+     <rect id="rect900" y="12360" x="6584" height="499" width="3847"/>
+     <rect id="rect902" y="12360" x="6584" height="499" width="3847"/>
+    </g>
+    <g id="g904">
+     <g id="g906" font-family="Arial embedded" font-weight="400" font-size="494px">
+      <g id="g908" fill="none">
+       <g id="g910" transform="matrix(1 0 -.17633 1 2249.8 0)">
+        <text id="text912">
+         <tspan id="tspan914" y="12759" x="6584 6897 7168 7333 7884 8019 8379 8641 9602 9962 10288">Ver IHL DS</tspan>
+        </text>
+       </g>
+      </g>
+     </g>
+    </g>
+   </g>
+  </g>
+  <g id="g916" transform="translate(881.68 -1923.7)">
+   <desc id="desc918">Drawing</desc>
+   <g id="g920">
+    <g id="g922" fill="none">
+     <rect id="rect924" y="12365" x="12391" height="499" width="2530"/>
+     <rect id="rect926" y="12365" x="12392" height="499" width="2530"/>
+    </g>
+    <g id="g928">
+     <g id="g930" font-family="Arial embedded" font-weight="400" font-size="494px">
+      <g id="g932" fill="none">
+       <text id="text934">
+        <tspan id="tspan936" y="12764" x="12391 12637 12912 13051 13327 13432 13572 13682 13957 14233 14508 14643">Total length</tspan>
+       </text>
+      </g>
+     </g>
+    </g>
+   </g>
+  </g>
+  <g id="g938" transform="translate(881.68 -1923.7)">
+   <desc id="desc940">Drawing</desc>
+   <g id="g942">
+    <g id="g944" stroke-width="35" stroke="#000" fill="none">
+     <path id="path946" fill="none" d="m11311 12175 4 917"/>
+    </g>
+   </g>
+  </g>
+  <g id="g950" transform="translate(881.68 -1923.7)">
+   <desc id="desc952">Drawing</desc>
+   <g id="g954">
+    <g id="g956" fill="none">
+     <rect id="rect958" y="14301" x="12334" height="499" width="2336"/>
+     <rect id="rect960" y="14301" x="12335" height="499" width="2336"/>
+    </g>
+    <g id="g962">
+     <g id="g964" font-family="Arial embedded" font-weight="400" font-size="494px">
+      <g id="g966" fill="none">
+       <text id="text968">
+        <tspan id="tspan970" y="14700" x="12334 12690 12965 13240 13485 13735 13981 14256">Checksum</tspan>
+       </text>
+      </g>
+     </g>
+    </g>
+   </g>
+  </g>
+  <g id="g972" transform="translate(881.68 -1923.7)">
+   <desc id="desc974">Drawing</desc>
+   <g id="g976">
+    <g id="g978" fill="none">
+     <rect id="rect980" y="14318" x="6835" height="499" width="4185"/>
+     <rect id="rect982" y="14318" x="6835" height="499" width="4185"/>
+    </g>
+    <g id="g984">
+     <g id="g986" font-family="Arial embedded" font-weight="400" font-size="494px">
+      <g id="g988" fill="none">
+       <text id="text990">
+        <tspan id="tspan992" y="14717"/>
+       </text>
+       <text id="text994">
+        <tspan id="tspan996" y="14717" x="7385 7686 7990 8244 9205 9536 9701 9976 10111 10386 10632 10907">TTL Protocol</tspan>
+       </text>
+      </g>
+     </g>
+    </g>
+   </g>
+  </g>
+  <g id="g998" transform="translate(881.68 -1923.7)">
+   <desc id="desc1000">Drawing</desc>
+   <g id="g1002">
+    <g id="g1004" fill="none">
+     <rect id="rect1006" y="13423" x="11432" height="499" width="4770"/>
+     <rect id="rect1008" y="13423" x="11433" height="499" width="4770"/>
+    </g>
+    <g id="g1010">
+     <g id="g1012" font-family="Arial embedded" font-weight="400" font-size="494px">
+      <g id="g1014" fill="none">
+       <text id="text1016">
+        <tspan id="tspan1018" y="13822" x="11432 11733 11843 12118 12393 12639 12778 13079 13244 13519 13794 14205 14480 14755 14891 15276 15403 15543 15788 16063">Flags FragmentOffset</tspan>
+       </text>
+      </g>
+     </g>
+    </g>
+   </g>
+  </g>
+  <g id="g1020" transform="translate(881.68 -1923.7)">
+   <desc id="desc1022">Drawing</desc>
+   <g id="g1024">
+    <g id="g1026" fill="none">
+     <rect id="rect1028" y="15297" x="8867" height="499" width="4194"/>
+     <rect id="rect1030" y="15297" x="8868" height="499" width="4194"/>
+    </g>
+    <g id="g1032">
+     <g id="g1034" font-family="Arial embedded" font-weight="400" font-size="494px">
+      <g id="g1036" fill="none">
+       <text id="text1038">
+        <tspan id="tspan1040" y="15696" x="8867 9197 9472 9748 9908 10158 10433 10569 10709 11026 11166 11441 11716 11987 12152 12427 12677 12923">Source IP address</tspan>
+       </text>
+      </g>
+     </g>
+    </g>
+   </g>
+  </g>
+  <g id="g1064" transform="translate(881.68 -1923.7)">
+   <desc id="desc1066">Drawing</desc>
+   <g id="g1068">
+    <g id="g1070" stroke-width="35" stroke="#000" fill="none">
+     <path id="path1072" fill="none" d="m7549 12241 5 918"/>
+    </g>
+   </g>
+  </g>
+  <g id="g1076" transform="translate(881.68 -1923.7)">
+   <desc id="desc1078">Drawing</desc>
+   <g id="g1080">
+    <g id="g1082" stroke-width="35" stroke="#000" fill="none">
+     <path id="path1084" fill="none" d="m9088 12241 5 918"/>
+    </g>
+   </g>
+  </g>
+  <g id="g1088" transform="translate(881.68 -1923.7)">
+   <desc id="desc1090">Drawing</desc>
+   <g id="g1092">
+    <g id="g1094" stroke-width="35" stroke="#000" fill="none">
+     <path id="path1096" fill="none" d="m11302 13229 5 917"/>
+    </g>
+   </g>
+  </g>
+  <g id="g1100" transform="translate(881.68 -1923.7)">
+   <desc id="desc1102">Drawing</desc>
+   <g id="g1104">
+    <g id="g1106" stroke-width="35" stroke="#000" fill="none">
+     <path id="path1108" fill="none" d="m12603 13189 4 918"/>
+    </g>
+   </g>
+  </g>
+  <g id="g1112" transform="translate(881.68 -1923.7)">
+   <desc id="desc1114">Drawing</desc>
+   <g id="g1116">
+    <g id="g1118" stroke-width="35" stroke="#000" fill="none">
+     <path id="path1120" fill="none" d="m11302 14177 5 917"/>
+    </g>
+   </g>
+  </g>
+  <g id="g1124" transform="translate(881.68 -1923.7)">
+   <desc id="desc1126">Drawing</desc>
+   <g id="g1128">
+    <g id="g1130" stroke-width="35" stroke="#000" fill="none">
+     <path id="path1132" fill="none" d="m9080 14204 4 917"/>
+    </g>
+   </g>
+  </g>
+  <g id="g1160" transform="translate(881.68 -1923.7)">
+   <desc id="desc1162">Drawing</desc>
+   <g id="g1164" fill="none">
+    <g id="g1166" stroke-width="35" stroke="#000">
+     <path id="path1168" fill="none" d="m11284 12214c-2 0-4 2-4 4v953c0 2 2 5 4 5h4882c2 0 5-3 5-5v-953c0-2-3-4-5-4h-4882"/>
+    </g>
+    <g id="g1170">
+     <rect id="rect1172" y="12215" x="11280" height="962" width="4891"/>
+    </g>
+   </g>
+  </g>
+  <g id="g1176" transform="translate(881.68 -1923.7)">
+   <desc id="desc1178">Drawing</desc>
+   <g id="g1180">
+    <g id="g1182" stroke-width="35" stroke="#000" fill="none">
+     <path id="path1184" fill="none" d="m8652 10367 4 917"/>
+    </g>
+   </g>
+  </g>
+  <g id="g1188" transform="translate(881.68 -1923.7)">
+   <desc id="desc1190">Drawing</desc>
+   <g id="g1192">
+    <g id="g1194" stroke-width="35" stroke="#f00" fill="none">
+     <path id="path1196" fill="none" d="m6145 10606-22 1414"/>
+    </g>
+    <g id="g1198" fill="#f00">
+     <path id="path1200" d="m6147 10438 102 212-210-4 108-208z"/>
+     <path id="path1202" d="m6121 12188-102-212 210 4-108 208z"/>
+    </g>
+   </g>
+  </g>
+  <g id="g1228" transform="translate(881.68 -1923.7)">
+   <desc id="desc1230">Drawing</desc>
+   <g id="g1232">
+    <g id="g1234" stroke-width="35" stroke="#00f" fill="none">
+     <path id="path1236" fill="none" d="m6146 12528-24 6147"/>
+    </g>
+    <g id="g1238" fill="#00f">
+     <path id="path1240" d="m6147 12360 104 210h-210l106-210z"/>
+     <path id="path1242" d="m6121 18843-104-210h210l-106 210z"/>
+    </g>
+   </g>
+  </g>
+  <g id="g1310" transform="matrix(.81133 0 0 1 1355.3 -3286.3)">
+   <desc id="desc1312">Group</desc>
+   <g id="g1314">
+    <desc id="desc1316">Drawing</desc>
+    <g id="g1318" fill="none">
+     <g id="g1320" stroke-width="35" stroke="#000">
+      <path id="path1322" d="m17401 4648c-2 0-4 2-4 4v1150c0 2 2 5 4 5h6117c2 0 4-3 4-5v-1150c0-2-2-4-4-4h-6117" fill="none"/>
+     </g>
+     <g id="g1324">
+      <rect id="rect1326" y="4648" width="6126" x="17398" height="1159"/>
+     </g>
+    </g>
+   </g>
+   <g id="g1330">
+    <desc id="desc1332">Drawing</desc>
+    <g id="g1334">
+     <g id="g1336" fill="none">
+      <rect id="rect1338" y="4928" width="6135" x="17394" height="594"/>
+      <rect id="rect1340" y="4929" width="6135" x="17394" height="594"/>
+     </g>
+     <g id="g1342">
+      <g id="g1344" font-family="Arial embedded" font-weight="400" font-size="494px">
+       <g id="g1346" fill="none">
+        <text id="text1348">
+         <tspan id="tspan1350" y="5375" x="18230 18560 18725 19000 19136 19411 19657 19932 20042 20330 20605 20745 20880 21155 21320 21456 21596 21951 22362">Protocol=1 for ICMP</tspan>
+        </text>
+       </g>
+      </g>
+     </g>
+    </g>
+   </g>
+  </g>
+  <g id="g1356" transform="matrix(.85203 0 0 .96644 3406.1 -1710.2)">
+   <desc id="desc1358">Group</desc>
+   <g id="g1360">
+    <desc id="desc1362">Drawing</desc>
+    <g id="g1364" fill="none">
+     <g id="g1366" stroke-width="35" stroke="#000">
+      <path id="path1368" d="m17082 6376c-2 0-4 2-4 4v1150c0 2 2 5 4 5h6999c2 0 4-3 4-5v-1150c0-2-2-4-4-4h-6999" fill="none"/>
+     </g>
+     <g id="g1370">
+      <rect id="rect1372" y="6376" width="7008" x="17079" height="1159"/>
+     </g>
+    </g>
+   </g>
+   <g id="g1376">
+    <desc id="desc1378">Drawing</desc>
+    <g id="g1380">
+     <g id="g1382" fill="none">
+      <rect id="rect1384" y="6657" width="7017" x="17074" height="594"/>
+      <rect id="rect1386" y="6658" width="7017" x="17074" height="594"/>
+     </g>
+     <g id="g1388">
+      <g id="g1390" font-family="Arial embedded" font-weight="400" font-size="494px">
+       <g id="g1392" fill="none">
+        <text id="text1394">
+         <tspan id="tspan1396" y="7104" x="17416 17662 17937 18186 18457 18623 18872 19008 19283 19558 19694 19804 19969 20244 20379 20519 20875 21285 21607 21742 22157 22433 22678 22924 23199 23474">covers entire ICMP message</tspan>
+        </text>
+       </g>
+      </g>
+     </g>
+    </g>
+   </g>
+  </g>
+  <g id="g1418" transform="matrix(.75670 0 0 1 5735.9 -921.76)">
+   <desc id="desc1420">Group</desc>
+   <g id="g1422">
+    <desc id="desc1424">Drawing</desc>
+    <g id="g1426" fill="none">
+     <g id="g1428" stroke-width="35" stroke="#000">
+      <path id="path1430" d="m17320 8061c-2 0-4 2-4 4v1546c0 2 2 5 4 5h7881c2 0 4-3 4-5v-1546c0-2-2-4-4-4h-7881" fill="none"/>
+     </g>
+     <g id="g1432">
+      <rect id="rect1434" y="8061" width="7890" x="17317" height="1555"/>
+     </g>
+    </g>
+   </g>
+   <g id="g1438">
+    <desc id="desc1440">Drawing</desc>
+    <g id="g1442">
+     <g id="g1444" fill="none">
+      <rect id="rect1446" y="8276" width="7899" x="17317" height="1123"/>
+      <rect id="rect1448" y="8276" width="7899" x="17317" height="1123"/>
+     </g>
+     <g id="g1450">
+      <g id="g1452" font-family="Arial embedded" font-weight="400" font-size="494px">
+       <g id="g1454" fill="none">
+        <text id="text1456">
+         <tspan id="tspan1458" y="8739" x="18203 18533 18808 19084 19194 19329 19439 19714 19989 20265 20375 20510 20620 20895 21031 21306 21471 21882 22157 22292 22402 22678 22953 23093 23368 23639 23914 24189">Additional information about</tspan>
+        </text>
+        <text id="text1460">
+         <tspan id="tspan1462" y="9236" x="19289 19564 19729 19894 20170 20305 20440 20580 20716 20965 21236 21512 21651 21926 22062 22202 22472 22638 22803 23078">error, type of error</tspan>
+        </text>
+       </g>
+      </g>
+     </g>
+    </g>
+   </g>
+  </g>
+  <g id="g1480" transform="translate(881.68 -1923.7)">
+   <desc id="desc1482">Group</desc>
+   <g id="g1484">
+    <desc id="desc1486">Drawing</desc>
+    <g id="g1488" fill="none">
+     <g id="g1490" stroke-width="35" stroke="#000">
+      <path id="path1492" fill="none" d="m365 15314c-2 0-4 2-4 4v1549c0 2 2 5 4 5h5477c2 0 4-3 4-5v-1549c0-2-2-4-4-4h-5477"/>
+     </g>
+     <g id="g1494">
+      <rect id="rect1496" y="15315" x="362" height="1558" width="5486"/>
+     </g>
+    </g>
+   </g>
+   <g id="g1500">
+    <desc id="desc1502">Drawing</desc>
+    <g id="g1504">
+     <g id="g1506" fill="none">
+      <rect id="rect1508" y="15284" x="356" height="1619" width="5500"/>
+      <rect id="rect1510" y="15284" x="357" height="1619" width="5500"/>
+     </g>
+     <g id="g1512">
+      <g id="g1514" font-family="Arial embedded" font-weight="400" font-size="494px">
+       <g id="g1516" fill="none">
+        <text id="text1518">
+         <tspan id="tspan1520" y="15747" x="428 784 1059 1334 1579 1719 1994 2130 2270 2405 2680 2955 3091 3366 3641 3916 4026 4302 4577 4687 4958 5233 5373 5648">Copy of the beginning of</tspan>
+        </text>
+        <text id="text1522">
+         <tspan id="tspan1524" y="16244" x="1146 1281 1557 1832 1972 2107 2429 2564 2839 3115 3390 3665 3940 4105 4241 4376 4651 4926 5066">the IP header that</tspan>
+        </text>
+        <text id="text1526">
+         <tspan id="tspan1528" y="16741" x="1307 1553 1828 2103 2348 2624 2899 3038 3174 3449 3724 3860 4135 4300 4465 4740">caused the error</tspan>
+        </text>
+       </g>
+      </g>
+     </g>
+    </g>
+   </g>
+  </g>
+  <g id="g1670" transform="matrix(.85841 0 0 .85710 3192.8 702.8)">
+   <desc id="desc1672">Group</desc>
+   <g id="g1674">
+    <desc id="desc1676">Drawing</desc>
+    <g id="g1678" fill="none">
+     <g id="g1680" stroke-width="35" stroke="#000">
+      <path id="path1682" d="m18325 9984c-2 0-4 2-4 4v9772c0 2 2 5 4 5h7881c2 0 5-3 5-5v-9772c0-2-3-4-5-4h-7881" fill="none"/>
+     </g>
+     <g id="g1684">
+      <rect id="rect1686" y="9984" width="7890" x="18322" height="9781"/>
+     </g>
+    </g>
+   </g>
+   <g id="g1690">
+    <desc id="desc1692">Drawing</desc>
+    <g id="g1694">
+     <g id="g1696" fill="none">
+      <rect id="rect1698" y="11045" width="7899" x="18318" height="7652"/>
+      <rect id="rect1700" y="11046" width="7899" x="18318" height="7652"/>
+     </g>
+     <g id="g1702" font-weight="400" font-family="Arial embedded">
+      <g id="g1704" font-size="494px">
+       <g id="g1706" fill="none">
+        <text id="text1708">
+         <tspan id="tspan1710" y="11542" x="18449 18724 18970 19245">Type</tspan>
+        </text>
+        <text id="text1712">
+         <tspan id="tspan1714" y="11542" x="19655 19931 20206 20481">and</tspan>
+        </text>
+        <text id="text1716">
+         <tspan id="tspan1718" y="11542" x="20621 20977 21252 21527">Code</tspan>
+        </text>
+        <text id="text1720">
+         <tspan id="tspan1722" y="11542" x="21937 22048 22323 22598 22708 22953 23229 23368 23644 23779 23914 24190 24465 24604 24740 24985 25261 25536 25676 25951">indicate the type of</tspan>
+        </text>
+        <text id="text1724">
+         <tspan id="tspan1726" y="12039" x="20731 21006 21171 21336 21612 21772 21912 22187 22462 22598 22873 23119 23258 23533">error detected</tspan>
+        </text>
+       </g>
+      </g>
+      <g id="g1728" font-size="217px">
+       <g id="g1730" fill="none">
+        <text id="text1732">
+         <tspan id="tspan1734" y="12412" x="19511">l</tspan>
+        </text>
+       </g>
+      </g>
+      <g id="g1736" font-size="494px">
+       <g id="g1738" fill="none">
+        <text id="text1740">
+         <tspan id="tspan1742" y="12536"/>
+        </text>
+        <text id="text1744">
+         <tspan id="tspan1746" y="12536" x="19693 20049 20324 20574 20709 20819 21094 21369 21505 21615 21890 22165 22301 22576 22851 23016 23291 23567 23812 24087 24362 24638 24748">Destination unreachable</tspan>
+        </text>
+       </g>
+      </g>
+      <g id="g1748" font-size="217px">
+       <g id="g1750" fill="none">
+        <text id="text1752">
+         <tspan id="tspan1754" y="12909" x="19951">l</tspan>
+        </text>
+       </g>
+      </g>
+      <g id="g1756" font-size="494px">
+       <g id="g1758" fill="none">
+        <text id="text1760">
+         <tspan id="tspan1762" y="13033" x="19998 20273 20548 20684 21039 21315 21480 21729 21865 22140 22415 22580 22856 23126 23376 23651 23927 24202 24308">network unreachable</tspan>
+        </text>
+       </g>
+      </g>
+      <g id="g1764" font-size="217px">
+       <g id="g1766" fill="none">
+        <text id="text1768">
+         <tspan id="tspan1770" y="13406" x="20349">l</tspan>
+        </text>
+       </g>
+      </g>
+      <g id="g1772" font-size="494px">
+       <g id="g1774" fill="none">
+        <text id="text1776">
+         <tspan id="tspan1778" y="13530" x="20396 20671 20946 21192 21332 21467 21742 22017 22182 22458 22729 22978 23254 23529 23800 23910">host unreachable</tspan>
+        </text>
+       </g>
+      </g>
+      <g id="g1780" font-size="217px">
+       <g id="g1782" fill="none">
+        <text id="text1784">
+         <tspan id="tspan1786" y="13903" x="19936">l</tspan>
+        </text>
+       </g>
+      </g>
+      <g id="g1788" font-size="494px">
+       <g id="g1790" fill="none">
+        <text id="text1792">
+         <tspan id="tspan1794" y="14027" x="19983 20258 20423 20698 20834 21109 21355 21630 21740 21880 22150 22426 22591 22866 23141 23387 23662 23937 24212 24322">protocol unreachable</tspan>
+        </text>
+       </g>
+      </g>
+      <g id="g1796" font-size="217px">
+       <g id="g1798" fill="none">
+        <text id="text1800">
+         <tspan id="tspan1802" y="14400" x="20389">l</tspan>
+        </text>
+       </g>
+      </g>
+      <g id="g1804" font-size="494px">
+       <g id="g1806" fill="none">
+        <text id="text1808">
+         <tspan id="tspan1810" y="14524" x="20436 20711 20986 21151 21287 21422 21698 21973 22138 22413 22688 22934 23209 23484 23759 23869">port unreachable</tspan>
+        </text>
+       </g>
+      </g>
+      <g id="g1812" font-size="217px">
+       <g id="g1814" fill="none">
+        <text id="text1816">
+         <tspan id="tspan1818" y="14897" x="19841">l</tspan>
+        </text>
+       </g>
+      </g>
+      <g id="g1820" font-size="494px">
+       <g id="g1822" fill="none">
+        <text id="text1824">
+         <tspan id="tspan1826" y="15021" x="19888 20023 20189 20464 20739 21150 21425 21700 21840 22111 22250 22360 22635 22911 23046 23321 23596 23872 24147 24418">fragmentation needed</tspan>
+        </text>
+       </g>
+      </g>
+      <g id="g1828" font-size="217px">
+       <g id="g1830" fill="none">
+        <text id="text1832">
+         <tspan id="tspan1834" y="15394" x="20211">l</tspan>
+        </text>
+       </g>
+      </g>
+      <g id="g1836" font-size="494px">
+       <g id="g1838" fill="none">
+        <text id="text1840">
+         <tspan id="tspan1842" y="15518" x="20258 20504 20779 21054 21219 21465 21740 21879 22044 22315 22591 22730 23005 23141 23276 23552 23662 23772 24047">source route failed</tspan>
+        </text>
+       </g>
+      </g>
+      <g id="g1844" font-size="217px">
+       <g id="g1846" fill="none">
+        <text id="text1848">
+         <tspan id="tspan1850" y="15891" x="21322">l</tspan>
+        </text>
+       </g>
+      </g>
+      <g id="g1852" font-size="494px">
+       <g id="g1854" fill="none">
+        <text id="text1856">
+         <tspan id="tspan1858" y="16015" x="21369 21725 22000 22275 22385 22550 22825 23071">Redirect</tspan>
+        </text>
+       </g>
+      </g>
+      <g id="g1860" font-size="217px">
+       <g id="g1862" fill="none">
+        <text id="text1864">
+         <tspan id="tspan1866" y="16388" x="20129">l</tspan>
+        </text>
+       </g>
+      </g>
+      <g id="g1868" font-size="494px">
+       <g id="g1870" fill="none">
+        <text id="text1872">
+         <tspan id="tspan1874" y="16512" x="20176 20506 20781 20946 21217 21632 21907 22043 22318 22483 22619 22894 23059 23334 23609 23719 23994">Parameter problem</tspan>
+        </text>
+       </g>
+      </g>
+      <g id="g1876" font-size="217px">
+       <g id="g1878" fill="none">
+        <text id="text1880">
+         <tspan id="tspan1882" y="16885" x="20565">l</tspan>
+        </text>
+       </g>
+      </g>
+      <g id="g1884" font-size="494px">
+       <g id="g1886" fill="none">
+        <text id="text1888">
+         <tspan id="tspan1890" y="17009" x="20612 20896 21006 21416 21692 21827 22102 22352 22597 22873 23148 23423 23698">Time exceeded</tspan>
+        </text>
+       </g>
+      </g>
+      <g id="g1892" font-size="217px">
+       <g id="g1894" fill="none">
+        <text id="text1896">
+         <tspan id="tspan1898" y="17382" x="20673">l</tspan>
+        </text>
+       </g>
+      </g>
+      <g id="g1900" font-size="494px">
+       <g id="g1902" fill="none">
+        <text id="text1904">
+         <tspan id="tspan1906" y="17506" x="20720 21021 21325 21579 21719 21990 22240 22485 22760 23036 23311 23586">TTL exceeded</tspan>
+        </text>
+       </g>
+      </g>
+      <g id="g1908" font-size="217px">
+       <g id="g1910" fill="none">
+        <text id="text1912">
+         <tspan id="tspan1914" y="17879" x="19305">l</tspan>
+        </text>
+       </g>
+      </g>
+      <g id="g1916" font-size="494px">
+       <g id="g1918" fill="none">
+        <text id="text1920">
+         <tspan id="tspan1922" y="18003" x="19352 19517 19792 20067 20313 20559 20834 21244 21519 21630 21879 22015 22150 22260 22675 22946 23086 23361 23607 23856 24127 24402 24678 24953">reassembly time exceeded</tspan>
+        </text>
+       </g>
+      </g>
+      <g id="g1924" font-size="217px">
+       <g id="g1926" fill="none">
+        <text id="text1928">
+         <tspan id="tspan1930" y="18376" x="19045">l</tspan>
+        </text>
+       </g>
+      </g>
+      <g id="g1932" font-size="494px">
+       <g id="g1934" fill="none">
+        <text id="text1936">
+         <tspan id="tspan1938" y="18500" x="19092 19422 19668 19943 20218 20354 20519 20794 21069 21344 21674 21950 22195 22331 22470 22745 22881 23021 23347 23596 23871 24147 24282 24447 24722 24998 25108 25353">Echo requEast et Echo reply</tspan>
+        </text>
+       </g>
+      </g>
+     </g>
+    </g>
+   </g>
+  </g>
+  <g id="g1940" transform="matrix(.80469 0 0 1 4394.8 -1923.7)">
+   <desc id="desc1942">Drawing</desc>
+   <g id="g1944">
+    <g id="g1946" stroke-width="35" stroke="#000" fill="none">
+     <path id="path1948" d="m8771 10932 9052 2078" fill="none"/>
+    </g>
+    <g id="g1950">
+     <path id="path1952" d="m17987 13048-228 55 47-204 181 149z"/>
+    </g>
+   </g>
+  </g>
+  <text id="text8331" style="word-spacing:0px;letter-spacing:0px;text-anchor:middle;text-align:center" line-height="125%" font-weight="bold" font-size="400px" y="9956.1387" x="22279.914" font-family="FreeSans" xml:space="preserve" fill="#000000"><tspan id="tspan8333" y="9956.1387" x="22279.914"><tspan id="tspan8471" style="text-anchor:middle;text-align:center" fill="#ff0000">Type</tspan> and <tspan id="tspan8473" style="text-anchor:middle;text-align:center" fill="#ff0000">Code</tspan> indicate the type of</tspan><tspan id="tspan8335" y="10456.139" x="22279.914">error detected</tspan><tspan id="tspan8337" y="10956.139" x="22279.914"> Destination unreachable</tspan><tspan id="tspan8339" y="11456.139" x="22279.914">network unreachable</tspan><tspan id="tspan8341" y="11956.139" x="22279.914">host unreachable</tspan><tspan id="tspan8343" y="12456.139" x="22279.914">protocol unreachable</tspan><tspan id="tspan8345" y="12956.139" x="22279.914">port unreachable</tspan><tspan id="tspan8347" y="13456.139" x="22279.914">fragmentation needed</tspan><tspan id="tspan8349" y="13956.139" x="22279.914">source route failed</tspan><tspan id="tspan8351" y="14456.139" x="22279.914">Redirect</tspan><tspan id="tspan8353" y="14956.139" x="22279.914">Parameter problem</tspan><tspan id="tspan8355" y="15456.139" x="22279.914">Time exceeded</tspan><tspan id="tspan8357" y="15956.139" x="22279.914">TTL exceeded</tspan><tspan id="tspan8359" y="16456.139" x="22279.914">reassembly time exceeded</tspan><tspan id="tspan8361" y="16956.139" x="22335.383">Echo requEast et Echo reply </tspan></text>
+  <text id="text8363" style="word-spacing:0px;letter-spacing:0px" line-height="125%" font-weight="bold" font-size="400px" y="7702.2031" x="19159.303" font-family="FreeSans" xml:space="preserve" fill="#000000"><tspan id="tspan8365" y="7702.2031" x="19159.303">Additional information about</tspan><tspan id="tspan8367" y="8202.2031" x="19159.303">error, type of error</tspan></text>
+  <text id="text8369" style="word-spacing:0px;letter-spacing:0px" line-height="125%" font-weight="bold" font-size="400px" y="5087.6562" x="18319.57" font-family="FreeSans" xml:space="preserve" fill="#000000"><tspan id="tspan8371" y="5087.6562" x="18319.57">covers entire ICMP message</tspan></text>
+  <text id="text8373" style="word-spacing:0px;letter-spacing:0px" line-height="125%" font-weight="bold" font-size="400px" y="2034.4899" x="15959.095" font-family="FreeSans" xml:space="preserve" fill="#000000"><tspan id="tspan8375" y="2034.4899" x="15959.095">Protocol=1 for ICMP</tspan></text>
+  <text id="text8377" style="word-spacing:0px;letter-spacing:0px;text-anchor:middle;text-align:center" line-height="125%" font-weight="bold" font-size="400px" y="13786.259" x="3930.1736" font-family="FreeSans" xml:space="preserve" fill="#0000ff"><tspan id="tspan8379" style="text-anchor:middle;text-align:center" y="13786.259" x="3930.1736">Copy of the beginning of</tspan><tspan id="tspan8381" style="text-anchor:middle;text-align:center" y="14286.259" x="3985.6423">the IP header that caused </tspan><tspan id="tspan8564" style="text-anchor:middle;text-align:center" y="14786.259" x="3930.1736">the error</tspan></text>
+  <text id="text8391" style="word-spacing:0px;letter-spacing:0px" line-height="125%" font-weight="bold" font-size="400px" y="12784.352" x="7854.9619" font-family="FreeSans" xml:space="preserve" fill="#0000ff"><tspan id="tspan8393" y="12784.352" x="7854.9619">    TTL            Protocol</tspan></text>
+  <text id="text8395" style="word-spacing:0px;letter-spacing:0px" line-height="125%" font-weight="bold" font-size="400px" y="13786.26" x="10820.61" font-family="FreeSans" xml:space="preserve" fill="#0000ff"><tspan id="tspan8397" y="13786.26" x="10820.61">Source IP address </tspan></text>
+  <text id="text8399" style="word-spacing:0px;letter-spacing:0px" line-height="125%" font-weight="bold" font-size="400px" y="14748.092" x="10459.923" font-family="FreeSans" xml:space="preserve" fill="#0000ff"><tspan id="tspan8401" y="14748.092" x="10459.923">Destination IP address </tspan></text>
+  <text id="text8403" style="word-spacing:0px;letter-spacing:0px" line-height="125%" font-weight="bold" font-size="400px" y="16030.534" x="10379.771" font-family="FreeSans" xml:space="preserve" fill="#0000ff"><tspan id="tspan8405" y="16030.534" x="10379.771">First 64 bits of payload</tspan></text>
+  <text id="text8407" style="word-spacing:0px;letter-spacing:0px" line-height="125%" font-weight="bold" font-size="400px" y="12744.274" x="13185.115" font-family="FreeSans" xml:space="preserve" fill="#0000ff"><tspan id="tspan8409" y="12744.274" x="13185.115">Checksum</tspan></text>
+  <text id="text8411" style="word-spacing:0px;letter-spacing:0px" line-height="125%" font-weight="bold" font-size="400px" y="10860.688" x="13425.572" font-family="FreeSans" xml:space="preserve" fill="#0000ff"><tspan id="tspan8413" y="10860.688" x="13425.572">Total length</tspan></text>
+  <text id="text8415" style="word-spacing:0px;letter-spacing:0px" line-height="125%" font-weight="bold" font-size="400px" y="8937.0234" x="7975.1909" font-family="FreeSans" xml:space="preserve" fill="#ff0000"><tspan id="tspan8417" y="8937.0234" x="7975.1909">Type             Code</tspan></text>
+  <text id="text8419" style="word-spacing:0px;letter-spacing:0px" line-height="125%" font-weight="bold" font-size="400px" y="8937.0225" x="12704.198" font-family="FreeSans" xml:space="preserve" fill="#ff0000"><tspan id="tspan8421" y="8937.0225" x="12704.198">  Checksum</tspan></text>
+  <text id="text8423" style="word-spacing:0px;letter-spacing:0px" line-height="125%" font-weight="bold" font-size="400px" y="9979.0078" x="11742.366" font-family="FreeSans" xml:space="preserve" fill="#ff0000"><tspan id="tspan8425" y="9979.0078" x="11742.366">Data</tspan></text>
+  <text id="text8427" style="word-spacing:0px;letter-spacing:0px" line-height="125%" font-weight="bold" font-size="400px" y="7975.1909" x="10179.389" font-family="FreeSans" xml:space="preserve" fill="#000000"><tspan id="tspan8429" y="7975.1909" x="10179.389">Destination IP address </tspan></text>
+  <text id="text8431" style="word-spacing:0px;letter-spacing:0px" line-height="125%" font-weight="bold" font-size="400px" y="6973.2822" x="10740.458" font-family="FreeSans" xml:space="preserve" fill="#000000"><tspan id="tspan8433" y="6973.2822" x="10740.458">Source IP address </tspan></text>
+  <text id="text8435" style="word-spacing:0px;letter-spacing:0px" line-height="125%" font-weight="bold" font-size="400px" y="6051.5269" x="8335.877" font-family="FreeSans" xml:space="preserve" fill="#ff0000"><tspan id="tspan8437" y="6051.5269" x="8335.877"><tspan id="tspan8582" fill="#000000"> TTL </tspan>          Protocol</tspan></text>
+  <text id="text8439" style="word-spacing:0px;letter-spacing:0px" line-height="125%" font-weight="bold" font-size="400px" y="6051.5269" x="13545.802" font-family="FreeSans" xml:space="preserve" fill="#000000"><tspan id="tspan8441" y="6051.5269" x="13545.802">Checksum</tspan></text>
+  <text id="text8443" style="word-spacing:0px;letter-spacing:0px" line-height="125%" font-weight="bold" font-size="400px" y="5089.6943" x="12341.664" font-family="FreeSans" xml:space="preserve" fill="#000000"><tspan id="tspan8445" y="5089.6943" x="12341.664">Flags    FragmentOffset</tspan></text>
+  <text id="text8447" style="word-spacing:0px;letter-spacing:0px" line-height="125%" font-weight="bold" font-size="400px" y="5129.771" x="8416.0303" font-family="FreeSans" xml:space="preserve" fill="#000000"><tspan id="tspan8449" y="5129.771" x="8416.0303">Identification</tspan></text>
+  <text id="text8455" style="word-spacing:0px;letter-spacing:0px" line-height="125%" font-weight="bold" font-size="400px" y="4087.7861" x="13345.419" font-family="FreeSans" xml:space="preserve" fill="#000000"><tspan id="tspan8457" y="4087.7861" x="13345.419">Total length</tspan></text>
+  <text id="text8459" style="word-spacing:0px;letter-spacing:0px" line-height="125%" font-weight="bold" font-size="400px" y="2444.6565" x="10700.382" font-family="FreeSans" xml:space="preserve" fill="#000000"><tspan id="tspan8461" y="2444.6565" x="10700.382">32 bits</tspan></text>
+  <text id="text8463" style="word-spacing:0px;letter-spacing:0px" line-height="125%" font-weight="bold" font-size="400px" y="5490.458" x="4309.6787" font-family="FreeSans" xml:space="preserve" fill="#000000"><tspan id="tspan8465" y="5490.458" x="4309.6787">IP header</tspan></text>
+  <text id="text8467" style="word-spacing:0px;letter-spacing:0px" line-height="125%" font-weight="bold" font-size="400px" y="9538.168" x="3687.0227" font-family="FreeSans" xml:space="preserve" fill="#000000"><tspan id="tspan8469" y="9538.168" x="3687.0227" fill="#ff0000">ICMP header</tspan></text>
+  <text id="text8566" style="word-spacing:0px;letter-spacing:0px" font-weight="bold" xml:space="preserve" font-size="400px" y="4087.7866" x="7534.3511" font-family="FreeSans" line-height="125%" fill="#000000"><tspan id="tspan8568" x="7534.3511" y="4087.7866">Ver       IHL           DS </tspan></text>
+  <text id="text8570" style="word-spacing:0px;letter-spacing:0px" line-height="125%" font-weight="bold" font-size="400px" y="10860.535" x="7534.3511" font-family="FreeSans" xml:space="preserve" fill="#0000ff"><tspan id="tspan8572" y="10860.535" x="7534.3511">Ver       IHL           DS </tspan></text>
+  <text id="text8574" style="word-spacing:0px;letter-spacing:0px" font-weight="bold" xml:space="preserve" font-size="400px" y="11822.366" x="12337.97" font-family="FreeSans" line-height="125%" fill="#0000ff"><tspan id="tspan8576" x="12337.97" y="11822.366">Flags    FragmentOffset</tspan></text>
+  <text id="text8578" style="word-spacing:0px;letter-spacing:0px" font-weight="bold" xml:space="preserve" font-size="400px" y="11862.442" x="8412.3359" font-family="FreeSans" line-height="125%" fill="#0000ff"><tspan id="tspan8580" x="8412.3359" y="11862.442">Identification</tspan></text>
+  <path id="path8584" d="m20840 17032h1563" stroke="#f90000" stroke-width="20" fill="#f00"/>
+  <path id="path9980" marker-end="url(#Arrow1Mend)" d="m14468 8536.3 3406-3687.1" stroke="#000" stroke-width="31.5" fill="none"/>
+  <path id="path10164" marker-end="url(#Arrow1Mend)" d="m11584 5809.2 3802-4122.3" stroke="#000" stroke-width="35.188" fill="none"/>
+  <path id="path10166" marker-end="url(#Arrow1Mend)" d="m16506 10104 2299-2539.3" stroke="#000" stroke-width="22.576" fill="none"/>
+ </g>
+</svg>

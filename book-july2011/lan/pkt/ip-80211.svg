@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg"     xmlns:xlink="http://www.w3.org/1999/xlink"><text style="font-size:14px; font-family:Courier; " y="0" x="0" xml:space='preserve' ><tspan x="0"> </tspan> <tspan x="0" dy="18">
+</tspan> <tspan x="0" dy="18">    0                   1                   2                   3
+</tspan> <tspan x="0" dy="18">    0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+</tspan> <tspan x="0" dy="18">   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+            
+</tspan> <tspan x="0" dy="18">   |                                                               |
+</tspan> <tspan x="0" dy="18">   ~                        802.11 header                          ~
+</tspan> <tspan x="0" dy="18">   |                                                               |     
+</tspan> <tspan x="0" dy="18">   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+</tspan> <tspan x="0" dy="18">   |  SNAP/DSAP    |   SNAP/SSAP   |     Control   |  RFC 1042     |
+</tspan> <tspan x="0" dy="18">   |    0xAA       |     0xAA      |       0x03    |     0x00      |    
+</tspan> <tspan x="0" dy="18">   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+</tspan> <tspan x="0" dy="18">   |              Type             |                               |
+</tspan> <tspan x="0" dy="18">   |              0x800            |                               |
+</tspan> <tspan x="0" dy="18">   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+                               |
+</tspan> <tspan x="0" dy="18">   |                                                               |
+</tspan> <tspan x="0" dy="18">   ~                                         IP packet             ~
+</tspan> <tspan x="0" dy="18">   |                                                               |
+</tspan> <tspan x="0" dy="18">   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+</tspan> <tspan x="0" dy="18">   |                    32 bits         CRC                        |    
+</tspan> <tspan x="0" dy="18">   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+</tspan> <tspan x="0" dy="18">
+</tspan></text> </svg>
