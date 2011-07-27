@@ -52,7 +52,7 @@
 
 .. _xorp: http://www.xorp.org
 
-.. _quagga: http://www.quagga.org
+.. _quagga: http://www.quagga.net
 
 .. _uIP: http://www.sics.se/~adam/uip/index.php/Main_Page
 
@@ -174,7 +174,7 @@
 
 .. _facebook: http://www.facebook.com
 
-.. _akamai: http://www.akamai.net
+.. _akamai: http://www.akamai.com
 
 .. _sprint: https://www.sprint.net/
 
@@ -248,7 +248,7 @@
 
 .. _inkscape: http://www.inkscape.org 
 
-.. _email clients: http://en.wikipedia.org/wiki/Comparison_of_email_client
+.. _email clients: http://en.wikipedia.org/wiki/Comparison_of_email_clients
 
 .. _ISP: http://en.wikipedia.org/wiki/Internet_service_provider
 

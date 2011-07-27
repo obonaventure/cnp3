@@ -11,14 +11,15 @@ then
 
    W=`${INKSCAPE} -W ${1}`
    H=`${INKSCAPE} -H ${1}`
-
+   
 #   ${INKSCAPE} ${1} --export-area-drawing --export-area-snap --export-dpi=30  --export-png=${DIRNAME}/${BASENAME}.png
 #   FILESIZE=`stat -f %z ${DIRNAME}/${BASENAME}.png`
 #   if [ ${FILESIZE} -ge 100000 ]
 #   then
        
-       NEWH=`echo "600*${H}/${W}" | bc -lq` 
-       ${INKSCAPE} ${1} --export-area-drawing --export-area-snap --export-width=600 --export-height=${NEWH} --export-png=${DIRNAME}/${BASENAME}.png
+       NEWH=`echo "1200*${H}/${W}" | bc -lq` 
+       ${INKSCAPE} ${1} --export-area-drawing --export-area-snap --export-width=1200 --export-height=${NEWH} --export-png=${DIRNAME}/${BASENAME}.png
+   #    ${INKSCAPE} ${1} --export-area-drawing --export-area-snap --export-png=${DIRNAME}/${BASENAME}.png
  #  fi
    
 else
