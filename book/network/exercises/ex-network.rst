@@ -15,7 +15,7 @@ Principles
 
 1. Routing protocols used in data networks only use positive link weights. What would happen with a distance vector routing protocol in the network below that contains a negative link weight ?
 
- .. figure:: svg/ex-simple.png 
+ .. figure:: svg/ex-simple.png
     :align: center 
     :scale: 50 
 
