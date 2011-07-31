@@ -9,7 +9,7 @@ Networked applications are built on top of the transport service. As explained i
  - the `connectionless` or `datagram` service
  - the `connection-oriented` or `byte-stream` service
 
-The connectionless service allows applications to easily exchange messages or Service Data Units. On the Internet, this service is provided by the UDP protocol  that will be explained in the next chapter. The connectionless transport service on the Internet is unreliable but is able to detect transmission errors. This implies that an application will not receive an SDU that has been corrupted due to transmission errors. 
+The connectionless service allows applications to easily exchange messages or Service Data Units. On the Internet, this service is provided by the UDP protocol that will be explained in the next chapter. The connectionless transport service on the Internet is unreliable, but is able to detect transmission errors. This implies that an application will not receive an SDU that has been corrupted due to transmission errors. 
 
 The connectionless transport service allows networked application to exchange messages. Several networked applications may be running at the same time on a single host. Each of these applications must be able to exchange SDUs with remote applications. To enable these exchanges of SDUs, each networked application running on a host is identified by the following information :
 
