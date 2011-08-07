@@ -1,4 +1,4 @@
-# A too simple HTTP server
+# An extremely simple HTTP server
 
 import socket, sys, time
 
