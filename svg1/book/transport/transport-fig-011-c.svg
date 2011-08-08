@@ -24,7 +24,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -24257,323 +24257,323 @@
     </font>
   </defs>
   <g
-     id="g92893">
+     style="fill-rule:evenodd;visibility:visible"
+     id="g90665"
+     transform="translate(-13642.404,-10468.95)">
+    <desc
+       id="desc90667">Drawing</desc>
     <g
-       transform="translate(-13644.309,-10454.664)"
-       id="g90665"
-       style="fill-rule:evenodd;visibility:visible">
-      <desc
-         id="desc90667">Drawing</desc>
+       id="g90669">
       <g
-         id="g90669">
+         id="g90671"
+         style="fill:none;stroke:none">
+        <rect
+           id="rect90673"
+           height="17174"
+           width="27289"
+           y="3832"
+           x="714" />
+      </g>
+      <g
+         id="g90675">
         <g
-           style="fill:none;stroke:none"
-           id="g90671">
-          <rect
-             x="714"
-             y="3832"
-             width="27289"
-             height="17174"
-             id="rect90673" />
+           id="g90677"
+           style="font-size:846px;font-weight:400;font-family:Helvetica embedded">
+          <g
+             id="g90679"
+             style="fill:none;stroke:none">
+            <text
+               id="text90681">
+              <tspan
+                 id="tspan90683"
+                 y="4520"
+                 x="912">l</tspan>
+            </text>
+          </g>
         </g>
         <g
-           id="g90675">
+           id="g90685"
+           style="font-size:1129px;font-weight:400;font-family:Helvetica embedded">
           <g
-             style="font-size:846px;font-weight:400;font-family:Helvetica embedded"
-             id="g90677">
-            <g
-               style="fill:none;stroke:none"
-               id="g90679">
-              <text
-                 id="text90681">
-                <tspan
-                   x="912"
-                   y="4520"
-                   id="tspan90683">l</tspan>
-              </text>
-            </g>
+             id="g90687"
+             style="fill:none;stroke:none">
+            <text
+               id="text90689">
+              <tspan
+                 id="tspan90691"
+                 y="4744"
+                 x="2111 2865 3241 3491 4118 4685 4935 5561 5811">Principle</tspan>
+            </text>
           </g>
+        </g>
+        <g
+           id="g90693"
+           style="font-size:741px;font-weight:400;font-family:Helvetica embedded">
           <g
-             style="font-size:1129px;font-weight:400;font-family:Helvetica embedded"
-             id="g90685">
-            <g
-               style="fill:none;stroke:none"
-               id="g90687">
-              <text
-                 id="text90689">
-                <tspan
-                   x="2111 2865 3241 3491 4118 4685 4935 5561 5811"
-                   y="4744"
-                   id="tspan90691">Principle</tspan>
-              </text>
-            </g>
+             id="g90695"
+             style="fill:none;stroke:none">
+            <text
+               id="text90697">
+              <tspan
+                 id="tspan90699"
+                 y="5571"
+                 x="1710">l</tspan>
+            </text>
           </g>
+        </g>
+        <g
+           id="g90701"
+           style="font-size:988px;font-weight:400;font-family:Helvetica embedded">
           <g
-             style="font-size:741px;font-weight:400;font-family:Helvetica embedded"
-             id="g90693">
-            <g
-               style="fill:none;stroke:none"
-               id="g90695">
-              <text
-                 id="text90697">
-                <tspan
-                   x="1710"
-                   y="5571"
-                   id="tspan90699">l</tspan>
-              </text>
-            </g>
+             id="g90703"
+             style="fill:none;stroke:none">
+            <text
+               id="text90705">
+              <tspan
+                 id="tspan90707"
+                 y="5767"
+                 x="2910 3570 4117 4667 5217 5768 6098 6369 6864 7414 7965 8515 9006 9281 9832 10107 10327 10543 11038 11313 11588 12139 12410 12685 13235 13455 13675 13951 14221 14772 15322 15597 16093 16639 17189 18015 18561 19111 19386 19881 20157 20428 20978 21528 21803 22079 22299 22570 22845 23065 23560 23835 24381 24602 24822 25372 26083 26634 27184">Sender keeps a list of all the segments that it is allowed</tspan>
+            </text>
+            <text
+               id="text90709">
+              <tspan
+                 id="tspan90711"
+                 y="6762"
+                 x="2910 3185 3736 4006 4502 5052 5602">to send</tspan>
+            </text>
           </g>
+        </g>
+        <g
+           id="g90713"
+           style="font-size:635px;font-weight:400;font-family:Helvetica embedded">
           <g
-             style="font-size:988px;font-weight:400;font-family:Helvetica embedded"
-             id="g90701">
-            <g
-               style="fill:none;stroke:none"
-               id="g90703">
-              <text
-                 id="text90705">
-                <tspan
-                   x="2910 3570 4117 4667 5217 5768 6098 6369 6864 7414 7965 8515 9006 9281 9832 10107 10327 10543 11038 11313 11588 12139 12410 12685 13235 13455 13675 13951 14221 14772 15322 15597 16093 16639 17189 18015 18561 19111 19386 19881 20157 20428 20978 21528 21803 22079 22299 22570 22845 23065 23560 23835 24381 24602 24822 25372 26083 26634 27184"
-                   y="5767"
-                   id="tspan90707">Sender keeps a list of all the segments that it is allowed</tspan>
-              </text>
-              <text
-                 id="text90709">
-                <tspan
-                   x="2910 3185 3736 4006 4502 5052 5602"
-                   y="6762"
-                   id="tspan90711">to send</tspan>
-              </text>
-            </g>
+             id="g90715"
+             style="fill:none;stroke:none">
+            <text
+               id="text90717">
+              <tspan
+                 id="tspan90719"
+                 y="7475"
+                 x="2513">u</tspan>
+            </text>
           </g>
+        </g>
+        <g
+           id="g90721"
+           style="font-size:847px;font-weight:400;font-family:Courier embedded">
           <g
-             style="font-size:635px;font-weight:400;font-family:Helvetica embedded"
-             id="g90713">
-            <g
-               style="fill:none;stroke:none"
-               id="g90715">
-              <text
-                 id="text90717">
-                <tspan
-                   x="2513"
-                   y="7475"
-                   id="tspan90719">u</tspan>
-              </text>
-            </g>
+             id="g90723"
+             style="fill:none;stroke:none">
+            <text
+               id="text90725">
+              <tspan
+                 id="tspan90727"
+                 y="7643"
+                 x="3712 4220 4728 5236 5744 6252 6760 7268 7780 8288 8796 9304 9812 10320">sending_window</tspan>
+            </text>
           </g>
+        </g>
+        <g
+           id="g90729"
+           style="font-size:741px;font-weight:400;font-family:Helvetica embedded">
           <g
-             style="font-size:847px;font-weight:400;font-family:Courier embedded"
-             id="g90721">
-            <g
-               style="fill:none;stroke:none"
-               id="g90723">
-              <text
-                 id="text90725">
-                <tspan
-                   x="3712 4220 4728 5236 5744 6252 6760 7268 7780 8288 8796 9304 9812 10320"
-                   y="7643"
-                   id="tspan90727">sending_window</tspan>
-              </text>
-            </g>
+             id="g90731"
+             style="fill:none;stroke:none">
+            <text
+               id="text90733">
+              <tspan
+                 id="tspan90735"
+                 y="12679"
+                 x="1710">l</tspan>
+            </text>
           </g>
+        </g>
+        <g
+           id="g90737"
+           style="font-size:988px;font-weight:400;font-family:Helvetica embedded">
           <g
-             style="font-size:741px;font-weight:400;font-family:Helvetica embedded"
-             id="g90729">
-            <g
-               style="fill:none;stroke:none"
-               id="g90731">
-              <text
-                 id="text90733">
-                <tspan
-                   x="1710"
-                   y="12679"
-                   id="tspan90735">l</tspan>
-              </text>
-            </g>
+             id="g90739"
+             style="fill:none;stroke:none">
+            <text
+               id="text90741">
+              <tspan
+                 id="tspan90743"
+                 y="12875"
+                 x="2910 3625 4172 4667 5217 5437 5928 6479 6809 7084 7634 7850 8346 8896 9171 9992 10543 10763 11313 11584 12134 12355 12905 13400 13671 14221 14497 14827 15377 15868 16419 16639 17134 17350 17900 18451 18726 19437 19657 20207 20758 21308 22019 22294 23010 23226 23501 24051 24326 24602 25152 25698 25973 26193 26413 26909 27180">Receiver also maintains a receiving window with the list</tspan>
+            </text>
+            <text
+               id="text90745">
+              <tspan
+                 id="tspan90747"
+                 y="13870"
+                 x="2910 3460 3736 4006 4557 5052 5547 6093 6644 6919 7469 8020 8240 8786 9061 9556 10107 10653 11203 11753 12304 12799 13345 13620 14171 14721 15542 16093 16643">of acceptable sequence number</tspan>
+            </text>
           </g>
+        </g>
+        <g
+           id="g90749"
+           style="font-size:635px;font-weight:400;font-family:Helvetica embedded">
           <g
-             style="font-size:988px;font-weight:400;font-family:Helvetica embedded"
-             id="g90737">
-            <g
-               style="fill:none;stroke:none"
-               id="g90739">
-              <text
-                 id="text90741">
-                <tspan
-                   x="2910 3625 4172 4667 5217 5437 5928 6479 6809 7084 7634 7850 8346 8896 9171 9992 10543 10763 11313 11584 12134 12355 12905 13400 13671 14221 14497 14827 15377 15868 16419 16639 17134 17350 17900 18451 18726 19437 19657 20207 20758 21308 22019 22294 23010 23226 23501 24051 24326 24602 25152 25698 25973 26193 26413 26909 27180"
-                   y="12875"
-                   id="tspan90743">Receiver also maintains a receiving window with the list</tspan>
-              </text>
-              <text
-                 id="text90745">
-                <tspan
-                   x="2910 3460 3736 4006 4557 5052 5547 6093 6644 6919 7469 8020 8240 8786 9061 9556 10107 10653 11203 11753 12304 12799 13345 13620 14171 14721 15542 16093 16643"
-                   y="13870"
-                   id="tspan90747">of acceptable sequence number</tspan>
-              </text>
-            </g>
+             id="g90751"
+             style="fill:none;stroke:none">
+            <text
+               id="text90753">
+              <tspan
+                 id="tspan90755"
+                 y="14583"
+                 x="2513">u</tspan>
+            </text>
           </g>
+        </g>
+        <g
+           id="g90757"
+           style="font-size:847px;font-weight:400;font-family:Helvetica embedded">
           <g
-             style="font-size:635px;font-weight:400;font-family:Helvetica embedded"
-             id="g90749">
-            <g
-               style="fill:none;stroke:none"
-               id="g90751">
-              <text
-                 id="text90753">
-                <tspan
-                   x="2513"
-                   y="14583"
-                   id="tspan90755">u</tspan>
-              </text>
-            </g>
+             id="g90759"
+             style="fill:none;stroke:none">
+            <text
+               id="text90761">
+              <tspan
+                 id="tspan90763"
+                 y="14751"
+                 x="3712 3996 4466 4889 5359 5549 5973 6159 6629 7103 7573 8182 8373 8843 9313 9787">receiving_window</tspan>
+            </text>
           </g>
+        </g>
+        <g
+           id="g90765"
+           style="font-size:741px;font-weight:400;font-family:Helvetica embedded">
           <g
-             style="font-size:847px;font-weight:400;font-family:Helvetica embedded"
-             id="g90757">
-            <g
-               style="fill:none;stroke:none"
-               id="g90759">
-              <text
-                 id="text90761">
-                <tspan
-                   x="3712 3996 4466 4889 5359 5549 5973 6159 6629 7103 7573 8182 8373 8843 9313 9787"
-                   y="14751"
-                   id="tspan90763">receiving_window</tspan>
-              </text>
-            </g>
+             id="g90767"
+             style="fill:none;stroke:none">
+            <text
+               id="text90769">
+              <tspan
+                 id="tspan90771"
+                 y="16375"
+                 x="1710">l</tspan>
+            </text>
           </g>
+        </g>
+        <g
+           id="g90773"
+           style="font-size:988px;font-weight:400;font-family:Helvetica embedded">
           <g
-             style="font-size:741px;font-weight:400;font-family:Helvetica embedded"
-             id="g90765">
-            <g
-               style="fill:none;stroke:none"
-               id="g90767">
-              <text
-                 id="text90769">
-                <tspan
-                   x="1710"
-                   y="16375"
-                   id="tspan90771">l</tspan>
-              </text>
-            </g>
+             id="g90775"
+             style="fill:none;stroke:none">
+            <text
+               id="text90777">
+              <tspan
+                 id="tspan90779"
+                 y="16571"
+                 x="2910 3570 4117 4667 5217 5768 6098 6369 6919 7469 8020 8295 8621 9171 9666 10217 10437 10928 11478 11808 12084 12905 13455 13946 14221 14497 15047 15542 16088 16364 16859 17409 18230 18781 19331 19606 19822 20373 20593 21143 21418 22129 22349 22900 23450 24000 24712">Sender and receiver must use compatible windows</tspan>
+            </text>
           </g>
+        </g>
+        <g
+           id="g90781"
+           style="font-size:635px;font-weight:400;font-family:Helvetica embedded">
           <g
-             style="font-size:988px;font-weight:400;font-family:Helvetica embedded"
-             id="g90773">
-            <g
-               style="fill:none;stroke:none"
-               id="g90775">
-              <text
-                 id="text90777">
-                <tspan
-                   x="2910 3570 4117 4667 5217 5768 6098 6369 6919 7469 8020 8295 8621 9171 9666 10217 10437 10928 11478 11808 12084 12905 13455 13946 14221 14497 15047 15542 16088 16364 16859 17409 18230 18781 19331 19606 19822 20373 20593 21143 21418 22129 22349 22900 23450 24000 24712"
-                   y="16571"
-                   id="tspan90779">Sender and receiver must use compatible windows</tspan>
-              </text>
-            </g>
+             id="g90783"
+             style="fill:none;stroke:none">
+            <text
+               id="text90785">
+              <tspan
+                 id="tspan90787"
+                 y="17284"
+                 x="2513">u</tspan>
+            </text>
           </g>
+        </g>
+        <g
+           id="g90789"
+           style="font-size:847px;font-weight:400;font-family:Helvetica embedded">
           <g
-             style="font-size:635px;font-weight:400;font-family:Helvetica embedded"
-             id="g90781">
-            <g
-               style="fill:none;stroke:none"
-               id="g90783">
-              <text
-                 id="text90785">
-                <tspan
-                   x="2513"
-                   y="17284"
-                   id="tspan90787">u</tspan>
-              </text>
-            </g>
+             id="g90791"
+             style="fill:none;stroke:none">
+            <text
+               id="text90793">
+              <tspan
+                 id="tspan90795"
+                 y="17452"
+                 x="3712 4135 4605 5079 5549 5736 6210 6680 7149 7763 7950 8419 8894 9364 9973">sending_window</tspan>
+            </text>
           </g>
+        </g>
+        <g
+           id="g90797"
+           style="font-size:847px;font-weight:400;font-family:Symbol embedded">
           <g
-             style="font-size:847px;font-weight:400;font-family:Helvetica embedded"
-             id="g90789">
-            <g
-               style="fill:none;stroke:none"
-               id="g90791">
-              <text
-                 id="text90793">
-                <tspan
-                   x="3712 4135 4605 5079 5549 5736 6210 6680 7149 7763 7950 8419 8894 9364 9973"
-                   y="17452"
-                   id="tspan90795">sending_window</tspan>
-              </text>
-            </g>
+             id="g90799"
+             style="fill:none;stroke:none">
+            <text
+               id="text90801">
+              <tspan
+                 id="tspan90803"
+                 y="17452"
+                 x="10210 10676">≤</tspan>
+            </text>
           </g>
+        </g>
+        <g
+           id="g90805"
+           style="font-size:847px;font-weight:400;font-family:Helvetica embedded">
           <g
-             style="font-size:847px;font-weight:400;font-family:Symbol embedded"
-             id="g90797">
-            <g
-               style="fill:none;stroke:none"
-               id="g90799">
-              <text
-                 id="text90801">
-                <tspan
-                   x="10210 10676"
-                   y="17452"
-                   id="tspan90803">≤</tspan>
-              </text>
-            </g>
+             id="g90807"
+             style="fill:none;stroke:none">
+            <text
+               id="text90809">
+              <tspan
+                 id="tspan90811"
+                 y="17452"
+                 x="10938 11222 11692 12115 12585 12775 13199 13385 13855 14329 14562 15176 15362 15836 16306 16776">receiving window</tspan>
+            </text>
           </g>
+        </g>
+        <g
+           id="g90813"
+           style="font-size:529px;font-weight:400;font-family:Helvetica embedded">
           <g
-             style="font-size:847px;font-weight:400;font-family:Helvetica embedded"
-             id="g90805">
-            <g
-               style="fill:none;stroke:none"
-               id="g90807">
-              <text
-                 id="text90809">
-                <tspan
-                   x="10938 11222 11692 12115 12585 12775 13199 13385 13855 14329 14562 15176 15362 15836 16306 16776"
-                   y="17452"
-                   id="tspan90811">receiving window</tspan>
-              </text>
-            </g>
+             id="g90815"
+             style="fill:none;stroke:none">
+            <text
+               id="text90817">
+              <tspan
+                 id="tspan90819"
+                 y="18050"
+                 x="3311">u</tspan>
+            </text>
           </g>
+        </g>
+        <g
+           id="g90821"
+           style="font-size:706px;font-weight:400;font-family:Helvetica embedded">
           <g
-             style="font-size:529px;font-weight:400;font-family:Helvetica embedded"
-             id="g90813">
-            <g
-               style="fill:none;stroke:none"
-               id="g90815">
-              <text
-                 id="text90817">
-                <tspan
-                   x="3311"
-                   y="18050"
-                   id="tspan90819">u</tspan>
-              </text>
-            </g>
-          </g>
-          <g
-             style="font-size:706px;font-weight:400;font-family:Helvetica embedded"
-             id="g90821">
-            <g
-               style="fill:none;stroke:none"
-               id="g90823">
-              <text
-                 id="text90825">
-                <tspan
-                   x="4510 4942 5336 5568 5763 6157 6512 6902 7490 7884 8041 8434 8629 8828 9336 9493 9886 10280 10670 11182 11376 11728 11884 12240 12634 12829 12985 13337 13535 13925 14124 14475 14869 15263 15614 15809 16202 16596 16791 16990 17185 17578 17811 18010 18400 18599 18988 19145 19500 19894 20283 20482 20872 21109 21503 21697 22091 22442 22836 22993 23187 23581 23818 24013 24407 24796 25190 25584 25778 25935 26329 26523 26917 27311"
-                   y="18191"
-                   id="tspan90827">For example, window size is a constant for a given protocol or negotiated</tspan>
-              </text>
-              <text
-                 id="text90829">
-                <tspan
-                   x="4510 4904 5297 5530 5687 6081 6474 6669 7020 7414 7808 8201 8591 8947 9141 9298 9692 10085 10280 10674 11025 11220 11614 12007 12164 12321 12672 13066 13654 14048 14441 14636 14831 15225 15618 16008 16363"
-                   y="18902"
-                   id="tspan90831">during connection establishment phase</tspan>
-              </text>
-            </g>
+             id="g90823"
+             style="fill:none;stroke:none">
+            <text
+               id="text90825">
+              <tspan
+                 id="tspan90827"
+                 y="18191"
+                 x="4510 4942 5336 5568 5763 6157 6512 6902 7490 7884 8041 8434 8629 8828 9336 9493 9886 10280 10670 11182 11376 11728 11884 12240 12634 12829 12985 13337 13535 13925 14124 14475 14869 15263 15614 15809 16202 16596 16791 16990 17185 17578 17811 18010 18400 18599 18988 19145 19500 19894 20283 20482 20872 21109 21503 21697 22091 22442 22836 22993 23187 23581 23818 24013 24407 24796 25190 25584 25778 25935 26329 26523 26917 27311">For example, window size is a constant for a given protocol or negotiated</tspan>
+            </text>
+            <text
+               id="text90829">
+              <tspan
+                 id="tspan90831"
+                 y="18902"
+                 x="4510 4904 5297 5530 5687 6081 6474 6669 7020 7414 7808 8201 8591 8947 9141 9298 9692 10085 10280 10674 11025 11220 11614 12007 12164 12321 12672 13066 13654 14048 14441 14636 14831 15225 15618 16008 16363">during connection establishment phase</tspan>
+            </text>
           </g>
         </g>
       </g>
     </g>
+  </g>
+  <g
+     id="g9266">
     <g
-       transform="matrix(0.01752932,0,0,0.01063881,-52.093142,-34.335343)"
+       transform="matrix(0.01752932,0,0,0.01063881,-50.18838,-48.621057)"
        id="g90833"
        style="fill-rule:evenodd;visibility:visible">
       <desc
@@ -24670,7 +24670,7 @@
       </g>
     </g>
     <g
-       transform="matrix(0.01625625,0,0,0.01063881,-36.361809,-34.335343)"
+       transform="matrix(0.01625625,0,0,0.01063881,-34.457047,-48.621057)"
        id="g90885"
        style="fill-rule:evenodd;visibility:visible">
       <desc
@@ -24701,7 +24701,7 @@
       </g>
     </g>
     <g
-       transform="matrix(0.01752932,0,0,0.01063881,-52.093142,-34.335343)"
+       transform="matrix(0.01752932,0,0,0.01063881,-50.18838,-48.621057)"
        id="g90967"
        style="fill-rule:evenodd;visibility:visible">
       <desc
@@ -24734,7 +24734,7 @@
       </g>
     </g>
     <g
-       transform="matrix(0.01752932,0,0,0.01063881,-52.093142,-34.335343)"
+       transform="matrix(0.01752932,0,0,0.01063881,-50.18838,-48.621057)"
        id="g90985"
        style="fill-rule:evenodd;visibility:visible">
       <desc
@@ -24767,7 +24767,7 @@
       </g>
     </g>
     <g
-       transform="matrix(0.01752932,0,0,0.01063881,-52.093142,-34.335343)"
+       transform="matrix(0.01752932,0,0,0.01063881,-50.18838,-48.621057)"
        id="g91003"
        style="fill-rule:evenodd;visibility:visible">
       <desc
@@ -24796,7 +24796,7 @@
       </g>
     </g>
     <g
-       transform="matrix(0.01752932,0,0,0.01063881,-52.093142,-34.335343)"
+       transform="matrix(0.01752932,0,0,0.01063881,-50.18838,-48.621057)"
        id="g91035"
        style="fill-rule:evenodd;visibility:visible">
       <desc
@@ -24825,7 +24825,7 @@
       </g>
     </g>
     <g
-       transform="matrix(0.01752932,0,0,0.01063881,-52.093142,-34.335343)"
+       transform="matrix(0.01752932,0,0,0.01063881,-50.18838,-48.621057)"
        id="g91051"
        style="fill-rule:evenodd;visibility:visible">
       <desc
@@ -24854,7 +24854,7 @@
       </g>
     </g>
     <g
-       transform="matrix(0.01752932,0,0,0.01063881,-52.093142,-34.335343)"
+       transform="matrix(0.01752932,0,0,0.01063881,-50.18838,-48.621057)"
        id="g91067"
        style="fill-rule:evenodd;visibility:visible">
       <desc
@@ -24883,7 +24883,7 @@
       </g>
     </g>
     <g
-       transform="matrix(0.01752932,0,0,0.01063881,-52.093142,-34.335343)"
+       transform="matrix(0.01752932,0,0,0.01063881,-50.18838,-48.621057)"
        id="g91105"
        style="fill-rule:evenodd;visibility:visible">
       <desc
@@ -24915,14 +24915,14 @@
        transform="scale(1.125249,0.88869219)"
        sodipodi:linespacing="120%"
        id="text92307"
-       y="76.479012"
-       x="49.639721"
+       y="60.404026"
+       x="51.332466"
        style="font-size:12.44169044px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:120.00000477%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:FreeSans;-inkscape-font-specification:FreeSans Bold"
        xml:space="preserve"><tspan
          dx="-0.079982296"
          style="line-height:119.00000572%;word-spacing:-0.03554768px"
-         y="76.479012"
-         x="49.639721"
+         y="60.404026"
+         x="51.332466"
          id="tspan92309"
          sodipodi:role="line"><tspan
    id="tspan92411"
@@ -24934,51 +24934,51 @@
     <text
        sodipodi:linespacing="125%"
        id="text92417"
-       y="90.285553"
-       x="6.3178568"
+       y="75.99984"
+       x="8.2226191"
        style="font-size:12px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#0000ff;fill-opacity:1;stroke:none;font-family:FreeSans;-inkscape-font-specification:FreeSans Bold"
        xml:space="preserve"><tspan
-         y="90.285553"
-         x="6.3178568"
+         y="75.99984"
+         x="8.2226191"
          id="tspan92419"
          sodipodi:role="line">Acked segments</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text92421"
-       y="114.0472"
-       x="38.801411"
+       y="99.76149"
+       x="40.706173"
        style="font-size:12px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ff0000;fill-opacity:1;stroke:none;font-family:FreeSans;-inkscape-font-specification:FreeSans Bold"
        xml:space="preserve"><tspan
-         y="114.0472"
-         x="38.801411"
+         y="99.76149"
+         x="40.706173"
          id="tspan92423"
          sodipodi:role="line">Unacknowledged segments</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text92425"
-       y="90.23938"
-       x="169.25706"
+       y="75.953667"
+       x="171.16182"
        style="font-size:12px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#008000;fill-opacity:1;stroke:none;font-family:FreeSans;-inkscape-font-specification:FreeSans Bold"
        xml:space="preserve"><tspan
-         y="90.23938"
-         x="169.25706"
+         y="75.953667"
+         x="171.16182"
          id="tspan92427"
          sodipodi:role="line">Available seq. nums</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text92429"
-       y="88.442337"
-       x="285.78098"
+       y="74.156624"
+       x="287.68573"
        style="font-size:12px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:FreeSans;-inkscape-font-specification:FreeSans Bold"
        xml:space="preserve"><tspan
-         y="88.442337"
-         x="285.78098"
+         y="74.156624"
+         x="287.68573"
          id="tspan92431"
          sodipodi:role="line">Forbidden seq. num.</tspan></text>
     <path
        inkscape:connector-curvature="0"
        id="path92655"
-       d="M 145.71428,75.714286 120,102.38095"
+       d="M 147.61904,61.428572 121.90476,88.095236"
        style="fill:none;stroke:#ef171f;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:0.95555558;marker-end:url(#TriangleOutM-05)" />
   </g>
 </svg>
