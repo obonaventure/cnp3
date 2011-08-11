@@ -1,7 +1,7 @@
 
 
 
-This set of question covers several application layer protocols. We expect that each group will distribute the questions among the different members of the group. The best solution is to have two answers from different students for each question. This would allow a discussion during the synthesis phases if the students disagree. Most questions require some thinking and to do some manipulations with simple networking tools or read information that is available on the web. Given the size of the groups, we do not expect that a student would spend more than 3 hours answering his/her allocated questions.
+This set of questions covers several application layer protocols. We expect each group to distribute the questions among its different members. The best solution is to have two answers from different students for each question. This would facilitate discussion during the synthesis phases if students disagree. Most questions require some thinking and some manipulation of simple networking tools, or reading information available on the web. Given the size of the groups, we do not expect any student to spend more than 3 hours answering his/her allocated questions.
 
 
 The Domain Name System
@@ -9,7 +9,7 @@ The Domain Name System
 
 The Domain Name System (DNS) plays a key role in the Internet today as it allows
  applications to use fully qualified domain names (FQDN) instead of IPv4 or IPv6
- addresses. Many tools allow to perform queries through DNS servers. For this ex
+ addresses. Many tools enable queries through DNS servers. For this ex
 ercise, we will use dig_ which is installed on most Unix systems. 
 
 A typical usage of dig is as follows :: 
