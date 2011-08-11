@@ -9,7 +9,7 @@ This section contains several exercises and small challenges about the applicati
 The Domain Name System
 ======================
 
-The Domain Name System (DNS) plays a key role in the Internet today as it allows applications to use fully qualified domain names (FQDN) instead of IPv4 or IPv6 addresses. Many tools allow to perform queries through DNS servers. For this exercise, we will use dig_ which is installed on most Unix systems. 
+The Domain Name System (DNS) plays a key role in the Internet today as it allows applications to use fully qualified domain names (FQDN) instead of IPv4 or IPv6 addresses. Many tools enable queries through DNS servers. For this exercise, we will use dig_ which is installed on most Unix systems. 
 
 A typical usage of dig is as follows 
 
