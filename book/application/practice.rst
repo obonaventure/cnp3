@@ -13,7 +13,7 @@ Contents:
 The application layer
 =====================
 
-This set of question covers several application layer protocols. We expect that each group will organise itself to find detailed answers to all these questions.
+This set of questions covers several application layer protocols. We expect each group to organise themselves appropriately in order to provide detailed answers to every question.
 
 
 The Domain Name System
@@ -21,8 +21,8 @@ The Domain Name System
 
 The Domain Name System (DNS) plays a key role in the Internet today as it allows
  applications to use fully qualified domain names (FQDN) instead of IPv4 or IPv6
- addresses. Many tools allow to perform queries through DNS servers. For this ex
-ercise, we will use dig_ which is installed on most Unix systems. 
+ addresses. Many tools enable queries through DNS servers. For this ex
+ercise, we will use dig_ ,which is installed on most Unix systems. 
 
 A typical usage of dig is as follows :: 
 
@@ -43,7 +43,7 @@ where
 
 #. What are the nameservers that are responsible for the `be` top-level domain ? Where are they located ? Is it possible to use IPv6 to query them ?
 
-#. When run without any parameter, `dig` queries one of the root DNS servers and retrieves the list of the the name of all DNS servers. For technical reasons, there are only 13 different root DNS servers. This information is also available as a text file from http://www.internic.net/zones/named.root What are the IPv4 addresses of all these servers. Do they all support IPv6 [#rs]_ ? 
+#. When run without any parameter, `dig` queries one of the root DNS servers and retrieves the list of names of all DNS servers. For technical reasons, there are only 13 different root DNS servers. This information is also available as a text file from http://www.internic.net/zones/named.root What are the IPv4 addresses of all these servers. Do they all support IPv6 [#rs]_ ? 
 
 #. Assume now that you are residing in a network where there is no DNS resolver and that you need to start your query from the DNS root.
 
@@ -80,15 +80,15 @@ where
      - sends DNS requests containing identifiers that are incremented by one after each request
      - sends DNS requests containing random identifiers
 
-#. The DNS protocol can run over UDP and over TCP. Most DNS servers prefer to use UDP because it consumes fewer res sources on the server. However, TCP is useful when a large answer is expected or when a large answer must Use `time dig +tcp ` to query a root DNS server. Is it faster to receive an answer via TCP or via UDP ?
+#. The DNS protocol can run over UDP and TCP. Most DNS servers prefer to use UDP because it consumes fewer resources on the server. However, TCP is useful when a large answer is expected or when a large answer must Use `time dig +tcp ` to query a root DNS server. Is it faster to receive an answer via TCP or via UDP ?
 
 
 Internet email protocols
 .........................	
 
-Many Internet protocols are ASCII_-based protocols where the client sends requests as one line of ASCII_ text terminated by `CRLF` and the server replies with one of more lines of ASCII_ text. Using these ASCII messages has several advantages compared to protocols that rely one binary encoded messages
+Many Internet protocols are ASCII_-based protocols where the client sends requests as one line of ASCII_ text terminated by `CRLF`, and the server replies with one of more lines of ASCII_ text. Using these ASCII messages has several advantages compared to protocols that rely on binary encoded messages
 
-   - the messages exchanged by the client and the server can be easily understood by a developer or network engineer by simply reading the messages
+   - the messages exchanged by the client and the server can easily be understood by a developer or network engineer by simply reading the messages
    - it is often easy to write a small prototype that implements a part of the protocol
    - it is possible to test a server manually by using telnet_ Telnet is a protocol that allows to obtain a terminal on a remote server. For this, telnet opens a TCP connection with the remote server on port 23. However, most `telnet` implementations allow the user to specify an alternate port as `telnet hosts port` When used with a port number as parameter, `telnet` opens a TCP connection to the remote host on the specified port. `telnet` can thus be used to test any server using an ASCII-based protocol on top of TCP. Note that if you need to stop a running `telnet` session, Ctrl-C will not work as it will be sent by `telnet`to the remote host over the TCP connection. On many `telnet` implementations you can type `Ctrl-]` to freeze the TCP connection and return to the telnet interface.
 
