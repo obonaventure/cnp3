@@ -110,7 +110,7 @@ Many Internet protocols are ASCII_-based protocols where the client sends reques
 #. A SMTP server is a daemon process that can fail due to a bug or lack of resources (e.g. memory). Network administrators often install tools [#fmonitoring] that regularly connect to their servers to check that they are operating correctly. A simple solution is to open a TCP connection on port 25 to the SMTP server's host [#fblock]. If the connection is established, this implies that there is a processing listening. What is the reply sent by the SMTP server when you type the following command ::
    telnet smtpserver 25
 
-#. Continue the SMTP session that you started above by sending the greetings command (`HELO` followed by the fully qualified domain name of your host) and termine the session by sending the `QUIT` command.
+#. Continue the SMTP session that you started above by sending the greetings command (`EHLO` followed by the fully qualified domain name of your host) and termine the session by sending the `QUIT` command.
 
 #. The minimum SMTP session above allows to verify that the SMTP is running. However, this does not always imply that mail can be delivered. For example, large SMTP servers often use a database to store all the email addresses that they serve. To verify the correct operation of such a server, one possibility is to use the VRFY command. Open an SMTP session on the lab's SMTP server and use this command to verify that your account is active. 
 

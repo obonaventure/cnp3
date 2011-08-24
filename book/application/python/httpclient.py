@@ -34,7 +34,7 @@ for res in socket.getaddrinfo(hostname, port, socket.AF_UNSPEC, socket.SOCK_STRE
         continue
     if s :
         print "Connected to "+sa[0]
-        s.send('GET / HTTP/1.1\nHost:'+hostname+'\n\n')
+        s.send('GET / HTTP/1.1\r\nHost:'+hostname+'\r\n\r\n')
         finished=False
         count=0
         while not finished:

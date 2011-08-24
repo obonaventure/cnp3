@@ -5,7 +5,6 @@
 
 Electronic mail
 ===============
-.. comment:: I don't know if you intentionaly put the word "Email" in every sentence... but it seemed forced, so I changed it a little. Also, the phrase "text messages", reminds me too much of sms messages, so I altered that too... this might be just a personal thing though, technically what was there was perfectly correct.
 
 Electronic mail, or email, is a very popular application in computer networks such as the Internet. Email `appeared <http://openmap.bbn.com/~tomlinso/ray/firstemailframe.html>`_ in the early 1970s and allows users to exchange text based messages. Initially, it was mainly used to exchange short messages, but over the years its usage has grown. It is now not only used to exchange small, but also long messages that can be composed of several parts as we will see later. 
 
@@ -70,9 +69,7 @@ A simple email message containing the `From:`, `To:`, `Subject:` and `Date:` hea
 
 Note the empty line after the `Date:` header line; this empty line contains only the `CR` and `LF` characters, and marks the boundary between the header and the body of the message.
 
-.. comment:: the phrase "optional header line" may want to be cut down a little. But I see the benefit of clarity.
-
-Several other optionnal header lines are defined in :rfc:`5322`, and other optional header lines have been defined elsewhere [#femailheaders]_. Furthermore, many email clients and servers define their own header lines starting from `X-`. Several of the optionnal header lines defined in :rfc:`5322` are worth being discussed here :
+Several other optionnal header lines are defined in :rfc:`5322` and elsewhere [#femailheaders]_. Furthermore, many email clients and servers define their own header lines starting from `X-`. Several of the optionnal header lines defined in :rfc:`5322` are worth being discussed here :
 
  - the `Message-Id:` header line is used to associate a "unique" identifier to each email. Email identifiers are usually structured like `string@domain` where `string` is a unique character string or sequence number chosen by the sender of the email and `domain` the domain name of the sender. Since domain names are unique, a host can generate globally unique message identifiers concatenating a locally unique identifier with its domain name.
  - the `In-reply-to:` is used when a message was created in reply to a previous message. In this case, the end of the `In-reply-to:` line contains the identifier of the original message.
@@ -133,9 +130,8 @@ Inside the email header, the `Content-Type:` header line indicates how the MIME 
 
 To support these two types of MIME messages, the recipient of a message must be able to extract the different parts from the message. In :rfc:`822`, an empty line was used to separate the header lines from the body. Using an empty line to separate the different parts of an email body would be difficult as the body of email messages often contains one or more empty lines. Another possible option would be to define a special line, e.g. `*-LAST_LINE-*` to mark the boundary between two parts of a MIME message. Unfortunately, this is not possible as some emails may contain this string in their body (e.g. emails sent to students to explain the format of MIME messages). To solve this problem, the `Content-Type:` header line contains a second parameter that specifies the string that has been used by the sender of the MIME message to delineate the different parts. In practice, this string is often chosen randomly by the mail client.
 
-.. comment:: Perhaps the second sentence here (below) could be improved...
 
-The email message below, copied from :rfc:`2046` shows a MIME message containing two parts that are both in plain text and encoded using the ASCII character set. Note that the string `simple boundary` is defined in the `Content-Type:` header as the string that marks the boundary between the header and the first part, between the first and the second part and at the end of the message. Another example of MIME messages may be found in :rfc:`2046`.
+The email message below, copied from :rfc:`2046` shows a MIME message containing two parts that are both in plain text and encoded using the ASCII character set. The string `simple boundary` is defined in the `Content-Type:` header as the marker for the boundary between two successive parts. Another example of MIME messages may be found in :rfc:`2046`.
 
 .. code-block:: text
 
@@ -158,8 +154,6 @@ The email message below, copied from :rfc:`2046` shows a MIME message containing
  
  Second part
  --simple boundary
-
-.. comment:: I changed very slightly the first sentence of the explanation for the "application" content type. but maybe you might like to check that it still says what you want it to. 
 
 The `Content-Type:` header can also be used inside a MIME part. In this case, it indicates the type of data placed in this part. Each data type is specified as a type followed by a subtype. A detailed description may be found in :rfc:`2046`. Some of the most popular `Content-Type:` header lines are :
 
@@ -233,8 +227,6 @@ The example below, from :rfc:`4648`, illustrates the `Base64` encoding.
  +----------------+----------------------------------------------------------+
    
 
-.. comment:: I have made the "sequence of bytes" described below singular. You originally had "are" instead of "is", so I'm not sure if you want plural or singular. Minor point.
-
 The last point to be discussed about `base64` is what happens when the length of the sequence of bytes to be encoded is not a multiple of three. In this case, the last group of bytes may contain one or two bytes instead of three. `Base64` reserves the `=` character as a padding character. This character is used twice when the last group contains two bytes and once when it contains one byte as illustrated by the two examples below. 
 
  +----------------+-----------------------+
@@ -281,9 +273,7 @@ The Simple Mail Transfer Protocol
 
 The Simple Mail Transfer Protocol (:term:`SMTP`) defined in :rfc:`5321` is a client-server protocol. The SMTP specification distinguishes between five types of processes involved in the delivery of email messages. Email messages are composed on a Mail User Agent (MUA). The MUA is usually either an email client or a webmail. The MUA sends the email message to a Mail Submission Agent (MSA). The MSA processes the received email and forwards it to the Mail Transmission Agent (MTA). The MTA is responsible for the transmission of the email, directly or via intermediate MTAs to the MTA of the destination domain. This destination MTA will then forward the message to the Mail Delivery Agent (MDA) where it will be accessed by the recipient's MUA. SMTP is used for the interactions between MUA and MSA [#fsmtpauth]_, MSA-MTA and MTA-MTA.
 
-.. comment:: Again I know it is a paragraph about SMTP, but SMTP is said a lot in it...
-
-SMTP is a text-based protocol like many other application-layer protocols on the Internet. It uses the byte-stream service and SMTP servers listen on port `21`. SMTP clients send commands that are each composed of one line of ASCII text terminated by `CR+LF`. SMTP servers reply by sending ASCII lines that contain a three digit numerical error/success code and optional comments.
+SMTP is a text-based protocol like many other application-layer protocols on the Internet. It relies on the byte-stream service. Servers listen on port `21`. Clients send commands that are each composed of one line of ASCII text terminated by `CR+LF`. Servers reply by sending ASCII lines that contain a three digit numerical error/success code and optional comments.
 
 The SMTP protocol, like most text-based protocols, is specified as a :term:`BNF`. The full BNF is defined in :rfc:`5321`. The main SMTP commands are defined by the BNF rules shown in the figure below.
 
@@ -292,7 +282,7 @@ The SMTP protocol, like most text-based protocols, is specified as a :term:`BNF`
 
    BNF specification of the SMTP commands
 
-In this BNF, `atext` corresponds to printable ASCII characters. This BNF rule is defined in :rfc:`5322`. The five main commands are `HELO`, `MAIL FROM:`, `RCPT TO:`, `DATA` and `QUIT`. `Postmaster` is the alias of the system administrator who is responsible for a given domain or SMTP server. All domains must have a `Postmaster` alias.
+In this BNF, `atext` corresponds to printable ASCII characters. This BNF rule is defined in :rfc:`5322`. The five main commands are `EHLO`, `MAIL FROM:`, `RCPT TO:`, `DATA` and `QUIT` [#fehlo]_. `Postmaster` is the alias of the system administrator who is responsible for a given domain or SMTP server. All domains must have a `Postmaster` alias.
 
 The SMTP responses are defined by the BNF shown in the figure below. 
 
@@ -301,9 +291,8 @@ The SMTP responses are defined by the BNF shown in the figure below.
 
    BNF specification of the SMTP responses
 
-.. comment:: I changed some bits here... you might want to review them
 
-SMTP servers use structured reply codes containing three digits and an optional comment. The first digit of the reply code indicates whether the command was successful or not. A reply code of `2xy` indicates that the command has been accepted. A reply code of `3xy` indicates that the command has been accepted, but additional information from the client is expected. A reply code of `4xy` indicates a transient negative reply; this means that for some reason, which is indicated by either the other digits or the comment, the command cannot be processed immediately, but there is some hope that the problem will only be transient. This is basically telling the client to try the same command again later. In contrast, a reply code of `5xy` indicates a permanent failure or error. In this case, it is useless for the client to retry the same command later. Other application layer protocols such as FTP :rfc:`959`  or HTTP :rfc:`2616` use a similar structure for their reply codes. Additional details about the other reply codes may be found in :rfc:`5321`.
+SMTP servers use structured reply codes containing three digits and an optional comment. The first digit of the reply code indicates whether the command was successful or not. A reply code of `2xy` indicates that the command has been accepted. A reply code of `3xy` indicates that the command has been accepted, but additional information from the client is expected. A reply code of `4xy` indicates a transient negative reply. This means that for some reason, which is indicated by either the other digits or the comment, the command cannot be processed immediately, but there is some hope that the problem will only be transient. This is basically telling the client to try the same command again later. In contrast, a reply code of `5xy` indicates a permanent failure or error. In this case, it is useless for the client to retry the same command later. Other application layer protocols such as FTP :rfc:`959`  or HTTP :rfc:`2616` use a similar structure for their reply codes. Additional details about the other reply codes may be found in :rfc:`5321`.
 
 Examples of SMTP reply codes include the following :
 
@@ -325,16 +314,14 @@ Examples of SMTP reply codes include the following :
 
 The first four reply codes correspond to errors in the commands sent by the client. The fourth reply code would be sent by the server when the client sends commands in an incorrect order (e.g. the client tries to send an email before providing the destination address of the message). Reply code `220` is used by the server as the first message when it agrees to interact with the client. Reply code `221` is sent by the server before closing the underlying transport connection. Reply code `421` is returned when there is a problem (e.g. lack of memory/disk resources) that prevents the server from accepting the transport connection. Reply code `250` is the standard positive reply that indicates the success of the previous command. Reply codes `450` and `452` indicate that the destination mailbox is temporarily unavailable, for various reasons, while reply code `550` indicates that the mailbox does not exist or cannot be used for policy reasons. Reply code `354` indicates that the client can start transmitting its email message.
 
-.. comment:: For the final sentence below: "Once the client....", does it mean to say "...has sent all of its email messages", or "... has finished sending all of its email message" ?? The first one indicates that there are multiple messages, while the second indicates that there is only one, but each part of this one message.
-
-The transfer of an email message is performed in three phases. During the first phase, the client opens a transport connection with the server. Once the connection has been established, the client and the server exchange greetings messages (`HELO` command). Most servers insist on receiving valid greeting messages and some of them drop the underlying transport connection if they do not receive a valid greeting. Once the greetings have been exchanged, the email transfer phase can start. During this phase, the client transfers one or more email messages by indicating the email address of the sender (`MAIL FROM:` command), the email address of the recipient (`RCPT TO:` command) followed by the headers and the body of the email message (`DATA` command). Once the client has sent all the email messages to the SMTP server, it terminates the SMTP association (`QUIT` command).
+The transfer of an email message is performed in three phases. During the first phase, the client opens a transport connection with the server. Once the connection has been established, the client and the server exchange greetings messages (`EHLO` command). Most servers insist on receiving valid greeting messages and some of them drop the underlying transport connection if they do not receive a valid greeting. Once the greetings have been exchanged, the email transfer phase can start. During this phase, the client transfers one or more email messages by indicating the email address of the sender (`MAIL FROM:` command), the email address of the recipient (`RCPT TO:` command) followed by the headers and the body of the email message (`DATA` command). Once the client has finished sending all its queued email messages to the SMTP server, it terminates the SMTP association (`QUIT` command).
 
 A successful transfer of an email message is shown below 
 
 .. code-block:: text
 
  S: 220 smtp.example.com ESMTP MTA information
- C: HELO mta.example.org
+ C: EHLO mta.example.org
  S: 250 Hello mta.example.org, glad to meet you
  C: MAIL FROM:<alice@example.org>
  S: 250 Ok
@@ -358,7 +345,7 @@ A successful transfer of an email message is shown below
 
 .. comment:: Suggestion: The following paragraph is quite packed and intense for somebody who is new to this. Perhaps if the part explaining the 3 commands was ordered into some sort of numbered list. Beginning from "To send an email; the client must issue three commands...." Also, the sentence explaining how the MAIL FROM and RCPT TO commands must come before the DATA command, might be a little confusing too. The second part of that sentence: "the latter does not need to come before the former". I personally know what it means, but perhaps it could be "stupidly" clear. I only say so because I'm very aware that non English speakers will read this.
 
-In this example, the MTA running on `mta.example.org` opens a TCP connection to the SMTP server on host `smtp.example.com`. The lines prefixed with `S:` (resp. `C:`) are the responses sent by the server (resp. the commands sent by the client). The server sends its greetings as soon as the TCP connection has been established. The client then sends the `HELO` command with its fully qualified domain name. The server replies with reply-code `250` and sends its greetings. To send an email, the client must issue three commands : `RCPT TO:` which provides the address of the recipient of the email, `MAIL FROM:` which indicates the address of the sender of the email and `DATA` which starts the actual transfer of the email message. The `MAIL FROM:` and `RCPT TO:` must be issued before the `DATA` command, but the latter does not need to be sent before the former. After having received the `354` reply code, the client sends the headers and the body of its email message. The client indicates the end of the message by sending a line containing only the `.` (dot) character [#fdot]_. The server confirms that the email message has been queued for delivery or transmission with a reply code of `250`. The client issues the `QUIT` command to close the session and the server confirms with reply-code `221`, before closing the TCP connection.
+In this example, the MTA running on `mta.example.org` opens a TCP connection to the SMTP server on host `smtp.example.com`. The lines prefixed with `S:` (resp. `C:`) are the responses sent by the server (resp. the commands sent by the client). The server sends its greetings as soon as the TCP connection has been established. The client then sends the `EHLO` command with its fully qualified domain name. The server replies with reply-code `250` and sends its greetings. To send an email, the client must issue three commands : `RCPT TO:` which provides the address of the recipient of the email, `MAIL FROM:` which indicates the address of the sender of the email and `DATA` which starts the actual transfer of the email message. The `MAIL FROM:` and `RCPT TO:` must be issued before the `DATA` command, but the latter does not need to be sent before the former. After having received the `354` reply code, the client sends the headers and the body of its email message. The client indicates the end of the message by sending a line containing only the `.` (dot) character [#fdot]_. The server confirms that the email message has been queued for delivery or transmission with a reply code of `250`. The client issues the `QUIT` command to close the session and the server confirms with reply-code `221`, before closing the TCP connection.
 
 
 .. note:: Open SMTP relays and spam 
@@ -425,6 +412,8 @@ In this example, a POP client contacts a POP server on behalf of the user named 
 .. [#fto] It could be surprising that the `To:` is not mandatory inside an email message. While most email messages will contain this header line an email that does not contain a `To:` header line and that relies on the `bcc:` to specify the recipient is valid as well.
 
 .. [#fsmtpauth] During the last years, many Internet Service Providers, campus and enterprise networks have deployed SMTP extensions :rfc:`4954` on their MSAs. These extensions force the MUAs to be authenticated before the MSA accepts an email message from the MUA. 
+
+.. [#ehlo] The first versions of SMTP used `HELO` as the first command sent by a client to a SMTP server. When SMTP was extended to support newer features such as 8 bits characters, it was necessary to allow a server to recognise whether it was interacting with a client that supported the extensions or not. `EHLO` became mandatory with the publication of :rfc:`2821`.
 
 .. [#fdot] This implies that a valid email message cannot contain a line with one dot followed by `CR` and `LF`. If a user types such a line in an email, his email client will automatically add a space character before or after the dot when sending the message over SMTP.
 

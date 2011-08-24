@@ -5,7 +5,7 @@ import os
 import sys
 import random
 
-MSG="GET / HTTP/1.0\n\n"
+MSG="GET / HTTP/1.0\r\n\r\n"
 
 if len(sys.argv) !=3:
     print "Usage : ",sys.argv[0]," host port"

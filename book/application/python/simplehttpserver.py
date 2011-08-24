@@ -27,15 +27,15 @@ while True:
         data = data+conn.recv(BUFLEN) 
     if data.startswith('GET'):
         # GET request
-        conn.send('HTTP/1.0 404 Not Found\n')
+        conn.send('HTTP/1.0 404 Not Found\r\n')
         # a real server should serve files
     else:
         # other type of HTTP request
-        conn.send('HTTP/1.0 501 Not implemented\n')
+        conn.send('HTTP/1.0 501 Not implemented\r\n')
 
     now = time.strftime("%a, %d %b %Y %H:%M:%S", time.localtime())
-    conn.send('Date: ' + now +'\n')
-    conn.send('Server: Dummy-HTTP-Server\n')
-    conn.send('\n')
+    conn.send('Date: ' + now +'\r\n')
+    conn.send('Server: Dummy-HTTP-Server\r\n')
+    conn.send('\r\n')
     conn.shutdown(socket.SHUT_RDWR)
     conn.close()
