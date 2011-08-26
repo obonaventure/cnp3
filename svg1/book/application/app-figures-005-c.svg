@@ -14,7 +14,7 @@
    id="svg11613"
    version="1.1"
    inkscape:version="0.48.1 r9760"
-   sodipodi:docname="intro-figures-035-c.svg">
+   sodipodi:docname="app-figures-005-c.svg">
   <defs
      id="defs11615">
     <marker
@@ -3233,13 +3233,13 @@
      inkscape:cx="481.10022"
      inkscape:cy="182.29233"
      inkscape:document-units="px"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="g7927"
      showgrid="false"
-     inkscape:window-width="1280"
-     inkscape:window-height="674"
+     inkscape:window-width="1440"
+     inkscape:window-height="808"
      inkscape:window-x="0"
      inkscape:window-y="0"
-     inkscape:window-maximized="1" />
+     inkscape:window-maximized="0" />
   <metadata
      id="metadata11618">
     <rdf:RDF>
@@ -3248,7 +3248,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -3530,8 +3530,8 @@
          d="m 4361.0596,7079.4976 c 0,211.9521 -273.3518,383.7732 -610.5484,383.7732 -337.1965,0 -610.5483,-171.8211 -610.5483,-383.7732 0,-211.9522 273.3518,-383.7733 610.5483,-383.7733 337.1966,0 610.5484,171.8211 610.5484,383.7733 z"
          transform="matrix(1.2658013,0,0,1.2658013,9544.3792,681.54415)" />
       <path
-         transform="matrix(1.2658013,0,0,1.2658013,11353.24,-1495.6438)"
-         d="m 4361.0596,7079.4976 c 0,211.9521 -273.3518,383.7732 -610.5484,383.7732 -337.1965,0 -610.5483,-171.8211 -610.5483,-383.7732 0,-211.9522 273.3518,-383.7733 610.5483,-383.7733 337.1966,0 610.5484,171.8211 610.5484,383.7733 z"
+         transform="matrix(1.6687367,0,0,1.2658013,10088.038,-1495.6438)"
+         d="m 4361.0596,7079.4976 a 610.54834,383.77325 0 1 1 -1221.0967,0 610.54834,383.77325 0 1 1 1221.0967,0 z"
          sodipodi:ry="383.77325"
          sodipodi:rx="610.54834"
          sodipodi:cy="7079.4976"
@@ -3553,11 +3553,11 @@
          sodipodi:linespacing="125%"
          id="text9968"
          y="4804.0771"
-         x="13425.993"
+         x="13240.462"
          style="font-size:403.36761475px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:FreeSans;-inkscape-font-specification:FreeSans Bold"
          xml:space="preserve"><tspan
            y="4804.0771"
-           x="13425.993"
+           x="13240.462"
            id="tspan9970"
            sodipodi:role="line">dom</tspan></text>
       <text
@@ -3579,8 +3579,8 @@
          sodipodi:cy="7079.4976"
          sodipodi:rx="610.54834"
          sodipodi:ry="383.77325"
-         d="m 4361.0596,7079.4976 c 0,211.9521 -273.3518,383.7732 -610.5484,383.7732 -337.1965,0 -610.5483,-171.8211 -610.5483,-383.7732 0,-211.9522 273.3518,-383.7733 610.5483,-383.7733 337.1966,0 610.5484,171.8211 610.5484,383.7733 z"
-         transform="matrix(1.2658013,0,0,1.2658013,13662.379,-1561.6192)" />
+         d="m 4361.0596,7079.4976 a 610.54834,383.77325 0 1 1 -1221.0967,0 610.54834,383.77325 0 1 1 1221.0967,0 z"
+         transform="matrix(1.6405085,0,0,1.2658013,12485.812,-1561.6192)" />
       <text
          sodipodi:linespacing="125%"
          id="text9976"
@@ -3591,7 +3591,7 @@
            y="7541.0195"
            x="15471.23"
            id="tspan9978"
-           sodipodi:role="line">sdom1          sdom2</tspan></text>
+           sodipodi:role="line">sdom1      sdom2</tspan></text>
       <text
          sodipodi:linespacing="125%"
          id="text9980"
@@ -3602,7 +3602,7 @@
            y="9817.1709"
            x="14118.733"
            id="tspan9982"
-           sodipodi:role="line">a                      b                  z</tspan></text>
+           sodipodi:role="line">a                b               z</tspan></text>
       <text
          xml:space="preserve"
          style="font-size:403.36761475px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:FreeSans;-inkscape-font-specification:FreeSans Bold"
@@ -3613,7 +3613,7 @@
            sodipodi:role="line"
            id="tspan10028"
            x="12172.461"
-           y="12060.334">h1           h2           h3</tspan></text>
+           y="12060.334">h1        h2       h3</tspan></text>
     </g>
   </g>
 </svg>

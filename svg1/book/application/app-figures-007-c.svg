@@ -4759,7 +4759,7 @@
      inkscape:cx="268.24165"
      inkscape:cy="351.02233"
      inkscape:document-units="px"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="g13224"
      showgrid="false"
      inkscape:window-width="1280"
      inkscape:window-height="674"
@@ -4774,7 +4774,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -4868,7 +4868,7 @@
            y="524.15497"
            x="157.34097"
            id="tspan10563"
-           sodipodi:role="line">&lt;HTML&gt;</tspan><tspan
+           sodipodi:role="line">&lt;html&gt;</tspan><tspan
            style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Courier;-inkscape-font-specification:Courier"
            id="tspan10565"
            y="541.65497"
@@ -4878,17 +4878,17 @@
            id="tspan10567"
            y="559.15497"
            x="157.34097"
-           sodipodi:role="line">&lt;HEAD&gt;</tspan><tspan
+           sodipodi:role="line">&lt;head&gt;</tspan><tspan
            style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Courier;-inkscape-font-specification:Courier"
            id="tspan10569"
            y="576.65497"
            x="157.34097"
-           sodipodi:role="line">&lt;TITLE&gt;HTML test page&lt;/TITLE&gt;</tspan><tspan
+           sodipodi:role="line">&lt;title&gt;HTML test page&lt;/title&gt;</tspan><tspan
            style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Courier;-inkscape-font-specification:Courier"
            id="tspan10571"
            y="594.15497"
            x="157.34097"
-           sodipodi:role="line">&lt;/HEAD&gt;</tspan><tspan
+           sodipodi:role="line">&lt;/head&gt;</tspan><tspan
            style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Courier;-inkscape-font-specification:Courier"
            id="tspan10573"
            y="611.65497"
@@ -4898,66 +4898,62 @@
            id="tspan10575"
            y="629.15497"
            x="157.34097"
-           sodipodi:role="line">&lt;BODY&gt;</tspan><tspan
+           sodipodi:role="line">&lt;body&gt;</tspan><tspan
            style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Courier;-inkscape-font-specification:Courier"
            id="tspan10577"
            y="646.65497"
            x="157.34097"
-           sodipodi:role="line">&lt;IMG SRC=&quot;<tspan
+           sodipodi:role="line">&lt;img src=&quot;<tspan
    id="tspan13222"
    style="fill:#ff0000">http://www.images.be/logo.gif</tspan>&quot;&gt;</tspan><tspan
            style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Courier;-inkscape-font-specification:Courier"
            id="tspan10579"
            y="664.15497"
            x="157.34097"
-           sodipodi:role="line">&lt;H1&gt;Web servers from UCL UCL&lt;P&gt;&lt;/H1&gt;</tspan><tspan
+           sodipodi:role="line">&lt;h1&gt;Web servers from UCL UCL&lt;P&gt;&lt;/h1&gt;</tspan><tspan
            style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Courier;-inkscape-font-specification:Courier"
            id="tspan10581"
            y="681.65497"
            x="157.34097"
-           sodipodi:role="line">&lt;HR&gt;</tspan><tspan
+           sodipodi:role="line">&lt;hr&gt;</tspan><tspan
            style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Courier;-inkscape-font-specification:Courier"
            id="tspan10583"
            y="699.15497"
            x="157.34097"
-           sodipodi:role="line">&lt;UL&gt;</tspan><tspan
+           sodipodi:role="line">&lt;ul&gt;</tspan><tspan
            style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Courier;-inkscape-font-specification:Courier"
            id="tspan10585"
            y="716.65497"
            x="157.34097"
-           sodipodi:role="line"> &lt;LI&gt;&lt;A HREF=&quot;<tspan
+           sodipodi:role="line"> &lt;li&gt;&lt;A HREF=&quot;<tspan
    id="tspan13210"
    style="fill:#ff0000">http://www.uclouvain.be</tspan>&quot;&gt;<tspan
    id="tspan13216"
-   style="fill:#0000ff">UCL</tspan>&lt;/A&gt;</tspan><tspan
+   style="fill:#0000ff">UCL</tspan>&lt;/a&gt;</tspan><tspan
            style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Courier;-inkscape-font-specification:Courier"
            id="tspan10587"
            y="734.15497"
            x="157.34097"
-           sodipodi:role="line"> &lt;LI&gt;&lt;A HREF=&quot;<tspan
+           sodipodi:role="line"> &lt;li&gt;&lt;A HREF=&quot;<tspan
    id="tspan13212"
-   style="fill:#ff0000">http://www.info.ucl.ac.be</tspan>&quot;&gt;<tspan
-   id="tspan13218"
-   style="fill:#0000ff">CSE Dept.</tspan>&lt;/A&gt;</tspan><tspan
+   style="fill:#ff0000">http://inl.info.ucl.ac.be</tspan>&quot;&gt;Net lab&lt;/a&gt;</tspan><tspan
            style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Courier;-inkscape-font-specification:Courier"
            id="tspan10589"
            y="751.65497"
            x="157.34097"
-           sodipodi:role="line"> &lt;LI&gt;&lt;A HREF=&quot;<tspan
+           sodipodi:role="line"> &lt;li&gt;&lt;A HREF=&quot;<tspan
    id="tspan13214"
-   style="fill:#ff0000">http://www.math.ucl.ac.be</tspan>&quot;&gt;<tspan
-   id="tspan13220"
-   style="fill:#0000ff">Math</tspan>&lt;/A&gt;</tspan><tspan
+   style="fill:#ff0000">http://www.uclouvain.be/icteam</tspan>&quot;&gt;ICTEAM&lt;/a&gt;</tspan><tspan
            style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Courier;-inkscape-font-specification:Courier"
            id="tspan10591"
            y="769.15497"
            x="157.34097"
-           sodipodi:role="line">&lt;/UL&gt;</tspan><tspan
+           sodipodi:role="line">&lt;/ul&gt;</tspan><tspan
            style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Courier;-inkscape-font-specification:Courier"
            id="tspan10593"
            y="786.65497"
            x="157.34097"
-           sodipodi:role="line">&lt;/BODY&gt;</tspan><tspan
+           sodipodi:role="line">&lt;/body&gt;</tspan><tspan
            style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Courier;-inkscape-font-specification:Courier"
            id="tspan10595"
            y="804.15497"
@@ -4967,7 +4963,7 @@
            id="tspan10597"
            y="821.65497"
            x="157.34097"
-           sodipodi:role="line">&lt;/HTML&gt;</tspan></text>
+           sodipodi:role="line">&lt;/html&gt;</tspan></text>
       <text
          sodipodi:linespacing="125%"
          id="text10617"

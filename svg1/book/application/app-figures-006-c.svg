@@ -3953,9 +3953,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.04"
-     inkscape:cx="189.12102"
-     inkscape:cy="175.18765"
+     inkscape:zoom="9.1560805"
+     inkscape:cx="178.73319"
+     inkscape:cy="113.69186"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -3972,7 +3972,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -5068,24 +5068,24 @@
        xml:space="preserve"
        style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ff0000;fill-opacity:1;stroke:none;font-family:Courier;-inkscape-font-specification:Courier"
        x="125"
-       y="923.51599"
+       y="918.70831"
        id="text9041"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan9043"
          x="125"
-         y="923.51599">DEF Corp.</tspan><tspan
+         y="918.70831">DEF Corp.</tspan><tspan
          sodipodi:role="line"
          x="125"
-         y="938.51599"
+         y="933.70831"
          id="tspan9045">Steel street 9</tspan><tspan
          sodipodi:role="line"
          x="125"
-         y="953.51599"
+         y="948.70831"
          id="tspan9047">WA78 AX London</tspan><tspan
          sodipodi:role="line"
          x="125"
-         y="968.51599"
+         y="963.70831"
          id="tspan9049">Grande Bretagne</tspan></text>
     <text
        xml:space="preserve"
@@ -5101,11 +5101,11 @@
          sodipodi:role="line"
          x="308.65384"
          y="860.63141"
-         id="tspan9055"></tspan><tspan
+         id="tspan9055" /><tspan
          sodipodi:role="line"
          x="308.65384"
          y="875.63141"
-         id="tspan9057"></tspan><tspan
+         id="tspan9057" /><tspan
          sodipodi:role="line"
          x="308.65384"
          y="890.63141"
