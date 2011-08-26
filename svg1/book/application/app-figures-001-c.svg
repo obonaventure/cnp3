@@ -13,8 +13,8 @@
    height="300"
    id="svg11613"
    version="1.1"
-   inkscape:version="0.48.1 r9760"
-   sodipodi:docname="New document 14">
+   inkscape:version="0.48.0 r9654"
+   sodipodi:docname="app-figures-001-c.svg">
   <defs
      id="defs11615">
     <marker
@@ -483,8 +483,8 @@
      showgrid="false"
      inkscape:window-width="1280"
      inkscape:window-height="674"
-     inkscape:window-x="0"
-     inkscape:window-y="0"
+     inkscape:window-x="655"
+     inkscape:window-y="107"
      inkscape:window-maximized="0" />
   <metadata
      id="metadata11618">
@@ -494,7 +494,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -847,38 +847,38 @@
     <text
        xml:space="preserve"
        style="font-size:24px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ff0000;fill-opacity:1;fill-rule:evenodd;stroke:none;font-family:FreeSans;-inkscape-font-specification:FreeSans Bold"
-       x="101.91937"
+       x="98.941605"
        y="855.51086"
        id="text4227"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan4229"
-         x="101.91937"
+         x="98.941605"
          y="855.51086"
-         style="font-size:14px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:FreeSans;-inkscape-font-specification:FreeSans Bold;fill:#ff0000">Client</tspan></text>
+         style="font-size:14px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#ff0000;font-family:FreeSans;-inkscape-font-specification:FreeSans Bold">Client</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text4231"
        y="854.53998"
-       x="390.26889"
+       x="383.32077"
        style="font-size:24px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#0000ff;fill-opacity:1;fill-rule:evenodd;stroke:none;font-family:FreeSans;-inkscape-font-specification:FreeSans Bold"
        xml:space="preserve"><tspan
-         style="font-size:14px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:FreeSans;-inkscape-font-specification:FreeSans Bold;fill:#0000ff"
+         style="font-size:14px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#0000ff;font-family:FreeSans;-inkscape-font-specification:FreeSans Bold"
          y="854.53998"
-         x="390.26889"
+         x="383.32077"
          id="tspan4233"
          sodipodi:role="line">Server</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:24px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;font-family:FreeSans;-inkscape-font-specification:FreeSans Bold"
-       x="169.76404"
-       y="951.16138"
+       x="139.98639"
+       y="950.16876"
        id="text4235"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan4237"
-         x="169.76404"
-         y="951.16138"
+         x="139.98639"
+         y="950.16876"
          style="font-size:14px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:FreeSans;-inkscape-font-specification:FreeSans Bold">Service provider (&quot;the network&quot;)</tspan></text>
     <text
        sodipodi:linespacing="125%"

@@ -13,7 +13,7 @@
    height="600"
    id="svg11613"
    version="1.1"
-   inkscape:version="0.48.1 r9760"
+   inkscape:version="0.48.0 r9654"
    sodipodi:docname="app-figures-008-c.svg">
   <defs
      id="defs11615">
@@ -7162,7 +7162,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -7524,7 +7524,7 @@
          y="742.13373"
          x="135.58476"
          id="tspan16951"
-         sodipodi:role="line">CONNECT.confirm</tspan></text>
+         sodipodi:role="line">DATA.req(Request)</tspan></text>
     <path
        inkscape:connector-curvature="0"
        id="path16953"

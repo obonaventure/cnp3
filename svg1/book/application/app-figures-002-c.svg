@@ -13,8 +13,8 @@
    height="600"
    id="svg11613"
    version="1.1"
-   inkscape:version="0.48.1 r9760"
-   sodipodi:docname="intro-figures-032-c.svg">
+   inkscape:version="0.48.0 r9654"
+   sodipodi:docname="app-figures-002-c.svg">
   <defs
      id="defs11615">
     <marker
@@ -482,12 +482,12 @@
      inkscape:cx="481.10022"
      inkscape:cy="359.32574"
      inkscape:document-units="px"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="g16720"
      showgrid="false"
      inkscape:window-width="1280"
      inkscape:window-height="674"
-     inkscape:window-x="0"
-     inkscape:window-y="0"
+     inkscape:window-x="368"
+     inkscape:window-y="263"
      inkscape:window-maximized="0" />
   <metadata
      id="metadata11618">
@@ -497,7 +497,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -690,17 +690,17 @@
            y="695.70416"
            x="235.8595"
            id="tspan4229"
-           sodipodi:role="line">Applic. 1</tspan></text>
+           sodipodi:role="line">App. 1</tspan></text>
       <text
          sodipodi:linespacing="125%"
          id="text4235"
          y="791.35468"
-         x="358.76642"
+         x="338.72137"
          style="font-size:24px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;font-family:FreeSans;-inkscape-font-specification:FreeSans Bold"
          xml:space="preserve"><tspan
            style="font-size:14px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:FreeSans;-inkscape-font-specification:FreeSans Bold"
            y="791.35468"
-           x="358.76642"
+           x="338.72137"
            id="tspan4237"
            sodipodi:role="line">Byte-stream service</tspan></text>
       <text
@@ -714,7 +714,7 @@
            id="tspan16289"
            x="525.8595"
            y="695.70416"
-           style="font-size:14px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;font-family:FreeSans;-inkscape-font-specification:FreeSans Bold">Applic. 2</tspan></text>
+           style="font-size:14px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;font-family:FreeSans;-inkscape-font-specification:FreeSans Bold">App. 2</tspan></text>
       <text
          sodipodi:linespacing="125%"
          id="text16291"
@@ -729,7 +729,7 @@
            id="tspan16295"
            y="865.38898"
            x="465.5239"
-           sodipodi:role="line">IP address : 2001:4860:a005::68</tspan><tspan
+           sodipodi:role="line">IP address : 2001:DB8:a005::68</tspan><tspan
            id="tspan16297"
            y="882.88898"
            x="465.5239"
@@ -752,7 +752,7 @@
            id="tspan16305"
            y="836.60394"
            x="66.50341"
-           sodipodi:role="line">IP address : 2001:6a8:3080:2:217:f2ff:fed6:65c0</tspan><tspan
+           sodipodi:role="line">IP address : 2001:DB8:3080:2:217:f2ff:fed6:65c0</tspan><tspan
            id="tspan16307"
            y="854.10394"
            x="66.50341"
