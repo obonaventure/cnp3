@@ -2419,8 +2419,8 @@
      inkscape:current-layer="layer1"
      inkscape:document-units="px"
      showgrid="false"
-     inkscape:window-width="1280"
-     inkscape:window-height="674"
+     inkscape:window-width="1440"
+     inkscape:window-height="808"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1" />
@@ -2675,13 +2675,13 @@
     <text
        xml:space="preserve"
        style="font-size:14px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:FreeSans;-inkscape-font-specification:FreeSans Bold"
-       x="163"
+       x="126"
        y="206"
        id="text5748"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan5750"
-         x="163"
+         x="126"
          y="206">Connection opened</tspan></text>
     <text
        xml:space="preserve"
@@ -2905,15 +2905,15 @@
        inkscape:connector-curvature="0" />
     <text
        xml:space="preserve"
-       style="font-size:12.20969868000000069px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ff0000;fill-opacity:1;stroke:none;font-family:FreeSans;-inkscape-font-specification:FreeSans Bold"
-       x="108.68174"
+       style="font-size:12.20969868px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ff0000;fill-opacity:1;stroke:none;font-family:FreeSans;-inkscape-font-specification:FreeSans Bold"
+       x="93.899246"
        y="303.24091"
        id="text6636"
        sodipodi:linespacing="125%"
        transform="scale(1.0147137,0.98549965)"><tspan
          sodipodi:role="line"
          id="tspan6638"
-         x="108.68174"
+         x="93.899246"
          y="303.24091">DISCONNECT.req(graceful)</tspan></text>
     <text
        transform="scale(1.0147137,0.98549965)"
@@ -3055,11 +3055,11 @@
        sodipodi:linespacing="125%"
        id="text6706"
        y="465.59479"
-       x="108.68174"
+       x="92.913742"
        style="font-size:12.20969868px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#0000ff;fill-opacity:1;stroke:none;font-family:FreeSans;-inkscape-font-specification:FreeSans Bold"
        xml:space="preserve"><tspan
          y="465.59479"
-         x="108.68174"
+         x="92.913742"
          id="tspan6708"
          sodipodi:role="line">DISCONNECT.ind(graceful)</tspan></text>
     <text
@@ -3124,14 +3124,14 @@
     <text
        sodipodi:linespacing="125%"
        id="text6736"
-       y="486"
-       x="163"
+       y="487"
+       x="127"
        style="font-size:14px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:FreeSans;-inkscape-font-specification:FreeSans Bold"
        xml:space="preserve"><tspan
-         y="486"
-         x="163"
+         y="487"
+         x="127"
          id="tspan6738"
-         sodipodi:role="line">Connection opened</tspan></text>
+         sodipodi:role="line">Connection closed</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text6740"
@@ -3142,6 +3142,6 @@
          y="486"
          x="484"
          id="tspan6742"
-         sodipodi:role="line">Connection opened</tspan></text>
+         sodipodi:role="line">Connection closed</tspan></text>
   </g>
 </svg>

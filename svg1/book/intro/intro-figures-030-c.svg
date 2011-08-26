@@ -24,7 +24,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -47,7 +47,7 @@
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="0"
-     inkscape:current-layer="svg2" />
+     inkscape:current-layer="g11075" />
   <defs
      id="defs4">
     <marker
@@ -2071,88 +2071,88 @@
        sodipodi:linespacing="125%"
        id="text5463"
        y="214.69904"
-       x="43.833237"
+       x="35.833237"
        style="font-size:14px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:FreeSans;-inkscape-font-specification:FreeSans Bold"
        xml:space="preserve"><tspan
          y="214.69904"
-         x="43.833237"
+         x="35.833237"
          id="tspan5465"
          sodipodi:role="line">Physical layer</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text5467"
        y="190.62425"
-       x="61.105629"
+       x="53.105629"
        style="font-size:14px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:FreeSans;-inkscape-font-specification:FreeSans Bold"
        xml:space="preserve"><tspan
          y="190.62425"
-         x="61.105629"
+         x="53.105629"
          id="tspan5469"
          sodipodi:role="line">Datalink</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text5471"
        y="167.18448"
-       x="60.909515"
+       x="52.909515"
        style="font-size:14px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:FreeSans;-inkscape-font-specification:FreeSans Bold"
        xml:space="preserve"><tspan
          y="167.18448"
-         x="60.909515"
+         x="52.909515"
          id="tspan5473"
          sodipodi:role="line">Network</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:14px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:FreeSans;-inkscape-font-specification:FreeSans Bold"
-       x="57.575439"
+       x="49.575439"
        y="145.18448"
        id="text6466"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan6468"
-         x="57.575439"
+         x="49.575439"
          y="145.18448">Transport</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:14px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:FreeSans;-inkscape-font-specification:FreeSans Bold"
-       x="475.83325"
+       x="465.83325"
        y="214.69904"
        id="text6482"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan6484"
-         x="475.83325"
+         x="465.83325"
          y="214.69904">Physical layer</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:14px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:FreeSans;-inkscape-font-specification:FreeSans Bold"
-       x="493.10565"
+       x="483.10565"
        y="190.62425"
        id="text6486"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan6488"
-         x="493.10565"
+         x="483.10565"
          y="190.62425">Datalink</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:14px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:FreeSans;-inkscape-font-specification:FreeSans Bold"
-       x="492.90955"
+       x="482.90955"
        y="167.18448"
        id="text6490"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan6492"
-         x="492.90955"
+         x="482.90955"
          y="167.18448">Network</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text6494"
        y="145.18448"
-       x="489.57544"
+       x="479.57544"
        style="font-size:14px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:FreeSans;-inkscape-font-specification:FreeSans Bold"
        xml:space="preserve"><tspan
          y="145.18448"
-         x="489.57544"
+         x="479.57544"
          id="tspan6496"
          sodipodi:role="line">Transport</tspan></text>
     <path
@@ -2338,23 +2338,23 @@
        sodipodi:linespacing="125%"
        id="text9962"
        y="123.18448"
-       x="62.276924"
+       x="54.276924"
        style="font-size:14px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:FreeSans;-inkscape-font-specification:FreeSans Bold"
        xml:space="preserve"><tspan
          y="123.18448"
-         x="62.276924"
+         x="54.276924"
          id="tspan9964"
          sodipodi:role="line">Session</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:14px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:FreeSans;-inkscape-font-specification:FreeSans Bold"
-       x="494.27695"
+       x="484.27695"
        y="123.18448"
        id="text9966"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan9968"
-         x="494.27695"
+         x="484.27695"
          y="123.18448">Session</tspan></text>
     <g
        transform="matrix(0.02064173,0,0,0.01842173,15.958273,-6.542357)"
@@ -2516,23 +2516,23 @@
        sodipodi:linespacing="125%"
        id="text10975"
        y="101.18448"
-       x="47.6478"
+       x="39.6478"
        style="font-size:14px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:FreeSans;-inkscape-font-specification:FreeSans Bold"
        xml:space="preserve"><tspan
          y="101.18448"
-         x="47.6478"
+         x="39.6478"
          id="tspan10977"
          sodipodi:role="line">Presentation</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:14px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:FreeSans;-inkscape-font-specification:FreeSans Bold"
-       x="479.64783"
+       x="469.64783"
        y="101.18448"
        id="text10979"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan10981"
-         x="479.64783"
+         x="469.64783"
          y="101.18448">Presentation</tspan></text>
     <g
        style="visibility:visible"
@@ -2693,23 +2693,23 @@
     <text
        xml:space="preserve"
        style="font-size:14px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:FreeSans;-inkscape-font-specification:FreeSans Bold"
-       x="53.142365"
+       x="45.142365"
        y="79.184479"
        id="text11067"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan11069"
-         x="53.142365"
+         x="45.142365"
          y="79.184479">Application</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text11071"
        y="79.184479"
-       x="485.14236"
+       x="475.14236"
        style="font-size:14px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:FreeSans;-inkscape-font-specification:FreeSans Bold"
        xml:space="preserve"><tspan
          y="79.184479"
-         x="485.14236"
+         x="475.14236"
          id="tspan11073"
          sodipodi:role="line">Application</tspan></text>
   </g>

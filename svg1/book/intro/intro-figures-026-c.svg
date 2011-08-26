@@ -46,7 +46,7 @@
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="0"
-     inkscape:current-layer="svg2" />
+     inkscape:current-layer="g5519" />
   <defs
      id="defs4">
     <font
@@ -550,7 +550,7 @@
       </g>
     </g>
     <g
-       transform="matrix(0.02064173,0,0,0.01842173,15.400946,45.457643)"
+       transform="matrix(0.02064173,0,0,0.01842173,29.400946,45.457643)"
        id="g463"
        style="visibility:visible">
       <desc
@@ -919,7 +919,7 @@
       </g>
     </g>
     <g
-       transform="matrix(0.02064173,0,0,0.01842173,15.958273,45.457643)"
+       transform="matrix(0.02064173,0,0,0.01842173,29.958273,45.457643)"
        id="g633"
        style="visibility:visible">
       <desc
@@ -1123,7 +1123,7 @@
       </g>
     </g>
     <g
-       transform="matrix(0.02064173,0,0,0.01842173,15.958273,45.457643)"
+       transform="matrix(0.02064173,0,0,0.01842173,29.958273,45.457643)"
        id="g729"
        style="visibility:visible">
       <desc
@@ -1317,7 +1317,7 @@
       </g>
     </g>
     <g
-       transform="matrix(0.02064173,0,0,0.01842173,15.958273,45.457643)"
+       transform="matrix(0.02064173,0,0,0.01842173,29.958273,45.457643)"
        id="g833"
        style="visibility:visible">
       <desc
@@ -1914,7 +1914,7 @@
       </g>
     </g>
     <g
-       transform="matrix(0.02064173,0,0,0.01842173,15.958273,45.457643)"
+       transform="matrix(0.02504537,0,0,0.01842173,-59.795973,43.515896)"
        id="g1141"
        style="visibility:visible">
       <desc
@@ -2041,7 +2041,8 @@
          id="tspan5461"
          sodipodi:role="line" /></text>
     <g
-       id="g5475">
+       id="g5475"
+       transform="translate(-8.7378641,0)">
       <text
          xml:space="preserve"
          style="font-size:14px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:FreeSans;-inkscape-font-specification:FreeSans Bold"
@@ -2115,7 +2116,7 @@
     </g>
     <g
        id="g5497"
-       transform="translate(432,0)">
+       transform="translate(433.37864,0)">
       <text
          xml:space="preserve"
          style="font-size:14px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:FreeSans;-inkscape-font-specification:FreeSans Bold"
@@ -2154,23 +2155,23 @@
        sodipodi:linespacing="125%"
        id="text5511"
        y="132.03883"
-       x="173.78641"
+       x="165.78641"
        style="font-size:14px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:FreeSans;-inkscape-font-specification:FreeSans Bold"
        xml:space="preserve"><tspan
          y="132.03883"
-         x="173.78641"
+         x="165.78641"
          id="tspan5513"
          sodipodi:role="line">Packets</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:14px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:FreeSans;-inkscape-font-specification:FreeSans Bold"
-       x="387.78641"
-       y="132.03883"
+       x="386.64078"
+       y="131.06796"
        id="text5515"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan5517"
-         x="387.78641"
-         y="132.03883">Packets</tspan></text>
+         x="386.64078"
+         y="131.06796">Packets</tspan></text>
   </g>
 </svg>

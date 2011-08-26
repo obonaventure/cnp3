@@ -1238,7 +1238,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -1519,7 +1519,7 @@
          y="329.78769"
          x="509.1745"
          id="tspan19588"
-         sodipodi:role="line">DATA.indication(&quot;C&quot;)</tspan></text>
+         sodipodi:role="line">DATA.request(&quot;C&quot;)</tspan></text>
     <path
        style="fill:none;stroke:#000000;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:1.5, 4.5;stroke-dashoffset:0;marker-start:none"
        d="m 294,220 189,57"

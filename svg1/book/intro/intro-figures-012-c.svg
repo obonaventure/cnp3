@@ -13,7 +13,7 @@
    height="600px"
    id="svg9320"
    version="1.1"
-   inkscape:version="0.48.1 r9760"
+   inkscape:version="0.48.0 r9654"
    sodipodi:docname="intro-figures-012-c.svg">
   <defs
      id="defs9322">
@@ -1222,7 +1222,7 @@
      inkscape:zoom="1"
      inkscape:cx="382.5"
      inkscape:cy="263"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="g18926"
      inkscape:document-units="px"
      showgrid="false"
      inkscape:window-width="1280"
@@ -1238,7 +1238,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -1405,29 +1405,29 @@
            x="543.33899"
            sodipodi:role="line">Destination</tspan></text>
       <text
-         transform="scale(1.0147137,0.98549964)"
+         transform="scale(1.0147137,0.98549965)"
          sodipodi:linespacing="125%"
          id="text13395"
          y="311.35843"
-         x="108.68174"
+         x="98.826744"
          style="font-size:12.20969868px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:FreeSans;-inkscape-font-specification:FreeSans Bold"
          xml:space="preserve"><tspan
            y="311.35843"
-           x="108.68174"
+           x="98.826744"
            id="tspan13397"
            sodipodi:role="line">DATA.request(S, D, &quot;Msg&quot;)</tspan></text>
       <text
          transform="scale(1.0147137,0.98549965)"
          xml:space="preserve"
          style="font-size:12.20969868px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:FreeSans;-inkscape-font-specification:FreeSans Bold"
-         x="503.26147"
-         y="388.64044"
+         x="475.66748"
+         y="387.62573"
          id="text13399"
          sodipodi:linespacing="125%"><tspan
            sodipodi:role="line"
            id="tspan13401"
-           x="503.26147"
-           y="388.64044">DATA.indication(S, D, &quot;Net&quot;)</tspan></text>
+           x="475.66748"
+           y="387.62573">DATA.indication(S, D, &quot;Msg&quot;)</tspan></text>
       <text
          transform="scale(1.0147137,0.98549965)"
          sodipodi:linespacing="125%"

@@ -46,7 +46,7 @@
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="0"
-     inkscape:current-layer="svg2" />
+     inkscape:current-layer="g4810" />
   <defs
      id="defs4">
     <font
@@ -1363,13 +1363,13 @@
        sodipodi:linespacing="125%"
        id="text4806"
        y="137.31927"
-       x="188.53247"
+       x="190.53247"
        style="font-size:16px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:FreeSans;-inkscape-font-specification:FreeSans Bold"
        xml:space="preserve"><tspan
          style="font-size:14px"
          y="137.31927"
-         x="188.53247"
+         x="190.53247"
          id="tspan4808"
-         sodipodi:role="line">010100010100010101001010</tspan></text>
+         sodipodi:role="line">01010010100010101001010</tspan></text>
   </g>
 </svg>
