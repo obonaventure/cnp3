@@ -837,13 +837,13 @@
      inkscape:cx="241.63022"
      inkscape:cy="106.98727"
      inkscape:document-units="px"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="g7474"
      showgrid="false"
-     inkscape:window-width="1280"
-     inkscape:window-height="675"
+     inkscape:window-width="1440"
+     inkscape:window-height="808"
      inkscape:window-x="0"
      inkscape:window-y="0"
-     inkscape:window-maximized="1" />
+     inkscape:window-maximized="0" />
   <metadata
      id="metadata21293">
     <rdf:RDF>
@@ -1318,11 +1318,11 @@
            id="tspan7087"
            y="835.40137"
            x="109.40452"
-           sodipodi:role="line"></tspan><tspan
+           sodipodi:role="line" /><tspan
            id="tspan7089"
            y="852.90137"
            x="109.40452"
-           sodipodi:role="line"></tspan><tspan
+           sodipodi:role="line" /><tspan
            id="tspan7091"
            y="870.40137"
            x="109.40452"
@@ -1330,11 +1330,11 @@
            id="tspan7093"
            y="887.90137"
            x="109.40452"
-           sodipodi:role="line"></tspan><tspan
+           sodipodi:role="line" /><tspan
            id="tspan7095"
            y="905.40137"
            x="109.40452"
-           sodipodi:role="line"></tspan><tspan
+           sodipodi:role="line" /><tspan
            id="tspan7097"
            y="922.90137"
            x="109.40452"
@@ -1349,7 +1349,7 @@
            y="937.6955"
            x="114.70589"
            id="tspan7101"
-           sodipodi:role="line">0                 W/2                   W                    3W/2               2W         time(rtt)</tspan></text>
+           sodipodi:role="line">0                 W/2                   W                    3W/2     time(rtt)</tspan></text>
     </g>
   </g>
 </svg>

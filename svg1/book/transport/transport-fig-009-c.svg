@@ -24,7 +24,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -47,7 +47,7 @@
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="0"
-     inkscape:current-layer="svg2" />
+     inkscape:current-layer="g45847" />
   <defs
      id="defs4">
     <marker
@@ -11536,11 +11536,11 @@
        sodipodi:linespacing="125%"
        id="text10923"
        y="80.574692"
-       x="90.665756"
+       x="78.665756"
        style="font-size:14px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;font-family:FreeSans;-inkscape-font-specification:FreeSans Bold"
        xml:space="preserve"><tspan
          y="80.574692"
-         x="90.665756"
+         x="78.665756"
          id="tspan10925"
          sodipodi:role="line">Data.req(<tspan
    id="tspan45821"
@@ -11590,13 +11590,13 @@
     <text
        xml:space="preserve"
        style="font-size:14px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;font-family:FreeSans;-inkscape-font-specification:FreeSans Bold"
-       x="89.673172"
+       x="77.673172"
        y="141.31528"
        id="text20839"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan20841"
-         x="89.673172"
+         x="77.673172"
          y="141.31528">Data.req(<tspan
    id="tspan45823"
    style="fill:#0000ff">b</tspan>)</tspan></text>
@@ -11608,24 +11608,24 @@
     <text
        xml:space="preserve"
        style="font-size:14px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;font-family:FreeSans;-inkscape-font-specification:FreeSans Bold"
-       x="358.40585"
-       y="141.50848"
+       x="346.40585"
+       y="133.50848"
        id="text21433"
        sodipodi:linespacing="125%"><tspan
          style="fill:#ff0000"
          sodipodi:role="line"
          id="tspan21435"
-         x="358.40585"
-         y="141.50848">C(OK0)</tspan></text>
+         x="346.40585"
+         y="133.50848">C(OK0)</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text21437"
-       y="184.10745"
+       y="172.10745"
        x="355.90256"
        style="font-size:14px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;font-family:FreeSans;-inkscape-font-specification:FreeSans Bold"
        xml:space="preserve"><tspan
          style="fill:#ff0000"
-         y="184.10745"
+         y="172.10745"
          x="355.90256"
          id="tspan21439"
          sodipodi:role="line">D(1, <tspan
@@ -11681,13 +11681,13 @@
     <text
        sodipodi:linespacing="125%"
        id="text21652"
-       y="236.54236"
-       x="351.84131"
+       y="232.54236"
+       x="317.84131"
        style="font-size:14px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;font-family:FreeSans;-inkscape-font-specification:FreeSans Bold"
        xml:space="preserve"><tspan
          style="fill:#ff0000"
-         y="236.54236"
-         x="351.84131"
+         y="232.54236"
+         x="317.84131"
          id="tspan21654"
          sodipodi:role="line">C(OK1)</tspan></text>
     <path
@@ -11695,23 +11695,6 @@
        id="path23638"
        d="m 292.59985,160.87734 0,29.67546"
        style="fill:none;stroke:#000000;stroke-width:0.65352941px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#TriangleInM-5);marker-end:url(#TriangleOutM-1)" />
-    <text
-       sodipodi:linespacing="125%"
-       id="text24024"
-       y="327.14365"
-       x="542.39862"
-       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;font-family:FreeSans;-inkscape-font-specification:FreeSans Bold"
-       xml:space="preserve"><tspan
-         style="fill:#800080"
-         y="327.14365"
-         x="542.39862"
-         id="tspan24026"
-         sodipodi:role="line">Lost segment</tspan></text>
-    <path
-       inkscape:connector-curvature="0"
-       id="path24028"
-       d="m 534.84315,321.02885 -97.2355,5.55616"
-       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#TriangleOutM-1)" />
     <g
        style="fill-rule:evenodd;visibility:visible"
        id="g24253"
@@ -11768,14 +11751,14 @@
        xml:space="preserve"
        style="font-size:14px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;font-family:FreeSans;-inkscape-font-specification:FreeSans Bold"
        x="353.27673"
-       y="211.48163"
+       y="203.48163"
        id="text45757"
        sodipodi:linespacing="125%"><tspan
          style="fill:#ff0000"
          sodipodi:role="line"
          id="tspan45759"
          x="353.27673"
-         y="211.48163">D(1,<tspan
+         y="203.48163">D(1,<tspan
    id="tspan45837"
    style="fill:#0000ff">b</tspan>)</tspan></text>
     <path
@@ -11786,15 +11769,15 @@
     <text
        xml:space="preserve"
        style="font-size:14px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;font-family:FreeSans;-inkscape-font-specification:FreeSans Bold"
-       x="351.84131"
-       y="266.54236"
+       x="353.84131"
+       y="278.54236"
        id="text45763"
        sodipodi:linespacing="125%"><tspan
          style="fill:#ff0000"
          sodipodi:role="line"
          id="tspan45765"
-         x="351.84131"
-         y="266.54236">C(OK1)</tspan></text>
+         x="353.84131"
+         y="278.54236">C(OK1)</tspan></text>
     <g
        transform="matrix(0.01865911,0,0,0.02043401,130.03131,48.68456)"
        id="g45767"
@@ -11828,11 +11811,11 @@
        sodipodi:linespacing="125%"
        id="text45783"
        y="295.31528"
-       x="89.673172"
+       x="69.673172"
        style="font-size:14px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;font-family:FreeSans;-inkscape-font-specification:FreeSans Bold"
        xml:space="preserve"><tspan
          y="295.31528"
-         x="89.673172"
+         x="69.673172"
          id="tspan45785"
          sodipodi:role="line">Data.req(<tspan
    id="tspan45825"
@@ -11845,13 +11828,13 @@
     <text
        sodipodi:linespacing="125%"
        id="text45789"
-       y="319.48163"
-       x="353.27673"
+       y="331.48163"
+       x="339.27673"
        style="font-size:14px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;font-family:FreeSans;-inkscape-font-specification:FreeSans Bold"
        xml:space="preserve"><tspan
          style="fill:#ff0000"
-         y="319.48163"
-         x="353.27673"
+         y="331.48163"
+         x="339.27673"
          id="tspan45791"
          sodipodi:role="line">D(0, <tspan
    id="tspan45839"
@@ -11864,15 +11847,15 @@
     <text
        xml:space="preserve"
        style="font-size:14px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;font-family:FreeSans;-inkscape-font-specification:FreeSans Bold"
-       x="353.27673"
-       y="363.48163"
+       x="337.27673"
+       y="379.48163"
        id="text45795"
        sodipodi:linespacing="125%"><tspan
          style="fill:#ff0000"
          sodipodi:role="line"
          id="tspan45797"
-         x="353.27673"
-         y="363.48163">D(0, <tspan
+         x="337.27673"
+         y="379.48163">D(0, <tspan
    style="fill:#0000ff"
    id="tspan45980">c</tspan>)</tspan></text>
     <path
@@ -11884,28 +11867,13 @@
        sodipodi:linespacing="125%"
        id="text45801"
        y="181.18161"
-       x="150.9847"
+       x="112.9847"
        style="font-size:14px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:FreeSans;-inkscape-font-specification:FreeSans Bold"
        xml:space="preserve"><tspan
          y="181.18161"
-         x="150.9847"
+         x="112.9847"
          id="tspan45803"
          sodipodi:role="line">Retransmission timer</tspan></text>
-    <text
-       sodipodi:linespacing="125%"
-       id="text45805"
-       y="280.9628"
-       x="182.49452"
-       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:FreeSans;-inkscape-font-specification:FreeSans Bold"
-       xml:space="preserve"><tspan
-         y="280.9628"
-         x="182.49452"
-         id="tspan45807"
-         sodipodi:role="line"><tspan
-   id="tspan45827"
-   style="fill:#ff0000">D(1,<tspan
-   id="tspan45829"
-   style="fill:#0000ff">b</tspan>)</tspan> recvd</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text45809"
@@ -11920,28 +11888,13 @@
     <text
        xml:space="preserve"
        style="font-size:14px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:FreeSans;-inkscape-font-specification:FreeSans Bold"
-       x="182.49452"
-       y="312.97592"
-       id="text45813"
-       sodipodi:linespacing="125%"><tspan
-         sodipodi:role="line"
-         id="tspan45815"
-         x="182.49452"
-         y="312.97592"><tspan
-   id="tspan45831"
-   style="fill:#ff0000">D(1,<tspan
-   id="tspan45833"
-   style="fill:#0000ff">b</tspan>)</tspan> recvd</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:FreeSans;-inkscape-font-specification:FreeSans Bold"
-       x="150.9847"
+       x="108.9847"
        y="349.99124"
        id="text45817"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan45819"
-         x="150.9847"
+         x="108.9847"
          y="349.99124">Retransmission timer</tspan></text>
   </g>
   <flowRoot
@@ -11954,4 +11907,4 @@
          height="19.693655"
          x="443.76367"
          y="179.86871" /></flowRegion><flowPara
-       id="flowPara45978"></flowPara></flowRoot></svg>
+       id="flowPara45978" /></flowRoot></svg>

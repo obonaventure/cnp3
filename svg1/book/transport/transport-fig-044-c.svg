@@ -14,7 +14,7 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.48.1 r9760"
-   sodipodi:docname="New document 1">
+   sodipodi:docname="transport-fig-044-c.svg">
   <defs
      id="defs4">
     <font
@@ -530,7 +530,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -1840,13 +1840,13 @@
     <text
        xml:space="preserve"
        style="font-size:14px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:FreeSans;-inkscape-font-specification:FreeSans Bold"
-       x="260.82513"
+       x="240.82513"
        y="944.21515"
        id="text8309"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan8311"
-         x="260.82513"
+         x="240.82513"
          y="944.21515">(seq=123,&quot;abcd&quot;)</tspan></text>
     <text
        xml:space="preserve"

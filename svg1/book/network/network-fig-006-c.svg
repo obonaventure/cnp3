@@ -16,7 +16,7 @@
    inkscape:version="0.48.1 r9760"
    width="100%"
    height="100%"
-   sodipodi:docname="network-fig-007.svg"
+   sodipodi:docname="network-fig-006-c.svg"
    style="fill-rule:evenodd">
   <metadata
      id="metadata2043">
@@ -26,7 +26,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -49,7 +49,7 @@
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="0"
-     inkscape:current-layer="svg2" />
+     inkscape:current-layer="g5369" />
   <defs
      id="defs4">
     <linearGradient
@@ -4793,9 +4793,9 @@
     <linearGradient
        inkscape:collect="always"
        xlink:href="#linearGradient5771"
-       id="linearGradient4735"
+       id="linearGradient4737"
        gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(0.04096832,0,0,0.04096832,6524.8026,2549.3178)"
+       gradientTransform="matrix(0.04096832,0,0,0.04096832,6808.9718,2543.9562)"
        x1="11732.709"
        y1="10591.141"
        x2="15717.171"
@@ -4803,9 +4803,9 @@
     <linearGradient
        inkscape:collect="always"
        xlink:href="#linearGradient5771"
-       id="linearGradient4737"
+       id="linearGradient1702"
        gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(0.04096832,0,0,0.04096832,6808.9718,2543.9562)"
+       gradientTransform="matrix(0.04096832,0,0,0.04096832,6422.1664,2510.4944)"
        x1="11732.709"
        y1="10591.141"
        x2="15717.171"
@@ -7354,21 +7354,21 @@
              sodipodi:role="line">z</tspan></text>
       </g>
       <text
-         transform="scale(1.0183701,0.98196126)"
+         transform="scale(1.0183701,0.98196127)"
          xml:space="preserve"
          style="font-size:557.3817749px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;font-family:FreeSans;-inkscape-font-specification:FreeSans"
-         x="27350.191"
+         x="27129.16"
          y="30090.516"
          id="text17013"
          sodipodi:linespacing="125%"><tspan
            sodipodi:role="line"
-           x="27350.191"
+           x="27129.16"
            y="30090.516"
            style="fill:#000000;font-family:FreeSans;-inkscape-font-specification:FreeSans"
            id="tspan17015" /><tspan
            sodipodi:role="line"
-           x="27350.191"
-           y="30542.18"
+           x="27129.16"
+           y="30497.805"
            style="font-size:267px;fill:#000000;font-family:FreeSans;-inkscape-font-specification:FreeSans"
            id="tspan17017">Addr: C</tspan></text>
     </g>
@@ -7421,17 +7421,17 @@
          id="tspan4783"
          sodipodi:role="line">Open (Dest=J)</tspan></text>
     <text
-       transform="scale(0.92997236,1.0753008)"
+       transform="scale(0.92997235,1.0753008)"
        xml:space="preserve"
        style="font-size:10.93854237px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ff0000;fill-opacity:1;stroke:none;font-family:FreeSans;-inkscape-font-specification:FreeSans"
-       x="7470.7568"
-       y="2875.0161"
+       x="7346.0142"
+       y="2920.7722"
        id="text4785"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan4787"
-         x="7470.7568"
-         y="2875.0161">Open (Dest=J)</tspan></text>
+         x="7346.0142"
+         y="2920.7722">Open (Dest=J)</tspan></text>
     <text
        transform="scale(0.92997236,1.0753008)"
        sodipodi:linespacing="125%"
@@ -7445,29 +7445,29 @@
          id="tspan4909"
          sodipodi:role="line">Open (Dest=I)</tspan></text>
     <text
-       transform="scale(0.92997236,1.0753008)"
+       transform="scale(0.92997235,1.0753008)"
        xml:space="preserve"
        style="font-size:10.93854237px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#0000ff;fill-opacity:1;stroke:none;font-family:FreeSans;-inkscape-font-specification:FreeSans"
-       x="6745.3975"
-       y="3014.4199"
+       x="6734.3442"
+       y="3028.2854"
        id="text4911"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan4913"
-         x="6745.3975"
-         y="3014.4199">Open (Dest=I, Route=R3, R2, R4)</tspan></text>
+         x="6734.3442"
+         y="3028.2854">Open (Dest=I, Route=R3, R2, R4)</tspan></text>
     <text
-       transform="scale(0.92997236,1.0753008)"
+       transform="scale(0.92997235,1.0753008)"
        sodipodi:linespacing="125%"
        id="text4919"
-       y="2986.0796"
-       x="7005.0562"
-       style="font-size:10.93854237px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:url(#linearGradient4735);fill-opacity:1;stroke:none;font-family:FreeSans;-inkscape-font-specification:FreeSans"
+       y="2947.2561"
+       x="6902.4199"
+       style="font-size:10.93854237px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:url(#linearGradient1702);fill-opacity:1;stroke:none;font-family:FreeSans;-inkscape-font-specification:FreeSans"
        xml:space="preserve"><tspan
          id="tspan5790"
-         style="fill:url(#linearGradient4735);fill-opacity:1"
-         y="2986.0796"
-         x="7005.0562"
+         style="fill:url(#linearGradient1702);fill-opacity:1"
+         y="2947.2561"
+         x="6902.4199"
          sodipodi:role="line">Open (Dest=I, Route=R2, R4)</tspan></text>
     <g
        transform="matrix(0.03809941,0,0,0.04405327,6075.7215,2736.3415)"

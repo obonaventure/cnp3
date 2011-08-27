@@ -841,13 +841,13 @@
      inkscape:cx="251.96078"
      inkscape:cy="200.58229"
      inkscape:document-units="px"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="g11199"
      showgrid="false"
-     inkscape:window-width="1280"
-     inkscape:window-height="675"
+     inkscape:window-width="1440"
+     inkscape:window-height="808"
      inkscape:window-x="0"
      inkscape:window-y="0"
-     inkscape:window-maximized="1" />
+     inkscape:window-maximized="0" />
   <metadata
      id="metadata7">
     <rdf:RDF>
@@ -1902,11 +1902,11 @@
          sodipodi:linespacing="125%"
          id="text9891"
          y="825.8916"
-         x="258.82352"
+         x="248.82352"
          style="font-size:14px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:FreeSans;-inkscape-font-specification:FreeSans Bold"
          xml:space="preserve"><tspan
            y="825.8916"
-           x="258.82352"
+           x="248.82352"
            id="tspan9893"
            sodipodi:role="line">(seq=127,&quot;ef&quot;)</tspan></text>
       <text
@@ -1935,13 +1935,13 @@
          sodipodi:linespacing="125%"
          id="text9903"
          y="871.97003"
-         x="30.229702"
+         x="20.229702"
          style="font-size:14px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:FreeSans;-inkscape-font-specification:FreeSans Bold"
          xml:space="preserve"><tspan
            y="871.97003"
-           x="30.229702"
+           x="20.229702"
            id="tspan9905"
-           sodipodi:role="line">First duplicate ack</tspan></text>
+           sodipodi:role="line">Duplicate ack</tspan></text>
       <text
          sodipodi:linespacing="125%"
          id="text9907"
@@ -1968,24 +1968,24 @@
          sodipodi:linespacing="125%"
          id="text9915"
          y="945.49945"
-         x="9.8039198"
+         x="19.803921"
          style="font-size:14px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:FreeSans;-inkscape-font-specification:FreeSans Bold"
          xml:space="preserve"><tspan
            y="945.49945"
-           x="9.8039198"
+           x="19.803921"
            id="tspan9917"
-           sodipodi:role="line">Second duplicate ack</tspan></text>
+           sodipodi:role="line">Duplicate ack</tspan></text>
       <text
          sodipodi:linespacing="125%"
          id="text9919"
          y="1007.2641"
-         x="25.389858"
+         x="21.389858"
          style="font-size:14px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:FreeSans;-inkscape-font-specification:FreeSans Bold"
          xml:space="preserve"><tspan
            y="1007.2641"
-           x="25.389858"
+           x="21.389858"
            id="tspan9921"
-           sodipodi:role="line">Third duplicate ack</tspan></text>
+           sodipodi:role="line">Duplicate ack</tspan></text>
       <text
          xml:space="preserve"
          style="font-size:14px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:FreeSans;-inkscape-font-specification:FreeSans Bold"

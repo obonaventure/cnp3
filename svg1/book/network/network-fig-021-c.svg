@@ -462,7 +462,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -493,7 +493,7 @@
          x="44.067795"
          y="964.22656"><tspan
    style="fill:#008000"
-   id="tspan25166">10001010 00110000 00011010</tspan>             00000001</tspan></text>
+   id="tspan25166">10001010 00110000 00011010 </tspan>00000001</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:14px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:FreeSans;-inkscape-font-specification:FreeSans Bold"
@@ -506,6 +506,6 @@
          x="49.152542"
          y="987.95538"><tspan
    style="fill:#008000"
-   id="tspan25172">          subnetwork id </tspan>                                host id</tspan></text>
+   id="tspan25172">          subnetwork id </tspan>                  host id</tspan></text>
   </g>
 </svg>

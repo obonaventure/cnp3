@@ -423,13 +423,13 @@
      inkscape:cx="287.37624"
      inkscape:cy="106.98727"
      inkscape:document-units="px"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="g7391"
      showgrid="false"
-     inkscape:window-width="1280"
-     inkscape:window-height="675"
+     inkscape:window-width="1440"
+     inkscape:window-height="808"
      inkscape:window-x="0"
      inkscape:window-y="0"
-     inkscape:window-maximized="1" />
+     inkscape:window-maximized="0" />
   <metadata
      id="metadata21293">
     <rdf:RDF>
@@ -438,7 +438,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -1787,11 +1787,11 @@
          sodipodi:linespacing="125%"
          id="text7342"
          y="797.99323"
-         x="10.679611"
+         x="2.6796112"
          style="font-size:14px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:FreeSans;-inkscape-font-specification:FreeSans Bold"
          xml:space="preserve"><tspan
            y="797.99323"
-           x="10.679611"
+           x="2.6796112"
            id="tspan7344"
            sodipodi:role="line">Cwnd</tspan></text>
       <g
@@ -1811,7 +1811,11 @@
              sodipodi:role="line"
              x="18.446602"
              y="1034.9109"
-             id="tspan7334">exponential increase of cwnd</tspan></text>
+             id="tspan7334">exponential increase </tspan><tspan
+             sodipodi:role="line"
+             x="18.446602"
+             y="1052.4109"
+             id="tspan431">of cwnd</tspan></text>
         <g
            id="g7362"
            transform="translate(0,7.7669903)">

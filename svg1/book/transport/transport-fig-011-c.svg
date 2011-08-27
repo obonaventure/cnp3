@@ -41,13 +41,13 @@
      inkscape:window-height="675"
      id="namedview2201"
      showgrid="false"
-     inkscape:zoom="1.05"
-     inkscape:cx="101.07286"
+     inkscape:zoom="2.75"
+     inkscape:cx="218.65297"
      inkscape:cy="75"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="0"
-     inkscape:current-layer="svg2" />
+     inkscape:current-layer="g9266" />
   <defs
      id="defs4">
     <marker
@@ -24670,7 +24670,7 @@
       </g>
     </g>
     <g
-       transform="matrix(0.01625625,0,0,0.01063881,-34.457047,-48.621057)"
+       transform="matrix(0.00698589,0,0,0.00948351,87.458359,-38.523747)"
        id="g90885"
        style="fill-rule:evenodd;visibility:visible">
       <desc
@@ -24701,7 +24701,7 @@
       </g>
     </g>
     <g
-       transform="matrix(0.01752932,0,0,0.01063881,-50.18838,-48.621057)"
+       transform="matrix(0.02393751,0,0,0.01063881,-94.426276,-48.621057)"
        id="g90967"
        style="fill-rule:evenodd;visibility:visible">
       <desc
@@ -24734,7 +24734,7 @@
       </g>
     </g>
     <g
-       transform="matrix(0.01752932,0,0,0.01063881,-50.18838,-48.621057)"
+       transform="matrix(0.02227653,0,0,0.01063881,-78.550592,-46.621057)"
        id="g90985"
        style="fill-rule:evenodd;visibility:visible">
       <desc
@@ -24796,7 +24796,7 @@
       </g>
     </g>
     <g
-       transform="matrix(0.01752932,0,0,0.01063881,-50.18838,-48.621057)"
+       transform="matrix(0.01260057,0,0,0.02026662,48.394755,-139.22501)"
        id="g91035"
        style="fill-rule:evenodd;visibility:visible">
       <desc
@@ -24825,7 +24825,7 @@
       </g>
     </g>
     <g
-       transform="matrix(0.01752932,0,0,0.01063881,-50.18838,-48.621057)"
+       transform="matrix(0.02292063,0,0,0.01063881,-79.786653,-48.621057)"
        id="g91051"
        style="fill-rule:evenodd;visibility:visible">
       <desc
@@ -24854,7 +24854,7 @@
       </g>
     </g>
     <g
-       transform="matrix(0.01752932,0,0,0.01063881,-50.18838,-48.621057)"
+       transform="matrix(0.02175207,0,0,0.01063881,-77.643675,-46.621057)"
        id="g91067"
        style="fill-rule:evenodd;visibility:visible">
       <desc
@@ -24883,7 +24883,7 @@
       </g>
     </g>
     <g
-       transform="matrix(0.01752932,0,0,0.01063881,-50.18838,-48.621057)"
+       transform="matrix(0.01752932,0,0,0.01063881,-50.18838,-46.439239)"
        id="g91105"
        style="fill-rule:evenodd;visibility:visible">
       <desc
@@ -24935,50 +24935,50 @@
        sodipodi:linespacing="125%"
        id="text92417"
        y="75.99984"
-       x="8.2226191"
+       x="11.079762"
        style="font-size:12px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#0000ff;fill-opacity:1;stroke:none;font-family:FreeSans;-inkscape-font-specification:FreeSans Bold"
        xml:space="preserve"><tspan
          y="75.99984"
-         x="8.2226191"
+         x="11.079762"
          id="tspan92419"
          sodipodi:role="line">Acked segments</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text92421"
-       y="99.76149"
-       x="40.706173"
+       y="108.33292"
+       x="73.087128"
        style="font-size:12px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ff0000;fill-opacity:1;stroke:none;font-family:FreeSans;-inkscape-font-specification:FreeSans Bold"
        xml:space="preserve"><tspan
-         y="99.76149"
-         x="40.706173"
+         y="108.33292"
+         x="73.087128"
          id="tspan92423"
          sodipodi:role="line">Unacknowledged segments</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text92425"
-       y="75.953667"
-       x="171.16182"
+       y="87.915627"
+       x="169.72638"
        style="font-size:12px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#008000;fill-opacity:1;stroke:none;font-family:FreeSans;-inkscape-font-specification:FreeSans Bold"
        xml:space="preserve"><tspan
-         y="75.953667"
-         x="171.16182"
+         y="87.915627"
+         x="169.72638"
          id="tspan92427"
          sodipodi:role="line">Available seq. nums</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text92429"
-       y="74.156624"
-       x="287.68573"
+       y="74.883896"
+       x="247.3221"
        style="font-size:12px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:FreeSans;-inkscape-font-specification:FreeSans Bold"
        xml:space="preserve"><tspan
-         y="74.156624"
-         x="287.68573"
+         y="74.883896"
+         x="247.3221"
          id="tspan92431"
          sodipodi:role="line">Forbidden seq. num.</tspan></text>
     <path
        inkscape:connector-curvature="0"
        id="path92655"
-       d="M 147.61904,61.428572 121.90476,88.095236"
-       style="fill:none;stroke:#ef171f;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:0.95555558;marker-end:url(#TriangleOutM-05)" />
+       d="m 175.75463,61.881729 -28.2586,33.732683"
+       style="fill:none;stroke:#ef171f;stroke-width:1.17904186px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:0.95555558;marker-end:url(#TriangleOutM-05)" />
   </g>
 </svg>

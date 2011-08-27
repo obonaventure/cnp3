@@ -14,7 +14,7 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.48.1 r9760"
-   sodipodi:docname="New document 1">
+   sodipodi:docname="network-fig-018-c.svg">
   <defs
      id="defs4">
     <font
@@ -444,11 +444,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.02"
-     inkscape:cx="83.700722"
+     inkscape:zoom="1.65"
+     inkscape:cx="241.86667"
      inkscape:cy="126.57707"
      inkscape:document-units="px"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="g9094"
      showgrid="false"
      inkscape:window-width="1280"
      inkscape:window-height="675"
@@ -463,7 +463,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -480,7 +480,7 @@
         <g
            style="fill-rule:evenodd;visibility:visible"
            id="g4916"
-           transform="translate(-13065.714,-9576.2092)">
+           transform="translate(-13083.488,-9576.2092)">
           <desc
              id="desc4918">Drawing</desc>
           <g
@@ -511,7 +511,7 @@
         <g
            style="fill-rule:evenodd;visibility:visible"
            id="g4932"
-           transform="translate(-13065.714,-9576.2092)">
+           transform="translate(-13121.488,-9576.2092)">
           <desc
              id="desc4934">Drawing</desc>
           <g
@@ -542,7 +542,7 @@
         <g
            style="fill-rule:evenodd;visibility:visible"
            id="g4948"
-           transform="translate(-13065.714,-9576.2092)">
+           transform="translate(-13121.488,-9576.2092)">
           <desc
              id="desc4950">Drawing</desc>
           <g
@@ -2653,7 +2653,7 @@
         <g
            style="fill-rule:evenodd;visibility:visible"
            id="g5804"
-           transform="translate(-13065.714,-9576.2092)">
+           transform="translate(-13161.197,-9576.2092)">
           <desc
              id="desc5806">Drawing</desc>
           <g
@@ -3434,22 +3434,22 @@
          sodipodi:linespacing="125%"
          id="text9054"
          y="881.77386"
-         x="53.921558"
+         x="39.215675"
          style="font-size:14px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ff0000;fill-opacity:1;stroke:none;font-family:FreeSans;-inkscape-font-specification:FreeSans Bold"
          xml:space="preserve"><tspan
            y="881.77386"
-           x="53.921558"
+           x="39.215675"
            id="tspan9056"
            sodipodi:role="line">Network layer</tspan></text>
       <text
          sodipodi:linespacing="125%"
          id="text9058"
-         y="950.40137"
-         x="53.921562"
+         y="951.38177"
+         x="43.137249"
          style="font-size:14px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:FreeSans;-inkscape-font-specification:FreeSans Bold"
          xml:space="preserve"><tspan
-           y="950.40137"
-           x="53.921562"
+           y="951.38177"
+           x="43.137249"
            id="tspan9060"
            sodipodi:role="line">Datalink layer</tspan></text>
       <text
@@ -3478,22 +3478,23 @@
          sodipodi:linespacing="125%"
          id="text9070"
          y="941.57782"
-         x="167.64705"
+         x="161.07727"
          style="font-size:14px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:FreeSans;-inkscape-font-specification:FreeSans Bold"
          xml:space="preserve"><tspan
            y="941.57782"
-           x="167.64705"
+           x="161.07727"
            id="tspan9072"
-           sodipodi:role="line">802.3 802.5 FDDI</tspan></text>
+           sodipodi:role="line"
+           style="font-size:12px">802.3 802.5 FDDI</tspan></text>
       <text
          sodipodi:linespacing="125%"
          id="text9074"
-         y="927.85229"
-         x="289.2157"
+         y="925.85229"
+         x="285.2157"
          style="font-size:14px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:FreeSans;-inkscape-font-specification:FreeSans Bold"
          xml:space="preserve"><tspan
-           y="927.85229"
-           x="289.2157"
+           y="925.85229"
+           x="285.2157"
            id="tspan9076"
            sodipodi:role="line">Eth</tspan></text>
       <text
