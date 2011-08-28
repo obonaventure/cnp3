@@ -12,7 +12,7 @@ In computer networks, the notion of service is more formally defined in [X200]_ 
 
 .. _fig-users:
 
-.. figure:: png/intro-figures-014-c.png
+.. figure:: svg/intro-figures-014-c.png
    :align: center
    :scale: 50 
 
@@ -26,7 +26,7 @@ Many users can be attached to the same service provider. Through this provider, 
 
 Throughout this book, we will define a service as a set of capabilities provided by a system (and its underlying elements) to its user. A user interacts with a service through a `service access point`. Note that as shown in the figure above, users interact with one service provider. In practice, the service provider is distributed over several hosts, but these are implementation details that are not important at this stage. These interactions between a user and a service provider are expressed in [X200]_ by using primitives, as show in the figure below. These primitives are an abstract representation of the interactions between a user and a service provider. In practice, these interactions could be implemented as system calls for example.
 
-.. figure:: png/intro-figures-016-c.png
+.. figure:: svg/intro-figures-016-c.png
    :align: center
    :scale: 50 
 
@@ -58,7 +58,7 @@ When discussing the service provided in a computer network, it is often useful t
 
 The figure below provides a representation of the connectionless service as a `time-sequence diagram`. The user on the left, having address `S`, issues a `Data.request` primitive containing SDU `M` that must be delivered by the service provider to destination `D`. The dashed line between the two primitives indicates that the `Data.indication` primitive that is delivered to the user on the right corresponds to the `Data.request` primitive sent by the user on the left.
 
-.. figure:: png/intro-figures-017-c.png
+.. figure:: svg/intro-figures-017-c.png
    :align: center
    :scale: 50 
 
@@ -70,7 +70,7 @@ There are several possible implementations of the connectionless service, which 
 
 An `unreliable connectionless` service may suffer from various types of problems compared to a `reliable connectionless service`. First of all, an `unreliable connectionless service` does not guarantee the delivery of all SDUs. This can be expressed graphically by using the time-sequence diagram below.
 
-.. figure:: png/intro-figures-034-c.png
+.. figure:: svg/intro-figures-034-c.png
    :align: center
    :scale: 50 
 
@@ -83,7 +83,7 @@ In practice, an `unreliable connectionless service` will usually deliver a large
 A second imperfection that may affect an `unreliable connectionless service` is that it may duplicate SDUs. Some unreliable connectionless service providers may deliver an SDU sent by a user twice or even more. This is illustrated by the time-sequence diagram below.
 
 
-.. figure:: png/intro-figures-033-c.png
+.. figure:: svg/intro-figures-033-c.png
    :align: center
    :scale: 50 
 
@@ -91,7 +91,7 @@ A second imperfection that may affect an `unreliable connectionless service` is 
 
 Finally, some unreliable connectionless service providers may deliver to a destination a different SDU than the one that was supplied in the `Data.request`. This is illustrated in the figure below. 
 
-.. figure:: png/intro-figures-035-c.png
+.. figure:: svg/intro-figures-035-c.png
    :align: center
    :scale: 50 
 
@@ -111,7 +111,7 @@ Another important characteristic of the connectionless service is whether it pre
 
 However, many connectionless services, and in particular the unreliable services, do not guarantee that they will always preserve the ordering of the SDUs sent by each user. This is illustrated in the figure below.
 
-.. figure:: png/intro-figures-037-c.png
+.. figure:: svg/intro-figures-037-c.png
    :align: center
    :scale: 50 
 
@@ -122,7 +122,7 @@ However, many connectionless services, and in particular the unreliable services
 
 The `connectionless service` is widely used in computer networks as we will see later in this book. Several variations to this basic service have been proposed. One of these is the `confirmed connectionless service`. This service uses a `Data.confirm` primitive in addition to the classical `Data.request` and `Data.indication` primitives. This primitive is issued by the service provider to confirm to a user the delivery of a previously sent SDU to its recipient. Note that, like the registered service of the post office, the `Data.confirm` only indicates that the SDU has been delivered to the destination user. The `Data.confirm` primitive does not indicate whether the SDU has been processed by the destination user. This `confirmed connectionless service` is illustrated in the figure below.
 
-.. figure:: png/intro-figures-018-c.png
+.. figure:: svg/intro-figures-018-c.png
    :align: center
    :scale: 50 
 
@@ -141,7 +141,7 @@ An invocation of the `connection-oriented service` is divided into three phases.
 
 The establishment of a connection can be modelled by using four primitives : `Connect.request`, `Connect.indication`, `Connect.response` and `Connect.confirm`. The `Connect.request` primitive is used to request the establishment of a connection. The main parameter of this primitive is the `address` of the destination user. The service provider delivers a `Connect.indication` primitive to inform the destination user of the connection attempt. If it accepts to establish a connection, it responds with a `Connect.response` primitive. At this point, the connection is considered to be open and the destination user can start sending SDUs over the connection. The service provider processes the `Connect.response` and will deliver a `Connect.confirm` to the user who initiated the connection. The delivery of this primitive terminates the connection establishment phase. At this point, the connection is considered to be open and both users can send SDUs. A successful connection establishment is illustrated below.
 
-.. figure:: png/intro-figures-019-c.png
+.. figure:: svg/intro-figures-019-c.png
    :align: center
    :scale: 50 
 
@@ -150,7 +150,7 @@ The establishment of a connection can be modelled by using four primitives : `Co
 
 The example above shows a successful connection establishment. However, in practice not all connections are successfully established. One reason is that the destination user may not agree, for policy or performance reasons, to establish a connection with the initiating user at this time. In this case, the destination user responds to the `Connect.indication` primitive by a `Disconnect.request` primitive that contains a parameter to indicate why the connection has been refused. The service provider will then deliver a `Disconnect.indication` primitive to inform the initiating user. A second reason is when the service provider is unable to reach the destination user. This might happen because the destination user is not currently attached to the network or due to congestion. In these cases, the service provider responds to the `Connect.request` with a `Disconnect.indication` primitive whose `reason` parameter contains additional information about the failure of the connection.
 
-.. figure:: png/intro-figures-020-c.png
+.. figure:: svg/intro-figures-020-c.png
    :align: center
    :scale: 50 
 
@@ -161,7 +161,7 @@ The example above shows a successful connection establishment. However, in pract
 
 Once the connection has been established, the service provider supplies two data streams to the communicating users. The first data stream can be used by the initiating user to send SDUs. The second data stream allows the responding user to send SDUs to the initiating user. The data streams can be organised in different ways. A first organisation is the `message-mode` transfer. With the `message-mode` transfer, the service provider guarantees that one and only one `Data.indication` will be delivered to the endpoint of the data stream for each `Data.request` primitive issued by the other endpoint. The `message-mode` transfer is illustrated in the figure below. The main advantage of the `message-transfer` mode is that the recipient receives exactly the SDUs that were sent by the other user. If each SDU contains a command, the receiving user can process each command as soon as it receives a SDU.
 
-.. figure:: png/intro-figures-021-c.png
+.. figure:: svg/intro-figures-021-c.png
    :align: center
    :scale: 50 
 
@@ -172,7 +172,7 @@ Once the connection has been established, the service provider supplies two data
 Unfortunately, the `message-mode` transfer is not widely used on the Internet. On the Internet, the most popular connection-oriented service transfers SDUs in `stream-mode`. With the `stream-mode`, the service provider supplies a byte stream that links the two communicating users. The sending user sends bytes by using `Data.request` primitives that contain sequences of bytes as SDUs. The service provider delivers SDUs containing consecutive bytes to the receiving user by using `Data.indication` primitives. The service provider ensures that all the bytes sent at one end of the stream are delivered correctly in the same order at the other endpoint. However, the service provider does not attempt to preserve the boundaries of the SDUs. There is no relation enforced by the service provider between the number of `Data.request` and the number of `Data.indication` primitives. The `stream-mode` is illustrated in the figure below. In practice, a consequence of the utilisation of the `stream-mode` is that if the users want to exchange structured SDUs, they will need to provide the mechanisms that allow the receiving user to separate successive SDUs in the byte stream that it receives. As we will see in the next chapter, application layer protocols often use specific delimiters such as the end of line character to delineate SDUs in a bytestream.
 
 
-.. figure:: png/intro-figures-022-c.png
+.. figure:: svg/intro-figures-022-c.png
    :align: center
    :scale: 50 
 
@@ -183,7 +183,7 @@ Unfortunately, the `message-mode` transfer is not widely used on the Internet. O
 The third phase of a connection is when it needs to be released. As a connection involves three parties (two users and one service provider), any of them can request the termination of the connection. Usually, connections are terminated upon request of one user once the data transfer is finished. However, sometimes the service provider may be forced to terminate a connection. This can be due to lack of resources inside the service provider or because one of the users is not reachable anymore through the network. In this case, the service provider will issue `Disconnect.indication` primitives to both users. These primitives will contain, as parameter, some information about the reason for the termination of the connection. Unfortunately, as illustrated in the figure below, when a service provider is forced to terminate a connection it cannot guarantee that all SDUs sent by each user have been delivered to the other user. This connection release is said to be abrupt as it can cause losses of data.
 
 
-.. figure:: png/intro-figures-038-c.png
+.. figure:: svg/intro-figures-038-c.png
    :align: center
    :scale: 50 
 
@@ -193,7 +193,7 @@ The third phase of a connection is when it needs to be released. As a connection
 An abrupt connection release can also be triggered by one of the users. If a user needs, for any reason, to terminate a connection quickly, it can issue a `Disconnect.request` primitive and to request an abrupt release. The service provider will process the request, stop the two data streams and deliver the `Disconnect.indication` primitive to the remote user as soon as possible. As illustrated in the figure below, this abrupt connection release may cause losses of SDUs.
 
 
-.. figure:: png/intro-figures-023-c.png
+.. figure:: svg/intro-figures-023-c.png
    :align: center
    :scale: 50 
 
@@ -203,7 +203,7 @@ An abrupt connection release can also be triggered by one of the users. If a use
 To ensure a reliable delivery of the SDUs sent by each user over a connection, we need to consider the two streams that compose a connection as independent. A user should be able to release the stream that it uses to send SDUs once it has sent all the SDUs that it planned to send over this connection, but still continue to receive SDUs over the opposite stream. This `graceful` connection release is usually performed as shown in the figure below. One user issues a `Disconnect.request` primitive to its provider once it has issued all its `Data.request` primitives. The service provider will wait until all `Data.indication` primitives have been delivered to the receiving user before issuing the `Disconnnect.indication` primitive. This primitive informs the receiving user that it will no longer receive SDUs over this connection, but it is still able to issue `Data.request` primitives on the stream in the opposite direction. Once the user has issued all of its `Data.request` primitives, it issues a `Disconnnect.request` primitive to request the termination of the remaining stream. The service provider will process the request and deliver the corresponding `Disconnect.indication` to the other user once it has delivered all the pending `Data.indication` primitives. At this point, all data has been delivered and the two streams have been released successfully and the connection is completely closed.
 
 
-.. figure:: png/intro-figures-024-c.png
+.. figure:: svg/intro-figures-024-c.png
    :align: center
    :scale: 50 
 
