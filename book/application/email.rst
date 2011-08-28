@@ -69,7 +69,7 @@ A simple email message containing the `From:`, `To:`, `Subject:` and `Date:` hea
 
 Note the empty line after the `Date:` header line; this empty line contains only the `CR` and `LF` characters, and marks the boundary between the header and the body of the message.
 
-Several other optionnal header lines are defined in :rfc:`5322` and elsewhere [#femailheaders]_. Furthermore, many email clients and servers define their own header lines starting from `X-`. Several of the optionnal header lines defined in :rfc:`5322` are worth being discussed here :
+Several other optional header lines are defined in :rfc:`5322` and elsewhere [#femailheaders]_. Furthermore, many email clients and servers define their own header lines starting from `X-`. Several of the optionnal header lines defined in :rfc:`5322` are worth being discussed here :
 
  - the `Message-Id:` header line is used to associate a "unique" identifier to each email. Email identifiers are usually structured like `string@domain` where `string` is a unique character string or sequence number chosen by the sender of the email and `domain` the domain name of the sender. Since domain names are unique, a host can generate globally unique message identifiers concatenating a locally unique identifier with its domain name.
  - the `In-reply-to:` is used when a message was created in reply to a previous message. In this case, the end of the `In-reply-to:` line contains the identifier of the original message.
