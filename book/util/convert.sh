@@ -17,13 +17,13 @@ then
 #   FILESIZE=`stat -f %z ${DIRNAME}/${BASENAME}.png`
 #   if [ ${FILESIZE} -ge 100000 ]
 #   then
-   if [ ${W} -gt 1200 ] 
-       then
-       NEWH=`echo "1200*${H}/${W}" | bc -lq` 
-       echo "New dimensions 1200x"${NEWH}
-       ${INKSCAPE} ${1} --export-area-drawing --export-area-snap --export-width=1200 --export-height=${NEWH} --export-png=${DIRNAME}/${BASENAME}.png
-   #    ${INKSCAPE} ${1} --export-area-drawing --export-area-snap --export-png=${DIRNAME}/${BASENAME}.png
-       else
+   if [ ${W} -gt 1000 ] 
+   then
+       NEWH=`echo "1000*${H}/${W}" | bc -lq` 
+       ${INKSCAPE} ${1} --export-area-drawing --export-area-snap --export-width=1000 --export-height=${NEWH} --export-png=${DIRNAME}/${BASENAME}.png
+      # ${INKSCAPE} ${1} --export-area-drawing --export-area-snap --export-png=${DIRNAME}/${BASENAME}.png
+       sips --resampleWidth 800 ${DIRNAME}/${BASENAME}.png
+   else
        echo "Dimensions " ${W} "x" ${H}
        ${INKSCAPE} ${1} --export-area-drawing --export-area-snap --export-png=${DIRNAME}/${BASENAME}.png
    fi

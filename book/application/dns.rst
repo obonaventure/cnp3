@@ -98,7 +98,7 @@ The `RDLength` field is the length of the `RData` field that contains the inform
 
 Several types of DNS RR are used in practice. The `A` type is used to encode the IPv4 address that corresponds to the specified name. The `AAAA` type is used to encode the IPv6 address that corresponds to the specified name. A `NS` record contains the name of the DNS server that is responsible for a given domain. For example, a query for the `A` record associated to the `www.ietf.org` name returns the following answer.
 
-.. figure:: pkt/www.ietf.org.png
+.. figure:: pkt/www-ietf-org.png
    :align: center
 
    Query for the `A` record of `www.ietf.org` 
