@@ -25,7 +25,7 @@ The transport layer entity interacts with both a user in the application layer a
 
 This is illustrated in the figure below.
 
-.. figure:: png/transport-fig-007-c.png
+.. figure:: svg/transport-fig-007-c.png
    :align: center
    :scale: 70 
 
@@ -34,7 +34,7 @@ This is illustrated in the figure below.
 
 When running on top of a perfect connectionless network service, a transport level entity can simply issue a `send(SDU)` upon arrival of a `DATA.req(SDU)`. Similarly, the receiver issues a `DATA.ind(SDU)` upon receipt of a `recvd(SDU)`. Such a simple protocol is sufficient when a single SDU is sent. 
 
-.. figure:: png/transport-fig-004-c.png
+.. figure:: svg/transport-fig-004.png
    :align: center
    :scale: 70 
 
@@ -65,7 +65,7 @@ The transport entity can then be modelled as a finite state machine, containing 
 
 The above FSM shows that the sender has to wait for an acknowledgement from the receiver before being able to transmit the next SDU.  The figure below illustrates the exchange of a few segments between two hosts.
 
-.. figure:: png/transport-fig-009-c.png
+.. figure:: svg/transport-fig-009.png
    :align: center
    :scale: 70 
 
@@ -131,7 +131,7 @@ The simplest error detection scheme is the checksum. A checksum is basically an 
 
 The second imperfection of the network layer is that segments may be lost. As we will see later, the main cause of packet losses in the network layer is the lack of buffers in intermediate routers. Since the receiver sends an acknowledgement segment after having received each data segment, the simplest solution to deal with losses is to use a retransmission timer. When the sender sends a segment, it starts a retransmission timer. The value of this retransmission timer should be larger than the `round-trip-time`, i.e. the delay between the transmission of a data segment and the reception of the corresponding acknowledgement. When the retransmission timer expires, the sender assumes that the data segment has been lost and retransmits it. This is illustrated in the figure below.
 
-.. figure:: png/transport-fig-018-c.png
+.. figure:: svg/transport-fig-018.png
    :align: center
    :scale: 70 
 
@@ -141,7 +141,7 @@ The second imperfection of the network layer is that segments may be lost. As we
 Unfortunately, retransmission timers alone are not sufficient to recover from segment losses. Let us consider, as an example, the situation depicted below where an acknowledgement is lost. In this case, the sender retransmits the data segment that has not been acknowledged. Unfortunately, as illustrated in the figure below, the receiver considers the retransmission as a new segment whose payload must be delivered to its user.
 
 
-.. figure:: png/transport-fig-019-c.png
+.. figure:: svg/transport-fig-019.png
    :align: center
    :scale: 70 
 
@@ -155,7 +155,7 @@ To solve this problem, transport protocols associate a `sequence number` to each
 
 The Alternating Bit Protocol uses a single bit to encode the sequence number. It can be implemented easily. The sender and the receivers only require a four states Finite State Machine. 
 
-.. figure:: png/transport-fig-021-c.png
+.. figure:: svg/transport-fig-021.png
    :align: center
    :scale: 70 
 
@@ -167,7 +167,7 @@ The initial state of the sender is `Wait for D(0,...)`. In this state, the sende
 The receiver first waits for `D(0,...)`. If the segment contains a correct `CRC`, it passes the SDU to its user and sends `OK0`. If the segment contains an invalid CRC, it is immediately discarded. Then, the receiver waits for `D(1,...)`. In this state, it may receive a duplicate `D(0,...)` or a data segment with an invalid CRC. In both cases, it returns an `OK0` segment to allow the sender to recover from the possible loss of the previous `OK0` segment.
 
 
-.. figure:: png/transport-fig-022-c.png
+.. figure:: svg/transport-fig-022.png
    :align: center
    :scale: 70 
 
@@ -182,7 +182,7 @@ The receiver first waits for `D(0,...)`. If the segment contains a correct `CRC`
 
 The figure below illustrates the operation of the alternating bit protocol.
 
-.. figure:: png/transport-fig-023-c.png
+.. figure:: svg/transport-fig-023.png
    :align: center
    :scale: 70 
 
@@ -262,7 +262,7 @@ The simplest sliding window protocol uses `go-back-n` recovery. Intuitively, `go
 The figure below shows the FSM of a simple `go-back-n` receiver. This receiver uses two variables : `lastack` and `next`. `next` is the next expected sequence number and `lastack` the sequence number of the last data segment that has been acknowledged. The receiver only accepts the segments that are received in sequence. `maxseq` is the number of different sequence numbers (:math:`2^n`).
 
 
-.. figure:: png/transport-fig-029-c.png
+.. figure:: svg/transport-fig-029.png
    :align: center
    :scale: 70 
 
@@ -273,7 +273,7 @@ The figure below shows the FSM of a simple `go-back-n` receiver. This receiver u
 A `go-back-n` sender is also very simple. It uses a sending buffer that can store an entire sliding window of segments [#fsizesliding]_ . The segments are sent with increasing sequence number (modulo `maxseq`). The sender must wait for an acknowledgement once its sending buffer is full. When a `go-back-n` sender receives an acknowledgement, it removes from the sending buffer all the acknowledged segments and uses a retransmission timer to detect segment losses. A simple `go-back-n` sender maintains one retransmission timer per connection. This timer is started when the first segment is sent. When the `go-back-n sender` receives an acknowledgement, it restarts the retransmission timer only if there are still unacknowledged segments in its sending buffer. When the retransmission timer expires, the `go-back-n` sender assumes that all the unacknowledged segments currently stored in its sending buffer have been lost. It thus retransmits all the unacknowledged segments in the buffer and restarts its retransmission timer.
 
 
-.. figure:: png/transport-fig-030-c.png
+.. figure:: svg/transport-fig-030.png
    :align: center
    :scale: 70 
 
@@ -340,7 +340,7 @@ In the figure above, when the sender receives `C(OK,0,[2])`, it knows that all s
 To deal with this issue, transport protocols allow the receiver to advertise the current size of its receiving window in all the acknowledgements that it sends. The receiving window advertised by the receiver bounds the size of the sending buffer used by the sender. In practice, the sender maintains two state variables : `swin`, the size of its sending window (that may be adjusted by the system) and `rwin`, the size of the receiving window advertised by the receiver. At any time, the number of unacknowledged segments cannot be larger than `min(swin,rwin)` [#facklost]_ . The utilisation of dynamic windows is illustrated in the figure below.
 
 
-.. figure:: png/transport-fig-039-c.png
+.. figure:: svg/transport-fig-039.png
    :align: center
    :scale: 70 
 

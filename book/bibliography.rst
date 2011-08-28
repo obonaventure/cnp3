@@ -6,7 +6,6 @@ Bibliography
 
 Whenever possible, the bibliography includes stable hypertext links to the references cited. 
 
-
 .. [802.11] LAN/MAN Standards Committee of the IEEE Computer Society. `IEEE Standard for Information Technology - Telecommunications and information exchange between systems - local and  metropolitan area networks - specific requirements - Part 11 : Wireless LAN Medium Access Control (MAC) and Physical Layer (PHY) Specifications <http://standards.ieee.org/getieee802/802.11.html>`_. IEEE, 1999. 
 .. [802.1d] LAN/MAN Standards Committee of the IEEE Computer Society, `IEEE Standard for Local and metropolitan area networks Media Access Control (MAC) Bridges <http://standards.ieee.org/getieee802/download/802.1D-2004.pdf>`_ , IEEE Std 802.1DTM-2004, 2004, 
 .. [802.1q] LAN/MAN Standards Committee of the IEEE Computer Society, `IEEE Standard for Local and metropolitan area networks— Virtual Bridged Local Area Networks <http://standards.ieee.org/getieee802/download/802.1Q-2005.pdf>`_, 2005, 
@@ -312,7 +311,6 @@ Whenever possible, the bibliography includes stable hypertext links to the refer
 .. [X224] ITU-T, recommendation X.224, `Information technology - Open Systems Interconnection - Protocol for providing the connection-mode transport service <http://www.itu.int/rec/T-REC-X.224-199511-I/en/>`_, 1995 
 .. [XNS] Xerox, `Xerox Network Systems Architecture <http://www.bitsavers.org/pdf/xerox/xns/XNSG058504_XNS_Introduction.pdf>`_, XNSG058504, 1985 
 .. [Zimmermann80] Zimmermann, H., `OSI Reference Model - The ISO Model of Architecture for Open Systems Interconnection <http://dx.doi.org/10.1109/TCOM.1980.1094702>`_, IEEE Transactions on Communications, vol. 28, no. 4, April 1980, pp. 425 - 432. 
-
 
 
 

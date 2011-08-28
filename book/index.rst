@@ -24,7 +24,6 @@ Computer Networking : Principles, Protocols and Practice
    transport/transport
    network/network
    lan/lan
-   bibliography
    glossary
 
 

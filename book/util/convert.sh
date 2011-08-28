@@ -20,12 +20,12 @@ then
    if [ ${W} -gt 1000 ] 
    then
        NEWH=`echo "1000*${H}/${W}" | bc -lq` 
-       ${INKSCAPE} ${1} --export-area-drawing --export-area-snap --export-width=1000 --export-height=${NEWH} --export-png=${DIRNAME}/${BASENAME}.png
+       ${INKSCAPE} ${1} --export-width=1000 --export-height=${NEWH} --export-png=${DIRNAME}/${BASENAME}.png
       # ${INKSCAPE} ${1} --export-area-drawing --export-area-snap --export-png=${DIRNAME}/${BASENAME}.png
-       sips --resampleWidth 800 ${DIRNAME}/${BASENAME}.png
+      # sips --resampleWidth 800 ${DIRNAME}/${BASENAME}.png
    else
        echo "Dimensions " ${W} "x" ${H}
-       ${INKSCAPE} ${1} --export-area-drawing --export-area-snap --export-png=${DIRNAME}/${BASENAME}.png
+       ${INKSCAPE} ${1} --export-area-drawing --export-png=${DIRNAME}/${BASENAME}.png
    fi
    
 else
