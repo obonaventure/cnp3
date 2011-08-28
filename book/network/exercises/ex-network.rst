@@ -53,7 +53,7 @@ Principles
 
 5. In the above questions, you have worked on the stable state of the routing tables computed by routing protocols. Let us now consider the transient problems that main happen when the network topology changes [#ffailures]_. For this, consider the network topology shown in the figure below and assume that all routers use a distance vector protocol that uses split horizon.
 
- .. figure:: svg/ex-five-routers-redundant.svg
+ .. figure:: svg/ex-five-routers-redundant.png
     :align: center
     :scale: 50
 
@@ -82,7 +82,7 @@ Principles
 
 6. Consider the network shown below. In this network, the metric of each link is set to `1` except link `A-B` whose metric is set to `4` in both directions. In this network, there are two paths with the same cost between `D` and `C`. Old routers would randomly select one of these equal cost paths and install it in their forwarding table. Recent routers are able to use up to `N` equal cost paths towards the same destination. 
 
- .. figure:: svg/ex-five-routers-weigth4.svg
+ .. figure:: svg/ex-five-routers-weigth4.png
     :align: center
     :scale: 70
    
@@ -113,7 +113,7 @@ Principles
 
 10. Consider the network shown in the figure below and explain the path that will be followed by the packets to reach `194.100.10.0/23`
 
- .. figure:: svg/ex-bgp-stub-one-provider.svg
+ .. figure:: svg/ex-bgp-stub-one-provider.png
     :align: center
     :scale: 100
    
@@ -121,7 +121,7 @@ Principles
 
 11. Consider, now, as shown in the figure below that the stub AS is now also connected to provider `AS789`. Via which provider will the packets destined to `194.100.10.0/23` will be received by `AS4567` ? Should `AS123` change its configuration ? 
 
- .. figure:: svg/ex-bgp-stub-two-providers.svg
+ .. figure:: svg/ex-bgp-stub-two-providers.png
     :align: center
     :scale: 100
    
@@ -133,7 +133,7 @@ Principles
   #. How is the reachabilty of these addresses affected when link `R1-R3` fails ?
   #. Propose a configuration on `R1` that achieves the same objective as the one shown in the figure but also preserves the reachability of all IP addresses inside `AS4567` if one of `AS4567`'s interdomain links fails ?
 
-  .. figure:: svg/ex-bgp-stub-two-providers-specific.svg
+  .. figure:: svg/ex-bgp-stub-two-providers-specific.png
      :align: center
      :scale: 100
    

@@ -140,7 +140,7 @@ The last point to be discussed about the virtual circuit organisation is its `da
 
 Each host maintains a flow table that associates a label with each virtual circuit that is has established. When a router receives a packet containing a label, it extracts the label and consults its `label forwarding table`. This table is a data structure that maps each couple `(incoming interface, label)` to the outgoing interface to be used to forward the packet as well as the label that must be placed in the outgoing packets. In practice, the label forwarding table can be implemented as a vector and the couple `(incoming interface, label)` is the index of the entry in the vector that contains the outgoing interface and the outgoing label. Thus a single memory access is sufficient to consult the label forwarding table. The utilisation of the label forwarding table is illustrated in the figure below.
 
-.. figure:: svg/label-forwarding.svg
+.. figure:: svg/label-forwarding.png
    :align: center
    :scale: 70   
 
@@ -175,7 +175,7 @@ The simplest solution is to pre-compute all the routing tables of all routers an
 
 The figure below shows sample routing tables in a five routers network.
 
-.. figure:: svg/routing-tables.svg
+.. figure:: svg/routing-tables.png
    :align: center
    :scale: 70   
 
