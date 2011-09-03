@@ -18,7 +18,7 @@ As the transport layer is built on top of the network layer, it is important to 
 
 .. figure:: png/transport-fig-001-c.png
    :align: center
-   :scale: 70 
+   :scale: 80 
 
    The transport layer in the reference model
 

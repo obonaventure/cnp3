@@ -26,7 +26,7 @@ IPv4 addresses are usually represented by using a dotted decimal representation 
 
 .. figure:: png/app-fig-002-c.png
    :align: center
-   :scale: 50 
+   :scale: 80 
 
    The connectionless or datagram service 
 
@@ -35,6 +35,6 @@ The second transport service is the connection-oriented service. On the Internet
 
 .. figure:: png/app-fig-003-c.png
    :align: center
-   :scale: 50 
+   :scale: 80 
 
    The connection-oriented or byte-stream service 

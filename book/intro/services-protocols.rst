@@ -14,7 +14,7 @@ In computer networks, the notion of service is more formally defined in [X200]_ 
 
 .. figure:: svg/intro-figures-014-c.png
    :align: center
-   :scale: 50 
+   :scale: 80 
 
    Users and service provider
 
@@ -28,7 +28,7 @@ Throughout this book, we will define a service as a set of capabilities provided
 
 .. figure:: svg/intro-figures-016-c.png
    :align: center
-   :scale: 50 
+   :scale: 80 
 
    The four types of primitives
 
@@ -60,7 +60,7 @@ The figure below provides a representation of the connectionless service as a `t
 
 .. figure:: svg/intro-figures-017-c.png
    :align: center
-   :scale: 50 
+   :scale: 80 
 
    A simple connectionless service
 
@@ -72,7 +72,7 @@ An `unreliable connectionless` service may suffer from various types of problems
 
 .. figure:: svg/intro-figures-034-c.png
    :align: center
-   :scale: 50 
+   :scale: 80 
 
    An unreliable connectionless service may loose SDUs
 
@@ -85,7 +85,7 @@ A second imperfection that may affect an `unreliable connectionless service` is 
 
 .. figure:: svg/intro-figures-033-c.png
    :align: center
-   :scale: 50 
+   :scale: 80 
 
    An unreliable connectionless service may duplicate SDUs
 
@@ -93,7 +93,7 @@ Finally, some unreliable connectionless service providers may deliver to a desti
 
 .. figure:: svg/intro-figures-035-c.png
    :align: center
-   :scale: 50 
+   :scale: 80 
 
    An unreliable connectionless service may deliver erroneous SDUs
 
@@ -105,7 +105,7 @@ Another important characteristic of the connectionless service is whether it pre
 
 .. figure:: png/intro-figures-036-c.png
    :align: center
-   :scale: 50 
+   :scale: 80 
 
    A connectionless service that preserves the ordering of SDUs sent by a given user
 
@@ -113,7 +113,7 @@ However, many connectionless services, and in particular the unreliable services
 
 .. figure:: svg/intro-figures-037-c.png
    :align: center
-   :scale: 50 
+   :scale: 80 
 
    A connectionless service that does not preserve the ordering of SDUs sent by a given user
 
@@ -124,7 +124,7 @@ The `connectionless service` is widely used in computer networks as we will see 
 
 .. figure:: svg/intro-figures-018-c.png
    :align: center
-   :scale: 50 
+   :scale: 80 
 
    A confirmed connectionless service
 
@@ -143,7 +143,7 @@ The establishment of a connection can be modelled by using four primitives : `Co
 
 .. figure:: svg/intro-figures-019-c.png
    :align: center
-   :scale: 50 
+   :scale: 80 
 
    Connection establishment
 
@@ -152,7 +152,7 @@ The example above shows a successful connection establishment. However, in pract
 
 .. figure:: svg/intro-figures-020-c.png
    :align: center
-   :scale: 50 
+   :scale: 80 
 
    Two types of rejection for a connection establishment attempt
 
@@ -163,7 +163,7 @@ Once the connection has been established, the service provider supplies two data
 
 .. figure:: svg/intro-figures-021-c.png
    :align: center
-   :scale: 50 
+   :scale: 80 
 
    Message-mode transfer in a connection oriented service
 
@@ -174,7 +174,7 @@ Unfortunately, the `message-mode` transfer is not widely used on the Internet. O
 
 .. figure:: svg/intro-figures-022-c.png
    :align: center
-   :scale: 50 
+   :scale: 80 
 
    Stream-mode transfer in a connection oriented service
 
@@ -185,7 +185,7 @@ The third phase of a connection is when it needs to be released. As a connection
 
 .. figure:: svg/intro-figures-038-c.png
    :align: center
-   :scale: 50 
+   :scale: 80 
 
    Abrupt connection release initiated by the service provider
 
@@ -195,7 +195,7 @@ An abrupt connection release can also be triggered by one of the users. If a use
 
 .. figure:: svg/intro-figures-023-c.png
    :align: center
-   :scale: 50 
+   :scale: 80 
 
    Abrupt connection release initiated by a user
 
@@ -205,7 +205,7 @@ To ensure a reliable delivery of the SDUs sent by each user over a connection, w
 
 .. figure:: svg/intro-figures-024-c.png
    :align: center
-   :scale: 50 
+   :scale: 80 
 
    Graceful connection release
 

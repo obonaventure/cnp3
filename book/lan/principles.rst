@@ -139,7 +139,7 @@ These four basic physical organisations of Local Area Networks are shown graphic
 
 .. figure:: svg/bus-ring-star.png
    :align: center
-   :scale: 70
+   :scale: 90
    
    Bus, ring and star-shaped Local Area Network 
 

@@ -5,6 +5,13 @@
 Changes
 ========
 
+
+
+
+September 1st, 2011
+
+
+
 July 2011 Major update, version 0.1
  - addition of a draft socket section
  - conversion of images to the SVG format

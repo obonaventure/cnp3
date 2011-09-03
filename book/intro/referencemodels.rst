@@ -17,7 +17,7 @@ Our reference model is divided into five layers, as shown in the figure below.
 
 .. figure:: svg/intro-figures-026-c.png
    :align: center
-   :scale: 50 
+   :scale: 80 
 
    The five layers of the reference model
 
@@ -38,7 +38,7 @@ An important point to note about the Physical layer is the service that it provi
 
 The last two points may seem strange at first glance. When two devices are attached through a cable, how is it possible for bits to be created or lost on such a cable ? 
 
-This is mainly due to the fact that the communicating devices use their own clock to transmit bits at a given bandwidth. Consider a sender having a clock that ticks one million times per second and sends one bit every tick. Every microsecond, the sender sends an electrical or optical signal that encodes one bit. The sender's bandwidth is thus 1 Mbps. If the receiver clock ticks exactly [#fsynchro]_ every microsecond, it will also deliver 1 Mbps to its user. However, if the receiver's clock is slightly faster (resp. slower), than it will deliver slightly more (resp. less) than one million bits every second. This explains why the physical layer may loose or create bits.
+This is mainly due to the fact that the communicating devices use their own clock to transmit bits at a given bandwidth. Consider a sender having a clock that ticks one million times per second and sends one bit every tick. Every microsecond, the sender sends an electrical or optical signal that encodes one bit. The sender's bandwidth is thus 1 Mbps. If the receiver clock ticks exactly [#fsynchro]_ every microsecond, it will also deliver 1 Mbps to its user. However, if the receiver's clock is slightly faster (resp. slower), than it will deliver slightly more (resp. less) than one million bits every second. This explains why the physical layer may lose or create bits.
 
 .. note:: Bandwidth
 
@@ -59,7 +59,7 @@ This is mainly due to the fact that the communicating devices use their own cloc
 
 .. figure:: svg/intro-figures-027-c.png
    :align: center
-   :scale: 50
+   :scale: 80
 
    The Physical layer
 
@@ -77,7 +77,7 @@ An important point to note about the `Datalink layer` is that although the figur
 
 .. figure:: svg/intro-figures-028-c.png
    :align: center
-   :scale: 50 
+   :scale: 80 
 
    The Datalink layer
 
@@ -89,7 +89,7 @@ The `Datalink layer` allows directly connected hosts to exchange information, bu
 
 .. figure:: svg/intro-figures-029-c.png
    :align: center
-   :scale: 50 
+   :scale: 80 
 
    The network layer
 
@@ -102,7 +102,7 @@ There are different types of transport layers. The most widely used transport la
 
 .. figure:: svg/intro-figures-030-c.png
    :align: center
-   :scale: 50 
+   :scale: 80 
 
    The transport layer
 
@@ -150,7 +150,7 @@ Compared to the five layers reference model explained above, the :term:`OSI` ref
 
 .. figure:: png/intro-figures-032-c.png
    :align: center
-   :scale: 50 
+   :scale: 80 
 
    The seven layers of the OSI reference model
 

@@ -538,7 +538,7 @@ In the previous sections, we have explained the mechanisms that TCP uses to deal
 
 .. index:: TCP self clocking
 
-To understand this problem better, let us consider the scenario shown in the figure below, where a server (`A`) attached to a `10 Mbps` link is sending TCP segments to a laptop (`C`) attached to a `2 Mbps` link.
+To understand this problem better, let us consider the scenario shown in the figure below, where a server (`A`) attached to a `10 Mbps` link is sending TCP segments to another computer (`C`) through a path that contains a `2 Mbps` link.
 
 .. figure:: svg/tcp-2mbps.png 
    :align: center
@@ -546,7 +546,7 @@ To understand this problem better, let us consider the scenario shown in the fig
 
    TCP over heterogenous links 
 
-In this network, the TCP segments sent by the server reach router `R1`. `R1` forwards the segments towards router `R2`. Router `R2` can potentially receive segments at `10 Mbps`, but it can only forward them at `2 Mbps` to host `C`.  Router `R2` contains buffers that allow it to store the packets that cannot immediately be forwarded to their destination. To understand the operation of TCP in this environment, let us consider a simplified model of this network where host `A` is attached to a `10 Mbps` link to a queue that represents the buffers of router `R2`. This queue is emptied at a rate of `2 Mbps`.
+In this network, the TCP segments sent by the server reach router `R1`. `R1` forwards the segments towards router `R2`. Router `R2` can potentially receive segments at `10 Mbps`, but it can only forward them at `2 Mbps` to router `R2` and then to host `C`.  Router `R2` contains buffers that allow it to store the packets that cannot immediately be forwarded to their destination. To understand the operation of TCP in this environment, let us consider a simplified model of this network where host `A` is attached to a `10 Mbps` link to a queue that represents the buffers of router `R2`. This queue is emptied at a rate of `2 Mbps`.
 
 
 .. figure:: svg/tcp-self-clocking.png 

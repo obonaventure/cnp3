@@ -27,7 +27,7 @@ This is illustrated in the figure below.
 
 .. figure:: svg/transport-fig-007-c.png
    :align: center
-   :scale: 70 
+   :scale: 80 
 
    Interactions between the transport layer, its user, and its network layer provider
 
@@ -59,7 +59,7 @@ The transport entity can then be modelled as a finite state machine, containing 
 
 .. figure:: png/transport-fig-008-c.png
    :align: center
-   :scale: 70 
+   :scale: 60 
 
    Finite state machine of the simplest transport protocol
 
@@ -67,7 +67,7 @@ The above FSM shows that the sender has to wait for an acknowledgement from the 
 
 .. figure:: svg/transport-fig-009.png
    :align: center
-   :scale: 70 
+   :scale: 80 
 
    Time sequence diagram illustrating the operation of the simplest transport protocol
 
@@ -157,7 +157,7 @@ The Alternating Bit Protocol uses a single bit to encode the sequence number. It
 
 .. figure:: svg/transport-fig-021.png
    :align: center
-   :scale: 70 
+   :scale: 80 
 
    Alternating bit protocol : Sender FSM
 

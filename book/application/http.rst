@@ -24,7 +24,7 @@ In the late 1980s, high energy physicists working at CERN_ had to efficiently ex
 
 .. figure:: svg/www-basics.png
    :align: center
-   :scale: 50 
+   :scale: 60 
 
    World-wide web clients and servers 
 
@@ -60,7 +60,8 @@ The first components of the `world wide web` are the Uniform Resource Identifier
 
 The first component of a URI is its `scheme`. In practice, the `scheme` identifies the application-layer protocol that must be used by the client to retrieve the document. The most frequent scheme is `http` that will be described later. A URI scheme can be defined for almost any application layer protocol [#furilist]_. The characters `:` and `//` follow the `scheme` of any URI.
 
-The second part of the URI  is the `authority`. This includes the DNS name or the IP address of the server where the document can be retrieved using the protocol specified in the `scheme`. This name can be preceded by some information about the user (e.g. a username) who is requesting the information. Earlier definitions of the URI allowed the specification of a username and a password before the `@` character (:rfc:`1738`), but this is now deprecated as placing a password inside a URI is insecure. The host name can be followed by the semicolon character and a port number. A default port number is defined for each `scheme` and the port number should only be included in the URI if a non-default port number is used.
+The second part of the URI is the `authority`. This includes the DNS name or the IP address of the server where the document can be retrieved using the protocol specified in the `scheme`. This name can be preceded by some information about the user (e.g. a username) who is requesting the information. Earlier definitions of the URI allowed the specification of a username and a password before the `@` character (:rfc:`1738`), but this is now deprecated as placing a password inside a URI is insecure. The host name can be followed by the semicolon character and a port number. A default port number is defined for some protocols and the port number should only be included in the URI if a non-default port number is used (for other protocols, techniques like service DNS records are used).
+
 
 The third part of the URI is the path to the document. This path is structured as filenames on a Unix host. If the path is not specified, the server will return a default document. The last two optional parts of the URI are used to provide a query and indicate a specific part (e.g. a section in an article) of the requested document. Sample URIs are shown below 
 
@@ -72,11 +73,13 @@ The third part of the URI is the path to the document. This path is structured a
    telnet://[2001:6a8:3080:3::2]:80/
    ftp://cnn.example.com&story=breaking_news@10.0.0.1/top_story.htm
 
-The first URI corresponds to a document named `rfc3986.html` that is stored on the server named `tools.ietf.org` and can be accessed by using the `http` protocol on its default port. The second URI corresponds to an email message, with subject `current-issue`, that will be sent to user `infobot` in domain `example.com`. The `mailto:` URI scheme is defined in :rfc:`2368`. The third URI references the portion `BaseHTTPServer.BaseHTTPRequestHandler` of the document `basehttpserver.html` that is stored in the `library` directory on server `docs.python.org`. This document can be retrieved by using the `http` protocol. The query `highlight=http` is associated to this URI. The fourth example is a server that operates the telnet_ protocol, uses IPv6 address `2001:6a8:3080:3::2` and is reachable on port 80. The last URI is somewhat special. Most users will assume that it corresponds to a document stored on the `cnn.example.com` server. However, to parse this URI, it is important to remember that the `@` character is used to separate the username from the host name in the authorisation part of a URI. This implies that the URI points to a document named `top_story.htm` on host having IPv4 address `10.0.0.1`. The document will be retrieved by using the `ftp` protocol with the username set to `cnn.example.com&story=breaking_news`. 
+.. The first URI corresponds to a document named `rfc3986.html` that is stored on the server named `tools.ietf.org` and can be accessed by using the `http` protocol on its default port. The second URI corresponds to an email message, with subject `current-issue`, that will be sent to user `infobot` in domain `example.com`. The `mailto:` URI scheme is defined in :rfc:`2368`. The third URI references the portion `BaseHTTPServer.BaseHTTPRequestHandler` of the document `basehttpserver.html` that is stored in the `library` directory on server `docs.python.org`. This document can be retrieved by using the `http` protocol. The query `highlight=http` is associated to this URI. The fourth example is a server that operates the telnet_ protocol, uses IPv6 address `2001:6a8:3080:3::2` and is reachable on port 80. The last URI is somewhat special. Most users will assume that it corresponds to a document stored on the `cnn.example.com` server. However, to parse this URI, it is important to remember that the `@` character is used to separate the username from the host name in the authorisation part of a URI. This implies that the URI points to a document named `top_story.htm` on host having IPv4 address `10.0.0.1`. The document will be retrieved by using the `ftp` protocol with the username set to `cnn.example.com&story=breaking_news`. 
+
+The first URI corresponds to a document named `rfc3986.html` that is stored on the server named `tools.ietf.org` and can be accessed by using the `http` protocol on its default port. The second URI corresponds to an email message, with subject `current-issue`, that will be sent to user `infobot` in domain `example.com`. The `mailto:` URI scheme is defined in :rfc:`6068`. The third URI references the portion `BaseHTTPServer.BaseHTTPRequestHandler` of the document `basehttpserver.html` that is stored in the `library` directory on server `docs.python.org`. This document can be retrieved by using the `http` protocol. The query `highlight=http` is associated to this URI. The fourth example is a server that operates the telnet_ protocol, uses IPv6 address `2001:6a8:3080:3::2` and is reachable on port 80. The last URI is somewhat special. Most users will assume that it corresponds to a document stored on the `cnn.example.com` server. However, to parse this URI, it is important to remember that the `@` character is used to separate the username from the host name in the authorisation part of a URI. This implies that the URI points to a document named `top_story.htm` on host having IPv4 address `10.0.0.1`. The document will be retrieved by using the `ftp` protocol with the username set to `cnn.example.com&story=breaking_news`. 
 
 The second component of the `word wide web` is the HyperText Markup Language (HTML). HTML defines the format of the documents that are exchanged on the `web`. The `first version of HTML <http://www.w3.org/History/19921103-hypertext/hypertext/WWW/MarkUp/Tags.html>`_ was derived from the Standard Generalized Markup Language (SGML) that was standardised in 1986 by :term:`ISO`. SGML_ was designed to allow large project documents in industries such as government, law or aerospace to be shared efficiently in a machine-readable manner. These industries require documents to remain readable and editable for tens of years and insisted on a standardised format supported by multiple vendors. Today, SGML_ is no longer widely used beyond specific applications, but its descendants including :term:`HTML` and :term:`XML` are now widespread.
 
-A markup language is a structured way of adding annotations about the formatting of the document within the document itself. Example markup langages include troff, which is used to write the Unix man pages or Latex. HTML uses markers to annotate text and a document is composed of `HTML elements`. Each element is usually composed of three elements : a start tag that potentially includes some specific attributes, some text, and an end tag. A HTML tag is a keyword enclosed in angle brackets. The generic form of a HTML element is ::
+A markup language is a structured way of adding annotations about the formatting of the document within the document itself. Example markup langages include troff, which is used to write the Unix man pages or Latex. HTML uses markers to annotate text and a document is composed of `HTML elements`. Each element is usually composed of three items: a start tag that potentially includes some specific attributes, some text (often including other elements), and an end tag. A HTML tag is a keyword enclosed in angle brackets. The generic form of a HTML element is ::
 
  <tag>Some text to be displayed</tag>
 
@@ -90,7 +93,7 @@ The HTML document shown below is composed of two parts : a header, delineated by
 
 .. figure:: png/app-fig-015-c.png
    :align: center
-   :scale: 50 
+   :scale: 80 
 
    A simple HTML page 
 
@@ -110,18 +113,18 @@ The response sent by the server also contains three parts :
 
 .. figure:: svg/http-requests-responses.png
    :align: center
-   :scale: 50 
+   :scale: 60 
 
    HTTP requests and responses
 
 
-Three types of method can be used in HTTP requests :
+Several types of method can be used in HTTP requests. The three most important ones are :
 
  - the `GET` method is the most popular one. It is used to retrieve a document from a server. The `GET` method is encoded as `GET` followed by the path of the URI of the requested document and the version of HTTP used by the client. For example, to retrieve the http://www.w3.org/MarkUp/ URI, a client must open a TCP on port `80` with host `www.w3.org` and send a HTTP request containing the following line ::
 
   GET /MarkUp/ HTTP/1.0
 
- - the `HEAD` method is a variant of the `GET` method that allows the retrieval of the header lines for a given URI without retrieving the entire document. It can be used by a client to verify whether a document has changed, compared to the copy that it already has.
+ - - the `HEAD` method is a variant of the `GET` method that allows the retrieval of the header lines for a given URI without retrieving the entire document. It can be used by a client to verify if a document exists, for instance. 
  - the `POST` method can be used by a client to send a document to a server. The sent document is attached to the HTTP request as a MIME document.
 
 
@@ -191,7 +194,7 @@ HTTP was initially designed to share text documents that were self-contained. Fo
 
 .. figure:: png/app-fig-016-c.png
    :align: center
-   :scale: 50 
+   :scale: 60
 
    HTTP 1.0 and the underlying TCP connection
 
@@ -201,7 +204,7 @@ This problem was solved by extending HTTP to support persistent TCP connections 
 
 .. figure:: svg/http-persistent.png
    :align: center
-   :scale: 50 
+   :scale: 60
 
    HTTP 1.1 persistent connections
 
@@ -299,11 +302,11 @@ A first solution is to force the users to be authenticated. This was the solutio
 
 A second solution to allow servers to tune that content to the needs and capabilities of the user is to rely on the different types of `Accept-*` HTTP headers. For example, the `Accept-Language:` can be used by the client to indicate its preferred languages. Unfortunately, in practice this header is usually set based on the default language of the browser and it is not possible for a user to indicate the language it prefers to use by selecting options on each visited web server.
 
-The third, and widely adopted, solution are HTTP cookies. HTTP cookies were initially developed as a private extension by Netscape_. They are now part of the standard :rfc:`2965`. In a nutshell, a cookie is a short string that is chosen by a server to represent a given client. Two HTTP headers are used : `Cookie:` and `Set-Cookie:`. When a server receives an HTTP request from a new client (i.e. an HTTP request that does not contain the `Cookie:` header), it generates a cookie for the client and includes it in the `Set-Cookie:` header of the returned HTTP response. The `Set-Cookie:` header contains several additional parameters including the domain names for which the cookie is valid. The client stores all received cookies on disk and every time it sends a HTTP request, it verifies whether it already knows a cookie for this domain. If so, it attaches the `Cookie:` header to the HTTP request. This is illustrated in the figure below with HTTP 1.1, but cookies also work with HTTP 1.0.
+The third, and widely adopted, solution are HTTP cookies. HTTP cookies were initially developed as a private extension by Netscape_. They are now part of the standard :rfc:`6265`. In a nutshell, a cookie is a short string that is chosen by a server to represent a given client. Two HTTP headers are used : `Cookie:` and `Set-Cookie:`. When a server receives an HTTP request from a new client (i.e. an HTTP request that does not contain the `Cookie:` header), it generates a cookie for the client and includes it in the `Set-Cookie:` header of the returned HTTP response. The `Set-Cookie:` header contains several additional parameters including the domain names for which the cookie is valid. The client stores all received cookies on disk and every time it sends a HTTP request, it verifies whether it already knows a cookie for this domain. If so, it attaches the `Cookie:` header to the HTTP request. This is illustrated in the figure below with HTTP 1.1, but cookies also work with HTTP 1.0.
 
 .. figure:: svg/http-cookies.png
    :align: center
-   :scale: 50 
+   :scale: 60 
 
    HTTP cookies
 

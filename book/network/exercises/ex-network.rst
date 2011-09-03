@@ -84,7 +84,7 @@ Principles
 
  .. figure:: svg/ex-five-routers-weigth4.png
     :align: center
-    :scale: 70
+    :scale: 30
    
     A simple network running OSPF
 
@@ -168,7 +168,7 @@ Principles
 
  .. figure:: svg/ex-bgp-backup.png
     :align: center
-    :scale: 100
+    :scale: 40
    
     A simple internetwork with a backup link 
 

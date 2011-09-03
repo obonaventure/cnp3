@@ -265,9 +265,12 @@ Whenever possible, the bibliography includes stable hypertext links to the refer
 .. [RFC5321] Klensin, J., `Simple Mail Transfer Protocol`, :rfc:`5321`, Oct. 2008
 .. [RFC5322] Resnick, P., `Internet Message Format`, :rfc:`5322`, Oct. 2008
 .. [RFC5340] Coltun, R. and Ferguson, D. and Moy, J. and Lindem, A., `OSPF for IPv6`, :rfc:`5340`, July 2008
+.. [RFC5598] Crocker, D., `Internet Mail Architecture`, :rfc:`5598`, July 2009
 .. [RFC5646] Phillips, A. and Davis, M., `Tags for Identifying Languages`, :rfc:`5646`, Sept. 2009
 .. [RFC5681] Allman, M. and Paxson, V. and Blanton, E., `TCP congestion control`, :rfc:`5681`, Sept. 2009
 .. [RFC5795] Sandlund, K. and Pelletier, G. and Jonsson, L-E., `The RObust Header Compression (ROHC) Framework`, :rfc:`5795`, March 2010
+.. [RFC6068] Duerst, M., Masinter, L. and Zawinski, J., `The 'mailto' URI Scheme` , :rfc:`6068`, October 2010   
+.. [RFC6265] Barth, A., ` HTTP State Management Mechanism`, :rfc:`6265`, April 2011
 .. [RG2010] Rhodes, B. and Goerzen, J., `Foundations of Python Network Programming: The Comprehensive Guide to Building Network Applications with Python <http://books.google.com/books?id=9HGUc8AO2xQC>`_, Second Edition, Academic Press, 2004
 .. [RJ1995] Ramakrishnan, K. K. and Jain, R., `A binary feedback scheme for congestion avoidance in computer networks with a connectionless network layer <http://doi.acm.org/10.1145/205447.205461>`_. SIGCOMM Comput. Commun. Rev. 25, 1 (Jan. 1995), 138-156. 
 .. [RY1994] Ramakrishnan, K.K. and Henry Yang, `The Ethernet Capture Effect: Analysis and Solution <http://www2.research.att.com/~kkrama/papers/capture_camera.pdf>`_, Proceedings of IEEE 19th Conference on Local Computer Networks, MN, Oct. 1994. 

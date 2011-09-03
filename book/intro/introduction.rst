@@ -40,7 +40,7 @@ Computer networks are used to allow several hosts to exchange information betwee
 
 .. figure:: svg/fullmesh.png
    :align: center
-   :scale: 100
+   :scale: 50
 
    A Full mesh network
 
@@ -52,7 +52,8 @@ The second possible physical organisation, which is also used inside computers t
 
    A network organised as a Bus
 
-A third organisation of a computer network is a star topology. In such topologies, hosts have a single physical interface and there is one physical link between each host and the center of the star. The node at the center of the star can be either a passive device, such as a piece of equipment that amplifies an electrical signal, or an active device, such as a piece of equipment that understands the format of the messages exchanged through the network. Of course, the failure of the central node implies the failure of the network. However, if one physical link fails (e.g. because the cable has been cut), then only one node is disconnected from the network. In practice, star-shaped networks are easier to operate and maintain than bus-shaped networks.
+A third organisation of a computer network is a star topology. In such topologies, hosts have a single physical interface and there is one physical link between each host and the center of the star. The node at the center of the star can be either a piece of equipment that amplifies an electrical signal, or an active device, such as a piece of equipment that understands the format of the messages exchanged through the network. Of course, the failure of the central node implies the failure of the network. However, if one physical link fails (e.g. because the cable has been cut), then only one node is disconnected from the network. In practice, star-shaped networks are easier to operate and maintain than bus-shaped networks. Many network administrators also appreciate the fact that they can control the network from a central point. Administered from a Web interface, or through a console-like connection, the center of the star is a useful point of control (enabling or disabling devices) and an excellent observation point (usage statistics).
+
 
 .. figure:: svg/star.png
    :align: center
@@ -87,7 +88,7 @@ Throughout this book, our objective will be to understand the protocols and mech
 
 .. figure:: svg/internetwork.png
    :align: center
-   :scale: 50 
+   :scale: 75
 
    A simple internetwork
 
@@ -101,7 +102,7 @@ The first and most widespread transmission mode is called :term:`unicast` . In t
 
 .. figure:: svg/unicast.png
    :align: center
-   :scale: 10 
+   :scale: 50
 
    Unicast transmission
 
@@ -109,7 +110,7 @@ A second transmission mode is :term:`multicast` transmission mode. This mode is 
 
 .. figure:: svg/multicast.png
    :align: center
-   :scale: 10 
+   :scale: 50 
 
    Multicast transmission
 
@@ -119,7 +120,7 @@ The last transmission mode is the :term:`anycast` transmission mode. It was init
 
 .. figure:: svg/anycast.png
    :align: center
-   :scale: 10 
+   :scale: 50 
 
    Anycast transmission
 

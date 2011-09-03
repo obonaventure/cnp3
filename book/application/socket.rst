@@ -82,6 +82,19 @@ With these methods, it is now possible to write a simple HTTP client. This clien
    :language: python
 
 
+As mentioned above, the socket API is very low-level. This is the interface to the transport service. For a common and simple task, like retrieving a document from the Web, there are much simpler solutions. For example, the python_ `standard library <http://docs.python.org/library/>` includes several high-level APIs to implementations of various application layer protocols including HTTP. For example, the `httplib <http://docs.python.org/library/httplib.html>` module can be used to easily access documents via HTTP. 
+
+
+.. literalinclude:: python/http-client-httplib.py
+ :language: python
+
+Another module, `urllib2 <http://docs.python.org/library/urllib2.html` allows the programmer to directly use URLs. This is much more simpler than directly using sockets. 
+
+.. literalinclude:: python/http-cclient-urllib2.py
+ :language: python
+
+But simplicity is not the only advantage of using high-level libraries. They allow the programmer to manipulate higher-level concepts ( e.g. `I want the content pointed by this URL`) but also include many features such as transparent support for the utilisation of :term:`TLS` or IPv6.
+
 The second type of applications that can be written by using the socket API are the servers. A server is typically runs forever waiting to process requests coming from remote clients. A server using the connectionless will typically start with the creation of a `socket` with the ``socket.socket``. This socket can be created above the TCP/IPv4 networking stack (``socket.AF_INET``) or the TCP/IPv6 networking stack (``socket.AF_INET6``), but not both by default. If a server is willing to use the two networking stacks, it must create two threads, one to handle the TCP/IPv4 socket and the other to handle the TCP/IPv6 socket. It is unfortunately impossible to define a socket that can receive data from both networking stacks at the same time with the python_ socket API.
 
 .. index:: socket.bind, socket.recvfrom
@@ -117,4 +130,4 @@ This server is far from a production-quality web server. A real web server would
 
 .. [#fnumrecv] Experiments with the client indicate that the number of `socket.recv` calls can vary at each run. There are various factors that influence the number of such calls that are required to retrieve some information from a server. We'll discuss some of them after having explained the operation of the underlying transport protocol.
 
-.. [#apache] There are many `production quality web servers software <http://en.wikipedia.org/wiki/Comparison_of_web_server_software>` available. apache_ is a very complex but widely used one. `thttpd <http://www.acme.com/software/thttpd/>` and `lighttpd <http://www.lighttpd.net/>` are less complex and their source code is probably easier to understand.
+.. [#fapache] There are many `production quality web servers software <http://en.wikipedia.org/wiki/Comparison_of_web_server_software>` available. apache_ is a very complex but widely used one. `thttpd <http://www.acme.com/software/thttpd/>` and `lighttpd <http://www.lighttpd.net/>` are less complex and their source code is probably easier to understand.

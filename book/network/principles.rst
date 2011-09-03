@@ -9,7 +9,7 @@ The main objective of the network layer is to allow endsystems, connected to dif
 
 .. figure:: svg/osi-network.png
    :align: center
-   :scale: 70
+   :scale: 80
    
    The network layer in the reference model
 
@@ -28,7 +28,7 @@ The second type of datalink layer is the one used in Local Area Networks (LAN). 
 
 .. figure:: svg/simple-lan.png
    :align: center
-   :scale: 70    
+   :scale: 50    
    
    A local area network 
 
@@ -84,7 +84,7 @@ To understand the datagram organisation, let us consider the figure below. A net
 
 .. figure:: svg/simple-internetwork.png
    :align: center
-   :scale: 70   
+   :scale: 80   
 
    A simple internetwork 
 

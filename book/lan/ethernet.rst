@@ -299,7 +299,7 @@ To illustrate the operation of the `Spanning Tree Protocol`, let us consider the
 
 .. figure:: svg/datalink-fig-016-c.png
    :Align: center
-   :scale: 70
+   :scale: 100
    
    A simple Spanning tree computed in a switched Ethernet network
 

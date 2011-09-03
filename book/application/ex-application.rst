@@ -42,12 +42,12 @@ where
 
 7. Perform the same analysis for a popular website such as `www.google.com`. What is the lifetime associated to this IP address ? If you perform the same request several times, do you always receive the same answer ? Can you explain why a lifetime is associated to the DNS replies ?
 
-8. Use `dig` to find the mail relays used by the `uclouvain.be` and `gmail.com` domains. What is the `TTL` of these records (use the `+ttlid` option when using `dig`) ? Can you explain the preferences used by the `MX` records. You can find more information about the MX records in :rfc:`974`
+8. Use `dig` to find the mail relays used by the `uclouvain.be` and `gmail.com` domains. What is the `TTL` of these records ? Can you explain the preferences used by the `MX` records. You can find more information about the MX records in :rfc:`5321`
 
 9. Use `dig` to query the IPv6 address (DNS record AAAA) of the following hosts
 
    - `www.sixxs.net`
-   - `www.google.com`
+   - `www.ietf.org`
    - `ipv6.google.com`
 
 10. When `dig` is run, the header section in its output indicates the `id` the DNS identifier used to send the query. Does your implementation of `dig` generates random identifiers ? 
@@ -69,7 +69,7 @@ where
      - sends DNS requests containing identifiers that are incremented by one after each request
      - sends DNS requests containing random identifiers
 
-12. The DNS protocol can run over UDP and over TCP. Most DNS servers prefer to use UDP because it consumes fewer resources on the server. However, TCP is useful when a large answer is expected or when a large answer must Use `time dig +tcp` to query a root DNS server. Is it faster to receive an answer via TCP or via UDP ?
+12. The DNS protocol can run over UDP and over TCP. Most DNS servers prefer to use UDP because it consumes fewer resources on the server. However, TCP is useful when a large answer is expected or when a large answer is expected. Use `time dig +tcp` to query a root DNS server. Is it faster to receive an answer via TCP or via UDP ?
 
 
 Internet email protocols
@@ -79,7 +79,7 @@ Many Internet protocols are ASCII_-based protocols where the client sends reques
 
    - the messages exchanged by the client and the server can be easily understood by a developer or network engineer by simply reading the messages
    - it is often easy to write a small prototype that implements a part of the protocol
-   - it is possible to test a server manually by using telnet Telnet is a protocol that allows to obtain a terminal on a remote server. For this, telnet opens a TCP connection with the remote server on port 23. However, most `telnet` implementations allow the user to specify an alternate port as `telnet hosts port` When used with a port number as parameter, `telnet` opens a TCP connection to the remote host on the specified port. `telnet` can thus be used to test any server using an ASCII-based protocol on top of TCP. Note that if you need to stop a running `telnet` session, Ctrl-C will not work as it will be sent by `telnet` to the remote host over the TCP connection. On many `telnet` implementations you can type `Ctrl-]` to freeze the TCP connection and return to the telnet interface.
+   - it is possible to test a server manually by using telnet Telnet is a protocol that allows to obtain a terminal on a remote server. For this, telnet opens a TCP connection with the remote server on port 23. However, most `telnet` implementations allow the user to specify an alternate port as `telnet hosts port` When used with a port number as parameter, `telnet` opens a TCP connection to the remote host on the specified port. `telnet` can thus be used to test any server using an ASCII-based protocol on top of TCP. Note that if you need to stop a running `telnet` session, ``Ctrl-C`` will not work as it will be sent by `telnet` to the remote host over the TCP connection. On many `telnet` implementations you can type ``Ctrl-]`` to freeze the TCP connection and return to the telnet interface.
 
 
 1. Assume that your are sending an email from your `@student.uclouvain.be` inside the university to another student's `@student.uclouvain.be` address. Which protocols are involved in the transmission of this email ?
@@ -114,11 +114,9 @@ Many Internet protocols are ASCII_-based protocols where the client sends reques
  
 11. By using SMTP, is it possible to send an email that contains exactly the following ASCII art ? 
 
- .. code-block:: text
-
-    .
-    ..
-    ...
+.. figure:: pkt/ascii-art.png
+   :align: center
+   :scale: 100
 
 12. Most email agents allow you to send email in carbon-copy (`cc:`) and also in blind-carbon-copy (`bcc:`) to a recipient. How does a SMTP server supports these two types of recipients ?
 
@@ -157,7 +155,7 @@ The HyperText Transfer Protocol
 
 6. Use curl_ with the `--trace-ascii filename` to retrieve http://www.google.com . Explain what a browser such as firefox would do when retrieving this URL.
 
-7. The headers sent in a HTTP request allow the client to provide additional information to the server. One of these headers is the Language header that allows to indicate the preferred language of the client [#lang]_. For example, `curl -HAccept-Language:en http://www.google.be' will send to `http://www.google.be` a HTTP request indicating English (en) as the preferred language. Does google provide a different page in French (fr) and Walloon (wa) ? Same question for http://www.uclouvain.be (given the size of the homepage, use diff to compare the different pages retrieved from www.uclouvain.be)
+7. The headers sent in a HTTP request allow the client to provide additional information to the server. One of these headers is the `Accept-Language` header that allows to indicate the preferred language of the client [#lang]_. For example, `curl -HAccept-Language:en http://www.google.be' will send to `http://www.google.be` a HTTP request indicating English (en) as the preferred language. Does google provide a different page in French (fr) and Walloon (wa) ? Same question for `http://www.uclouvain.be` (given the size of the homepage, use ``diff`` to compare the different pages retrieved from `www.uclouvain.be`)
 
 8. Compare the size of the http://www.yahoo.com and http://www.google.com web pages by downloading them with curl_
 
@@ -189,6 +187,8 @@ The HyperText Transfer Protocol
 
 .. [#ftotem] Use dig_ to find the IP address used by `totem.info.ucl.ac.be`
 
-.. [#lang] The list of available language tags can be found at http://www.loc.gov/standards/iso639-2/php/code_list.php Additional information about the support of multiple languages in Internet protocols may be found in :rfc:`5646`
+.. [#lang] The list of available language tags can be found at http://www.iana.org/assignments/language-subtag-registry Versions in other formats are available at http://www.langtag.net/registries.html Additional information about the support of multiple languages in Internet protocols may be found in rfc5646_
+
+
 
 

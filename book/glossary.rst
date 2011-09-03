@@ -311,4 +311,5 @@ Glossary
    inverse query
         For DNS servers and resolvers, an inverse query is a query for the domaine name that corresponds to a given IP address. 
 
-
+   TLS
+	Transport Layer Security, defined in :rfc:`5246` is a cryptographic protocol that is used to provide communication security for Internet applications. This protocol is used on top of the transport service but a detailed description is outside the scope of this book.
