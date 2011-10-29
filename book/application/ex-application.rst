@@ -128,7 +128,7 @@ Many Internet protocols are ASCII_-based protocols where the client sends reques
 
 16. On smartphones, users often want to avoid downloading large emails over a slow wireless connection. How could a POP client only download emails that are smaller than 5 KBytes ?
 
-17. Open a POP session with the lab's POP server (`nostromo.info.ucl.ac.be`) by using the username and password that you received. Verify that your username and password are accepted by the server.
+17. Open a POP session with the lab's POP server (`cnp3.info.ucl.ac.be`) by using the username and password that you received. Verify that your username and password are accepted by the server.
 
 18. The lab's POP server contains a script that runs every minute and sends two email messages to your account if your email folder is empty. Use POP to retrieve these two emails and provide the secret message to your teaching assistant. 
 
@@ -169,7 +169,7 @@ The HyperText Transfer Protocol
 
 .. [#rs] You may obtain additional information about the root DNS servers from http://www.root-servers.org
 
-.. [#fblock] Note that using `telnet` to connect to a remote host on port 25 may not work in all networks. Due to the spam_ problem, many :term:`ISP` networks do not allow their customers to use port TCP 25 directly and force them to use the ISP's mail relay to forward their email. Thanks to this, if a software sending spam has been installed on the PC of one of the ISP's customers, this software will not be able to send a huge amount of spam. If you connect to `nostromo.info.ucl.ac.be` from the fixed stations in INGI's lab, you should not be blocked.
+.. [#fblock] Note that using `telnet` to connect to a remote host on port 25 may not work in all networks. Due to the spam_ problem, many :term:`ISP` networks do not allow their customers to use port TCP 25 directly and force them to use the ISP's mail relay to forward their email. Thanks to this, if a software sending spam has been installed on the PC of one of the ISP's customers, this software will not be able to send a huge amount of spam. If you connect to `cnp3.info.ucl.ac.be` from the fixed stations in INGI's lab, you should not be blocked.
 
 .. [#fmonitoring] There are many `monitoring tools <http://en.wikipedia.org/wiki/Comparison_of_network_monitoring_systems>`_ available. nagios_ is a very popular open source monitoring system. 
 

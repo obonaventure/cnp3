@@ -253,3 +253,7 @@
 .. _ISP: http://en.wikipedia.org/wiki/Internet_service_provider
 
 .. _Unix BSD: http://en.wikipedia.org/wiki/Berkeley_Software_Distribution
+
+.. _troff: http://en.wikipedia.org/wiki/Troff
+
+.. _Latex: http://en.wikipedia.org/wiki/Latex

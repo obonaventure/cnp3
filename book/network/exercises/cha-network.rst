@@ -18,7 +18,7 @@ Practice
  - `2001:db8::/48`
  - `2001:6a8:3080::/48`
 
-3. Researchers and network operators collect and expose lots of BGP data. For this, they establish eBGP sessions between `data collection` routers and production routers located operationnal networks. Several `data collection` routers are available, the most popular ones are :
+3. Researchers and network operators collect and expose lots of BGP data. For this, they establish eBGP sessions between `data collection` routers and production routers located in operational networks. Several `data collection` routers are available, the most popular ones are :
 
   - http://www.routeviews.org
   - http://www.ripe.net/ris

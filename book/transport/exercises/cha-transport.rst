@@ -255,6 +255,8 @@ In the netkit lab (:download:`exercises/netkit/netkit_lab_2hosts_1rtr_ipv4.tar.t
     Emulated network
 
  The emulated network is composed of three UML machines [#fcongestion]_: a client, a server and a router. The client and the server are connected via the router. The client sends data to the server. The link between the router and the client is controlled by using the `netem <http://www.linuxfoundation.org/en/Net:Netem>`_ Linux kernel module. This module allows us to insert additional delays, reduce the link bandwidth and insert random packet losses. 
+.. Note that due to the way `netem <http://www.linuxfoundation.org/en/Net:Netem>`_ has been configured, the delays and the losses are only applied on packets received by `S`, not on packets sent by `S`.
+
 
  We used `netem <http://www.linuxfoundation.org/en/Net:Netem>`_ to collect several traces : 
 
@@ -262,8 +264,6 @@ In the netkit lab (:download:`exercises/netkit/netkit_lab_2hosts_1rtr_ipv4.tar.t
   - :download:`exercises/traces/trace1.pcap`
   - :download:`exercises/traces/trace2.pcap`
   - :download:`exercises/traces/trace3.pcap`   
-
-.. Note that due to the way `netem <http://www.linuxfoundation.org/en/Net:Netem>`_ has been configured, the delays and the losses are only applied on packets received by `S`, not on packets sent by `S`.
 
  Using wireshark_ or tcpdump_, carry out the following analyses :
 

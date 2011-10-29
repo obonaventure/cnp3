@@ -9,12 +9,12 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="600"
-   height="300"
+   width="370.29086"
+   height="228.83994"
    id="svg6744"
    version="1.1"
    inkscape:version="0.48.1 r9760"
-   sodipodi:docname="New document 4">
+   sodipodi:docname="intro-figures-026-c.svg">
   <defs
      id="defs6746">
     <font
@@ -397,8 +397,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.0074671"
-     inkscape:cx="385.55711"
-     inkscape:cy="169.88997"
+     inkscape:cx="256.43388"
+     inkscape:cy="140.1412"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -406,7 +406,11 @@
      inkscape:window-height="674"
      inkscape:window-x="0"
      inkscape:window-y="0"
-     inkscape:window-maximized="0" />
+     inkscape:window-maximized="0"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
   <metadata
      id="metadata6749">
     <rdf:RDF>
@@ -415,7 +419,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -423,7 +427,7 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(0,-752.36217)">
+     transform="translate(-129.12323,-793.77347)">
     <g
        style="fill-rule:evenodd;visibility:visible"
        id="g7557"

@@ -11,7 +11,7 @@ Glossary
    :sorted:
 
    ascii
-	The American Standard Code for Information Interchange (ASCII) is a character-encoding scheme that defines a binary representation for characters. The ASCII table contains both printable characters and control characters. ASCII characters were encoded in 7 bits and only contained the characters required to write text in English. Other character sets such as Unicode have been developped later to support all written languages.
+	The American Standard Code for Information Interchange (ASCII) is a character-encoding scheme that defines a binary representation for characters. The ASCII table contains both printable characters and control characters. ASCII characters were encoded in 7 bits and only contained the characters required to write text in English. Other character sets such as Unicode have been developed later to support all written languages.
 
    anycast
 	a transmission mode where an information is sent from one source to `one` receiver that belongs to a specified group
@@ -46,7 +46,7 @@ Glossary
 	The Internet Engineering Task Force is a non-profit organisation that develops the standards for the protocols used in the Internet. The IETF mainly covers the transport and network layers. Several application layer protocols are also standardised within the IETF. The work in the IETF is organised in working groups. Most of the work is performed by exchanging emails and there are three IETF meetings every year. Participation is open to anyone. See http://www.ietf.org
 
    W3C
-	The world wide web consortium was created to standardise the protocols and mechanisms used in the global www. It is thus focussed on a subset of the application layer. See http://www.w3c.org
+	The world wide web consortium was created to standardise the protocols and mechanisms used in the global www. It is thus focused on a subset of the application layer. See http://www.w3c.org
 
    X25
    
@@ -62,13 +62,13 @@ Glossary
         The Domain Name System is a distributed database that allows to map names on IP addresses.
    
    packet
-	a packet is the unit of information transfert in the network layer
+	a packet is the unit of information transfer in the network layer
 
    segment
-	a segment is the unit of information transfert in the transport layer
+	a segment is the unit of information transfer in the transport layer
 
    frame
-	a frame is the unit of information transfert in the datalink layer
+	a frame is the unit of information transfer in the datalink layer
 
    SDU (Service Data Unit)	
         a Service Data Unit is the unit information transferred between applications
@@ -77,7 +77,7 @@ Glossary
 	a public internet, i.e. a network composed of different networks that are running :term:`IPv4` or :term:`IPv6`
 
    internet
-	an internet is an internetwork, i.e. a network composed of different networks. The :term:`Internet` is a very popular internetwork, but other internets have beend used in the path.	
+	an internet is an internetwork, i.e. a network composed of different networks. The :term:`Internet` is a very popular internetwork, but other internets have been used in the path.	
 
    IP
         Internet Protocol is the generic term for the network layer protocol in the TCP/IP protocol suite. :term:`IPv4` is widely used today and :term:`IPv6` is expected to replace :term:`IPv4`
@@ -104,10 +104,10 @@ Glossary
 	The Simple Network Management Protocol is a management protocol defined for TCP/IP networks.
 
    ASN.1
-	The Abstract Syntax Notation One (ASN.1) was designed by ISO and ITU-T. It is a stadard and flexible notation that can be used to describe data structures for representing, encoding, transmitting, and decoding data between applications. It was designed to be used in the Presentation layer of the OSI reference model but is now used in other protocols such as :term:`SNMP`.
+	The Abstract Syntax Notation One (ASN.1) was designed by ISO and ITU-T. It is a standard and flexible notation that can be used to describe data structures for representing, encoding, transmitting, and decoding data between applications. It was designed to be used in the Presentation layer of the OSI reference model but is now used in other protocols such as :term:`SNMP`.
 
    ftp
-	The File Transfert Protocol defined in :rfc:`959` has been the de facto protocol to exchange files over the Internet before the widespread adoption of HTTP :rfc:`2616`
+	The File Transfer Protocol defined in :rfc:`959` has been the de facto protocol to exchange files over the Internet before the widespread adoption of HTTP :rfc:`2616`
 
    ISN
 	The Initial Sequence Number of a TCP connection is the sequence number chosen by the client ( resp. server) that is placed in the `SYN` (resp. `SYN+ACK`) segment during the establishment of the TCP connection.
@@ -120,6 +120,10 @@ Glossary
 
    TCB
 	The Transmission Control Block is the set of variables that are maintained for each established TCP connection by a TCP implementation. 
+  
+   API
+	Application Programming Interface
+
 
    socket
 	A low-level API originally defined on Berkeley Unix to allow programmers to develop clients and servers. 
@@ -131,16 +135,16 @@ Glossary
 	The round-trip-time (RTT) is the delay between the transmission of a segment and the reception of the corresponding acknowledgement in a transport protocol.
 
    CIDR
-	Classless InterDomain Routing is the current address allocation architecture for IPv4. It was defined in :rfc:`1518` and :rfc:`4632`. 
+	Classless Inter Domain Routing is the current address allocation architecture for IPv4. It was defined in :rfc:`1518` and :rfc:`4632`. 
 
    RIR
 	Regional Internet Registry. An organisation that manages IP addresses and AS numbers on behalf of :term:`IANA`.
 
    RIP
-	Routing Information Protocol. An intradomain routing protocol based on distance vectors that is sometimes used in entreprise networks. RIP is defined in :rfc:`2453`.
+	Routing Information Protocol. An intradomain routing protocol based on distance vectors that is sometimes used in enterprise networks. RIP is defined in :rfc:`2453`.
 
    OSPF
-	Open Shortest Path First. A link-state intradomain routing protocol that  is often used in entreprise and ISP networks. OSPF is defined in and :rfc:`2328`  and :rfc:`5340`
+	Open Shortest Path First. A link-state intradomain routing protocol that  is often used in enterprise and ISP networks. OSPF is defined in and :rfc:`2328`  and :rfc:`5340`
  
    IS-IS
 	Intermediate System- Intermediate System. A link-state intradomain routing that was initially defined for the ISO CLNP protocol but was extended to support IPv4 and IPv6. IS-IS is often used in ISP networks. It is defined in [ISO10589]_
@@ -158,7 +162,7 @@ Glossary
 	The Border Gateway Protocol is the interdomain routing protocol used in the global Internet.
 
    EIGRP
-	The Enhanced Interior Gateway Routing Protocol (EIGRP) is prorietary intradomain routing protocol that is often used in entreprise networks. EIGRP uses the DUAL algorithm described in [Garcia1993]_.
+	The Enhanced Interior Gateway Routing Protocol (EIGRP) is a proprietary intradomain routing protocol that is often used in enterprise networks. EIGRP uses the DUAL algorithm described in [Garcia1993]_.
 
 
    IGRP	
@@ -183,7 +187,7 @@ Glossary
 	A relay operating in the physical layer.   
 	
    AIMD
-	Additive Increase, Multiplicative Decrease. A rate adaption algorithm used notably by TCP where a host additively increases its transmission rate when the network is not congested and multiplicatevely decreases when congested is detected.
+	Additive Increase, Multiplicative Decrease. A rate adaption algorithm used notably by TCP where a host additively increases its transmission rate when the network is not congested and multiplicatively decreases when congested is detected.
 
    HTTP
 	The HyperText Transport Protocol is defined in :rfc:`2616`
@@ -228,7 +232,7 @@ Glossary
 	Asynchronous Transfer Mode
 
    Frame-Relay	     
-        A wide area networking 	technology using virtual circuits that is deploed by telecom operators.	     
+        A wide area networking 	technology using virtual circuits that is deployed by telecom operators.	     
   
    hosts.txt
 	A file that initially contained the list of all Internet hosts with their IPv4 address. As the network grew, this file was replaced by the DNS, but each host still maintains a small hosts.txt file that can be used when DNS is not available.   
@@ -237,7 +241,7 @@ Glossary
 	The Domain Name System is a distributed database that can be queried by hosts to map names onto IP addresses
 
    BNF
-	 A Backus-Naur Form (BNF) is a formal way to describe a langage by using syntactic and lexical rules. BNFs are frequently used to define programming languages, but also to define the messages exchanged between networked applications. :rfc:`5234` explains how a BNF must be written to specify an Internet protocol.
+	 A Backus-Naur Form (BNF) is a formal way to describe a language by using syntactic and lexical rules. BNFs are frequently used to define programming languages, but also to define the messages exchanged between networked applications. :rfc:`5234` explains how a BNF must be written to specify an Internet protocol.
 
    TLD
 	A Top-level domain name. There are two types of TLDs. The ccTLD are the TLD that correspond to a two letters :term:`ISO-3166` country code. The gTLD are the generic TLDs that are not assigned to a country.
@@ -288,7 +292,7 @@ Glossary
    	A synonym for a regular telephone line, i.e. a line that can be used to dial any telephone number.
 
    leased line
-        A telephone line that is permanentaly available between two endpoints. 
+        A telephone line that is permanently available between two endpoints. 
 
    ISO-3166
 	An :term:`ISO` standard that defines codes to represent countries and their subdivisions. See http://www.iso.org/iso/country_codes.htm    
@@ -309,7 +313,10 @@ Glossary
         For DNS servers and resolvers, a standard query is a query for a `A` or a `AAAA` record. Such a query typically returns an IP address. 
 
    inverse query
-        For DNS servers and resolvers, an inverse query is a query for the domaine name that corresponds to a given IP address. 
+        For DNS servers and resolvers, an inverse query is a query for the domain name that corresponds to a given IP address. 
 
    TLS
 	Transport Layer Security, defined in :rfc:`5246` is a cryptographic protocol that is used to provide communication security for Internet applications. This protocol is used on top of the transport service but a detailed description is outside the scope of this book.
+
+   NBMA
+	A Non Broadcast Mode Multiple Access Network is a subnetwork that supports multiple hosts/routers but does not provide an efficient way of sending broadcast frames to all devices attached to the subnetwork. ATM subnetworks are an example of NBMA networks.

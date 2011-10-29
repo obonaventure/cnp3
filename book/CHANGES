@@ -1,6 +1,26 @@
 Release 0.2 (in development)
 ============================
 
+
+Revision 316
+
+Minor improvements
+------------------
+- many small changes to figures
+- Changed to haiku style for HTML version, suggested by Simon van der Linden
+- #10 replaced bandwidth by bit rate in the introduction since bandwidth was used for the physical layer. bit rate seemed more appropriate than 
+- #27 various improvements in network layer chapter reported by S. Bortzmeyer
+- #33 fixed to US English spelling for the entire book
+- #34 typo repo reported by F. Pelsser
+- typo reported by Andre Sintzoff
+- fixed typos and error in bandwidth computation reported by Francois Aubry and Benjamin Blaise
+- included various text enhancements proposed by Daire O'Doherty in the application layer chapter
+- clarified DNS question, suggestion by Fabien Duchene
+- updated description of loopback interfaces in bgp section
+- Clarified text based on comments provided by Daire O'Doherty in the network layer and lan chapters
+- moved to PDF figures for the latex version instead of the png figures. Should improve the readability
+- fix from Stephane Bortzmeyer on the URI definition in application chapter
+
 Revision 315
 
 New text

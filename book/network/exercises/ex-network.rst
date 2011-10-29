@@ -130,7 +130,7 @@ Principles
 12. Consider that stub shown in the figure below decides to advertise two `/24` prefixes instead of its allocated `/23` prefix. 
 
   #. Via which provider does `AS4567` receive the packets destined to `194.100.11.99` and `194.100.10.1` ? 
-  #. How is the reachabilty of these addresses affected when link `R1-R3` fails ?
+  #. How is the reachability of these addresses affected when link `R1-R3` fails ?
   #. Propose a configuration on `R1` that achieves the same objective as the one shown in the figure but also preserves the reachability of all IP addresses inside `AS4567` if one of `AS4567`'s interdomain links fails ?
 
   .. figure:: svg/ex-bgp-stub-two-providers-specific.png

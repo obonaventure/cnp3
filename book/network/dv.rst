@@ -14,46 +14,41 @@ Each router maintains a routing table. The routing table `R` can be modelled as 
  - `R[d].cost` is the sum of the metrics of the links that compose the shortest path to reach destination `d`
  - `R[d].time` is the timestamp of the last distance vector containing destination `d`
 
-A router that uses distance vector routing regularly sends its distance vector over all of its interfaces. The distance vector is a summary of the router's routing table that indicates the distance towards each known destination. This distance vector can be computed from the routinng table by using the pseudo-code below.
+A router that uses distance vector routing regularly sends its distance vector over all its interfaces. The distance vector is a summary of the router's routing table that indicates the distance towards each known destination. This distance vector can be computed from the routing table by using the pseudo-code below.
 
-.. code-block:: text
+.. code-block:: python
 
  Every N seconds: 
   v=Vector()
-  for each destination=d in R[]
-  {
-   v.add(Pair(d,R[d].cost));
-  }
-  for each interface
-  {
-   Send(v,interface)  # send vector v on this interface
-  }
+  for d in R[]:
+     # add destination d to vector
+     v.add(Pair(d,R[d].cost))
+  for i in interfaces
+     # send vector v on this interface
+     send(v,interface)  
 
 
 When a router boots, it does not know any destination in the network and its routing table only contains itself. It thus sends to all its neighbours a distance vector that contains only its address at a distance of `0`. When a router receives a distance vector on link `l`, it processes it as follows.
 
-.. code-block:: text
+.. code-block:: python
 
- Received(Vector V[],link l)
- { # received vector from link l 
-  for each destination=d in V[]
-  {
-   if not (d isin R[])
-    { # new route 
-      R[d].cost=V[d].cost+l.cost;
-      R[d].link=l;
-      R[d].time=now;
-    }
-    else
-    { 
-     if ( ((V[d].cost+l.cost) < R[d].cost) or ( R[d].link == l) ) 
-     { # Better route or change to current route 
-       R[d].cost=V[d].cost+l.cost;
-       R[d].link=l;
-       R[d].time=now;
-     }
-   }
- }
+ # V : received Vector
+ # l : link over which vector is received
+ def received(V,l):
+    # received vector from link l  
+    for d in V[]
+      if not (d in R[]) :
+         # new route 
+      	 R[d].cost=V[d].cost+l.cost
+      	 R[d].link=l
+      	 R[d].time=now
+      else :
+         # existing route, is the new better ?
+	 if ( ((V[d].cost+l.cost) < R[d].cost) or ( R[d].link == l) )  :
+	      # Better route or change to current route 
+       	      R[d].cost=V[d].cost+l.cost
+       	      R[d].link=l
+       	      R[d].time=now
 
 
 The router iterates over all addresses included in the distance vector. If the distance vector contains an address that the router does not know, it inserts the destination inside its routing table via link `l` and at a distance which is the sum between the distance indicated in the distance vector and the cost associated to link `l`. If the destination was already known by the router, it only updates the corresponding entry in its routing table if either : 
@@ -110,7 +105,7 @@ At this point, all routers have a routing table allowing them to reach all anoth
 
 .. index:: count to infinity
 
-Consider now that the link between `D` and `E` fails. The network is now partitionned into two disjoint parts : (`A` , `D`)  and (`B`, `E`, `C`). The routes towards `B`, `C` and `E` expire first on router `D`. At this time, router `D` updates its routing table.
+Consider now that the link between `D` and `E` fails. The network is now partitioned into two disjoint parts : (`A` , `D`)  and (`B`, `E`, `C`). The routes towards `B`, `C` and `E` expire first on router `D`. At this time, router `D` updates its routing table.
 
 If `D` sends :math:`[D=0, A=1, B=\infty, C=\infty, E=\infty]`, `A` learns that `B`, `C` and `E` are unreachable and updates its routing table.
 
@@ -119,40 +114,38 @@ Unfortunately, if the distance vector sent to `A` is lost or if `A` sends its ow
 
 .. index:: split horizon, split horizon with poison reverse
 
-This count to infinity problem occurs because router `A` advertises to router `D` a route that it has learned via router `D`. A possible solution to avod this problem could be to change how a router creates its distance vector. Instead of computing one distance vector and sending it to all its neighbors, a router could create a distance vector that is specific to each neighbour and only contains the routes that have not been learned via this neighbour. This could be implemented by the following pseudocode.
+This count to infinity problem occurs because router `A` advertises to router `D` a route that it has learned via router `D`. A possible solution to avoid this problem could be to change how a router creates its distance vector. Instead of computing one distance vector and sending it to all its neighbors, a router could create a distance vector that is specific to each neighbour and only contains the routes that have not been learned via this neighbour. This could be implemented by the following pseudocode.
 
-.. code-block:: text
+.. code-block:: python
 
-  Every N seconds:
-   for each link=l
-   { /* one different vector for each link */
-    Vector=null;
-    for each destination=d in R[]
-    {
-     if (R[d].link<>l) 
-       Vector=Vector+Pair(d,R[d].cost); 
-    } 
-    Send(Vector);
-   }
+ Every N seconds: 
+  # one vector for each interface
+  for l in interfaces:
+    v=Vector()
+    for d in R[]:
+      if (R[d].link != i) :
+      	 v=v+Pair(d,R[d.cost])
+    send(v)
+    # end for d in R[]
+  #end for l in interfaces  
 
-This technique is called `split-horizon`. With this technique, the count to infinity problem would not have happened in the above scenario, as router `A` would have advertised :math:`[A=0]`, since it learned all its other routes via router `D`. Another variant called `split-horizon with poison reverse` is also possible.  Routers using this variant advertise a cost of :math:`\infty` for the destinations that they reach via the router to which they send the distance vector. This can be implemented by using the pseudocode below.
 
-.. code-block:: text
+This technique is called `split-horizon`. With this technique, the count to infinity problem would not have happened in the above scenario, as router `A` would have advertised :math:`[A=0]`, since it learned all its other routes via router `D`. Another variant called `split-horizon with poison reverse` is also possible.  Routers using this variant advertise a cost of :math:`\infty` for the destinations that they reach via the router to which they send the distance vector. This can be implemented by using the pseudo-code below.
 
- Every N seconds:
-  for each link=l
-  { /* one different vector for each link */
-   Vector=null;
-   for each destination=d in R[]
-   {
-    if (R[d].link<>l) 
-      Vector=Vector+Pair(d,R[d].cost); 
-    else
-      Vector=Vector+Pair(d,infinity);
-   } 
-   Send(Vector);
-  }
+.. code-block:: python
 
+ Every N seconds: 
+  for l in interfaces:
+    # one vector for each interface
+    v=Vector()
+    for d in R[]:
+      if (R[d].link != i) :
+      	 v=v+Pair(d,R[d.cost])
+      else:
+         v=v+Pair(d,infinity);
+    send(v)
+    # end for d in R[]
+  #end for l in interfaces  
 
 Unfortunately, split-horizon, is not sufficient to avoid all count to infinity problems with distance vector routing. Consider the failure of link `A-B` in the network of four routers below.
 

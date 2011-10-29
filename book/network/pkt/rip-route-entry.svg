@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
- <text xml:space="preserve" font-size="14px" y="0" x="0" font-family="Courier"><tspan x="0"> </tspan> <tspan x="0" dy="18">
+<svg xmlns="http://www.w3.org/2000/svg"     xmlns:xlink="http://www.w3.org/1999/xlink"><text style="font-size:14px; font-family:Courier; " y="0" x="0" xml:space='preserve' ><tspan x="0"> </tspan> <tspan x="0" dy="18">
 </tspan> <tspan x="0" dy="18">    0                   1                   2                   3 3
 </tspan> <tspan x="0" dy="18">    0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
 </tspan> <tspan x="0" dy="18">   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
@@ -13,5 +11,4 @@
 </tspan> <tspan x="0" dy="18">   |                         Next Hop (4)                          |
 </tspan> <tspan x="0" dy="18">   +---------------------------------------------------------------+
 </tspan> <tspan x="0" dy="18">   |                         Metric (4)                            |
-</tspan> <tspan x="0" dy="18">   +---------------------------------------------------------------+</tspan></text>
-</svg>
+</tspan> <tspan x="0" dy="18">   +---------------------------------------------------------------+</tspan></text> </svg>

@@ -43,9 +43,7 @@ When running on top of a perfect connectionless network service, a transport lev
 
 Unfortunately, this is not always sufficient to ensure a reliable delivery of the SDUs. Consider the case where a client sends tens of SDUs to a server. If the server is faster that the client, it will be able to receive and process all the segments sent by the client and deliver their content to its user. However, if the server is slower than the client, problems may arise. The transport layer entity contains buffers to store SDUs that have been received as a `Data.request` from the application but have not yet been sent via the network service. If the application is faster than the network layer, the buffer becomes full and the operating system suspends the application to let the transport entity empty its transmission queue. The transport entity also uses a buffer to store the segments received from the network layer that have not yet been processed by the application. If the application is slow to process the data, this buffer becomes full and the transport entity is not able to accept anymore the segments from the network layer. The buffers of the transport entity have a limited size [#fqueuesize]_ and if they overflow, the transport entity is forced to discard received segments. 
 
-.. comment:: we probably need to change the first sentence in the paragraph below, I'm still not happy with it.
-
-In order to solve this problem, we need to include in our transport protocol a feedback mechanism that allows the receiver to inform the sender that it has processed a segment and that another one can be sent even though the network layer provides a perfect service. For this, our transport protocol must process two types of segments :
+To solve this problem, our transport protocol must include a feedback mechanism that allows the receiver to inform the sender that it has processed a segment and that another one can be sent. This feedback is required even though the network layer provides a perfect service. To include such a feedback, our transport protocol must process two types of segments :
 
  - data segments carrying a SDU
  - control segments carrying an acknowledgment indicating that the previous segment was processed correctly
@@ -81,9 +79,7 @@ The transport layer must deal with the imperfections of the network layer servic
  #. Segments can be lost
  #. Segments can be reordered or duplicated
 
-.. comment:: Above you say "three types of imperfections", below you say "four types of imperfections"...
-
-To deal with these four types of imperfections, transport protocols rely on different types of mechanisms. The first problem is transmission errors. The segments sent by a transport entity is processed by the network and datalink layers and finally transmitted by the physical layer. All of these layers are imperfect. For example, the physical layer may be affected by different types of errors :
+To deal with these types of imperfections, transport protocols rely on different types of mechanisms. The first problem is transmission errors. The segments sent by a transport entity is processed by the network and datalink layers and finally transmitted by the physical layer. All of these layers are imperfect. For example, the physical layer may be affected by different types of errors :
 
  - random isolated errors where the value of a single bit has been modified due to a transmission error
  - random burst errors where the values of `n` consecutive bits have been changed due to transmission errors
@@ -103,7 +99,7 @@ Some coding schemes allow the receiver to correct some transmission errors. For 
  - `1` is encoded as `111`
  - `0` is encoded as `000`
 
-.. comment:: Maybe a small detail to show how this coding scheme allows a receiver to correct single bit errors might crystal clarify things.
+For example, consider a sender that sends `111`. If there is one bit in error, the receiver could receive `011` or `101` or `110`. In these three cases, the receiver will decode the received bit pattern as a `1` since it contains a majority of bits set to `1`. If there are two bits in error, the receiver will not be able anymore to recover from the transmission error. 
 
 This simple coding scheme forces the sender to transmit three bits for each source bit. However, it allows the receiver to correct single bit errors. More advanced coding systems that allow to recover from errors are used in several types of physical layers.
 
@@ -173,12 +169,9 @@ The receiver first waits for `D(0,...)`. If the segment contains a correct `CRC`
 
    Alternating bit protocol : Receiver FSM
 
-.. note:: Dealing with corrupted segments
+.. note:: Dealing with corrupted segments 
 
-.. comment:: what happened to the final sentence of the paragraph below?
-
- The receiver FSM of the Alternating bit protocol discards all segments that contain an invalid CRC. This is the safest approach since the received segment can be completely different from the segment sent by the remote host. Some mig
-
+ The receiver FSM of the Alternating bit protocol discards all segments that contain an invalid CRC. This is the safest approach since the received segment can be completely different from the segment sent by the remote host. A receiver should not attempt at extracting information from a corrupted segment because it cannot know which portion of the segment has been affected by the error.
 
 The figure below illustrates the operation of the alternating bit protocol.
 
@@ -413,7 +406,7 @@ We explained in the first chapters the service primitives used to establish a co
 
 Unfortunately, this scheme is not sufficient for several reasons. First, a transport entity usually needs to maintain several transport connections with remote entities. Sometimes, different users (i.e. processes) running above a given transport entity request the establishment of several transport connections to different users attached to the same remote transport entity. These different transport connections must be clearly separated to ensure that data from one connection is not passed to the other connections. This can be achieved by using a connection identifier, chosen by the transport entities and placed inside each segment to allow the entity which receives a segment to easily associate it to one established connection. 
 
-Second, as the network layer is imperfect, the `CR` or `CA` segment can be lost, delayed, or suffer from transmission errors. To deal with these problems, the control segments must be protected by using a CRC or checksum to detect transmission errors. Furthemore, since the `CA` segment acknowledges the reception of the `CR` segment, the `CR` segment can be protected by using a retransmission timer. 
+Second, as the network layer is imperfect, the `CR` or `CA` segment can be lost, delayed, or suffer from transmission errors. To deal with these problems, the control segments must be protected by using a CRC or checksum to detect transmission errors. Furthermore, since the `CA` segment acknowledges the reception of the `CR` segment, the `CR` segment can be protected by using a retransmission timer. 
 
 Unfortunately, this scheme is not sufficient to ensure the reliability of the transport service. Consider for example a short-lived transport connection where a single, but important transfer (e.g. money transfer from a bank account) is sent. Such a short-lived connection starts with a `CR` segment acknowledged by a `CA` segment, then the data segment is sent, acknowledged and the connection terminates. Unfortunately, as the network layer service is unreliable, delays combined to retransmissions may lead to the situation depicted in the figure below, where a delayed `CR` and data segments from a former connection are accepted by the receiving entity as valid segments, and the corresponding data is delivered to the user. Duplicating SDUs is not acceptable, and the transport protocol must solve this problem. 
 
@@ -442,7 +435,7 @@ A classical solution to avoid remembering the previous transport connections to 
    Transport clock
 
 
-It should be noted that `transport clocks` do not need and usually are not synchronised to the real-time clock. Precisely synchronising realtime clocks is an interesting problem, but it is outside the scope of this document. See [Mills2006]_ for a detailed discussion on synchronising the realtime clock.
+It should be noted that `transport clocks` do not need and usually are not synchronised to the real-time clock. Precisely synchronising real-time clocks is an interesting problem, but it is outside the scope of this document. See [Mills2006]_ for a detailed discussion on synchronising the real-time clock.
 
 The `transport clock` is combined with an exchange of three segments, called the `three way handshake`, to detect duplicates. This `three way handshake` occurs as follows :
 
@@ -492,7 +485,7 @@ The last scenario is less likely, but it it important to consider it as well. Th
 
 .. index:: abrupt connection release
 
-When we discussed the connection-oriented service, we mentionned that there are two types of connection releases : `abrupt release` and `graceful release`. 
+When we discussed the connection-oriented service, we mentioned that there are two types of connection releases : `abrupt release` and `graceful release`. 
 
 The first solution to release a transport connection is to define a new control segment (e.g. the `DR` segment) and consider the connection to be released once this segment has been sent or received. This is illustrated in the figure below.
 

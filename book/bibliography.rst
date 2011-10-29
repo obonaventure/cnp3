@@ -98,6 +98,7 @@ Whenever possible, the bibliography includes stable hypertext links to the refer
 .. [Malamud1991] Malamud, C., `Analyzing DECnet/OSI phase V <http://books.google.com/books?id=fPJSAAAAMAAJ>`_, Van Nostrand Reinhold, 1991 
 .. [McFadyen1976] McFadyen, J., `Systems Network Architecture: An overview <http://dx.doi.org/10.1147/sj.151.0004>`_, IBM Systems Journal, Vol. 15, N. 1, pp. 4-23, 1976
 .. [McKusick1999] McKusick, M., `Twenty Years of Berkeley Unix : From AT&T-Owned to Freely Redistributable <http://oreilly.com/catalog/opensources/book/kirkmck.html>`_, in Open Sources: Voices from the Open Source Revolution, Oreilly, 1999, http://oreilly.com/catalog/opensources/book/toc.html
+.. [ML2011] Minei I. and Lucek J. ,`MPLS-Enabled Applications: Emerging Developments and New Technologies <http://www.amazon.com/MPLS-Enabled-Applications-Developments-Technologies-Communications/dp/0470665459>`_  (Wiley Series on Communications Networking & Distributed Systems), Wiley, 2011 
 .. [MRR1979] McQuillan, J. M., Richer, I., and Rosen, E. C., `An overview of the new routing algorithm for the ARPANET <http://doi.acm.org/10.1145/800092.802981>`_. In Proceedings of the Sixth Symposium on Data Communications (Pacific Grove, California, United States, November 27 - 29, 1979). SIGCOMM '79. ACM, New York, NY, 63-68. 
 .. [MSMO1997] Mathis, M., Semke, J., Mahdavi, J., and Ott, T. 1997. `The macroscopic behavior of the TCP congestion avoidance algorithm <http://doi.acm.org/10.1145/263932.264023>`_. SIGCOMM Comput. Commun. Rev. 27, 3 (Jul. 1997), 67-82. 
 .. [MSV1987] Molle, M., Sohraby, K., Venetsanopoulos, A., `Space-Time Models of Asynchronous CSMA Protocols for Local Area Networks <http://dx.doi.org/10.1109/JSAC.1987.1146618>`_, IEEE Journal on Selected Areas in Communications, Volume: 5 Issue: 6, Jul 1987 Page(s): 956 -96 
@@ -268,9 +269,12 @@ Whenever possible, the bibliography includes stable hypertext links to the refer
 .. [RFC5598] Crocker, D., `Internet Mail Architecture`, :rfc:`5598`, July 2009
 .. [RFC5646] Phillips, A. and Davis, M., `Tags for Identifying Languages`, :rfc:`5646`, Sept. 2009
 .. [RFC5681] Allman, M. and Paxson, V. and Blanton, E., `TCP congestion control`, :rfc:`5681`, Sept. 2009
+.. [RFC5735] Cotton, M. and Vegoda, L., `Special Use IPv4 Addresses`, :rfc:`5735`, January 2010 
 .. [RFC5795] Sandlund, K. and Pelletier, G. and Jonsson, L-E., `The RObust Header Compression (ROHC) Framework`, :rfc:`5795`, March 2010
-.. [RFC6068] Duerst, M., Masinter, L. and Zawinski, J., `The 'mailto' URI Scheme` , :rfc:`6068`, October 2010   
-.. [RFC6265] Barth, A., ` HTTP State Management Mechanism`, :rfc:`6265`, April 2011
+.. [RFC6068] Duerst, M., Masinter, L. and Zawinski, J., `The 'mailto' URI Scheme` , :rfc:`6068`, October 2010 
+.. [RFC6144] Baker, F. and Li, X. and Bao, X. and Yin, K., `Framework for IPv4/IPv6 Translation`, :rfc:`6144`, April 2011
+.. [RFC6265] Barth, A., `HTTP State Management Mechanism`, :rfc:`6265`, April 2011
+.. [RFC6274] Gont, F., `Security Assessment of the Internet Protocol Version 4`, :rfc:`6274`, July 2011
 .. [RG2010] Rhodes, B. and Goerzen, J., `Foundations of Python Network Programming: The Comprehensive Guide to Building Network Applications with Python <http://books.google.com/books?id=9HGUc8AO2xQC>`_, Second Edition, Academic Press, 2004
 .. [RJ1995] Ramakrishnan, K. K. and Jain, R., `A binary feedback scheme for congestion avoidance in computer networks with a connectionless network layer <http://doi.acm.org/10.1145/205447.205461>`_. SIGCOMM Comput. Commun. Rev. 25, 1 (Jan. 1995), 138-156. 
 .. [RY1994] Ramakrishnan, K.K. and Henry Yang, `The Ethernet Capture Effect: Analysis and Solution <http://www2.research.att.com/~kkrama/papers/capture_camera.pdf>`_, Proceedings of IEEE 19th Conference on Local Computer Networks, MN, Oct. 1994. 

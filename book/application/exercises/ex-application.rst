@@ -5,7 +5,7 @@
 Exercises
 #########
 
-This section contains several exercices and small challenges about the application layer protocols.
+This section contains several exercises and small challenges about the application layer protocols.
 
 The Domain Name System
 ======================
@@ -30,7 +30,7 @@ where
 
 #. What are the nameservers that are responsible for the `be` top-level domain ? Where are they located ? Is it possible to use IPv6 to query them ?
 
-#. When run without any parameter, `dig` queries one of the root DNS servers and retrieves the list of the the names of all root DNS servers. For technical reasons, there are only 13 different root DNS servers. This information is also available as a text file from http://www.internic.net/zones/named.root What are the IP addresses of all these servers. Do they all support IPv6 [#rs]_ ? 
+#. When run without any parameter, `dig` queries one of the root DNS servers and retrieves the list of the the names of all root DNS servers. For technical reasons, there are only 13 different root DNS servers. This information is also available as a text file from http://www.internic.net/zones/named.root What are the IP addresses of all these servers. Can they be queried by using IPv6 [#rs]_ ? 
 
 #. Assume now that you are residing in a network where there is no DNS resolver and that you need to start your query from the DNS root.
 
@@ -97,9 +97,9 @@ Many Internet protocols are ASCII_-based protocols where the client sends reques
 
  telnet cnp3.info.ucl.ac.be 25
  
- *Warning* : Do *not* try this on a random SMTP server. The exercises proposed in this section should only be run on the SMTP server dedicated for these exercices : `cnp3.info.ucl.ac.be`. If you try them on a production SMTP server, the administrator of this server may become angry.
+ *Warning* : Do *not* try this on a random SMTP server. The exercises proposed in this section should only be run on the SMTP server dedicated for these exercises : `cnp3.info.ucl.ac.be`. If you try them on a production SMTP server, the administrator of this server may become angry.
 
-#. Continue the SMTP session that you started above by sending the greetings command (`HELO` followed by the fully qualified domain name of your host) and termine the session by sending the `QUIT` command.
+#. Continue the SMTP session that you started above by sending the greetings command (`HELO` followed by the fully qualified domain name of your host) and terminate the session by sending the `QUIT` command.
 
 #. The minimum SMTP session above allows to verify that the SMTP is running. However, this does not always imply that mail can be delivered. For example, large SMTP servers often use a database to store all the email addresses that they serve. To verify the correct operation of such a server, one possibility is to use the `VRFY` command. Open a SMTP session on the lab's SMTP server (`cnp3.info.ucl.ac.be`) and use this command to verify that your account is active. 
 

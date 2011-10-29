@@ -1,35 +1,252 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
-<svg id="svg8132" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 744.09 1052.4" version="1.1" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/">
- <metadata id="metadata8137">
-  <rdf:RDF>
-   <cc:Work rdf:about="">
-    <dc:format>image/svg+xml</dc:format>
-    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:title/>
-   </cc:Work>
-  </rdf:RDF>
- </metadata>
- <g id="layer1">
-  <g id="g8851" transform="translate(-57.282 -4.8544)">
-   <rect id="rect8799" stroke-opacity=".97333" height="117.15" width="77.479" stroke="#000" y="290.09" x="428.11" stroke-width="1.012" fill="none"/>
-   <rect id="rect8801" stroke-opacity=".97333" height="117.15" width="77.479" stroke="#000" y="292.04" x="505.01" stroke-width="1.012" fill="none"/>
-   <rect id="rect8803" stroke-opacity=".97333" height="117.15" width="77.479" stroke="#000" y="290.95" x="583.45" stroke-width="1.012" fill="none"/>
-   <rect id="rect8281" height="283.03" width="416.81" stroke="#000" y="122.89" x="243.37" stroke-width="1.502" fill="none"/>
-   <rect id="rect8283" stroke-opacity=".97333" height="84.027" width="416.82" stroke="#000" y="208.39" x="243.38" stroke-width="2.806" fill="#fff"/>
-   <rect id="rect8797" stroke-opacity=".97333" height="60.439" width="416.81" stroke="#000" y="404.91" x="243.37" stroke-width="1.086" fill="#fff"/>
-   <text id="text8805" style="word-spacing:0px;letter-spacing:0px" font-weight="bold" transform="scale(1.1061 .90409)" line-height="125%" xml:space="preserve" font-size="6.0185px" y="266.22122" x="360.47327" font-family="FreeSans" fill="#000000"><tspan id="tspan8807" y="266.22122" x="360.47327"/></text>
-   <text id="text8809" style="word-spacing:0px;letter-spacing:0px" line-height="125%" font-weight="bold" font-size="9.9479px" y="255.27481" x="434.95148" font-family="FreeSans" xml:space="preserve" fill="#000000"><tspan id="tspan8811" font-size="22px" y="255.27481" x="434.95148" fill="#ff0000">IP</tspan></text>
-   <text id="text8813" style="word-spacing:0px;letter-spacing:0px" line-height="125%" font-weight="bold" font-size="22px" y="324.20685" x="314.56308" font-family="FreeSans" xml:space="preserve" fill="#000000"><tspan id="tspan8815" y="324.20685" x="314.56308">LLC</tspan></text>
-   <text id="text8817" style="word-spacing:0px;letter-spacing:0px" line-height="125%" font-weight="bold" font-size="22px" y="382.45929" x="246.60196" font-family="FreeSans" xml:space="preserve" fill="#000000"><tspan id="tspan8819" y="382.45929" x="246.60196">802.3 802.5 FDDI</tspan></text>
-   <text id="text8821" style="word-spacing:0px;letter-spacing:0px" line-height="125%" font-weight="bold" font-size="22px" y="356.24573" x="446.60193" font-family="FreeSans" xml:space="preserve" fill="#000000"><tspan id="tspan8823" y="356.24573" x="446.60193">Eth.</tspan></text>
-   <text id="text8825" style="word-spacing:0px;letter-spacing:0px" line-height="125%" font-weight="bold" font-size="22px" y="356.24573" x="520.7132" font-family="FreeSans" xml:space="preserve" fill="#000000"><tspan id="tspan8827" y="356.24573" x="520.7132">PPP</tspan></text>
-   <text id="text8829" style="word-spacing:0px;letter-spacing:0px" line-height="125%" font-weight="bold" font-size="22px" y="356.50974" x="590.29126" font-family="FreeSans" xml:space="preserve" fill="#000000"><tspan id="tspan8831" y="356.50974" x="590.29126">HDLC</tspan></text>
-   <text id="text8833" style="word-spacing:0px;letter-spacing:0px" line-height="125%" font-weight="bold" font-size="22px" y="442.65344" x="380.58252" font-family="FreeSans" xml:space="preserve" fill="#000000"><tspan id="tspan8835" y="442.65344" x="380.58252">Physical Layer</tspan></text>
-   <text id="text8837" style="word-spacing:0px;letter-spacing:0px" line-height="125%" font-weight="bold" font-size="22px" y="342.65344" x="81.553398" font-family="FreeSans" xml:space="preserve" fill="#000000"><tspan id="tspan8839" y="342.65344" x="81.553398">Datalink Layer</tspan></text>
-   <text id="text8841" style="word-spacing:0px;letter-spacing:0px" line-height="125%" font-weight="bold" font-size="22px" y="249.44955" x="80.651054" font-family="FreeSans" xml:space="preserve" fill="#ff0000"><tspan id="tspan8843" y="249.44955" x="80.651054">Network Layer</tspan></text>
-   <path id="path8845" d="m243.69 343.68 185.44 0.97087" stroke="#000" stroke-dasharray="1, 3" fill="none"/>
-   <rect id="rect8849" stroke-opacity=".97333" height="21.154" width="416.81" stroke="#000" y="467.05" x="358.9" stroke-width=".64250" fill="#fff"/>
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   id="svg8132"
+   viewBox="0 0 693.36068 366.40626"
+   version="1.1"
+   inkscape:version="0.48.1 r9760"
+   width="100%"
+   height="100%"
+   sodipodi:docname="ip-ref.svg">
+  <defs
+     id="defs36" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="640"
+     inkscape:window-height="480"
+     id="namedview34"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:zoom="0.24895477"
+     inkscape:cx="346.65641"
+     inkscape:cy="-42.523139"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg8132" />
+  <metadata
+     id="metadata8137">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     id="layer1"
+     transform="translate(-25.38859,-117.2706)">
+    <g
+       id="g8851"
+       transform="translate(-57.282,-4.8544)">
+      <rect
+         id="rect8799"
+         height="117.15"
+         width="77.478996"
+         y="290.09"
+         x="428.10999"
+         style="fill:none;stroke:#000000;stroke-width:1.01199996;stroke-opacity:0.97333003" />
+      <rect
+         id="rect8801"
+         height="117.15"
+         width="77.478996"
+         y="292.04001"
+         x="505.01001"
+         style="fill:none;stroke:#000000;stroke-width:1.01199996;stroke-opacity:0.97333003" />
+      <rect
+         id="rect8803"
+         height="117.15"
+         width="77.478996"
+         y="290.95001"
+         x="583.45001"
+         style="fill:none;stroke:#000000;stroke-width:1.01199996;stroke-opacity:0.97333003" />
+      <rect
+         id="rect8281"
+         height="283.03"
+         width="416.81"
+         y="122.89"
+         x="243.37"
+         style="fill:none;stroke:#000000;stroke-width:1.50199997" />
+      <rect
+         id="rect8283"
+         height="84.027"
+         width="416.82001"
+         y="208.39"
+         x="243.38"
+         style="fill:#ffffff;stroke:#000000;stroke-width:2.80599999;stroke-opacity:0.97333003" />
+      <rect
+         id="rect8797"
+         height="60.438999"
+         width="416.81"
+         y="404.91"
+         x="243.37"
+         style="fill:#ffffff;stroke:#000000;stroke-width:1.08599997;stroke-opacity:0.97333003" />
+      <text
+         id="text8805"
+         style="font-size:6.01849985px;font-weight:bold;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;font-family:FreeSans"
+         font-weight="bold"
+         transform="scale(1.1061,0.90409)"
+         line-height="125%"
+         xml:space="preserve"
+         font-size="6.0185px"
+         y="266.22122"
+         x="360.47327"
+         sodipodi:linespacing="125%"><tspan
+           id="tspan8807"
+           y="266.22122"
+           x="360.47327" /></text>
+      <text
+         id="text8809"
+         style="font-size:9.94789982px;font-weight:bold;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;font-family:FreeSans"
+         line-height="125%"
+         font-weight="bold"
+         font-size="9.9479px"
+         y="255.27481"
+         x="434.95148"
+         xml:space="preserve"
+         sodipodi:linespacing="125%"><tspan
+           id="tspan8811"
+           font-size="22px"
+           y="255.27481"
+           x="434.95148"
+           style="font-size:22px;fill:#ff0000">IP</tspan></text>
+      <text
+         id="text8813"
+         style="font-size:22px;font-weight:bold;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;font-family:FreeSans"
+         line-height="125%"
+         font-weight="bold"
+         font-size="22px"
+         y="324.20685"
+         x="314.56308"
+         xml:space="preserve"
+         sodipodi:linespacing="125%"><tspan
+           id="tspan8815"
+           y="324.20685"
+           x="314.56308">LLC</tspan></text>
+      <text
+         id="text8817"
+         style="font-size:22px;font-weight:bold;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;font-family:FreeSans"
+         line-height="125%"
+         font-weight="bold"
+         font-size="22px"
+         y="382.45929"
+         x="246.60196"
+         xml:space="preserve"
+         sodipodi:linespacing="125%"><tspan
+           id="tspan8819"
+           y="382.45929"
+           x="246.60196">802.3 802.5 FDDI</tspan></text>
+      <text
+         id="text8821"
+         style="font-size:22px;font-weight:bold;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;font-family:FreeSans"
+         line-height="125%"
+         font-weight="bold"
+         font-size="22px"
+         y="356.24573"
+         x="446.60193"
+         xml:space="preserve"
+         sodipodi:linespacing="125%"><tspan
+           id="tspan8823"
+           y="356.24573"
+           x="446.60193">Eth.</tspan></text>
+      <text
+         id="text8825"
+         style="font-size:22px;font-weight:bold;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;font-family:FreeSans"
+         line-height="125%"
+         font-weight="bold"
+         font-size="22px"
+         y="356.24573"
+         x="520.7132"
+         xml:space="preserve"
+         sodipodi:linespacing="125%"><tspan
+           id="tspan8827"
+           y="356.24573"
+           x="520.7132">PPP</tspan></text>
+      <text
+         id="text8829"
+         style="font-size:22px;font-weight:bold;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;font-family:FreeSans"
+         line-height="125%"
+         font-weight="bold"
+         font-size="22px"
+         y="356.50974"
+         x="590.29126"
+         xml:space="preserve"
+         sodipodi:linespacing="125%"><tspan
+           id="tspan8831"
+           y="356.50974"
+           x="590.29126">HDLC</tspan></text>
+      <text
+         id="text8833"
+         style="font-size:22px;font-weight:bold;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;font-family:FreeSans"
+         line-height="125%"
+         font-weight="bold"
+         font-size="22px"
+         y="442.65344"
+         x="380.58252"
+         xml:space="preserve"
+         sodipodi:linespacing="125%"><tspan
+           id="tspan8835"
+           y="442.65344"
+           x="380.58252">Physical Layer</tspan></text>
+      <text
+         id="text8837"
+         style="font-size:22px;font-weight:bold;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;font-family:FreeSans"
+         line-height="125%"
+         font-weight="bold"
+         font-size="22px"
+         y="342.65344"
+         x="81.553398"
+         xml:space="preserve"
+         sodipodi:linespacing="125%"><tspan
+           id="tspan8839"
+           y="342.65344"
+           x="81.553398">Datalink Layer</tspan></text>
+      <text
+         id="text8841"
+         style="font-size:22px;font-weight:bold;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ff0000;font-family:FreeSans"
+         line-height="125%"
+         font-weight="bold"
+         font-size="22px"
+         y="249.44955"
+         x="80.651054"
+         xml:space="preserve"
+         sodipodi:linespacing="125%"><tspan
+           id="tspan8843"
+           y="249.44955"
+           x="80.651054">Network Layer</tspan></text>
+      <path
+         id="path8845"
+         d="m 243.69,343.68 185.44,0.97087"
+         inkscape:connector-curvature="0"
+         style="fill:none;stroke:#000000;stroke-dasharray:1, 3" />
+      <rect
+         id="rect8849"
+         height="21.153999"
+         width="416.81"
+         y="467.04999"
+         x="358.89999"
+         style="fill:#ffffff;stroke:#000000;stroke-width:0.64249998;stroke-opacity:0.97333003" />
+    </g>
   </g>
- </g>
 </svg>
