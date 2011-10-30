@@ -63,7 +63,7 @@ To understand the operation of a distance vector protocol, let us consider the n
 
 .. figure:: svg/dv-1.png
    :align: center
-   :scale: 70   
+   :scale: 100   
 
    Operation of distance vector routing in a simple network
 
@@ -80,7 +80,7 @@ At this point, all routers can reach all other routers in the network thanks to 
 
 .. figure:: svg/dv-full.png
    :align: center
-   :scale: 70   
+   :scale: 100   
 
    Routing tables computed by distance vector in a simple network
 
@@ -99,7 +99,7 @@ At this point, all routers have a routing table allowing them to reach all anoth
 
 .. figure:: svg/dv-failure-2.png
    :align: center
-   :scale: 70   
+   :scale: 100   
 
    Routing tables computed by distance vector after a failure
 
@@ -151,7 +151,7 @@ Unfortunately, split-horizon, is not sufficient to avoid all count to infinity p
 
 .. figure:: svg/dv-infinity.png
    :align: center
-   :scale: 70   
+   :scale: 100   
 
    Count to infinity problem
 

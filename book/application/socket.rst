@@ -88,7 +88,7 @@ As mentioned above, the socket API is very low-level. This is the interface to t
 .. literalinclude:: python/http-client-httplib.py
  :language: python
 
-Another module, `urllib2 <http://docs.python.org/library/urllib2.html`_ allows the programmer to directly use URLs. This is much more simpler than directly using sockets. 
+Another module, `urllib2 <http://docs.python.org/library/urllib2.html>`_ allows the programmer to directly use URLs. This is much more simpler than directly using sockets. 
 
 .. literalinclude:: python/http-cclient-urllib2.py
  :language: python

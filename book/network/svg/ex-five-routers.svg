@@ -13,7 +13,7 @@
    width="100%"
    version="1.1"
    preserveAspectRatio="xMidYMid"
-   viewBox="0 0 21401 16693.881"
+   viewBox="0 0 15361.653 16693.881"
    inkscape:version="0.48.1 r9760"
    sodipodi:docname="ex-five-routers.svg"
    style="fill-rule:evenodd">
@@ -35,8 +35,8 @@
      fit-margin-right="0"
      fit-margin-bottom="0"
      inkscape:zoom="0.01247619"
-     inkscape:cx="10913.5"
-     inkscape:cy="6794.572"
+     inkscape:cx="7702.6534"
+     inkscape:cy="6794.5719"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="0"
@@ -9111,37 +9111,37 @@
   </defs>
   <path
      id="path13826"
-     d="M 6009,14265.309 V 8448.4088"
+     d="M 2798.1534,14265.309 V 8448.4088"
      inkscape:connector-curvature="0"
      style="fill:none;stroke:#000000;stroke-width:40" />
   <path
      id="path13828"
-     d="M 15712.5,14291.309 V 8262.9088"
+     d="M 12501.653,14291.309 V 8262.9088"
      inkscape:connector-curvature="0"
      style="fill:none;stroke:#000000;stroke-width:40" />
   <path
      id="path13830"
-     d="m 6405.6,15455.309 8804.7,-52.881"
+     d="m 3194.7534,15455.309 8804.6996,-52.881"
      inkscape:connector-curvature="0"
      style="fill:none;stroke:#000000;stroke-width:40" />
   <path
      id="path13832"
-     d="m 7093.5,7734.3088 h 7588.4"
+     d="M 3882.6534,7734.3088 H 11471.053"
      inkscape:connector-curvature="0"
      style="fill:none;stroke:#000000;stroke-width:40" />
   <path
      id="path13834"
-     d="m 15527.5,6941.0088 -4134.9,-4649.7"
+     d="m 12316.653,6941.0088 -4134.8996,-4649.7"
      inkscape:connector-curvature="0"
      style="fill:none;stroke:#000000;stroke-width:40" />
   <path
      id="path13836"
-     d="m 6405.6,6703.1088 4362.9,-4362.7"
+     d="m 3194.7534,6703.1088 4362.9,-4362.7"
      inkscape:connector-curvature="0"
      style="fill:none;stroke:#000000;stroke-width:40" />
   <g
      id="g577"
-     transform="translate(-3086.5,-600.69115)">
+     transform="translate(-6297.3466,-600.69111)">
     <desc
        id="desc579">Drawing</desc>
     <g
@@ -9186,7 +9186,7 @@
   </g>
   <g
      id="g621"
-     transform="translate(-3086.5,-600.69115)">
+     transform="translate(-6297.3466,-600.69111)">
     <desc
        id="desc623">Drawing</desc>
     <g
@@ -9229,176 +9229,6 @@
       </g>
     </g>
   </g>
-  <g
-     id="g643"
-     transform="translate(-3086.5,-600.69115)">
-    <desc
-       id="desc645">Group</desc>
-    <g
-       id="g647">
-      <desc
-         id="desc649">Drawing</desc>
-      <g
-         id="g651">
-        <g
-           id="g653"
-           style="fill:#ffffff">
-          <path
-             id="path655"
-             d="m 3108,5433 c -2,0 -4,2 -4,4 v 940 c 0,2 2,5 4,5 h 940 c 2,0 5,-3 5,-5 v -940 c 0,-2 -3,-4 -5,-4 h -940 z"
-             inkscape:connector-curvature="0" />
-        </g>
-        <g
-           id="g657"
-           style="fill:none;stroke:#ffffff;stroke-width:35">
-          <path
-             id="path659"
-             d="m 3108,5433 c -2,0 -4,2 -4,4 v 940 c 0,2 2,5 4,5 h 940 c 2,0 5,-3 5,-5 v -940 c 0,-2 -3,-4 -5,-4 h -940"
-             inkscape:connector-curvature="0"
-             style="fill:none" />
-        </g>
-        <g
-           id="g661"
-           style="fill:none">
-          <rect
-             id="rect663"
-             y="5433"
-             width="949"
-             x="3104"
-             height="949" />
-        </g>
-      </g>
-    </g>
-    <g
-       id="g667">
-      <desc
-         id="desc669">Drawing</desc>
-      <g
-         id="g671">
-        <g
-           id="g673"
-           style="fill:none">
-          <rect
-             id="rect675"
-             y="5397"
-             width="954"
-             x="3103"
-             height="1024" />
-          <rect
-             id="rect677"
-             y="5398"
-             width="954"
-             x="3104"
-             height="1024" />
-        </g>
-        <g
-           id="g679">
-          <g
-             id="g681"
-             font-weight="400"
-             font-size="847px"
-             style="font-size:847px;font-weight:400;font-family:Helvetica embedded">
-            <g
-               id="g683"
-               style="fill:none">
-              <text
-                 id="text685">
-                <tspan
-                   id="tspan687"
-                   y="6166"
-                   x="3298">A</tspan>
-              </text>
-            </g>
-          </g>
-        </g>
-      </g>
-    </g>
-  </g>
-  <g
-     id="g689"
-     transform="translate(-3086.5,-600.69115)">
-    <desc
-       id="desc691">Group</desc>
-    <g
-       id="g693">
-      <desc
-         id="desc695">Drawing</desc>
-      <g
-         id="g697">
-        <g
-           id="g699"
-           style="fill:#ffffff">
-          <path
-             id="path701"
-             d="m 23525,4925 c -2,0 -4,2 -4,4 v 940 c 0,2 2,5 4,5 h 940 c 2,0 5,-3 5,-5 v -940 c 0,-2 -3,-4 -5,-4 h -940 z"
-             inkscape:connector-curvature="0" />
-        </g>
-        <g
-           id="g703"
-           style="fill:none;stroke:#ffffff;stroke-width:35">
-          <path
-             id="path705"
-             d="m 23525,4925 c -2,0 -4,2 -4,4 v 940 c 0,2 2,5 4,5 h 940 c 2,0 5,-3 5,-5 v -940 c 0,-2 -3,-4 -5,-4 h -940"
-             inkscape:connector-curvature="0"
-             style="fill:none" />
-        </g>
-        <g
-           id="g707"
-           style="fill:none">
-          <rect
-             id="rect709"
-             y="4925"
-             width="949"
-             x="23521"
-             height="949" />
-        </g>
-      </g>
-    </g>
-    <g
-       id="g713">
-      <desc
-         id="desc715">Drawing</desc>
-      <g
-         id="g717">
-        <g
-           id="g719"
-           style="fill:none">
-          <rect
-             id="rect721"
-             y="4889"
-             width="954"
-             x="23520"
-             height="1024" />
-          <rect
-             id="rect723"
-             y="4890"
-             width="954"
-             x="23521"
-             height="1024" />
-        </g>
-        <g
-           id="g725">
-          <g
-             id="g727"
-             font-weight="400"
-             font-size="847px"
-             style="font-size:847px;font-weight:400;font-family:Helvetica embedded">
-            <g
-               id="g729"
-               style="fill:none">
-              <text
-                 id="text731">
-                <tspan
-                   id="tspan733"
-                   y="5658"
-                   x="23692">C</tspan>
-              </text>
-            </g>
-          </g>
-        </g>
-      </g>
-    </g>
-  </g>
   <text
      id="text3784"
      style="font-size:528.04046631px;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;font-family:Sans"
@@ -9407,14 +9237,14 @@
      xml:space="preserve"
      font-size="528.03px"
      y="16812.375"
-     x="12619.006"
+     x="9725.5117"
      sodipodi:linespacing="125%"><tspan
        id="tspan3786"
        y="16812.375"
-       x="12619.006" /></text>
+       x="9725.5117" /></text>
   <g
      id="g13684"
-     transform="translate(-2108.2,1699.6088)">
+     transform="translate(-5319.0466,1699.6088)">
     <g
        id="g599">
       <desc
@@ -9526,7 +9356,7 @@
   </g>
   <g
      id="g28065"
-     transform="matrix(12.022,0,0,12.022,-7214.1,12289.309)">
+     transform="matrix(12.022,0,0,12.022,-10424.947,12289.309)">
     <path
        id="path28067"
        d="m 51.789,625.96 82.843,-81.324 h 135.88 l -83.198,81.324 z"
@@ -9581,7 +9411,7 @@
   </g>
   <g
      id="g13626"
-     transform="matrix(12.022,0,0,12.022,2383.8,12289.309)">
+     transform="matrix(12.022,0,0,12.022,-827.04661,12289.309)">
     <path
        id="path13628"
        d="m 51.789,625.96 82.843,-81.324 h 135.88 l -83.198,81.324 z"
@@ -9636,7 +9466,7 @@
   </g>
   <g
      id="g13734"
-     transform="translate(7489.5,1699.6088)">
+     transform="translate(4278.6534,1699.6088)">
     <g
        id="g13736">
       <desc
@@ -9748,7 +9578,7 @@
   </g>
   <g
      id="g13778"
-     transform="translate(2809.7,-3879.2912)">
+     transform="translate(-401.14661,-3879.2912)">
     <g
        id="g13780">
       <desc

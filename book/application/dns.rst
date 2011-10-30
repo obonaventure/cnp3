@@ -30,7 +30,7 @@ Each top-level domain is managed by an organisation that decides how sub-domain 
 domain names, to allow host names with a syntax which works with all
 applications (the domain names themselves have a much richer syntax).
 
-.. figure:: pkt/dns-bnf.*
+.. figure:: pkt/dns-bnf.png
    :align: center
 
    BNF of the fully qualified host names
@@ -66,7 +66,7 @@ DNS messages are composed of five parts that are named sections in :rfc:`1035`. 
 
 The header of DNS messages is composed of 12 bytes and its structure is shown in the figure below.
 
-.. figure:: pkt/dnsheader.*
+.. figure:: pkt/dnsheader.png
    :align: center
    :scale: 100
 
@@ -89,7 +89,7 @@ for additional details. The last four fields indicate the size of the `Question`
 
 The last four sections of the DNS message contain `Resource Records` (RR).  All RRs have the same top level format shown in the figure below. 
 
-.. figure:: pkt/dnsrr.*
+.. figure:: pkt/dnsrr.png
    :align: center
    :scale: 100
 
@@ -103,7 +103,7 @@ The `RDLength` field is the length of the `RData` field that contains the inform
 
 Several types of DNS RR are used in practice. The `A` type is used to encode the IPv4 address that corresponds to the specified name. The `AAAA` type is used to encode the IPv6 address that corresponds to the specified name. A `NS` record contains the name of the DNS server that is responsible for a given domain. For example, a query for the `A` record associated to the `www.ietf.org` name returns the following answer.
 
-.. figure:: pkt/www-ietf-org.*
+.. figure:: pkt/www-ietf-org.png
    :align: center
 
    Query for the `A` record of `www.ietf.org` 

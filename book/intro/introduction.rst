@@ -38,7 +38,7 @@ Computer networks are used to allow several hosts to exchange information betwee
 - for a network containing `n` hosts, each host must have `n-1` physical interfaces. In practice, the number of physical interfaces on a node will limit the size of a full-mesh network that can be built
 - for a network containing `n` hosts, :math:`\frac{n \times (n-1)}{2}` links are required. This is possible when there are a few nodes in the same room, but rarely when they are located several kilometers apart
 
-.. figure:: svg/fullmesh.png
+.. figure:: svg/fullmesh.*
    :align: center
    :scale: 50
 
@@ -46,7 +46,7 @@ Computer networks are used to allow several hosts to exchange information betwee
 
 The second possible physical organisation, which is also used inside computers to connect different extension cards, is the bus. In a bus network, all hosts are attached to a shared medium, usually a cable through a single interface. When one host sends an electrical signal on the bus, the signal is received by all hosts attached to the bus. A drawback of bus-based networks is that if the bus is physically cut, then the network is split into two isolated networks.  For this reason, bus-based networks are sometimes considered to be difficult to operate and maintain, especially when the cable is long and there are many places where it can break. Such a bus-based topology was used in early Ethernet networks. 
 
-.. figure:: svg/bus.png
+.. figure:: svg/bus.*
    :align: center
    :scale: 50 
 
@@ -55,7 +55,7 @@ The second possible physical organisation, which is also used inside computers t
 A third organisation of a computer network is a star topology. In such topologies, hosts have a single physical interface and there is one physical link between each host and the center of the star. The node at the center of the star can be either a piece of equipment that amplifies an electrical signal, or an active device, such as a piece of equipment that understands the format of the messages exchanged through the network. Of course, the failure of the central node implies the failure of the network. However, if one physical link fails (e.g. because the cable has been cut), then only one node is disconnected from the network. In practice, star-shaped networks are easier to operate and maintain than bus-shaped networks. Many network administrators also appreciate the fact that they can control the network from a central point. Administered from a Web interface, or through a console-like connection, the center of the star is a useful point of control (enabling or disabling devices) and an excellent observation point (usage statistics).
 
 
-.. figure:: svg/star.png
+.. figure:: svg/star.*
    :align: center
    :scale: 50 
 
@@ -66,7 +66,7 @@ A third organisation of a computer network is a star topology. In such topologie
 
 A fourth physical organisation of a network is the Ring topology. Like the bus organisation, each host has a single physical interface connecting it to the ring. Any signal sent by a host on the ring will be received by all hosts attached to the ring. From a redundancy point of view, a single ring is not the best solution, as the signal only travels in one direction on the ring; thus if one of the links composing the ring is cut, the entire network fails. In practice, such rings have been used in local area networks, but are now often replaced by star-shaped networks. In metropolitan networks, rings are often used to interconnect multiple locations. In this case, two parallel links, composed of different cables, are often used for redundancy. With such a dual ring, when one ring fails all the traffic can be quickly switched to the other ring.
 
-.. figure:: svg/ring.png
+.. figure:: svg/ring.*
    :align: center
    :scale: 50 
 
@@ -74,7 +74,7 @@ A fourth physical organisation of a network is the Ring topology. Like the bus o
 
 A fifth physical organisation of a network is the tree. Such networks are typically used when a large number of customers must be connected in a very cost-effective manner. Cable TV networks are often organised as trees.
 
-.. figure:: svg/tree.png
+.. figure:: svg/tree.*
    :align: center
    :scale: 50 
 
@@ -86,7 +86,7 @@ In practice, most real networks combine part of these topologies. For example, a
 
 Throughout this book, our objective will be to understand the protocols and mechanisms that are necessary for a network such as the one shown below.
 
-.. figure:: svg/internetwork.png
+.. figure:: svg/internetwork.*
    :align: center
    :scale: 75
 
@@ -100,7 +100,7 @@ The last point of terminology we need to discuss is the transmission modes. When
 
 The first and most widespread transmission mode is called :term:`unicast` . In the unicast transmission mode, information is sent by one sender to one receiver. Most of today's Internet applications rely on the unicast transmission mode. The example below shows a network with two types of devices : hosts (drawn as computers) and intermediate nodes (drawn as cubes). Hosts exchange information via the intermediate nodes. In the example below, when host `S` uses unicast to send information, it sends it via three intermediate nodes. Each of these nodes receives the information from its upstream node or host, then processes and forwards it to its downstream node or host. This is called `store and forward` and we will see later that this concept is key in computer networks.
 
-.. figure:: svg/unicast.png
+.. figure:: svg/unicast.*
    :align: center
    :scale: 50
 
@@ -108,7 +108,7 @@ The first and most widespread transmission mode is called :term:`unicast` . In t
 
 A second transmission mode is :term:`multicast` transmission mode. This mode is used when the same information must be sent to a set of recipients. It was first used in LANs but later became supported in wide area networks. When a sender uses multicast to send information to `N` receivers, the sender sends a single copy of the information and the network nodes duplicate this information whenever necessary, so that it can reach all recipients belonging to the destination group.  
 
-.. figure:: svg/multicast.png
+.. figure:: svg/multicast.*
    :align: center
    :scale: 50 
 
@@ -118,7 +118,7 @@ To understand the importance of multicast transmission, consider source `S` that
 
 The last transmission mode is the :term:`anycast` transmission mode. It was initially defined in :rfc:`1542`. In this transmission mode, a set of receivers is identified. When a source sends information towards this set of receivers, the network ensures that the information is delivered to `one` receiver that belongs to this set. Usually, the receiver closest to the source is the one that receives the information sent by this particular source. The anycast transmission mode is useful to ensure redundancy, as when one of the receivers fails, the network will ensure that information will be delivered to another receiver belonging to the same group. However, in practice supporting the anycast transmission mode can be difficult.
 
-.. figure:: svg/anycast.png
+.. figure:: svg/anycast.*
    :align: center
    :scale: 50 
 

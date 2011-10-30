@@ -106,7 +106,7 @@ The figure below shows a simple example of the BGP routes that are exchanged bet
 
 BGP routers exchange routes over BGP sessions. A BGP session is established between two routers belonging to two different domains that are directly connected. As explained earlier, the physical connection between the two routers can be implemented as a private peering link or over an Internet eXchange Point. A BGP session between two adjacent routers runs above a TCP connection (the default BGP port is 179). In contrast with intradomain routing protocols that exchange IP packets or UDP segments, BGP runs above TCP because TCP ensures a reliable delivery of the BGP messages sent by each router without forcing the routers to implement acknowledgements, checksums, etc. Furthermore, the two routers consider the peering link to be up as long as the BGP session and the underlying TCP connection remain up [#flifetimebgp]_. The two endpoints of a BGP session are called `BGP peers`.
 
-.. figure:: png/network-fig-112-c.png
+.. figure:: svg/bgp-peering.*
    :align: center
    :scale: 70
    
@@ -172,29 +172,6 @@ When a BGP session starts, the routers first exchange `OPEN` messages to negotia
     # new Updates will be sent to reflect local or distant
     # changes in routers
 
-.. code-block:: c
-
- Initialize_BGP_Session(RemoteAS, RemoteIP)
- { 
-  /* Initialize and start BGP session */
-  /* Send BGP OPEN Message to RemoteIP on port 179 */
-  /* Follow BGP state machine */ 
-  /* advertise local routes and routes learned from peers*/
- foreach (destination=d inside BGP Loc-RIB)
- {
-  B=build_BGP_UPDATE(d); // best path
-  S=apply_export_filter(RemoteAS,B);
-  if (S<>NULL)
-	{  /* send UPDATE message */
-	   send_UPDATE(S,RemoteAS, RemoteIP) 
-        }
-  }	
- /* entire RIB has been sent */
- /* new UPDATE will be sent only to reflect local or distant
-   changes in routes */
- ...
- }
-
 
 In the above pseudo-code, the `build\_BGP\_UPDATE(d)` procedure extracts from the `BGP Loc-RIB` the best path towards destination `d` (i.e. the route installed in the FIB) and prepares the corresponding BGP `UPDATE` message. This message is then passed to the `export filter` that returns NULL if the route cannot be advertised to the peer or the (possibly modified) BGP `UPDATE` message to be advertised. BGP routers allow network administrators to specify very complex `export filters`, see e.g. [WMS2004]_. A simple `export filter` that implements the equivalent of `split horizon` is shown below.
 
@@ -207,18 +184,7 @@ In the above pseudo-code, the `build\_BGP\_UPDATE(d)` procedure extracts from th
       # Many additional export policies can be configured : 
       # Accept or refuse the BGPMsg 
       # Modify selected attributes inside BGPMsg 
- 
-
-.. code-block:: c
-
- BGPMsg Apply_export_filter(RemoteAS, BGPMsg)
- { /* check if Remote AS already received route */
- if (RemoteAS isin BGPMsg.ASPath)
-   BGPMsg==NULL;
-  /* Many additional export policies can be configured : */
-  /* Accept or refuse the BGPMsg */
-  /* Modify selected attributes inside BGPMsg */
- }
+   return BGPMsg 
 
 At this point, the remote router has received all the exportable BGP routes. After this initial exchange, the router only sends `BGP UPDATE` messages when there is a change (addition of a route, removal of a route or change in the attributes of a route) in one of these exportable routes. Such a change can happen when the router receives a BGP message. The pseudo-code below summarizes the processing of these BGP messages.
 
@@ -253,45 +219,6 @@ At this point, the remote router has received all the exportable BGP routes. Aft
      	    else if(Old_Route != None) : # No best route anymore 
 	        send_WITHDRAW(Msg.prefix,RemoteAS,RemoteIP);
      
-
-.. code-block:: c
-
- Recvd_BGPMsg(Msg, RemoteAS)
- { 
-  B=apply_import_filer(Msg,RemoteAS);
-  if (B==NULL) /* Msg not acceptable */
-	exit();
-  if IsUPDATE(Msg)
-  { 
-   Old_Route=BestRoute(Msg.prefix); 
-   Insert_in_RIB(Msg);
-   Run_Decision_Process(RIB);
-   if (BestRoute(Msg.prefix)<>Old_Route)
-   { /* best route changed */
-    B=build_BGP_Message(Msg.prefix);
-    S=apply_export_filter(RemoteAS,B);
-    if (S<>NULL) /* announce best route */
-	send_UPDATE(S,RemoteAS);     
-    else if (Old_Route<>NULL) 
-     send_WITHDRAW(Msg.prefix);
-   } 
-  if IsWITHDRAW(Msg)
-  { 
-   Old_Route=BestRoute(Msg.prefix); 
-   Remove_from_RIB(Msg);
-   Run_Decision_Process(RIB);
-   if (Best_Route(Msg.prefix)<>Old_Route)
-   { /* best route changed */
-     B=build_BGP_Message(d);
-     S=apply_export_filter(RemoteAS,B);
-     if (S<>NULL) /* still one best route */
-       send_UPDATE(S,RemoteAS, RemoteIP);
-     else if(Old_Route<>NULL)/* no best route anymore */
-       send_WITHDRAW(Msg.prefix,RemoteAS,RemoteIP);
-   }
-  }
- }     
-
 When a BGP message is received, the router first applies the peer's `import filter` to verify whether the message is acceptable or not. If the message is not acceptable, the processing stops. The pseudo-code below shows a simple `import filter`. This `import filter` accepts all routes, except those that already contain the local AS in their AS-Path. If such a route was used, it would cause a routing loop. Another example of an `import filter` would be a filter used by an Internet Service Provider on a session with a customer to only accept routes towards the IP prefixes assigned to the customer by the provider. On real routers, `import filters` can be much more complex and some `import filters` modify the attributes of the received BGP `UPDATE` [WMS2004]_ .
 
 .. code-block:: python
@@ -302,18 +229,8 @@ When a BGP message is received, the router first applies the peer's `import filt
 	# Many additional import policies can be configured : 
   	# Accept or refuse the BGPMsg 
   	# Modify selected attributes inside BGPMsg 
-
-.. code-block:: c
-
- BGPMsg apply_import_filter(RemoteAS, BGPMsg)
- { /* check that we are not already inside  ASPath */ 
-  if (MyAS isin BGPMsg.ASPath)
-   BGPMsg==NULL;
-  /* Many additional import policies can be configured : */
-  /* Accept or refuse the BGPMsg */
-  /* Modify selected attributes inside BGPMsg */
- }
-
+     return BGPMsg
+	
 
 .. note:: The bogon filters
 
@@ -324,7 +241,7 @@ If the import filter accepts the BGP message, the pseudo-code distinguishes two 
 
 Let us now discuss in more detail the operation of BGP in an IPv4 network. For this, let us consider the simple network composed of three routers located in three different ASes and shown in the figure below.
 
-.. figure:: png/network-fig-121-c.png
+.. figure:: svg/bgp-nexthop.*
    :align: center
    :scale: 70
    
@@ -359,7 +276,7 @@ If the link between `R2` and `R3` fails, `R3` detects the failure as it did not 
 Most networks that use BGP contain more than one router. For example, consider the network shown in the figure below where `AS20` contains two routers attached to interdomain links : `R2` and `R4`. In this network, two routing protocols are used by `R2` and `R4`. They use an intradomain routing protocol such as OSPF to distribute the routes towards the internal prefixes : `195.100.0.8/30`, `195.100.0.0/30`, ... `R2` and `R4` also use BGP. `R2` receives the routes advertised by `AS10` while `R4` receives the routes advertised by `AS30`. These two routers need to exchange the routes that they have respectively received over their BGP sessions. 
 
 
-.. figure:: png/network-fig-136-c.png
+.. figure:: svg/bgp-larger.*
    :align: center
    :scale: 70
    
@@ -389,7 +306,7 @@ A BGP router does not advertise a route that it has learned over an `iBGP sessio
 
 To understand the utilisation of an `iBGP session`, let us consider what happens when router `R1` sends `U(194.100.0.0/23,195.100.0.1,AS10)` in the network shown below. This BGP message is processed by `R2` which advertises it over its `iBGP session` with `R4`. The `BGP Update` sent by `R2` contains the same nexthop and the same AS-Path as in the `BGP Update` received by `R2`. `R4` then sends `U(194.100.0.0/23,195.100.0.5,AS20:AS10)` to `R3`. Note that the BGP nexthop and the AS-Path are only updated [#fnexthopself]_ when a BGP route is advertised over an `eBGP session`.
 
-.. figure:: png/network-fig-138-c.png
+.. figure:: svg/ibgp-ebgp.*
    :align: center
    :scale: 70
    
@@ -431,7 +348,7 @@ There is thus a coupling between the interdomain and the intradomain routing tab
 
 The last point to be discussed before looking at the BGP decision process is that a network may contain routers that do not maintain any eBGP session. These routers can be stub routers attached to a single router in the network or core routers that reside on the path between two border routers that are using BGP as illustrated in the figure below.
 
-.. figure:: png/network-fig-144-c.png
+.. figure:: svg/ibgp-ebgp-2.*
    :align: center
    :scale: 70
    
@@ -460,7 +377,7 @@ The `local-pref` attribute is often used to prefer some routes over others. This
 
 A common utilisation of `local-pref` is to support backup links. Consider the situation depicted in the figure below. `AS1` would always like to use the high bandwidth link to send and receive packets via `AS2` and only use the backup link upon failure of the primary one.
 
-.. figure:: png/network-fig-122-c.png
+.. figure:: svg/bgp-backup.*
    :align: center
    :scale: 70
    
@@ -487,7 +404,7 @@ The import filter above modifies the selection of the BGP routes inside `AS1`. T
 
 Sometimes, the `local-pref` attribute is used to prefer a `cheap` link compared to a more expensive one. For example, in the network below, `AS1` could wish to send and receive packets mainly via its interdomain link with `AS4`.
 
-.. figure:: png/network-fig-123-c.png
+.. figure:: svg/bgp-prefer.*
    :align: center
    :scale: 70
    
@@ -512,7 +429,7 @@ Another important utilisation of the `local-pref` attribute is to support the `c
 
 With such an import filter, the routers of a domain always prefer to reach destinations via their customers whenever such a route exists. Otherwise, they prefer to use `shared-cost` peering relationships and they only send packets via their providers when they do not know any alternate route. A consequence of setting the `local-pref` attribute like this is that Internet paths are often asymmetrical. Consider for example the internetwork shown in the figure below.
 
-.. figure:: png/network-fig-135-c.png
+.. figure:: svg/asymetry.*
    :align: center
    :scale: 70
    
@@ -547,7 +464,7 @@ To understand `hot potato routing`, let us consider the two domains shown in the
 
 .. _fig-med:
 
-.. figure:: png/network-fig-151-c.png
+.. figure:: svg/bgp-med.*
    :align: center
    :scale: 70
    
@@ -578,7 +495,7 @@ In practice, the fifth step of the BGP decision process is slightly more complex
 
 The last step of the BGP decision allows the selection of a single route when a BGP router has received several routes that are considered as equal by the first six steps of the decision process. This can happen for example in a dual-homed stub attached to two different providers. As shown in the figure below, router `R1` receives two equally good BGP routes towards `1.0.0.0/8`. To break the ties, each router is identified by a unique `router-id` which in practice is one of the IP addresses assigned to the router. On some routers, the lowest router id step in the BGP decision process is replaced by the selection of the oldest route :rfc:`5004`. Preferring the oldest route when breaking ties is used to prefer stable paths over unstable paths. However, a drawback of this approach is that the selection of the BGP routes depends on the arrival times of the corresponding messages. This makes the BGP selection process non-deterministic and can lead to problems that are difficult to debug.
 
-.. figure:: png/network-fig-153-c.png
+.. figure:: svg/stub-2providers.*
    :align: center
    :scale: 70
    
@@ -592,7 +509,7 @@ BGP convergence
 In the previous sections, we have explained the operation of BGP routers. Compared to intradomain routing protocols, a key feature of BGP is its ability to support interdomain routing policies that are defined by each domain as its import and export filters and ranking process. A domain can define its own routing policies and router vendors have implemented many configuration tweaks to support complex routing policies. However, the routing policy chosen by a domain may interfere with the routing policy chosen by another domain. To understand this issue, let us first consider the simple internetwork shown below.
 
 
-.. figure:: png/network-fig-127-c.png
+.. figure:: svg/disagree.*
    :align: center
    :scale: 70
    
@@ -608,7 +525,7 @@ The example above has shown that the routes selected by BGP routers may sometime
 
 From an operational perspective, the above configuration is annoying since the network operators cannot easily predict which paths are chosen. Unfortunately, there are even more annoying BGP configurations. For example, let us consider the configuration below which is often named `Bad Gadget` [GW1999]_
 
-.. figure:: png/network-fig-133-c.png
+.. figure:: svg/bad-gadget.*
    :align: center
    :scale: 70
    
@@ -648,7 +565,7 @@ In practice, researchers and operators expect that these guidelines are verified
 
 Based on these studies and [ATLAS2009]_, the AS-level Internet topology can be summarised as shown in the figure below.
 
-.. figure:: png/network-fig-110-c.png
+.. figure:: svg/bgp-hierarchy.* 
    :align: center
    :scale: 70
    

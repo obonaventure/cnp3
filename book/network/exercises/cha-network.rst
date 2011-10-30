@@ -90,6 +90,7 @@ Practice
     h1[0]="lan"
     h2[0]="lan"
 
+
  This configuration file requests the creation of two virtual machines, named `h1` and `h2`. Each of these hosts has one network interface (`eth0`) that is connected to the local area network named `"lan"`. netkit_ allows to define several interfaces on a given host and attach them to different local area networks.
   A `host.startup` file for each host (`h1.startup` and `h2.startup` in the example above). This file is a shell script that is executed at the end of the boot of the virtual host. This is typically in this script that the network interfaces are configured and the daemons are launched.
   A directory for each host (`h1` and `h2` in the example above). This directory is used to store configuration files that must be copied on the virtual machine's filesystems when they are first created.

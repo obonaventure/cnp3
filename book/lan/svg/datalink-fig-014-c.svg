@@ -26,21 +26,21 @@
      guidetolerance="10"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:window-width="640"
-     inkscape:window-height="480"
+     inkscape:window-width="934"
+     inkscape:window-height="619"
      id="namedview739"
      showgrid="false"
      fit-margin-top="0"
      fit-margin-left="0"
      fit-margin-right="0"
      fit-margin-bottom="0"
-     inkscape:zoom="0.01247619"
-     inkscape:cx="13295.85"
-     inkscape:cy="6677.7"
+     inkscape:zoom="0.14115198"
+     inkscape:cx="16581.354"
+     inkscape:cy="4274.5391"
      inkscape:window-x="426"
      inkscape:window-y="173"
      inkscape:window-maximized="0"
-     inkscape:current-layer="svg2" />
+     inkscape:current-layer="g8342" />
   <metadata
      id="metadata1029">
     <rdf:RDF>
@@ -1388,17 +1388,6 @@
        x="0"
        height="21000" />
   </g>
-  <g
-     id="g214"
-     transform="matrix(0.87291,0,0,0.87291,28586.85,121)"
-     style="fill:none">
-    <rect
-       id="rect216"
-       y="0"
-       x="0"
-       height="21000"
-       width="28000" />
-  </g>
   <text
      id="text3784"
      style="font-size:367.09359741px;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;font-family:Sans"
@@ -1414,7 +1403,7 @@
        y="12071.984" /></text>
   <g
      id="g8342"
-     transform="translate(-704.15,-2617.9)">
+     transform="translate(-623.99773,-2617.9)">
     <g
        id="g347"
        transform="translate(-583.35,-4024.9)">
@@ -2874,7 +2863,7 @@
     </g>
     <g
        id="g5095"
-       transform="matrix(11.22,0,0,9.8734,-1261.8,3011.5)">
+       transform="matrix(11.22,0,0,9.8734,-1255.8,3011.5)">
       <path
          id="path5080"
          d="m 51.789,625.96 82.843,-81.324 h 135.88 l -83.198,81.324 z"
@@ -2901,15 +2890,15 @@
            font-size="5.757px"
            line-height="125%"
            y="551.60193"
-           x="877.06805"
+           x="869.84741"
            xml:space="preserve"
            sodipodi:linespacing="125%"><tspan
              id="tspan4315"
              font-weight="bold"
              font-size="41.121px"
              y="551.60193"
-             x="877.06805"
-             style="font-size:41.12099838px;font-weight:bold;font-family:FreeSans">Switch 1</tspan></text>
+             x="869.84741"
+             style="font-size:41.12099838px;font-weight:bold;font-family:FreeSans">  Sw 1</tspan></text>
         <path
            id="path4317"
            d="m 868.16,559.93 47.156,0.14075 h 107.79 c 19.516,0 24.295,-1.8096 37.228,-14.721 l 69.77,-69.654"
@@ -3120,7 +3109,7 @@
              font-size="41.121px"
              y="551.60193"
              x="877.06805"
-             style="font-size:41.12099838px;font-weight:bold;font-family:FreeSans">Switch 3</tspan></text>
+             style="font-size:41.12099838px;font-weight:bold;font-family:FreeSans"> Sw 3</tspan></text>
         <path
            id="path8304"
            d="m 868.16,559.93 47.156,0.14075 h 107.79 c 19.516,0 24.295,-1.8096 37.228,-14.721 l 69.77,-69.654"
@@ -3178,7 +3167,7 @@
              font-size="41.121px"
              y="551.60193"
              x="877.06805"
-             style="font-size:41.12099838px;font-weight:bold;font-family:FreeSans">Switch 2</tspan></text>
+             style="font-size:41.12099838px;font-weight:bold;font-family:FreeSans"> Sw 2</tspan></text>
         <path
            id="path8328"
            d="m 868.16,559.93 47.156,0.14075 h 107.79 c 19.516,0 24.295,-1.8096 37.228,-14.721 l 69.77,-69.654"

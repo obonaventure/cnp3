@@ -65,7 +65,7 @@ The :term:`ASCII` characters are encoded as a seven bits field, but transmitted 
 
 Most applications exchange strings that are composed of fixed or variable numbers of characters. A common solution to define the character strings that are acceptable is to define them as a grammar using a Backus-Naur Form (:term:`BNF`) such as the Augmented BNF defined in :rfc:`5234`. A BNF is a set of production rules that generate all valid character strings. For example, consider a networked application that uses two commands, where the user can supply a username and a password. The BNF for this application could be defined as shown in the figure below.
 
-.. figure:: pkt/bnf.*
+.. figure:: pkt/bnf.png
    :align: center
    :scale: 100 
 
@@ -82,7 +82,7 @@ The first possibility was named  `big-endian` in a note written by Cohen [Cohen1
 
 Besides 16 and 32 bit words, some applications need to exchange data structures containing bit fields of various lengths. For example, a message may be composed of a 16 bits field followed by eight, one bit flags, a 24 bits field and two 8 bits bytes. Internet protocol specifications will define such a message by using a representation such as the one below. In this representation, each line corresponds to 32 bits and the vertical lines are used to delineate fields. The numbers above the lines indicate the bit positions in the 32-bits word, with the high order bit at position `0`. 
 
-.. figure:: pkt/message.*
+.. figure:: pkt/message.png
    :align: center
    :scale: 100 
 

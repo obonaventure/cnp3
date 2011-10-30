@@ -26,17 +26,17 @@
      guidetolerance="10"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:window-width="640"
-     inkscape:window-height="480"
+     inkscape:window-width="1264"
+     inkscape:window-height="826"
      id="namedview648"
      showgrid="false"
      fit-margin-top="0"
      fit-margin-left="0"
      fit-margin-right="0"
      fit-margin-bottom="0"
-     inkscape:zoom="0.01247619"
-     inkscape:cx="10683.489"
-     inkscape:cy="5853.0557"
+     inkscape:zoom="0.035287994"
+     inkscape:cx="11438.961"
+     inkscape:cy="16914.358"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="0"
@@ -1814,7 +1814,7 @@
   </defs>
   <g
      id="g393"
-     transform="translate(-3637.1207,-8223.3715)">
+     transform="translate(-3637.1215,-8223.3715)">
     <desc
        id="desc395">Drawing</desc>
     <g
@@ -1832,7 +1832,7 @@
   </g>
   <g
      id="g415"
-     transform="translate(-3637.1207,-8223.3715)">
+     transform="translate(-3637.1215,-8223.3715)">
     <desc
        id="desc417">Drawing</desc>
     <g
@@ -1850,7 +1850,7 @@
   </g>
   <g
      id="g427"
-     transform="translate(-3637.1207,-8223.3715)">
+     transform="translate(-3637.1215,-8223.3715)">
     <desc
        id="desc429">Drawing</desc>
     <g
@@ -1868,7 +1868,7 @@
   </g>
   <g
      id="g469"
-     transform="translate(-3637.1207,-8223.3715)">
+     transform="translate(-3637.1215,-8223.3715)">
     <desc
        id="desc471">Drawing</desc>
     <g
@@ -1886,7 +1886,7 @@
   </g>
   <g
      id="g481"
-     transform="translate(-3637.1207,-8223.3715)">
+     transform="translate(-3637.1215,-8223.3715)">
     <desc
        id="desc483">Drawing</desc>
     <g
@@ -1904,7 +1904,7 @@
   </g>
   <g
      id="g493"
-     transform="translate(-3637.1207,-8223.3715)">
+     transform="translate(-3637.1215,-8223.3715)">
     <desc
        id="desc495">Drawing</desc>
     <g
@@ -1922,7 +1922,7 @@
   </g>
   <g
      id="g505"
-     transform="translate(-3637.1207,-8223.3715)">
+     transform="translate(-3637.1215,-8223.3715)">
     <desc
        id="desc507">Drawing</desc>
     <g
@@ -1940,7 +1940,7 @@
   </g>
   <g
      id="g517"
-     transform="translate(-3637.1207,-8223.3715)">
+     transform="translate(-3637.1215,-8223.3715)">
     <desc
        id="desc519">Drawing</desc>
     <g
@@ -1958,7 +1958,7 @@
   </g>
   <g
      id="g529"
-     transform="translate(-3637.1207,-8223.3715)">
+     transform="translate(-3637.1215,-8223.3715)">
     <desc
        id="desc531">Drawing</desc>
     <g
@@ -2003,7 +2003,7 @@
   </g>
   <g
      id="g551"
-     transform="translate(-3637.1207,-8223.3715)">
+     transform="translate(-3637.1215,-8223.3715)">
     <desc
        id="desc553">Drawing</desc>
     <g
@@ -2048,7 +2048,7 @@
   </g>
   <g
      id="g595"
-     transform="translate(-3637.1207,-8223.3715)">
+     transform="translate(-3637.1215,-8223.3715)">
     <desc
        id="desc597">Drawing</desc>
     <g
@@ -2093,7 +2093,7 @@
   </g>
   <g
      id="g617"
-     transform="translate(-3637.1207,-8223.3715)">
+     transform="translate(-3637.1215,-8223.3715)">
     <desc
        id="desc619">Drawing</desc>
     <g
@@ -2138,7 +2138,7 @@
   </g>
   <g
      id="g639"
-     transform="translate(-3637.1207,-8223.3715)">
+     transform="translate(-3637.1215,-8223.3715)">
     <desc
        id="desc641">Drawing</desc>
     <g
@@ -2183,7 +2183,7 @@
   </g>
   <g
      id="g661"
-     transform="translate(-4973.5107,-7980.4715)">
+     transform="translate(-4973.5115,-7980.4715)">
     <desc
        id="desc663">Group</desc>
     <g
@@ -2223,7 +2223,7 @@
   </g>
   <g
      id="g689"
-     transform="translate(-2482.9807,-8223.3715)">
+     transform="translate(-2482.9815,-8223.3715)">
     <desc
        id="desc691">Group</desc>
     <g
@@ -2263,7 +2263,7 @@
   </g>
   <g
      id="g717"
-     transform="translate(-3394.1447,-8587.8715)">
+     transform="translate(-3394.1455,-8587.8715)">
     <desc
        id="desc719">Group</desc>
     <g
@@ -2301,33 +2301,11 @@
       </g>
     </g>
   </g>
-  <g
-     id="g206"
-     transform="translate(29450.489,-6174.4715)"
-     style="fill:none">
-    <rect
-       id="rect208"
-       y="0"
-       width="28000"
-       x="0"
-       height="21000" />
-  </g>
-  <g
-     id="g214"
-     transform="matrix(0.87291,0,0,0.87291,58741.489,-3435.4915)"
-     style="fill:none">
-    <rect
-       id="rect216"
-       y="0"
-       x="0"
-       height="21000"
-       width="28000" />
-  </g>
   <text
      id="text3784"
      style="font-size:367.09359741px;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-rule:evenodd;font-family:Sans"
      xml:space="preserve"
-     transform="scale(1.0005902,0.99941018)"
+     transform="scale(1.0005902,0.99941015)"
      font-size="367.09px"
      y="8513.3418"
      x="117179.16"
@@ -2338,7 +2316,7 @@
        y="8513.3418" /></text>
   <g
      id="g5095"
-     transform="matrix(11.22,0,0,9.8734,-3310.8867,1005.0285)"
+     transform="matrix(11.22,0,0,9.8734,-3310.8875,1005.0285)"
      style="fill-rule:evenodd">
     <path
        id="path5080"
@@ -2374,7 +2352,7 @@
            font-size="41.121px"
            y="551.60193"
            x="877.06805"
-           style="font-size:41.12099838px;font-weight:bold;font-family:FreeSans">Switch 1</tspan></text>
+           style="font-size:41.12099838px;font-weight:bold;font-family:FreeSans"> Sw 1</tspan></text>
       <path
          id="path4317"
          d="m 868.16,559.93 47.156,0.14075 h 107.79 c 19.516,0 24.295,-1.8096 37.228,-14.721 l 69.77,-69.654"
@@ -2397,7 +2375,7 @@
   </g>
   <g
      id="g8314"
-     transform="matrix(11.22,0,0,9.8734,1259.8893,-3732.3215)"
+     transform="matrix(11.22,0,0,9.8734,1259.8885,-3732.3215)"
      style="fill-rule:evenodd">
     <path
        id="path8316"
@@ -2433,7 +2411,7 @@
            font-size="41.121px"
            y="551.60193"
            x="877.06805"
-           style="font-size:41.12099838px;font-weight:bold;font-family:FreeSans">Switch 2</tspan></text>
+           style="font-size:41.12099838px;font-weight:bold;font-family:FreeSans">  Sw 2</tspan></text>
       <path
          id="path8328"
          d="m 868.16,559.93 47.156,0.14075 h 107.79 c 19.516,0 24.295,-1.8096 37.228,-14.721 l 69.77,-69.654"
@@ -2469,7 +2447,7 @@
        y="7566.4478" /></text>
   <g
      id="g8673"
-     transform="matrix(11.22,0,0,9.8734,4225.4893,2519.6285)"
+     transform="matrix(11.22,0,0,9.8734,4225.4885,2519.6285)"
      style="fill-rule:evenodd">
     <path
        id="path8675"
@@ -2505,7 +2483,7 @@
            font-size="41.121px"
            y="551.60193"
            x="877.06805"
-           style="font-size:41.12099838px;font-weight:bold;font-family:FreeSans">Switch 44</tspan></text>
+           style="font-size:41.12099838px;font-weight:bold;font-family:FreeSans"> Sw 44</tspan></text>
       <path
          id="path8687"
          d="m 868.16,559.93 47.156,0.14075 h 107.79 c 19.516,0 24.295,-1.8096 37.228,-14.721 l 69.77,-69.654"
@@ -2528,7 +2506,7 @@
   </g>
   <g
      id="g8697"
-     transform="matrix(11.22,0,0,9.8734,1099.4893,6206.8285)"
+     transform="matrix(11.22,0,0,9.8734,1099.4885,6206.8285)"
      style="fill-rule:evenodd">
     <path
        id="path8699"
@@ -2564,7 +2542,7 @@
            font-size="41.121px"
            y="551.60193"
            x="877.06805"
-           style="font-size:41.12099838px;font-weight:bold;font-family:FreeSans">Switch 22</tspan></text>
+           style="font-size:41.12099838px;font-weight:bold;font-family:FreeSans"> Sw 22</tspan></text>
       <path
          id="path8711"
          d="m 868.16,559.93 47.156,0.14075 h 107.79 c 19.516,0 24.295,-1.8096 37.228,-14.721 l 69.77,-69.654"
@@ -2587,7 +2565,7 @@
   </g>
   <g
      id="g8721"
-     transform="matrix(11.22,0,0,9.8734,-6675.3107,5886.0285)"
+     transform="matrix(11.22,0,0,9.8734,-6675.3115,5886.0285)"
      style="fill-rule:evenodd">
     <path
        id="path8723"
@@ -2623,7 +2601,7 @@
            font-size="41.121px"
            y="551.60193"
            x="877.06805"
-           style="font-size:41.12099838px;font-weight:bold;font-family:FreeSans">Switch 7</tspan></text>
+           style="font-size:41.12099838px;font-weight:bold;font-family:FreeSans"> Sw 7</tspan></text>
       <path
          id="path8735"
          d="m 868.16,559.93 47.156,0.14075 h 107.79 c 19.516,0 24.295,-1.8096 37.228,-14.721 l 69.77,-69.654"
@@ -2682,7 +2660,7 @@
            font-size="41.121px"
            y="551.60193"
            x="877.06805"
-           style="font-size:41.12099838px;font-weight:bold;font-family:FreeSans">Switch 9</tspan></text>
+           style="font-size:41.12099838px;font-weight:bold;font-family:FreeSans"> Sw 9</tspan></text>
       <path
          id="path8759"
          d="m 868.16,559.93 47.156,0.14075 h 107.79 c 19.516,0 24.295,-1.8096 37.228,-14.721 l 69.77,-69.654"
@@ -2705,22 +2683,22 @@
   </g>
   <path
      id="path9253"
-     d="m 2241.5893,7810.8285 1913.5,-1124"
+     d="m 2241.5885,7810.8285 1913.5,-1124"
      inkscape:connector-curvature="0"
      style="fill:none;stroke:#000000;stroke-width:80" />
   <path
      id="path9255"
-     d="m 6645.5893,7932.8285 1852.7,728.93"
+     d="m 6645.5885,7932.8285 1852.7,728.93"
      inkscape:connector-curvature="0"
      style="fill:none;stroke:#000000;stroke-width:80" />
   <path
      id="path9257"
-     d="m 8376.4893,10483.828 v 1154.1"
+     d="m 8376.4885,10483.827 v 1154.1"
      inkscape:connector-curvature="0"
      style="fill:none;stroke:#000000;stroke-width:80" />
   <path
      id="path9259"
-     d="m 14542.489,9602.8285 1549,820.0495"
+     d="m 14542.489,9602.8285 1549,820.0485"
      inkscape:connector-curvature="0"
      style="fill:none;stroke:#000000;stroke-width:80" />
   <path
@@ -2740,7 +2718,7 @@
      style="fill:none;stroke:#000000;stroke-width:80" />
   <path
      id="path9269"
-     d="m 8923.4893,3376.6285 -577.07,-1488.2"
+     d="m 8923.4885,3376.6285 -577.07,-1488.2"
      inkscape:connector-curvature="0"
      style="fill:none;stroke:#000000;stroke-width:80" />
   <text
@@ -2750,11 +2728,11 @@
      xml:space="preserve"
      font-size="500px"
      y="8479.1279"
-     x="935.59479"
+     x="935.59399"
      line-height="125%"
      sodipodi:linespacing="125%"><tspan
        id="tspan10041"
-       x="935.59479"
+       x="935.59399"
        y="8479.1279">LAN B</tspan></text>
   <text
      id="text10043"
@@ -2763,11 +2741,11 @@
      xml:space="preserve"
      font-size="500px"
      y="12457.884"
-     x="8133.8027"
+     x="8133.8018"
      line-height="125%"
      sodipodi:linespacing="125%"><tspan
        id="tspan10045"
-       x="8133.8027"
+       x="8133.8018"
        y="12457.884">LAN H</tspan></text>
   <text
      id="text10047"
@@ -2776,11 +2754,11 @@
      xml:space="preserve"
      font-size="500px"
      y="10210.342"
-     x="16638.014"
+     x="16638.012"
      line-height="125%"
      sodipodi:linespacing="125%"><tspan
        id="tspan10049"
-       x="16638.014"
+       x="16638.012"
        y="10210.342">LAN G</tspan></text>
   <text
      id="text10051"
@@ -2789,11 +2767,11 @@
      xml:space="preserve"
      font-size="500px"
      y="3984.0452"
-     x="16425.41"
+     x="16425.408"
      line-height="125%"
      sodipodi:linespacing="125%"><tspan
        id="tspan10053"
-       x="16425.41"
+       x="16425.408"
        y="3984.0452">LAN F</tspan></text>
   <text
      id="text10055"
@@ -2801,13 +2779,13 @@
      font-weight="bold"
      xml:space="preserve"
      font-size="500px"
-     y="1584.6429"
-     x="7344.125"
+     y="1584.6428"
+     x="7344.124"
      line-height="125%"
      sodipodi:linespacing="125%"><tspan
        id="tspan10057"
-       x="7344.125"
-       y="1584.6429">LAN A</tspan></text>
+       x="7344.124"
+       y="1584.6428">LAN A</tspan></text>
   <text
      id="text10059"
      style="font-size:500px;font-weight:bold;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;font-family:FreeSans"
@@ -2815,11 +2793,11 @@
      xml:space="preserve"
      font-size="500px"
      y="6140.4702"
-     x="12537.77"
+     x="12537.769"
      line-height="125%"
      sodipodi:linespacing="125%"><tspan
        id="tspan10061"
-       x="12537.77"
+       x="12537.769"
        y="6140.4702">LAN E</tspan></text>
   <text
      id="text10063"
@@ -2827,13 +2805,13 @@
      font-weight="bold"
      xml:space="preserve"
      font-size="500px"
-     y="8630.9883"
-     x="9044.9678"
+     y="8630.9873"
+     x="9044.9668"
      line-height="125%"
      sodipodi:linespacing="125%"><tspan
        id="tspan10065"
-       x="9044.9678"
-       y="8630.9883">LAN D</tspan></text>
+       x="9044.9668"
+       y="8630.9873">LAN D</tspan></text>
   <text
      id="text10067"
      style="font-size:500px;font-weight:bold;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;font-family:FreeSans"
@@ -2841,10 +2819,10 @@
      xml:space="preserve"
      font-size="500px"
      y="7689.4517"
-     x="5886.2607"
+     x="5886.2598"
      line-height="125%"
      sodipodi:linespacing="125%"><tspan
        id="tspan10069"
-       x="5886.2607"
+       x="5886.2598"
        y="7689.4517">LAN C</tspan></text>
 </svg>

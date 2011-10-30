@@ -57,7 +57,7 @@ This is mainly due to the fact that the communicating devices use their own cloc
 .. index:: Physical layer
 
 
-.. figure:: svg/intro-figures-027-c.png
+.. figure:: svg/intro-figures-027-c.*
    :align: center
    :scale: 80
 
@@ -75,7 +75,7 @@ The `Datalink layer` builds on the service provided by the underlying physical l
 An important point to note about the `Datalink layer` is that although the figure below indicates that two entities of the `Datalink layer` exchange frames directly, in reality this is slightly different. When the `Datalink layer` entity on the left needs to transmit a frame, it issues as many `Data.request` primitives to the underlying `physical layer` as there are bits in the frame. The physical layer will then convert the sequence of bits in an electromagnetic or optical signal that will be sent over the physical medium. The `physical layer` on the right hand side of the figure will decode the received signal, recover the bits and issue the corresponding `Data.indication` primitives to its `Datalink layer` entity. If there are no transmission errors, this entity will receive the frame sent earlier. 
 
 
-.. figure:: svg/intro-figures-028-c.png
+.. figure:: svg/intro-figures-028-c.*
    :align: center
    :scale: 80 
 
@@ -87,7 +87,7 @@ An important point to note about the `Datalink layer` is that although the figur
 The `Datalink layer` allows directly connected hosts to exchange information, but it is often necessary to exchange information between hosts that are not attached to the same physical medium. This is the task of the `network layer`. The `network layer` is built above the `datalink layer`. Network layer entities exchange `packets`. A `packet` is a finite sequence of bytes that is transported by the datalink layer inside one or more frames. A packet usually contains information about its origin and its destination, and usually passes through several intermediate devices called routers on its way from its origin to its destination.
 
 
-.. figure:: svg/intro-figures-029-c.png
+.. figure:: svg/intro-figures-029-c.*
    :align: center
    :scale: 80 
 
@@ -100,7 +100,7 @@ Most realisations of the network layer, including the internet, do not provide a
 There are different types of transport layers. The most widely used transport layers on the Internet are :term:`TCP` ,that provides a reliable connection-oriented bytestream transport service, and :term:`UDP` ,that provides an unreliable connection-less transport service.
 
 
-.. figure:: svg/intro-figures-030-c.png
+.. figure:: svg/intro-figures-030-c.*
    :align: center
    :scale: 80 
 
@@ -110,7 +110,7 @@ There are different types of transport layers. The most widely used transport la
 
 The upper layer of our architecture is the `Application layer`. This layer includes all the mechanisms and data structures that are necessary for the applications. We will use Application Data Unit (ADU) to indicate the data exchanged between two entities of the Application layer.
 
-.. figure:: svg/intro-figures-031-c.png
+.. figure:: svg/intro-figures-031-c.*
    :align: center
    :scale: 50 
 

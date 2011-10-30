@@ -14,7 +14,7 @@
    width="100%"
    version="1.1"
    preserveAspectRatio="xMidYMid"
-   viewBox="0 0 14884.154 5684.7806"
+   viewBox="0 0 14884.154 5684.7807"
    inkscape:version="0.48.1 r9760"
    sodipodi:docname="simple-internetwork-vc-estab.svg"
    style="fill-rule:evenodd">
@@ -27,17 +27,17 @@
      guidetolerance="10"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:window-width="759"
-     inkscape:window-height="575"
+     inkscape:window-width="1288"
+     inkscape:window-height="792"
      id="namedview1201"
      showgrid="false"
      fit-margin-top="0"
      fit-margin-left="0"
      fit-margin-right="0"
      fit-margin-bottom="0"
-     inkscape:zoom="0.049904762"
-     inkscape:cx="4506.877"
-     inkscape:cy="2180.7776"
+     inkscape:zoom="0.056568542"
+     inkscape:cx="10639.783"
+     inkscape:cy="1143.8862"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="0"
@@ -2147,7 +2147,7 @@
     <linearGradient
        inkscape:collect="always"
        xlink:href="#linearGradient5771"
-       id="linearGradient6587"
+       id="linearGradient4190"
        gradientUnits="userSpaceOnUse"
        gradientTransform="matrix(0.040968,0,0,0.040968,6524.8,2549.3)"
        x1="11733"
@@ -2157,7 +2157,7 @@
     <linearGradient
        inkscape:collect="always"
        xlink:href="#linearGradient5771"
-       id="linearGradient6589"
+       id="linearGradient4192"
        gradientUnits="userSpaceOnUse"
        gradientTransform="matrix(0.040968,0,0,0.040968,6809,2544)"
        x1="11733"
@@ -2165,472 +2165,63 @@
        x2="15717"
        y2="10591" />
   </defs>
-  <g
-     id="g250"
-     style="fill:none"
-     transform="translate(-682.07202,-1097.2769)">
-    <rect
-       id="rect252"
-       y="0"
-       width="28000"
-       x="0"
-       height="21000" />
-  </g>
-  <g
-     id="g291"
-     transform="translate(-682.07202,-1097.2769)">
-    <desc
-       id="desc293">Drawing</desc>
-    <g
-       id="g295">
-      <g
-         id="g297"
-         style="fill:none">
-        <rect
-           id="rect299"
-           y="19914"
-           width="4270"
-           x="365"
-           height="601" />
-        <rect
-           id="rect301"
-           y="19914"
-           width="4270"
-           x="366"
-           height="601" />
-      </g>
-      <g
-         id="g303">
-        <g
-           id="g305"
-           font-weight="400"
-           font-size="494px"
-           style="font-size:494px;font-weight:400;font-family:Helvetica embedded">
-          <g
-             id="g307"
-             style="fill:none">
-            <text
-               id="text309">
-              <tspan
-                 id="tspan311"
-                 y="20313"
-                 x="365 721 1080 1406 1737 1876 2151 2422 2698 2973 3112 3388">CNPP/2008.4.</tspan>
-            </text>
-          </g>
-        </g>
-      </g>
-    </g>
-  </g>
-  <g
-     id="g313"
-     transform="translate(-682.07202,-1097.2769)">
-    <desc
-       id="desc315">Drawing</desc>
-    <g
-       id="g317">
-      <g
-         id="g319"
-         style="fill:none">
-        <rect
-           id="rect321"
-           y="0"
-           width="21282"
-           x="4929"
-           height="3702" />
-      </g>
-      <g
-         id="g323">
-        <g
-           id="g325"
-           font-weight="400"
-           font-size="1270px"
-           style="font-size:1270px;font-weight:400;font-family:Helvetica embedded">
-          <g
-             id="g327"
-             style="fill:none">
-            <text
-               id="text329">
-              <tspan
-                 id="tspan331"
-                 y="2237"
-                 x="6642 7489 8124 8475 9182 9889 10173 10452 11087 11794 12852 13559 14266 14618 14973 15676 16032 16383 17090 17441 18076 18360 18783 19135 19842 20549 20832 21184 21819 22102 22521 23156 23863 24147">Establishment of a virtual circuit</tspan>
-            </text>
-          </g>
-        </g>
-      </g>
-    </g>
-  </g>
-  <g
-     id="g1875"
-     transform="translate(-682.07202,-1097.2769)">
-    <desc
-       id="desc1877">Drawing</desc>
-    <g
-       id="g1879">
-      <g
-         id="g1881"
-         style="fill:none">
-        <rect
-           id="rect1883"
-           y="13440"
-           x="1723"
-           height="3778"
-           width="13925" />
-        <rect
-           id="rect1885"
-           y="13441"
-           x="1723"
-           height="3778"
-           width="13925" />
-      </g>
-      <g
-         id="g1887">
-        <g
-           id="g1889"
-           font-weight="400"
-           font-size="847px"
-           style="font-size:847px;font-weight:400;font-family:Helvetica embedded">
-          <g
-             id="g1891"
-             style="fill:none">
-            <text
-               id="text1893">
-              <tspan
-                 id="tspan1895"
-                 y="14215"
-                 x="1833 2443 2917 3387 3670 4140 4564 4847 5317 5787 6257 6494 6778 7247 7717 7954 8141 8615">Hop-by-hop routing</tspan>
-            </text>
-            <text
-               id="text1897">
-              <tspan
-                 id="tspan1899"
-                 y="15159"
-                 x="1833 2396 2870 3294 3763 4000 4280 4754 5224 5457 5931 6210 6447 6871 7341 7810 8238 8708 8894 9131 9555 9787 9978 10211 10638 10871 11155 11625 12095 12332 12518 12992 13462 13695 13932 14402 14876 15062">Each router consults its routing table</tspan>
-            </text>
-            <text
-               id="text1901">
-              <tspan
-                 id="tspan1903"
-                 y="16103"
-                 x="1833 2070 2540 2773 3010 3480 3763 4373 4847 5127 5601 5834 6257 6680 6917 7387 7810 8048 8517 8987 9178 9364 9787 10262 10964 11434 11908">to forward vc establishment</tspan>
-            </text>
-          </g>
-        </g>
-      </g>
-    </g>
-  </g>
-  <g
-     id="g1925"
-     transform="translate(1230.628,7626.6231)">
-    <desc
-       id="desc1927">Drawing</desc>
-    <g
-       id="g1929">
-      <g
-         id="g1931"
-         style="fill:none">
-        <rect
-           id="rect1933"
-           y="8765"
-           x="3903"
-           height="642"
-           width="3834" />
-        <rect
-           id="rect1935"
-           y="8766"
-           x="3904"
-           height="642"
-           width="3834" />
-      </g>
-      <g
-         id="g1937">
-        <g
-           id="g1939"
-           font-weight="400"
-           font-size="635px"
-           style="font-size:635px;font-weight:400;font-family:Helvetica embedded">
-          <g
-             id="g1941"
-             style="fill:none">
-            <text
-               id="text1943">
-              <tspan
-                 id="tspan1945"
-                 y="9278"
-                 x="3903 4398 4750 5105 5457 5668 6126 6481 6799 6972 7345 7523">Open(Dest=I)</tspan>
-            </text>
-          </g>
-        </g>
-      </g>
-    </g>
-  </g>
-  <g
-     id="g1947"
-     transform="translate(1230.628,7626.6231)">
-    <desc
-       id="desc1949">Drawing</desc>
-    <g
-       id="g1951">
-      <g
-         id="g1953"
-         style="fill:none">
-        <rect
-           id="rect1955"
-           y="16614"
-           x="8042"
-           height="3212"
-           width="19968" />
-        <rect
-           id="rect1957"
-           y="16615"
-           x="8043"
-           height="3212"
-           width="19968" />
-      </g>
-      <g
-         id="g1959">
-        <g
-           id="g1961"
-           font-weight="400"
-           font-size="847px"
-           style="font-size:847px;font-weight:400;font-family:Helvetica embedded">
-          <g
-             id="g1963"
-             style="fill:none">
-            <text
-               id="text1965">
-              <tspan
-                 id="tspan1967"
-                 y="17389"
-                 x="8152 8715 9189 9659 9943 10366 10836 11073 11352 11822 12296 12529 12720 13190 13660 13897 14129 14604 15027 15497 15687 15874 16297 16483 16720 16957 17237 17711 18181 18414 18604 19074">Source routing/ explicit routing</tspan>
-            </text>
-            <text
-               id="text1969">
-              <tspan
-                 id="tspan1971"
-                 y="18333"
-                 x="8152 8715 9189 9659 9943 10366 10836 11073 11352 11822 12106 12343 12343 12766 13046 13469 13706 13943 14413 14883 15353 15590 15874 16344 16813 17050 17520 17804 18083 18320 18507 18981 19451 19637 20060 20535 20767 21237 21661 21898 22088 22558 22791 23214 23638">Source (or first hop router) indicates in vc</tspan>
-            </text>
-            <text
-               id="text1973">
-              <tspan
-                 id="tspan1975"
-                 y="19277"
-                 x="8152 8622 9045 9282 9752 10222 10413 10599 11022 11496 12199 12673 13143 13376 13613 14083 14557 14980 15404 15874 16111 16344 16581 17050 17520 17757 18227 18697 18934 19404 19641 19874 20348 20581 21055 21525 21758 21995 22465 22655 22842 23312 23925 24395 24869">establishment packet the path to be followed</tspan>
-            </text>
-          </g>
-        </g>
-      </g>
-    </g>
-  </g>
-  <g
-     id="Default"
-     transform="matrix(0.86465,0,0,0.6373,-9097.572,2174.0231)"
-     style="fill-rule:evenodd">
-    <desc
-       id="desc81">Master slide</desc>
-    <g
-       id="g83"
-       style="fill:none">
-      <rect
-         id="rect85"
-         y="0"
-         x="0"
-         height="29700"
-         width="21000" />
-    </g>
-  </g>
   <text
      id="text3784"
      style="font-size:550.56134033px;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-rule:evenodd;font-family:Sans"
      xml:space="preserve"
-     transform="scale(0.96794525,1.0331163)"
+     transform="scale(0.96794524,1.0331163)"
      font-size="550.57px"
-     y="13055.397"
-     x="346.20911"
+     y="17361.277"
+     x="32951.48"
      line-height="125%"
      sodipodi:linespacing="125%"><tspan
        id="tspan3786"
-       x="346.20911"
-       y="13055.397" /></text>
+       x="32951.48"
+       y="17361.277" /></text>
   <text
      id="text13112"
      style="font-size:29.69306183px;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-rule:evenodd;font-family:Sans"
      xml:space="preserve"
-     transform="scale(1.1647976,0.85851824)"
+     transform="scale(1.1647976,0.85851825)"
      font-size="29.693px"
-     y="10039.377"
-     x="-4935.6279"
+     y="15220.949"
+     x="22159.309"
      line-height="125%"
      sodipodi:linespacing="125%"><tspan
        id="tspan13114"
-       y="10039.377"
-       x="-4935.6279" /></text>
-  <g
-     id="g269-2"
-     transform="translate(11957.928,27029.723)"
-     style="fill-rule:evenodd">
-    <desc
-       id="desc271-8">Drawing</desc>
-    <g
-       id="g273-4">
-      <g
-         id="g275-4"
-         style="fill:none">
-        <rect
-           id="rect277-9"
-           y="19914"
-           width="5477"
-           x="21480"
-           height="499" />
-        <rect
-           id="rect279-8"
-           y="19914"
-           width="5477"
-           x="21480"
-           height="499" />
-      </g>
-      <g
-         id="g281-1">
-        <g
-           id="g283-0"
-           font-weight="400"
-           font-size="494px"
-           style="font-size:494px;font-weight:400;font-family:Helvetica embedded">
-          <g
-             id="g285-3"
-             style="fill:none">
-            <text
-               id="text287-7">
-              <tspan
-                 id="tspan289-4"
-                 y="20313"
-                 x="21480 21844 21980 22365 22504 22640 22970 23245 23520 23796 24041 24316 24592 24727 25002 25167 25442 25578 25853 26128 26403 26679">© O. Bonaventure, 2007</tspan>
-            </text>
-          </g>
-        </g>
-      </g>
-    </g>
-  </g>
-  <g
-     id="g1637"
-     transform="translate(11957.928,27029.723)"
-     style="fill-rule:evenodd">
-    <desc
-       id="desc1639">Drawing</desc>
-    <g
-       id="g1641-6">
-      <g
-         id="g1643"
-         style="fill:none">
-        <rect
-           id="rect1645"
-           y="15606"
-           width="18271"
-           x="851"
-           height="6202" />
-      </g>
-      <g
-         id="g1647"
-         font-weight="400"
-         style="font-weight:400;font-family:Helvetica embedded">
-        <g
-           id="g1649"
-           font-size="635px"
-           style="font-size:635px">
-          <g
-             id="g1651"
-             style="fill:none">
-            <text
-               id="text1653">
-              <tspan
-                 id="tspan1655"
-                 y="16122"
-                 x="2650">u</tspan>
-            </text>
-          </g>
-        </g>
-        <g
-           id="g1657"
-           font-size="847px"
-           style="font-size:847px">
-          <g
-             id="g1659"
-             style="fill:none">
-            <text
-               id="text1661">
-              <tspan
-                 id="tspan1663"
-                 y="16290"
-                 x="3849 4365 4835 5310 5542 5826 6296 6770 7003 7193 7663 8133 8370 8603 9077 9547 9733 10207 10631 10864 11334 11571 11808 12278 12464 12654 12887 13171 13641 14115 14348 14818 15101 15525 15762 16464 16938 17362 17595 17832 18302 18772">The routing tables of all routers must be</tspan>
-            </text>
-            <text
-               id="text1665">
-              <tspan
-                 id="tspan1667"
-                 y="17143"
-                 x="3849 4272 4742 5216 5686 5966 6440 6910 7147 7380 7617 8087 8324 8794 9263 9687 10161 10440 10910 11147 11384 11854 12324 12561 12794 13268 13501 13971 14445 14868 15292 15762 15999 16232 16655 17129 17599 17832 18069 18539 18962">coherent to ensure that a packet sent by</tspan>
-            </text>
-            <text
-               id="text1669">
-              <tspan
-                 id="tspan1671"
-                 y="17996"
-                 x="3849 4319 4793 5216 5449 5873 6342 6817 7096 7519 7993 8226 8840 9026 9217 9403 9640 9920 10394 10864 11287 11757 11994 12180 12417 12841 13073 13548 14017 14441 14678 14864 15334 15808 16041 16232 16701">any source will reach its destination</tspan>
-            </text>
-          </g>
-        </g>
-      </g>
-    </g>
-  </g>
-  <g
-     id="Default-3"
-     transform="translate(4045.028,13570.723)"
-     style="fill-rule:evenodd">
-    <desc
-       id="desc81-9">Master slide</desc>
-    <g
-       id="g83-1"
-       style="fill:none">
-      <rect
-         id="rect85-7"
-         y="0"
-         x="0"
-         height="29700"
-         width="21000" />
-    </g>
-  </g>
+       y="15220.949"
+       x="22159.309" /></text>
   <text
      id="text3784-9"
      style="font-size:741.69494629px;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-rule:evenodd;font-family:Sans"
      xml:space="preserve"
-     transform="scale(0.83098445,1.203392)"
+     transform="scale(0.83098443,1.203392)"
      font-size="741.69px"
-     y="26030.273"
-     x="17995.791"
+     y="29726.887"
+     x="55974.984"
      line-height="125%"
      sodipodi:linespacing="125%"><tspan
        id="tspan3786-6"
-       x="17995.791"
-       y="26030.273" /></text>
+       x="55974.984"
+       y="29726.887" /></text>
   <text
      id="text13112-6"
      style="font-size:40px;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-rule:evenodd;font-family:Sans"
      xml:space="preserve"
      font-size="40px"
-     y="23683.861"
-     x="7917.8359"
+     y="28132.336"
+     x="39477.953"
      line-height="125%"
      sodipodi:linespacing="125%"><tspan
        id="tspan13114-4"
-       y="23683.861"
-       x="7917.8359" /></text>
+       y="28132.336"
+       x="39477.953" /></text>
   <flowRoot
      id="flowRoot16973"
      style="font-size:48px;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-rule:evenodd;font-family:FreeSans"
      xml:space="preserve"
      font-size="48px"
-     transform="translate(11957.928,27029.723)"
+     transform="translate(43518.046,31478.197)"
      line-height="125%"><flowRegion
        id="flowRegion16975"><rect
          id="rect16977"
@@ -2638,94 +2229,37 @@
          width="2361.7"
          x="12657"
          height="176.78" /></flowRegion><flowPara
-       id="flowPara16979" /></flowRoot>  <g
-     id="g313-19"
-     transform="translate(15604.928,15647.723)"
-     style="fill-rule:evenodd">
-    <desc
-       id="desc315-9">Drawing</desc>
-    <g
-       id="g317-7">
-      <g
-         id="g319-90"
-         style="fill:none">
-        <rect
-           id="rect321-6"
-           y="0"
-           width="20920"
-           x="5291"
-           height="3702" />
-      </g>
-      <g
-         id="g323-5">
-        <g
-           id="g325-1"
-           font-weight="400"
-           font-size="1270px"
-           style="font-size:1270px;font-weight:400;font-family:Helvetica embedded">
-          <g
-             id="g327-7"
-             style="fill:none">
-            <text
-               id="text329-9">
-              <tspan
-                 id="tspan331-7"
-                 y="2237"
-                 x="6505 7424 8126 8482 9189 9896 10315 11022 12080 12436 12787 13211 13918 14620 15255 16314 16597 17232 17867 18151 18858 19561 19916 20975 21677 22384 23091 23447 23866 24573">Datagram transmission mode (2)</tspan>
-            </text>
-          </g>
-        </g>
-      </g>
-    </g>
-  </g>
-  <g
-     id="Default-6"
-     transform="translate(7691.928,2189.2231)"
-     style="fill-rule:evenodd">
-    <desc
-       id="desc81-3">Master slide</desc>
-    <g
-       id="g83-3"
-       style="fill:none">
-      <rect
-         id="rect85-5"
-         y="0"
-         x="0"
-         height="29700"
-         width="21000" />
-    </g>
-  </g>
-  <text
+       id="flowPara16979" /></flowRoot>  <text
      id="text3784-0"
      style="font-size:741.69494629px;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-rule:evenodd;font-family:Sans"
      xml:space="preserve"
-     transform="scale(0.83098445,1.203392)"
+     transform="scale(0.83098443,1.203392)"
      font-size="741.69px"
-     y="16572.115"
-     x="22384.482"
+     y="20268.729"
+     x="60363.676"
      line-height="125%"
      sodipodi:linespacing="125%"><tspan
        id="tspan3786-2"
-       x="22384.482"
-       y="16572.115" /></text>
+       x="60363.676"
+       y="20268.729" /></text>
   <text
      id="text13112-8"
      style="font-size:40px;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-rule:evenodd;font-family:Sans"
      xml:space="preserve"
      font-size="40px"
-     y="12302.181"
-     x="11564.781"
+     y="16750.654"
+     x="43124.898"
      line-height="125%"
      sodipodi:linespacing="125%"><tspan
        id="tspan13114-7"
-       y="12302.181"
-       x="11564.781" /></text>
+       y="16750.654"
+       x="43124.898" /></text>
   <flowRoot
      id="flowRoot16973-3"
      style="font-size:48px;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-rule:evenodd;font-family:FreeSans"
      xml:space="preserve"
      font-size="48px"
-     transform="translate(15604.928,15647.723)"
+     transform="translate(47165.046,20096.197)"
      line-height="125%"><flowRegion
        id="flowRegion16975-7"><rect
          id="rect16977-6"
@@ -2733,59 +2267,14 @@
          width="2361.7"
          x="12657"
          height="176.78" /></flowRegion><flowPara
-       id="flowPara16979-5" /></flowRoot>  <g
-     id="g1853"
-     transform="matrix(0.038099,0,0,0.044053,5344.628,1639.0231)">
-    <desc
-       id="desc1855">Drawing</desc>
-    <g
-       id="g1857">
-      <g
-         id="g1859"
-         style="fill:none">
-        <rect
-           id="rect1861"
-           y="4559"
-           x="2863"
-           height="642"
-           width="3974" />
-        <rect
-           id="rect1863"
-           y="4560"
-           x="2864"
-           height="642"
-           width="3974" />
-      </g>
-      <g
-         id="g1865">
-        <g
-           id="g1867"
-           font-weight="400"
-           font-size="635px"
-           style="font-size:635px;font-weight:400;font-family:Helvetica embedded">
-          <g
-             id="g1869"
-             style="fill:none">
-            <text
-               id="text1871">
-              <tspan
-                 id="tspan1873"
-                 y="5072"
-                 x="2863 3358 3710 4065 4417 4628 5086 5441 5759 5932 6305 6622">Open(Dest=J)</tspan>
-            </text>
-          </g>
-        </g>
-      </g>
-    </g>
-  </g>
-  <text
+       id="flowPara16979-5" /></flowRoot>  <text
      id="text5802"
      style="font-size:267px;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;font-family:FreeSans"
      xml:space="preserve"
      font-size="267px"
      line-height="125%"
-     y="13246.85"
-     x="18911.621"
+     y="17695.324"
+     x="50471.738"
      sodipodi:linespacing="125%"><tspan
        id="tspan5804" /></text>
   <g
@@ -4713,7 +4202,7 @@
          y="3014.4199">Open (Dest=I, Route=R3, R2, R4)</tspan></text>
     <text
        id="text4919"
-       style="font-size:10.93900013px;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:url(#linearGradient6587);font-family:FreeSans"
+       style="font-size:10.93900013px;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:url(#linearGradient4190);font-family:FreeSans"
        transform="scale(0.92997,1.0753)"
        xml:space="preserve"
        line-height="125%"
@@ -4724,7 +4213,7 @@
          id="tspan5790"
          y="2986.0796"
          x="7005.0562"
-         style="fill:url(#linearGradient6587)">Open (Dest=I, Route=R2, R4)</tspan></text>
+         style="fill:url(#linearGradient4190)">Open (Dest=I, Route=R2, R4)</tspan></text>
     <g
        id="g1631"
        transform="matrix(0.038099,0,0,0.044053,6075.7,2736.3)">
@@ -5116,7 +4605,7 @@
     </g>
     <text
        id="text5794"
-       style="font-size:10.93900013px;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:url(#linearGradient6589);font-family:FreeSans"
+       style="font-size:10.93900013px;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:url(#linearGradient4192);font-family:FreeSans"
        xml:space="preserve"
        transform="scale(0.92997,1.0753)"
        line-height="125%"
@@ -5127,7 +4616,7 @@
          id="tspan5796"
          y="2980.7178"
          x="7289.2256"
-         style="fill:url(#linearGradient6589)">Open (Dest=I, Route=R4)</tspan></text>
+         style="fill:url(#linearGradient4192)">Open (Dest=I, Route=R4)</tspan></text>
     <g
        id="g7889"
        transform="matrix(0.038099,0,0,0.044053,4848.3,1651.5)">

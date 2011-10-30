@@ -25,7 +25,7 @@ On the global Internet, most of the applications used in the wide area rely on T
  
 To provide this service, TCP relies on a simple segment format that is shown in the figure below. Each TCP segment contains a header described below and, optionally, a payload. The default length of the TCP header is twenty bytes, but some TCP headers contain options.
 
-.. figure:: pkt/tcp.*
+.. figure:: pkt/tcp.png
    :align: center
    :scale: 100
 
@@ -60,7 +60,7 @@ A TCP header contains the following fields :
  
 .. _fig-tcpports:
 
-.. figure:: svg/tcp-ports.*
+.. figure:: svg/tcp-ports.png
    :align: center
    :scale: 70 
 
@@ -547,7 +547,7 @@ To understand this problem better, let us consider the scenario shown in the fig
 In this network, the TCP segments sent by the server reach router `R1`. `R1` forwards the segments towards router `R2`. Router `R2` can potentially receive segments at `10 Mbps`, but it can only forward them at `2 Mbps` to router `R2` and then to host `C`.  Router `R2` contains buffers that allow it to store the packets that cannot immediately be forwarded to their destination. To understand the operation of TCP in this environment, let us consider a simplified model of this network where host `A` is attached to a `10 Mbps` link to a queue that represents the buffers of router `R2`. This queue is emptied at a rate of `2 Mbps`.
 
 
-.. figure:: svg/tcp-self-clocking.png 
+.. figure:: svg/tcp-self-clocking.png
    :align: center
    :scale: 70 
 

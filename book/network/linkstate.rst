@@ -26,7 +26,7 @@ When a link-state router boots, it first needs to discover to which routers it i
 
 .. figure:: svg/ls-hello.png
    :align: center
-   :scale: 70   
+   :scale: 100   
 
    The exchange of HELLO messages
 
@@ -79,7 +79,7 @@ Flooding is illustrated in the figure below. By exchanging HELLO messages, each 
 
 .. figure:: svg/ls-flooding.png
    :align: center
-   :scale: 70   
+   :scale: 100   
 
    Flooding : example 
 
@@ -90,7 +90,7 @@ To ensure that all routers receive all LSPs, even when there are transmissions e
 
 .. figure:: svg/ls-lsdb.png
    :align: center
-   :scale: 70   
+   :scale: 100   
 
    Link state databases received by all routers 
 
@@ -106,7 +106,7 @@ When a link fails, the two routers attached to the link detect the failure by th
 
 .. figure:: svg/ls-twoway.png
    :align: center
-   :scale: 70   
+   :scale: 100   
 
    The two-way connectivity check
 
@@ -119,7 +119,7 @@ To compute its routing table, each router computes the spanning tree rooted at i
 
 .. figure:: svg/ls-computation.png
    :align: center
-   :scale: 70   
+   :scale: 100   
 
    Computation of the routing table
 

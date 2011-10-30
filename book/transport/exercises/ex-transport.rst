@@ -159,7 +159,7 @@ Principles
 
 36. Consider the simple network shown in the figure below. In this network, the router between the client and the server can only store on each outgoing interface one packet in addition to the packet that it is currently transmitting. It discards all the packets that arrive while its buffer is full. Assuming that you can neglect the transmission time of acknowledgements and that the server uses an initial window of one segment and has a retransmission timer set to 500 milliseconds, what is the time required to transmit 10 segments from the client to the server. Does the performance increases if the server uses an initial window of 16 segments instead ?
 
-.. figure:: svg/emulated-network-002-c.png
+.. figure:: svg/emulated-network-002-c.*
    :align: center
 
    Simple network
@@ -174,7 +174,7 @@ Principles
 
 38. The figure below describes the evolution of the congestion window of a TCP connection. Can you find the reasons for the three events that are marked in the figure ?
 
- .. figure:: svg/revision-figs-002-c.png
+ .. figure:: svg/revision-figs-002-c.*
    :align: center
    :scale: 70 
 

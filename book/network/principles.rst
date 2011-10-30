@@ -28,7 +28,7 @@ The second type of datalink layer is the one used in Local Area Networks (LAN). 
 
 .. figure:: svg/simple-lan.png
    :align: center
-   :scale: 50    
+   :scale: 80    
    
    A local area network 
 
