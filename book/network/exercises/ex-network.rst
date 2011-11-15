@@ -111,7 +111,91 @@ Principles
 
 9. Can you find an ordering of the updates of the forwarding tables that avoids all transient problems ?
 
-10. Consider the network shown in the figure below and explain the path that will be followed by the packets to reach `194.100.10.0/23`
+10. Consider the simple network depicted in the figure below. On each subnet, each router has one IP address whose host identifier is the numerical id of the router (.e.g router `R1` uses addresses `10.1.0.1` and `10.2.0.1`). Assume that all the hosts and routers have been booted and no packet has been sent. Explain in details all the packets and frames that are exchanged when :
+
+ a.  `10.1.0.10` performs a :manpage:`ping(8)` towards `10.3.0.3` 
+ b.  `10.1.0.10` performs a :manpage:`traceroute(8)` Towards `10.3.0.3`. Assume that :manpage:`traceroute(8)` is used with the `-n` option so that no reverse DNS lookup is performed for each IP address and that all devices have been rebooted after the first question.
+
+ .. figure:: png/ip-figs-001-c.png
+    :align: center
+    :scale: 70
+   
+    A small network using IPv4
+
+11. Consider the simple network depicted in the figure below. On each subnet, each router has one IPv6 address whose host identifier is the numerical id of the router. Assume that all the hosts and routers have been booted and no packet has been sent. Explain in details all the packets and frames that are exchanged when :
+
+ a.  `2001:db8:cafe::abcd` performs a :manpage:`ping6(8)` towards `2001:db8:dead::3` 
+ b.  `2001:db8:cafe::abcd` performs a :manpage:`traceroute6(8)` towards `2001:db8:dead::3`. Assume that :manpage:`traceroute(8)` is used with the `-n` option so that no reverse DNS lookup is performed for each IPv6 address and that all devices have been rebooted after the first question.
+
+ .. figure:: png/ip-figs-002-c.png
+    :align: center
+    :scale: 70
+   
+    A small network using IPv6
+
+12. Many TCP/IP implementations today send an ARP request for their own IP address before sending their first IP packet using this address. Can you explain why this is useful in practice ?
+
+13. Consider now the transmission of IPv4 packets. One security issue with IPv4 is the Address Resolution Protocol (ARP). Can you explain what ARP spoofing or ARP poisoning is and show how host `A` in the network below could intercept all the IP packets sent by host `B` via the default router ? Can router `R` do something to improve the security of ARP ?
+
+ .. figure:: png/ip-figs-008-c.png
+    :align: center
+    :scale: 70
+   
+    A small Ethernet network
+
+14. Consider the network shown in the figure below that is using only static routes as shown in the figure. Assuming that there are only point-to-point links, show all the packets that are exchanged in the network when `S` (`1.0.0.1/8`) performs a :manpage:`traceroute(8)` towards `2.0.0.2`. `S` (resp. `D`) uses `A` (resp. `E`) as its default router. Provide your answer in a table such as the one shown below where each line corresponds to one IP packet.
+
+ ===========  ========   =========  =========== 
+ Link	      IP	 IP	    Explanation
+ 	      source	 dest.	   
+ -----------  --------   ---------  -----------  
+ ...	      ...	 ...	    ...	      
+ ===========  ========   =========  =========== 
+
+  .. figure:: png/ip-figs-003-c.png
+    :align: center
+    :scale: 70
+   
+    A small network
+
+15. IPv4 addresses are scarce and network operators often need to minimise the number of IPv4 addresses that they use when deploying a network.  You are responsible for the entreprise network shown below and must use IP prefix `172.16.12.128/25` for all IP addresses (hosts and routers) in this network. How to you assign IP prefixes to the various subnets to maximise the number of addresses that are available for hosts on the left and right networks. As a practical constraint, note that inside each subnet, the IPv4 addresses whose host identifier bits are all set to `0` or all set to `1` cannot be used. In practice, the address where all host identifiers bits are set to `0` is used to represent the subnetwork itself while the address where all host identifiers bits are set to `1` is reserved for backward compatibility reason for the subnet broadcast address. This implies that on a point-to-point link you can only assign a `/30` prefix and not a `/31` prefix although there are usually only two IPv4 addresses in use on such a link [#frfc3021]_.
+
+ .. figure:: png/ip-figs-004-c.png
+    :align: center
+    :scale: 70
+   
+    A simple enterprise network
+
+16. Hosts are sometimes misconfigured on a subnetwork. Consider the network shown below where all hosts have been manually configured. Discuss which host is able to send a packet to which host ?
+
+ .. figure:: png/ip-figs-005-c.png
+    :align: center
+    :scale: 70
+   
+    Misconfigured hosts on a subnetwork 
+
+17. In the entreprise network shown below, there are many servers on the subnetwork at the top and many servers on the subnetwork shown at the bottom. The links `R0-R2` and `R1-R3` must be used together to sustain the load generated by these servers. How can you configure the static routing tables on the routers and the servers so that 50% of the traffic is sent via each point-to-point link ?
+
+ .. figure:: png/ip-figs-006-c.png
+    :align: center
+    :scale: 70
+   
+    An entreprise network with many servers 
+
+18. Salesman often explain that a Network Address Translator is equivalent to a firewall because it protects the hosts that reside behind the NAT. What is your technical opinion about this ?
+
+19. There are two main types of Network Address Translators (NAT). The simplest NATs use a single public IP address and can serve many hosts using private addresses. Entreprise-grade and carrier-grade NATs often use an IPv4 prefix and can serve an entire enterprise using private addresses. Compare these two types of NATs.
+
+20. A student has installed a NAT router at home and would like to setup a web server on his laptop. What does he need to do to ensure that his web server is reachable from the Internet ?
+
+21. NATs translate port numbers and IP addresses. Sometimes, IPv4 packets are fragmented. Discuss how should a NAT process fragments of IPv4 packets ? Assume that only TCP is used through the NAT. 
+
+22. Same question as above for a firewall.
+
+23. Assume that you use a laptop with a private IPv4 address behind a NAT to surf the web. To reduce cost, the implementor of your NAT chose to discard all ICMP messages that your laptop sends and all ICMP that are received from the Internet. What could be the consequences of this reduced NAT ?
+
+
+24. Consider the network shown in the figure below and explain the path that will be followed by the packets to reach `194.100.10.0/23`
 
  .. figure:: svg/ex-bgp-stub-one-provider.png
     :align: center
@@ -119,7 +203,7 @@ Principles
    
     A stub connected to one provider
 
-11. Consider, now, as shown in the figure below that the stub AS is now also connected to provider `AS789`. Via which provider will the packets destined to `194.100.10.0/23` will be received by `AS4567` ? Should `AS123` change its configuration ? 
+25. Consider, now, as shown in the figure below that the stub AS is now also connected to provider `AS789`. Via which provider will the packets destined to `194.100.10.0/23` will be received by `AS4567` ? Should `AS123` change its configuration ? 
 
  .. figure:: svg/ex-bgp-stub-two-providers.png
     :align: center
@@ -127,7 +211,7 @@ Principles
    
     A stub connected to two providers
 
-12. Consider that stub shown in the figure below decides to advertise two `/24` prefixes instead of its allocated `/23` prefix. 
+16. Consider that stub shown in the figure below decides to advertise two `/24` prefixes instead of its allocated `/23` prefix. 
 
   #. Via which provider does `AS4567` receive the packets destined to `194.100.11.99` and `194.100.10.1` ? 
   #. How is the reachability of these addresses affected when link `R1-R3` fails ?
@@ -140,7 +224,7 @@ Principles
      A stub connected to two providers
 
 
-13. Consider the network shown in the figure below. In this network, each AS contains a single BGP router. Assume that `R1` advertises a single prefix. `R1` receives a lot of packets from `R9`. Without any help from `R2`, `R9` or `R4`, how could `R1` configure its BGP advertisement such that it receives the packets from `R9` via `R3` ? What happens when a link fails ?
+27. Consider the network shown in the figure below. In this network, each AS contains a single BGP router. Assume that `R1` advertises a single prefix. `R1` receives a lot of packets from `R9`. Without any help from `R2`, `R9` or `R4`, how could `R1` configure its BGP advertisement such that it receives the packets from `R9` via `R3` ? What happens when a link fails ?
 
  .. figure:: svg/ex-bgp-internetwork.png
     :align: center
@@ -148,7 +232,7 @@ Principles
    
     A simple internetwork 
 
-14. Consider the network show in the figure below.
+28. Consider the network show in the figure below.
 
  .. figure:: svg/ex-bgp-path-explo.png
     :align: center
@@ -160,7 +244,7 @@ Principles
  #. How many and which routes are known by router `R5` ? Which route does it advertise to `R6`?
  #. Assume now that the link between `R1` and `R2` fails.  Show the messages exchanged due to this event.  Which BGP messages are sent to `R6` ?
 
-15. Consider the network shown in the figure below where `R1` advertises a single prefix. In this network, the link between `R1` and `R2` is considered as a backup link. It should only be used only when the primary link (`R1-R4`) fails. This can be implemented on `R2` by setting a low `local-pref` to the routes received on link `R2-R1`
+29. Consider the network shown in the figure below where `R1` advertises a single prefix. In this network, the link between `R1` and `R2` is considered as a backup link. It should only be used only when the primary link (`R1-R4`) fails. This can be implemented on `R2` by setting a low `local-pref` to the routes received on link `R2-R1`
 
   #. In this network, what are the paths used by all routers to reach `R1` ?
   #. Assume now that the link `R1-R4` fails. Which BGP messages are exchanged and what are now the paths used to reach `R1` ?
@@ -172,14 +256,14 @@ Principles
    
     A simple internetwork with a backup link 
 
-16. On February 22, 2008, the Pakistan Telecom Authority issued an `order <http://www.teeth.com.pk/blog/wp-content/uploads/2008/02/22-02-08_pta_blocking_of_websities.pdf>`_ to Pakistan ISPs to block access to three IP addresses belonging to `youtube <http://www.youtube.com>`_: `208.65.153.238`, `208.65.153.253`, `208.65.153.251`. One operator noted that these addresses were belonging to the same `/24` prefix. Read http://www.ripe.net/news/study-youtube-hijacking.html to understand what happened really.
+30. On February 22, 2008, the Pakistan Telecom Authority issued an `order <http://www.teeth.com.pk/blog/wp-content/uploads/2008/02/22-02-08_pta_blocking_of_websities.pdf>`_ to Pakistan ISPs to block access to three IP addresses belonging to `youtube <http://www.youtube.com>`_: `208.65.153.238`, `208.65.153.253`, `208.65.153.251`. One operator noted that these addresses were belonging to the same `/24` prefix. Read http://www.ripe.net/news/study-youtube-hijacking.html to understand what happened really.
 
  #. What should have done youtube_ to avoid this problem ?
  #. What kind of solutions would you propose to improve the security of interdomain routing ?
 
-17. There are currently 13 IPv4 addresses that are associated to the root servers of the Domain Name System. However, http://www.root-servers.org/ indicates that there are more than 100 different physical servers that support. This is a large anycast service. How would you configure BGP routers to provide such anycast service ?
+31. There are currently 13 IPv4 addresses that are associated to the root servers of the Domain Name System. However, http://www.root-servers.org/ indicates that there are more than 100 different physical servers that support. This is a large anycast service. How would you configure BGP routers to provide such anycast service ?
 
-18. Consider the network shown in the figure below. In this network, `R0` advertises prefix `p` and all link metrics are set to `1`
+32. Consider the network shown in the figure below. In this network, `R0` advertises prefix `p` and all link metrics are set to `1`
 
  - Draw the iBGP and eBGP sessions
  - Assume that session `R0-R8` is down when `R0` advertises `p` over `R0-R7`. What are the BGP messages exchanged and the routes chosen by each router in the network ?
@@ -193,9 +277,9 @@ Principles
 
     A simple Internet
 
-19. The BGP `MED` attribute is often set at the IGP cost to reach the BGP nexthop of the advertised prefix. However, routers can also be configured to always use the same `MED` values for all routes advertised over a given session. How would you use it in the figure above so that link `R10-R3` is the primary link while `R7-R6` is a backup link ? Is there an advantage or drawback of using the `MED` attribute for this application compared to `local-pref` ?
+33. The BGP `MED` attribute is often set at the IGP cost to reach the BGP nexthop of the advertised prefix. However, routers can also be configured to always use the same `MED` values for all routes advertised over a given session. How would you use it in the figure above so that link `R10-R3` is the primary link while `R7-R6` is a backup link ? Is there an advantage or drawback of using the `MED` attribute for this application compared to `local-pref` ?
 
-20. In the figure above, assume that the managers of `R8` and `R9` would like to use the `R8-R6` link as a backup link, but the managers of `R4` and `R6` do no agree to use the BGP `MED` attribute nor to use a different `local-pref` for the routes learned from 
+34. In the figure above, assume that the managers of `R8` and `R9` would like to use the `R8-R6` link as a backup link, but the managers of `R4` and `R6` do no agree to use the BGP `MED` attribute nor to use a different `local-pref` for the routes learned from 
 
 .. rubric:: Footnotes
 
@@ -207,4 +291,12 @@ Principles
  - the failure/crash of a router followed by its reboot. 
  - a change in the metric of a link by reconfiguring the routers attached to the link
  See http://totem.info.ucl.ac.be/lisis_tool/lisis-example/ for an analysis of the failures inside the Abilene network in June 2005 or http://citeseer.ist.psu.edu/old/markopoulou04characterization.html for an analysis of the failures affecting a larger ISP network
+.. [#frfc3021] See :rfc:`3021` for a discussion of the utilisation of `/30` IPv4 prefixes on point-to-point links
+
+.. include:: ../../book/links.rst
+
+
+
+
+
 
