@@ -15,6 +15,7 @@ Computer Networking : Principles, Protocols and Practice
    :scale: 80
 
 .. toctree:: 
+   :glob:
    :maxdepth: 4
    :numbered:
 

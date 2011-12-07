@@ -321,19 +321,19 @@ latex_logo = "cnp3.png"
 #epub_theme
 #The HTML theme for the epub output. Since the default themes are not optimized for small screen space, using the same theme for HTML and epub output is usually not wise. This defaults to 'epub', a theme designed to save visual space.
 
-#epub_title
+epub_title="Computer Networking : Principles, Protocols and Practice"
 #The title of the document. It defaults to the html_title option but can be set independently for epub creation.
 
 epub_author="Olivier Bonaventure"
 #The author of the document. This is put in the Dublin Core metadata. The default value is 'unknown'.
 
-#epub_language
+epub_language="en"
 #The language of the document. This is put in the Dublin Core metadata. The default is the language option or 'en' if unset.
 
 epub_publisher="Presses Universitaires de Louvain"
 #The publisher of the document. This is put in the Dublin Core metadata. You may use any sensible string, e.g. the project homepage. The default value is 'unknown'.
 
-#epub_copyright
+epub_copyright="Copyright 2011, Olivier Bonaventure"
 #The copyright of the document. It defaults to the copyright option but can be set independently for epub creation.
 
 epub_identifier="http://inl.info.ucl.ac.be/cnp3"
@@ -365,3 +365,8 @@ epub_scheme="URL"
 #epub_tocdup
 #This flag determines if a toc entry is inserted again at the beginning of it’s nested toc listing. This allows easier navitation to the top of a chapter, but can be confusing because it mixes entries of differnet depth in one list. The default value is True.
 
+epub_cover=('cnp3.png','')
+#The cover page information. This is a tuple containing the filenames of the cover image and the html template. The rendered html cover page is inserted as the first item in the spine in content.opf. If the template filename is empty, no html cover page is created. No cover at all is created if the tuple is empty. Examples:
+#epub_cover = ('_static/cover.png', 'epub-cover.html')
+#epub_cover = ('_static/cover.png', '')
+#epub_cover = ()
