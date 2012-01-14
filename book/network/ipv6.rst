@@ -50,22 +50,22 @@ In today's deployments, interface identifiers are always 64 bits wide. This impl
 
  It is sometimes necessary to write IPv6 addresses in text format, e.g. when manually configuring addresses or for documentation purposes. The preferred format for writing IPv6 addresses is `x:x:x:x:x:x:x:x`, where the `x` 's are hexadecimal digits representing the eight 16-bit parts of the address. Here are a few examples of IPv6 addresses :
 
-  - ABCD:EF01:2345:6789:ABCD:EF01:2345:6789
-  - 2001:DB8:0:0:8:800:200C:417A
-  - FE80:0:0:0:219:E3FF:FED7:1204
+  - abcd:Eef01:2345:6789:abcd:ef01:2345:6789
+  - 2001:db8:0:0:8:800:200c:417a
+  - fe80:0:0:0:219:e3ff:fed7:1204
 
  IPv6 addresses often contain a long sequence of bits set to `0`. In this case, a compact notation has been defined. With this notation, `::` is used to indicate one or more groups of 16 bits blocks containing only bits set to `0`. For example, 
  
-  - 2001:DB8:0:0:8:800:200C:417A  is represented as  `2001:DB8::8:800:200C:417A`
-  - FF01:0:0:0:0:0:0:101   is represented as `FF01::101` 
+  - 2001:db8:0:0:8:800:200c:417a  is represented as  `2001:db8::8:800:200c:417a`
+  - ff01:0:0:0:0:0:0:101   is represented as `ff01::101` 
   - 0:0:0:0:0:0:0:1 is represented as `::1`
   - 0:0:0:0:0:0:0:0 is represented as `\:\:`
 
  An IPv6 prefix can be represented as `address/length`, where `length` is the length of the prefix in bits. For example, the three notations below correspond to the same IPv6 prefix :
 
-  - 2001:0DB8:0000:CD30:0000:0000:0000:0000/60
-  - 2001:0DB8::CD30:0:0:0:0/60
-  - 2001:0DB8:0:CD30::/60
+  - 2001:0db8:0000:cd30:0000:0000:0000:0000/60
+  - 2001:0db8::cd30:0:0:0:0/60
+  - 2001:0db8:0:cd30::/60
 
 .. index:: Provider Independent address
 .. index:: Provider Aggregatable address
@@ -81,7 +81,7 @@ When considering the allocation of IPv6 addresses, two types of address allocati
 
 .. index:: Unique Local Unicast IPv6
 
-For the companies that want to use IPv6 without being connected to the IPv6 Internet, :rfc:`4193` defines the `Unique Local Unicast (ULA)` addresses (`FC00::/7`). These ULA addresses play a similar role as the private IPv4 addresses defined in :rfc:`1918`. However, the size of the `FC00::/7` address block allows ULA to be much more flexible than private IPv4 addresses.
+For the companies that want to use IPv6 without being connected to the IPv6 Internet, :rfc:`4193` defines the `Unique Local Unicast (ULA)` addresses (`fc00::/7`). These ULA addresses play a similar role as the private IPv4 addresses defined in :rfc:`1918`. However, the size of the `fc00::/7` address block allows ULA to be much more flexible than private IPv4 addresses.
 
 .. index:: ::1, ::
 
@@ -92,7 +92,7 @@ Furthermore, the IETF has reserved some IPv6 addresses for a special usage. The 
 
 .. index:: Link Local address
 
-The last type of unicast IPv6 addresses are the `Link Local Unicast` addresses. These addresses are part of the `FE80::/10` address block and are defined in :rfc:`4291`. Each host can compute its own link local address by concatenating the `FE80::/64` prefix with the 64 bits identifier of its interface. Link local addresses can be used when hosts that are attached to the same link (or local area network) need to exchange packets. They are used notably for address discovery and auto-configuration purposes. Their usage is restricted to each link and a router cannot forward a packet whose source or destination address is a link local address. Link local addresses have also been defined for IPv4 :rfc:`3927`. However, the IPv4 link local addresses are only used when a host cannot obtain a regular IPv4 address, e.g. on an isolated LAN.
+The last type of unicast IPv6 addresses are the `Link Local Unicast` addresses. These addresses are part of the `fe80::/10` address block and are defined in :rfc:`4291`. Each host can compute its own link local address by concatenating the `fe80::/64` prefix with the 64 bits identifier of its interface. Link local addresses can be used when hosts that are attached to the same link (or local area network) need to exchange packets. They are used notably for address discovery and auto-configuration purposes. Their usage is restricted to each link and a router cannot forward a packet whose source or destination address is a link local address. Link local addresses have also been defined for IPv4 :rfc:`3927`. However, the IPv4 link local addresses are only used when a host cannot obtain a regular IPv4 address, e.g. on an isolated LAN.
 
 .. figure:: png/network-fig-074-c.png
    :align: center
@@ -114,7 +114,7 @@ Finally, :rfc:`4291` defines the structure of the IPv6 multicast addresses [#fmu
 
 The low order 112 bits of an IPv6 multicast address are the group's identifier. The high order bits are used as a marker to distinguish multicast addresses from unicast addresses. Notably, the 4 bits flag field indicates whether the address is temporary or permanent. Finally, the scope field indicates the boundaries of the forwarding of packets destined to a particular address. A link-local scope indicates that a router should not forward a packet destined to such a multicast address. An organisation local-scope indicates that a packet sent to such a multicast destination address should not leave the organisation. Finally the global scope is intended for multicast groups spanning the global Internet.
 
-Among these addresses, some are well known. For example, all endsystem automatically belong to the `FF02::1` multicast group while all routers automatically belong to the `FF02::2` multicast group. We discuss IPv6 multicast later.
+Among these addresses, some are well known. For example, all endsystem automatically belong to the `ff02::1` multicast group while all routers automatically belong to the `ff02::2` multicast group. We discuss IPv6 multicast later.
 
 .. _IPv6Packet:
 
@@ -146,7 +146,7 @@ The third difference are the IPv6 options, which are simpler and easier to proce
 
 .. note:: Header compression on low bandwidth links
 
- Given the size of the IPv6 header, it can cause huge overhead on low bandwidth links, especially when small packets are exchanged such as for Voice over IP applications. In such environments, several techniques can be used to reduce the overhead. A first solution is to use data compression in the datalink layer to compress all the information exchanged [Thomborson1992]_. These techniques are similar to the data compression algorithms used in tools such as :manpage:`compress(1)` or :manpage:`gzip(1)` :rfc:`1951`. They compress streams of bits without taking advantage of the fact that these streams contain IP packets with a known structure. A second solution is to compress the IP and TCP header. These header compression techniques, such as the one defined in :rfc:`2507` take advantage of the redundancy found in successive packets from the same flow to significantly reduce the size of the protocol headers. Another solution is to define a compressed encoding of the IPv6 header that matches the capabilities of the underlying datalink layer :rfc:`4944`. 
+ Given the size of the IPv6 header, it can cause huge overhead on low bandwidth links, especially when small packets are exchanged such as for Voice over IP applications. In such environments, several techniques can be used to reduce the overhead. A first solution is to use data compression in the datalink layer to compress all the information exchanged [Thomborson1992]_. These techniques are similar to the data compression algorithms used in tools such as :manpage:`compress(1)` or :manpage:`gzip(1)` :rfc:`1951`. They compress streams of bits without taking advantage of the fact that these streams contain IP packets with a known structure. A second solution is to compress the IP and TCP header. These header compression techniques, such as the one defined in :rfc:`5795` take advantage of the redundancy found in successive packets from the same flow to significantly reduce the size of the protocol headers. Another solution is to define a compressed encoding of the IPv6 header that matches the capabilities of the underlying datalink layer :rfc:`4944`. 
 
 
 .. _IPv6Options:

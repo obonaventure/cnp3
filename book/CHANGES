@@ -1,5 +1,16 @@
 Release 0.2 (in development)
 ============================
+
+Revision 323
+
+Applied several patches from Stephane Bortzmeyer on :
+
+- #50 on LAN chapter
+- #49 on transport chapter
+- #52 network chapter
+- #53 (IPv6 addresses in lower case) made a first pass on the ipv6.rst file and have fixed most
+- #28 (figure - reported by Fabien Duchene)
+
 Revision 318
 
 New text

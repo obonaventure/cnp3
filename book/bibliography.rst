@@ -271,6 +271,7 @@ Whenever possible, the bibliography includes stable hypertext links to the refer
 .. [RFC5681] Allman, M. and Paxson, V. and Blanton, E., `TCP congestion control`, :rfc:`5681`, Sept. 2009
 .. [RFC5735] Cotton, M. and Vegoda, L., `Special Use IPv4 Addresses`, :rfc:`5735`, January 2010 
 .. [RFC5795] Sandlund, K. and Pelletier, G. and Jonsson, L-E., `The RObust Header Compression (ROHC) Framework`, :rfc:`5795`, March 2010
+.. [RFC6077] Papadimitriou, D. and Welzl, M. and Scharf, M. and Briscoe, B., `Open Research Issues in Internet Congestion Control`, :rfc:`6077`, February 2011
 .. [RFC6068] Duerst, M., Masinter, L. and Zawinski, J., `The 'mailto' URI Scheme` , :rfc:`6068`, October 2010 
 .. [RFC6144] Baker, F. and Li, X. and Bao, X. and Yin, K., `Framework for IPv4/IPv6 Translation`, :rfc:`6144`, April 2011
 .. [RFC6265] Barth, A., `HTTP State Management Mechanism`, :rfc:`6265`, April 2011

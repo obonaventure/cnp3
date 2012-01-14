@@ -159,7 +159,7 @@ Apart from these two paths in the TCP connection establishment FSM, there is a t
    - the high order bits contain the low order bits of a counter that is incremented slowly
    - the low order bits contain a hash value computed over the local and remote IP addresses and ports and a random secret only known to the server
    
- The advantage of the `SYN cookies`_ is that by using them, the server does not need to create a :term:`TCB` upon reception of the `SYN` segment and can still check the returned `ACK` segment by recomputing the `SYN cookie`.
+ The advantage of the `SYN cookies`_ is that by using them, the server does not need to create a :term:`TCB` upon reception of the `SYN` segment and can still check the returned `ACK` segment by recomputing the `SYN cookie`. The main disadvantage is that they are not fully compatible with the TCP options. This is why they are not enabled by default on a typical system.
 
 
 .. topic:: Retransmitting the first `SYN` segment
@@ -756,7 +756,7 @@ In general, the maximum throughput that can be achieved by a TCP connection depe
   - `CUBIC`, which was designed for high bandwidth links and is the default congestion control scheme in the Linux 2.6.19 kernel [HRX2008]_
   - `Compound TCP`, which was designed for high bandwidth links is the default congestion control scheme in several Microsoft operating systems [STBT2009]_
 
- A search of the scientific literature will probably reveal more than 100 different variants of the TCP congestion control scheme. Most of them have only been evaluated by simulations. However, the TCP implementation in the recent Linux kernels supports several congestion control schemes and new ones can be easily added. We can expect that new TCP congestion control schemes will always continue to appear. 
+ A search of the scientific literature (:rfc:`6077`) will probably reveal more than 100 different variants of the TCP congestion control scheme. Most of them have only been evaluated by simulations. However, the TCP implementation in the recent Linux kernels supports several congestion control schemes and new ones can be easily added. We can expect that new TCP congestion control schemes will always continue to appear. 
  
 .. rubric:: Footnotes
 
@@ -801,7 +801,7 @@ In general, the maximum throughput that can be achieved by a TCP connection depe
 
 .. [#ffifo] We discuss in another chapter other possible organisations of the router's buffers.
 
-.. [#foldtcp] At this time, TCP implementations were mainly following :rfc:`791`. The round-trip-time estimations and the retransmission mechanisms were very simple. TCP was improved after the publication of [Jacobson1988]_
+.. [#foldtcp] At this time, TCP implementations were mainly following :rfc:`793`. The round-trip-time estimations and the retransmission mechanisms were very simple. TCP was improved after the publication of [Jacobson1988]_
 
 .. [#fcredit] In this section, we focus on congestion control mechanisms that regulate the transmission rate of the hosts. Other types of mechanisms have been proposed in the literature. For example, `credit-based` flow-control has been proposed to avoid congestion in ATM networks [KR1995]_. With a credit-based mechanism, hosts can only send packets once they have received credits from the routers and the credits depend on the occupancy of the router's buffers. 
 

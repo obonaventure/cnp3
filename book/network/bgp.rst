@@ -319,7 +319,7 @@ To understand the utilisation of an `iBGP session`, let us consider what happens
 
 .. note:: Loopback interfaces and iBGP sessions
 
- In addition to their physical interfaces, routers can also be configured with a special loopback interface. A loopback interface is a software interface that is always up. When a loopback interface is configured on a router, the address associated to this interface is advertised by the intradomain routing protocol. Consider for example a router with two point-to-point interfaces and one loopback interface. When a point-to-point interface fails, it becomes unreachable and the router cannot receive anymore packets via this IP address. This is not the case for the loopback interface. It remains reachable as long as at least one of the router's interfaces remains up. `iBGP sessions` are usually established using the router's loopback addresses as endpoints. This allows the `iBGP session` and its underlying TCP connection to remain up even if physical interfaces fail on the routers.
+ In addition to their physical interfaces, routers can also be configured with a special loopback interface[#fbgploop]_. A loopback interface is a software interface that is always up. When a loopback interface is configured on a router, the address associated to this interface is advertised by the intradomain routing protocol. Consider for example a router with two point-to-point interfaces and one loopback interface. When a point-to-point interface fails, it becomes unreachable and the router cannot receive anymore packets via this IP address. This is not the case for the loopback interface. It remains reachable as long as at least one of the router's interfaces remains up. `iBGP sessions` are usually established using the router's loopback addresses as endpoints. This allows the `iBGP session` and its underlying TCP connection to remain up even if physical interfaces fail on the routers.
 
 .. comment:: example route not selected ?
 
@@ -592,6 +592,8 @@ Due to this organisation of the Internet and due to the BGP decision process, mo
 .. [#fasnum] An analysis of the evolution of the number of domains on the global Internet during the last ten years may be found in http://www.potaroo.net/tools/asn32/
 
 .. [#fasrank] See http://as-rank.caida.org/ for an  analysis of the interconnections between domains based on measurements collected in the global Internet
+
+.. [#fbgploop] It is important to know that this concept has nothing to do with the loopback interfaces `127.0.0.1` and `::1` of an host. It is unfortunate that one router manufacturer decided to reuse the word loopback with this new meaning.
 
 .. [#fwish] Two routers that are attached to the same IXP only exchange packets when the owners of their domains have an economical incentive to exchange packets on this IXP. Usually, a router on an IXP is only able to exchange packets with a small fraction of the routers that are present on the same IXP.
 

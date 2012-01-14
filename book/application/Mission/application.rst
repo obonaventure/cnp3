@@ -30,7 +30,7 @@ where
 
 #. What are the nameservers that are responsible for the `be` top-level domain ? Where are they located ? Is it possible to use IPv6 to query them ?
 
-#. When run without any parameter, `dig` queries one of the root DNS servers and retrieves the list of the the name of all DNS servers. For technical reasons, there are only 13 different root DNS servers. This information is also available as a text file from http://www.internic.net/zones/named.root What are the IPv4 addresses of all these servers. Do they all support IPv6 [#rs]_ ? 
+#. When run without any parameter, `dig` queries one of the root DNS servers and retrieves the list of the name of all DNS servers. For technical reasons, there are only 13 different root DNS servers. This information is also available as a text file from http://www.internic.net/zones/named.root What are the IPv4 addresses of all these servers. Do they all support IPv6 [#rs]_ ? 
 
 #. Assume now that you are residing in a network where there is no DNS resolver and that you need to start your query from the DNS root.
 
