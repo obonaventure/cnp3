@@ -1,5 +1,5 @@
 .. Copyright |copy| 2010 by Olivier Bonaventure
-.. This file is licensed under a `creative commons licence <http://creativecommons.org/licenses/by-sa/3.0/>`_
+.. This file is licensed under a `creative commons licence <http://creativecommons.org/licenses/by/3.0/>`_
 
 Principles of a reliable transport protocol
 ###########################################
@@ -521,3 +521,6 @@ The second method to release a transport connection is to release independently 
 .. [#facklost] Note that if the receive window shrinks, it might happen that the sender has already sent a segment that is not anymore inside its window. This segment will be discarded by the receiver and the sender will retransmit it later.
 
 .. [#fmsl] As we will see in the next chapter, the Internet does not strictly enforce this MSL. However, it is reasonable to expect that most packets on the Internet will not remain in the network during more than 2 minutes. There are a few exceptions to this rule, such as :rfc:`1149` whose implementation is described in http://www.blug.linux.no/rfc1149/ but there are few real links supporting :rfc:`1149` in the Internet.
+
+
+.. include:: /links.rst

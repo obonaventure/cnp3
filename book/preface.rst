@@ -1,5 +1,5 @@
 .. Copyright |copy| 2010 by Olivier Bonaventure
-.. This file is licensed under a `creative commons licence <http://creativecommons.org/licenses/by-sa/3.0/>`_
+.. This file is licensed under a `creative commons licence <http://creativecommons.org/licenses/by/3.0/>`_
 
 
 =======
@@ -15,12 +15,17 @@ The frustrations that motivated this book are different. When I started to teach
 
 The second reason is that the computer networking community is a strong participant in the open-source movement. Today, there are high-quality and widely used open-source implementations for most networking protocols. This includes the TCP/IP implementations that are part of linux_, freebsd_ or the uIP_ stack running on 8bits controllers, but also servers such as bind_, unbound_, apache_ or sendmail_ and implementations of routing protocols such as xorp_ or quagga_ . Furthermore, the documents that define almost all of the Internet protocols have been developed within the Internet Engineering Task Force (IETF_) using an open process. The IETF publishes its protocol specifications in the publicly available RFC_ and new proposals are described in `Internet drafts`_.  
 
-This open textbook aims to fill the gap between the open-source implementations and the open-source network specifications by providing a detailed but pedagogical description of the key principles that guide the operation of the Internet. The book is released under a `creative commons licence <http://creativecommons.org/licenses/by-sa/3.0/>`_. Such an open-source license is motivated by two reasons. The first is that we hope that this will allow many students to use the book to learn computer networks. The second is that I hope that other teachers will reuse, adapt and improve it. Time will tell if it is possible to build a community of contributors to improve and develop the book further. As a starting point, the first release contains all the material for a one-semester first upper undergraduate or a graduate networking course.
+This open textbook aims to fill the gap between the open-source implementations and the open-source network specifications by providing a detailed but pedagogical description of the key principles that guide the operation of the Internet. The book is released under a `creative commons licence <http://creativecommons.org/licenses/by/3.0/>`_. Such an open-source license is motivated by two reasons. The first is that we hope that this will allow many students to use the book to learn computer networks. The second is that I hope that other teachers will reuse, adapt and improve it. Time will tell if it is possible to build a community of contributors to improve and develop the book further. As a starting point, the first release contains all the material for a one-semester first upper undergraduate or a graduate networking course.
 
 As of this writing, most of the text has been written by `Olivier Bonaventure`_. `Laurent Vanbever`_, `Virginie Van den Schriek`_, `Damien Saucez`_ and `Mickael Hoerdt`_ have contributed to exercises. Pierre Reinbold designed the icons used to represent switches and Nipaul Long has redrawn many figures in the SVG format. Stephane Bortzmeyer sent many suggestions and corrections to the text. Additional information about the textbook is available at http://inl.info.ucl.ac.be/CNP3
 
 .. The overall objective of the book is to explain the principles and the protocols used in computer networks such as the Internet and also provide the students with some intuition about the important practical problems that often arise. The textbook was developed for the 
 .. The course follows a hybrid problem-based learning (:term:`PBL`) approach. During each week, the students follow a 2 hours theoretical course that describes the principles and some of the protocols. They also receive a set of small problems that they need to solve in groups. These problems are designed to reinforce the student's knowledge but also to explore the practical problems that arise in real networks by allowing the students to perform experiments by writing prototype networking code. 
+
+
+.. note::
+
+ `Computer Networking : Principles, Protocols and Practice`, (c) 2011, `Olivier Bonaventure <http://inl.info.ucl.ac.be/obo>`_, `Universite catholique de Louvain <http://www.uclouvain.be>`_ (Belgium) and the collaborators listed above, used under a Creative Commons Attribution (CC BY) license made possible by funding from The Saylor Foudnation's Open Textbook Challenge in order to be incorporated into Saylor.org' collection of open courses available at `http://www.saylor.org <http://www.saylo.org>`_. Full license terms may be viewed at : `http://creativecommons.org/licenses/by/3.0/ <http://creativecommons.org/licenses/by/3.0/>`_
 
 
 .. include:: links.rst

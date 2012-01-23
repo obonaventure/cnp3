@@ -1,5 +1,5 @@
 .. Copyright |copy| 2010 by Olivier Bonaventure
-.. This file is licensed under a `creative commons licence <http://creativecommons.org/licenses/by-sa/3.0/>`_
+.. This file is licensed under a `creative commons licence <http://creativecommons.org/licenses/by/3.0/>`_
 
 Exercises
 #########
@@ -159,14 +159,14 @@ Principles
 
 36. Consider the simple network shown in the figure below. In this network, the router between the client and the server can only store on each outgoing interface one packet in addition to the packet that it is currently transmitting. It discards all the packets that arrive while its buffer is full. Assuming that you can neglect the transmission time of acknowledgements and that the server uses an initial window of one segment and has a retransmission timer set to 500 milliseconds, what is the time required to transmit 10 segments from the client to the server. Does the performance increases if the server uses an initial window of 16 segments instead ?
 
-.. figure:: svg/emulated-network-002-c.*
+.. figure:: /transport/svg/emulated-network-002-c.png
    :align: center
 
    Simple network
 
 37. The figure below describes the evolution of the congestion window of a TCP connection. Can you find the reasons for the three events that are marked in the figure ?
 
- .. figure:: fig/revision-figs-001-c.png
+ .. figure:: /transport/fig/revision-figs-001-c.png
     :align: center
     :scale: 70 
 
@@ -174,7 +174,7 @@ Principles
 
 38. The figure below describes the evolution of the congestion window of a TCP connection. Can you find the reasons for the three events that are marked in the figure ?
 
- .. figure:: svg/revision-figs-002-c.*
+ .. figure:: /transport/svg/revision-figs-002-c.png
    :align: center
    :scale: 70 
 
@@ -186,3 +186,6 @@ Principles
  - the TCP stack uses an initial window size of three segments
 
 40. :rfc:`3168` defines mechanism that allow routers to mark packets by setting one bit in the packet header when they are congested. When a TCP destination receives such a marking in a packet, it returns the congestion marking to the source that reacts by halving its congestion window and performs congestion avoidance. Consider a TCP connection where the fourth data segment experiences congestion. Compare the delay to transmit 8 segments in a network where routers discards packets during congestion and a network where routers mark packets during congestion.
+
+
+.. include:: /links.rst

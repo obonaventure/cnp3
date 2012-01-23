@@ -30,7 +30,7 @@ We will first discuss the format of email messages followed by the protocols tha
 
 Email messages, like postal mail, are composed of two parts :
 
-- a `header` that plays the same role as the letterhead in regular mail. It contains metadata about the message.
+ - a `header` that plays the same role as the letterhead in regular mail. It contains metadata about the message.
  - the `body` that contains the message itself.  
 
 Email messages are entirely composed of lines of ASCII characters. Each line can contain up to 998 characters and is terminated by the `CR` and `LF` control characters :rfc:`5322`. The lines that compose the `header` appear before the message `body`. An empty line, containing only the `CR` and `LF` characters, marks the end of the `header`. This is illustrated in the figure below.
@@ -421,4 +421,4 @@ In this example, a POP client contacts a POP server on behalf of the user named 
 .. [#fapop] :rfc:`1939` defines the APOP authentication scheme that is not vulnerable to such attacks.
 
 
-.. include:: ../links.rst
+.. include:: /links.rst

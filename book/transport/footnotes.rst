@@ -1,5 +1,5 @@
 .. Copyright |copy| 2010 by Olivier Bonaventure
-.. This file is licensed under a `creative commons licence <http://creativecommons.org/licenses/by-sa/3.0/>`_
+.. This file is licensed under a `creative commons licence <http://creativecommons.org/licenses/by/3.0/>`_
 
 .. [#fsize] Many network layer services are unable to carry SDUs that are larger than 64 KBytes. 
 

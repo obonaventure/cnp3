@@ -1,5 +1,5 @@
 .. Copyright |copy| 2010 by Olivier Bonaventure
-.. This file is licensed under a `creative commons licence <http://creativecommons.org/licenses/by-sa/3.0/>`_
+.. This file is licensed under a `creative commons licence <http://creativecommons.org/licenses/by/3.0/>`_
 
 .. _HTTP:
 
@@ -115,9 +115,9 @@ Several types of method can be used in HTTP requests. The three most important o
 
  - the `GET` method is the most popular one. It is used to retrieve a document from a server. The `GET` method is encoded as `GET` followed by the path of the URI of the requested document and the version of HTTP used by the client. For example, to retrieve the http://www.w3.org/MarkUp/ URI, a client must open a TCP on port `80` with host `www.w3.org` and send a HTTP request containing the following line ::
 
-  GET /MarkUp/ HTTP/1.0
+   GET /MarkUp/ HTTP/1.0
 
- - - the `HEAD` method is a variant of the `GET` method that allows the retrieval of the header lines for a given URI without retrieving the entire document. It can be used by a client to verify if a document exists, for instance. 
+ - the `HEAD` method is a variant of the `GET` method that allows the retrieval of the header lines for a given URI without retrieving the entire document. It can be used by a client to verify if a document exists, for instance. 
  - the `POST` method can be used by a client to send a document to a server. The sent document is attached to the HTTP request as a MIME document.
 
 
@@ -306,4 +306,4 @@ The third, and widely adopted, solution are HTTP cookies. HTTP cookies were init
 .. [#ffavicon] Favorite icons are small icons that are used to represent web servers in the toolbar of Internet browsers. Microsoft added this feature in their browsers without taking into account the W3C standards. See http://www.w3.org/2005/10/howto-favicon for a discussion on how to cleanly support such favorite icons.
 
 
-
+.. include:: /links.rst

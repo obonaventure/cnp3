@@ -1,5 +1,5 @@
 .. Copyright |copy| 2010 by Olivier Bonaventure
-.. This file is licensed under a `creative commons licence <http://creativecommons.org/licenses/by-sa/3.0/>`_
+.. This file is licensed under a `creative commons licence <http://creativecommons.org/licenses/by/3.0/>`_
 
 Practice
 ========
@@ -28,7 +28,7 @@ Practice
 
 .. To ensure that your implementation is portable, try to Inside each group, implement two different clients and two different servers (both using different languages). The clients and the servers must run on both the Linux workstations and the Sun server (`sirius`). Verify the interoperability of the clients and the servers inside the group. You can use C, Java or python to write these implementations. 
 
-.. figure:: pkt/simple-transport.png
+.. figure:: /transport/pkt/simple-transport.png
    :align: center
 
    Simple SDU format 
@@ -54,7 +54,7 @@ Practice
 
  To deal with segments losses, the protocol must implement a recovery technique such as go-back-n or selective repeat and use retransmission timers. You can select the technique that best suite your needs and start from a simple technique that you improve later.
 
- .. figure:: pkt/ex-transport-header.png
+ .. figure:: /transport/pkt/ex-transport-header.png
     :align: center
 
     Segment format
@@ -106,7 +106,7 @@ You can easily recognise in the output above the `SYN` segment containing the `M
 
 wireshark_ is more recent than tcpdump_. It evolved from the ethereal packet trace analysis software. It can be used as a text tool like tcpdump_. For a TCP connection, wireshark_ would provide almost the same output as tcpdump_. The main advantage of wireshark_ is that it also includes a graphical user interface that allows to perform various types of analysis on a packet trace.
 
-.. figure:: exercises/fig/wireshark-open.png
+.. figure:: /transport/exercises/fig/wireshark-open.png
    :align: center
    :scale: 50
 
@@ -118,7 +118,7 @@ wireshark_ is very good at displaying packets, but it also contains several anal
 
 The second tool is the flow graph that is part of the `Statistics` menu. It provides a time sequence diagram of the packets exchanged with some comments about the packet contents. See blow for an example.
 
-.. figure:: exercises/fig/wireshark-flowgraph.png
+.. figure:: /transport/exercises/fig/wireshark-flowgraph.png
    :align: center
    :scale: 50
 
@@ -126,7 +126,7 @@ The second tool is the flow graph that is part of the `Statistics` menu. It prov
 
 The third set of tools are the `TCP stream graph` tools that are part of the `Statistics menu`. These tools allow you to plot various types of information extracted from the segments exchanged during a TCP connection. A first interesting graph is the `sequence number graph` that shows the evolution of the sequence number field of the captured segments with time. This graph can be used to detect graphically retransmissions.
 
-.. figure:: exercises/fig/wireshark-seqgraph.png
+.. figure:: /transport/exercises/fig/wireshark-seqgraph.png
    :align: center
    :scale: 50
 
@@ -134,7 +134,7 @@ The third set of tools are the `TCP stream graph` tools that are part of the `St
 
 A second interesting graph is the `round-trip-time` graph that shows the evolution of the round-trip-time in function of time. This graph can be used to check whether the round-trip-time remains stable or not. Note that from a packet trace, wireshark_ can plot two `round-trip-time` graphs, One for the flow from the client to the server and the other one. wireshark_ will plot the `round-trip-time` graph that corresponds to the selected packet in the top wireshark_ window. 
 
-.. figure:: exercises/fig/wireshark-rttgraph.png
+.. figure:: /transport/exercises/fig/wireshark-rttgraph.png
    :align: center
    :scale: 50
 
@@ -249,7 +249,7 @@ In the netkit lab (:download:`exercises/netkit/netkit_lab_2hosts_1rtr_ipv4.tar.t
 
 15. For the exercises below, we have performed measurements in an emulated [#femulation]_ network similar to the one shown below.
 
- .. figure:: fig/emulated-network-001-c.png
+ .. figure:: /transport/fig/emulated-network-001-c.png
     :align: center
 
     Emulated network
@@ -258,10 +258,10 @@ In the netkit lab (:download:`exercises/netkit/netkit_lab_2hosts_1rtr_ipv4.tar.t
 
  We used `netem <http://www.linuxfoundation.org/en/Net:Netem>`_ to collect several traces : 
 
-  - :download:`exercises/traces/trace0.pcap` 
-  - :download:`exercises/traces/trace1.pcap`
-  - :download:`exercises/traces/trace2.pcap`
-  - :download:`exercises/traces/trace3.pcap`   
+  - :download:`/transport/exercises/traces/trace0.pcap` 
+  - :download:`/transport/exercises/traces/trace1.pcap`
+  - :download:`/transport/exercises/traces/trace2.pcap`
+  - :download:`/transport/exercises/traces/trace3.pcap`   
 
  Using wireshark_ or tcpdump_, carry out the following analyses :
 
@@ -293,3 +293,4 @@ In the netkit lab (:download:`exercises/netkit/netkit_lab_2hosts_1rtr_ipv4.tar.t
 .. todo::  sctp ? http://wiki.wireshark.org/SampleCaptures?action=AttachFile&do=get&target=sctp-www.cap
 
 
+.. include:: /links.rst

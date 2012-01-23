@@ -1,5 +1,5 @@
 .. Copyright |copy| 2010 by Olivier Bonaventure
-.. This file is licensed under a `creative commons licence <http://creativecommons.org/licenses/by-sa/3.0/>`_
+.. This file is licensed under a `creative commons licence <http://creativecommons.org/licenses/by/3.0/>`_
 
 
 .. _glossary:
@@ -22,7 +22,6 @@ Glossary
    multicast
 	a transmission mode where an information is sent efficiently to `all` the receivers that belong to a given group
 
-
    broadcast
 	a transmission mode where is same information is sent to all nodes in the network
 
@@ -34,7 +33,6 @@ Glossary
 
    WAN
 	Wide Area Network
-
    
    ISO
 	The International Standardization Organisation is an agency of the United Nations that is based in Geneva and develop standards on various topics. Within ISO, country representatives vote to approve or reject standards. Most of the work on the development of ISO standards is done in expert working groups. Additional information about ISO may be obtained from http://www.iso.int 
@@ -48,12 +46,8 @@ Glossary
    W3C
 	The world wide web consortium was created to standardise the protocols and mechanisms used in the global www. It is thus focused on a subset of the application layer. See http://www.w3c.org
 
-   X25
-   
-
    ARPANET	
    	The Advanced Research Project Agency (ARPA) Network is a network that was built by network scientists in USA with funding from the ARPA of the US Ministry of Defense. ARPANET is considered as the grandfather of today's Internet.
-
 
    PBL
 	Problem-based learning is a teaching approach that relies on problems.
@@ -224,7 +218,6 @@ Glossary
    NTP
 	The Network Time Protocol is defined in :rfc:`1305`
   
-
    X.25
 	A wide area networking technology using virtual circuits that was deployed by telecom operators.
 

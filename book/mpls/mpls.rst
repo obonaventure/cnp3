@@ -1,5 +1,5 @@
 .. Copyright |copy| 2011 by Olivier Bonaventure
-.. This file is licensed under a `creative commons licence <http://creativecommons.org/licenses/by-sa/3.0/>`_
+.. This file is licensed under a `creative commons licence <http://creativecommons.org/licenses/by/3.0/>`_
 
 =============================
 MultiProtocol Label Switching

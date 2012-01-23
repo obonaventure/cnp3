@@ -1,5 +1,5 @@
 .. Copyright |copy| 2010 by `Olivier Bonaventure <http://inl.info.ucl.ac.be/obo>`_
-.. This file is licensed under a `creative commons licence <http://creativecommons.org/licenses/by-sa/3.0/>`_
+.. This file is licensed under a `creative commons licence <http://creativecommons.org/licenses/by/3.0/>`_
 
 
 .. Computer Networking : Principles, Protocols and Practice, created by
@@ -15,16 +15,76 @@ Computer Networking : Principles, Protocols and Practice
    :scale: 80
 
 .. toctree:: 
-   :glob:
-   :maxdepth: 4
-   :numbered:
+   :maxdepth: 2
 
    preface
+
+
+Part 1: Introduction
+::::::::::::::::::::
+
+.. toctree::
+   :maxdepth: 4
+
    intro/introduction
+   intro/services-protocols
+   intro/referencemodels
+   intro/organisation
+
+
+Part 2: The Application Layer
+:::::::::::::::::::::::::::::
+
+.. toctree::
+   :maxdepth: 4
+
    application/application
-   transport/transport
+   application/principles
+   application/transport-service
+   application/app-protocols
+   application/socket
+   application/summary
+   application/exercises/ex-application
+
+
+Part 4: The Transport Layer
+:::::::::::::::::::::::::::
+
+.. toctree::
+   :maxdepth: 4
+
+   transport/principles
+   transport/udp
+   transport/tcp
+   transport/exercises/ex-transport
+   transport/exercises/cha-transport
+   
+
+Part 5: The Network Layer
+:::::::::::::::::::::::::
+
+.. toctree::
+   :maxdepth: 4
+   
    network/network
+
+
+
+
+Part 6: The The datalink layer and the Local Area Networks
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+.. toctree::
+   :maxdepth: 4
+
    lan/lan
+
+Part 7: Appendices
+::::::::::::::::::
+
+.. toctree::
+   :maxdepth: 4
+
    glossary
    bibliography
 

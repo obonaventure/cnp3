@@ -1,5 +1,5 @@
 .. Copyright |copy| 2010 by Olivier Bonaventure
-.. This file is licensed under a `creative commons licence <http://creativecommons.org/licenses/by-sa/3.0/>`_
+.. This file is licensed under a `creative commons licence <http://creativecommons.org/licenses/by/3.0/>`_
 
 Bibliography
 ============
@@ -25,7 +25,7 @@ Whenever possible, the bibliography includes stable hypertext links to the refer
 .. [BG1992] Bertsekas, D., Gallager, G., `Data networks <http://books.google.com/books?id=FfpSAAAAMAAJ>`_, second edition, Prentice Hall, 1992
 .. [BMO2006] Bhatia, M., Manral, V., Ohara, Y., `IS-IS and OSPF Difference Discussions <http://tools.ietf.org/html/draft-bhatia-manral-diff-isis-ospf-01>`_, work in progress, Internet draft, Jan. 2006 
 .. [BMvB2009] Bagnulo, M., Matthews, P., van Beijnum, I., `NAT64: Network Address and Protocol Translation from IPv6 Clients to IPv4 Servers <http://tools.ietf.org/html/draft-ietf-behave-v6v4-xlate-stateful-02>`_, Internet draft, work in progress, October 2009, 
-.. [BNT1997] Beech, W., Nielsen, D., Taylor, J.,  `AX.25 Link Access Protocol for Amateur Packet Radio <http://www.tapr.org/pdf/AX25.2.2.pdf>`_, version `2.2, Revision: July 1998
+.. [BNT1997] Beech, W., Nielsen, D., Taylor, J.,  `AX.25 Link Access Protocol for Amateur Packet Radio <http://www.tapr.org/pdf/AX25.2.2.pdf>`_, version 2.2, Revision: July 1998
 .. [BOP1994] Brakmo, L. S., O'Malley, S. W., and Peterson, L. L., `TCP Vegas: new techniques for congestion detection and avoidance <http://doi.acm.org/10.1145/190314.190317>`_. In Proceedings of the Conference on Communications Architectures, Protocols and Applications (London, United Kingdom, August 31 - September 02, 1994). SIGCOMM '94. ACM, New York, NY, 24-35. 
 .. [Benvenuti2005] Benvenuti, C., `Understanding Linux Network Internals <http://books.google.com/books?id=yy7tihZLgGYC>`_, O'Reilly Media, 2005 
 .. [Bush1945]  Bush, V. `As we may think <http://www.theatlantic.com/magazine/archive/1969/12/as-we-may-think/3881/>`_ The Atlantic Monthly 176 (July 1945), pp. 101–108 

@@ -1,5 +1,5 @@
 .. Copyright |copy| 2010 by Olivier Bonaventure
-.. This file is licensed under a `creative commons licence <http://creativecommons.org/licenses/by-sa/3.0/>`_
+.. This file is licensed under a `creative commons licence <http://creativecommons.org/licenses/by/3.0/>`_
 
 ============
 Introduction
@@ -133,9 +133,9 @@ In the example above, the three hosts marked with `*` are part of the same anyca
 
 .. [#finterplanetary] In this book, we focus on networks that are used on Earth. These networks sometimes include satellite links. Besides the network technologies that are used on Earth, researchers develop networking techniques that could be used between nodes located on different planets. Such an Inter Planetary Internet requires different techniques than the ones discussed in this book. See :rfc:`4838` and the references therein for information about these techniques. 
 
-.. include:: services-protocols.rst
-.. include:: referencemodels.rst
-.. include:: organisation.rst
+.. .. include:: services-protocols.rst
+.. .. include:: referencemodels.rst
+.. .. include:: organisation.rst
 
 
 .. include:: ../links.rst
