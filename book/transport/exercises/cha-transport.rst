@@ -197,13 +197,13 @@ In the netkit lab (:download:`exercises/netkit/netkit_lab_2hosts_1rtr_ipv4.tar.t
 
 2. Is it possible for a TCP/IP stack to return a SYN+ACK segment with the acknowledgement number set to `0` ? If no, explain why. If yes, what was the content of the received SYN segment.
 
-3. Open the tcpdump_ packet trace :download:`exercises/traces/trace.5connections_opening_closing.pcap` and identify the number of different TCP connections that are established and closed. For each connection, explain by which mechanism they are closed. Analyse the initial sequence numbers that are used in the SYN and SYN+ACK segments. How do these initial sequence numbers evolve ? Are they increased every 4 microseconds ?
+3. Open the tcpdump_ packet trace :download:`/transport/exercises/traces/trace.5connections_opening_closing.pcap` and identify the number of different TCP connections that are established and closed. For each connection, explain by which mechanism they are closed. Analyse the initial sequence numbers that are used in the SYN and SYN+ACK segments. How do these initial sequence numbers evolve ? Are they increased every 4 microseconds ?
 
-4. The tcpdump_ packet trace :download:`exercises/traces/trace.5connections.pcap` contains several connection attempts. Can you explain what is happening with these connection attempts ?
+4. The tcpdump_ packet trace :download:`/transport/exercises/traces/trace.5connections.pcap` contains several connection attempts. Can you explain what is happening with these connection attempts ?
 
-5. The tcpdump_ packet trace :download:`exercises/traces/trace.ipv6.google.com.pcap` was collected from a popular website that is accessible by using IPv6. Explain the TCP options that are supported by the client and the server.
+5. The tcpdump_ packet trace :download:`/transport/exercises/traces/trace.ipv6.google.com.pcap` was collected from a popular website that is accessible by using IPv6. Explain the TCP options that are supported by the client and the server.
 
-6. The tcpdump_ packet trace :download:`exercises/traces/trace.sirius.info.ucl.ac.be.pcap` Was collected on the departmental server. What are the TCP options supported by this server ?
+6. The tcpdump_ packet trace :download:`/transport/exercises/traces/trace.sirius.info.ucl.ac.be.pcap` Was collected on the departmental server. What are the TCP options supported by this server ?
 
 7. A TCP implementation maintains a Transmission Control Block (TCB) for each TCP connection. This TCB is a data structure that contains the complete "`state`"  of each TCP connection. The TCB is described in :rfc:`793`. It contains first the identification of the TCP connection : 
 
@@ -217,9 +217,9 @@ In the netkit lab (:download:`exercises/netkit/netkit_lab_2hosts_1rtr_ipv4.tar.t
  - `sndwnd` : the current sending window
  - `rcvwnd` : the current window advertised by the receiver
 
- Using the :download:`exercises/traces/trace.sirius.info.ucl.ac.be.pcap` packet trace, what is the TCB of the connection on host `130.104.78.8` when it sends the third segment of the trace ?
+ Using the :download:`/transport/exercises/traces/trace.sirius.info.ucl.ac.be.pcap` packet trace, what is the TCB of the connection on host `130.104.78.8` when it sends the third segment of the trace ?
 
-8. The tcpdump_ packet trace :download:`exercises/traces/trace.maps.google.com` was collected by containing a popular web site that provides mapping information. How many TCP connections were used to retrieve the information from this server ?
+8. The tcpdump_ packet trace :download:`/transport/exercises/traces/trace.maps.google.com` was collected by containing a popular web site that provides mapping information. How many TCP connections were used to retrieve the information from this server ?
 
 9. Some network monitoring tools such as ntop_ collect all the TCP segments sent and received by a host or a group of hosts and provide interesting statistics such as the number of TCP connections, the number of bytes exchanged over each TCP connection, ... Assuming that you can capture all the TCP segments sent by a host, propose the pseudo-code of an application that would list all the TCP connections established and accepted by this host and the number of bytes exchanged over each connection. Do you need to count the number of bytes contained inside each segment to report the number of bytes exchanged over each TCP connection ?
 
