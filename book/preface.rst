@@ -28,5 +28,14 @@ As of this writing, most of the text has been written by `Olivier Bonaventure`_.
  `Computer Networking : Principles, Protocols and Practice`, (c) 2011, `Olivier Bonaventure <http://inl.info.ucl.ac.be/obo>`_, `Universite catholique de Louvain <http://www.uclouvain.be>`_ (Belgium) and the collaborators listed above, used under a Creative Commons Attribution (CC BY) license made possible by funding from The Saylor Foudnation's Open Textbook Challenge in order to be incorporated into Saylor.org' collection of open courses available at `http://www.saylor.org <http://www.saylo.org>`_. Full license terms may be viewed at : `http://creativecommons.org/licenses/by/3.0/ <http://creativecommons.org/licenses/by/3.0/>`_
 
 
+About the author
+################
+
+`Olivier Bonaventure <http://inl.info.ucl.ac.be/obo>`_ is currently professor at `Universite catholique de Louvain <http://www.uclouvain.be>`_ (Belgium) where he leads the `IP Networking Lab <http://inl.info.ucl.ac.be>`_ and is vice-president of the `ICTEAM <http://www.uclouvain.be/icteam>`_ institute. His research has been focused on Internet protocols for more than twenty years. Together with his Ph.D. students, he has developed traffic engineering techniques, performed various types of Internet measurements, improved the performance of routing protocols such as BGP and IS-IS and participated to the development of new Internet protocols including shim6, LISP and Multipath TCP. He frequently contributes to standardisation within the `IETF <http://www.ietf.org>`_. He was on the editorial board of IEEE/ACM Transactions on Networking and is Education Director of `ACM SIGCOMM <http://www.sigcomm.org>`_.
+
+
+
+
+
 .. include:: links.rst
 
