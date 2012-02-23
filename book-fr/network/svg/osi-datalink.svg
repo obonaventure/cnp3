@@ -1,0 +1,1504 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   id="svg2"
+   height="100%"
+   width="100%"
+   version="1.1"
+   preserveAspectRatio="xMidYMid"
+   viewBox="0 0 17052 4286"
+   inkscape:version="0.48.1 r9760"
+   sodipodi:docname="osi-datalink.svg"
+   style="fill-rule:evenodd">
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1051"
+     inkscape:window-height="574"
+     id="namedview3942"
+     showgrid="false"
+     inkscape:zoom="0.01247619"
+     inkscape:cx="9692.0476"
+     inkscape:cy="-3324.0946"
+     inkscape:window-x="97"
+     inkscape:window-y="264"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg2"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
+  <metadata
+     id="metadata1000">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs4">
+    <font
+       id="EmbeddedFont_1"
+       horiz-adv-x="2048"
+       horiz-origin-x="0"
+       horiz-origin-y="0"
+       vert-origin-x="45"
+       vert-origin-y="90"
+       vert-adv-y="90">
+      <font-face
+         id="font-face7"
+         font-family="Arial embedded"
+         ascent="1860"
+         descent="431"
+         units-per-em="2048" />
+      <missing-glyph
+         id="missing-glyph9"
+         horiz-adv-x="2048">
+        <path
+           id="path11"
+           d="m0 2048h2047v-2047h-2047v2047z"
+           stroke="#000"
+           stroke-width="33"
+           fill="none" />
+      </missing-glyph>
+      <glyph
+         id="glyph13"
+         horiz-adv-x="1021"
+         unicode=" " />
+      <glyph
+         id="glyph15"
+         horiz-adv-x="500"
+         unicode="(">
+        <path
+           id="path17"
+           d="m626-412h-128c-104 122-191 265-263 429-71 164-107 334-107 510 0 155 27 304 80 446 63 164 159 328 290 492h128c-85-136-140-232-168-290-42-90-76-184-100-281-30-122-45-245-45-368 0-313 104-626 313-938z" />
+      </glyph>
+      <glyph
+         id="glyph19"
+         horiz-adv-x="500"
+         unicode=")">
+        <path
+           id="path21"
+           d="m242-412h-128c208 312 313 625 313 938 0 123-15 244-45 364-24 98-57 192-100 282-27 58-83 156-168 293h128c130-164 227-328 289-492 54-142 81-291 81-446 0-176-36-346-108-510s-159-307-262-429z" />
+      </glyph>
+      <glyph
+         id="glyph23"
+         horiz-adv-x="183"
+         unicode=",">
+        <path
+           id="path25"
+           d="m277 0h-92v185h185v-185c0-78-12-140-34-188-23-48-59-85-108-111l-43 71c31 18 53 44 68 79 14 35 22 84 24 149z" />
+      </glyph>
+      <glyph
+         id="glyph27"
+         horiz-adv-x="568"
+         unicode="-">
+        <path
+           id="path29"
+           d="m626 441h-555v171h555v-171z" />
+      </glyph>
+      <glyph
+         id="glyph31"
+         horiz-adv-x="183"
+         unicode=".">
+        <path
+           id="path33"
+           d="m370 0h-185v185h185v-185z" />
+      </glyph>
+      <glyph
+         id="glyph35"
+         horiz-adv-x="613"
+         unicode="/">
+        <path
+           id="path37"
+           d="m162 0h-162l427 1465h162l-427-1465z" />
+      </glyph>
+      <glyph
+         id="glyph39"
+         horiz-adv-x="953"
+         unicode="0">
+        <path
+           id="path41"
+           d="m100 725c0 174 17 316 52 425s87 191 156 246 156 83 261 83c77 0 146-16 207-48 60-32 108-78 144-138s64-133 86-219c21-86 32-203 32-349 0-173-17-314-52-423-34-109-86-191-155-247-70-56-157-83-262-83-139 0-248 48-327 146-95 127-142 330-142 607zm184 0c0-238 28-395 82-470 55-75 123-113 203-113s148 38 202 113c55 76 82 232 82 470 0 235-26 391-80 468-53 77-122 115-206 115-80 0-146-34-196-102-58-86-87-247-87-481z" />
+      </glyph>
+      <glyph
+         id="glyph43"
+         horiz-adv-x="954"
+         unicode="2">
+        <path
+           id="path45"
+           d="m304 185h720v-185h-967c-1 45 5 88 20 130 24 68 62 135 114 201 53 65 130 138 231 219 157 132 263 234 319 307s84 143 84 210c0 68-25 125-75 171-51 47-116 70-197 70-85 0-154-23-205-71s-77-114-78-199l-185 29c13 134 60 236 142 307 82 70 192 105 330 105 139 0 250-39 331-118 81-78 122-176 122-292 0-59-12-117-34-174-23-57-61-117-114-180-52-63-142-148-269-255-108-88-177-148-209-180s-59-63-80-95z" />
+      </glyph>
+      <glyph
+         id="glyph47"
+         horiz-adv-x="1021"
+         unicode="4">
+        <path
+           id="path49"
+           d="m853 0h-185v356h-640v184l683 911h142v-911h185v-184h-185v-356zm-597 540h412v551l-412-551z" />
+      </glyph>
+      <glyph
+         id="glyph51"
+         horiz-adv-x="953"
+         unicode="7">
+        <path
+           id="path53"
+           d="m811 1266h-726v185h953v-150c-90-100-180-232-268-396-89-163-157-332-206-505-34-121-57-255-66-400h-185c2 115 24 253 66 415 42 163 102 319 181 470 78 151 162 278 251 381z" />
+      </glyph>
+      <glyph
+         id="glyph55"
+         horiz-adv-x="953"
+         unicode="8">
+        <path
+           id="path57"
+           d="m376 816c-75 27-130 65-166 114-36 50-54 109-54 179 0 104 38 192 112 263 75 72 174 107 298 107 125 0 225-36 301-109s114-162 114-266c0-67-17-125-53-174-35-49-89-87-161-114 88-30 156-79 202-146 46-68 69-148 69-241 0-129-43-238-129-326s-200-131-340-131c-141 0-254 44-340 132s-129 198-129 330c0 98 23 180 71 246 48 67 116 112 205 136zm-35 292c0-63 20-113 61-153 40-39 96-59 169-59 71 0 126 20 166 59s59 87 59 144c0 59-20 109-61 149s-97 60-166 60c-70 0-126-19-166-59-41-39-62-86-62-141zm-57-671c0-51 11-99 32-147 20-47 55-83 103-109s99-39 151-39c87 0 156 27 207 82 51 54 76 123 76 207 0 85-26 155-79 211-52 56-122 83-209 83-86 0-154-27-205-82-50-55-76-124-76-206z" />
+      </glyph>
+      <glyph
+         id="glyph59"
+         horiz-adv-x="1429"
+         unicode="A">
+        <path
+           id="path61"
+           d="m185 0h-211l585 1465h205l585-1465h-211l-168 455h-618l-167-455zm395 1032l-165-406h493l-142 383c-45 124-80 219-105 285-20-82-47-169-81-262z" />
+      </glyph>
+      <glyph
+         id="glyph63"
+         horiz-adv-x="1112"
+         unicode="B">
+        <path
+           id="path65"
+           d="m724 0h-553v1465h551c112 0 202-15 270-44 68-30 121-75 159-137 39-61 58-125 58-192 0-63-18-121-53-176-35-56-89-100-160-134 87-26 153-70 200-133 46-63 70-137 70-223 0-69-15-133-43-192-29-59-64-105-107-137-42-32-95-56-158-72-64-17-142-25-234-25zm-354 1294v-441h311c85 0 146 6 182 17 49 15 85 39 110 73 24 34 37 76 37 127 0 49-12 91-35 128s-55 62-98 76c-43 13-116 20-219 20h-288zm0-611v-512h357c61 0 104 2 129 7 44 8 80 21 110 40 29 19 53 47 72 83s29 78 29 126c0 55-14 103-40 144-27 41-64 70-113 87-49 16-119 25-211 25h-333z" />
+      </glyph>
+      <glyph
+         id="glyph67"
+         horiz-adv-x="1293"
+         unicode="C">
+        <path
+           id="path69"
+           d="m1180 514l200-49c-41-160-113-283-217-367-105-84-232-126-383-126-156 0-283 32-381 96-97 65-172 159-223 281s-76 254-76 395c0 153 28 286 86 400 57 115 139 201 245 260 106 60 223 89 350 89 144 0 266-37 364-113 99-75 167-181 206-318l-199-44c-33 106-81 183-144 232-62 48-141 73-236 73-109 0-201-27-274-81-74-54-125-126-155-217-29-91-44-184-44-281 0-124 17-232 53-325s91-162 166-208 156-69 243-69c106 0 196 31 270 94 74 62 123 155 149 278z" />
+      </glyph>
+      <glyph
+         id="glyph71"
+         horiz-adv-x="1225"
+         unicode="D">
+        <path
+           id="path73"
+           d="m698 0h-527v1465h503c114 0 201-7 261-21 84-19 155-54 214-105 77-65 135-149 173-250 38-102 58-218 58-349 0-111-13-209-39-295s-60-157-100-214c-41-56-85-100-133-133-49-32-107-56-175-73s-146-25-235-25zm-328 1294v-1123h310c96 0 171 9 225 27 55 18 98 43 131 76 45 46 81 108 106 186 26 78 38 172 38 284 0 153-24 272-74 354-50 83-111 138-182 166-52 20-135 30-249 30h-305z" />
+      </glyph>
+      <glyph
+         id="glyph75"
+         horiz-adv-x="1089"
+         unicode="E">
+        <path
+           id="path77"
+           d="m1252 0h-1081v1465h1052v-171h-853v-455h796v-171h-796v-497h882v-171z" />
+      </glyph>
+      <glyph
+         id="glyph79"
+         horiz-adv-x="999"
+         unicode="F">
+        <path
+           id="path81"
+           d="m370 0h-199v1465h981v-171h-782v-455h668v-171h-668v-668z" />
+      </glyph>
+      <glyph
+         id="glyph83"
+         horiz-adv-x="908"
+         unicode="L">
+        <path
+           id="path85"
+           d="m1067 0h-896v1465h199v-1294h697v-171z" />
+      </glyph>
+      <glyph
+         id="glyph87"
+         horiz-adv-x="1430"
+         unicode="M">
+        <path
+           id="path89"
+           d="m341 0h-199v1465h304l333-1038c31-97 53-169 67-217 16 53 40 132 73 235l329 1020h302v-1465h-199v1237l-396-1237h-219l-395 1237v-1237z" />
+      </glyph>
+      <glyph
+         id="glyph91"
+         horiz-adv-x="1157"
+         unicode="N">
+        <path
+           id="path93"
+           d="m370 0h-199v1465h211l727-1116v1116h199v-1465h-211l-727 1116v-1116z" />
+      </glyph>
+      <glyph
+         id="glyph95"
+         horiz-adv-x="1407"
+         unicode="O">
+        <path
+           id="path97"
+           d="m100 713c0 244 65 435 194 573 130 138 298 207 503 207 135 0 256-32 364-97s191-155 247-271c57-116 85-248 85-395 0-149-29-283-89-400-60-118-144-207-254-268-109-60-227-90-354-90-137 0-259 33-367 100s-190 158-246 274c-56 115-83 238-83 367zm199-3c0-176 47-314 141-416 95-101 213-152 356-152 145 0 264 51 358 154 93 102 140 247 140 436 0 119-20 222-60 311s-99 157-176 206-164 74-260 74c-136 0-253-47-352-141-98-95-147-252-147-472z" />
+      </glyph>
+      <glyph
+         id="glyph99"
+         horiz-adv-x="1112"
+         unicode="P">
+        <path
+           id="path101"
+           d="m370 0h-199v1465h541c95 0 168-5 218-14 71-12 130-35 177-68 48-34 86-81 115-142 29-60 44-127 44-199 0-124-39-229-115-316-77-86-216-129-417-129h-364v-597zm0 1294v-526h364c121 0 206 23 257 70 50 47 76 113 76 198 0 62-15 114-45 158s-69 73-118 87c-31 9-89 13-174 13h-360z" />
+      </glyph>
+      <glyph
+         id="glyph103"
+         horiz-adv-x="1271"
+         unicode="R">
+        <path
+           id="path105"
+           d="m370 0h-199v1465h637c125 0 220-13 285-39 66-27 118-73 157-139 39-67 58-140 58-221 0-103-32-191-96-262-65-71-165-116-300-136 49-24 86-49 112-73 54-52 105-117 154-195l243-400h-231l-187 306c-54 88-99 155-134 202s-67 80-95 99c-27 19-56 33-84 40-22 5-56 7-104 7h-216v-654zm0 1294v-469h400c85 0 151 9 197 27 47 17 82 46 106 85s36 81 36 127c0 67-23 122-70 165-47 44-122 65-224 65h-445z" />
+      </glyph>
+      <glyph
+         id="glyph107"
+         horiz-adv-x="1157"
+         unicode="S">
+        <path
+           id="path109"
+           d="m100 498h199c8-77 27-141 57-190s76-89 139-120 134-46 213-46c70 0 132 12 186 35 53 23 93 55 119 95 26 41 39 83 39 127 0 45-10 84-32 117-21 34-61 62-120 86-38 15-122 39-251 72-130 33-223 63-278 92-72 37-126 83-162 137-35 55-53 116-53 184 0 74 21 144 63 209 42 64 104 113 184 147 81 34 171 50 269 50 109 0 205-17 288-53 83-35 147-87 191-155 45-69 69-146 72-233h-199c-10 89-42 157-98 202-55 46-137 69-246 69-113 0-195-22-247-65-52-44-77-96-77-157 0-53 18-97 54-131s130-70 282-105c152-36 257-68 314-94 84-40 146-90 186-150 40-61 60-130 60-209s-22-152-67-221c-44-70-107-123-190-162-82-38-175-57-279-57-131 0-240 20-329 61-88 41-158 103-208 185-50 83-77 176-79 280z" />
+      </glyph>
+      <glyph
+         id="glyph111"
+         horiz-adv-x="1158"
+         unicode="T">
+        <path
+           id="path113"
+           d="m725 0h-199v1294h-483v171h1166v-171h-484v-1294z" />
+      </glyph>
+      <glyph
+         id="glyph115"
+         horiz-adv-x="1157"
+         unicode="U">
+        <path
+           id="path117"
+           d="m1109 624v841h199v-848c0-148-16-265-49-352s-92-157-178-212c-86-54-198-81-338-81-135 0-246 23-333 71-86 47-147 116-184 205-37 90-55 213-55 369v848h199v-841c0-127 11-220 34-280s62-106 118-139c56-32 124-49 204-49 138 0 237 33 295 97 59 64 88 188 88 371z" />
+      </glyph>
+      <glyph
+         id="glyph119"
+         horiz-adv-x="953"
+         unicode="a">
+        <path
+           id="path121"
+           d="m811 128c-65-52-127-89-186-110-59-22-123-32-191-32-112 0-198 28-258 83-61 56-91 127-91 214 0 51 12 97 34 139 23 43 53 76 90 102 37 25 78 44 124 57 34 10 85 18 154 27 140 17 242 37 308 60 1 23 1 37 1 44 0 67-15 115-47 142-43 38-107 56-192 56-79 0-137-13-175-41-37-27-65-75-83-144l-185 29c16 75 42 136 78 182 36 47 89 82 158 107 68 25 148 38 238 38s163-11 219-33 98-49 124-82c27-33 45-75 56-125 6-31 9-84 9-158v-223c0-155 3-259 11-311s23-101 45-149h-184c-30 36-49 79-57 128zm-16 317l1 53c-62-22-157-41-282-56-72-9-122-19-151-30-30-11-53-27-69-48s-24-44-24-70c0-39 18-72 53-98 34-26 86-40 153-40 66 0 125 14 177 42s90 63 115 105c18 32 27 80 27 142z" />
+      </glyph>
+      <glyph
+         id="glyph123"
+         horiz-adv-x="931"
+         unicode="b">
+        <path
+           id="path125"
+           d="m313 167v-167h-185v1465h185v-549c76 110 173 165 290 165 66 0 127-13 185-39 59-26 107-63 144-110 38-47 67-103 89-170 21-66 31-137 31-213 0-179-44-318-132-416s-194-147-318-147c-123 0-219 60-289 181zm0 374c0-118 17-203 50-256 55-86 130-129 223-129 77 0 142 32 198 95 56 64 84 158 84 283 0 129-27 223-80 285-54 61-118 91-194 91s-142-31-198-95c-55-63-83-154-83-274z" />
+      </glyph>
+      <glyph
+         id="glyph127"
+         horiz-adv-x="908"
+         unicode="c">
+        <path
+           id="path129"
+           d="m825 398l185-28c-19-120-69-214-149-282-79-68-177-102-293-102-145 0-262 47-350 140-89 94-133 228-133 403 0 114 19 213 57 297 37 85 94 149 171 191 76 43 160 64 250 64 114 0 207-29 279-85 72-57 119-138 139-242l-185-29c-16 62-44 108-85 139-40 31-89 46-147 46-87 0-158-30-212-90-55-60-82-156-82-286 0-132 27-228 81-288s124-90 211-90c69 0 128 20 174 60 47 39 76 100 89 182z" />
+      </glyph>
+      <glyph
+         id="glyph131"
+         horiz-adv-x="931"
+         unicode="d">
+        <path
+           id="path133"
+           d="m996 0h-185v168c-66-122-164-182-292-182-83 0-159 23-229 69-69 46-123 110-162 193-38 82-57 177-57 284 0 105 18 200 53 285s88 150 158 196c71 45 150 68 237 68 63 0 120-16 170-46 50-31 90-72 122-121v551h185v-1465zm-740 533c0-126 28-220 83-283 56-62 122-94 197-94 77 0 141 30 195 90 53 60 80 151 80 273 0 135-27 234-82 297-54 63-121 94-201 94-77 0-142-30-194-91-52-60-78-156-78-286z" />
+      </glyph>
+      <glyph
+         id="glyph135"
+         horiz-adv-x="999"
+         unicode="e">
+        <path
+           id="path137"
+           d="m866 341l180-28c-29-104-83-184-163-241-79-58-181-86-305-86-155 0-279 47-370 141-91 95-137 227-137 397 0 177 46 314 138 411 93 97 212 146 359 146 143 0 259-48 349-144s135-231 135-406c0-10 0-26-1-47h-795c7-106 40-187 100-243 61-56 136-85 226-85 67 0 124 15 171 45 47 29 85 76 113 140zm-610 313h612c-9 75-32 131-71 169-59 58-135 87-229 87-86 0-157-23-216-69-58-47-90-109-96-187z" />
+      </glyph>
+      <glyph
+         id="glyph139"
+         horiz-adv-x="636"
+         unicode="f">
+        <path
+           id="path141"
+           d="m363 0h-185v896h-156v171h156v112c0 71 7 124 20 158 17 47 49 84 94 113s107 43 186 43c50 0 106-6 168-18l-27-162c-37 6-73 10-106 10-55 0-93-12-116-34-23-23-34-65-34-127v-95h199v-171h-199v-896z" />
+      </glyph>
+      <glyph
+         id="glyph143"
+         horiz-adv-x="931"
+         unicode="g">
+        <path
+           id="path145"
+           d="m88-71l185-29c7-50 27-86 59-109 43-31 102-47 178-47 80 0 143 15 187 46 44 30 74 73 89 127 9 34 13 104 13 211-77-85-174-128-289-128-143 0-254 52-333 157-78 105-118 231-118 377 0 101 18 194 53 280 35 85 86 151 153 197 67 47 146 70 236 70 121 0 220-52 298-157v143h185v-919c0-165-17-282-50-351-34-69-87-124-160-164s-162-60-268-60c-126 0-228 30-306 89-77 59-115 148-112 267zm156 618c0-131 27-226 79-286 53-60 119-90 198-90s145 30 198 89c53 60 80 154 80 281 0 122-28 214-82 276-55 62-121 93-199 93-76 0-141-30-194-91s-80-152-80-272z" />
+      </glyph>
+      <glyph
+         id="glyph147"
+         horiz-adv-x="863"
+         unicode="h">
+        <path
+           id="path149"
+           d="m327 0h-185v1465h185v-545c82 107 185 161 310 161 77 0 144-16 201-46 56-31 97-74 121-128 24-55 37-134 37-237v-670h-185v658c0 88-19 152-56 192-38 40-90 60-159 60-51 0-99-13-144-40-45-28-77-64-96-111-19-46-29-110-29-191v-568z" />
+      </glyph>
+      <glyph
+         id="glyph151"
+         horiz-adv-x="183"
+         unicode="i">
+        <path
+           id="path153"
+           d="m327 1280h-185v185h185v-185zm0-1280h-185v1067h185v-1067z" />
+      </glyph>
+      <glyph
+         id="glyph155"
+         horiz-adv-x="886"
+         unicode="k">
+        <path
+           id="path157"
+           d="m321 0h-185v1465h185v-787l401 389h259l-411-398 440-669h-219l-354 540-116-113v-427z" />
+      </glyph>
+      <glyph
+         id="glyph159"
+         horiz-adv-x="183"
+         unicode="l">
+        <path
+           id="path161"
+           d="m327 0h-185v1465h185v-1465z" />
+      </glyph>
+      <glyph
+         id="glyph163"
+         horiz-adv-x="1453"
+         unicode="m">
+        <path
+           id="path165"
+           d="m320 0h-185v1067h185v-173c32 56 75 101 128 135 53 35 113 52 181 52 76 0 137-18 186-53 48-35 82-84 102-147 84 133 193 200 327 200 105 0 186-29 243-87 56-58 85-148 85-268v-726h-185v655c0 70-6 121-18 152-11 31-32 56-62 75s-65 28-106 28c-73 0-134-24-183-73-48-48-72-126-72-233v-604h-185v675c0 79-14 137-43 176-29 40-76 59-141 59-49 0-95-13-137-39s-73-64-92-115c-19-50-28-122-28-217v-539z" />
+      </glyph>
+      <glyph
+         id="glyph167"
+         horiz-adv-x="863"
+         unicode="n">
+        <path
+           id="path169"
+           d="m327 0h-185v1067h185v-151c74 110 182 165 322 165 61 0 117-12 169-34 51-23 89-53 115-91 25-37 43-81 53-132 6-33 10-91 10-174v-650h-185v632c0 72-7 126-21 161-13 36-37 64-71 85-35 22-75 32-121 32-74 0-137-24-191-71-53-48-80-138-80-271v-568z" />
+      </glyph>
+      <glyph
+         id="glyph171"
+         horiz-adv-x="953"
+         unicode="o">
+        <path
+           id="path173"
+           d="m85 533c0 194 53 338 160 431 89 78 197 117 324 117 142 0 258-47 348-142 90-94 135-224 135-391 0-135-19-241-59-318s-98-137-174-180-160-64-250-64c-144 0-261 47-350 141s-134 229-134 406zm185 1c0-126 29-221 85-283 57-63 128-95 214-95s157 32 213 95c57 63 86 159 86 288 0 122-29 214-86 277s-128 94-213 94c-86 0-157-31-214-93-56-63-85-157-85-283z" />
+      </glyph>
+      <glyph
+         id="glyph175"
+         horiz-adv-x="931"
+         unicode="p">
+        <path
+           id="path177"
+           d="m313-412h-185v1479h185v-176c38 63 80 111 128 142 47 32 105 48 172 48 89 0 167-23 235-69 67-46 118-111 153-195 34-84 51-176 51-276 0-107-19-203-58-289s-95-152-169-198c-74-45-152-68-234-68-60 0-113 14-161 44-48 29-87 66-117 110v-552zm0 937c0-126 27-219 80-279s118-90 194-90c77 0 143 32 198 94s83 158 83 288c0 125-27 218-81 279-54 62-118 93-192 93s-140-33-197-98c-57-66-85-162-85-287z" />
+      </glyph>
+      <glyph
+         id="glyph179"
+         horiz-adv-x="568"
+         unicode="r">
+        <path
+           id="path181"
+           d="m327 0h-185v1067h157v-156c41 69 79 115 113 137 35 22 74 33 115 33 61 0 122-16 184-47l-62-167c-42 29-84 43-127 43-38 0-72-12-102-36s-51-57-64-100c-19-64-29-135-29-212v-562z" />
+      </glyph>
+      <glyph
+         id="glyph183"
+         horiz-adv-x="886"
+         unicode="s">
+        <path
+           id="path185"
+           d="m71 327l185 29c10-65 36-114 80-148s105-52 184-52 138 15 176 45c39 29 58 64 58 103 0 36-22 64-65 84-30 14-89 32-176 53-118 34-203 63-255 87-52 25-91 59-118 102s-40 91-40 143c0 48 10 92 31 132 21 41 49 75 85 101 27 21 64 39 110 53 47 15 97 22 150 22 81 0 151-13 212-38 60-25 105-59 134-102s49-101 60-173l-185-28c-7 53-28 95-62 125s-83 45-145 45c-74 0-127-12-158-35-32-24-48-52-48-83 0-20 7-39 20-55s34-30 62-41c16-6 63-19 142-40 113-34 198-62 253-84s99-53 130-95c32-41 48-93 48-154 0-60-18-117-52-170s-84-94-149-124c-65-29-138-43-220-43-136 0-240 28-311 86-71 57-116 142-136 255z" />
+      </glyph>
+      <glyph
+         id="glyph187"
+         horiz-adv-x="522"
+         unicode="t">
+        <path
+           id="path189"
+           d="m526 161l29-159c-51-11-96-16-136-16-65 0-115 10-151 30s-61 46-75 79c-15 33-22 102-22 207v594h-128v171h128v263l185 108v-371h170v-171h-170v-598c0-49 3-81 9-95s15-26 29-34c13-8 33-13 58-13 19 0 43 2 74 5z" />
+      </glyph>
+      <glyph
+         id="glyph191"
+         horiz-adv-x="863"
+         unicode="u">
+        <path
+           id="path193"
+           d="m996 0h-185v181c-79-130-187-195-322-195-60 0-116 12-168 36-52 23-90 53-115 90-25 36-43 80-53 132-7 36-11 91-11 168v655h185v-576c0-92 4-154 11-186 11-46 34-83 69-109 36-26 79-40 131-40s101 14 147 41 78 64 97 111c19 46 29 114 29 202v557h185v-1067z" />
+      </glyph>
+      <glyph
+         id="glyph195"
+         horiz-adv-x="976"
+         unicode="v">
+        <path
+           id="path197"
+           d="m624 0h-205l-391 1067h197l226-639c25-69 47-141 68-215 16 56 39 124 67 203l227 651h197l-386-1067z" />
+      </glyph>
+      <glyph
+         id="glyph199"
+         horiz-adv-x="1475"
+         unicode="w">
+        <path
+           id="path201"
+           d="m523 0h-205l-325 1067h193l176-618 54-227c2 11 20 85 54 220l164 625h200l162-620 49-203 57 205 177 618h193l-327-1067h-205l-163 636-45 185-209-821z" />
+      </glyph>
+      <glyph
+         id="glyph203"
+         horiz-adv-x="999"
+         unicode="x">
+        <path
+           id="path205"
+           d="m240 0h-226l396 540-367 527h222l174-249c32-46 60-87 85-123 27 37 53 72 78 106l194 266h226l-388-529 376-538h-222l-227 324-40 59-281-383z" />
+      </glyph>
+      <glyph
+         id="glyph207"
+         horiz-adv-x="953"
+         unicode="y">
+        <path
+           id="path209"
+           d="m128-405l-28 165c37-11 70-16 98-16 38 0 68 7 91 20 23 14 41 32 56 56 11 18 28 63 52 135 3 10 8 24 15 44l-398 1068h196l215-584c28-74 52-152 75-233 19 56 43 124 70 203l212 614h195l-379-1095c-43-113-76-190-100-233-32-57-68-99-109-126-41-26-90-40-146-40-34 0-73 7-115 22z" />
+      </glyph>
+      <glyph
+         id="glyph211"
+         horiz-adv-x="1498"
+         unicode="©">
+        <path
+           id="path213"
+           d="m754 1493c127 0 250-32 371-97 120-65 214-158 282-279 67-121 101-247 101-378 0-130-34-255-100-375-66-119-159-212-279-279-119-66-244-99-375-99-130 0-255 33-375 99-119 67-213 160-279 279-67 120-100 245-100 375 0 131 34 257 101 378 68 121 162 214 283 279 120 65 244 97 370 97zm0-142c-103 0-203-26-300-79-98-53-174-128-229-226-55-99-83-201-83-307s27-207 81-304c54-96 130-172 227-226s199-81 304-81c106 0 207 27 304 81s173 130 227 226c53 97 80 198 80 304s-27 208-82 307c-55 98-131 173-229 226-97 53-197 79-300 79zm227-739l143-29c-21-86-64-155-129-207-66-52-146-77-239-77-119 0-215 39-289 117s-111 187-111 326c0 90 16 169 50 236s82 117 144 151c63 34 134 51 214 51 90 0 165-21 224-65 59-43 100-102 121-176l-142-29c-19 42-47 73-85 95-37 22-81 33-131 33-74 0-134-26-182-78-47-52-71-127-71-224s22-170 68-220c45-50 104-75 176-75 58 0 109 15 152 46 44 31 73 72 87 125z" />
+      </glyph>
+    </font>
+  </defs>
+  <defs
+     id="defs215">
+    <font
+       id="EmbeddedFont_2"
+       horiz-adv-x="2048"
+       horiz-origin-x="0"
+       horiz-origin-y="0"
+       vert-origin-x="45"
+       vert-origin-y="90"
+       vert-adv-y="90">
+      <font-face
+         id="font-face218"
+         font-family="Times New Roman embedded"
+         ascent="1814"
+         descent="454"
+         units-per-em="2048" />
+      <missing-glyph
+         id="missing-glyph220"
+         horiz-adv-x="2048">
+        <path
+           id="path222"
+           d="m0 2048h2047v-2047h-2047v2047z"
+           stroke="#000"
+           stroke-width="33"
+           fill="none" />
+      </missing-glyph>
+      <glyph
+         id="glyph224"
+         horiz-adv-x="817"
+         unicode="»">
+        <path
+           id="path226"
+           d="m768 475l-256 478h71l370-478-370-475h-71l256 475zm-427 0l-256 478h71l370-478-370-475h-71l256 475z" />
+      </glyph>
+      <glyph
+         id="glyph228"
+         horiz-adv-x="1067"
+         unicode="–">
+        <path
+           id="path230"
+           d="m1038 540v-85h-1052v85h1052z" />
+      </glyph>
+      <glyph
+         id="glyph232"
+         horiz-adv-x="500"
+         unicode="•">
+        <path
+           id="path234"
+           d="m348 924c69 0 128-24 176-72 49-49 73-108 73-176 0-69-24-128-73-176-48-49-107-73-176-73-68 0-127 24-176 73-48 48-72 107-72 176 0 68 24 127 72 176 48 48 107 72 176 72z" />
+      </glyph>
+    </font>
+  </defs>
+  <g
+     id="g3944"
+     transform="translate(-4227.8,-2729.6)">
+    <g
+       transform="translate(-1923.7,-1522.9)"
+       id="g478">
+      <desc
+         id="desc480">Group</desc>
+      <g
+         id="g482">
+        <desc
+           id="desc484">Drawing</desc>
+        <g
+           id="g486"
+           style="fill:none;stroke:#000000">
+          <g
+             id="g488"
+             style="stroke-width:35">
+            <path
+               d="m 6173,6773 c -2,0 -4,2 -4,4 v 1196 c 0,2 2,5 4,5 h 6188 c 2,0 4,-3 4,-5 V 6777 c 0,-2 -2,-4 -4,-4 H 6173"
+               id="path490"
+               inkscape:connector-curvature="0"
+               style="fill:none" />
+          </g>
+          <g
+             id="g492">
+            <rect
+               height="1205"
+               x="6169"
+               width="6197"
+               y="6773"
+               id="rect494" />
+          </g>
+        </g>
+      </g>
+      <g
+         id="g498">
+        <desc
+           id="desc500">Drawing</desc>
+        <g
+           id="g502">
+          <g
+             id="g504"
+             style="fill:none;stroke:#000000">
+            <rect
+               x="6165"
+               y="6954"
+               width="6205"
+               height="843"
+               id="rect506" />
+            <rect
+               x="6165"
+               y="6954"
+               width="6205"
+               height="843"
+               id="rect508" />
+          </g>
+          <g
+             id="g510">
+            <g
+               font-size="706px"
+               font-weight="400"
+               id="g512"
+               style="font-size:706px;font-weight:400;font-family:Arial embedded">
+              <g
+                 id="g514"
+                 style="fill:none;stroke:#000000">
+                <text
+                   id="text516">
+                  <tspan
+                     x="7953 8423 8817 9168 9524 9680 10032 10425"
+                     y="7590"
+                     font-weight="normal"
+                     id="tspan518"
+                     style="font-weight:normal;fill:#000000;font-family:FreeSans">Physical</tspan>
+                </text>
+              </g>
+            </g>
+          </g>
+        </g>
+      </g>
+    </g>
+    <g
+       transform="translate(-703.66,-1522.9)"
+       id="g520">
+      <desc
+         id="desc522">Drawing</desc>
+      <g
+         id="g524"
+         style="stroke:#000000">
+        <g
+           id="g526"
+           style="fill:#c0c0c0">
+          <path
+             d="m 8880,7982 c -2,0 -4,2 -4,4 v 530 c 0,2 2,5 4,5 h 9235 c 2,0 5,-3 5,-5 v -530 c 0,-2 -3,-4 -5,-4 H 8880 z"
+             id="path528"
+             inkscape:connector-curvature="0" />
+        </g>
+        <g
+           id="g530"
+           style="fill:none;stroke-width:35">
+          <path
+             d="m 8880,7982 c -2,0 -4,2 -4,4 v 530 c 0,2 2,5 4,5 h 9235 c 2,0 5,-3 5,-5 v -530 c 0,-2 -3,-4 -5,-4 H 8880"
+             id="path532"
+             inkscape:connector-curvature="0"
+             style="fill:none" />
+        </g>
+        <g
+           id="g534"
+           style="fill:none">
+          <rect
+             height="539"
+             x="8877"
+             width="9244"
+             y="7982"
+             id="rect536" />
+        </g>
+      </g>
+    </g>
+    <g
+       transform="translate(-1923.7,-1522.9)"
+       id="g540">
+      <desc
+         id="desc542">Drawing</desc>
+      <g
+         id="g544">
+        <g
+           id="g546"
+           style="fill:none;stroke:#000000;stroke-width:35">
+          <path
+             d="m 6169,6256 v -35"
+             id="path548"
+             inkscape:connector-curvature="0" />
+          <path
+             d="m 6169,6186 v -35"
+             id="path550"
+             inkscape:connector-curvature="0" />
+          <path
+             d="m 6169,6116 1,-35"
+             id="path552"
+             inkscape:connector-curvature="0" />
+          <path
+             d="m 6170,6046 v -35"
+             id="path554"
+             inkscape:connector-curvature="0" />
+          <path
+             d="m 6170,5976 v -35"
+             id="path556"
+             inkscape:connector-curvature="0" />
+          <path
+             d="m 6170,5906 v -35"
+             id="path558"
+             inkscape:connector-curvature="0" />
+          <path
+             d="m 6170,5836 1,-35"
+             id="path560"
+             inkscape:connector-curvature="0" />
+          <path
+             d="m 6171,5766 v -35"
+             id="path562"
+             inkscape:connector-curvature="0" />
+          <path
+             d="m 6171,5696 v -35"
+             id="path564"
+             inkscape:connector-curvature="0" />
+          <path
+             d="m 6171,5626 v -35"
+             id="path566"
+             inkscape:connector-curvature="0" />
+          <path
+             d="m 6171,5556 v -35"
+             id="path568"
+             inkscape:connector-curvature="0" />
+          <path
+             d="m 6172,5486 v -35"
+             id="path570"
+             inkscape:connector-curvature="0" />
+          <path
+             d="m 6172,5416 v -35"
+             id="path572"
+             inkscape:connector-curvature="0" />
+          <path
+             d="m 6172,5346 v -35"
+             id="path574"
+             inkscape:connector-curvature="0" />
+          <path
+             d="m 6172,5276 v -35"
+             id="path576"
+             inkscape:connector-curvature="0" />
+          <path
+             d="m 6172,5206 1,-35"
+             id="path578"
+             inkscape:connector-curvature="0" />
+          <path
+             d="m 6173,5136 v -35"
+             id="path580"
+             inkscape:connector-curvature="0" />
+          <path
+             d="m 6173,5066 v -35"
+             id="path582"
+             inkscape:connector-curvature="0" />
+          <path
+             d="m 6173,4996 v -35"
+             id="path584"
+             inkscape:connector-curvature="0" />
+          <path
+             d="m 6173,4926 1,-35"
+             id="path586"
+             inkscape:connector-curvature="0" />
+          <path
+             d="m 6174,4856 v -35"
+             id="path588"
+             inkscape:connector-curvature="0" />
+          <path
+             d="m 6174,4786 v -33"
+             id="path590"
+             inkscape:connector-curvature="0" />
+        </g>
+      </g>
+    </g>
+    <g
+       transform="translate(-1923.7,-1522.9)"
+       id="g594">
+      <desc
+         id="desc596">Drawing</desc>
+      <g
+         id="g598">
+        <g
+           id="g600"
+           style="fill:none;stroke:#000000;stroke-width:35">
+          <path
+             d="m 12365,6256 v -35"
+             id="path602"
+             inkscape:connector-curvature="0" />
+          <path
+             d="m 12365,6186 v -35"
+             id="path604"
+             inkscape:connector-curvature="0" />
+          <path
+             d="m 12365,6116 v -35"
+             id="path606"
+             inkscape:connector-curvature="0" />
+          <path
+             d="m 12366,6046 v -35"
+             id="path608"
+             inkscape:connector-curvature="0" />
+          <path
+             d="m 12366,5976 v -35"
+             id="path610"
+             inkscape:connector-curvature="0" />
+          <path
+             d="m 12366,5906 v -35"
+             id="path612"
+             inkscape:connector-curvature="0" />
+          <path
+             d="m 12366,5836 v -35"
+             id="path614"
+             inkscape:connector-curvature="0" />
+          <path
+             d="m 12366,5766 v -35"
+             id="path616"
+             inkscape:connector-curvature="0" />
+          <path
+             d="m 12366,5696 1,-35"
+             id="path618"
+             inkscape:connector-curvature="0" />
+          <path
+             d="m 12367,5626 v -35"
+             id="path620"
+             inkscape:connector-curvature="0" />
+          <path
+             d="m 12367,5556 v -35"
+             id="path622"
+             inkscape:connector-curvature="0" />
+          <path
+             d="m 12367,5486 v -35"
+             id="path624"
+             inkscape:connector-curvature="0" />
+          <path
+             d="m 12367,5416 v -35"
+             id="path626"
+             inkscape:connector-curvature="0" />
+          <path
+             d="m 12367,5346 1,-35"
+             id="path628"
+             inkscape:connector-curvature="0" />
+          <path
+             d="m 12368,5276 v -35"
+             id="path630"
+             inkscape:connector-curvature="0" />
+          <path
+             d="m 12368,5206 v -35"
+             id="path632"
+             inkscape:connector-curvature="0" />
+          <path
+             d="m 12368,5136 v -35"
+             id="path634"
+             inkscape:connector-curvature="0" />
+          <path
+             d="m 12368,5066 v -35"
+             id="path636"
+             inkscape:connector-curvature="0" />
+          <path
+             d="m 12368,4996 v -35"
+             id="path638"
+             inkscape:connector-curvature="0" />
+          <path
+             d="m 12369,4926 v -35"
+             id="path640"
+             inkscape:connector-curvature="0" />
+          <path
+             d="m 12369,4856 v -35"
+             id="path642"
+             inkscape:connector-curvature="0" />
+          <path
+             d="m 12369,4786 v -33"
+             id="path644"
+             inkscape:connector-curvature="0" />
+        </g>
+      </g>
+    </g>
+    <g
+       transform="translate(-1923.7,-1522.9)"
+       id="g652">
+      <desc
+         id="desc654">Drawing</desc>
+      <g
+         id="g656"
+         style="fill:none;stroke:#000000">
+        <g
+           id="g658"
+           style="stroke-width:35">
+          <path
+             d="m 6173,5521 c -2,0 -4,2 -4,4 v 1196 c 0,2 2,5 4,5 h 6188 c 2,0 4,-3 4,-5 V 5525 c 0,-2 -2,-4 -4,-4 H 6173"
+             id="path660"
+             inkscape:connector-curvature="0"
+             style="fill:none" />
+        </g>
+        <g
+           id="g662">
+          <rect
+             width="6197"
+             height="1205"
+             x="6169"
+             y="5521"
+             id="rect664" />
+        </g>
+      </g>
+    </g>
+    <g
+       transform="translate(-1923.7,-1522.9)"
+       id="g668">
+      <desc
+         id="desc670">Drawing</desc>
+      <g
+         id="g672">
+        <g
+           id="g674"
+           style="fill:none">
+          <rect
+             x="6165"
+             y="5702"
+             width="6205"
+             height="843"
+             id="rect676" />
+          <rect
+             x="6165"
+             y="5702"
+             width="6205"
+             height="843"
+             id="rect678" />
+        </g>
+        <g
+           id="g680">
+          <g
+             font-size="706px"
+             font-weight="400"
+             id="g682"
+             style="font-size:706px;font-weight:400;font-family:Arial embedded">
+            <g
+               id="g684"
+               style="fill:none">
+              <text
+                 y="44.5"
+                 id="text686"
+                 style="fill:#0000ff">
+                <tspan
+                   x="7991 8499 8893 9092 9481 9638 9794 10188"
+                   y="6382.5"
+                   font-weight="normal"
+                   id="tspan688"
+                   style="font-weight:normal;fill:#0000ff;font-family:FreeSans">Datalink</tspan>
+              </text>
+            </g>
+          </g>
+        </g>
+      </g>
+    </g>
+    <g
+       transform="translate(-2071.7,-1522.9)"
+       id="g690">
+      <desc
+         id="desc692">Drawing</desc>
+      <g
+         id="g694"
+         style="stroke:#000000">
+        <g
+           id="g696"
+           style="fill:none;stroke-width:35">
+          <path
+             d="m 12736,6067 4228,-20"
+             id="path698"
+             inkscape:connector-curvature="0"
+             style="fill:none" />
+        </g>
+        <g
+           id="g700">
+          <path
+             d="m 12568,6068 209,-106 2,210 -211,-104 z"
+             id="path702"
+             inkscape:connector-curvature="0" />
+          <path
+             d="m 17132,6046 -209,106 -2,-210 211,104 z"
+             id="path704"
+             inkscape:connector-curvature="0" />
+        </g>
+      </g>
+    </g>
+    <g
+       transform="translate(-1907.7,-1522.9)"
+       id="g708">
+      <desc
+         id="desc710">Group</desc>
+      <g
+         id="g712">
+        <desc
+           id="desc714">Drawing</desc>
+        <g
+           id="g716">
+          <g
+             id="g718"
+             style="fill:#ffffff">
+            <path
+               d="m 14611,6421 h -1286 v -812 h 2571 v 812 h -1285 z"
+               id="path720"
+               inkscape:connector-curvature="0" />
+          </g>
+          <g
+             id="g722"
+             style="fill:none">
+            <rect
+               x="13325"
+               y="5609"
+               width="2572"
+               height="813"
+               id="rect724" />
+            <rect
+               x="13326"
+               y="5609"
+               width="2572"
+               height="813"
+               id="rect726" />
+          </g>
+        </g>
+      </g>
+      <g
+         id="g730">
+        <desc
+           id="desc732">Drawing</desc>
+        <g
+           id="g734">
+          <g
+             id="g736"
+             style="fill:none">
+            <rect
+               x="13337"
+               y="5609"
+               width="2395"
+               height="713"
+               id="rect738" />
+            <rect
+               x="13337"
+               y="5609"
+               width="2395"
+               height="713"
+               id="rect740" />
+          </g>
+          <g
+             id="g742">
+            <g
+               font-size="706px"
+               font-weight="400"
+               id="g744"
+               style="font-size:706px;font-weight:400;font-family:Arial embedded">
+              <g
+                 id="g746"
+                 style="fill:none">
+                <text
+                   id="text748"
+                   style="fill:#0000ff">
+                  <tspan
+                     x="13337 13769 14002 14395 14984 15377"
+                     y="6179"
+                     font-weight="normal"
+                     id="tspan750"
+                     style="font-weight:normal;fill:#0000ff;font-family:FreeSans">Frames</tspan>
+                </text>
+              </g>
+            </g>
+          </g>
+        </g>
+      </g>
+    </g>
+    <g
+       transform="translate(-1923.7,-1516.9)"
+       id="g756">
+      <desc
+         id="desc758">Drawing</desc>
+      <g
+         id="g760"
+         style="fill:none;stroke:#000000">
+        <g
+           id="g762"
+           style="stroke-width:35">
+          <path
+             d="m 6173,4264 c -2,0 -4,2 -4,4 v 1196 c 0,2 2,5 4,5 h 6188 c 2,0 4,-3 4,-5 V 4268 c 0,-2 -2,-4 -4,-4 H 6173"
+             id="path764"
+             inkscape:connector-curvature="0"
+             style="fill:none" />
+        </g>
+        <g
+           id="g766">
+          <rect
+             width="6197"
+             height="1205"
+             x="6169"
+             y="4264"
+             id="rect768" />
+        </g>
+      </g>
+    </g>
+    <g
+       transform="translate(-1923.7,-1522.9)"
+       id="g772">
+      <desc
+         id="desc774">Drawing</desc>
+      <g
+         id="g776">
+        <g
+           id="g778"
+           style="fill:none">
+          <rect
+             x="6165"
+             y="4445"
+             width="6205"
+             height="843"
+             id="rect780" />
+          <rect
+             x="6165"
+             y="4445"
+             width="6205"
+             height="843"
+             id="rect782" />
+        </g>
+        <g
+           id="g784">
+          <g
+             font-size="706px"
+             font-weight="400"
+             id="g786"
+             style="font-size:706px;font-weight:400;font-family:Arial embedded">
+            <g
+               id="g788"
+               style="fill:none">
+              <text
+                 y="93.5"
+                 id="text790">
+                <tspan
+                   x="7972 8480 8874 9073 9581 9974 10207"
+                   y="5174.5"
+                   font-weight="normal"
+                   id="tspan792"
+                   style="font-weight:normal;fill:#000000;font-family:FreeSans">Network</tspan>
+              </text>
+            </g>
+          </g>
+        </g>
+      </g>
+    </g>
+    <g
+       transform="translate(-1897.7,-1522.9)"
+       id="g794">
+      <desc
+         id="desc796">Group</desc>
+      <g
+         id="g798">
+        <desc
+           id="desc800">Drawing</desc>
+        <g
+           id="g802"
+           style="fill:none;stroke:#000000">
+          <g
+             id="g804"
+             style="stroke-width:35">
+            <path
+               d="m 16968,6817 c -2,0 -4,2 -4,4 v 1108 c 0,2 2,5 4,5 h 6188 c 2,0 4,-3 4,-5 V 6821 c 0,-2 -2,-4 -4,-4 h -6188"
+               id="path806"
+               inkscape:connector-curvature="0"
+               style="fill:none" />
+          </g>
+          <g
+             id="g808">
+            <rect
+               height="1117"
+               x="16964"
+               width="6197"
+               y="6817"
+               id="rect810" />
+          </g>
+        </g>
+      </g>
+      <g
+         id="g814">
+        <desc
+           id="desc816">Drawing</desc>
+        <g
+           id="g818">
+          <g
+             id="g820"
+             style="fill:none;stroke:#000000">
+            <rect
+               x="16960"
+               y="6954"
+               width="6205"
+               height="843"
+               id="rect822" />
+            <rect
+               x="16960"
+               y="6954"
+               width="6205"
+               height="843"
+               id="rect824" />
+          </g>
+          <g
+             id="g826">
+            <g
+               font-size="706px"
+               font-weight="400"
+               id="g828"
+               style="font-size:706px;font-weight:400;font-family:Arial embedded">
+              <g
+                 id="g830"
+                 style="fill:none;stroke:#000000">
+                <text
+                   id="text832">
+                  <tspan
+                     x="18748 19218 19612 19963 20319 20475 20827 21220"
+                     y="7590"
+                     font-weight="normal"
+                     id="tspan834"
+                     style="font-weight:normal;fill:#000000;font-family:FreeSans">Physical</tspan>
+                </text>
+              </g>
+            </g>
+          </g>
+        </g>
+      </g>
+    </g>
+    <g
+       transform="translate(4293.3,-1522.9)"
+       id="g836">
+      <desc
+         id="desc838">Drawing</desc>
+      <g
+         id="g840">
+        <g
+           id="g842"
+           style="fill:none;stroke:#000000;stroke-width:35">
+          <path
+             d="m 16964,6209 v -35"
+             id="path844"
+             inkscape:connector-curvature="0" />
+          <path
+             d="m 16964,6139 v -35"
+             id="path846"
+             inkscape:connector-curvature="0" />
+          <path
+             d="m 16964,6069 1,-35"
+             id="path848"
+             inkscape:connector-curvature="0" />
+          <path
+             d="m 16965,5999 v -35"
+             id="path850"
+             inkscape:connector-curvature="0" />
+          <path
+             d="m 16965,5929 v -35"
+             id="path852"
+             inkscape:connector-curvature="0" />
+          <path
+             d="m 16965,5859 v -35"
+             id="path854"
+             inkscape:connector-curvature="0" />
+          <path
+             d="m 16965,5789 1,-35"
+             id="path856"
+             inkscape:connector-curvature="0" />
+          <path
+             d="m 16966,5719 v -35"
+             id="path858"
+             inkscape:connector-curvature="0" />
+          <path
+             d="m 16966,5649 v -35"
+             id="path860"
+             inkscape:connector-curvature="0" />
+          <path
+             d="m 16966,5579 v -35"
+             id="path862"
+             inkscape:connector-curvature="0" />
+          <path
+             d="m 16966,5509 v -35"
+             id="path864"
+             inkscape:connector-curvature="0" />
+          <path
+             d="m 16967,5439 v -35"
+             id="path866"
+             inkscape:connector-curvature="0" />
+          <path
+             d="m 16967,5369 v -35"
+             id="path868"
+             inkscape:connector-curvature="0" />
+          <path
+             d="m 16967,5299 v -35"
+             id="path870"
+             inkscape:connector-curvature="0" />
+          <path
+             d="m 16967,5229 v -35"
+             id="path872"
+             inkscape:connector-curvature="0" />
+          <path
+             d="m 16967,5159 1,-35"
+             id="path874"
+             inkscape:connector-curvature="0" />
+          <path
+             d="m 16968,5089 v -35"
+             id="path876"
+             inkscape:connector-curvature="0" />
+          <path
+             d="m 16968,5019 v -35"
+             id="path878"
+             inkscape:connector-curvature="0" />
+          <path
+             d="m 16968,4949 v -35"
+             id="path880"
+             inkscape:connector-curvature="0" />
+          <path
+             d="m 16968,4879 1,-35"
+             id="path882"
+             inkscape:connector-curvature="0" />
+          <path
+             d="m 16969,4809 v -35"
+             id="path884"
+             inkscape:connector-curvature="0" />
+          <path
+             d="m 16969,4739 v -34"
+             id="path886"
+             inkscape:connector-curvature="0" />
+        </g>
+      </g>
+    </g>
+    <g
+       transform="translate(-1866.7,-1522.9)"
+       id="g890">
+      <desc
+         id="desc892">Group</desc>
+      <g
+         id="g894">
+        <desc
+           id="desc896">Drawing</desc>
+        <g
+           id="g898"
+           style="fill:none;stroke:#000000">
+          <g
+             id="g900"
+             style="stroke-width:35">
+            <path
+               d="m 16937,5565 c -2,0 -4,2 -4,4 v 1196 c 0,2 2,5 4,5 h 6188 c 2,0 4,-3 4,-5 V 5569 c 0,-2 -2,-4 -4,-4 h -6188"
+               id="path902"
+               inkscape:connector-curvature="0"
+               style="fill:none" />
+          </g>
+          <g
+             id="g904">
+            <rect
+               height="1205"
+               x="16933"
+               width="6197"
+               y="5565"
+               id="rect906" />
+          </g>
+        </g>
+      </g>
+      <g
+         id="g910">
+        <desc
+           id="desc912">Drawing</desc>
+        <g
+           id="g914">
+          <g
+             id="g916"
+             style="fill:none;stroke:#000000">
+            <rect
+               x="16929"
+               y="5746"
+               width="6205"
+               height="843"
+               id="rect918" />
+            <rect
+               x="16929"
+               y="5746"
+               width="6205"
+               height="843"
+               id="rect920" />
+          </g>
+          <g
+             id="g922">
+            <g
+               font-size="706px"
+               font-weight="400"
+               id="g924"
+               style="font-size:706px;font-weight:400;font-family:Arial embedded">
+              <g
+                 id="g926"
+                 style="fill:none;stroke:#000000">
+                <text
+                   id="text928"
+                   style="fill:#0000ff">
+                  <tspan
+                     x="18755 19263 19657 19856 20245 20402 20558 20952"
+                     y="6382"
+                     font-weight="normal"
+                     id="tspan930"
+                     style="font-weight:normal;fill:#0000ff;font-family:FreeSans">Datalink</tspan>
+                </text>
+              </g>
+            </g>
+          </g>
+        </g>
+      </g>
+    </g>
+    <g
+       transform="translate(-1866.7,-1522.9)"
+       id="g932">
+      <desc
+         id="desc934">Group</desc>
+      <g
+         id="g936">
+        <desc
+           id="desc938">Drawing</desc>
+        <g
+           id="g940"
+           style="fill:none;stroke:#000000">
+          <g
+             id="g942"
+             style="stroke-width:35">
+            <path
+               d="m 16937,4357 c -2,0 -4,2 -4,4 v 1196 c 0,2 2,5 4,5 h 6188 c 2,0 4,-3 4,-5 V 4361 c 0,-2 -2,-4 -4,-4 h -6188"
+               id="path944"
+               inkscape:connector-curvature="0"
+               style="fill:none" />
+          </g>
+          <g
+             id="g946">
+            <rect
+               height="1205"
+               x="16933"
+               width="6197"
+               y="4357"
+               id="rect948" />
+          </g>
+        </g>
+      </g>
+      <g
+         id="g952">
+        <desc
+           id="desc954">Drawing</desc>
+        <g
+           id="g956">
+          <g
+             id="g958"
+             style="fill:none;stroke:#000000">
+            <rect
+               x="16929"
+               y="4538"
+               width="6205"
+               height="843"
+               id="rect960" />
+            <rect
+               x="16929"
+               y="4538"
+               width="6205"
+               height="843"
+               id="rect962" />
+          </g>
+          <g
+             id="g964">
+            <g
+               font-size="706px"
+               font-weight="400"
+               id="g966"
+               style="font-size:706px;font-weight:400;font-family:Arial embedded">
+              <g
+                 id="g968"
+                 style="fill:none;stroke:#000000">
+                <text
+                   id="text970">
+                  <tspan
+                     x="18736 19244 19638 19837 20345 20738 20971"
+                     y="5174"
+                     font-weight="normal"
+                     id="tspan972"
+                     style="font-weight:normal;fill:#000000;font-family:FreeSans">Network</tspan>
+                </text>
+              </g>
+            </g>
+          </g>
+        </g>
+      </g>
+    </g>
+    <g
+       transform="translate(1215.3,-1522.9)"
+       id="g974">
+      <desc
+         id="desc976">Drawing</desc>
+      <g
+         id="g978">
+        <g
+           id="g980"
+           style="fill:none;stroke:#000000;stroke-width:35">
+          <path
+             d="m 13884,4372.4 3052,1213"
+             id="path982"
+             inkscape:connector-curvature="0"
+             style="fill:none" />
+        </g>
+      </g>
+    </g>
+    <g
+       transform="translate(-1970.8,-1546.5)"
+       id="g986">
+      <desc
+         id="desc988">Drawing</desc>
+      <g
+         id="g990">
+        <g
+           id="g992"
+           style="fill:none;stroke:#000000;stroke-width:35">
+          <path
+             d="M 19866,5569 23186,4383"
+             id="path994"
+             inkscape:connector-curvature="0"
+             style="fill:none" />
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
