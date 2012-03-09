@@ -1,0 +1,17 @@
+English-French translation table for CNP3
+*****************************************
+English	: French
+
+
+Local Area Network : Réseau local
+host : hôte
+networking equipement : équipement réseau
+full-mesh : full-mesh
+bus : bus
+subnet : sous-réseau
+star topology : topologie en étoile
+ring topology : topologie en anneau
+internetwork : inter-réseau
+broadcast : broadcast
+unicast : unicast
+store and forward : store and forward
