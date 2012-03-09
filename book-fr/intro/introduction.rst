@@ -129,7 +129,7 @@ Le dernier mode de transmission est le mode :term:`anycast`. Il a été initiale
 
    Transmission anycast
 
-Dans l'exemple ci-dessus, les trois hôtes marqués par `*` font partie du même groupe anycast. Lorsque l'hôte `S` envoie des informations à ce groupe anycast, le réseau assure qu'il atteigne l'un des ses membres. Les lignes pointillées indiquent une transmission possible via les noeuds '1 ', '2 `et` 4 `. Une transmission anycast ultérieure de l'hôte `S` au même groupe anycast  pourrait atteindre l'hôte attaché au noeud intermédiaire `3` comme le montre la ligne continue. Une transmission anycast atteint n'importe quel membre du groupe anycast, choisi par le réseau en fonction des conditions du réseau à ce moment.
+Dans l'exemple ci-dessus, les trois hôtes marqués par `*` font partie du même groupe anycast. Lorsque l'hôte `S` envoie des informations à ce groupe anycast, le réseau assure qu'il atteigne l'un des ses membres. Les lignes pointillées indiquent une transmission possible via les noeuds '1 ', '2 `et` 4 `. Une transmission anycast ultérieure de l'hôte `S` au même groupe anycast  pourrait atteindre l'hôte attaché au noeud intermédiaire `3` comme le montre la ligne continue. Une transmission anycast atteint n'importe quel membre du groupe anycast, choisi par le réseau en fonction des conditions du moment.
 .. rubric:: Footnotes
 
 

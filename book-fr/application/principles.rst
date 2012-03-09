@@ -4,58 +4,60 @@
 Principles
 ##########
 
-The are two important models used to organise a networked application. The first and oldest model is the client-server model. In this model, a server provides services to clients that exchange information with it. This model is highly asymmetrical : clients send requests and servers perform actions and return responses. It is illustrated in the figure below.
+Il y a deux modèles important d'organisation d'applications distribuées : Le modèle Client-Serveur, et le modèle Pair-à-Pair.  Le premier, et le plus ancien, est le modèle client-serveur.  Dans ce modèle, un serveur fournit des services aux clients qui échangent de l'information avec lui.  Ce modèle est donc asymétrique : les clients envoient des requêtes et les serveurs exécutent des actions et renvoient des réponses.  Ceci est illustré dans la figure ci-dessous. 
 
 
 .. figure:: png/app-fig-001-c.png
    :align: center
    :scale: 50 
 
-   The client-server model
+   Le modèle client-serveur
 
-The client-server model was the first model to be used to develop networked applications. This model comes naturally from the mainframes and minicomputers that were the only networked computers used until the 1980s. A minicomputer_ is a multi-user system that is used by tens or more users at the same time. Each user interacts with the minicomputer by using a terminal. Those terminals, were mainly a screen, a keyboard and a cable directly connected to the minicomputer.
+Le modèle client-serveur fut le premier à être utilisé pour développer des applications réseaux.  Ce modèle dérive naturellement des mainframes et des mini-ordinateurs qui furent les seuls machines utilisées en réseaux jusque dans les années 80.  Un mini-ordinateur est un système multi-utilisateur utilisé par des dizaines, voire plus, d'utilisateurs en même temps.  Chaque utilisateur interagit avec le mini-ordinateur en utilisant un terminal.  Ces terminaux étaient essentiellement un clavier, un écran et un câble directement connectés au mini-ordinateur.  
 
-There are various types of servers as well as various types of clients. A web server provides information in response to the query sent by its clients. A print server prints documents sent as queries by the client. An email server will forward towards their recipient the email messages sent as queries while a music server will deliver the music requested by the client. From the viewpoint of the application developer, the client and the server applications directly exchange messages (the horizontal arrows labelled `Queries` and `Responses` in the above figure), but in practice these messages are exchanged thanks to the underlying layers (the vertical arrows in the above figure). In this chapter, we focus on these horizontal exchanges of messages. 
+Il y a de nombreux types de serveurs, et de nombreux types de clients.  Ainsi, un serveur Web fournit de l'information en réponse aux requêtes envoyées par ses clients.  Un serveur d'impression imprime les documents envoyés par les clients.  Un serveur mail transmettra les messages emails à leur destinataire, tandis qu'un serveur de musique délivrera la musique requise par le client.  
+Du point de vue du développeur de l'application, les applications clients et serveurs échangent des messages directement, mais en pratique, ces messages sont échangés en passant par les couches réseau inférieures (les flèches verticales dans la figure ci-dessus).  Dans ce chapitre, nous nous concentrerons sur ces échanges horizontaux de messages. 
 
-Networked applications do not exchange random messages. In order to ensure that the server is able to understand the queries sent by a client, and also that the client is able to understand the responses sent by the server, they must both agree on a set of syntactical and semantic rules. These rules define the format of the messages exchanged as well as their ordering. This set of rules is called an application-level `protocol`.
+Les applications réseau n'échangent pas leurs messages n'importe comment.  Pour s'assurer que le serveur soit capable de comprendre les requêtes d'un client, et que le client est à même de comprendre les réponses du serveur, ils doivent se mettre d'accord sur un ensemble de règles syntaxiques et sémantiques.  Ces règles définissent le format des messages qu'ils échangent, ainsi que l'ordre dans lequel ils sont échangés.  Un tel ensemble de règles est appelé un `protocole`.  
 
-An `application-level protocol` is similar to a structured conversation between humans. Assume that Alice wants to know the current time but does not have a watch. If Bob passes close by, the following conversation could take place :
+Un `protocole de niveau applicatif` est similaire à une conversation structurée entre humains.  Supposons qu'Alice désire connaître l'heure, mais n'a pas de montre.  Si Bob passe à proximité, la conversation suivante pourrait se produire : 
 
- - Alice : `Hello`
- - Bob : `Hello`
- - Alice : `What time is it ?`
+
+ - Alice : `Bonjour`
+ - Bob : `Bonjour`
+ - Alice : `Quelle heure est-il ?`
  - Bob : `11:55`
- - Alice : `Thank you`
- - Bob : `You're welcome`  
+ - Alice : `Merci
+ - Bob : `De rien`  
 
-Such a conversation succeeds if both Alice and Bob speak the same language. If Alice meets Tchang who only speaks Chinese, she won't be able to ask him the current time. A conversation between humans can be more complex. For example, assume that Bob is a security guard whose duty is to only allow trusted secret agents to enter a meeting room. If all agents know a secret password, the conversation between Bob and Trudy could be as follows :
+Une telle conversation est possible pour peu qu'Alice et Bob parlent le même langage.  Si Alice rencontre Tchang qui ne parle que le chinois, elle ne sera pas en mesure de lui demander l'heure.  Une conversation entre humains peut être encore plus complexe.  Par exemple, supposons que Bob est un garde de sécurité dont le job est de ne permettre qu'à des agents secrets fiables d'entrer dans une salle de réunion.  Si tous les agents connaissent un mot de passe secret, la conversation entre Bob et Trudy pourrait être comme suit : 
 
- - Bob : `What is the secret password ?`
+ - Bob : `Quel est le mot de passe ?`
  - Trudy : `1234`
- - Bob : `This is the correct password, you're welcome`
- 
-If Alice wants to enter the meeting room but does not know the password, her conversation could be as follows :
+ - Bob : `C'est correct, vous pouvez entrer`
+Si Alice désire entrer dans la salle de réunion, mais ne connaît pas le mot de passe, la conversation donnera : 
 
- - Bob : `What is the secret password ?`
+ - Bob : `Quel est le mot de passe ?`
  - Alice : `3.1415`
- - Bob : `This is not the correct password.`
+ - Bob : `Ce n'est pas correct.`
 
-Human conversations can be very formal, e.g. when soldiers communicate with their hierarchy, or informal such as when friends discuss. Computers that communicate are more akin to soldiers and require well-defined rules to ensure an successful exchange of information.  There are two types of rules that define how information can be exchanged between computers :
+Les conversations humaines peuvent être très formelles, comme par exemple lorsque des soldats communiquent avec leur hiérarchie, ou informelles, lors de discussion entre amis.  Les ordinateurs qui communiquent s'apparentent plus aux soldats, et requièrent des règles bien-définies pour assurer un échange d'information correct.  Il y a deux types de règles qui définissent comment l'information peut être échangée entre ordinateurs : 
 
- - syntactical rules that precisely define the format of the messages that are exchanged. As computers only process bits, the syntactical rules specify how information is encoded as bit strings 
- - organisation of the information flow. For many applications, the flow of information must be structured and there are precedence relationships between the different types of information. In the time example above, Alice must greet Bob before asking for the current time. Alice would not ask for the current time first and greet Bob afterwards. Such precedence relationships exist in networked applications as well. For example, a server must receive a username and a valid password before accepting more complex commands from its clients.
+- Les règles syntaxiques, qui définissent précisément le format des messages échangés.  Puisque les ordinateurs ne manipulent que des bits, les règles syntaxiques spécifient comment l'information est encodé sous forme de suite de bits.  
+- L'organisation du flux d'information.  Pour beaucoup d'applications, le flux d'informations doit être structuré, et il doit y avoir des relations de priorité entre les différents types d'informations.  Dans l'exemple de l'heure ci-dessus, Alice doit saluer Bob avant de lui poser une question.  Alice ne commencerait pas par lui demander l'heure avant de le saluer.  De telles relations d'ordre existent également dans les applications réseau.  Par exemple, un serveur doit recevoir un nom d'utilisateur et un mot de passe valide avant d'accepter des commandes plus complexes de la part de ses clients.
 
-Let us first discuss the syntactical rules. We will later explain how the information flow can be organised by analysing real networked applications.
+Commençons par discuter des règles syntaxiques.  Nous verrons plus tard comment le flux d'information peut être organisé en analysant des applications réseaux réelles.  
 
-Application-layer protocols exchange two types of messages. Some protocols such as those used to support electronic mail exchange messages expressed as strings or lines of characters. As the transport layer allows hosts to exchange bytes, they need to agree on a common representation of the characters. The first and simplest method to encode characters is to use the :term:`ASCII` table. :rfc:`20` provides the ASCII table that is used by many protocols on the Internet. For example, the table defines the following binary representations :
+
+Les protocoles de la couche Application échangent deux types de messages.  Certains protocoles tels que ceux utilisés pour le courrier électroniques échangent des messages exprimés comme des chaînes ou des lignes de caractères.  Comme la couche Transport permet aux hôtes d'échanger des octets, ces protocoles doivent convenir d'une représentation commune des caractères.  La méthode la plus simple pour encoder des caractères consiste à utiliser la table :term:`ASCII` table. Le :rfc:`20` fournit la table ASCII utilisée par de nombreux protocoles sur l'Internet.  Par exemple, cette table définit les représentations binaires suivantes : 
 
  - `A` : `1000011b` 
  - `0` : `0110000b`
  - `z` : `1111010b`
  - `@` : `1000000b`
- - `space` : `0100000b`
+ - `espace` : `0100000b`
 
-In addition, the :term:`ASCII` table also defines several non-printable or control characters. These characters were designed to allow an application to control a printer or a terminal. These control characters include `CR` and `LF`, that are used to terminate a line, and the `Bell` character which causes the terminal to emit a sound.
+De plus, la table :term:`ASCII` définit également plusieurs caractères non imprimables ou de contrôle.  Ces caractères ont été conçus pour permettre à une application de contrôler une imprimante ou un terminal.  Ces caractères de contrôles incluent notamment `CR` et `LF`, utilisés pour terminer une ligne, et le caractère `Bell`, qui fait en sorte que le terminal produise un son. 
 
  - `carriage return` (`CR`) : `0001101b`
  - `line feed` (`LF`) : `0001010b`

@@ -2,11 +2,11 @@
 .. This file is licensed under a `creative commons licence <http://creativecommons.org/licenses/by/3.0/>`_
 
 
-Application-level protocols
+Les protocoles applicatifs
 ###########################
 
+De nombreux protocoles ont été définis pour les applications réseaux.  Dans cette section, nous décrivons les applications les plus utilisées sur l'Internet.  Tout d'abord, nous présentons le Domain Name System (DNS) qui permet aux hôtes d'être identifiés par des noms compréhensibles au lieu des adresses IPv4 ou IPv6 utilisées par le réseau.  Ensuite, nous décrivons le fonctionnement du courrier électronique, une des premières applications qui ont fait le succès d'Internet, ainsi que les protocoles utilisés dans le World Wide Web. 
 
-Many protocols have been defined for networked applications. In this section, we describe some of the important applications that are used on the Internet. We first explain the Domain Name System (DNS) that enables hosts to be identified by human-friendly names instead of the IPv4 or IPv6 addresses that are used by the network. Then, we describe the operation of electronic mail, one of the first killer applications on the global Internet, and the protocols used on world wide web. 
 
 .. toctree::
    :maxdepth: 4

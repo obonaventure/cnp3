@@ -4,13 +4,12 @@
 .. _chapter-application:
 
 =====================
-The application Layer
+La couche Application
 =====================
 
-The Application Layer is the most important and most visible layer in computer networks. Applications reside in this layer and human users interact via those applications through the network. 
+La couche Application est la couche la plus visible et la plus importante dans les réseaux informatiques.  Les applications appartiennent à cette couche, et les utilisateurs humains interagissent via ces applications à travers le réseU.  
 
-In this chapter, we first briefly describe the main principles of the application layer and focus on the two most important application models :  the client-server and the peer-to-peer models. Then, we review in detail two families of protocols that have proved to be very useful in the Internet : electronic mail and the protocols that allow access to information on the world wide web. We also describe the Domain Name System that allows humans to use user-friendly names while the hosts use 32 bits or 128 bits long IP addresses. 
-
+Dans ce chapitre, nous décrivons d'abord brièvement les principes généraux de la couche Application, et nous nous concentrons sur les deux modèles applicatifs les plus importants : le modèle client-serveur et le modèle pair-à-pair. Ensuite, nous voyons en détails deux familles de protocoles qui ont prouvé leur utilisé sur Internet : le courrier électronique, et les les protocoles qui permettent l'accès aux informations du World Wide Web.  Nous décrivons également le DNS (Domain Name System), qui permet aux humains d'utiliser des noms à la place des adresses IP de 32 ou 128 bits utilisées par les hôtes. 
 
 
 .. include:: ../links.rst

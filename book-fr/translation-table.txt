@@ -15,3 +15,19 @@ internetwork : inter-réseau
 broadcast : broadcast
 unicast : unicast
 store and forward : store and forward
+bit rate : bande passante (???)
+bandwidth : bande passante 
+datalink : Liaison de données
+frame : trame
+packet : paquet
+segment : segment
+Application Data Unit : Application Data Unit (ADU)
+feedback : feedback
+ISP : Fournisseur d'accès internet
+time-sequence diagram : diagramme 'time-sequence' (???)
+Service Data Unit : Service Data Unit (SDU)
+byte stream : flux d'octets
+Reliability : fiabilité
+peer to peer : pair à pair
+mainframe : mainframe
+minicomputer : mini-ordinateur

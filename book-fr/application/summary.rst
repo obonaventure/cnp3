@@ -6,8 +6,8 @@
 Summary
 #######
 
-In this chapter, we began by describing the client-server and peer-to-peer models. We then described, in detail, three important families of protocols in the application layer.
-The Internet identifies hosts by using 32 bits IPv4 or 128 bits IPv6. However, using these addresses directly inside applications would be difficult for the humans that use them. We have explained how the Domain Name System allows the mapping of names to corresponding addresses. We have described both the DNS protocol that runs above UDP and the naming hierarchy. We have then discussed one of the oldest applications on the Internet : electronic mail. We have described the format of email messages and described the SMTP protocol that is used to send email messages as well as the POP protocol that is used by email recipients to retrieve their email messages from their server. Finally, we have explained the protocols that are used in the world wide web and the HyperText Transfer Protocol in particular. 
+Dans ce chapitre, nous avons d'abord décrit les modèles client-serveur et pair-à-pair.  Ensuite, nous avons décrit en détails trois importantes familles de protocoles de la couche Application.  L'Internet identifie les hôtes par des adresses 32 ou 128 bits.  Cependant, l'utilisation de ces adresses directement depuis les applications les rendraient difficiles à utiliser par les utilisateurs humains.  Nous avons expliqué comment le DNS permet de faire correspondre des noms à ces adresses.  Nous avons également décrit à la fois le protocole DNS, fonctionnant au dessus d'UDP, et la hiérarchie de nommage.  Nous avons ensuite décrit l'une des plus anciennes applications de l'Internet : le courrier électronique.  Nous avons décrit le format des messages, et expliqué comment le protocole SMTP envoie les messages, et comment les protocoles POP et IMAP permettent aux destinataires de les retrouver depuis leur serveur.  Enfin, nous avons détaillé les protocoles utilisés dans le World Wide Web, en particulier le protocole HTTP (HyperText Transfert Protocol).  
+
 
 
 .. for DNS mention security as well and extensions for DNSSEC
