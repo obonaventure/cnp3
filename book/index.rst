@@ -31,6 +31,8 @@ Computer Networking : Principles, Protocols and Practice
     The source code of the entire textbook is written in `reStructuredText <http://docutils.sourceforge.net/rst.html>`_ and uses several `sphinx <http://sphinx.pocoo.org>`_ features. You can browse it from `https://scm.info.ucl.ac.be/trac/cnp3/browser/book <https://scm.info.ucl.ac.be/trac/cnp3/browser/book>`_ or download the current source tree by using ``svn co https://scm.info.ucl.ac.be/svn/cnp3/book``
 
 
+Table of Contents
+:::::::::::::::::
 
 .. toctree:: 
    :maxdepth: 2
@@ -89,7 +91,7 @@ Part 5: The Network Layer
 
 
 
-Part 6: The The datalink layer and the Local Area Networks
+Part 6: The datalink layer and the Local Area Networks
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 .. toctree::
