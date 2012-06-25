@@ -13,7 +13,7 @@
    height="600px"
    id="svg9320"
    version="1.1"
-   inkscape:version="0.48.0 r9654"
+   inkscape:version="0.48.1 r9760"
    sodipodi:docname="intro-figures-012-c.svg">
   <defs
      id="defs9322">
@@ -1427,7 +1427,7 @@
            sodipodi:role="line"
            id="tspan13401"
            x="475.66748"
-           y="387.62573">DATA.indication(S, D, &quot;Msg&quot;)</tspan></text>
+           y="387.62573">DATA.indication(S, D, &quot;XYZ&quot;)</tspan></text>
       <text
          transform="scale(1.0147137,0.98549965)"
          sodipodi:linespacing="125%"
