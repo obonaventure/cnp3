@@ -1,9 +1,0 @@
-#
-# OB
-#
-SUBDIRS = intro/svg intro/pkt application/svg application/pkt transport/pkt transport/svg network/pkt network/svg lan/pkt lan/svg
-     
-subdirs:
-	for dir in $(SUBDIRS); do \
-               $(MAKE) -C $$dir; \
-	done
