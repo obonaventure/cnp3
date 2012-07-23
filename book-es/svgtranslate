@@ -1,0 +1,95 @@
+#!/usr/bin/perl -s
+# ./svgtranslate -f=files*.svg -out
+# (edit svgtranslate.txt)
+# ./svgtranslate -in
+
+use XML::LibXML;
+
+$TEXTFILENAME = "svgtranslate.txt";
+
+$f = "*" unless defined $f;
+@fileglob = glob($f);
+
+if(!defined $in && !defined $out) {
+	print <<EOM ;
+SVGTRANSLATE replaces text in (batches of) SVG files
+You probably mean ./svgtranslate -f=<files> [-out | -in]
+	1) first extract text by asking
+		./svgtranslate -f=<filenames> -out
+	2) then edit svgtranslate.txt replacing TRANSLATION labels
+	3) finally create a new set of SVG files by asking
+		./svgtranslate -in
+Features
+	Liberally use wildcards in filenames
+	You can leave TRANSLATION labels untouched, text will be left as is
+	When batch processing, you only need to translate first occurrence of text
+	Original *.svg are renamed to *.svg.bak
+EOM
+	exit;
+}
+
+if(defined $in) {
+	translations2svg();
+} else {
+	if(defined $out) {
+		svg2translations(@fileglob);
+	}
+}
+
+
+sub svg2translations 
+{
+	my @files = @_;
+
+	open TEXTFILE, ">$TEXTFILENAME" or die "Can't open file $TEXTFILENAME for output";
+	foreach my $file (@files) {
+		my $dom = XML::LibXML->load_xml(location => $file) or die "Can't open SVG file $file";
+		printf TEXTFILE "BEGIN $file\n";
+		foreach my $elem ($dom->getElementsByTagName('tspan')) {
+			my $node = $elem->getFirstChild or next;
+			my $data = $node->getData;
+			my $id  = $elem->getAttribute("id");
+			printf TEXTFILE "\t%s <%s> <TRANSLATION>\n", $id, $data;		
+		}
+		printf TEXTFILE "END $file\n";
+	}
+	close TEXTFILE;
+}
+
+sub translations2svg 
+{
+	open TEXTFILE, "<$TEXTFILENAME" or die "Could not open $TEXTFILENAME for input";
+	my $dom;
+	while (<TEXTFILE>) {
+		if(/BEGIN (.*)/) {
+			$file = $1;
+			$dom = XML::LibXML->load_xml(location => $file) or die "Can't open SVG file $file";
+		}
+		if(/(tspan\d+) <([^>]*)> <([^>]*)>/) {
+			print "Translating $file $_";
+			$tspan = $1;
+			$source = $2;
+			$transl = $3;
+			if($transl eq "TRANSLATION" && defined $translmem->{$source}) {
+				$transl = $translmem->{$source};
+			} else {
+				$translmem->{$source} = $transl;
+			}			
+			if ($transl eq "TRANSLATION") {
+				break;
+			} else {
+				my $e = $dom->find(sprintf '//*[@id="%s"]',$tspan) or die "$tspan not found";
+				my $fe = @{$e}[0];
+				$fe->replaceNode(XML::LibXML::Text->new($transl)) or die "Could not replace value";
+			}
+		}
+		if(/END (.*)/) {
+			my $fileout = $1;
+			rename($fileout,"$fileout.bak");
+			open FILEOUT, ">$fileout" or die "Could not write $fileout";
+			print FILEOUT $dom->toString;
+			close FILEOUT or die "Could not close $fileout";
+		}
+	}
+}
+
