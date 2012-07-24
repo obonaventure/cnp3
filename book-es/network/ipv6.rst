@@ -19,7 +19,7 @@ Se desarrollaron dos tipos de soluciones para resolver este problema. La primera
 
 Sin embargo, paralelamente a estas soluciones de corto plazo, que han permitido a la Internet IPv4 continuar siendo usable hasta ahora, IETF comenzó a trabajar en un reemplazo para IPv4. Este trabajo comenzó con un llamado abierto a propuestas, delineado en :rfc:`1550`. Varios grupos respondieron a este llamado con propuestas para un Protocolo de Internet de Próxima Generación (`IPng`):
 
- * TUBA, propuesto en :rfc:`1347` and :rfc:`1561`
+ * TUBA, propuesto en :rfc:`1347` y :rfc:`1561`
  * PIP, propuesto en :rfc:`1621`
  * SIPP, propuesto en :rfc:`1710`
 
