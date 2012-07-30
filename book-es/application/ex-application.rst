@@ -23,13 +23,14 @@ Un uso típico de dig es el siguiente:
 
 donde
 
+ - `server` es la dirección IP o el nombre de un servidor o resolver DNS
+ - `type` es el tipo de registro DNS que se requiere con la consulta, como por ejemplo `NS` para nameserver, `A` para dirección IPv4, `AAAA` para dirección IPv6, `MX` para mail exchanger, ...
+ - `fqdn` es el nombre de dominio copletamente calificado
+
 .. - `server` is the IP address or the name of a DNS server or resolver
 .. - `type` is the type of DNS record that is requested by the query such as `NS` for a nameserver, `A` for an IPv4 address, `AAAA` for an IPv6 address, `MX` for a mail relay, ...
 .. - `fqdn` is the fully qualified domain name being queried
 
- - `server` es la dirección IP o el nombre de un servidor o resolver DNS
- - `type` es el tipo de registro DNS que se requiere con la consulta, como por ejemplo `NS` para nameserver, `A` para dirección IPv4, `AAAA` para dirección IPv6, `MX` para mail exchanger, ...
- - `fqdn` es el nombre de dominio copletamente calificado
 
 .. 1. What are the IP addresses of the resolvers that the `dig` implementation you are using relies on [#fdig]_ ?
 1. ¿Cuáles son las direcciones IP de los resolvers utilizados por la implementación de `dig` que usted está usando? [#fdig]_
@@ -45,7 +46,7 @@ donde
 
 .. 5. When run without any parameter, `dig` queries one of the root DNS servers and retrieves the list of the names of all root DNS servers. For technical reasons, there are only 13 different root DNS servers. This information is also available as a text file from http://www.internic.net/zones/named.root What are the IP addresses of all these servers. Do they all support IPv6 [#rs]_ ? 
 
-5. Al ser ejecutado sin ningún parámetro, `dig` consulta uno de los servers DNS raíz y recupera la lista de los nombres de todos los servidores raíz. Por razones técnicas, existen sólo 13 diferentes servidores DNS raíz. Esta información también está disponible como archivo de texto en http://www.internic.net/zones/named.root. ¿Cuáles son las direcciones IP de todos estos servidores? ¿Todos ellos soportan IPv6? [#rs]_ 
+5. Al ser ejecutado sin ningún parámetro, `dig` consulta uno de los servers DNS raíz y recupera la lista de los nombres de todos los servidores raíz. Por razones técnicas, existen sólo 13 diferentes servidores DNS raíz. Esta información también está disponible como archivo de texto en http://www.internic.net/zones/named.root. ¿Cuáles son las direcciones IP de todos estos servidores? ¿Puede hacérseles consultas a través de IPv6? [#rs]_ 
 
 .. 6. Assume now that you are residing in a network where there is no DNS resolver and that you need to start your query from the DNS root.
 
@@ -65,7 +66,7 @@ donde
 7. Ejecute el mismo análisis para un sitio web popular tal como `www.google.com`. ¿Cuál es el tiempo de vida asociado a esta dirección IP? Si ejecuta la misma consulta varias veces, ¿recibe siempre la misma respuesta? ¿Puede explicar por qué se asocia un tiempo de vida a las respuestas DNS?
 
 .. 8. Use `dig` to find the mail relays used by the `uclouvain.be` and `gmail.com` domains. What is the `TTL` of these records ? Can you explain the preferences used by the `MX` records. You can find more information about the MX records in :rfc:`5321`
-8. Use `dig` para hallar los mail exchangers usados por los dominios `uclouvain.be` y `gmail.com`. ¿Cuál es el `TTL` de estos registros? ¿Puede explicar las preferencias usadas por los registros `MX`? Puede encontrar más información sobre los registros MX en :rfc:`5321`.
+8. Use `dig` para hallar los mail exchangers usados por los dominios `uclouvain.be` y `gmail.com`. ¿Cuál es el `TTL` de estos registros? ¿Puede explicar las preferencias usadas por los registros `MX`? Puede encontrar más información sobre los registros MX en :rfc:`974`.
 
 .. 9. Use `dig` to query the IPv6 address (DNS record AAAA) of the following hosts
 
@@ -101,7 +102,7 @@ donde
 ..     - sends DNS requests containing random identifiers
 
 
-11. Una implementación DNS como `dig`, y con mayor importancia, un name resolver, como bind_ o unbound_, siempre verifican que las respuestas DNS contengan el mismo identificador que la consulta DNS que enviaron. ¿Por qué es esto tan importante?
+11. Una implementación DNS como `dig`, y con mayor importancia, un name resolver, como bind_ o unbound_, siempre verifican que las respuestas DNS recibidas contengan el mismo identificador que la consulta DNS que enviaron. ¿Por qué es esto tan importante?
 
    - Imaginemos un atacante que pueda enviar respuestas DNS falsas para asociar, por ejemplo, `www.bigbank.com` con su propia dirección IP. ¿De qué manera podría él atacar a una implementación DNS que:
 
@@ -111,7 +112,7 @@ donde
 
 .. 12. The DNS protocol can run over UDP and over TCP. Most DNS servers prefer to use UDP because it consumes fewer resources on the server. However, TCP is useful when a large answer is expected or when a large answer is expected. Use `time dig +tcp` to query a root DNS server. Is it faster to receive an answer via TCP or via UDP ?
 
-12. El protocolo DNS puede correr sobre UDP y sobre TCP. La mayoría de los servidores prefieren usar UDP porque consume menos recursos del servidor. Sin embargo, TCP es útil cuando se espera una respuesta voluminosa. Use `time dig +tcp` para consultar un servidor DNS raíz. ¿Es más rápido recibir una respuesta a través de TCP o de UDP?
+12. El protocolo DNS puede correr sobre UDP y sobre TCP. La mayoría de los servidores prefieren usar UDP porque consume menos recursos del servidor. Sin embargo, TCP es útil cuando se espera una respuesta voluminosa. Usando `dig +tcp` puede forzarse el uso de TCP. Utilice el comando `time dig +tcp` para consultar un servidor DNS raíz y registrar el tiempo insumido. Consulte un servidor DNS raíz usando TCP y UDP. ¿Es más rápido recibir una respuesta a través de TCP o de UDP?
 
 Protocolos de correo electrónico de Internet
 ============================================
@@ -131,10 +132,10 @@ En muchos protocolos de Internet, basados en ASCII_, el cliente envía consultas
 
 
 .. 1. Assume that your are sending an email from your `@student.uclouvain.be` inside the university to another student's `@student.uclouvain.be` address. Which protocols are involved in the transmission of this email ?
-1. Supongamos que usted envía un email desde su cuenta `alfa@student.uclouvain.be` dentro de la universidad, a otro estudiante con dirección `beta@student.uclouvain.be`. ¿Qué protocolos están involucrados en la transmisión de este email?
+1. Supongamos que Alice envía un email desde su cuenta `alice@yahoo.com`, a Bob, con dirección `bob@yahoo.com`. ¿Qué protocolos están involucrados en la transmisión de este email?
 
 .. 2. Same question when you are sending an email from  your `@student.uclouvain.be` inside the university to another student's `@gmail.com` address
-2. La misma pregunta, para el caso en que usted envía un email desde su cuenta  `alfa@student.uclouvain.be` dentro de la universidad a la dirección de otro estudiante, `beta@gmail.com`.
+2. La misma pregunta, para el caso en que Alice envía un email a su amiga Trudy, `trudy@gmail.com`.
 
 .. 3. Before the advent of webmail and feature rich mailers, email was written and read by using command line tools on servers. Using your account on `sirius.info.ucl.ac.be` use the `/bin/mail` command line tool to send an email to yourself *on this host*. This server stores local emails in the `/var/mail` directory with one file per user. Check with `/bin/more` the content of your mail file and try to understand which lines have been added by the server in the header of your email.
 3. Antes de la llegada del webmail y los programas de correo ricos en características, el email se escribía y se leía usando herramientas de línea de comandos disponibles en servidores. Usando su cuenta en `sirius.info.ucl.ac.be`, use la herramienta de línea de comandos `/bin/mail` para enviarse un email a sí mismo en este host.  Este servidor almacena emails locales en el directorio `/var/mail`, con un archivo por usuario. Verifique el contenido de su mail con `/bin/more`y trate de comprender qué líneas de cabecera han sido añadidas por el servidor.
