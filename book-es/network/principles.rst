@@ -23,78 +23,127 @@ Antes de explicar la Capa de Red en detalle, será útil comenzar analizando el 
    :align: center
    :scale: 70   
 
-   The point-to-point datalink layer
+   La Capa de Enlace de Datos punto a punto
+..   The point-to-point datalink layer
 
-There are three main types of datalink layers. The simplest datalink layer is when there are only two communicating systems that are directly connected through the physical layer. Such a datalink layer is used when there is a point-to-point link between the two communicating systems. The two systems can be endsystems or routers. :abbr:`PPP (Point-to-Point Protocol)`, defined in :rfc:`1661`, is an example of such a point-to-point datalink layer. Datalink layers exchange `frames` and a datalink :term:`frame` sent by a datalink layer entity on the left is transmitted through the physical layer, so that it can reach the datalink layer entity on the right. Point-to-point datalink layers can either provide an unreliable service (frames can be corrupted or lost) or a reliable service (in this case, the datalink layer includes retransmission mechanisms similar to the ones used in the transport layer). The unreliable service is frequently used above physical layers (e.g. optical fiber, twisted pairs) having a low bit error ratio while reliability mechanisms are often used in wireless networks to recover locally from transmission errors.
+.. There are three main types of datalink layers. The simplest datalink layer is when there are only two communicating systems that are directly connected through the physical layer. Such a datalink layer is used when there is a point-to-point link between the two communicating systems. The two systems can be endsystems or routers. :abbr:`PPP (Point-to-Point Protocol)`, defined in :rfc:`1661`, is an example of such a point-to-point datalink layer. Datalink layers exchange `frames` and a datalink :term:`frame` sent by a datalink layer entity on the left is transmitted through the physical layer, so that it can reach the datalink layer entity on the right. Point-to-point datalink layers can either provide an unreliable service (frames can be corrupted or lost) or a reliable service (in this case, the datalink layer includes retransmission mechanisms similar to the ones used in the transport layer). The unreliable service is frequently used above physical layers (e.g. optical fiber, twisted pairs) having a low bit error ratio while reliability mechanisms are often used in wireless networks to recover locally from transmission errors.
 
-The second type of datalink layer is the one used in Local Area Networks (LAN). Conceptually, a LAN is a set of communicating devices such that any two devices can directly exchange frames through the datalink layer. Both endsystems and routers can be connected to a LAN. Some LANs only connect a few devices, but there are LANs that can connect hundreds or even thousands of devices.
+Existen tres tipos principales de capas de enlace de datos. El más simple es aquel donde hay sólo dos sistemas que se comunican, directamente conectados a través de la capa física. Esta capa de enlace de datos se usa cuando hay un vínculo punto a punto (`point-to-point`) entre ambos sistemas. Los sistemas pueden ser sistemas finales o routers. El Protocolo Punto a Punto (`Point-to-Point Protocol`, :abbr:`PPP`), definido en :rfc:`1661`, es un ejemplo de dicha capa de Enlace de Datos punto a punto. La unidad de datos intercambiada por las entidades de capa de Enlace de Datos se denomina `trama` (:term:`frame`). Cada trama enviada por la entidad de Enlace de Datos a la izquierda es transmitida a través de la capa Física, de modo que llegue a la entidad de Enlace de Datos a la derecha. Las capas de Enlace de Datos punto a punto pueden ofrecer un servicio no confiable (las tramas pueden sufrir corrupción o pérdidad) o un servicio confiable (en este caso la capa de Enlace de Datos incluye mecanismos de retransmisión similares a los usados en la capa de Transporte). El servicio no confiable se usa frecuentemente sobre capas físicas que tienen baja tasa de errores de bits (`Bit Error Ratio`, o BER), como, por ejemplo, fibra óptica o pares retorcidos. Por el contrario, en redes inalámbricas, suelen usarse mecanismos de confiabilidad para recuperarse localmente de los errores de transmisión. 
+
+.. The second type of datalink layer is the one used in Local Area Networks (LAN). Conceptually, a LAN is a set of communicating devices such that any two devices can directly exchange frames through the datalink layer. Both endsystems and routers can be connected to a LAN. Some LANs only connect a few devices, but there are LANs that can connect hundreds or even thousands of devices.
+
+El segundo tipo de capa de Enlace de Datos es el usado en Redes de Área Local (`Local Area Networks`, LAN). Conceptualmente, una LAN es un conjunto de dispositivos que se comunican, de modo que dos dispositivos cualesquiera pueden intercambiar, directamente, tramas mediante la capa de Enlace de Datos. Una LAN puede interconectar tanto sistemas finales como routers. Algunas LANs sólo conectan unos pocos dispositivos, pero existen LANs que pueden conectar cientos o miles de dispositivos.
 
 .. figure:: svg/simple-lan.png
    :align: center
    :scale: 80    
    
-   A local area network 
+   Una red de área local
+..   A local area network 
 
-In the next chapter, we describe the organisation and the operation of Local Area Networks. An important difference between the point-to-point datalink layers and the datalink layers used in LANs is that in a LAN, each communicating device is identified by a unique `datalink layer address`. This address is usually embedded in the hardware of the device and different types of LANs use different types of datalink layer addresses. A communicating device attached to a LAN can send a datalink frame to any other communicating device that is attached to the same LAN. Most LANs also support special broadcast and multicast datalink layer addresses. A frame sent to the broadcast address of the LAN is delivered to all communicating devices that are attached to the LAN. The multicast addresses are used to identify groups of communicating devices. When a frame is sent towards a multicast datalink layer address, it is delivered by the LAN to all communicating devices that belong to the corresponding group.
+.. In the next chapter, we describe the organisation and the operation of Local Area Networks. An important difference between the point-to-point datalink layers and the datalink layers used in LANs is that in a LAN, each communicating device is identified by a unique `datalink layer address`. This address is usually embedded in the hardware of the device and different types of LANs use different types of datalink layer addresses. A communicating device attached to a LAN can send a datalink frame to any other communicating device that is attached to the same LAN. Most LANs also support special broadcast and multicast datalink layer addresses. A frame sent to the broadcast address of the LAN is delivered to all communicating devices that are attached to the LAN. The multicast addresses are used to identify groups of communicating devices. When a frame is sent towards a multicast datalink layer address, it is delivered by the LAN to all communicating devices that belong to the corresponding group.
+
+En el próximo capítulo describiremos la organización y la operación de las Redes de Área Local. Una diferencia importante entre las capas de Enlace de Datos punto a punto y las usadas en LANs es que, en una LAN, cada dispositivo que se comunica es identificado por una `dirección de capa de Enlace de Datos` única. Esta dirección está típicamente incorporada en el hardware del dispositivo, y diferentes tipos de LANs usan diferentes tipos de direcciones de capa de Enlace de Datos. Un dispositivo conectado a una LAN puede enviar una trama de Enlace de Datos a cualquier otro dispositivo que esté conectado a la misma LAN. La mayoría de las LANs además soportan direcciones de Enlace de Datos especiales, de `broadcast` y de `multicast`. Una trama enviada a la dirección de `broadcast`, o de `difusión`, de la LAN es entregada a todos los dispositivos conectados a la LAN. Las direcciones de `multicast` se usan para identificar grupos de dispositivos que se comunican. Cuando se envía una trama a una dirección de Enlace de Datos de `multicast`, la trama es enviada por la LAN a todos los dispositivos que pertenecen al grupo correspondiente.
 
 .. index:: NBMA, Non-Broadcast Multi-Access Networks
 
-The third type of datalink layers are used in Non-Broadcast Multi-Access (NBMA) networks. These networks are used to interconnect devices like a LAN. All devices attached to an NBMA network are identified by a unique datalink layer address. However, and this is the main difference between an NBMA network and a traditional LAN, the NBMA service only supports unicast. The datalink layer service provided by an NBMA network supports neither broadcast nor multicast.
+.. The third type of datalink layers are used in Non-Broadcast Multi-Access (NBMA) networks. These networks are used to interconnect devices like a LAN. All devices attached to an NBMA network are identified by a unique datalink layer address. However, and this is the main difference between an NBMA network and a traditional LAN, the NBMA service only supports unicast. The datalink layer service provided by an NBMA network supports neither broadcast nor multicast.
 
-Unfortunately no datalink layer is able to send frames of unlimited side. Each datalink layer is characterised by a maximum frame size. There are more than a dozen different datalink layers and unfortunately most of them use a different maximum frame size. The network layer must cope with the heterogeneity of the datalink layer.
+El tercer tipo de capa de enlace de datos se usa en `redes de acceso múltiple sin difusión` (`Non-Broadcast Multi-Access` networks, NBMA). Estas redes se usan para interconectar dispositivos como en una LAN. Todos los dispositivos conectados a la red NBMA se identifican con una dirección de capa de Enlace de Datos única. Sin embargo, y ésta es la principal diferencia entre una red NBMA y una LAN tradicional, el servicio NBMA sólo soporta `unicast`. El servicio de capa de Enlace de Datos provisto por una red NBMA no soporta `broadcast` ni `multicast`.
 
-The network layer itself relies on the following principles : 
+.. Unfortunately no datalink layer is able to send frames of unlimited side. Each datalink layer is characterised by a maximum frame size. There are more than a dozen different datalink layers and unfortunately most of them use a different maximum frame size. The network layer must cope with the heterogeneity of the datalink layer.
 
- #. Each network layer entity is identified by a `network layer address`. This address is independent of the datalink layer addresses that it may use.
- #. The service provided by the network layer does not depend on the service or the internal organisation of the underlying datalink layers.
- #. The network layer is conceptually divided into two planes : the `data plane` and the `control plane`. The `data plane` contains the protocols and mechanisms that allow hosts and routers to exchange packets carrying user data. The `control plane` contains the protocols and mechanisms that enable routers to efficiently learn how to forward packets towards their final destination. 
+Desafortunadamente, ninguna capa de Enlace de Datos es capaz de enviar tramas de tamaño ilimitado. Cada capa de Enlace de Datos se caracteriza por un tamaño máximo de trama. Existe más de una docena de diferentes capas de Enlace, y por desgracia la mayoría de ellas usa un tamaño de trama diferente. La capa de Red es quien debe enfrentar el problema de la heterogeneidad de la capa de Enlace de Datos.
+
+.. The network layer itself relies on the following principles : 
+..  #. Each network layer entity is identified by a `network layer address`. This address is independent of the datalink layer addresses that it may use.
+.. #. The service provided by the network layer does not depend on the service or the internal organisation of the underlying datalink layers.
+.. #. The network layer is conceptually divided into two planes : the `data plane` and the `control plane`. The `data plane` contains the protocols and mechanisms that allow hosts and routers to exchange packets carrying user data. The `control plane` contains the protocols and mechanisms that enable routers to efficiently learn how to forward packets towards their final destination. 
+
+La capa de Red, por su parte, se apoya en los siguientes principios:
+
+ #. Cada entidad de capa de Red se identifica por una `dirección de capa de Red`. Esta dirección es independiente de las direcciones de capa de Enlace de Datos que pueda usar la entidad de Red. 
+ #. El servicio provisto por la capa de Red no depende del servicio o de la organización interna de las capas de Enlace de Datos subyacentes.
+ #. La capa de Red está conceptualmente dividida en dos planos: el `plano de datos` y el `plano de control`. 
+
+    - El plano de datos contiene los protocolos y mecanismos que permiten a los `hosts y routers` intercambiar paquetes que transportan `datos de usuario`. 
+    - El plano de control contiene los protocolos y mecanismos que permiten a los `routers` aprender eficientemente `cómo reenviar paquetes` hasta su destino final.
 
 
-The independence of the network layer from the underlying datalink layer is a key principle of the network layer. It ensures that the network layer can be used to allow hosts attached to different types of datalink layers to exchange packets through intermediate routers. Furthermore, this allows the datalink layers and the network layer to evolve independently from each other. This enables the network layer to be easily adapted to a new datalink layer every time a new datalink layer is invented.
+.. The independence of the network layer from the underlying datalink layer is a key principle of the network layer. It ensures that the network layer can be used to allow hosts attached to different types of datalink layers to exchange packets through intermediate routers. Furthermore, this allows the datalink layers and the network layer to evolve independently from each other. This enables the network layer to be easily adapted to a new datalink layer every time a new datalink layer is invented.
 
-There are two types of service that can be provided by the network layer :
+La independencia de la capa de Red de la capa de Enlace de Datos, subyacente, es un principio clave de la capa de Red. Asegura que, gracias a la capa de Red, hosts conectados a diferentes tipos de Enlace de Datos puedan intercambiar paquetes atravesando los routers intermedios. Además, esto permite que la capa de Enlace de Datos y la de Red evolucionen independientemente una de otra. Así, la capa de Red puede adaptarse fácilmente a cada nueva capa de Enlace de Datos que sea inventada.
 
- - an `unreliable connectionless` service
- - a `connection-oriented`, reliable or unreliable, service
+.. There are two types of service that can be provided by the network layer :
 
-Connection-oriented services have been popular with technologies such as :term:`X.25` and :term:`ATM` or :term:`frame-relay`, but nowadays most networks use an `unreliable connectionless` service. This is our main focus in this chapter.
+.. - an `unreliable connectionless` service
+.. - a `connection-oriented`, reliable or unreliable, service
 
+Existen dos tipos de servicio que pueden ser provistos por la capa de Red:
 
-Organisation of the network layer
-=================================
+ - Un servicio `sin conexión, no confiable`;
+ - Un servicio `orientado a conexión`, confiable o no confiable.
+
+.. Connection-oriented services have been popular with technologies such as :term:`X.25` and :term:`ATM` or :term:`frame-relay`, but nowadays most networks use an `unreliable connectionless` service. This is our main focus in this chapter.
+
+Los servicios orientados a conexión han sido populares con tecnologías como :term:`X.25` y :term:`ATM` o :term:`frame-relay`, pero hoy en día la mayoría de las redes usan un servicio `sin conexión, no confiable`. Éste es el foco central de este capítulo.
+
+.. Organisation of the network layer
+Organización de la capa de Red
+==============================
 
 .. index:: datagram, virtual circuit
 
-There are two possible internal organisations of the network layer : 
+.. There are two possible internal organisations of the network layer : 
 
- - datagram 
- - virtual circuits 
+..  - datagram 
+..  - virtual circuits 
 
-The internal organisation of the network is orthogonal to the service that it provides, but most of the time a datagram organisation is used to provide a connectionless service while a virtual circuit organisation is used in networks that provide a connection-oriented service.
+Hay dos posibles organizaciones internas de la capa de Red: 
 
-Datagram organisation
----------------------
+  - Datagramas
+  - Circuitos Virtuales
 
-The first and most popular organisation of the network layer is the datagram organisation. This organisation is inspired by the organisation of the postal service. Each host is identified by a `network layer address`. To send information to a remote host, a host creates a packet that contains :
+.. The internal organisation of the network is orthogonal to the service that it provides, but most of the time a datagram organisation is used to provide a connectionless service while a virtual circuit organisation is used in networks that provide a connection-oriented service.
 
- - the network layer address of the destination host
- - its own network layer address
- - the information to be sent
+La organización interna de la red es ortogonal al servicio que provee, pero la mayoría de las veces, una organización de datagramas es usada para proveed un servicio sin conexión, mientras que una organización de circuitos virtuales se usa en las redes que ofrecen un servicio orientado a conexión.
 
-The network layer limits the maximum packet size. Thus, the information must have been divided in packets by the transport layer before being passed to the network layer. 
+.. Datagram organisation
+Organización de datagramas
+--------------------------
 
-To understand the datagram organisation, let us consider the figure below. A network layer address, represented by a letter, has been assigned to each host and router. To send some information to host `J`, host `A` creates a packet containing its own address, the destination address and the information to be exchanged.
+.. The first and most popular organisation of the network layer is the datagram organisation. This organisation is inspired by the organisation of the postal service. Each host is identified by a `network layer address`. To send information to a remote host, a host creates a packet that contains :
+
+.. - the network layer address of the destination host
+.. - its own network layer address
+.. - the information to be sent
+
+La primera y más popular organización de la capa de Red es la de datagramas. Esta organización está inspirada por la de un servicio postal tradicional. Cada host está identificado por una `dirección de capa de Red`. Para enviar información a un host remoto, un host crea un paquete que contiene:
+
+ - La dirección de capa de Red del host destino;
+ - Su propia dirección de capa de Red;
+ - La información a ser enviada.
+
+.. The network layer limits the maximum packet size. Thus, the information must have been divided in packets by the transport layer before being passed to the network layer. 
+
+La capa de Red limita el tamaño máximo de los paquetes. Luego, la información debe ser dividida en paquetes por la capa de Transporte antes de ser pasada a la capa de Red.
+
+.. To understand the datagram organisation, let us consider the figure below. A network layer address, represented by a letter, has been assigned to each host and router. To send some information to host `J`, host `A` creates a packet containing its own address, the destination address and the information to be exchanged.
+
+Para comprender la organización de datagramas, consdieremos la figura siguiente. Una dirección de capa de Red, representada por una letra, ha sido asignada a cada host y a cada router. Para enviar una información al host `J`, el host `A` crea un paquete conteniendo su propia dirección, la dirección destino y la información a ser intercambiada.
 
 .. figure:: svg/simple-internetwork.png
    :align: center
    :scale: 80   
 
-   A simple internetwork 
+   Una `internetwork` simple
+..   A simple internetwork 
 
 .. index:: hop-by-hop forwarding
 
+.. With the datagram organisation, routers use `hop-by-hop forwarding`. This means that when a router receives a packet that is not destined to itself, it looks up the destination address of the packet in its `routing table`. A `routing table` is a data structure that maps each destination address (or set of destination addresses) to the outgoing interface over which a packet destined to this address must be forwarded to reach its final destination. 
 
-With the datagram organisation, routers use `hop-by-hop forwarding`. This means that when a router receives a packet that is not destined to itself, it looks up the destination address of the packet in its `routing table`. A `routing table` is a data structure that maps each destination address (or set of destination addresses) to the outgoing interface over which a packet destined to this address must be forwarded to reach its final destination. 
+Con la organización de datagramas, los routers usan With the datagram organisation, routers use `hop-by-hop forwarding`. This means that when a router receives a packet that is not destined to itself, it looks up the destination address of the packet in its `routing table`. A `routing table` is a data structure that maps each destination address (or set of destination addresses) to the outgoing interface over which a packet destined to this address must be forwarded to reach its final destination. 
 
 The main constraint imposed on the routing tables is that they must allow any host in the network to reach any other host. This implies that each router must know a route towards each destination, but also that the paths composed from the information stored in the routing tables must not contain loops. Otherwise, some destinations would be unreachable. 
 
