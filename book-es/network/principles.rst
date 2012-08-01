@@ -1,20 +1,23 @@
 .. Copyright |copy| 2010 by Olivier Bonaventure
 .. This file is licensed under a `creative commons licence <http://creativecommons.org/licenses/by/3.0/>`_
 
-Principles 
-###########
+.. Principles
+Principios
+##########
 
-The main objective of the network layer is to allow endsystems, connected to different networks, to exchange information through intermediate systems called :term:`router`. The unit of information in the network layer is called a :term:`packet`.
-
+.. The main objective of the network layer is to allow endsystems, connected to different networks, to exchange information through intermediate systems called :term:`router`. The unit of information in the network layer is called a :term:`packet`.
+El objetivo principal de la Capa de Red es permitir a los sistemas finales, conectados a diferentes redes, intercambiar información mediante sistemas intermedios. Cada uno de estos sistemas intermedios recibe el nombre de :term:`router`. La unidad de información en la Capa de Red se llama `paquete` (:term:`packet`).
 
 .. figure:: svg/osi-network.png
    :align: center
    :scale: 80
-   
-   The network layer in the reference model
+  
+   La Capa de Red en el Modelo de Referencia 
+..   The network layer in the reference model
 
-Before explaining the network layer in detail, it is useful to begin by analysing the service provided by the `datalink` layer. There are many variants of the datalink layer. Some provide a connection-oriented service while others provide a connectionless service. In this section, we focus on connectionless datalink layer services as they are the most widely used. Using a connection-oriented datalink layer causes some problems that are beyond the scope of this chapter. See :rfc:`3819` for a discussion on this topic.
+.. Before explaining the network layer in detail, it is useful to begin by analysing the service provided by the `datalink` layer. There are many variants of the datalink layer. Some provide a connection-oriented service while others provide a connectionless service. In this section, we focus on connectionless datalink layer services as they are the most widely used. Using a connection-oriented datalink layer causes some problems that are beyond the scope of this chapter. See :rfc:`3819` for a discussion on this topic.
 
+Antes de explicar la Capa de Red en detalle, será útil comenzar analizando el servicio provisto por la Capa de Enlace de datos. Existen numerosas variantes de la Capa de Enlace de Datos. Algunas ofrecen un servicio orientado a conexión, mientras que otras, servicio sin conexión. En esta sección nos concentraremos en los servicios de capa de Enlace de Datos sin conexión, ya que son los más ampliamente usados. El uso de una capa de Enlace de Datos orientada a conexión causa algunos problemas que exceden el alcance de este capítulo. Véase en :rfc:`3819` una discusión sobre este asunto.
 
 .. figure:: svg/osi-datalink.png
    :align: center
