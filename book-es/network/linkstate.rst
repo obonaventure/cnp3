@@ -33,7 +33,7 @@ Por lo común, se asocia el mismo peso a los dos arcos dirigidios que correspond
 
 .. When a link-state router boots, it first needs to discover to which routers it is directly connected. For this, each router sends a HELLO message every `N` seconds on all of its interfaces. This message contains the router's address. Each router has a unique address. As its neighbouring routers also send HELLO messages, the router automatically discovers to which neighbours it is connected. These HELLO messages are only sent to neighbours who are directly connected to a router, and a router never forwards the HELLO messages that they receive. HELLO messages are also used to detect link and router failures. A link is considered to have failed if no HELLO message has been received from the neighbouring router for a period of :math:`k \times N` seconds.
 
-Al arrancar, un router de estado de enlacel necesita antes que nada descubrir con qué routers se encuentra directamente conectado. Para esto, cada router envía un mensaje HELLO cada `N` segundos, por todas sus interfaces. Este mensaje contiene la dirección del router. Cada router tiene una dirección única. A medida que sus routers vecinos envían también mensajes HELLO, el router descubre automáticamente a qué vecinos se halla conectado. Estos mensajes HELLO solamente son enviados a vecinos directamente conectados, y un router nunca reenvía los mensajes HELLO que recibe. Los mensajes HELLO también se usan para detectar fallos de routers o de enlaces. Se considera que un enlace ha fallado cuando no se ha recibido ningún mensaje HELLO del router vecino por un período de :math:`k \times N` segundos.
+Al arrancar, un router de estado de enlace necesita antes que nada descubrir con qué routers se encuentra directamente conectado. Para esto, cada router envía un mensaje HELLO cada `N` segundos, por todas sus interfaces. Este mensaje contiene la dirección del router. Cada router tiene una dirección única. A medida que sus routers vecinos envían también mensajes HELLO, el router descubre automáticamente a qué vecinos se halla conectado. Estos mensajes HELLO solamente son enviados a vecinos directamente conectados; y un router nunca reenvía los mensajes HELLO que recibe. Los mensajes HELLO también se usan para detectar fallos de routers o de enlaces. Se considera que un enlace ha fallado cuando no se ha recibido ningún mensaje HELLO del router vecino por un período de :math:`k \times N` segundos.
 
 .. figure:: svg/ls-hello.png
    :align: center
@@ -89,7 +89,7 @@ En este pseudocódigo, `LSDB(r)` devuelve el LSP más reciente originado en el r
 
 .. note:: ¿Cuál es el LSP más reciente?
 
-Un router que implementa flooding debe ser capaz de detectar si un LSP recibido es más reciente que el LSP almacenado. Esto requiere una comparación entre el número de secuencia del LSP ecibido y el del LSP almacenado en la LSDB. El protocolo de ruteo de ARPANET [MRR1979]_ usaba un número de secuencia de 6 bits e implementaba la comparación de la manera siguiente (:rfc:`789`).
+Un router que implementa flooding debe ser capaz de detectar si un LSP recibido es más reciente que el LSP almacenado. Esto requiere una comparación entre el número de secuencia del LSP recibido y el del LSP almacenado en la LSDB. El protocolo de ruteo de ARPANET [MRR1979]_ usaba un número de secuencia de 6 bits e implementaba la comparación de la manera siguiente (:rfc:`789`).
 
  .. code-block:: python
 
@@ -118,7 +118,7 @@ En la figura siguiente se ilustra el mecanismo de flooding. Intercambiando mensa
    :align: center
    :scale: 100   
 
-   Ejemplo de inundación (flooding)
+   Ejemplo de inundación (`flooding`)
 ..   Flooding : example 
 
 

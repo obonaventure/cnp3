@@ -4,12 +4,12 @@
 .. _chapter-network: 
 
 ==============
-La Capa de Red
+La capa de Red
 ==============
 
 .. The transport layer enables the applications to efficiently and reliably exchange data. Transport layer entities expect to be able to send segment to any destination without having to understand anything about the underlying subnetwork technologies. Many subnetwork technologies exist. Most of them differ in subtle details (frame size, addressing, ...). The network layer is the glue between these subnetworks and the transport layer. It hides to the transport layer all the complexity of the underlying subnetworks and ensures that information can be exchanged between hosts connected to different types of subnetworks.
 
-La capa de Transporte habilita a las aplicaciones para intercambiar datos eficiente y confiablemente. Las entidades de capa de Transporte esperan poder enviar segmentos a cualquier destino sin tener que entender nada de las tecnologías subyacentes. Existen muchas tecnologías de infraestructura por debajo de la capa de Red. La mayoría de ellas difieren en detalles sutiles (tamaño de trama, direccionamiento...). La capa de Red es el adhesivo entre estas sub-redes y la capa de Transporte. Esconde toda la complejidad de las capas subyacentes y asegura que la información pueda ser intercambiada entre los hosts conectados a diferentes tipos de sub-redes.
+La capa de Transporte habilita a las aplicaciones para intercambiar datos eficiente y confiablemente. Las entidades de capa de Transporte esperan poder enviar segmentos a cualquier destino sin tener que entender nada de las tecnologías subyacentes. Existen muchas tecnologías de infraestructura por debajo de la capa de Red. La mayoría de ellas difieren en detalles sutiles (tamaño de trama, direccionamiento...). La capa de Red es el adhesivo entre estas redes subyacentes y la capa de Transporte. Esconde toda la complejidad de las capas inferiores y asegura que la información pueda ser intercambiada entre los hosts conectados a diferentes tipos de redes subyacentes.
 
 .. In this chapter, we first explain the principles of the network layer. These principles include the datagram and virtual circuit modes, the separation between the data plane and the control plane and the algorithms used by routing protocols. Then, we explain, in more detail, the network layer in the Internet, starting with IPv4 and IPv6 and then moving to the routing protocols (RIP, OSPF and BGP).
 
