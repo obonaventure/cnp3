@@ -1,91 +1,139 @@
 .. Copyright |copy| 2010 by Olivier Bonaventure
 .. This file is licensed under a `creative commons licence <http://creativecommons.org/licenses/by/3.0/>`_
 
-Interdomain routing
+.. Interdomain routing
+Ruteo interdominios
 ===================
 
-As explained earlier, the Internet is composed of more than 30,000 different networks [#fasnum]_ called `domains`. Each domain is composed of a group of routers and hosts that are managed by the same organisation. Example domains include belnet_, sprint_, level3_, geant_, abilene_, cisco_ or google_ ... 
+.. As explained earlier, the Internet is composed of more than 30,000 different networks [#fasnum]_ called `domains`. Each domain is composed of a group of routers and hosts that are managed by the same organisation. Example domains include belnet_, sprint_, level3_, geant_, abilene_, cisco_ or google_ ... 
+
+Como se explicó anteriormente, Internet se compone de más de 30.000 diferentes redes [#fasnum]_ llamadas `dominios`. Cada dominio se compone de un grupo de routers y hosts que son administrados por la misma organización. Algunos dominios ejemplo son belnet_, sprint_, level3_, geant_, abilene_, cisco_ o google_ ... 
 
 .. index:: stub domain, transit domain
 
-Each domain contains a set of routers. From a routing point of view, these domains can be divided into two classes : the `transit` and the `stub` domains. A `stub` domain sends and receives packets whose source or destination are one of its own hosts. A `transit` domain is a domain that provides a transit service for other domains, i.e. the routers in this domain forward packets whose source and destination do not belong to the transit domain. As of this writing, about 85% of the domains in the Internet are stub domains [#fpotaroo]_. A `stub` domain that is connected to a single transit domain is called a `single-homed stub`. A `multihomed stub` is a `stub` domain connected to two or more transit providers.
+.. Each domain contains a set of routers. From a routing point of view, these domains can be divided into two classes : the `transit` and the `stub` domains. A `stub` domain sends and receives packets whose source or destination are one of its own hosts. A `transit` domain is a domain that provides a transit service for other domains, i.e. the routers in this domain forward packets whose source and destination do not belong to the transit domain. As of this writing, about 85% of the domains in the Internet are stub domains [#fpotaroo]_. A `stub` domain that is connected to a single transit domain is called a `single-homed stub`. A `multihomed stub` is a `stub` domain connected to two or more transit providers.
+
+Cada dominio contiene un conjunto de routers. Desde el punto de vista de un router, estos dominios pueden dividirse en dos clases: los dominios `de tránsito` los `finales` (o `stub domains`). Un dominio `final` envía y recibe paquetes cuyo origen o destino son sus propios hosts. Un dominio `de tránsito` es un dominio que provee un servicio de tránsito para otros dominios, es decir, los routers en este dominio reenvían paquetes cuyo origen y destino no pertenecen al dominio de tránsito. Al escribirse este documento, alrededor del 85% de los dominios de Internet son dominios `stub` [#fpotaroo]_. Un dominio stub que está conectado a un único dominio de tránsito se llama `single-homed stub`. Un `multihomed stub` es un dominio stub que está conectado a dos o más proveedores de tránsito.
 
 .. figure:: png/network-fig-089-c.png
    :align: center
    :scale: 70
-   
-   Transit and stub domains 
 
-The stub domains can be further classified by considering whether they mainly send or receive packets. An `access-rich` stub domain is a domain that contains hosts that mainly receive packets. Typical examples include small ADSL- or cable modem-based Internet Service Providers or enterprise networks. On the other hand, a `content-rich` stub domain is a domain that mainly produces packets. Examples of `content-rich` stub domains include google_, yahoo_, microsoft_, facebook_ or content distribution networks such as akamai_ or limelight_ For the last few years, we have seen a rapid growth of these `content-rich` stub domains. Recent measurements [ATLAS2009]_ indicate that a growing fraction of all the packets exchanged on the Internet are produced in the data centers managed by these content providers.
+   Dominios de tránsito y stub   
+..   Transit and stub domains 
 
-Domains need to be interconnected to allow a host inside a domain to exchange IP packets with hosts located in other domains. From a physical perspective, domains can be interconnected in two different ways. The first solution is to directly connect a router belonging to the first domain with a router inside the second domain. Such links between domains are called private interdomain links or `private peering links`. In practice, for redundancy or performance reasons, distinct physical links are usually established between different routers in the two domains that are interconnected. 
+.. The stub domains can be further classified by considering whether they mainly send or receive packets. An `access-rich` stub domain is a domain that contains hosts that mainly receive packets. Typical examples include small ADSL- or cable modem-based Internet Service Providers or enterprise networks. On the other hand, a `content-rich` stub domain is a domain that mainly produces packets. Examples of `content-rich` stub domains include google_, yahoo_, microsoft_, facebook_ or content distribution networks such as akamai_ or limelight_ For the last few years, we have seen a rapid growth of these `content-rich` stub domains. Recent measurements [ATLAS2009]_ indicate that a growing fraction of all the packets exchanged on the Internet are produced in the data centers managed by these content providers.
+
+Los dominios stub pueden clasificarse además considerando si principalmente envían o reciben paquetes. Un dominio final rico en acceso (`access-rich stub domain`) es un dominio que contiene hosts que principalmente reciben paquetes. Los ejemplos típicos incluyen pequeñas redes de ISPs sobre ADSL o cable modem. Contrariamente, un dominio final rico en contenidos (`content-rich` stub domain) es un dominio que principalmente produce paquetes. Ejemplos de estos dominios son google_, yahoo_, microsoft_, facebook_, o redes de distribución de contenido como akamai_ o limelight_. Durante los últimos años, hemos visto un rápido crecimiento de estos dominios finales ricos en contenidos. Mediciones recientes [ATLAS2009]_ indican que una proporción creciente de los paquetes intercambiados en Internet son producidos en los `data centers` gestionados por estos proveedores de contenidos.
+
+.. Domains need to be interconnected to allow a host inside a domain to exchange IP packets with hosts located in other domains. From a physical perspective, domains can be interconnected in two different ways. The first solution is to directly connect a router belonging to the first domain with a router inside the second domain. Such links between domains are called private interdomain links or `private peering links`. In practice, for redundancy or performance reasons, distinct physical links are usually established between different routers in the two domains that are interconnected. 
+
+Los dominios necesitan estar interconectados para permitir que un host dentro de un dominio intercambie paquetes IP con hosts ubicados en otros dominios. Desde el punto de vista físico, los dominios pueden interconectarse de dos diferentes formas. La primera solución es conectar directamente un router que pertenece al primer dominio con un router dentro del segundo. Estos enlaces entre dominios se llaman enlaces interdominios privados (`private peering links`). En la práctica, por razones de redundancia o de performance, se establecen diferentes enlaces físicos entre diferentes routers en los dos dominios que se interconectan.
 
 .. figure:: png/network-fig-104-c.png
    :align: center
    :scale: 70
    
-   Interconnection of two domains via a private peering link 
+   Interconexión de dos dominos mediante un enlace privado de `peering`
+..   Interconnection of two domains via a private peering link 
 
-Such `private peering links` are useful when, for example, an enterprise or university network needs to be connected to its Internet Service Provider. However, some domains are connected to hundreds of other domains [#fasrank]_ . For some of these domains, using only private peering links would be too costly. A better solution to allow many domains to interconnect cheaply are the `Internet eXchange Points` (:term:`IXP`). An :term:`IXP` is usually some space in a data center that hosts routers belonging to different domains. A domain willing to exchange packets with other domains present at the :term:`IXP` installs one of its routers on the :term:`IXP` and connects it to other routers inside its own network. The IXP contains a Local Area Network to which all the participating routers are connected. When two domains that are present at the IXP wish [#fwish]_ to exchange packets, they simply use the Local Area Network. IXPs are very popular in Europe and many Internet Service Providers and Content providers are present in these IXPs. 
+.. Such `private peering links` are useful when, for example, an enterprise or university network needs to be connected to its Internet Service Provider. However, some domains are connected to hundreds of other domains [#fasrank]_ . For some of these domains, using only private peering links would be too costly. A better solution to allow many domains to interconnect cheaply are the `Internet eXchange Points` (:term:`IXP`). An :term:`IXP` is usually some space in a data center that hosts routers belonging to different domains. A domain willing to exchange packets with other domains present at the :term:`IXP` installs one of its routers on the :term:`IXP` and connects it to other routers inside its own network. The IXP contains a Local Area Network to which all the participating routers are connected. When two domains that are present at the IXP wish [#fwish]_ to exchange packets, they simply use the Local Area Network. IXPs are very popular in Europe and many Internet Service Providers and Content providers are present in these IXPs. 
+
+Dichos enlaces privados de `peering` son útiles cuando la red de, por ejemplo, una empresa o universidad, necesita ser conectada a su ISP. Sin embargo, algunos dominios se conectan a cientos de otros dominios [#fasrank]_. Para algunos de estos dominios, el uso exclusivo de enlaces de peering privados sería demasiado costoso. Una mejor solución para permitir a muchos dominios interconectarse en forma económica son los `puntos de intercambio de Internet` (`Internet eXchange Points`, :term:`IXP`). Un :term:`IXP` es típicamos algún espacio en un data center que aloja routers pertenecientes a diferentes dominios. Un dominio que desea intercambiar paquetes con otros dominios presentes en el :term:`IXP` instala uno de sus routers en el :term:`IXP` y los conecta a otros routers dentro de su propia red. El IXP contiene una LAN a la cual están conectados todos los routers participantes. Cuando dos dominios que están presentes en el IXP desean  [#fwish]_ intercabiar paquetes, simplemente usan la LAN. Los IXPs son muy populares en Europa, y muchos ISPs y proveedores de contenidos tienen presencia en estos IXPs.
 
 .. figure:: png/network-fig-103-c.png
    :align: center
    :scale: 70
-   
-   Interconnection of two domains at an Internet eXchange Point
 
-In the early days of the Internet, domains would simply exchange all the routes they know to allow a host inside one domain to reach any host in the global Internet. However, in today's highly commercial Internet, this is no longer true as interdomain routing mainly needs to take into account the economical relationships between the domains. Furthermore, while intradomain routing usually prefers some routes over others based on their technical merits (e.g. prefer route with the minimum number of hops, prefer route with the minimum delay, prefer high bandwidth routes over low bandwidth ones, etc) interdomain routing mainly deals with economical issues. For interdomain routing, the cost of using a route is often more important than the quality of the route measured by its delay or bandwidth.
+   Interconexión de dos dominios en un IXP (Internet eXchange Point).
+..   Interconnection of two domains at an Internet eXchange Point
 
-There are different types of economical relationships that can exist between domains. Interdomain routing converts these relationships into peering relationships between domains that are connected via peering links. 
+.. In the early days of the Internet, domains would simply exchange all the routes they know to allow a host inside one domain to reach any host in the global Internet. However, in today's highly commercial Internet, this is no longer true as interdomain routing mainly needs to take into account the economical relationships between the domains. Furthermore, while intradomain routing usually prefers some routes over others based on their technical merits (e.g. prefer route with the minimum number of hops, prefer route with the minimum delay, prefer high bandwidth routes over low bandwidth ones, etc) interdomain routing mainly deals with economical issues. For interdomain routing, the cost of using a route is often more important than the quality of the route measured by its delay or bandwidth.
+
+En los primeros días de Internet, los dominios intercambiaban simplemente todas las rutas conocidas para que cada host dentro de un dominio pudiera alcanzar cualquier otro host de Internet. Sin embargo, en la Internet altamente comercial de hoy, esto ya no es cierto, porque el ruteo interdominios necesita tener en cuenta principalmente las relaciones económicas entre los dominios. Además, mientras el ruteo intradominio prefiere normalmente unas rutas a otras basándose en sus méritos técnicos (por ejemplo, se prefieren las rutas con número mínimo de saltos, las rutas con el mínimo retardo, las rutas de alto ancho de banda sobre las de bajo ancho de banda, etc.), el ruteo interdominio básicamente trata con los aspectos económicos. Para el ruteo interdominio, el costo de usar una ruta suele ser más importante que la calidad de la ruta medida por su retardo o su ancho de banda.
+
+.. There are different types of economical relationships that can exist between domains. Interdomain routing converts these relationships into peering relationships between domains that are connected via peering links. 
+
+Pueden existir diferentes tipos de relaciones económicas entre dominios. El ruteo interdominios convierte estas relaciones en relaciones de `peering` entre dominios que se conectan mediante enlaces de peering.
 
 .. index:: customer-provider peering relationship
 
-The first category of peering relationship is the `customer->provider` relationship. Such a relationship is used when a customer domain pays an Internet Service Provider to be able to exchange packets with the global Internet over an interdomain link. A similar relationship is used when a small Internet Service Provider pays a larger Internet Service Provider to exchange packets with the global Internet. 
+.. The first category of peering relationship is the `customer->provider` relationship. Such a relationship is used when a customer domain pays an Internet Service Provider to be able to exchange packets with the global Internet over an interdomain link. A similar relationship is used when a small Internet Service Provider pays a larger Internet Service Provider to exchange packets with the global Internet.
+
+La primera categoría de relación de peering es la de cliente y proveedor. Dicha relación se conforma cuando un cliente paga a un ISP para poder intercambiar paquetes con la Internet global sobre un enlace interdominios. Se conforma una relación similar cuando un ISP pequeño paga a un ISP mayor por intercambiar paquetes con la Internet global.
 
 .. figure:: png/network-fig-106-c.png
    :align: center
    :scale: 70
    
-   A simple Internet with peering relationships
+   Una interred simple con relaciones de `peering`
+..   A simple Internet with peering relationships
 
-To understand the `customer->provider` relationship, let us consider the simple internetwork shown in the figure above. In this internetwork, `AS7` is a stub domain that is connected to one provider : `AS4`. The contract between `AS4` and `AS7` allows a host inside `AS7` to exchange packets with any host in the internetwork. To enable this exchange of packets, `AS7` must know a route towards any domain and all the domains of the internetwork must know a route via `AS4` that allows them to reach hosts inside `AS7`. From a routing perspective, the commercial contract between `AS7` and `AS4` leads to the following routes being exchanged : 
+.. To understand the `customer->provider` relationship, let us consider the simple internetwork shown in the figure above. In this internetwork, `AS7` is a stub domain that is connected to one provider : `AS4`. The contract between `AS4` and `AS7` allows a host inside `AS7` to exchange packets with any host in the internetwork. To enable this exchange of packets, `AS7` must know a route towards any domain and all the domains of the internetwork must know a route via `AS4` that allows them to reach hosts inside `AS7`. From a routing perspective, the commercial contract between `AS7` and `AS4` leads to the following routes being exchanged : 
 
- - over a `customer->provider` relationship, the `customer` domain advertises to its `provider`  all its routes and all the routes that it has learned from its own customers. 
- - over a `provider->customer` relationship, the `provider` advertises all the routes that it knows to its `customer`. 
+..  - over a `customer->provider` relationship, the `customer` domain advertises to its `provider`  all its routes and all the routes that it has learned from its own customers. 
+.. - over a `provider->customer` relationship, the `provider` advertises all the routes that it knows to its `customer`. 
 
-The second rule ensures that the customer domain receives a route towards all destinations that are reachable via its provider. The first rule allows the routes of the customer domain to be distributed throughout the Internet.
+Para comprender la relación cliente-proveedor, consideremos la interred sencilla mostrada en la figura anterior. En esta interred, `AS7` es un dominio final que se conecta a un proveedor: `AS4`. El contrato entre `AS4` y `AS7` permite a un host dentro de `AS7` intercambiar paquetes con cualquier host de la interred. Para permitir este intercambio de paquetes, `AS7` debe conocer una ruta hacia cualquier dominio, y todos los dominios de la interred deben conocer una ruta a través de `AS4` que les permita llegar a los hosts dentro de `AS7`. Desde el punto de vista del ruteo, el contrato comercial entre `AS7` y `AS4` lleva a que se intercambien las siguientes rutas: 
 
-Coming back to the figure above, `AS4` advertises to its two providers `AS1` and `AS2` its own routes and the routes learned from its customer, `AS7`. On the other hand, `AS4` advertises to `AS7` all the routes that it knows. 
+  - En una relación `cliente -> proveedor`, el dominio `cliente` anuncia a su `proveedor` todas sus rutas, y todas las rutas que ha aprendido de sus propios clientes.
+  - En una relación `proveedor -> cliente`, el dominio `proveedor` anuncia todas las rutas que conoce a su `cliente`.
+
+.. The second rule ensures that the customer domain receives a route towards all destinations that are reachable via its provider. The first rule allows the routes of the customer domain to be distributed throughout the Internet.
+
+La segunda regla asegura que el dominio cliente reciba una ruta hacia todos los destinos que sean alcanzables a través de su proveedor. La primera regla permite que las rutas del cliente sean distribuidas por toda Internet.
+
+.. Coming back to the figure above, `AS4` advertises to its two providers `AS1` and `AS2` its own routes and the routes learned from its customer, `AS7`. On the other hand, `AS4` advertises to `AS7` all the routes that it knows. 
+
+Volviendo a la figura anterior, `AS4` anuncia a sus dos proveedores `AS1` y `AS2` sus propias rutas y las aprendidas de su cliente, `AS7`. Por otra parte, `AS4` anuncia todas las rutas que conoce a `AS7`.
 
 .. index:: shared-cost peering relationship
 
-The second type of peering relationship is the `shared-cost` peering relationship. Such a relationship usually does not involve a payment from one domain to the other in contrast with the `customer->provider` relationship. A `shared-cost` peering relationship is usually established between domains having a similar size and geographic coverage. For example, consider the figure above. If `AS3` and `AS4` exchange many packets via `AS1`, they both need to pay `AS1`. A cheaper alternative for `AS3` and `AS4` would be to establish a `shared-cost` peering. Such a peering can be established at IXPs where both `AS3` and `AS4` are present or by using private peering links. This `shared-cost` peering should be used to exchange packets between hosts inside `AS3` and hosts inside `AS4`. However, `AS3` does not want to receive on the `AS3-AS4` `shared-cost` peering links packets whose destination belongs to `AS1` as `AS3` would have to pay to send these packets to `AS1`.  
+.. The second type of peering relationship is the `shared-cost` peering relationship. Such a relationship usually does not involve a payment from one domain to the other in contrast with the `customer->provider` relationship. A `shared-cost` peering relationship is usually established between domains having a similar size and geographic coverage. For example, consider the figure above. If `AS3` and `AS4` exchange many packets via `AS1`, they both need to pay `AS1`. A cheaper alternative for `AS3` and `AS4` would be to establish a `shared-cost` peering. Such a peering can be established at IXPs where both `AS3` and `AS4` are present or by using private peering links. This `shared-cost` peering should be used to exchange packets between hosts inside `AS3` and hosts inside `AS4`. However, `AS3` does not want to receive on the `AS3-AS4` `shared-cost` peering links packets whose destination belongs to `AS1` as `AS3` would have to pay to send these packets to `AS1`.  
 
-From a routing perspective, over a `shared-cost` peering relationship a domain only advertises its internal routes and the routes that it has learned from its customers. This restriction ensures that only packets destined to the local domain or one of its customers is received over the `shared-cost` peering relationship. This implies that the routes that have been learned from a provider or from another `shared-cost` peer is not advertised over a `shared-cost` peering relationship. This is motivated by economical reasons. If a domain were to advertise the routes that it learned from a provider over a `shared-cost` peering relationship that does not bring revenue, it would have allowed its `shared-cost` peer to use the link with its provider without any payment. If a domain were to advertise the routes it learned over a `shared cost` peering over another `shared-cost` peering relationship, it would have allowed these `shared-cost` peers to use its own network (which may span one or more continents) freely to exchange packets. 
+El segundo tipo de relación de peering es la de `costo compartido` (`shared-cost`). Esta relación generalmente no implica un pago de un dominio al otro, al contrario que en la relación `cliente -> proveedor`. Una relación de peering de costo compartido se establece normalmente entre dominios que tienen un tamaño y una cobertura geográfica similares. Por ejemplo, consideremos la figura anterior. Si `AS3` y `AS4` intercambian muchos paquetes a través de `AS1`, ambos deberán pagarle a `AS1`. Una alternativa más barata para `AS3` y `AS4` sería establecer una relación de costo compartido. Dicha relación de peering puede ser establecida en IXPs donde ambos `AS3` y `AS4` tengan presencia, o usando enlaces privados de peering. Este peering de costo compartido debería ser usado para intercambiar paquetes entre hosts dentro de `AS3` y hosts dentro de `AS4`. Sin embargo, `AS3` no quiere recibir, sobre el enlace de costo compartido `AS3-AS4`, paquetes cuyo destino pertenezca a `AS1`, ya que `AS3` tendría que pagar por enviar estos paquetes a `AS1`.  
+
+.. From a routing perspective, over a `shared-cost` peering relationship a domain only advertises its internal routes and the routes that it has learned from its customers. This restriction ensures that only packets destined to the local domain or one of its customers is received over the `shared-cost` peering relationship. This implies that the routes that have been learned from a provider or from another `shared-cost` peer is not advertised over a `shared-cost` peering relationship. This is motivated by economical reasons. If a domain were to advertise the routes that it learned from a provider over a `shared-cost` peering relationship that does not bring revenue, it would have allowed its `shared-cost` peer to use the link with its provider without any payment. If a domain were to advertise the routes it learned over a `shared cost` peering over another `shared-cost` peering relationship, it would have allowed these `shared-cost` peers to use its own network (which may span one or more continents) freely to exchange packets. 
+
+Desde el punto de vista del ruteo, un dominio, sobre el enlace de una relación de costo compartido, sólo anuncia sus rutas internas y las rutas que haya aprendido de sus clientes. Esta restricción asegura que sólo se reciban sobre el enlace de costo compartido aquellos paquetes destinados al dominio local o a alguno de sus clientes. Por lo tanto, no serán anunciadas sobre dicha relación de costo compartido las rutas que hayan sido aprendidas de un proveedor o de otro peer de costo compartido. La motivación es económica: si un dominio anunciara las rutas que aprendió de un proveedor sobre una relación de costo compartido que no trae ganancias, habría permitido a su peer de costo compartido usar el enlace con su proveedor sin ningún pago. Si un dominio anunciara las rutas aprendidas por un enlace de costo compartido, sobre otra relación del mismo tipo, habría permitido a estos peers de costo compartido usar su propia red (que puede extenderse sobre uno o más continentes) libremente para intercambiar paquetes.
 
 .. index:: sibling peering relationship
 
-Finally, the last type of peering relationship is the `sibling`. Such a relationship is used when two domains exchange all their routes in both directions. In practice, such a relationship is only used between domains that belong to the same company. 
+.. Finally, the last type of peering relationship is the `sibling`. Such a relationship is used when two domains exchange all their routes in both directions. In practice, such a relationship is only used between domains that belong to the same company. 
+
+Finalmente, el tercer tipo de relación de peering es la `fraternal` (`sibling`). Esta relación se establece cuando dos dominios intercambiar todas sus rutas en ambas direcciones. En la práctica, una tal relación se usa sólo entre dominios que pertenecen a la misma organización.
 
 .. index:: interdomain routing policy
 
-These different types of relationships are implemented in the `interdomain routing policies` defined by each domain. The `interdomain routing policy` of a domain is composed of three main parts : 
+.. These different types of relationships are implemented in the `interdomain routing policies` defined by each domain. The `interdomain routing policy` of a domain is composed of three main parts : 
 
- - the `import filter` that specifies, for each peering relationship, the routes that can be accepted from the neighbouring domain (the non-acceptable routes are ignored and the domain never uses them to forward packets) 
- - the `export filter` that specifies, for each peering relationship, the routes that can be advertised to the neighbouring domain  
- - the `ranking` algorithm that is used to select the best route among all the routes that the domain has received towards the same destination prefix  
+..  - the `import filter` that specifies, for each peering relationship, the routes that can be accepted from the neighbouring domain (the non-acceptable routes are ignored and the domain never uses them to forward packets) 
+..  - the `export filter` that specifies, for each peering relationship, the routes that can be advertised to the neighbouring domain  
+..  - the `ranking` algorithm that is used to select the best route among all the routes that the domain has received towards the same destination prefix  
+
+
+Estos diferentes tipos de relaciones se implementan en las `políticas de ruteo interdominio` definidas por cada dominio. Esta política se compone de tres partes principales: 
+
+  - El `filtro de importación` especifica, para cada relación de peering, las rutas que pueden ser aceptadas del dominio vecino (las rutas no aceptables serán ignoradas, y el dominio nunca las usará para reenviar paquetes).
+  - El `filtro de exportación` que especifica, para cada relación de peering, las rutas que serán anunciadas al dominio vecino.
+  - El algoritmo de `ranking` que se usa para seleccionar la mejor ruta entre todas las que el dominio ha recibido hacia el mismo prefijo destino.
 
 .. index:: import policy, export policy
 
-A domain's import and export filters can be defined by using the Route Policy Specification Language (RPSL) specified in :rfc:`2622` [GAVE1999]_ . Some Internet Service Providers, notably in Europe, use RPSL to document [#fripedb]_ their import and export policies. Several tools help to easily convert a RPSL policy into router commands. 
+.. A domain's import and export filters can be defined by using the Route Policy Specification Language (RPSL) specified in :rfc:`2622` [GAVE1999]_ . Some Internet Service Providers, notably in Europe, use RPSL to document [#fripedb]_ their import and export policies. Several tools help to easily convert a RPSL policy into router commands. 
 
-The figure below provides a simple example of import and export filters for two domains in a simple internetwork. In RPSL, the keyword `ANY` is used to replace any route from any domain. It is typically used by a provider to indicate that it announces all its routes to a customer over a `provider->customer` relationship. This is the case for `AS4`'s export policy. The example below clearly shows the difference between a `provider->customer` and a `shared-cost` peering relationship. `AS4`'s export filter indicates that it announces only its internal routes (`AS4`) and the routes learned from its clients (`AS7`) over its `shared-cost` peering with `AS3`, while it advertises all the routes that it uses (including the routes learned from `AS3`) to `AS7`. 
+Los filtros de importación y exportacíon de un dominio pueden definirse usando el lenguaje de especificación de políticas de ruteo (`Route Policy Specification Language`, RPSL) especificado en :rfc:`2622` [GAVE1999]_. Algunos ISPs, notablemente en Europa, usan RPSL para documentar [#fripedb]_ sus políticas de importación y exportación. Existen varias herramientas para convertir fácilmente una política RPSL en comandos de configuración de un router. 
+
+.. The figure below provides a simple example of import and export filters for two domains in a simple internetwork. In RPSL, the keyword `ANY` is used to replace any route from any domain. It is typically used by a provider to indicate that it announces all its routes to a customer over a `provider->customer` relationship. This is the case for `AS4`'s export policy. The example below clearly shows the difference between a `provider->customer` and a `shared-cost` peering relationship. `AS4`'s export filter indicates that it announces only its internal routes (`AS4`) and the routes learned from its clients (`AS7`) over its `shared-cost` peering with `AS3`, while it advertises all the routes that it uses (including the routes learned from `AS3`) to `AS7`. 
+
+La figura siguiente ofrece un ejemplo sencillo de filtros de importación y exportación para dos dominios en una interred simple. En RPSL se usa la clave `ANY` para sustituir cualquier ruta de cualquier dominio. Es típicamente usada por un proveedor para indicar que anuncia todas sus rutas a un cliente sobre una relación `proveedor -> cliente`. Éste es el caso de la política de exportación de `AS4`. El ejemplo siguiente muestra claramente la diferencia entre relaciones de peering `proveedor -> cliente` y `costo compartido`. El filtro de exportación de `AS4` indica que anuncia sólo sus rutas internas (`AS4`) y las rutas aprendidas de sus clientes (`AS7`) sobre su relación de peering de costo compartido con `AS3`, mientras que anuncia todas las rutas que usa (incluyendo las rutas aprendidas de `AS3`) a `AS7`. 
 
 .. figure:: png/network-fig-109-c.png
    :align: center
    :scale: 70
-   
-   Import and export policies 
+
+   Políticas de importación y exportación   
+..    Import and export policies 
 
 .. index:: BGP, Border Gateway Protocol
 
