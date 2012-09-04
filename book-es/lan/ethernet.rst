@@ -338,7 +338,7 @@ El algoritmo de `aprendizaje de direcciones MAC` da a los switches la capacidad 
 
 .. rubric:: Notas
 
- [#fbridges] Los primeros relays Ethernet que operaron en la capa de Enlace de Datos fueron llamados `puentes` (`bridges`). En la práctica, la principal diferencia entre switches y bridges es que los bridges eran normalmente implementados en software mientras que los switches son dispositivos basados en hardware. En este texto usaremos el término `switch` para referirnos a un relay en la capa de Enlace de Datos, aunque podrá también aparecer el término `bridge`.
+.. [#fbridges] Los primeros relays Ethernet que operaron en la capa de Enlace de Datos fueron llamados `puentes` (`bridges`). En la práctica, la principal diferencia entre switches y bridges es que los bridges eran normalmente implementados en software mientras que los switches son dispositivos basados en hardware. En este texto usaremos el término `switch` para referirnos a un relay en la capa de Enlace de Datos, aunque podrá también aparecer el término `bridge`.
 
 
 El Protocolo de Árbol de Expansión (802.1d) 
@@ -510,7 +510,7 @@ La figura siguiente ilustra una red Ethernet conmutada con tres VLANs. `VLAN2` y
 
 .. IEEE defined in the [802.1q]_ standard a special header to encode the VLAN identifiers. This 32 bit header includes a 20 bit VLAN field that contains the VLAN identifier of each frame. The format of the [802.1q]_ header is described below.
 
-IEEE definió en el estándar [802.1q]_  una cabecera especial para codificar los identificadores VLAN. Est cabecera de 32 bits incluye un campo VLAN de 20 bits que contiene el identificador de cada trama.  Más abajo se describe el formato de la cabecera [802.1q]_.
+IEEE definió en el estándar [802.1q]_  una cabecera especial para codificar los identificadores VLAN. Esta cabecera de 32 bits incluye un campo VLAN de 20 bits que contiene el identificador de cada trama.  Más abajo se describe el formato de la cabecera [802.1q]_.
 
 .. figure:: pkt/8021q.png
    :align: center
