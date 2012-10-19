@@ -39,7 +39,7 @@ Los dominios necesitan estar interconectados para permitir que un host dentro de
 
 .. Such `private peering links` are useful when, for example, an enterprise or university network needs to be connected to its Internet Service Provider. However, some domains are connected to hundreds of other domains [#fasrank]_ . For some of these domains, using only private peering links would be too costly. A better solution to allow many domains to interconnect cheaply are the `Internet eXchange Points` (:term:`IXP`). An :term:`IXP` is usually some space in a data center that hosts routers belonging to different domains. A domain willing to exchange packets with other domains present at the :term:`IXP` installs one of its routers on the :term:`IXP` and connects it to other routers inside its own network. The IXP contains a Local Area Network to which all the participating routers are connected. When two domains that are present at the IXP wish [#fwish]_ to exchange packets, they simply use the Local Area Network. IXPs are very popular in Europe and many Internet Service Providers and Content providers are present in these IXPs. 
 
-Dichos enlaces privados de `peering` son útiles cuando la red de, por ejemplo, una empresa o universidad, necesita ser conectada a su ISP. Sin embargo, algunos dominios se conectan a cientos de otros dominios [#fasrank]_. Para algunos de estos dominios, el uso exclusivo de enlaces de peering privados sería demasiado costoso. Una mejor solución para permitir a muchos dominios interconectarse en forma económica son los `puntos de intercambio de Internet` (`Internet eXchange Points`, :term:`IXP`). Un :term:`IXP` es típicamos algún espacio en un data center que aloja routers pertenecientes a diferentes dominios. Un dominio que desea intercambiar paquetes con otros dominios presentes en el :term:`IXP` instala uno de sus routers en el :term:`IXP` y los conecta a otros routers dentro de su propia red. El IXP contiene una LAN a la cual están conectados todos los routers participantes. Cuando dos dominios que están presentes en el IXP desean  [#fwish]_ intercabiar paquetes, simplemente usan la LAN. Los IXPs son muy populares en Europa, y muchos ISPs y proveedores de contenidos tienen presencia en estos IXPs.
+Dichos enlaces privados de `peering` son útiles cuando la red de, por ejemplo, una empresa o universidad, necesita ser conectada a su ISP. Sin embargo, algunos dominios se conectan a cientos de otros dominios [#fasrank]_. Para algunos de estos dominios, el uso exclusivo de enlaces de peering privados sería demasiado costoso. Una mejor solución para permitir a muchos dominios interconectarse en forma económica son los `puntos de intercambio de Internet` (`Internet eXchange Points`, :term:`IXP`). Un :term:`IXP` es, típicamente, algún espacio en un data center que aloja routers, pertenecientes a diferentes dominios. Un dominio que desea intercambiar paquetes con otros dominios presentes en el :term:`IXP` instala uno de sus routers en el :term:`IXP` y los conecta a otros routers dentro de su propia red. El IXP contiene una LAN a la cual están conectados todos los routers participantes. Cuando dos dominios que están presentes en el IXP desean  [#fwish]_ intercabiar paquetes, simplemente usan la LAN. Los IXPs son muy populares en Europa, y muchos ISPs y proveedores de contenidos tienen presencia en estos IXPs.
 
 .. figure:: png/network-fig-103-c.png
    :align: center
@@ -114,8 +114,8 @@ Finalmente, el tercer tipo de relación de peering es la `fraternal` (`sibling`)
 
 Estos diferentes tipos de relaciones se implementan en las `políticas de ruteo interdominio` definidas por cada dominio. Esta política se compone de tres partes principales: 
 
-  - El `filtro de importación` especifica, para cada relación de peering, las rutas que pueden ser aceptadas del dominio vecino (las rutas no aceptables serán ignoradas, y el dominio nunca las usará para reenviar paquetes).
-  - El `filtro de exportación` que especifica, para cada relación de peering, las rutas que serán anunciadas al dominio vecino.
+  - El `filtro de importación` (`import filter`) especifica, para cada relación de peering, las rutas que pueden ser aceptadas del dominio vecino (las rutas no aceptables serán ignoradas, y el dominio nunca las usará para reenviar paquetes).
+  - El `filtro de exportación` (`export filter`) que especifica, para cada relación de peering, las rutas que serán anunciadas al dominio vecino.
   - El algoritmo de `ranking` que se usa para seleccionar la mejor ruta entre todas las que el dominio ha recibido hacia el mismo prefijo destino.
 
 .. index:: import policy, export policy
@@ -137,166 +137,222 @@ La figura siguiente ofrece un ejemplo sencillo de filtros de importación y expo
 
 .. index:: BGP, Border Gateway Protocol
 
-The Border Gateway Protocol
----------------------------
+.. The Border Gateway Protocol
+BGP (Border Gateway Protocol)
+-----------------------------
 
-The Internet uses a single interdomain routing protocol : the Border Gateway Protocol (BGP). The current version of BGP is defined in :rfc:`4271`. BGP differs from the intradomain routing protocols that we have already discussed in several ways. First, BGP is a `path-vector` protocol. When a BGP router advertises a route towards a prefix, it announces the IP prefix and the interdomain path used to reach this prefix. From BGP's point of view, each domain is identified by a unique `Autonomous System` (AS) number [#fasdomain]_ and the interdomain path contains the AS numbers of the transit domains that are used to reach the associated prefix. This interdomain path is called the `AS Path`. Thanks to these AS-Paths, BGP does not suffer from the count-to-infinity problems that affect distance vector routing protocols. Furthermore, the AS-Path can be used to implement some routing policies. Another difference between BGP and the intradomain routing protocols is that a BGP router does not send the entire contents of its routing table to its neighbours regularly. Given the size of the global Internet, routers would be overloaded by the number of BGP messages that they would need to process. BGP uses incremental updates, i.e. it only announces the routes that have changed to its neighbours.
+.. The Internet uses a single interdomain routing protocol : the Border Gateway Protocol (BGP). The current version of BGP is defined in :rfc:`4271`. BGP differs from the intradomain routing protocols that we have already discussed in several ways. First, BGP is a `path-vector` protocol. When a BGP router advertises a route towards a prefix, it announces the IP prefix and the interdomain path used to reach this prefix. From BGP's point of view, each domain is identified by a unique `Autonomous System` (AS) number [#fasdomain]_ and the interdomain path contains the AS numbers of the transit domains that are used to reach the associated prefix. This interdomain path is called the `AS Path`. Thanks to these AS-Paths, BGP does not suffer from the count-to-infinity problems that affect distance vector routing protocols. Furthermore, the AS-Path can be used to implement some routing policies. Another difference between BGP and the intradomain routing protocols is that a BGP router does not send the entire contents of its routing table to its neighbours regularly. Given the size of the global Internet, routers would be overloaded by the number of BGP messages that they would need to process. BGP uses incremental updates, i.e. it only announces the routes that have changed to its neighbours.
 
-The figure below shows a simple example of the BGP routes that are exchanged between domains. In this example, prefix `1.0.0.0/8` is announced by `AS1`. `AS1` advertises a BGP route towards this prefix to `AS2`. The AS-Path of this route indicates that `AS1` is the originator of the prefix. When `AS4` receives the BGP route from `AS1`, it re-announces it to `AS2` and adds its AS number to the AS-Path. `AS2` has learned two routes towards prefix `1.0.0.0/8`. It compares the two routes and prefers the route learned from `AS4` based on its own ranking algorithm. `AS2` advertises to `AS5` a route towards `1.0.0.0/8` with its AS-Path set to `AS2:AS4:AS1`. Thanks to the AS-Path, `AS5` knows that if it sends a packet towards `1.0.0.0/8` the packet first passes through `AS2`, then through `AS4` before reaching its destination inside `AS1`.
+Internet utiliza un único protocolo de ruteo interdominios: `Border Gateway Protocol` (protocolo de pasarelas de frontera, BGP). La versión actual de BGP está definida en :rfc:`4271`. BGP difiere de los protocolos de ruteo intradominio que ya hemos discutido en varias formas. En primer lugar, BGP es un protocolo de `vector de caminos` (`path-vector`). Cuando un router BGP publica una ruta hacia un prefijo destino, anuncia el prefijo IP y el camino interdominio usado para alcanzar este prefijo. Desde el punto de vista de BGP, cada dominio se identifica por un número único de sistema autónomo (`Autonomous System number` o `AS number` [#fasdomain]_), y el camino interdominios contiene los números de AS de los dominios de tránsito que son usados para alcanzar el prefijo asociado. Este camino interdominios se llama camino de sistemas autónomos (`AS-Path`). Gracias a estos AS-Paths, BGP no sufre de los problemas de cuenta al infinito que afectan a los protocolos de ruteo de vector-distancia. Más aún, el AS-Path puede usarse para implementar algunas políticas de ruteo. Otra diferencia entre BGP y los protocolos de ruteo intradominios es que un router BGP no envía regularmente los contenidos completos de su tabla de ruteo a los vecinos. Dado el tamaño de la Internet completa, los routers se verían sobrecargados por la cantidad de mensajes BGP que necesitarían procesar. BGP usa actualizaciones incrementales, es decir, anuncia a sus vecinos solamente las rutas que han cambiado.
+
+.. The figure below shows a simple example of the BGP routes that are exchanged between domains. In this example, prefix `1.0.0.0/8` is announced by `AS1`. `AS1` advertises a BGP route towards this prefix to `AS2`. The AS-Path of this route indicates that `AS1` is the originator of the prefix. When `AS4` receives the BGP route from `AS1`, it re-announces it to `AS2` and adds its AS number to the AS-Path. `AS2` has learned two routes towards prefix `1.0.0.0/8`. It compares the two routes and prefers the route learned from `AS4` based on its own ranking algorithm. `AS2` advertises to `AS5` a route towards `1.0.0.0/8` with its AS-Path set to `AS2:AS4:AS1`. Thanks to the AS-Path, `AS5` knows that if it sends a packet towards `1.0.0.0/8` the packet first passes through `AS2`, then through `AS4` before reaching its destination inside `AS1`.
+
+La figura siguiente muestra un ejemplo simple de rutas BGP que son intercambiadas entre dominios. En este ejemplo, el prefijo  `1.0.0.0/8` es anunciado por `AS1`. `AS1` publica a `AS2` una ruta BGP hacia este prefijo. El AS-Path de esta ruta indica que `AS1` es el originador del prefijo. Cuando `AS4` recibe de `AS1` la ruta BGP, la re-anuncia a `AS2` y agrega su número de AS al AS-Path. `AS2` ha aprendido dos rutas hacia el prefijo `1.0.0.0/8`. Compara ambas rutas y prefiere la aprendida de `AS4` basándose en su propio algoritmo de ranking. `AS2` publica a `AS5` una ruta hacia `1.0.0.0/8` con su AS-Path fijado en `AS2:AS4:AS1`. Gracias al AS-Path, `AS5` sabe que si envía un paquete hacia `1.0.0.0/8`, éste primero pasará a través de `AS2` y luego a través de `AS4`, antes de alcanzar su destino dentro de `AS1`.
 
 .. figure:: png/network-fig-111-c.png
    :align: center
    :scale: 70
-   
-   Simple exchange of BGP routes 
+  
+   Intercambio simple de rutas BGP  
+
+..   Simple exchange of BGP routes 
 
 .. index:: BGP peer
 
-BGP routers exchange routes over BGP sessions. A BGP session is established between two routers belonging to two different domains that are directly connected. As explained earlier, the physical connection between the two routers can be implemented as a private peering link or over an Internet eXchange Point. A BGP session between two adjacent routers runs above a TCP connection (the default BGP port is 179). In contrast with intradomain routing protocols that exchange IP packets or UDP segments, BGP runs above TCP because TCP ensures a reliable delivery of the BGP messages sent by each router without forcing the routers to implement acknowledgements, checksums, etc. Furthermore, the two routers consider the peering link to be up as long as the BGP session and the underlying TCP connection remain up [#flifetimebgp]_. The two endpoints of a BGP session are called `BGP peers`.
+.. BGP routers exchange routes over BGP sessions. A BGP session is established between two routers belonging to two different domains that are directly connected. As explained earlier, the physical connection between the two routers can be implemented as a private peering link or over an Internet eXchange Point. A BGP session between two adjacent routers runs above a TCP connection (the default BGP port is 179). In contrast with intradomain routing protocols that exchange IP packets or UDP segments, BGP runs above TCP because TCP ensures a reliable delivery of the BGP messages sent by each router without forcing the routers to implement acknowledgements, checksums, etc. Furthermore, the two routers consider the peering link to be up as long as the BGP session and the underlying TCP connection remain up [#flifetimebgp]_. The two endpoints of a BGP session are called `BGP peers`.
+
+Los routers BGP intercambian rutas mediante sesiones BGP. Una sesión BGP se establece entre dos routers que pertenecen a diferentes dominios y que están directamente conectados. Como se explicó anteriormente, la conexión física entre los dos routers puede ser implementada como un enlace privado de `peering` o sobre un punto de intercambio IXP. Una sesión BGP entre dos routers adyacentes corre por encima de una conexión TCP (el puerto default de BGP es 179). En contraste con los protocolos de ruteo intradominios que intercambian paquetes IP o segmentos UDP, BGP corre sobre TCP porque éste le asegura la entrega confiable de los mensajes BGP enviados por cada router, sin forzarlos a implementar reconocimientos, checksums, etc. Por otro lado, ambos  routers consideran que el enlace de `peering` está activo mientras la sesión BGP y la conexión TCP subyacente estén activos[#flifetimebgp]_. Los dos extremos de la sesión BGP se llaman `pares BGP` (`BGP peers`).
 
 .. figure:: svg/bgp-peering.*
    :align: center
    :scale: 70
    
-   A BGP peering session between two directly connected routers
+   Una sesión BGP entre dos routers directamente conectados
+..   A BGP peering session between two directly connected routers
 
-In practice, to establish a BGP session between routers `R1` and `R2` in the figure above, the network administrator of `AS3` must first configure on `R1` the IP address of `R2` on the `R1-R2` link and the AS number of `R2`. Router `R1` then regularly tries to establish the BGP session with `R2`. `R2` only agrees to establish the BGP session with `R1` once it has been configured with the IP address of `R1` and its AS number. For security reasons, a router never establishes a BGP session that has not been manually configured on the router. 
+.. In practice, to establish a BGP session between routers `R1` and `R2` in the figure above, the network administrator of `AS3` must first configure on `R1` the IP address of `R2` on the `R1-R2` link and the AS number of `R2`. Router `R1` then regularly tries to establish the BGP session with `R2`. `R2` only agrees to establish the BGP session with `R1` once it has been configured with the IP address of `R1` and its AS number. For security reasons, a router never establishes a BGP session that has not been manually configured on the router. 
+
+En la práctica, para establecer una sesió BGP entre los routers `R1` y `R2` de la figura anterior, el administrador de red del sistema autónomo `AS3` primero debe configurar en `R1` la dirección IP de `R2` sobre el vínculo `R1-R2`, y el número de AS de `R2`. El router `R1`, luego, intenta periódicamente establecer la sesión BGP con `R2`. `R2` sólo accede a establecer la sesión BGP con `R1` una vez que ha sido configurado con la dirección IP de `R1` y su número de AS. Por razones de seguridad, un router nunca establece una sesión BGP que no haya sido manualmente configurada en el router. 
 
 .. index:: BGP OPEN, BGP NOTIFICATION, BGP KEEPALIVE, BGP UPDATE
 
-The BGP protocol :rfc:`4271` defines several types of messages that can be exchanged over a BGP session :
+.. The BGP protocol :rfc:`4271` defines several types of messages that can be exchanged over a BGP session :
+..
+.. - `OPEN` : this message is sent as soon as the TCP connection between the two routers has been established. It initialises the BGP session and allows the negotiation of some options. Details about this message may be found in :rfc:`4271`
+.. - `NOTIFICATION` : this message is used to terminate a BGP session, usually because an error has been detected by the BGP peer. A router that sends or receives a `NOTIFICATION` message immediately shutdowns the corresponding BGP session.
+.. - `UPDATE`: this message is used to advertise new or modified routes or to withdraw previously advertised routes.
+.. - `KEEPALIVE` : this message is used to ensure a regular exchange of messages on the BGP session, even when no route changes. When a BGP router has not sent an `UPDATE` message during the last 30 seconds, it shall send a `KEEPALIVE` message to confirm to the other peer that it is still up. If a peer does not receive any BGP message during a period of 90 seconds [#fdefaultkeepalive]_, the BGP session is considered to be down and all the routes learned over this session are withdrawn. 
 
- - `OPEN` : this message is sent as soon as the TCP connection between the two routers has been established. It initialises the BGP session and allows the negotiation of some options. Details about this message may be found in :rfc:`4271`
- - `NOTIFICATION` : this message is used to terminate a BGP session, usually because an error has been detected by the BGP peer. A router that sends or receives a `NOTIFICATION` message immediately shutdowns the corresponding BGP session.
- - `UPDATE`: this message is used to advertise new or modified routes or to withdraw previously advertised routes.
- - `KEEPALIVE` : this message is used to ensure a regular exchange of messages on the BGP session, even when no route changes. When a BGP router has not sent an `UPDATE` message during the last 30 seconds, it shall send a `KEEPALIVE` message to confirm to the other peer that it is still up. If a peer does not receive any BGP message during a period of 90 seconds [#fdefaultkeepalive]_, the BGP session is considered to be down and all the routes learned over this session are withdrawn. 
+El protocolo BGP [:rfc:`4271`] define varios tipos de mensajes que pueden ser intercambiados sobre una sesión BGP:
 
-As explained earlier, BGP relies on incremental updates. This implies that when a BGP session starts, each router first sends BGP `UPDATE` messages to advertise to the other peer all the exportable routes that it knows. Once all these routes have been advertised, the BGP router only sends BGP `UPDATE` messages about a prefix if the route is new, one of its attributes has changed or the route became unreachable and must be withdrawn. The BGP `UPDATE` message allows BGP routers to efficiently exchange such information while minimising the number of bytes exchanged. Each `UPDATE` message contains :
+ - `OPEN`: Este mensaje se envía apenas se establece la conexión TCP entre los dos router. Inicializa la sesión BGP y permite la negociación de algunas opciones. Los detalles sobre este mensaje se pueden consutar en :rfc:`4271`
+ - `NOTIFICATION`: Este mensaje se usa para finalizar una sesión BGP, generalmente porque el `peer` BGP ha detectado un error. Un router que envía o recibe un mensaje `NOTIFICATION` inmediatamente cierra la correspondiente sesión BGP.
+ - `UPDATE`: Este mensaje se usa para anunciar rutas nuevas o modificadas, o para retirar rutas que previamente han sido anunciadas.
+ - `KEEPALIVE`: Este mensaje se usa para asegurar un intercambio regular de mensajes sobre la sesión BGP, aun cuando no cambien las ruas. Cuando un router BGP no ha enviado un mensaje `UPDATE` durante los últimos 30 segundos, enviará un mensaje `KEEPALIVE` para confirmar al otro `peer` que sigue activo. Si un `peer` no recibe ningún mensaje BGP durante un período de 90 segundos [#fdefaultkeepalive]_, la sesión BGP se considera cerrada y todas las rutas aprendidas sobre esta sesión son retiradas.
 
- - a list of IP prefixes that are withdrawn
- - a list of IP prefixes that are (re-)advertised
- - the set of attributes (e.g. AS-Path) associated to the advertised prefixes
 
-In the remainder of this chapter, and although all routing information is exchanged using BGP `UPDATE` messages, we assume for simplicity that a BGP message contains only information about one prefix and we use the words :
+.. As explained earlier, BGP relies on incremental updates. This implies that when a BGP session starts, each router first sends BGP `UPDATE` messages to advertise to the other peer all the exportable routes that it knows. Once all these routes have been advertised, the BGP router only sends BGP `UPDATE` messages about a prefix if the route is new, one of its attributes has changed or the route became unreachable and must be withdrawn. The BGP `UPDATE` message allows BGP routers to efficiently exchange such information while minimising the number of bytes exchanged. Each `UPDATE` message contains :
 
- - `Withdraw message` to indicate a BGP `UPDATE` message containing one route that is withdrawn 
- - `Update message` to indicate a BGP `UPDATE` containing a new or updated route towards one destination prefix with its attributes 
+.. - a list of IP prefixes that are withdrawn
+.. - a list of IP prefixes that are (re-)advertised
+.. - the set of attributes (e.g. AS-Path) associated to the advertised prefixes
 
+Como se explicó anteriormente, BGP se basa en actualizaciones incrementales. Esto implica que, cuando arranca una sesión BGP, cada router primeramente envía mensajes BGP `UPDATE` para anunciar al otro `peer` todas las rutas exportables que conoce.  Una vez que todas estas rutas hayan sido anunciadas, el router BGP sólo envía mensajes BGP `UPDATE` sobre un prefijo si la ruta es nueva, si uno de sus atributos ha cambiado, o si la ruta ha quedado inalcanzable y debe ser retirada. El mensaje BGP `UPDATE` permite a los routers BGP para intercambiar eficientemente dicha información mientras que se minimiza el número de bytes intercambiados. Cada mensaje `UPDATE` contiene:
+
+ - Una lista de prefijos IP que son retirados
+ - Una lista de prefijos IP que son (re-)anunciados
+ - El conjunto de atributos (por ejemplo, el `AS-Path`) asociado a los prefijos anunciados
+
+.. In the remainder of this chapter, and although all routing information is exchanged using BGP `UPDATE` messages, we assume for simplicity that a BGP message contains only information about one prefix and we use the words :
+
+.. - `Withdraw message` to indicate a BGP `UPDATE` message containing one route that is withdrawn 
+.. - `Update message` to indicate a BGP `UPDATE` containing a new or updated route towards one destination prefix with its attributes 
+
+En el resto de este capítulo, y aunque toda la información de ruteo se intercambia usando mensajes BGP `UPDATE`, suponemos por simplicidad que un mensaje BGP contiene sólo información acerca de un prefijo, y usamos las palabras:
+
+ - `Retiro` (`Withdraw message`) para indicar un mensaje BGP `UPDATE` que contiene una ruta que es retirada.
+ - `Actualización` (`Update message`) para indicar un mensaje BGP `UPDATE` que contiene una ruta nueva, o actualizada, hacia un prefijo destino con sus atributos. 
 
 .. index:: BGP Adj-RIB-In, BGP Adj-RIB-Out, BGP RIB
 
-From a conceptual point of view, a BGP router connected to `N` BGP peers, can be described as being composed of four parts as shown in the figure below.
+.. From a conceptual point of view, a BGP router connected to `N` BGP peers, can be described as being composed of four parts as shown in the figure below.
+
+Desde un punto de vista conceptual, un router BGP conectado a `N` pares BGP puede describirse como compuesto por cuatro partes, como se muestra en la figura siguiente.
 
 .. _bgprouter:
 
 .. figure:: png/network-fig-113-c.png
    :align: center
    :scale: 70
-   
-   Organisation of a BGP router 
+  
+   Organización de un router BGP
+..   Organisation of a BGP router 
 
-In this figure, the router receives BGP messages on the left part of the figure, processes these messages and possibly sends BGP messages on the right part of the figure. A BGP router contains three important data structures :
+.. In this figure, the router receives BGP messages on the left part of the figure, processes these messages and possibly sends BGP messages on the right part of the figure. A BGP router contains three important data structures :
 
- - the `Adj-RIB-In` contains the BGP routes that have been received from each BGP peer. The routes in the `Adj-RIB-In` are filtered by the `import filter` before being placed in the `BGP-Loc-RIB`. There is one `import filter` per BGP peer.
- - the `Local Routing Information Base` (`Loc-RIB`) contains all the routes that are considered as acceptable by the router. The `Loc-RIB` may contain several routes, learned from different BGP peers, towards the same destination prefix.
- - the `Forwarding Information Base` (`FIB`) is used by the dataplane to forward packets towards their destination. The `FIB` contains, for each destination, the best route that has been selected by the `BGP decision process`. This decision process is an algorithm that selects, for each destination prefix, the best route according to the router's ranking algorithm that is part of its policy.
- - the `Adj-RIB-Out` contains the BGP routes that have been advertised to each BGP peer. The `Adj-RIB-Out` for a given peer is built by applying the peer`s `export filter` on the routes that have been installed in the `FIB`. There is one `export filter` per BGP peer. For this reason, the Adj-RIB-Out of a peer may contain different routes than the Adj-RIB-Out of another peer.
+.. - the `Adj-RIB-In` contains the BGP routes that have been received from each BGP peer. The routes in the `Adj-RIB-In` are filtered by the `import filter` before being placed in the `BGP-Loc-RIB`. There is one `import filter` per BGP peer.
+.. - the `Local Routing Information Base` (`Loc-RIB`) contains all the routes that are considered as acceptable by the router. The `Loc-RIB` may contain several routes, learned from different BGP peers, towards the same destination prefix.
+.. - the `Forwarding Information Base` (`FIB`) is used by the dataplane to forward packets towards their destination. The `FIB` contains, for each destination, the best route that has been selected by the `BGP decision process`. This decision process is an algorithm that selects, for each destination prefix, the best route according to the router's ranking algorithm that is part of its policy.
+.. - the `Adj-RIB-Out` contains the BGP routes that have been advertised to each BGP peer. The `Adj-RIB-Out` for a given peer is built by applying the peer`s `export filter` on the routes that have been installed in the `FIB`. There is one `export filter` per BGP peer. For this reason, the Adj-RIB-Out of a peer may contain different routes than the Adj-RIB-Out of another peer.
 
-When a BGP session starts, the routers first exchange `OPEN` messages to negotiate the options that apply throughout the entire session. Then, each router extracts from its FIB the routes to be advertised to the peer. It is important to note that, for each known destination prefix, a BGP router can only advertise to a peer the route that it has itself installed inside its `FIB`. The routes that are advertised to a peer must pass the peer's `export filter`. The `export filter` is a set of rules that define which routes can be advertised over the corresponding session, possibly after having modified some of its attributes. One `export filter` is associated to each BGP session. For example, on a `shared-cost peering`, the `export filter` only selects the internal routes and the routes that have been learned from a `customer`. The pseudo-code below shows the initialisation of a BGP session.
+En esta figura, el router recibe mensajes BGP en la parte izquierda de la figura, procesa estos mensajes y posiblemente envía mensajes BGP en la parte derecha de la figura. Un router BGP contiene tres importantes estructuras de datos:
 
-.. code-block:: python
-
-  def initiliaze_BGP_session( RemoteAS, RemoteIP):
-    # Initialize and start BGP session
-    # Send BGP OPEN Message to RemoteIP on port 179
-    # Follow BGP state machine 
-    # advertise local routes and routes learned from peers*/
-    for d in BGPLocRIB :
-    	B=build_BGP_Update(d)
-	S=Apply_Export_Filter(RemoteAS,B)
-	if (S != None) :
-	   send_Update(S,RemoteAS,RemoteIP)
-    # entire RIB has been sent
-    # new Updates will be sent to reflect local or distant
-    # changes in routers
+ - La `Base de Información de Adyacencias de Ingreso` (`Adjacency Routing Information Base`, `Adj-RIB-In`) contiene las rutas BGP que han sido recibidas de cada `peer` BGP. Las rutas en `Adj-RIB-In` son filtradas por el `filtro de importación` antes de ser ubicadas en `BGP-Loc-RIB`. Hay un `filtro de importación` por cada par BGP.
+ - La `Base de Información Local` (`Local Routing Information Base`, `Loc-RIB`) contiene todas las rutas que son consideradas aceptables por el router. La tabla `Loc-RIB` puede contener varias rutas, aprendidas de diferentes pares BGP, hacia el mismo prefijo destino.
+ - La `Base de Información de Reenvío` (`Forwarding Information Base`, `FIB`) es usada por el plano de datos para reenviar paquetes hacia su destino. La `FIB` contiene, para cada destino, la mejor ruta que ha sido seleccionada por el `proceso de decisión` de BGP. Este proceso de decisión es un algoritmo que selecciona, para cada prefijo destino, la mejor ruta de acuerdo al algoritmo de `ranking` del router que es parte de su política. 
+ - La `Base de Información de Adyacencias de Egreso` (`Adj-RIB-Out`) contiene las rutas BGP que han sido anunciadas a cada par BGP. La base `Adj-RIB-Out` para un par dado se construye aplican el `filtro de exportación` del `peer` sobre las rutas que han sido instaladas en la  the `FIB`. Hay un `filtro de exportación` por cada par BGP. Por esta razón, la base `Adj-RIB-Out` de un par puede contener diferentes rutas que el `Adj-RIB-Out` de otro par.
 
 
-In the above pseudo-code, the `build\_BGP\_UPDATE(d)` procedure extracts from the `BGP Loc-RIB` the best path towards destination `d` (i.e. the route installed in the FIB) and prepares the corresponding BGP `UPDATE` message. This message is then passed to the `export filter` that returns NULL if the route cannot be advertised to the peer or the (possibly modified) BGP `UPDATE` message to be advertised. BGP routers allow network administrators to specify very complex `export filters`, see e.g. [WMS2004]_. A simple `export filter` that implements the equivalent of `split horizon` is shown below.
+.. When a BGP session starts, the routers first exchange `OPEN` messages to negotiate the options that apply throughout the entire session. Then, each router extracts from its FIB the routes to be advertised to the peer. It is important to note that, for each known destination prefix, a BGP router can only advertise to a peer the route that it has itself installed inside its `FIB`. The routes that are advertised to a peer must pass the peer's `export filter`. The `export filter` is a set of rules that define which routes can be advertised over the corresponding session, possibly after having modified some of its attributes. One `export filter` is associated to each BGP session. For example, on a `shared-cost peering`, the `export filter` only selects the internal routes and the routes that have been learned from a `customer`. The pseudo-code below shows the initialisation of a BGP session.
+
+Cuando arranca una sesión BGP, los routers primeramente intercambian mensajes `OPEN` para negociar las opciones que se aplicarán durante toda la sesión. Luego, cada router extrae de su `FIB` las rutas que serán anunciadas al `peer`. Es importante notar que, para cada prefijo destino conocido, un router BGP sólo puede anunciar a un `peer` la ruta que él tiene instalada en su `FIB`. Las rutas que son anunciadas a un `peer` deben pasar su filtro de exportación. El filtro de exportación es un conjunto de reglas que definen qué rutas pueden ser anunciadas sobre la sesión correspondiente, posiblemente luego de haber modificado algunos de sus atributos. Con cada sesión BGP se asocia un filtro de exportación. Por ejemplo, en un enlace de costo compartido, el filtro de exportación sólo selecciona las rutas internas y las que han sido aprendidas de un `cliente`. El pseudocódigo siguiente muestra la inicialización de una sesión BGP.
 
 .. code-block:: python
 
- def apply_export_filter(RemoteAS, BGPMsg) :
-   # check if RemoteAS already received route
-   if RemoteAS is BGPMsg.ASPath :
-      BGPMsg=None
-      # Many additional export policies can be configured : 
-      # Accept or refuse the BGPMsg 
-      # Modify selected attributes inside BGPMsg 
-   return BGPMsg 
+  def inicializar_sesión_BGP(AS_Remoto, IP_Remoto):
+    # Inicializar y comenzar sesión BGP
+    # Enviar mensaje BGP OPEN a IP_Remoto sobre puerto 179
+    # Seguir la máquina de estados BGP
+    # Anunciar rutas locales y rutas aprendidas de pares
+    for d in BGPLocRIB:
+    	B=construir_Update_BGP(d)
+	S=aplicar_Filtro_Exportación(AS_Remoto, B)
+	if (S != None):
+	   enviar_Update(S, AS_Remoto, IP_Remoto)
+    # Se ha enviado la tabla RIB completa
+    # Se enviarán nuevos Updates para reflejar cambios 
+    # locales o distantes en los routers
 
-At this point, the remote router has received all the exportable BGP routes. After this initial exchange, the router only sends `BGP UPDATE` messages when there is a change (addition of a route, removal of a route or change in the attributes of a route) in one of these exportable routes. Such a change can happen when the router receives a BGP message. The pseudo-code below summarizes the processing of these BGP messages.
+
+.. In the above pseudo-code, the `build\_BGP\_UPDATE(d)` procedure extracts from the `BGP Loc-RIB` the best path towards destination `d` (i.e. the route installed in the FIB) and prepares the corresponding BGP `UPDATE` message. This message is then passed to the `export filter` that returns NULL if the route cannot be advertised to the peer or the (possibly modified) BGP `UPDATE` message to be advertised. BGP routers allow network administrators to specify very complex `export filters`, see e.g. [WMS2004]_. A simple `export filter` that implements the equivalent of `split horizon` is shown below.
+
+En el pseudocódigo anterior, el procedimiento `construir\_UPDATE\_BGP(d)` extrae de la base `BGP Loc-RIB` el mejor camino hacia el destino `d` (es decir, la ruta instalada en `FIB`) y prepara el mensaje BGP `UPDATE` correspondiente. Este mensaje luego es pasado al filtro de exportación que devuelve NULL si la ruta no puede ser anunciada al `peer` o si el mensaje `UPDATE`  (posiblemente modificado) no puede ser anunciado. Los routers BGP permiten a los administradores de red especificar filtros de exportación sumamente complejos (ver, por ejemplo, [WMS2004]_). A continuación se muestra un filtro de exportación simple que implementa el equivalente de `horizonte dividido` (`split horizon`).
 
 .. code-block:: python
 
- def Recvd_BGPMsg(Msg, RemoteAS) :
-     B=apply_import_filer(Msg,RemoteAS)
-     if (B== None): # Msg not acceptable 
+ def aplicar_filtro_exportacion(AS_Remoto, mensaje_BGP):
+   # varificar su AS_Remoto ya recibió la ruta
+   if AS_Remoto in mensaje_BGP.ASPath:
+      mensaje_BGP=None
+      # Pueden configurarse muchas políticas de exportación adicionales: 
+      # - Aceptar o rehusar mensaje_BGP
+      # - Modificar atributos seleccionados dentro de mensaje_BGP
+   return mensaje_BGP
+
+.. At this point, the remote router has received all the exportable BGP routes. After this initial exchange, the router only sends `BGP UPDATE` messages when there is a change (addition of a route, removal of a route or change in the attributes of a route) in one of these exportable routes. Such a change can happen when the router receives a BGP message. The pseudo-code below summarizes the processing of these BGP messages.
+
+En este punto, el router remoto ha recibido todas las rutas BGP exportables. Luego de este intercambio inicial, el router sólo envía mensajes `BGP UPDATE` cuando ocurre un cambio (agregado o eliminación de una ruta, o cambio en los atributos de una ruta) en una de estas rutas exportables. Dicho cambio puede ocurrir cuando el router recibe un mensaje BGP. El pseudocódigo siguiente resume el procesamiento de estos mensajes BGP.
+
+.. code-block:: python
+
+ def mensaje_BGP_recibido(Msg, AS_Remoto) :
+     B=aplicar_filtro_importacion(Msg, AS_Remoto)
+     if B == None: # Mensaje no aceptable
      	return
-     if IsUPDATE(Msg):
-     	Old_Route=BestRoute(Msg.prefix) 
-   	Insert_in_RIB(Msg)
-   	Run_Decision_Process(RIB)       
-	if (BestRoute(Msg.prefix) != Old_Route) :
-	   # best route changed 
-	   B=build_BGP_Message(Msg.prefix);
-    	   S=apply_export_filter(RemoteAS,B);
-    	   if (S!=None) : # announce best route 
-	     send_UPDATE(S,RemoteAS,RemoteIP);     
-    	   else if (Old_Route != None) :
-	     send_WITHDRAW(Msg.prefix,RemoteAS, RemoteIP)		
-      else : # Msg is WITHDRAW
-      	  Old_Route=BestRoute(Msg.prefix) 
-   	  Remove_from_RIB(Msg)
-	  Run_Decision_Process(RIB)
-	  if (Best_Route(Msg.prefix) !=Old_Route):
-	    # best route changed 
-	    B=build_BGP_Message(Msg.prefix)
-	    S=apply_export_filter(RemoteAS,B)
-	    if (S != None) : # still one best route towards Msg.prefix
-	       send_UPDATE(S,RemoteAS, RemoteIP);
-     	    else if(Old_Route != None) : # No best route anymore 
-	        send_WITHDRAW(Msg.prefix,RemoteAS,RemoteIP);
+     if es_ACTUALIZACION(Msg):
+     	ruta_Anterior=mejorRuta(Msg.prefix) 
+   	insertar_en_RIB(Msg)
+   	correr_Proceso_Decision(RIB)       
+	if (mejorRuta(Msg.prefix) != ruta_Anterior) :
+	   # la mejor ruta ha cambiado
+	   B=construir_mensaje_BGP(Msg.prefix);
+    	   S=aplicar_filtro_exportacion(AS_Remoto, B);
+    	   if (S != None) : # anunciar la mejor ruta
+	     enviar_ACTUALIZACION(S, AS_Remoto, IP_Remoto);     
+    	   else if (ruta_Anterior != None) :
+	     enviar_RETIRO(Msg.prefix, AS_Remoto, IP_Remoto)		
+      else : # Msg es RETIRO
+      	  ruta_Anterior=mejor_Ruta(Msg.prefix) 
+   	  eliminar_de_RIB(Msg)
+	  correr_Proceso_Decision(RIB)
+	  if (mejor_Ruta(Msg.prefix) != ruta_Anterior):
+	    # mejor ruta ha cambiado
+	    B=construir_mensaje_BGP(Msg.prefix)
+	    S=aplicar_filtro_exportacion(AS_Remoto, B)
+	    if (S != None) : # aún es la una mejor ruta hacia Msg.prefix
+	       enviar_ACTUALIZACION(S, AS_Remoto, IP_Remoto);
+     	    else if(ruta_Anterior != None) : # Ya no es mejor ruta
+	        enviar_RETIRO(Msg.prefix, AS_Remoto, IP_Remoto);
      
-When a BGP message is received, the router first applies the peer's `import filter` to verify whether the message is acceptable or not. If the message is not acceptable, the processing stops. The pseudo-code below shows a simple `import filter`. This `import filter` accepts all routes, except those that already contain the local AS in their AS-Path. If such a route was used, it would cause a routing loop. Another example of an `import filter` would be a filter used by an Internet Service Provider on a session with a customer to only accept routes towards the IP prefixes assigned to the customer by the provider. On real routers, `import filters` can be much more complex and some `import filters` modify the attributes of the received BGP `UPDATE` [WMS2004]_ .
+.. When a BGP message is received, the router first applies the peer's `import filter` to verify whether the message is acceptable or not. If the message is not acceptable, the processing stops. The pseudo-code below shows a simple `import filter`. This `import filter` accepts all routes, except those that already contain the local AS in their AS-Path. If such a route was used, it would cause a routing loop. Another example of an `import filter` would be a filter used by an Internet Service Provider on a session with a customer to only accept routes towards the IP prefixes assigned to the customer by the provider. On real routers, `import filters` can be much more complex and some `import filters` modify the attributes of the received BGP `UPDATE` [WMS2004]_ .
+
+Cuando se recibe un mensaje BGP, el router primeramente aplica el filtro de importación del `peer`para verificar si el mensaje es aceptable o no. Si el mensaje no es aceptable, se detiene el procesamiento. El pseudocódigo siguiente muestra un filtro de importación sencillo. Este filtro de importación acepta todas las rutas, excepto aquellas que ya contienen el AS local en su `AS-Path`. Si fuera usada una de dichas rutas, causaría un ciclo de ruteo. Otro ejemplo de un filtro de importación sería un filtro usado por un ISP sobre una sesión con un cliente, para aceptar sólo rutas hacia los prefijos IP asignados al cliente por el proveedor. En los routers verdaderos, los filtros de importación pueden ser mucho más complejos, y algunos filtros de importación modifican los atributos del mensaje BGP `UPDATE` [WMS2004]_.
 
 .. code-block:: python
 
- def apply_import_filter(RemoteAS, BGPMsg):
-     if MysAS in BGPMsg.ASPath :
-     	BGPMsg=None
-	# Many additional import policies can be configured : 
-  	# Accept or refuse the BGPMsg 
-  	# Modify selected attributes inside BGPMsg 
-     return BGPMsg
+ def aplicar_filtro_importacion(AS_Remoto, mensaje_BGP):
+     if mi_AS in mensaje_BGP.ASPath:
+     	mensaje_BGP=None
+	# Pueden configurarse muchas políticas de importación adicionales: 
+	# - Aceptar o rehusar mensaje_BGP
+	# - Modificar atributos seleccionados dentro de mensaje_BGP
+     return mensaje_BGP
 	
 
 .. note:: The bogon filters
 
- Another example of frequently used `import filters` are the filters that Internet Service Providers use to ignore bogon routes. In the ISP community, a bogon route is a route that should not be advertised on the global Internet. Typical examples include the private IPv4 prefixes defined in :rfc:`1918`, the loopback prefixes (`127.0.0.1/8` and `::1/128`) or the IP prefixes that have not yet been allocated by IANA. A well managed BGP router should ensure that it never advertises bogons on the global Internet. Detailed information about these bogons may be found at http://www.team-cymru.org/Services/Bogons/
+..  Another example of frequently used `import filters` are the filters that Internet Service Providers use to ignore bogon routes. In the ISP community, a bogon route is a route that should not be advertised on the global Internet. Typical examples include the private IPv4 prefixes defined in :rfc:`1918`, the loopback prefixes (`127.0.0.1/8` and `::1/128`) or the IP prefixes that have not yet been allocated by IANA. A well managed BGP router should ensure that it never advertises bogons on the global Internet. Detailed information about these bogons may be found at http://www.team-cymru.org/Services/Bogons/
+
+Otro ejemplo de filtros de importación usados frecuentemente son los filtros que usan los ISPs para ignorar rutas `bogon`. En la comunidad de ISPs, una ruta `bogon` es aquella que no debe ser anunciada en la Internet global. Ejemplos típicos son los prefijos IPv4 privados  definidos en :rfc:`1918`, los prefijos de `loopback` (`127.0.0.1/8` y `::1/128`) o los prefijos IP que no hayan sido aún asignados por IANA. Un router BGP bien administrado debe asegurar que nunca anunciará `bogons` a la Internet global. Más detalles sobre `bogons` en http://www.team-cymru.org/Services/Bogons.
 
 
-If the import filter accepts the BGP message, the pseudo-code distinguishes two cases. If this is an `Update message` for prefix `p`, this can be a new route for this prefix or a modification of the route's attributes. The router first retrieves from its `RIB` the best route towards prefix `p`. Then, the new route is inserted in the `RIB` and the `BGP decision process` is run to find whether the best route towards destination `p` changes. A BGP message only needs to be sent to the router's peers if the best route has changed. For each peer, the router applies the  `export filter` to verify whether the route can be advertised. If yes, the filtered BGP message is sent. Otherwise, a `Withdraw message` is sent. When the router receives a `Withdraw message`, it also verifies whether the removal of the route from its `RIB` caused its best route towards this prefix to change. It should be noted that, depending on the content of the `RIB` and the `export filters`, a BGP router may need to send a `Withdraw message` to a peer after having received an `Update message` from another peer and conversely.
+.. If the import filter accepts the BGP message, the pseudo-code distinguishes two cases. If this is an `Update message` for prefix `p`, this can be a new route for this prefix or a modification of the route's attributes. The router first retrieves from its `RIB` the best route towards prefix `p`. Then, the new route is inserted in the `RIB` and the `BGP decision process` is run to find whether the best route towards destination `p` changes. A BGP message only needs to be sent to the router's peers if the best route has changed. For each peer, the router applies the  `export filter` to verify whether the route can be advertised. If yes, the filtered BGP message is sent. Otherwise, a `Withdraw message` is sent. When the router receives a `Withdraw message`, it also verifies whether the removal of the route from its `RIB` caused its best route towards this prefix to change. It should be noted that, depending on the content of the `RIB` and the `export filters`, a BGP router may need to send a `Withdraw message` to a peer after having received an `Update message` from another peer and conversely.
 
-Let us now discuss in more detail the operation of BGP in an IPv4 network. For this, let us consider the simple network composed of three routers located in three different ASes and shown in the figure below.
+Si el filtro de importación acepa el mensaje BGP, el pseudocódigo distingue dos casos. Si se trata de un mensaje de `Actualización` para el prefijo `p`, ésta puede ser una nueva ruta para este prefijo o una modificación de los atributos de la ruta. El router primeramente extrae de su `RIB` la mejor ruta hacia el prefijo `p`. Luego inserta en el `RIB` la nueva ruta y corre el proceso de decisión BGP para determinar si la mejor ruta hacia el destino `p` cambia. Sólo se necesita enviar un mensaje BGP a los pares del router si la mejor ruta ha cambiado. Para cada `peer`, el router aplica el filtro de exportación para verificar si la ruta puede ser anunciada. Si es así, el mensaje BGP filtrado es enviado. Si no, se envía un mensaje de `Retiro`. Cuando el router recibe un mensaje de `Retiro`, también verifica si la eliminación de la ruta de su `RIB` ha causado que cambie su mejor ruta hacia este prefijo. Debe notarse que, dependiendo del contenido de la tabla `RIB` y de los filtros de exportación, un router BGP puede necesitar enviar un mensaje de `Retiro` a un par luego de haber recibido una `Actualización` de otro par, y a la inversa.
 
+.. Let us now discuss in more detail the operation of BGP in an IPv4 network. For this, let us consider the simple network composed of three routers located in three different ASes and shown in the figure below.
+
+Discutamos ahora en mayor detalle la operación de BGP en una red IPv4. Para esto consideremos la red simple compuesta por tres routers en tres AS diferentes como se muestra en la figura siguiente.
 .. figure:: svg/bgp-nexthop.*
    :align: center
    :scale: 70
-   
-   Utilisation of the BGP nexthop attribute
+  
+   Utilización del atributo `nexthop` de BGP 
+.. Utilisation of the BGP nexthop attribute
 
-This network contains three routers : `R1`, `R2` and `R3`. Each router is attached to a local IPv4 subnet that it advertises using BGP. There are two BGP sessions, one between `R1` and `R2` and the second between `R2` and `R3`. A `/30` subnet is used on each interdomain link (`195.100.0.0/30` on `R1-R2` and `195.100.0.4/30` on `R2-R3`). The BGP sessions run above TCP connections established between the neighbouring routers (e.g. `195.100.0.1 - 195.100.0.2` for the `R1-R2` session).
+.. This network contains three routers : `R1`, `R2` and `R3`. Each router is attached to a local IPv4 subnet that it advertises using BGP. There are two BGP sessions, one between `R1` and `R2` and the second between `R2` and `R3`. A `/30` subnet is used on each interdomain link (`195.100.0.0/30` on `R1-R2` and `195.100.0.4/30` on `R2-R3`). The BGP sessions run above TCP connections established between the neighbouring routers (e.g. `195.100.0.1 - 195.100.0.2` for the `R1-R2` session).
 
+Esta red contiene tres routers: `R1`, `R2` y `R3`. Cada router está conectado a una subred local IPv4, la cual anuncia usando BGP. Hay dos sesiones BGP, una entre `R1` y `R2` y la segunda entre `R2` y `R3`. En cada enlace interdominios (`195.100.0.0/30` sobre `R1-R2` y `195.100.0.4/30` sobre `R2-R3`) se usa una subred `/30`. Las sesiones BGP corren sobre conexiones TCP establecidas entre los routers vecinos  (por ejemplo, `195.100.0.1 - 195.100.0.2` para la sesión `R1-R2`).
 
 .. index:: BGP nexthop
 
