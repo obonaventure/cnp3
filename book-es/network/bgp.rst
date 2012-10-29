@@ -356,74 +356,126 @@ Esta red contiene tres routers: `R1`, `R2` y `R3`. Cada router está conectado a
 
 .. index:: BGP nexthop
 
-Let us assume that the `R1-R2` BGP session is the first to be established. A `BGP Update` message sent on such a session contains three fields :
+.. Let us assume that the `R1-R2` BGP session is the first to be established. A `BGP Update` message sent on such a session contains three fields :
+..
+.. - the advertised prefix
+.. - the `BGP nexthop`
+.. - the attributes including the AS-Path 
 
- - the advertised prefix
- - the `BGP nexthop`
- - the attributes including the AS-Path 
+Supongamos que la sesión BGP que se establece primero es `R1-R2`. Un mensaje `BGP Update` enviado sobre esa sesión contendrá tres campos:
 
-We use the notation `U(prefix, nexthop, attributes)` to represent such a `BGP Update` message in this section. Similarly, `W(prefix)` represents a `BGP withdraw` for the specified prefix. Once the `R1-R2` session has been established, `R1` sends `U(194.100.0.0/24,195.100.0.1,AS10)` to `R2` and `R2` sends `U(194.100.2.0/23,195.100.0.2,AS20)`. At this point, `R1` can reach `194.100.2.0/23` via `195.100.0.2` and `R2` can reach `194.100.0.0/24` via `195.100.0.1`.
+ - El prefijo que se está anunciando
+ - El `nexthop` BGP
+ - Los atributos, incluyendo el AS-Path 
 
-Once the `R2-R3` has been established, `R3` sends `U(194.100.1.0/24,195.100.0.6,AS30)`. `R2` announces on the `R2-R3` session all the routes inside its RIB. It thus sends to `R3` : `U(194.100.0.0/24,195.100.0.5,AS20:AS10)` and `U(194.100.2.0/23,195.100.0.5,AS20)`. Note that when `R2` advertises the route that it learned from `R1`, it updates the BGP nexthop and adds its AS number to the AS-Path. `R2` also sends `U(194.100.1.0/24,195.100.0.2,AS20:AS30)` to `R1` on the `R1-R3` session. At this point, all BGP routes have been exchanged and all routers can reach `194.100.0.0/24`, `194.100.2.0/23` and `194.100.1.0/24`.
 
-If the link between `R2` and `R3` fails, `R3` detects the failure as it did not receive `KEEPALIVE` messages recently from `R2`. At this time, `R3` removes from its RIB all the routes learned over the `R2-R3` BGP session. `R2` also removes from its RIB the routes learned from `R3`. `R2` also sends  `W(194.100.1.0/24)` to `R1` over the `R1-R3` BGP session since it does not have a route anymore towards this prefix.
+.. We use the notation `U(prefix, nexthop, attributes)` to represent such a `BGP Update` message in this section. Similarly, `W(prefix)` represents a `BGP withdraw` for the specified prefix. Once the `R1-R2` session has been established, `R1` sends `U(194.100.0.0/24,195.100.0.1,AS10)` to `R2` and `R2` sends `U(194.100.2.0/23,195.100.0.2,AS20)`. At this point, `R1` can reach `194.100.2.0/23` via `195.100.0.2` and `R2` can reach `194.100.0.0/24` via `195.100.0.1`.
 
-.. note:: Origin of the routes advertised by a BGP router
+En esta sección usaremos la notación `U(prefijo, nexthop, atributos)` para representar dicho mensaje `BGP Update`. Del mismo modo, `W(prefijo)` representará un mensaje `BGP withdraw` para el prefijo especificado. Una vez establecida la sesión `R1-R2`, `R1` envía `U(194.100.0.0/24,195.100.0.1,AS10)` a `R2`, y `R2` envía `U(194.100.2.0/23,195.100.0.2,AS20)`. Llegado este momento, `R1` puede alcanzar `194.100.2.0/23` a través de `195.100.0.2`, y `R2` puede alcanzar `194.100.0.0/24` a través de `195.100.0.1`.
 
- A frequent practical question about the operation of BGP is how a BGP router decides to originate or advertise a route for the first time. In practice, this occurs in two situations :
+.. Once the `R2-R3` has been established, `R3` sends `U(194.100.1.0/24,195.100.0.6,AS30)`. `R2` announces on the `R2-R3` session all the routes inside its RIB. It thus sends to `R3` : `U(194.100.0.0/24,195.100.0.5,AS20:AS10)` and `U(194.100.2.0/23,195.100.0.5,AS20)`. Note that when `R2` advertises the route that it learned from `R1`, it updates the BGP nexthop and adds its AS number to the AS-Path. `R2` also sends `U(194.100.1.0/24,195.100.0.2,AS20:AS30)` to `R1` on the `R1-R3` session. At this point, all BGP routes have been exchanged and all routers can reach `194.100.0.0/24`, `194.100.2.0/23` and `194.100.1.0/24`.
 
-  - the router has been manually configured by the network operator to always advertise one or several routes on a BGP session. For example, on the BGP session between UCLouvain and its provider, belnet_ , UCLouvain's router always advertises the `130.104.0.0/16` IPv4 prefix assigned to the campus network
-  - the router has been configured by the network operator to advertise over its BGP session some of the routes that it learns with its intradomain routing protocol. For example, an enterprise router may advertise over a BGP session with its provider the routes to remote sites when these routes are reachable and advertised by the intradomain routing protocol
+Una vez establecida la sesión `R2-R3`, `R3` envía `U(194.100.1.0/24,195.100.0.6,AS30)`. `R2` anuncia, sobre la sesión `R2-R3`, todas las rutas contenidas en su RIB. Entonces, envía a `R3` : `U(194.100.0.0/24,195.100.0.5,AS20:AS10)` y `U(194.100.2.0/23,195.100.0.5,AS20)`. Nótese que cuando `R2` anuncia la ruta que aprendió de `R1`, actualiza el nexthop BGP, y agrega su número de AS al AS-Path. `R2` también envía `U(194.100.1.0/24,195.100.0.2,AS20:AS30)` a `R1` sobre la sesión `R1-R3`. En este momento, todas las rutas BGP han sido intercambiadas y todos los routers pueden llegar a `194.100.0.0/24`, `194.100.2.0/23` y `194.100.1.0/24`.
 
- The first solution is the most frequent. Advertising routes learned from an intradomain routing protocol is not recommended, this is because if the route flaps [#fflap]_, this would cause a large number of BGP messages being exchanged in the global Internet.
+.. If the link between `R2` and `R3` fails, `R3` detects the failure as it did not receive `KEEPALIVE` messages recently from `R2`. At this time, `R3` removes from its RIB all the routes learned over the `R2-R3` BGP session. `R2` also removes from its RIB the routes learned from `R3`. `R2` also sends  `W(194.100.1.0/24)` to `R1` over the `R1-R3` BGP session since it does not have a route anymore towards this prefix.
 
-Most networks that use BGP contain more than one router. For example, consider the network shown in the figure below where `AS20` contains two routers attached to interdomain links : `R2` and `R4`. In this network, two routing protocols are used by `R2` and `R4`. They use an intradomain routing protocol such as OSPF to distribute the routes towards the internal prefixes : `195.100.0.8/30`, `195.100.0.0/30`, ... `R2` and `R4` also use BGP. `R2` receives the routes advertised by `AS10` while `R4` receives the routes advertised by `AS30`. These two routers need to exchange the routes that they have respectively received over their BGP sessions. 
+Si falla el enlace entre `R2` y `R3`, `R3` detectará la falla al no recibir mensajes `KEEPALIVE` recientes de `R2`. En este momento, `R3` elimina de su RIB todas las rutas aprendidas sobre la sesión BGP `R2-R3`. `R2` también elimina de su RIB las rutas aprendidas de `R3`. `R2` envia también  `W(194.100.1.0/24)` a `R1` sobre la sesión BGP `R1-R3` ya que no tiene más una ruta hacia este prefijo.
 
+
+.. .. note:: Origin of the routes advertised by a BGP router
+
+.. A frequent practical question about the operation of BGP is how a BGP router decides to originate or advertise a route for the first time. In practice, this occurs in two situations :
+..
+..  - the router has been manually configured by the network operator to always advertise one or several routes on a BGP session. For example, on the BGP session between UCLouvain and its provider, belnet_ , UCLouvain's router always advertises the `130.104.0.0/16` IPv4 prefix assigned to the campus network
+..  - the router has been configured by the network operator to advertise over its BGP session some of the routes that it learns with its intradomain routing protocol. For example, an enterprise router may advertise over a BGP session with its provider the routes to remote sites when these routes are reachable and advertised by the intradomain routing protocol
+..
+.. The first solution is the most frequent. Advertising routes learned from an intradomain routing protocol is not recommended, this is because if the route flaps [#fflap]_, this would cause a large number of BGP messages being exchanged in the global Internet.
+
+.. note:: Origen de las rutas anunciadas por un router BGP
+
+ Una pregunta práctica frecuente sobre la operación de BGP es cómo decide un router BGP originar o anunciar una ruta por primera vez. En la práctica, esto ocurre en dos situaciones:
+
+  - El router ha sido configurado manualmente por el operador de la red para anunciar siempre una o más rutas sobre una sesión BGP. Por ejemplo, sobre la sesión BGP entre UCLouvain y su proveedor, belnet_ , el router de UCLouvain siempre anuncia el prefijo IPv4 `130.104.0.0/16` asignado a la red del campus.
+  - El router ha sido configurado por el operador de la red para anunciar sobre su sesión BGP algunas rutas que aprende con su protocolo de ruteo intradominio. Por ejemplo, un router corporativo puede anunciar sobre una sesión BGP con su proveedor las rutas a sitios remotos cuando estas rutas sean alcanzables y anunciadas por el protocolo de ruteo intradominio. 
+
+ La primera solución es la más frecuente. No es recomendable anunciar rutas aprendidas de un protocolo de ruteo intradominio. Esto se debe a que si la ruta oscila (o `hace flap` [#fflap]_), esto causaría una gran cantidad de mensajes BGP intercambiándose por la Internet global. 
+
+.. Most networks that use BGP contain more than one router. For example, consider the network shown in the figure below where `AS20` contains two routers attached to interdomain links : `R2` and `R4`. In this network, two routing protocols are used by `R2` and `R4`. They use an intradomain routing protocol such as OSPF to distribute the routes towards the internal prefixes : `195.100.0.8/30`, `195.100.0.0/30`, ... `R2` and `R4` also use BGP. `R2` receives the routes advertised by `AS10` while `R4` receives the routes advertised by `AS30`. These two routers need to exchange the routes that they have respectively received over their BGP sessions. 
+
+La mayor parte de las redes que usan BGP contienen más de un router. Por ejemplo, consideremos la red que se muestra en la figura siguiente, donde `AS20` contiene dos routers conectados a enlaces interdominio:  `R2` y `R4`. En esta red, `R2` y `R4` utilizan dos protocolos de ruteo. Usan un protocolo de ruteo intradominio, como OSPF, para distribuir las rutas hacia los prefijos internos: `195.100.0.8/30`, `195.100.0.0/30`, ... `R2` y `R4` también usan BGP. `R2` recibe las rutas anunciadas por `AS10` mientras que `R4` recibe las rutas anunciadas por `AS30`. Estos dos routers necesitan intercambiar las rutas que han recibido, respectivamente, sobre sus sesiones BGP.
 
 .. figure:: svg/bgp-larger.*
    :align: center
    :scale: 70
-   
-   A larger network using BGP
+  
+   Una red de mayor porte usando BGP 
+..   A larger network using BGP
 
-A first solution to allow `R2` and `R3` to exchange the interdomain routes that they have learned over their respective BGP sessions would be to configure the intradomain routing protocol to distribute inside `AS20` the routes learned over the BGP sessions. Although current routers support this feature, this is a bad solution for two reasons :
+.. A first solution to allow `R2` and `R3` to exchange the interdomain routes that they have learned over their respective BGP sessions would be to configure the intradomain routing protocol to distribute inside `AS20` the routes learned over the BGP sessions. Although current routers support this feature, this is a bad solution for two reasons :
 
- 1. Intradomain routing protocols cannot distribute the attributes that are attached to a BGP route. If `R4` received via the intradomain routing protocol a route towards `194.100.0.0/23` that `R2` learned via BGP, it would not know that the route was originated by `AS10` and the only advertisement that it could send to `R3` would contain an incorrect AS-Path
- 2. Intradomain routing protocols have not been designed to support the hundreds of thousands of routes that a BGP router can receive on today's global Internet.
+Una primera solución para permitir que `R2` y `R3` intercambien rutas que han aprendido sobre sus respectivas sesiones BGP sería configurar el protocolo de ruteo intradominio para distribuir dentro de `AS20` las rutas aprendidas sobre las sesiones BGP. Aunque los routers corrientes soportan esta característica, es una mala solución por dos razones:
+
+.. 1. Intradomain routing protocols cannot distribute the attributes that are attached to a BGP route. If `R4` received via the intradomain routing protocol a route towards `194.100.0.0/23` that `R2` learned via BGP, it would not know that the route was originated by `AS10` and the only advertisement that it could send to `R3` would contain an incorrect AS-Path
+.. 2. Intradomain routing protocols have not been designed to support the hundreds of thousands of routes that a BGP router can receive on today's global Internet.
+
+ 1. Los protocolos de ruteo intradominio no pueden distribuir los atributos que se agregan a una ruta BGP. Si `R4` recibiera, a través del protocolo de ruteo intradomino, una ruta hacia `194.100.0.0/23` que `R2` aprendió mediante BGP, no sabría que la ruta fue originada por `AS10` y que el único anuncio que podría enviar a `R3` contendría un AS-Path incorrecto.
+ 2. Los protocolos de ruteo intradominio no han sido diseñados para soportan los cientos de miles de rutas que puede recibir un router BGP en la Internet global de hoy.
+
 
 .. index:: eBGP, iBGP
 
-The best solution to allow BGP routers to distribute, inside an AS, all the routes learned over BGP sessions is to establish BGP sessions among all the BGP routers inside the AS. In practice, there are two types of BGP sessions :
+.. The best solution to allow BGP routers to distribute, inside an AS, all the routes learned over BGP sessions is to establish BGP sessions among all the BGP routers inside the AS. In practice, there are two types of BGP sessions :
+..
+.. - :term:`eBGP` session or `external BGP session`. Such a BGP session is established between two routers that are directly connected and belong to two different domains.
+.. - :term:`iBGP` session or `internal BGP session`. Such a BGP session is established between two routers belonging to the same domain. These two routers do not need to be directly connected.
 
- - :term:`eBGP` session or `external BGP session`. Such a BGP session is established between two routers that are directly connected and belong to two different domains.
- - :term:`iBGP` session or `internal BGP session`. Such a BGP session is established between two routers belonging to the same domain. These two routers do not need to be directly connected.
+La mejor solución para permitir a los routers BGP distribuir, dentro de un AS, todas las rutas aprendidas por sesiones BGP, es establecer sesiones entre todos los routers BGP dentro del AS. En la práctica, hay dos tipos de sesiones BGP: 
 
+ - Sesión :term:`eBGP` o `sesión BGP externa`. Esta sesión es establecida entre dos routers directamente conectados y pertenecientes a diferentes dominios.
+ - Sesión :term:`iBGP` o `sesión BGP externa`. Esta sesión se establece entre dos routers que pertenecen al mismo dominio. Ambos routers no necesitan estar directamente conectados.
 
-In practice, each BGP router inside a domain maintains an `iBGP session` with every other BGP router in the domain [#frr]_. This creates a full-mesh of `iBGP sessions` among all BGP routers of the domain. `iBGP sessions`, like `eBGP sessions` run over TCP connections. Note that in contrast with `eBGP sessions` that are established between directly connected routers, `iBGP sessions` are often established between routers that are not directly connected.
+.. In practice, each BGP router inside a domain maintains an `iBGP session` with every other BGP router in the domain [#frr]_. This creates a full-mesh of `iBGP sessions` among all BGP routers of the domain. `iBGP sessions`, like `eBGP sessions` run over TCP connections. Note that in contrast with `eBGP sessions` that are established between directly connected routers, `iBGP sessions` are often established between routers that are not directly connected.
 
-An important point to note about `iBGP sessions` is that a BGP router only advertises a route over an `iBGP session` provided that :
+En la práctica, cada router BGP dentro de un dominio mantiene una `sesión iBGP` con todos los demás routers BGP en el dominio [#frr]_. Esto crea una trama completamente conectada de sesiones `iBGP` entre todos los routers BGP del dominio. Las sesiones `iBGP`, al igual que las `sesiones eBGP`, corren sobre conexiones TCP. Nótese que, en contraste con las sesiones `eBGP`, que se establecen entre routers directamente conectados, las sesiones `iBGP` suelen establecerse entre routers que no lo están.
 
- - the router uses this route to forward packets, and
- - the route was learned over one of the router's `eBGP sessions`
+.. An important point to note about `iBGP sessions` is that a BGP router only advertises a route over an `iBGP session` provided that :
+..
+.. - the router uses this route to forward packets, and
+.. - the route was learned over one of the router's `eBGP sessions`
 
-A BGP router does not advertise a route that it has learned over an `iBGP session` over another `iBGP session`. Note that a router can, of course, advertise over an `eBGP session` a route that it has learned over an `iBGP session`. This difference between the behaviour of a BGP router over `iBGP` and `eBGP` session is due to the utilisation of a full-mesh of `iBGP sessions`. Consider a network containing three BGP routers : `A`, `B` and `C` interconnected via a full-mesh of iBGP sessions. If router `A` learns a route towards prefix `p` from router `B`, router `A` does not need to advertise the received route to router `C` since router `C` also learns the same route over the `C-B` `iBGP session`.
+Un punto importante a notar sobre las sesiones `iBGP` es que un router BGP sólo anuncia una ruta sobre una sesión `iBGP` cuando: 
 
-To understand the utilisation of an `iBGP session`, let us consider what happens when router `R1` sends `U(194.100.0.0/23,195.100.0.1,AS10)` in the network shown below. This BGP message is processed by `R2` which advertises it over its `iBGP session` with `R4`. The `BGP Update` sent by `R2` contains the same nexthop and the same AS-Path as in the `BGP Update` received by `R2`. `R4` then sends `U(194.100.0.0/23,195.100.0.5,AS20:AS10)` to `R3`. Note that the BGP nexthop and the AS-Path are only updated [#fnexthopself]_ when a BGP route is advertised over an `eBGP session`.
+ - El roter utiliza esta ruta para reenviar paquetes, y
+ - La ruta fue aprendida sobre una de las sesiones `eBGP` del router.
+
+.. A BGP router does not advertise a route that it has learned over an `iBGP session` over another `iBGP session`. Note that a router can, of course, advertise over an `eBGP session` a route that it has learned over an `iBGP session`. This difference between the behaviour of a BGP router over `iBGP` and `eBGP` session is due to the utilisation of a full-mesh of `iBGP sessions`. Consider a network containing three BGP routers : `A`, `B` and `C` interconnected via a full-mesh of iBGP sessions. If router `A` learns a route towards prefix `p` from router `B`, router `A` does not need to advertise the received route to router `C` since router `C` also learns the same route over the `C-B` `iBGP session`.
+
+Un router BGP no anuncia una ruta que ha aprendido sobre una sesión `iBGP` sobre otra sesión `iBGP`. Nótese que un router puede, por supuesto, anunciar sobre una sesión `eBGP` una ruta que ha aprendido sobre una sesión `iBGP`. La diferencia entre la conducta del router BGP sobre las sesiones `iBGP` y `eBGP` se debe a la utilización de una trama completamente conectada de sesiones `iBGP`. Consideremos una red conteniendo tres routers BGP: `A`, `B` y `C`, interconectados a través de una trama completa de sesiones iBGP. Si el router `A` aprende una ruta hacia el prefijo `p` del router `B`, `A` no necesita anunciar la ruta recibida al router `C`, ya que `C` también aprende la misma ruta sobre la sesión `iBGP` `C-B`.
+
+.. To understand the utilisation of an `iBGP session`, let us consider what happens when router `R1` sends `U(194.100.0.0/23,195.100.0.1,AS10)` in the network shown below. This BGP message is processed by `R2` which advertises it over its `iBGP session` with `R4`. The `BGP Update` sent by `R2` contains the same nexthop and the same AS-Path as in the `BGP Update` received by `R2`. `R4` then sends `U(194.100.0.0/23,195.100.0.5,AS20:AS10)` to `R3`. Note that the BGP nexthop and the AS-Path are only updated [#fnexthopself]_ when a BGP route is advertised over an `eBGP session`.
+
+Para comprender la utilización de una sesión `iBGP`, consideremos lo que ocurre cuando el router `R1` envía `U(194.100.0.0/23,195.100.0.1,AS10)` en la red que se muestra a continuación. Este mensaje BGP es procesado por `R2`, quien lo anuncia  sobre su sesión `iBGP` con `R4`. El mensaje `BGP Update` enviado por `R2` contiene el mismo nexthop y el mismo AS-Path que en el mensaje  `BGP Update` recibido por `R2`. `R4` envía entonces `U(194.100.0.0/23,195.100.0.5,AS20:AS10)` a `R3`. nótese que el nexthop BGP y el AS-PATH sólo se actualizan [#fnexthopself]_ cuando una ruta BGP es anunciada sobre una sesión `eBGP`.
 
 .. figure:: svg/ibgp-ebgp.*
    :align: center
    :scale: 70
-   
-   iBGP and eBGP sessions
+  
+   Sesiones iBGP y eBGP 
+..   iBGP and eBGP sessions
 
 
 .. index:: loopback interface
 
 .. comment:: For me, this note on the loopback isn't quite clear. I remember having trouble with it, when I first read this.
 
-.. note:: Loopback interfaces and iBGP sessions
+.. .. note:: Loopback interfaces and iBGP sessions
+..
+.. In addition to their physical interfaces, routers can also be configured with a special loopback interface[#fbgploop]_. A loopback interface is a software interface that is always up. When a loopback interface is configured on a router, the address associated to this interface is advertised by the intradomain routing protocol. Consider for example a router with two point-to-point interfaces and one loopback interface. When a point-to-point interface fails, it becomes unreachable and the router cannot receive anymore packets via this IP address. This is not the case for the loopback interface. It remains reachable as long as at least one of the router's interfaces remains up. `iBGP sessions` are usually established using the router's loopback addresses as endpoints. This allows the `iBGP session` and its underlying TCP connection to remain up even if physical interfaces fail on the routers.
 
- In addition to their physical interfaces, routers can also be configured with a special loopback interface[#fbgploop]_. A loopback interface is a software interface that is always up. When a loopback interface is configured on a router, the address associated to this interface is advertised by the intradomain routing protocol. Consider for example a router with two point-to-point interfaces and one loopback interface. When a point-to-point interface fails, it becomes unreachable and the router cannot receive anymore packets via this IP address. This is not the case for the loopback interface. It remains reachable as long as at least one of the router's interfaces remains up. `iBGP sessions` are usually established using the router's loopback addresses as endpoints. This allows the `iBGP session` and its underlying TCP connection to remain up even if physical interfaces fail on the routers.
+.. note:: Interfaces de loopback y sesiones iBGP
+
+ Además de sus interfaces físicas, los routers también pueden ser configurados con una interfaz especial `de loopback` [#fbgploop]_. Una interfaz de loopback es una interfaz de software, que está siempre activa. Cuando se configura dicha interfaz en un router, la dirección asociada con esta interfaz es anunciada por el protocolo de ruteo intradominio. Consideremos por ejemplo un router con dos interfaces punto a punto y una interfaz de loopback. Cuando falla una interfaz punto a punto, queda inalcanzable, y el router no puede recibir más paquetes a través de esta dirección IP. Éste no es el caso para la interfaz de loopback. Ésta permanece alcanzable mientras al menos una de las demás interfaces del router se mantenga activa. Las sesiones `iBGP` generalmente se establecen usando las direcciones de loopback de los routers como puntos extremos. Esto permite que la sesión `iBGP` y su conexión TCP subyacente se conserven activas aun cuando las interfaces físicas de los routers fallen.
+
 
 .. comment:: example route not selected ?
 
