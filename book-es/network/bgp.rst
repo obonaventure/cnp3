@@ -34,7 +34,7 @@ Los dominios necesitan estar interconectados para permitir que un host dentro de
    :align: center
    :scale: 70
    
-   Interconexión de dos dominos mediante un enlace privado de `peering`
+   Interconexión de dos dominios mediante un enlace privado de `peering`
 ..   Interconnection of two domains via a private peering link 
 
 .. Such `private peering links` are useful when, for example, an enterprise or university network needs to be connected to its Internet Service Provider. However, some domains are connected to hundreds of other domains [#fasrank]_ . For some of these domains, using only private peering links would be too costly. A better solution to allow many domains to interconnect cheaply are the `Internet eXchange Points` (:term:`IXP`). An :term:`IXP` is usually some space in a data center that hosts routers belonging to different domains. A domain willing to exchange packets with other domains present at the :term:`IXP` installs one of its routers on the :term:`IXP` and connects it to other routers inside its own network. The IXP contains a Local Area Network to which all the participating routers are connected. When two domains that are present at the IXP wish [#fwish]_ to exchange packets, they simply use the Local Area Network. IXPs are very popular in Europe and many Internet Service Providers and Content providers are present in these IXPs. 
@@ -477,72 +477,118 @@ Para comprender la utilización de una sesión `iBGP`, consideremos lo que ocurr
 
 .. note:: Interfaces de loopback y sesiones iBGP
 
- Además de sus interfaces físicas, los routers también pueden ser configurados con una interfaz especial `de loopback` [#fbgploop]_. Una interfaz de loopback es una interfaz de software, que está siempre activa. Cuando se configura dicha interfaz en un router, la dirección asociada con esta interfaz es anunciada por el protocolo de ruteo intradominio. Consideremos por ejemplo un router con dos interfaces punto a punto y una interfaz de loopback. Cuando falla una interfaz punto a punto, queda inalcanzable, y el router no puede recibir más paquetes a través de esta dirección IP. Éste no es el caso para la interfaz de loopback. Ésta permanece alcanzable mientras al menos una de las demás interfaces del router se mantenga activa. Las sesiones `iBGP` generalmente se establecen usando las direcciones de loopback de los routers como puntos extremos. Esto permite que la sesión `iBGP` y su conexión TCP subyacente se conserven activas aun cuando las interfaces físicas de los routers fallen.
+ Además de sus interfaces físicas, los routers también pueden ser configurados con una interfaz especial `de loopback` [#fbgploop]_. Una interfaz de loopback es una interfaz de software, que está siempre activa. Cuando se configura dicha interfaz en un router, la dirección asociada con esta interfaz es anunciada por el protocolo de ruteo intradominio. Consideremos por ejemplo un router con dos interfaces punto a punto y una interfaz de loopback. Cuando falla una interfaz punto a punto, queda inalcanzable, y el router no puede recibir más paquetes a través de esta dirección IP. No es éste el caso para la interfaz de loopback. Ésta permanece alcanzable mientras al menos una de las demás interfaces del router se mantenga activa. Las sesiones `iBGP` generalmente se establecen usando las direcciones de loopback de los routers como puntos extremos. Esto permite que la sesión `iBGP` y su conexión TCP subyacente se conserven activas aun cuando las interfaces físicas de los routers fallen.
 
 
 .. comment:: example route not selected ?
 
-Now that routers can learn interdomain routes over iBGP and eBGP sessions, let us examine what happens when router `R3` sends a packet destined to `194.100.1.234`. `R3` forwards this packet to `R4`.  `R4` uses an intradomain routing protocol and BGP. Its BGP routing table contains the following longest prefix match : 
+.. Now that routers can learn interdomain routes over iBGP and eBGP sessions, let us examine what happens when router `R3` sends a packet destined to `194.100.1.234`. `R3` forwards this packet to `R4`.  `R4` uses an intradomain routing protocol and BGP. Its BGP routing table contains the following longest prefix match : 
+..
+.. - `194.100.0.0/23` via `195.100.0.1`
 
- - `194.100.0.0/23` via `195.100.0.1`
+Ahora que los routers pueden aprender rutas interdominio sobre sesiones iBGP y eBGP, examinemos qué ocurre cuando el router `R3` envía un paquete destinado a `194.100.1.234`. `R3` envía este paquete a `R4`. `R4` usa un protocolo de ruteo intradominio, y además BGP. Su tabla de ruteo BGP contiene la siguiente coincidencia de prefijo más largo: 
 
-This routes indicates that to forward a packet towards `194.100.0.0/23`, `R4` needs to forward the packet along the route towards `195.100.0.1`. However, `R4` is not directly connected to `195.100.0.1`. `R4` learned a route that matches this address thanks to its intradomain routing protocol that distributed the following routes :
+ - `194.100.0.0/23` a través de `195.100.0.1`
 
- - `195.100.0.0/30`  via `195.100.0.10`
- - `195.100.0.4/30`  East
- - `195.100.0.8/30`  North
- - `194.100.2.0/23`  via `195.100.0.10`
- - `194.100.0.4/23`  West
+.. This routes indicates that to forward a packet towards `194.100.0.0/23`, `R4` needs to forward the packet along the route towards `195.100.0.1`. However, `R4` is not directly connected to `195.100.0.1`. `R4` learned a route that matches this address thanks to its intradomain routing protocol that distributed the following routes :
+..
+.. - `195.100.0.0/30`  via `195.100.0.10`
+.. - `195.100.0.4/30`  East
+.. - `195.100.0.8/30`  North
+.. - `194.100.2.0/23`  via `195.100.0.10`
+.. - `194.100.0.4/23`  West
 
-To build its forwarding table, `R4` must combine the routes learned from the intradomain routing protocol with the routes learned from BGP. Thanks to its intradomain routing table, for each interdomain route `R4` replaces the BGP nexthop with its shortest path computed by the intradomain routing protocol. In the figure above, `R4` forwards packets to `194.100.0.0/23` via `195.100.0.10` to which it is directly connected via its North interface. `R4` 's resulting forwarding table, which associates an outgoing interface for a directly connected prefix or a directly connected nexthop and an outgoing interface for prefixes learned via BGP, is shown below :
+Esta ruta indica que, para reenviar un paquete hacia `194.100.0.0/23`, `R4` debe reenviar el paquete sobre la ruta hacia `195.100.0.1`. Sin embargo, `R4` no está directamente conectado con `195.100.0.1`. `R4` aprendió una ruta que coincide con esta dirección gracias a su protocolo de ruteo intradominio que distribuyó las siguientes rutas:
 
- - `194.100.0.0/23`  via `195.100.0.10` (North)
- - `195.100.0.0/30`  via `195.100.0.10` (North)
- - `195.100.0.4/30`  East
- - `195.100.0.8/30`  North
- - `194.100.2.0/23`  via `195.100.0.10` (North)
- - `194.100.4.0/23`  West
+ - `195.100.0.0/30`  a través de `195.100.0.10`
+ - `195.100.0.4/30`  Este
+ - `195.100.0.8/30`  Norte
+ - `194.100.2.0/23`  a través de `195.100.0.10`
+ - `194.100.0.4/23`  Oeste
 
-There is thus a coupling between the interdomain and the intradomain routing tables. If the intradomain routes change, e.g. due to link failures or changes in link metrics, then the forwarding table must be updated on each router as the shortest path towards a BGP nexthop may have changed.
 
-The last point to be discussed before looking at the BGP decision process is that a network may contain routers that do not maintain any eBGP session. These routers can be stub routers attached to a single router in the network or core routers that reside on the path between two border routers that are using BGP as illustrated in the figure below.
+.. To build its forwarding table, `R4` must combine the routes learned from the intradomain routing protocol with the routes learned from BGP. Thanks to its intradomain routing table, for each interdomain route `R4` replaces the BGP nexthop with its shortest path computed by the intradomain routing protocol. In the figure above, `R4` forwards packets to `194.100.0.0/23` via `195.100.0.10` to which it is directly connected via its North interface. `R4` 's resulting forwarding table, which associates an outgoing interface for a directly connected prefix or a directly connected nexthop and an outgoing interface for prefixes learned via BGP, is shown below :
+..
+.. - `194.100.0.0/23`  via `195.100.0.10` (North)
+.. - `195.100.0.0/30`  via `195.100.0.10` (North)
+.. - `195.100.0.4/30`  East
+.. - `195.100.0.8/30`  North
+.. - `194.100.2.0/23`  via `195.100.0.10` (North)
+.. - `194.100.4.0/23`  West
+
+Para construir su tabla de reenvío, `R4` debe combinar las rutas aprendidas del protocolo de ruteo intradominio con las rutas aprendidas de BGP. Gracias a su tabla de ruteo intradominio, `R4` reemplaza el nexthop BGP, para cada ruta interdominio, con su camino más corto computado por el protocolo de ruteo intradominio. En la figura anterior, `R4` envía paquetes a `194.100.0.0/23` a través de `195.100.0.10`, a la cual está directamente conectado a través de su interfaz Norte. La tabla de reenvío de `R4` resultante, que asocia una interfaz de salida (para un prefijo directamente conectado) o un nexthop directamente conectado y una interfaz de salida (para prefijos aprendidos mediante BGP), es como sigue:
+
+ - `194.100.0.0/23`  a través de `195.100.0.10` (North)
+ - `195.100.0.0/30`  a través de `195.100.0.10` (North)
+ - `195.100.0.4/30`  Este
+ - `195.100.0.8/30`  Norte
+ - `194.100.2.0/23`  a través de `195.100.0.10` (North)
+ - `194.100.4.0/23`  Oeste
+
+.. There is thus a coupling between the interdomain and the intradomain routing tables. If the intradomain routes change, e.g. due to link failures or changes in link metrics, then the forwarding table must be updated on each router as the shortest path towards a BGP nexthop may have changed.
+
+Existe así un acoplamiento entre las tablas de ruteo interdominio e intradominio. Si las rutas intradominio cambian, por ejemplo debido a fallas de enlaces o cambios en métricas de los enlaces, entonces la tabla de reenvío debe ser actualizada en cada router, ya que el camino más corto hacia un nexthop BGP puede haber cambiado. 
+
+.. The last point to be discussed before looking at the BGP decision process is that a network may contain routers that do not maintain any eBGP session. These routers can be stub routers attached to a single router in the network or core routers that reside on the path between two border routers that are using BGP as illustrated in the figure below.
+
+La última cuestión a discutir antes de estudiar el proceso de decisión BGP es que una red puede contener routers que no mantengan sesiones eBGP. Éstos pueden ser routers `stub` conectados a un único router en la red, o routers del `core` que residen en el camino entre dos routers de frontera que usan BGP, como se ilustra en la fogura siguiente.
 
 .. figure:: svg/ibgp-ebgp-2.*
    :align: center
    :scale: 70
-   
-   How to deal with non-BGP routers ?
+  
+   ¿Cómo interactuar con routers no BGP? 
+..   How to deal with non-BGP routers ?
 
-In the scenario above, router `R2` needs to be able to forward a packet towards any destination in the `12.0.0.0/8` prefix inside `AS30`. Such a packet would need to be forwarded by router `R5` since this router resides on the path between `R2` and its BGP nexthop attached to `R4`. Two solutions can be used to ensure that `R2` is able to forward such interdomain packets :
+.. In the scenario above, router `R2` needs to be able to forward a packet towards any destination in the `12.0.0.0/8` prefix inside `AS30`. Such a packet would need to be forwarded by router `R5` since this router resides on the path between `R2` and its BGP nexthop attached to `R4`. Two solutions can be used to ensure that `R2` is able to forward such interdomain packets :
+..
+.. - enable BGP on router `R5` and include this router in the `iBGP` full-mesh. Two iBGP sessions would be added in the figure above : `R2-R5` and `R4-R5`. This solution works and is used by many ASes. However, it forces all routers to have enough resources (CPU and memory) to run BGP and maintain a large forwarding table
+.. - encapsulate the interdomain packets sent through the AS so that router `R5` never needs to forward a packet whose destination is outside the local AS. Different encapsulation mechanisms exist. MultiProtocol Label Switching (MPLS) :rfc:`3031` and the Layer 2 Tunneling Protocol (L2TP) :rfc:`3931` are frequently used in large domains, but a detailed explanation of these techniques is outside the scope of this section. The simplest encapsulation scheme to understand is in IP in IP defined in :rfc:`2003`. This encapsulation scheme places an IP packet (called the inner packet), including its payload, as the payload of a larger IP packet (called the outer packet). It can be used by border routers to forward packets via routers that do not maintain a BGP routing table. For example, in the figure above, if router `R2` needs to forward a packet towards destination `12.0.0.1`, it can add at the front of this packet an IPv4 header whose source address is set to one of its IPv4 addresses and whose destination address is one of the IPv4 addresses of `R4`. The `Protocol` field of the IP header is set to `4` to indicate that it contains an IPv4 packet. The packet is forwarded by `R5` to `R4` based on the forwarding table that it built thanks to its intradomain routing table. Upon reception of the packet, `R4` removes the outer header and consults its (BGP) forwarding table to forward the packet towards `R3`. 
 
- - enable BGP on router `R5` and include this router in the `iBGP` full-mesh. Two iBGP sessions would be added in the figure above : `R2-R5` and `R4-R5`. This solution works and is used by many ASes. However, it forces all routers to have enough resources (CPU and memory) to run BGP and maintain a large forwarding table
- - encapsulate the interdomain packets sent through the AS so that router `R5` never needs to forward a packet whose destination is outside the local AS. Different encapsulation mechanisms exist. MultiProtocol Label Switching (MPLS) :rfc:`3031` and the Layer 2 Tunneling Protocol (L2TP) :rfc:`3931` are frequently used in large domains, but a detailed explanation of these techniques is outside the scope of this section. The simplest encapsulation scheme to understand is in IP in IP defined in :rfc:`2003`. This encapsulation scheme places an IP packet (called the inner packet), including its payload, as the payload of a larger IP packet (called the outer packet). It can be used by border routers to forward packets via routers that do not maintain a BGP routing table. For example, in the figure above, if router `R2` needs to forward a packet towards destination `12.0.0.1`, it can add at the front of this packet an IPv4 header whose source address is set to one of its IPv4 addresses and whose destination address is one of the IPv4 addresses of `R4`. The `Protocol` field of the IP header is set to `4` to indicate that it contains an IPv4 packet. The packet is forwarded by `R5` to `R4` based on the forwarding table that it built thanks to its intradomain routing table. Upon reception of the packet, `R4` removes the outer header and consults its (BGP) forwarding table to forward the packet towards `R3`. 
+En el escenario anterior, el router `R2` necesita ser capaz de reenviar un paquete hacia cualquier destino en el prefijo `12.0.0.0/8` dentro de `AS30`. Dicho paquete debería ser reenviado por el router `R5`, dado que este router reside en el camino entre `R2` y su nexthop BGP conectado con `R4`. Pueden usarse dos soluciones para asegurar que `R2` sea capaz de reenviar dichos paquetes interdominio:
+
+ - Habilitar BGP en el router `R5` e incluir este router en la trama completa `iBGP`. En la figura anterior, se agregarían dos sesiones iBGP: `R2-R5` y `R4-R5`. Esta solución funciona y es usada por muchos sistemas autónomos. Sin embargo, obliga a todos los routers a contar con recursos suficientes (CPU, memoria) para correr BGP y mantener una tabla de ruteo grande.
+ - Encapsular los paquetes interdominio enviados a través del AS de modo que el router `R5` nunca necesite reenviar un paquete cuyo destino está fuera del AS local. Existen diferentes mecanismos de encapsulamiento. Frecuentemente se usan en dominios grandes MultiProtocol Label Switching (MPLS) :rfc:`3031` y el protocolo de Tunneling de Capa 2 (`Layer 2 Tunneling Protocol`, L2TP) :rfc:`3931`, pero explicar con detalle estas técnicas quedaría fuera del alcance de esta sección. El esquema de encapsulamiento más simple de comprender es `IP in IP`, definido en :rfc:`2003`. Este esquema de encapsulamiento coloca un paquete IP (llamado paquete interior), incluida su carga útil, como carga útil de un paquete IP mayor (llamado el paquete exterior). Puede ser usado por routers de frontera para reenviar paquetes a través de routers que no mantienen una tabla de ruteo BGP. Por ejemplo, en la figura anterior, si el router `R2` necesita reenviar un paquete hacia el destino `12.0.0.1`, al frente de este paquete puede agregarse una cabecera IPv4 cuya dirección origen se fija a una de sus direcciones IPv4, y cuya dirección destino es una de las direcciones IPv4 de `R4`. El campo `Protocol` de la cabecera IP se pone a `4` para indicar que contiene un paquete IPv4. El paquete es reenviado por `R5` a `R4` basándose en la tabla de reenvío que construyó gracias a su tabla de ruteo intradominio. Al recibir el paquete, `R4` retira la cabecera externa y consulta su tabla de reenvío BGP para reenviar el paquete hacia `R3`.
 
 .. index:: BGP decision process
 
-The BGP decision process
-........................
+.. The BGP decision process
 
-Besides the import and export filters, a key difference between BGP and the intradomain routing protocols is that each domain can define is own ranking algorithm to determine which route is chosen to forward packets when several routes have been learned towards the same prefix. This ranking depends on several BGP attributes that can be attached to a BGP route.
+El proceso de decisión BGP
+..........................
 
+.. Besides the import and export filters, a key difference between BGP and the intradomain routing protocols is that each domain can define is own ranking algorithm to determine which route is chosen to forward packets when several routes have been learned towards the same prefix. This ranking depends on several BGP attributes that can be attached to a BGP route.
+
+Además de los filtros de importación y exportación, una diferencia clave entre BGP y los protocolos de ruteo intradominio es que, cuando se han aprendido varias rutas hacia el mismo prefijo, cada dominio puede definir su propio algoritmo de ranking para determinar cuál ruta se elige para reenviar los paquetes. Este ranking u ordenamiento depende de varios atributos BGP que pueden adjuntarse a cada ruta BGP.
 
 .. index:: BGP local-preference
 
-The first BGP attribute that is used to rank BGP routes is the `local-preference` (local-pref) attribute. This attribute is an unsigned integer that is attached to each BGP route received over an eBGP session by the associated import filter.
+.. The first BGP attribute that is used to rank BGP routes is the `local-preference` (local-pref) attribute. This attribute is an unsigned integer that is attached to each BGP route received over an eBGP session by the associated import filter.
 
-When comparing routes towards the same destination prefix, a BGP router always prefers the routes with the highest `local-pref`. If the BGP router knows several routes with the same `local-pref`, it prefers among the routes having this `local-pref` the ones with the shortest AS-Path.
+El primer atributo BGP que se usa para ordenar las rutas BGP es el atributo `local-preference` (local-pref). Este atributo es un entero sin signo que se adjunta a cada ruta BGP recibida sobre una sesión eBGP mediante el filtro de importación asociado.
 
-The `local-pref` attribute is often used to prefer some routes over others. This attribute is always present inside `BGP Updates` exchanged over `iBGP sessions`, but never present in the messages exchanged over `eBGP sessions`. 
+.. When comparing routes towards the same destination prefix, a BGP router always prefers the routes with the highest `local-pref`. If the BGP router knows several routes with the same `local-pref`, it prefers among the routes having this `local-pref` the ones with the shortest AS-Path.
 
-A common utilisation of `local-pref` is to support backup links. Consider the situation depicted in the figure below. `AS1` would always like to use the high bandwidth link to send and receive packets via `AS2` and only use the backup link upon failure of the primary one.
+Al comparar rutas hacia el mismo prefijo detino, un router BGP siempre prefiere las rutas con atributo `local-pref` más alto. Si le router BGP conoce varias rutas con el mismo `local-pref`, preferirá entre las que tengan este valor de `local-pref` aquellas con el atributo AS-Path más corto.
+
+.. The `local-pref` attribute is often used to prefer some routes over others. This attribute is always present inside `BGP Updates` exchanged over `iBGP sessions`, but never present in the messages exchanged over `eBGP sessions`. 
+
+El atributo `local-pref` se usa frecuentemente para forzar la preferencia de unas rutas sobre otras. Este atributo está siempre preente dentro de los mensajes `BGP Update` intercambiados sobre `sesiones iBGP, pero nunca presente en los mensajes intercambiados sobre sesiones `eBGP`.
+
+.. A common utilisation of `local-pref` is to support backup links. Consider the situation depicted in the figure below. `AS1` would always like to use the high bandwidth link to send and receive packets via `AS2` and only use the backup link upon failure of the primary one.
+
+Un uso común de `local-pref` es para soportar enlaces de respaldo o `backup`. Considérese la situación mostrada en la figura siguiente. `AS1` desearía siempre usar el enlace de alto ancho de banda para enviar y recibir paquetes a través de `AS2` y sólo usar el enlace de respaldo ante una falla del primario. 
 
 .. figure:: svg/bgp-backup.*
    :align: center
    :scale: 70
-   
-   How to create a backup link with BGP ?
+  
+   Cómo crear un enlace de respaldo con BGP 
+..   How to create a backup link with BGP ?
 
-As BGP routers always prefer the routes with the highest `local-pref` attribute, this policy can be implemented using the following import filter on `R1`
+.. As BGP routers always prefer the routes with the highest `local-pref` attribute, this policy can be implemented using the following import filter on `R1`
+
+Como los routers BGP siempre prefieren las rutas con el mayor atributo `local-pref`, esta política puede ser implementada usando el siguiente filtro de importación en `R1`:
 
 .. code-block:: text
 
@@ -550,9 +596,13 @@ As BGP routers always prefer the routes with the highest `local-pref` attribute,
          from  AS2 RB at R1 set localpref=200;
          accept ANY
 
-With this import filter, all the BGP routes learned from `RB` over the high bandwidth links are preferred over the routes learned over the backup link. If the primary link fails, the corresponding routes are removed from `R1`'s RIB and `R1` uses the route learned from `RA`. `R1` reuses the routes via `RB` as soon as they are advertised by `RB` once the `R1-RB` link comes back.
+.. With this import filter, all the BGP routes learned from `RB` over the high bandwidth links are preferred over the routes learned over the backup link. If the primary link fails, the corresponding routes are removed from `R1`'s RIB and `R1` uses the route learned from `RA`. `R1` reuses the routes via `RB` as soon as they are advertised by `RB` once the `R1-RB` link comes back.
 
-The import filter above modifies the selection of the BGP routes inside `AS1`. Thus, it influences the route followed by the packets forwarded by `AS1`. In addition to using the primary link to send packets, `AS1` would like to receive its packets via the high bandwidth link. For this, `AS2` also needs to set the `local-pref` attribute in its import filter.
+Con este filtro de importación, todas las rutas BGP aprendidas de `RB` sobre los enlaces de alto ancho de banda se prefieren por sobre las rutas aprendidas sobre el enlace de backup. Si el enlace primario falla, las rutas correspondientes serán retiradas de la RIB de `R1`; y `R1` usará la ruta aprendida de `RA`. `R1` reutilizará las rutas que pasan a través de `RB` apenas sean anunciadas por `RB` una vez que vuelva a la actividad el enlace `R1-RB`. 
+
+.. The import filter above modifies the selection of the BGP routes inside `AS1`. Thus, it influences the route followed by the packets forwarded by `AS1`. In addition to using the primary link to send packets, `AS1` would like to receive its packets via the high bandwidth link. For this, `AS2` also needs to set the `local-pref` attribute in its import filter.
+
+El filtro de importación anterior modifica la selección de las rutas BGP dentro de `AS1`. De esta forma influye en la ruta seguida por los paquetes reenviados por `AS1`. Además de usar el enlace primario para enviar paquetes, `AS1` desearía recibir sus paquetes a través del enlace de alto ancho de banda. Para esto, `AS2` necesita también fijar el atributo `local-pref` en su filtro de importación. 
 
 .. code-block:: text
 
@@ -561,15 +611,20 @@ The import filter above modifies the selection of the BGP routes inside `AS1`. T
           accept AS1
 
 
-Sometimes, the `local-pref` attribute is used to prefer a `cheap` link compared to a more expensive one. For example, in the network below, `AS1` could wish to send and receive packets mainly via its interdomain link with `AS4`.
+.. Sometimes, the `local-pref` attribute is used to prefer a `cheap` link compared to a more expensive one. For example, in the network below, `AS1` could wish to send and receive packets mainly via its interdomain link with `AS4`.
+
+A veces, el atributo `local-pref` se usa para preferir un enlace `barato` en comparación con uno más costoso. Por ejemplo, en la red siguiente, `AS1` podría querer enviar y recibir paquetes principalmente a través de su enlace interdominio con `AS4`.
 
 .. figure:: svg/bgp-prefer.*
    :align: center
    :scale: 70
-   
-   How to prefer a cheap link over an more expensive one ? 
+  
+   Cómo preferir un enlace barato sobre uno más costoso 
+..   How to prefer a cheap link over an more expensive one ? 
 
-`AS1` can install the following import filter on `R1` to ensure that it always sends packets via `R2` when it has learned a route via `AS2` and another via `AS4`.
+.. `AS1` can install the following import filter on `R1` to ensure that it always sends packets via `R2` when it has learned a route via `AS2` and another via `AS4`.
+
+`AS1` puede instalar el siguiente filtro de importación en `R1` para asegurar que siempre envíe paquetes a través de `R2` cuando haya aprendido una ruta a través de `AS2` y otra a través de  `AS4`.
 
 .. code-block:: text
 
@@ -578,48 +633,81 @@ Sometimes, the `local-pref` attribute is used to prefer a `cheap` link compared 
          accept ANY
 
 
-However, this import filter does not influence how `AS3` , for example, prefers some routes over others. If the link between `AS3` and `AS2` is less expensive than the link between `AS3` and `AS4`, `AS3` could send all its packets via `AS2` and `AS1` would receive packets over its expensive link. An important point to remember about `local-pref` is that it can be used to prefer some routes over others to send packets, but it has no influence on the routes followed by received packets.
+.. However, this import filter does not influence how `AS3` , for example, prefers some routes over others. If the link between `AS3` and `AS2` is less expensive than the link between `AS3` and `AS4`, `AS3` could send all its packets via `AS2` and `AS1` would receive packets over its expensive link. An important point to remember about `local-pref` is that it can be used to prefer some routes over others to send packets, but it has no influence on the routes followed by received packets.
 
-Another important utilisation of the `local-pref` attribute is to support the `customer->provider` and `shared-cost` peering relationships. From an economic point of view, there is an important difference between these three types of peering relationships. A domain usually earns money when it sends packets over a `provider->customer` relationship. On the other hand, it must pay its provider when it sends packets over a `customer->provider` relationship. Using a `shared-cost` peering to send packets is usually neutral from an economic perspective. To take into account these economic issues, domains usually configure the import filters on their routers as follows :
+Sin embargo, este filtro de importación no influye en la manera como `AS3`, por ejemplo, prefiere algunas rutas por sobre otras. Si el enlace entre `AS3` y `AS2` es menos costoso que el enlace entre `AS3` y `AS4`, `AS3` podría enviar todos sus paquetes a través de `AS2`, y `AS1` recibiría paquetes sobre su enlace costoso. Un punto importante a recordar sobre el atributo `local-pref` es que puede ser usado para preferir algunas rutas sobre otras para `enviar` paquetes, pero no tiene influencia sobre las rutas seguidas por los paquetes `recibidos`.
 
- - insert a high `local-pref` attribute in the routes learned from a customer
- - insert a medium `local-pref` attribute in the routes learned over a shared-cost peering
- - insert a low `local-pref` attribute in the routes learned from a provider
+.. Another important utilisation of the `local-pref` attribute is to support the `customer->provider` and `shared-cost` peering relationships. From an economic point of view, there is an important difference between these three types of peering relationships. A domain usually earns money when it sends packets over a `provider->customer` relationship. On the other hand, it must pay its provider when it sends packets over a `customer->provider` relationship. Using a `shared-cost` peering to send packets is usually neutral from an economic perspective. To take into account these economic issues, domains usually configure the import filters on their routers as follows :
 
-With such an import filter, the routers of a domain always prefer to reach destinations via their customers whenever such a route exists. Otherwise, they prefer to use `shared-cost` peering relationships and they only send packets via their providers when they do not know any alternate route. A consequence of setting the `local-pref` attribute like this is that Internet paths are often asymmetrical. Consider for example the internetwork shown in the figure below.
+Otra utilización importante del atributo `local-pref` es dar soporte a las relaciones de peering `cliente -> proveedor` y `costo compartido`. Desde un punto de vista económico, existe una diferencia importante entre estos dos tipos de relaciones de peering. Un dominio generalmente gana dinero al enviar paquetes sobre una relación `proveedor -> cliente`. Por otro lado, debe pagar a su proveedor cuando envía paquetes sobre una relación `cliente -> proveedor`. Usar una relación de peering de `costo compartido` normalmente es neutral desde el punto de vista económico. Para tener en cuenta estos aspectos económicos, los dominios típicamente configuran los filtros de importación en sus routers de la manera siguiente:
+
+.. - insert a high `local-pref` attribute in the routes learned from a customer
+.. - insert a medium `local-pref` attribute in the routes learned over a shared-cost peering
+.. - insert a low `local-pref` attribute in the routes learned from a provider
+
+ - Se inserta un atributo `local-pref` alto en las rutas aprendidas de un cliente
+ - Se inserta un atributo `local-pref` de importancia media en las rutas aprendidas sobre una relación de costo compartido
+ - Se inserta un atributo `local-pref` bajo en las rutas aprendidas de un proveedor
+
+.. With such an import filter, the routers of a domain always prefer to reach destinations via their customers whenever such a route exists. Otherwise, they prefer to use `shared-cost` peering relationships and they only send packets via their providers when they do not know any alternate route. A consequence of setting the `local-pref` attribute like this is that Internet paths are often asymmetrical. Consider for example the internetwork shown in the figure below.
+
+Con este filtro de importación, los routers de un dominio siempre prefieren alcanzar los destinos a través de sus clientes cuando existe dicha ruta. De lo contrario, prefieren usar relaciones de costo compartido; y únicamente envían paquetes a través de sus proveedores cuando no conocen ninguna ruta alternativa. Una consecuencia de fijar el atributo `local-pref` de esta manera es que los caminos de Internet suelen ser asimétricos. Consideremos por ejemplo la interred mostrada en la figura siguiente.
 
 .. figure:: svg/asymetry.*
    :align: center
    :scale: 70
-   
-   Asymmetry of Internet paths
+  
+   Asimetría de caminos en Internet 
+..   Asymmetry of Internet paths
 
-Consider in this internetwork the routes available inside `AS1` to reach `AS5`. `AS1` learns the `AS4:AS6:AS7:AS5` path from `AS4`, the `AS3:AS8:AS5` path from `AS3` and the `AS2:AS5` path from `AS2`. The first path is chosen since it was from learned from a customer. `AS5` on the other hand receives three paths towards `AS1` via its providers. It may select any of these paths to reach `AS1` , depending on how it prefers one provider over the others.
+.. Consider in this internetwork the routes available inside `AS1` to reach `AS5`. `AS1` learns the `AS4:AS6:AS7:AS5` path from `AS4`, the `AS3:AS8:AS5` path from `AS3` and the `AS2:AS5` path from `AS2`. The first path is chosen since it was from learned from a customer. `AS5` on the other hand receives three paths towards `AS1` via its providers. It may select any of these paths to reach `AS1` , depending on how it prefers one provider over the others.
+
+Consideremos en esta interred las rutas disponibles dentro de `AS1` para alcanzar `AS5`. `AS1` aprende el camino `AS4:AS6:AS7:AS5` de `AS4`, el camino `AS3:AS8:AS5` de `AS3` y el camino `AS2:AS5` de `AS2`. Se elegirá el primer camino, ya que fue aprendido de un cliente. Por otro lado, `AS5` recibe tres caminos hacia `AS1` a través de sus proveedores. Puede seleccionar cualquiera de estos caminos para alcanzar `AS1`, dependiendo de cómo prefiera a un proveedor por sobre los demás.
+
+.. Coming back to the organisation of a BGP router shown in figure :ref:`bgprouter`, the last part to be discussed is the BGP decision process. The `BGP Decision Process` is the algorithm used by routers to select the route to be installed in the FIB when there are multiple routes towards the same prefix. The BGP decision process receives a set of candidate routes towards the same prefix and uses seven steps. At each step, some routes are removed from the candidate set and the process stops when the set only contains one route [#fbgpmulti]_ :
+
+.. 1. Ignore routes having an unreachable BGP nexthop
+..  2. Prefer routes having the highest local-pref
+..  3. Prefer routes having the shortest AS-Path
+..  4. Prefer routes having the smallest MED
+..  5. Prefer routes learned via eBGP sessions over routes learned via iBGP sessions
+..  6. Prefer routes having the closest next-hop 
+..  7. Tie breaking rules : prefer routes learned from the router with lowest router id
 
 
-Coming back to the organisation of a BGP router shown in figure :ref:`bgprouter`, the last part to be discussed is the BGP decision process. The `BGP Decision Process` is the algorithm used by routers to select the route to be installed in the FIB when there are multiple routes towards the same prefix. The BGP decision process receives a set of candidate routes towards the same prefix and uses seven steps. At each step, some routes are removed from the candidate set and the process stops when the set only contains one route [#fbgpmulti]_ :
+Volviendo a la organización de un router BGP mostrada en la figura :ref:`bgprouter`, la última parte a discutir es el proceso de decisión BGP. El `proceso de decisión BGP` es el algoritmo usado por los routers para seleccionar la ruta que será instalada en la FIB cuando haya múltiples rutas hacia el mismo prefijo. El proceso de decisión BGP recibe un conjunto de rutas candidatas hacia el mismo prefijo, y usa siete pasos. En cada paso, ciertas rutas son retiradas del conjunto de candidatos; y el proceso se detiene cuando el conjunto contiene únicamente una ruta [#fbgpmulti]_:
 
- 1. Ignore routes having an unreachable BGP nexthop
- 2. Prefer routes having the highest local-pref
- 3. Prefer routes having the shortest AS-Path
- 4. Prefer routes having the smallest MED
- 5. Prefer routes learned via eBGP sessions over routes learned via iBGP sessions
- 6. Prefer routes having the closest next-hop 
- 7. Tie breaking rules : prefer routes learned from the router with lowest router id
+ 1. Ignorar rutas que tengan un nexthop BGP inalcanzable
+ 2. Preferir rutas que tengan el local-pref más alto
+ 3. Preferir rutas que tengan el AS-Path más corto
+ 4. Preferir rutas que tengan el menor MED
+ 5. Preferir rutas aprendidas a través de sesiones eBGP antes que rutas aprendidas sobre sesiones iBGP
+ 6. Preferir rutas que tengan el nexthop más cercano
+ 7. Para romper los empates, preferir rutas aprendidas del router con el ID más bajo.
 
 
-The first step of the BGP decision process ensures that a BGP router does not install in its FIB a route whose nexthop is considered to be unreachable by the intradomain routing protocol. This could happen, for example, when a router has crashed. The intradomain routing protocol usually advertises the failure of this router before the failure of the BGP sessions that it terminates. This rule implies that the BGP decision process must be re-run each time the intradomain routing protocol reports a change in the reachability of a prefix containing one of more BGP nexthops.
+.. The first step of the BGP decision process ensures that a BGP router does not install in its FIB a route whose nexthop is considered to be unreachable by the intradomain routing protocol. This could happen, for example, when a router has crashed. The intradomain routing protocol usually advertises the failure of this router before the failure of the BGP sessions that it terminates. This rule implies that the BGP decision process must be re-run each time the intradomain routing protocol reports a change in the reachability of a prefix containing one of more BGP nexthops.
 
-The second rule allows each domain to define its routing preferences. The `local-pref` attribute is set by the import filter of the router that learned a route over an eBGP session. 
+El primer paso del proceso de decisión BGP asegura que un router BGP no instale en su FIB una ruta cuyo nexthop se considere inalcanzable por el protocolo de ruteo intradominio. Esto podría ocurrir, por ejemplo, cuando un router ha caído. El protocolo de ruteo intradominio normalmente anuncia la falla de este router antes de la falla de las sesiones BGP que se ven interrumpidas. Esta regla implica que el proceso de decisión BGP debe volver a ser corrido cada vez que el protocolo de ruteo intradominio reporta un cambio en la alcanzabilidad de un prefijo conteniendo uno o más nexthops BGP.
 
-In contrast with intradomain routing protocols, BGP does not contain an explicit metric. This is because in the global Internet it is impossible for all domains to agree on a common metric that meets the requirements of all domains. Despite this, BGP routers prefer routes having a short AS-Path attribute over routes with a long AS-Path. This step of the BGP decision process is motivated by the fact that operators expect that a route with a long AS-Path is lower quality than a route with a shorter AS-Path. However, studies have shown that there was not always a strong correlation between the quality of a route and the length of its AS-Path [HFPMC2002]_. 
+.. The second rule allows each domain to define its routing preferences. The `local-pref` attribute is set by the import filter of the router that learned a route over an eBGP session.
 
+La segunda regla permite a cada dominio definir sus preferencias de ruteo. El atributo `local-pref` es establecido por el filtro de importación del router que aprendió una ruta sobre una sesión BGP.  
+
+.. In contrast with intradomain routing protocols, BGP does not contain an explicit metric. This is because in the global Internet it is impossible for all domains to agree on a common metric that meets the requirements of all domains. Despite this, BGP routers prefer routes having a short AS-Path attribute over routes with a long AS-Path. This step of the BGP decision process is motivated by the fact that operators expect that a route with a long AS-Path is lower quality than a route with a shorter AS-Path. However, studies have shown that there was not always a strong correlation between the quality of a route and the length of its AS-Path [HFPMC2002]_. 
+
+En contraste con los protocolos de ruteo intradominios, BGP no contiene una métrica explícita. Esto se debe a que, en la Internet global, es imposible que todos los dominios se pongan de acuerdo sobre una métrica común, que satisfaga los requerimientos de todos ellos. A pesar de esto, los routers BGP prefieren rutas que tengan un atributo AS-Path corto por sobre las rutas con AS-Path largos. Este paso del proceso de decisión BGP está motivado por el hecho de que los operadores esperan que una ruta con un AS-Path largo sea de menor calidad que una con AS-Path más corto. Sin embargo, hay estudios que muestran que no siempre ha existido una correlación entre la calidad de una ruta y la longitud de su AS-Path[HFPMC2002]_. 
 
 .. index:: Hot potato routing
 
-Before explaining the fourth step of the BGP decision process, let us first describe the fifth and the sixth steps of the BGP decision process. These two steps are used to implement `hot potato` routing. Intuitively, when a domain implements `hot potato routing`, it tries to forward packets that are destined to addresses outside of its domain, to other domains as quickly as possible. 
+.. Before explaining the fourth step of the BGP decision process, let us first describe the fifth and the sixth steps of the BGP decision process. These two steps are used to implement `hot potato` routing. Intuitively, when a domain implements `hot potato routing`, it tries to forward packets that are destined to addresses outside of its domain, to other domains as quickly as possible. 
 
-To understand `hot potato routing`, let us consider the two domains shown in the figure below. `AS2` advertises prefix `1.0.0.0/8` over the `R2-R6` and `R3-R7` peering links. The routers inside `AS1` learn two routes towards `1.0.0.0/8`: one via `R6-R2` and the second via `R7-R3`.
+Antes de explicar el cuarto paso del proceso de decisión BGP, describamos los pasos quinto y sexto. Estos dos pasos se usan para implementar ruteo `de papa caliente` o ` hot potato`. Intuitivamente, cuando un dominio implementa ruteo `de papa caliente`, significa que trata de reenviar a otros dominios, lo más rápido posible, aquellos paquetes destinados a direcciones que están fuera de su dominio.
+
+.. To understand `hot potato routing`, let us consider the two domains shown in the figure below. `AS2` advertises prefix `1.0.0.0/8` over the `R2-R6` and `R3-R7` peering links. The routers inside `AS1` learn two routes towards `1.0.0.0/8`: one via `R6-R2` and the second via `R7-R3`.
+
+Para comprender el ruteo `de papa caliente` consideremos los dos dominios mostrados en la figura siguiente. `AS2` anuncia el prefijo `1.0.0.0/8` sobre los enlaces de peering `R2-R6` y `R3-R7`. Los routers dentro de `AS1` aprenden dos rutas hacia `1.0.0.0/8`: una a través de `R6-R2` y la segunda a través de `R7-R3`.
+
 
 .. _fig-med:
 
@@ -627,19 +715,31 @@ To understand `hot potato routing`, let us consider the two domains shown in the
    :align: center
    :scale: 70
    
-   Hot and cold potato routing
+   Ruteo de papa caliente y papa fría
+..   Hot and cold potato routing
 
-With the fifth step of the BGP decision process, a router always prefers to use a route learned over an `eBGP session` compared to a route learned over an `iBGP session`. Thus, router `R6` (resp. `R7`)  prefers to use the route via router `R2` (resp. `R3`) to reach prefix `1.0.0.0/8`. 
+.. With the fifth step of the BGP decision process, a router always prefers to use a route learned over an `eBGP session` compared to a route learned over an `iBGP session`. Thus, router `R6` (resp. `R7`)  prefers to use the route via router `R2` (resp. `R3`) to reach prefix `1.0.0.0/8`. 
 
-The sixth step of the BGP decision process takes into account the distance, measured as the length of the shortest intradomain path, between a BGP router and the BGP nexthop for routes learned over `iBGP sessions`. This rule is used on router `R8` in the example above. This router has received two routes towards `1.0.0.0/8`:
+Con el quinto paso del proceso de decisión BGP, un router siempre prefiere usar una ruta aprendida sobre una sesión `eBGP` en comparación con una aprendida sobre una sesión `iBGP`. Así, el router `R6` (resp. `R7`) prefiere usar la ruta a través de `R2` (resp. `R3`) para alcanzar el prefijo `1.0.0.0/8`. 
+
+.. The sixth step of the BGP decision process takes into account the distance, measured as the length of the shortest intradomain path, between a BGP router and the BGP nexthop for routes learned over `iBGP sessions`. This rule is used on router `R8` in the example above. This router has received two routes towards `1.0.0.0/8`:
  
- - `1.0.0.0/8` via `R7` that is at a distance of `1` from `R8` 
- - `1.0.0.0/8` via `R6` that is at a distance of `50` from `R8`
+.. - `1.0.0.0/8` via `R7` that is at a distance of `1` from `R8` 
+.. - `1.0.0.0/8` via `R6` that is at a distance of `50` from `R8`
 
-The first route, via `R7` is the one that router `R8` prefers, as this is the route that minimises the cost of forwarding packets inside `AS1` before sending them to `AS2`.
+El sexto paso del proceso de decisión BGP tiene en cuenta la distancia, medida como la longitud del camino intradominio más corto entre un router BGP y el nexthop BGP, para rutas aprendidas sobre sesiones `iBGP`. Esta regla se usa en el router `R8` en el ejemplo anterior. Este router ha recibido dos rutas hacia `1.0.0.0/8`:
+ 
+ - `1.0.0.0/8` via `R7` que está a una distancia de `1` de `R8` 
+ - `1.0.0.0/8` via `R6` que está a una distancia de `50` de `R8`
 
-`Hot potato routing` allows `AS1` to minimise the cost of forwarding packets towards `AS2`. However, there are situations where this is not desirable. For example, assume that `AS1` and `AS2` are domains with routers on both the East and the West coast of the US. In these two domains, the high metric associated to links `R6-R8` and `R0-R2` correspond to the cost of forwarding a packet across the USA. If `AS2` is a customer that pays `AS1`, it would prefer to receive the packets destined to `1.0.0.0/8` via the `R2-R6` link instead of the `R7-R3` link. This is the objective of `cold potato routing`.
 
+.. The first route, via `R7` is the one that router `R8` prefers, as this is the route that minimises the cost of forwarding packets inside `AS1` before sending them to `AS2`.
+
+La primera ruta, via `R7`, es la que prefiere el router `R8`, ya que ésta es la ruta que minimiza el costo de reenviar paquetes dentro de `AS1` antes de enviarlos a `AS2`.
+
+.. `Hot potato routing` allows `AS1` to minimise the cost of forwarding packets towards `AS2`. However, there are situations where this is not desirable. For example, assume that `AS1` and `AS2` are domains with routers on both the East and the West coast of the US. In these two domains, the high metric associated to links `R6-R8` and `R0-R2` correspond to the cost of forwarding a packet across the USA. If `AS2` is a customer that pays `AS1`, it would prefer to receive the packets destined to `1.0.0.0/8` via the `R2-R6` link instead of the `R7-R3` link. This is the objective of `cold potato routing`.
+
+El ruteo `de papa caliente` permite a `AS1` minimizar el costo de renviar paquetes hacia `AS2`. Sin embargo, hay situaciones donde esto no es deseable. Por ejemplo, supongamos que `AS1` y `AS2` son dominios con routers en las costas Este y Oeste de los Estados Unidos. En estos dos dominios, la alta métrica asociada a los enlaces `R6-R8` y `R0-R2` corresponden al costo de enviar un paquete a través de EEUU. Si `AS2` es un cliente que paga a `AS1`, preferiría recibir los paquetes destinados a `1.0.0.0/8` a través del enlace `R2-R6` en lugar de `R7-R3`. Éste es el objetivo del ruteo `de papa caliente`.
 
 .. index:: Multi-Exit Discriminator (MED), Cold potato routing
 
