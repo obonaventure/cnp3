@@ -282,7 +282,7 @@ La figura siguiente ejemplifica las tablas de ruteo en una red de cinco routers.
 
 .. The main drawback of static routing is that it does not adapt to the evolution of the network. When a new router or link is added, all routing tables must be recomputed. Furthermore, when a link or router fails, the routing tables must be updated as well.
 
-La principal desventaja del ruteo estático es que no se adapta a la evolución de la red. Cuando se agrega un nuevo router o enlace, todas las tablas de ruteo deben ser recalculadas. Además, cuando falla un enlace o un router, las tablas de ruteo deben ser actualizadas también.
+La principal desventaja del ruteo estático es que no se adapta a la evolución de la red. Cuando se agrega un nuevo router o enlace, todas las tablas de ruteo deben ser recalculadas. Además, las tablas de ruteo también deben ser actualizadas cuando falla un enlace o un router.
 
 .. include:: dv.rst
 

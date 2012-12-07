@@ -762,7 +762,7 @@ En la práctica, el quinto paso del proceso de decisión BGP es ligeramente más
 .. The last step of the BGP decision allows the selection of a single route when a BGP router has received several routes that are considered as equal by the first six steps of the decision process. This can happen for example in a dual-homed stub attached to two different providers. As shown in the figure below, router `R1` receives two equally good BGP routes towards `1.0.0.0/8`. To break the ties, each router is identified by a unique `router-id` which in practice is one of the IP addresses assigned to the router. On some routers, the lowest router id step in the BGP decision process is replaced by the selection of the oldest route :rfc:`5004`. Preferring the oldest route when breaking ties is used to prefer stable paths over unstable paths. However, a drawback of this approach is that the selection of the BGP routes depends on the arrival times of the corresponding messages. This makes the BGP selection process non-deterministic and can lead to problems that are difficult to debug.
 
 
-El último paso de la decisión BGP permite la selección de una única ruta cuando un router BGP ha recibido varias rutas que son consideradas iguales por los primeros seis pasos del proceso de decisión. Esot puede ocurrir, por ejemplo, en un stub dual-homed conectado a dos proveedores diferentes. Como se muestra en la figura siguiente, el router `R1` recibe dos rutas BGP, igualmente buenas, hacia `1.0.0.0/8`. Para romper los empates, cada router está identificado por un `router-id` único, el cual es en la práctica una de las direcciones IP asignadas al router. En algunos routers, el paso de router-id más bajo en el proceso de decisión BGP se reemplaza por la selección de la ruta más antigua (:rfc:`5004`). Preferir la ruta más antigua al desempatar se usa para favorecer caminos estables por sobre los inestables. Sin embargo, una desventaja de esta aproximación es que la selección de las rutas BGP depende de los tiempos de arribo de los mensajes correspondientes. Esto hace que el proceso de selección BGP sea no determinístico, y puede llevar a problemas difíciles de detectar y corregir.
+El último paso de la decisión BGP permite la selección de una única ruta cuando un router BGP ha recibido varias rutas que son consideradas iguales por los primeros seis pasos del proceso de decisión. Esto puede ocurrir, por ejemplo, en un stub dual-homed conectado a dos proveedores diferentes. Como se muestra en la figura siguiente, el router `R1` recibe dos rutas BGP, igualmente buenas, hacia `1.0.0.0/8`. Para romper los empates, cada router está identificado por un `router-id` único, el cual es en la práctica una de las direcciones IP asignadas al router. En algunos routers, el paso de router-id más bajo en el proceso de decisión BGP se reemplaza por la selección de la ruta más antigua (:rfc:`5004`). Preferir la ruta más antigua al desempatar se usa para favorecer caminos estables por sobre los inestables. Sin embargo, una desventaja de esta aproximación es que la selección de las rutas BGP depende de los tiempos de arribo de los mensajes correspondientes. Esto hace que el proceso de selección BGP sea no determinístico, y puede llevar a problemas difíciles de detectar y corregir.
 
 .. figure:: svg/stub-2providers.*
    :align: center
@@ -772,86 +772,144 @@ El último paso de la decisión BGP permite la selección de una única ruta cua
 ..   A stub connected to two providers
 
 
-BGP convergence
-...............
+.. BGP convergence
+Convergencia de BGP
+...................
 
 
-In the previous sections, we have explained the operation of BGP routers. Compared to intradomain routing protocols, a key feature of BGP is its ability to support interdomain routing policies that are defined by each domain as its import and export filters and ranking process. A domain can define its own routing policies and router vendors have implemented many configuration tweaks to support complex routing policies. However, the routing policy chosen by a domain may interfere with the routing policy chosen by another domain. To understand this issue, let us first consider the simple internetwork shown below.
+.. In the previous sections, we have explained the operation of BGP routers. Compared to intradomain routing protocols, a key feature of BGP is its ability to support interdomain routing policies that are defined by each domain as its import and export filters and ranking process. A domain can define its own routing policies and router vendors have implemented many configuration tweaks to support complex routing policies. However, the routing policy chosen by a domain may interfere with the routing policy chosen by another domain. To understand this issue, let us first consider the simple internetwork shown below.
+
+En las secciones anteriores hemos explicado la operación de los routers BGP. En comparación con los protocolos de ruteo intradominio, una característica clave de BGP es su capacidad de soportar políticas de ruteo interdominios, que sean definidas por cada dominio mediante sus filtros de importación y exportación, y su proceso de ranking. Un dominio puede definir sus propias políticas de ruteo, y los proveedores de routers han implementado muchas técnicas de configuración para soportar políticas de ruteo complejas. Sin embargo, la política de ruteo elegida por un dominio puede interferir con aquella elegida por otro dominio. Para comprender este asunto, consideremos primero la interred sencilla que se muestra a continuación. 
 
 
 .. figure:: svg/disagree.*
    :align: center
    :scale: 70
-   
-   The disagree internetwork 
+  
+   Una interred en desacuerdo
+..   The disagree internetwork 
 
-In this internetwork, we focus on the route towards `1.0.0.0/8` which is advertised by `AS1`. Let us also assume that `AS3` (resp. `AS4`) prefers, e.g. for economic reasons, a route learned from `AS4` (`AS3`) over a route learned from `AS1`. When `AS1` sends `U(1.0.0.0/8,AS1)` to `AS3` and `AS4`, three sequences of exchanges of BGP messages are possible :
+.. In this internetwork, we focus on the route towards `1.0.0.0/8` which is advertised by `AS1`. Let us also assume that `AS3` (resp. `AS4`) prefers, e.g. for economic reasons, a route learned from `AS4` (`AS3`) over a route learned from `AS1`. When `AS1` sends `U(1.0.0.0/8,AS1)` to `AS3` and `AS4`, three sequences of exchanges of BGP messages are possible :
 
- #. `AS3` sends first `U(1.0.0.0/8,AS3:AS1)` to `AS4`. `AS4` has learned two routes towards `1.0.0.0/8`. It runs its BGP decision process and selects the route via `AS3` and does not advertise a route to `AS3`
- #. `AS4` first sends `U(1.0.0.0/8,AS3:AS1)` to `AS3`. `AS3` has learned two routes towards `1.0.0.0/8`. It runs its BGP decision process and selects the route via `AS4` and does not advertise a route to `AS4`
- #. `AS3` sends `U(1.0.0.0/8,AS3:AS1)` to `AS4` and, at the same time, `AS4` sends `U(1.0.0.0/8,AS4:AS1)`.  `AS3` prefers the route via `AS4` and thus sends `W(1.0.0.0/8)` to `AS4`. In the mean time, `AS4` prefers the route via `AS3` and thus sends `W(1.0.0.0/8)` to `AS3`. Upon reception of the `BGP Withdraws`, `AS3` and `AS4` only know the direct route towards `1.0.0.0/8`. `AS3` (resp. `AS4`) sends `U(1.0.0.0/8,AS3:AS1)` (resp. `U(1.0.0.0/8,AS4:AS1)`) to `AS4` (resp. `AS3`). `AS3` and `AS4` could in theory continue to exchange BGP messages for ever. In practice, one of them sends one message faster than the other and BGP converges. 
+.. #. `AS3` sends first `U(1.0.0.0/8,AS3:AS1)` to `AS4`. `AS4` has learned two routes towards `1.0.0.0/8`. It runs its BGP decision process and selects the route via `AS3` and does not advertise a route to `AS3`
+.. #. `AS4` first sends `U(1.0.0.0/8,AS3:AS1)` to `AS3`. `AS3` has learned two routes towards `1.0.0.0/8`. It runs its BGP decision process and selects the route via `AS4` and does not advertise a route to `AS4`
+.. #. `AS3` sends `U(1.0.0.0/8,AS3:AS1)` to `AS4` and, at the same time, `AS4` sends `U(1.0.0.0/8,AS4:AS1)`.  `AS3` prefers the route via `AS4` and thus sends `W(1.0.0.0/8)` to `AS4`. In the mean time, `AS4` prefers the route via `AS3` and thus sends `W(1.0.0.0/8)` to `AS3`. Upon reception of the `BGP Withdraws`, `AS3` and `AS4` only know the direct route towards `1.0.0.0/8`. `AS3` (resp. `AS4`) sends `U(1.0.0.0/8,AS3:AS1)` (resp. `U(1.0.0.0/8,AS4:AS1)`) to `AS4` (resp. `AS3`). `AS3` and `AS4` could in theory continue to exchange BGP messages for ever. In practice, one of them sends one message faster than the other and BGP converges. 
 
-The example above has shown that the routes selected by BGP routers may sometimes depend on the ordering of the BGP messages that are exchanged. Other similar scenarios may be found in :rfc:`4264`. 
 
-From an operational perspective, the above configuration is annoying since the network operators cannot easily predict which paths are chosen. Unfortunately, there are even more annoying BGP configurations. For example, let us consider the configuration below which is often named `Bad Gadget` [GW1999]_
+En esta interred, nos concentramos en la ruta hacia `1.0.0.0/8` que es anunciada por `AS1`. Supongamos también que `AS3` (resp. `AS4`) prefiere (por ejemplo, por motivos económicos), una ruta aprendida de `AS4` (`AS3`) por sobre una aprendida de `AS1`. Cuando `AS1` envía `U(1.0.0.0/8,AS1)` a `AS3` y `AS4`, son posibles tres secuencias de intercambios de mensajes BGP: 
+
+ #. `AS3` envía primero `U(1.0.0.0/8,AS3:AS1)` a `AS4`. `AS4` ha aprendido dos rutas hacia `1.0.0.0/8`. Ejecuta su proceso de decisión BGP y selecciona la ruta a través de `AS3`, y no anuncia una ruta a `AS3`.
+ #. `AS4` envía primero `U(1.0.0.0/8,AS3:AS1)` a `AS3`. `AS3` ha aprendido dos rutas hacia `1.0.0.0/8`. Ejecuta su proceso de decisión BGP y selecciona la ruta a través de `AS4`, y no anuncia una ruta a `AS4`.
+ #. `AS3` envía `U(1.0.0.0/8,AS3:AS1)` a `AS4` y, al mismo tiempo, `AS4` envía `U(1.0.0.0/8,AS4:AS1)`.  `AS3` prefiere la ruta a través de `AS4` y así envía `W(1.0.0.0/8)` a `AS4`. Mientras tanto, `AS4` prefiere la ruta via `AS3`, y entonces envía  `W(1.0.0.0/8)` a `AS3`. Al recibir los `Withdraws` BGP, `AS3` y `AS4` sólo conocen la ruta directa hacia `1.0.0.0/8`. `AS3` (resp. `AS4`) envía `U(1.0.0.0/8,AS3:AS1)` (resp. `U(1.0.0.0/8,AS4:AS1)`) a `AS4` (resp. `AS3`). `AS3` y `AS4` podrían, en teoría, continuar intercambiando mensajes BGP eternamente. En la práctica, uno de ellos es más rápido que el otro para enviar los mensajes y así BGP converge.
+
+
+.. The example above has shown that the routes selected by BGP routers may sometimes depend on the ordering of the BGP messages that are exchanged. Other similar scenarios may be found in :rfc:`4264`.
+
+El ejemplo anterior muestra que las rutas seleccionadas por los routers BGP pueden a veces depender del ordenamiento de los mensajes BGP que son intercambiados. Otros escenarios similares pueden hallarse en :rfc:`4264`.  
+
+.. From an operational perspective, the above configuration is annoying since the network operators cannot easily predict which paths are chosen. Unfortunately, there are even more annoying BGP configurations. For example, let us consider the configuration below which is often named `Bad Gadget` [GW1999]_
+
+Desde el punto de vista operativo, la configuración anterior es fastidiosa porque los operadores de la red no pueden predecir fácilmente qué caminos serán los elegidos. Por desgracia, hay configuraciones BPG aún peores. Por ejemplo, consideremos la siguiente, que es llamada con frecuencia `Bad Gadget` [GW1999]_
 
 .. figure:: svg/bad-gadget.*
    :align: center
    :scale: 70
-   
-   The bad gadget internetwork
+  
+   La interred `Bad Gadget` 
+..   The bad gadget internetwork
 
 
-In this internetwork, there are four ASes. `AS0` advertises one route towards one prefix and we only analyse the routes towards this prefix. The routing preferences of `AS1`, `AS3` and `AS4` are the following :
+.. In this internetwork, there are four ASes. `AS0` advertises one route towards one prefix and we only analyse the routes towards this prefix. The routing preferences of `AS1`, `AS3` and `AS4` are the following :
 
- - `AS1` prefers the path `AS3:AS0` over all other paths
- - `AS3` prefers the path `AS4:AS0` over all other paths
- - `AS4` prefers the path `AS1:AS0` over all other paths
+.. - `AS1` prefers the path `AS3:AS0` over all other paths
+.. - `AS3` prefers the path `AS4:AS0` over all other paths
+.. - `AS4` prefers the path `AS1:AS0` over all other paths
 
-`AS0` sends `U(p,AS0)` to `AS1`, `AS3` and `AS4`. As this is the only route known by `AS1`, `AS3` and `AS4` towards `p`, they all select the direct path. Let us now consider one possible exchange of BGP messages :
+En esta interred, hay cuatro AS. `AS0` anuncia una ruta hacia un prefijo, y sólo analizamos las rutas hacia este prefijo. Las preferencias de ruteo de `AS1`, `AS3` y `AS4` son las siguientes:
+
+ - `AS1` prefiere el camino `AS3:AS0` por sobre todos los caminos
+ - `AS3` prefiere el camino `AS4:AS0` por sobre todos los caminos
+ - `AS4` prefiere el camino `AS1:AS0` por sobre todos los caminos
+
+.. `AS0` sends `U(p,AS0)` to `AS1`, `AS3` and `AS4`. As this is the only route known by `AS1`, `AS3` and `AS4` towards `p`, they all select the direct path. Let us now consider one possible exchange of BGP messages :
  
- #. `AS1` sends `U(p, AS1:AS0)` to `AS3` and `AS4`. `AS4` selects the path via `AS1` since this is its preferred path. `AS3` still uses the direct path.
- #. `AS4` advertises `U(p,AS4:AS1:AS0)` to `AS3`.
- #. `AS3` sends `U(p, AS3:AS0)` to `AS1` and `AS4`. `AS1` selects the path via `AS3` since this is its preferred path. `AS4` still uses the path via `AS1`.
- #. As `AS1` has changed its path, it sends `U(p,AS1:AS3:AS0)` to `AS4` and `W(p)` to `AS3` since its new path is via `AS3`. `AS4` switches back to the direct path.
- #. `AS4` sends `U(p,AS4:AS0)` to `AS1` and `AS3`. `AS3` prefers the path via `AS4`.
- #. `AS3` sends `U(p,AS3:AS4:AS0)` to `AS1` and `W(p)` to `AS4`. `AS1` switches back to the direct path and we are back at the first step.
+.. #. `AS1` sends `U(p, AS1:AS0)` to `AS3` and `AS4`. `AS4` selects the path via `AS1` since this is its preferred path. `AS3` still uses the direct path.
+.. #. `AS4` advertises `U(p,AS4:AS1:AS0)` to `AS3`.
+.. #. `AS3` sends `U(p, AS3:AS0)` to `AS1` and `AS4`. `AS1` selects the path via `AS3` since this is its preferred path. `AS4` still uses the path via `AS1`.
+.. #. As `AS1` has changed its path, it sends `U(p,AS1:AS3:AS0)` to `AS4` and `W(p)` to `AS3` since its new path is via `AS3`. `AS4` switches back to the direct path.
+.. #. `AS4` sends `U(p,AS4:AS0)` to `AS1` and `AS3`. `AS3` prefers the path via `AS4`.
+.. #. `AS3` sends `U(p,AS3:AS4:AS0)` to `AS1` and `W(p)` to `AS4`. `AS1` switches back to the direct path and we are back at the first step.
 
-This example shows that the convergence of BGP is unfortunately not always guaranteed as some interdomain routing policies may interfere with each other in complex ways. [GW1999]_ have shown that checking for global convergence is either NP-complete or NP-hard. See [GSW2002]_ for a more detailed discussion.
+`AS0` envía `U(p,AS0)` a `AS1`, `AS3` y `AS4`. Como ésta es la única ruta conocida por `AS1`, `AS3` y `AS4` hacia `p`, todos ellos seleccionan el camino directo. Consideremos un posible intercambio de mensajes BGP:
 
-Fortunately, there are some operational guidelines [GR2001]_ [GGR2001]_ that can guarantee BGP convergence in the global Internet. To ensure that BGP will converge, these guidelines consider that there are two types of peering relationships : `customer->provider` and `shared-cost`. In this case, BGP convergence is guaranteed provided that the following conditions are fulfilled :
+ #. `AS1` envía `U(p, AS1:AS0)` a `AS3` y `AS4`. `AS4` selecciona el camino a través `AS1` ya que éste es su camino preferido. `AS3` todavía usa el camino directo.
+ #. `AS4` anuncia `U(p,AS4:AS1:AS0)` a `AS3`.
+ #. `AS3` envía `U(p, AS3:AS0)` a `AS1` y `AS4`. `AS1` selecciona el camino a través de `AS3` ya que éste es su camino preferido. `AS4` sigue usando el camino a través de `AS1`.
+ #. Como `AS1` ha cambiado su camino, envía `U(p,AS1:AS3:AS0)` a `AS4` y `W(p)` a `AS3` ya que su nuevo camino es a través de `AS3`. `AS4` vuelve al camino directo.
+ #. `AS4` envía `U(p,AS4:AS0)` a `AS1` y `AS3`. `AS3` prefiere el camino a través de `AS4`.
+ #. `AS3` envía `U(p,AS3:AS4:AS0)` a `AS1` y `W(p)` a `AS4`. `AS1` vuelve al camino directo y así nos encontramos nuevamente en el primer paso.
 
- #. The topology composed of all the directed `customer->provider` peering links is an acyclic graph
- #. An AS always prefers a route received from a `customer` over a route received from a `shared-cost` peer or a `provider`.
+
+.. This example shows that the convergence of BGP is unfortunately not always guaranteed as some interdomain routing policies may interfere with each other in complex ways. [GW1999]_ have shown that checking for global convergence is either NP-complete or NP-hard. See [GSW2002]_ for a more detailed discussion.
+
+Este ejemplo muestra que desafortunadamente la convergencia de BGP no siempre está garantizada, ya que algunas políticas de ruteo interdominio pueden interferir con otras, en formas complejas. [GW1999]_ ha mostrado que verificar la convergencia global es, o bien NP-completa, o NP-hard. Véase [GSW2002]_ para una discusión más detallada.
+
+.. Fortunately, there are some operational guidelines [GR2001]_ [GGR2001]_ that can guarantee BGP convergence in the global Internet. To ensure that BGP will converge, these guidelines consider that there are two types of peering relationships : `customer->provider` and `shared-cost`. In this case, BGP convergence is guaranteed provided that the following conditions are fulfilled :
+
+.. #. The topology composed of all the directed `customer->provider` peering links is an acyclic graph
+.. #. An AS always prefers a route received from a `customer` over a route received from a `shared-cost` peer or a `provider`.
+
+Por fortuna, existen algunas recomendaciones operativas [GR2001]_ [GGR2001]_ que pueden garantizar convergencia BGP en la Internet global. Para asegurar la convergencia, estas recomendaciones consideran que existen dos tipos de relación de peering: `cliente->proveedor` y `costo compartido`. En este caso, la convergencia BGP está garantizada siempre que se satisfagan las siguientes condiciones:
+
+ #. La topología compuesta por todos los enlaces de peering `cliente->proveedor` es un grafo acíclico.
+ #. Un AS siempre prefiere una ruta recibida de un `cliente` por sobre una ruta recibida de un peer de `costo compartido`, o de un `proveedor`.
 
 
-The first guideline implies that the provider of the provider of `ASx` cannot be a customer of `ASx`. Such a relationship would not make sense from an economic perspective as it would imply circular payments. Furthermore, providers are usually larger than customers.
+.. The first guideline implies that the provider of the provider of `ASx` cannot be a customer of `ASx`. Such a relationship would not make sense from an economic perspective as it would imply circular payments. Furthermore, providers are usually larger than customers.
 
-The second guideline also corresponds to economic preferences. Since a provider earns money when sending packets to one of its customers, it makes sense to prefer such customer learned routes over routes learned from providers. [GR2001]_ also shows that BGP convergence is guaranteed even if an AS associates the same preference to routes learned from a `shared-cost` peer and routes learned from a customer.
+La primera recomendación implica que el proveedor del sistema autónomo `ASx` no puede ser cliente de `ASx`. Una tal relación no tendría sentido desde el punto de vista económico, ya que implicaría pagos circulares. Además, los proveedores son normalmente mayores que los clientes. 
 
-From a theoretical perspective, these guidelines should be verified automatically to ensure that BGP will always converge in the global Internet. However, such a verification cannot be performed in practice because this would force all domains to disclose their routing policies (and few are willing to do so) and furthermore the problem is known to be NP-hard [GW1999]. 
+.. The second guideline also corresponds to economic preferences. Since a provider earns money when sending packets to one of its customers, it makes sense to prefer such customer learned routes over routes learned from providers. [GR2001]_ also shows that BGP convergence is guaranteed even if an AS associates the same preference to routes learned from a `shared-cost` peer and routes learned from a customer.
 
-In practice, researchers and operators expect that these guidelines are verified [#fgranularity]_ in most domains. Thanks to the large amount of BGP data that has been collected by operators and researchers [#fbgpdata]_, several studies have analysed the AS-level topology of the Internet. [SARK2002]_ is one of the first analysis. More recent studies include [COZ2008]_ and [DKF+2007]_
+La segunda recomendación corresponde también a preferencias económicas. Como un proveedor gana dinero al enviar paquetes a uno de sus clientes, tiene sentido preferir las rutas aprendidas de dichos clientes a las rutas aprendidas de los proveedores. [GR2001]_ tambien muestra que la convergencia BGP se garantiza aún si un AS asocia la misma preferencia a las rutas aprendidas de un peer de `costo compartido` y las aprendidas de un cliente. 
 
-Based on these studies and [ATLAS2009]_, the AS-level Internet topology can be summarised as shown in the figure below.
+.. From a theoretical perspective, these guidelines should be verified automatically to ensure that BGP will always converge in the global Internet. However, such a verification cannot be performed in practice because this would force all domains to disclose their routing policies (and few are willing to do so) and furthermore the problem is known to be NP-hard [GW1999]. 
+
+Desde un punto de vista teórico, estas recomendaciones deben ser verificadas automáticamente para asegurar que BGP convergerá siempre en la Internet global. Sin embargo, tal verificación no puede llevarse a cabo en la práctica porque esto obligaría a todos los dominios a revelar sus políticas de ruteo (y pocos tienen intención de hacerlo); más aún, se sabe que el problema es NP-hard [GW1999]. 
+
+.. In practice, researchers and operators expect that these guidelines are verified [#fgranularity]_ in most domains. Thanks to the large amount of BGP data that has been collected by operators and researchers [#fbgpdata]_, several studies have analysed the AS-level topology of the Internet. [SARK2002]_ is one of the first analysis. More recent studies include [COZ2008]_ and [DKF+2007]_
+
+En la práctica, los investigadores y operadores esperan que estas recomendaciones se verifiquen en la mayoría de los dominios  [#fgranularity]_. Gracias a la gran cantidad de datos de BGP que han sido recogidos por operadores e investigadores [#fbgpdata]_, varios estudios han podido analizar la topología de Internet a nivel de AS. [SARK2002]_ es uno de los primeros análisis aparecidos. Entre los estudios más recientes están [COZ2008]_ y [DKF+2007]_
+
+Basándonos en estos estudios y en [ATLAS2009]_, la topología a nivel de AS de Internet puede resumirse como en la figura siguiente.
 
 .. figure:: svg/bgp-hierarchy.* 
    :align: center
    :scale: 70
    
-   The layered structure of the global Internet
+   La estructura en capas de la Internet global
+..   The layered structure of the global Internet
 
 .. index:: Tier-1 ISP
 
-The domains on the Internet can be divided in about four categories according to their role and their position in the AS-level topology. 
+.. The domains on the Internet can be divided in about four categories according to their role and their position in the AS-level topology. 
 
- - the core of the Internet is composed of a dozen-twenty `Tier-1` ISPs. A `Tier-1` is a domain that has no `provider`. Such an ISP has `shared-cost` peering relationships with all other `Tier-1` ISPs and `provider->customer` relationships with smaller ISPs. Examples of `Tier-1` ISPs include sprint_, level3_ or opentransit_
- - the `Tier-2` ISPs are national or continental ISPs that are customers of `Tier-1` ISPs. These `Tier-2` ISPs have smaller customers and `shared-cost` peering relationships with other `Tier-2` ISPs. Example of `Tier-2` ISPs include France Telecom, Belgacom, British Telecom, ...
- - the `Tier-3` networks are either stub domains such as enterprise or campus networks networks and smaller ISPs. They are customers of Tier-1 and Tier-2 ISPs and have sometimes `shared-cost` peering relationships
- - the large content providers that are managing large datacenters. These content providers are producing a growing fraction of the packets exchanged on the global Internet [ATLAS2009]_. Some of these content providers are customers of Tier-1 or Tier-2 ISPs, but they often try to establish `shared-cost` peering relationships, e.g. at IXPs, with many Tier-1 and Tier-2 ISPs.
+Los dominios de Internet pueden dividirse en unas cuatro categorías de acuerdo a su rol y posición en la topología a nivel de AS.
 
-Due to this organisation of the Internet and due to the BGP decision process, most AS-level paths on the Internet have a length of 3-5 AS hops. 
+.. - the core of the Internet is composed of a dozen-twenty `Tier-1` ISPs. A `Tier-1` is a domain that has no `provider`. Such an ISP has `shared-cost` peering relationships with all other `Tier-1` ISPs and `provider->customer` relationships with smaller ISPs. Examples of `Tier-1` ISPs include sprint_, level3_ or opentransit_
+.. - the `Tier-2` ISPs are national or continental ISPs that are customers of `Tier-1` ISPs. These `Tier-2` ISPs have smaller customers and `shared-cost` peering relationships with other `Tier-2` ISPs. Example of `Tier-2` ISPs include France Telecom, Belgacom, British Telecom, ...
+.. - the `Tier-3` networks are either stub domains such as enterprise or campus networks networks and smaller ISPs. They are customers of Tier-1 and Tier-2 ISPs and have sometimes `shared-cost` peering relationships
+.. - the large content providers that are managing large datacenters. These content providers are producing a growing fraction of the packets exchanged on the global Internet [ATLAS2009]_. Some of these content providers are customers of Tier-1 or Tier-2 ISPs, but they often try to establish `shared-cost` peering relationships, e.g. at IXPs, with many Tier-1 and Tier-2 ISPs.
 
+ - El núcleo de Internet se compone de unos doce a veinte ISPs `Tier-1`. Un dominio `Tier-1` es aquel que no tiene `proveedor`. Un tal ISP tiene relaciones de peering de `costo compartido` con todos los demás ISPs `Tier-1`, y de `proveedor->cliente` con los ISPs menores.  Ejemplos de ISPs `Tier-1` son sprint_, level3_ y opentransit_.
+ - Los ISPs `Tier-2` son proveedores nacionales o continentales que son clientes de ISPs `Tier-1`. Estos `Tier-2` tienen clientes más pequeños, y relaciones de peering de `costo compartido` con otros ISPs `Tier-2`. Ejemplos de ISPs `Tier-2` son France Telecom, Belgacom, British Telecom, ...
+ - Las redes `Tier-3` son, o bien dominios stub como redes corporativas, o redes de campus y proveedores ISP menores. Son clientes de ISPs de Tier-1 y Tier-2, y a veces tienen relaciones de peering de `costo compartido`.
+ - Los grandes proveedores de contenidos que manejan grandes datacenters. Estos provedores de contenido producen una fracción creciente de los paquetes que se intercambian en la Internet global [ATLAS2009]_. Algunos de estos proveedores de contenido son clientes de ISPs Tier-1 o Tier-2, pero con frecuencia tratan de establecer relaciones de `costo compartido`, por ejemplo, en IXPs, con muchos ISPs de Tier-1 y Tier-2.
+
+
+.. Due to this organisation of the Internet and due to the BGP decision process, most AS-level paths on the Internet have a length of 3-5 AS hops. 
+
+Debido a esta organización de la Internet y debido al proceso de decisión de BGP, la mayoría de los caminos a nivel de AS en Internet tienen una longitud de 3 a 5 saltos. 
 
 .. no note:: BGP security
 
@@ -859,35 +917,67 @@ Due to this organisation of the Internet and due to the BGP decision process, mo
 
 .. rubric:: Footnotes
 
-.. [#fasnum] An analysis of the evolution of the number of domains on the global Internet during the last ten years may be found in http://www.potaroo.net/tools/asn32/
+.. .. [#fasnum] An analysis of the evolution of the number of domains on the global Internet during the last ten years may be found in http://www.potaroo.net/tools/asn32/
 
-.. [#fasrank] See http://as-rank.caida.org/ for an  analysis of the interconnections between domains based on measurements collected in the global Internet
+.. [#fasnum] Puede encontrarse un análisi de la evolución de la cantidad de dominios en la Internet global durante los últimos diez años en http://www.potaroo.net/tools/asn32/.
 
-.. [#fbgploop] It is important to know that this concept has nothing to do with the loopback interfaces `127.0.0.1` and `::1` of an host. It is unfortunate that one router manufacturer decided to reuse the word loopback with this new meaning.
+.. .. [#fasrank] See http://as-rank.caida.org/ for an  analysis of the interconnections between domains based on measurements collected in the global Internet
 
-.. [#fwish] Two routers that are attached to the same IXP only exchange packets when the owners of their domains have an economical incentive to exchange packets on this IXP. Usually, a router on an IXP is only able to exchange packets with a small fraction of the routers that are present on the same IXP.
+.. [#fasrank] Ver en http://as-rank.caida.org/ un análisis de las interconexiones entre dominios basado en mediciones recogidas en la Internet global. 
 
-.. [#fripedb] See ftp://ftp.ripe.net/ripe/dbase for the RIPE database that contains the import and export policies of many European ISPs
+.. .. [#fbgploop] It is important to know that this concept has nothing to do with the loopback interfaces `127.0.0.1` and `::1` of an host. It is unfortunate that one router manufacturer decided to reuse the word loopback with this new meaning.
 
-.. [#fasdomain] In this text, we consider Autonomous System and domain as synonyms. In practice, a domain may be  divided into several Autonomous Systems, but we ignore this detail. 
+.. [#fbgploop] Es importante saber que este concepto no tiene nada que ver con las interfaces de loopback `127.0.0.1` y `::1` de un host. Desafortunadamente, un proveedor de routers decidió reutilizar la palabra `loopback` con este nuevo significado.
 
-.. [#flifetimebgp] The BGP sessions and the underlying TCP connection are typically established by the routers when they boot based on information found in their configuration. The BGP sessions are rarely released, except if the corresponding peering link fails or one of the endpoints crashes or needs to be rebooted. 
+.. .. [#fwish] Two routers that are attached to the same IXP only exchange packets when the owners of their domains have an economical incentive to exchange packets on this IXP. Usually, a router on an IXP is only able to exchange packets with a small fraction of the routers that are present on the same IXP.
 
-.. [#fdefaultkeepalive] 90 seconds is the default delay recommended by :rfc:`4271`. However, two BGP peers can negotiate a different timer during the establishment of their BGP session. Using a too small interval to detect BGP session failures is not recommended. BFD [KW2009]_ can be used to replace BGP's KEEPALIVE mechanism if fast detection of interdomain link failures is required.
+.. [#fwish] Dos routers conectados al mismo IXP solamente intercambian paquetes cuando los propietarios de esos dominios tienen un incentivo económico para intercambiar paquetes en ese IXP. Por lo general, un router en un IXP solamente es capaz de intercambiar paquetes con una pequeña fracción de los routers presentes en el mismo IXP.
 
-.. [#fflap] A link is said to be flapping if it switches several between an operational state and a disabled state within a short period of time. A router attached to such a link would need to frequently send routing messages.
+.. .. [#fripedb] See ftp://ftp.ripe.net/ripe/dbase for the RIPE database that contains the import and export policies of many European ISPs
 
-.. [#fnexthopself] Some routers, when they receive a `BGP Update` over an `eBGP session`, set the nexthop of the received route to one of their own addresses. This is called `nexthop-self`. See e.g. [WMS2004]_ for additional details.
+.. [#fripedb] Ver en ftp://ftp.ripe.net/ripe/dbase la base de datos RIPE que contiene las políticas de importación y exportación de muchos ISPs europeos.
 
-.. [#frr] Using a full-mesh of iBGP sessions is suitable in small networks. However, this solution does not scale in large networks containing hundreds or more routers since :math:`\frac{n \times (n-1)}{2}` iBGP sessions must be established in a domain containing :math:`n` BGP routers. Large domains use either Route Reflection :rfc:`4456` or confederations :rfc:`5065` to scale their iBGP, but this goes beyond this introduction.
+.. .. [#fasdomain] In this text, we consider Autonomous System and domain as synonyms. In practice, a domain may be  divided into several Autonomous Systems, but we ignore this detail. 
 
-.. [#fbgpmulti] Some BGP implementations can be configured to install several routes towards a single prefix in their FIB for load-balancing purposes. However, this goes beyond this introduction to BGP.
+.. [#fasdomain] En este texto consideramos Sistema Autónomo (AS) y dominio como sinónimos. En la práctica, un dominio puede estar dividido en varios AS, pero ignoraremos este detalle.
 
-.. [#fmed] The MED attribute can be used on `customer->provider` peering relationships upon request of the customer. On `shared-cost` peering relationship, the MED attribute is only enabled when there is a explicit agreement between the two peers. 
+.. .. [#flifetimebgp] The BGP sessions and the underlying TCP connection are typically established by the routers when they boot based on information found in their configuration. The BGP sessions are rarely released, except if the corresponding peering link fails or one of the endpoints crashes or needs to be rebooted.
 
-.. [#fgranularity] Some researchers such as [MUF+2007]_ have shown that modelling the Internet topology at the AS-level requires more than the `shared-cost` and `customer->provider` peering relationships. However, there is no publicly available model that goes beyond these classical peering relationships.
+.. [#flifetimebgp] Las sesiones BGP y la conexión TCP subyacente se establecen típicamente entre los routers cuando arrancan, basándose en su información de configuración. Las sesiones BGP raramente son interrumpidas, salvo que falle el vínculo de peering correspondiente o uno de los extremos falle, o necesite ser reiniciado.
 
-.. [#fbgpdata] BGP data is often collected by establishing BGP sessions between Unix hosts running a BGP daemon and BGP routers in different ASes. The Unix hosts stores all BGP messages received and regular dumps of its BGP routing table. See http://www.routeviews.org, http://www.ripe.net/ris, http://bgp.potaroo.net or http://irl.cs.ucla.edu/topology/
+.. .. [#fdefaultkeepalive] 90 seconds is the default delay recommended by :rfc:`4271`. However, two BGP peers can negotiate a different timer during the establishment of their BGP session. Using a too small interval to detect BGP session failures is not recommended. BFD [KW2009]_ can be used to replace BGP's KEEPALIVE mechanism if fast detection of interdomain link failures is required.
 
+.. [#fdefaultkeepalive] La demora recomendada por :rfc:`4271` es de 90 segundos. Sin embargo, dos peers BGP pueden negociar un timer diferente durante el establecimiento de su sesión. No se recomienda usar un intervalo demasiado pequeño para detectar fallos de sesión BGP. Puede usarse BFD [KW2009]_ para reemplazar el mecanismo keepalive de BGP si se requiere detección rápida de fallos de enlaces. 
 
-.. [#fpotaroo] Several web sites collect and analyse data about the evolution of BGP in the global Internet. http://bgp.potaroo.net provides lots of statistics and analyses that are updated daily.
+.. .. [#fflap] A link is said to be flapping if it switches several between an operational state and a disabled state within a short period of time. A router attached to such a link would need to frequently send routing messages.
+
+.. [#fflap] Se dice que un enlace está oscilando (`flapping`) si durante un período corto de tiempo cambia varias veces entre estado operativo y estado deshabilitado. Un router conectado a un tal enlace necesitaría enviar mensajes de ruteo muy frecuentes.
+
+.. .. [#fnexthopself] Some routers, when they receive a `BGP Update` over an `eBGP session`, set the nexthop of the received route to one of their own addresses. This is called `nexthop-self`. See e.g. [WMS2004]_ for additional details.
+
+.. [#fnexthopself] Algunos routers, al recibir un mensaje `BGP Update` sobre una sesión BGP, fijan el nexthop de la ruta recibida a una de sus propias direcciones. Esto se llama `nexthop-self`. Véase, por ejemplo, [WMS2004]_ para mayores detalles.
+
+.. .. [#frr] Using a full-mesh of iBGP sessions is suitable in small networks. However, this solution does not scale in large networks containing hundreds or more routers since :math:`\frac{n \times (n-1)}{2}` iBGP sessions must be established in a domain containing :math:`n` BGP routers. Large domains use either Route Reflection :rfc:`4456` or confederations :rfc:`5065` to scale their iBGP, but this goes beyond this introduction.
+
+.. [#frr] Usar una malla completa de sesiones iBGP es conveniente en redes pequeñas. Sin embargo, esta solución no escala en redes grandes que contengan cientos de routers o más, ya que se deben establecer :math:`\frac{n \times (n-1)}{2}` sesiones iBGP en un dominio que contenga :math:`n` BGP routers. Los dominios grandes usan, o bien reflexión de rutas (`Route Reflection`, :rfc:`4456`), o confederaciones :rfc:`5065` para escalar su iBGP, pero el tema excede a esta introducción.
+
+.. .. [#fbgpmulti] Some BGP implementations can be configured to install several routes towards a single prefix in their FIB for load-balancing purposes. However, this goes beyond this introduction to BGP.
+
+.. [#fbgpmulti] Algunas implementaciones BGP pueden configurarse para instalar varias rutas hacia un prefijo único en su FIB para propósitos de balanceo de carga. Sin embargo el tema excede a esta introducción a BGP.
+
+.. .. [#fmed] The MED attribute can be used on `customer->provider` peering relationships upon request of the customer. On `shared-cost` peering relationship, the MED attribute is only enabled when there is a explicit agreement between the two peers. 
+
+.. [#fmed] El atributo MED puede ser usado en relaciones de `cliente->proveedor` a requerimiento del cliente. En relaciones de peering de `costo compartido`, el atributo MED sólo se habilita cuando hay un acuerdo explícito entre los peers. 
+
+.. .. [#fgranularity] Some researchers such as [MUF+2007]_ have shown that modelling the Internet topology at the AS-level requires more than the `shared-cost` and `customer->provider` peering relationships. However, there is no publicly available model that goes beyond these classical peering relationships.
+
+.. [#fgranularity] Algunos investigadores, como [MUF+2007]_, han demostrado que el modelado de la topología de Internet a nivel de AS requiere más que las relaciones de peering de `costo compartido` y `cliente->proveedor`. Sin embargo, no existe un modelo públicamente disponible que vaya más allá de estas relaciones de peering clásicas. 
+
+.. .. [#fbgpdata] BGP data is often collected by establishing BGP sessions between Unix hosts running a BGP daemon and BGP routers in different ASes. The Unix hosts stores all BGP messages received and regular dumps of its BGP routing table. See http://www.routeviews.org, http://www.ripe.net/ris, http://bgp.potaroo.net or http://irl.cs.ucla.edu/topology/
+
+.. [#fbgpdata] Frecuentemente se recolectan datos de BGP estableciendo sesiones entre hosts Unix corriendo un daemon BGP y routers BGP en diferentes AS. Los hosts Unix almacenan todos los mensajes BGP recibidos, más vuelcos de su tabla de ruteo BGP a intervalos regulares. Véase http://www.routeviews.org, http://www.ripe.net/ris, http://bgp.potaroo.net o http://irl.cs.ucla.edu/topology/
+
+.. .. [#fpotaroo] Several web sites collect and analyse data about  evolution of BGP in the global Internet. http://bgp.potaroo.net provides lots of statistics and analyses that are updated daily.
+
+.. [#fpotaroo] Existen varios sitios web que recogen y analizan datos sobre la evolución de BGP en la Internet global. http://bgp.potaroo.net ofrece muchas estadísticas y análisis que se actualizan diariamente. 
+
