@@ -23,7 +23,7 @@ En el ruteo de estado de enlace, una red se modela como un grafo dirigido con pe
 
   - Peso unidad. Si todos los enlaces tienen un peso unitario, el ruteo de camino más corto preferirá los caminos con el menor número de routers intermedios.
   - Peso proporcional al retardo de propagación por el enlace. Si todos los pesos de los enlaces son configurados de esta forma, el ruteo de camino más corto usará los caminos con el retardo de propagación más pequeño.
-  - :math:`Peso=\frac{C}{bandwidth}` donde `C` es una constante mayor que el ancho de banda más grande de los enlaces de la red. Si todos los pesos de los enlaces se configuran de esta forma, el ruteo de camino más corto preferirá los caminos de mayores anchos de banda sobre los de menor ancho de banda.
+  - :math:`Peso=\frac{C}{ancho de banda}` donde `C` es una constante mayor que el ancho de banda más grande de los enlaces de la red. Si todos los pesos de los enlaces se configuran de esta forma, el ruteo de camino más corto preferirá los caminos de mayores anchos de banda sobre los de menor ancho de banda.
  
 .. Usually, the same weight is associated to the two directed edges that correspond to a physical link (i.e. :math:`R1 \rightarrow R2` and :math:`R2 \rightarrow R1`). However, nothing in the link state protocols requires this. For example, if the weight is set in function of the link bandwidth, then an asymmetric ADSL link could have a different weight for the upstream and downstream directions. Other variants are possible. Some networks use optimisation algorithms to find the best set of weights to minimize congestion inside the network for a given traffic demand [FRT2002]_. 
 
