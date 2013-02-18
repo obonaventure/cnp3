@@ -11,7 +11,7 @@ El correo electrónico, o email, es una aplicación muy popular en las redes de 
 
 .. Before looking at the details of Internet email, let us consider a simple scenario illustrated in the figure below, where Alice sends an email to Bob. Alice prepares her email by using an `email clients`_ and sends it to her email server. Alice's `email server <http://en.wikipedia.org/wiki/Comparison_of_mail_servers>`_ extracts Bob's address from the email and delivers the message to Bob's server. Bob retrieves Alice's message on his server and reads it by using his favourite email client or through his webmail interface. 
 
-Antes de analizar los detalles del email en Internet, consideremos un escenario simple como el ilustrado en la figura siguiente, donde Alice envía un email a Bob. Alice prepara su email usando un `cliente de email`_ y lo envía a su servidor de email. El `servidor de email <http://en.wikipedia.org/wiki/Comparison_of_mail_servers>`_ de Alice extrae del email la dirección de Bob, y lo envía al servidor de Bob. Éste recupera el mensaje de Alice de su servidor, y lo lee usando su cliente de email favorito, o a través de una interfaz de webmail.
+Antes de analizar los detalles del email en Internet, consideremos un escenario simple como el ilustrado en la figura siguiente, donde Alice envía un email a Bob. Alice prepara su email usando un `cliente de email <http://en.wikipedia.org/wiki/Comparison_of_email_clients>`_ y lo envía a su servidor de email. El `servidor de email <http://en.wikipedia.org/wiki/Comparison_of_mail_servers>`_ de Alice extrae del email la dirección de Bob, y lo envía al servidor de Bob. Éste recupera el mensaje de Alice de su servidor, y lo lee usando su cliente de email favorito, o a través de una interfaz de webmail.
 
 .. figure:: svg/email-arch.png
    :align: center
@@ -38,7 +38,7 @@ El sistema de email que consideramos en este libro consta de cuatro componentes:
 
 .. We will first discuss the format of email messages followed by the protocols that are used on today's Internet to exchange and retrieve emails. Other email systems have been developed in the past [Bush1993]_ [Genilloud1990]_ [GC2000]_, but today most email solutions have migrated to the Internet email. Information about the software that is used to compose and deliver emails may be found on wikipedia_ among others, for both `email clients`_ and `email servers <http://en.wikipedia.org/wiki/Comparison_of_mail_servers>`_. More detailed information about the full Internet Mail Architecture may be found in :rfc:`5598`.
 
-Discutiremos primero el formato de los mensajes de email, seguido de los protocolos que se usan hoy en Internet para intercambiar y recuperar emails. Han sido desarrollados otros sistemas en el pasado [Bush1993]_ [Genilloud1990]_ [GC2000]_, pero hoy la mayoría de las soluciones de email han sido migradas al email de Internet. Puede hallarse información sobre el software que se usa para componer y entregar email en wikipedia_, entre otros, para `clientes de email`_ y `servidores de email <http://en.wikipedia.org/wiki/Comparison_of_mail_servers>`_. Se puede encontrar más información sobre la arquitectura del correo electrónico en Internet en :rfc:`5598`.
+Discutiremos primero el formato de los mensajes de email, seguido de los protocolos que se usan hoy en Internet para intercambiar y recuperar emails. Han sido desarrollados otros sistemas en el pasado [Bush1993]_ [Genilloud1990]_ [GC2000]_, pero hoy la mayoría de las soluciones de email han sido migradas al email de Internet. Puede hallarse información sobre el software que se usa para componer y entregar email en wikipedia_, entre otros, para `clientes de email <http://en.wikipedia.org/wiki/Comparison_of_email_clients>`_ y `servidores de email <http://en.wikipedia.org/wiki/Comparison_of_mail_servers>`_. Se puede encontrar más información sobre la arquitectura del correo electrónico en Internet en :rfc:`5598`.
 
 .. index:: email message format, formato de mensajes de email
 
@@ -49,7 +49,7 @@ Discutiremos primero el formato de los mensajes de email, seguido de los protoco
 
 Los mensajes de email, como el correo postal, se componen de dos partes:
 
- - Una `cabecera` que juega el mismo rol que el membrete en el correo regular. Contiene metadatos acerca del mensaje.
+ - Una `cabecera` que juega el mismo rol que el membrete de una nota, o el sobre de una carta, en el correo regular. Contiene metadatos acerca del mensaje.
  - El `cuerpo` que contiene el mensaje en sí mismo.
 
 .. Email messages are entirely composed of lines of ASCII characters. Each line can contain up to 998 characters and is terminated by the `CR` and `LF` control characters :rfc:`5322`. The lines that compose the `header` appear before the message `body`. An empty line, containing only the `CR` and `LF` characters, marks the end of the `header`. This is illustrated in the figure below.
