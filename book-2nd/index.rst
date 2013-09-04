@@ -43,16 +43,16 @@ Part 1: Principles
    :maxdepth: 4
 
    principles/reliability
-#   intro/organisation
+..   intro/organisation
 
 
-#   application/application
-#   application/principles
+..   application/application
+..   application/principles
 
 
-#   intro/introduction
-#   intro/services-protocols
-#   intro/referencemodels
+..   intro/introduction
+..   intro/services-protocols
+..   intro/referencemodels
 
 Part 2: Protocols
 :::::::::::::::::
@@ -60,15 +60,15 @@ Part 2: Protocols
 .. toctree::
    :maxdepth: 4
 
-#   transport/principles
+..  transport/principles
 
-#   application/transport-service
-#   application/app-protocols
-#   application/socket
-#   application/summary
+..   application/transport-service
+..   application/app-protocols
+..   application/socket
+..   application/summary
 
-#   transport/udp
-#   transport/tcp
+..   transport/udp
+..   transport/tcp
 
 Part 3: Practice
 ::::::::::::::::
@@ -76,15 +76,14 @@ Part 3: Practice
 .. toctree::
    :maxdepth: 4
 
-#   application/exercises/ex-application
+..  application/exercises/ex-application
 
-
-#   transport/exercises/ex-transport
-#   transport/exercises/cha-transport
+..   transport/exercises/ex-transport
+..   transport/exercises/cha-transport
    
-#   network/network
+..   network/network
 
-#   lan/lan
+..  lan/lan
 
 Appendices
 ::::::::::
