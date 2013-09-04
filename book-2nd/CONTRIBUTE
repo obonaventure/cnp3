@@ -1,0 +1,29 @@
+File format
+===========
+
+We use the same levels of titles as the python documentation, namely ::
+
+ ####
+ Part
+ ####
+
+ *******
+ Chapter
+ *******
+
+ Section
+ =======
+
+ Subsection
+ ----------
+
+ Subsubsection
+ ^^^^^^^^^^^^^
+
+ Paragraph
+ """""""""
+
+The figures will preferably be in SVG format, but this will likely be aligned once the first draft has been written. 
+
+The links are defined in the top-level links.rst file which is importer in all restructured text files. 
+
