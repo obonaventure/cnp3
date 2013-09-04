@@ -10,7 +10,7 @@ In the previous section, we have explained how reliable protocols allow hosts to
 The main objective of the network layer is to allow endsystems, connected to different networks, to exchange information through intermediate systems called :term:`router`. The unit of information in the network layer is called a :term:`packet`.
 
 
-.. figure:: svg/osi-network.png
+.. figure:: ../../book/network/svg/osi-network.png
    :align: center
    :scale: 80
    
@@ -21,7 +21,7 @@ Before explaining the network layer in detail, it is useful to remember the char
 .. TODO add footnote ? Using a connection-oriented datalink layer causes some problems that are beyond the scope of this chapter. See :rfc:`3819` for a discussion on this topic.
 
 
-.. figure:: svg/osi-datalink.png
+.. figure:: ../../book/network/svg/osi-datalink.png
    :align: center
    :scale: 70   
 
@@ -58,14 +58,57 @@ There are two possible organisations for the network layer :
  - `datagram`
  - `virtual circuits` 
 
-The datagram organisation is the simplest one. It was inspired by the post office. 
-If each packet contains both the. The destination address is required in each packet to enable routers to forward them towards their final destination.
 
-..
- - `flat address`
- - `hierarchical address`
+The first and most popular organisation of the network layer is the datagram organisation. This organisation is inspired by the organisation of the postal service. Each host is identified by a `network layer address`. To send information to a remote host, a host creates a packet that contains :
 
-This problem is somewhat similar to the operation of the Post Office. To send some information through the post, one needs to first place the information inside an enveloppe. The enveloppe has a limited capacity like
+ - the network layer address of the destination host
+ - its own network layer address
+ - the information to be sent
+
+.. The network layer limits the maximum packet size. Thus, the information must have been divided in packets by the transport layer before being passed to the network layer. 
+
+To understand the datagram organisation, let us consider the figure below. A network layer address, represented by a letter, has been assigned to each host and router. To send some information to host `J`, host `A` creates a packet containing its own address, the destination address and the information to be exchanged.
+
+.. figure:: ../../book/network/svg/simple-internetwork.png
+   :align: center
+   :scale: 80   
+
+   A simple internetwork 
+
+.. index:: hop-by-hop forwarding, forwarding table
+
+
+With the datagram organisation, routers use `hop-by-hop forwarding`. This means that when a router receives a packet that is not destined to itself, it looks up the destination address of the packet in its `forwarding table`. A `forwarding table` is a data structure that maps each destination address (or set of destination addresses) to the outgoing interface over which a packet destined to this address must be forwarded to reach its final destination. The router consults its forwarding table for each packet that it handles. 
+
+The figure illustrates some possible forwarding tables in this network. By inspecting the forwarding tables of the different routers, one can find the path followed by packets sent from a source to a particular destination. In the example above, host `A` sends its packet to router `R1`. `R1` consults its routing table and forwards the packet towards `R2`. Based on its own routing table, `R2` decides to forward the packet to `R5` that can deliver it to its destination. Thus, the path from `A` to `J` is `A -> R1 -> R2 -> R5 -> J`.
+
+The computation of the forwarding tables of all the routers inside a network is a key element for the correct operation of the network. This computation can be carried out in different ways and it is possible to use both distributed and centralized algorithms. These algorithms provide different performance, may lead to different types of paths, but their composition must lead to valid path. 
+
+In a network, a path can be defined as the list of all intermediate routers for a given source destination pair. For a given source/destination pair, the path can be derived by first consulting the forwarding table of the router attached the source to determine the next router on the path towards the chosen destination. Then, the forwarding table of this router is queried for the same destination... The queries continue until the destination is reached. In a network that has valid forwarding tables, all the paths between all source/destination pairs contain a finite number of intermediate routers. However, if forwarding tables have not been correctly computed, two types of invalid path can occur. 
+
+A path may lead to a black hole. In a network, a black hole is a router that receives packets for at least one given source/destination pair but does not have any entry inside its forwarding table for this destination. Since it does not know how to reach the destination, the router cannot forward the received packets and must discard them. Any centralized or distributed algorithm that computes forwarding tables must ensure that there are not black holes inside the network.
+
+A second type of problem may exist in networks using the datagram organisation. Consider a path that contain a cycle. For example, router `R1` sends all packets towards destination `D` via router `R2`, router `R2` forwards these packets to router `R3` and finally router `R3`'s forwarding table uses router `R1` as its nexthop to reach destination `D`. In this case, if a packet destined to `D` is received by router `R1`, it will loop on the `R1 -> R2 -> R3 -> R1` cycle and will never reach its final destination. As in the black hole case, the destination is not reachable from all sources in the network. However, in practice the loop problem is worse than the black hole problem because when a packet is caught in a forwarding loop, it unnecessarily consumes bandwidth. In the black hole case, the problematic packet is quickly discarded. We will see later that network layer protocols include techniques to minimize the impact of such forwarding loops.
+
+Any solution which is used to compute the forwarding tables of a network must ensure that all destinations are reachable from any source. This implies that it must guarantee the absence of black holes and forwarding loops. 
+
+.. index:: data plane
+
+The `forwarding tables` and the precise format of the packets that are exchanged inside the network are part of the `data plane` of the network.  This `data plane` contains all the protocols and algorithms that are used by hosts and routers to create and process the packets that contain user data. On high-end routers, the data plane is often implemented in hardware for performance reasons.
+
+.. To allow hosts to exchange packets, a network relies on two different types of protocols and mechanisms. First, there must be a precise definition of the format of the packets that are sent by hosts and processed by routers. Second, the algorithm used by the routers to forward these packets must be defined. This protocol and this algorithm are part of the `data plane` of the network layer.
+
+.. index:: control plane
+
+Besides the `data plane`, a network is also characterized by its `control plane`. The control plane includes all the protocols and algorithms (often distributed) that are used to compute the forwarding tables that are installed on all routers inside the network. While there is only one possible `data plane` for a given networking technology, different networks using the same technology may use different control planes. The simplest `control plane` for a network is always to compute manually the forwarding tables of all routers inside the network. This simple control plane is sufficient when the network is (very) small, usually up to a few routers. 
+
+In most networks, manual forwarding tables are not a solution for two reasons. First, most networks are too large to enable a manual computation of the forwarding tables. Second, with manually computed forwarding tables, it is very difficult to deal with link and router failures. Networks need to operate 24h a day, 365 days per year. During the lifetime of a network, many events can affect the routers and links that it contains. Link failures are regular events in deployed networks. Links can fail for various reasons, including electromagnetic interference, fiber cuts, hardware or software problems on the terminating routers, ... Some links also need to be added to the network or removed because their utilisation is too low or their cost is too high. Similarly, routers also fail. There are two types of failures that affect routers. A router may stop forwarding packets due to hardware or software problem (e.g. due to a crash of its operating system). A router may also need to be halted from time to time (e.g. to upgrade its operating system to fix some bugs). These planned and unplanned events affect the set of links and routers that can be used to forward packets in the network. Still, most network users expect that their network will continue to correctly forward packets despite all these events. With manually computed forwarding tables, it is usually impossible to precompute the forwarding tables while taking into account all possible failure scenarios.
+
+An alternative to manually computed forwarding tables is to use a network management platform that tracks the network status and can push new forwarding tables on the routers when it detects any modification to the network topology. This solution gives some flexibility to the network managers in computing the paths inside their network. However, this solution only works if the network management platform is always capable of reaching all routers even when the network topology changes. This may require a dedicated network that allows the management platform to push information on the forwarding tables.
+
+Nowadays, most deployed networks rely on distributed algorithms, called routing protocols, to compute the forwarding tables that are installed on the routers. These distributed algorithms are part of the `control plane`. Their are usually implemented in software and are executed on the router's CPU. We will discuss later the two main families of routing protocols : distance vector routing and link state routing. Both are capable of discovering autonomously the network and react dynamically to topology changes.
+
+The datagram organisation has been very popular in computer networks. Datagram based network layers include IPv4 and IPv6 in the global Internet, CLNP defined by the ISO, IPX defined by Novell or XNS defined by Xerox [Perlman2000]_.
 
 .. 
  .. figure:: svg/simple-lan.png
@@ -114,36 +157,7 @@ The internal organisation of the network is orthogonal to the service that it pr
 Datagram organisation
 ---------------------
 
-The first and most popular organisation of the network layer is the datagram organisation. This organisation is inspired by the organisation of the postal service. Each host is identified by a `network layer address`. To send information to a remote host, a host creates a packet that contains :
 
- - the network layer address of the destination host
- - its own network layer address
- - the information to be sent
-
-The network layer limits the maximum packet size. Thus, the information must have been divided in packets by the transport layer before being passed to the network layer. 
-
-To understand the datagram organisation, let us consider the figure below. A network layer address, represented by a letter, has been assigned to each host and router. To send some information to host `J`, host `A` creates a packet containing its own address, the destination address and the information to be exchanged.
-
-.. figure:: svg/simple-internetwork.png
-   :align: center
-   :scale: 80   
-
-   A simple internetwork 
-
-.. index:: hop-by-hop forwarding
-
-
-With the datagram organisation, routers use `hop-by-hop forwarding`. This means that when a router receives a packet that is not destined to itself, it looks up the destination address of the packet in its `routing table`. A `routing table` is a data structure that maps each destination address (or set of destination addresses) to the outgoing interface over which a packet destined to this address must be forwarded to reach its final destination. 
-
-The main constraint imposed on the routing tables is that they must allow any host in the network to reach any other host. This implies that each router must know a route towards each destination, but also that the paths composed from the information stored in the routing tables must not contain loops. Otherwise, some destinations would be unreachable. 
-
-In the example above, host `A` sends its packet to router `R1`. `R1` consults its routing table and forwards the packet towards `R2`. Based on its own routing table, `R2` decides to forward the packet to `R5` that can deliver it to its destination.
-
-To allow hosts to exchange packets, a network relies on two different types of protocols and mechanisms. First, there must be a precise definition of the format of the packets that are sent by hosts and processed by routers. Second, the algorithm used by the routers to forward these packets must be defined. This protocol and this algorithm are part of the `data plane` of the network layer. The `data plane` contains all the protocols and algorithms that are used by hosts and routers to create and process the packets that contain user data.
-
-The `data plane`, and in particular the forwarding algorithm used by the routers, depends on the routing tables that are maintained on reach router. These routing tables can be maintained by using various techniques (manual configuration, distributed protocols, centralised computation, etc). These techniques are part of the `control plane` of the network layer. The `control plane` contains all the protocols and mechanisms that are used to compute and install routing tables on the routers. 
-
-The datagram organisation has been very popular in computer networks. Datagram based network layers include IPv4 and IPv6 in the global Internet, CLNP defined by the ISO, IPX defined by Novell or XNS defined by Xerox [Perlman2000]_.
 
 
 Virtual circuit organisation

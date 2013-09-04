@@ -2,9 +2,9 @@
 .. This file is licensed under a `creative commons licence <http://creativecommons.org/licenses/by/3.0/>`_
 
 
-########################################################
+#####################################################################
 Computer Networking : Principles, Protocols and Practice, 2nd edition
-########################################################
+#####################################################################
 
 .. figure:: cnp3.png
    :align: center
@@ -14,9 +14,9 @@ Computer Networking : Principles, Protocols and Practice, 2nd edition
 
    This is the current HTML version of the `Computer Networking : Principles, Protocols and Practice <http://inl.info.ucl.ac.be/cnp3/>`_. You can login with your yahoo, google or openid account to provide comments and suggestions to improve the text. You can also directly download the textbook in various formats from the links below :
 
-   	- :download:`distrib/cnp3.epub` suitable for viewing on tablets like ipad
- 	- :download:`distrib/cnp3.mobi` suitable for viewing on amazon kindle
- 	- :download:`distrib/cnp3.pdf` suitable for viewing and printing anywhere
+   	- :download:`distrib/cnp3b.epub` suitable for viewing on tablets like ipad
+ 	- :download:`distrib/cnp3b.mobi` suitable for viewing on amazon kindle
+ 	- :download:`distrib/cnp3b.pdf` suitable for viewing and printing anywhere
 
     The development of this edition of the textbook is done on `github
     <https://github.com/obonaventure/cnp3>`_ 
@@ -43,6 +43,7 @@ Part 1: Principles
    :maxdepth: 4
 
    principles/reliability
+   principles/network
 ..   intro/organisation
 
 
