@@ -42,7 +42,8 @@ Framing
 =======
 
 .. This is the `framing` problem. It can be defined as : "`How does a sender encode frames so that the receiver can efficiently extract them from the stream of bits that it receives from the physical layer`". 
-En esto consiste el problema del `framing`. Puede definirse así: "`Cómo debe codificar las tramas un emisor de manera que el receptor pueda eficientemente extraerlas del tren de bits que recibe de la capa Física`".
+
+En esto consiste el problema del `framing`, que puede definirse de la siguiente manera: "`Cómo debe un emisor codificar las tramas de manera que el receptor pueda extraerlas eficientemente del tren de bits que recibe de la capa Física`".
 
 .. A first solution to solve the framing problem is to require the physical layer to remain idle for some time after the transmission of each frame. These idle periods can be detected by the receiver and serve as a marker to delineate frame boundaries. Unfortunately, this solution is not sufficient for two reasons. First, some physical layers cannot remain idle and always need to transmit bits. Second, inserting an idle period between frames decreases the maximum bandwidth that can be achieved by the datalink layer.
 Una primera solución al problema del framing es requerir que la capa Física permanezca ociosa durante algún tiempo después de la transmisión de cada trama. Estos períodos ociosos pueden ser detectados por el receptor y servir como demarcación de los límites de tramas. Lamentablemente, esta solución no es suficiente por dos razones. Primero, algunas implementaciones de la capa Física no pueden permanecer ociosas y necesitan estar siempre transmitiendo bits. Segundo, insertar un período ocioso entre tramas disminuye el ancho de banda máximo que puede lograrse en la capa de Enlace de Datos.
