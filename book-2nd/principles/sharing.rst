@@ -6,34 +6,169 @@
 Sharing ressources
 ------------------
 
+A network is designed to support a potentially large number of users that exchange information with each other. These users produce and consume information which is exchanged through the network. To support its users, a network uses several types of ressources. It is important to keep in mind the different ressources that are shared inside the network.
 
+The first and more important ressource inside a network is the link bandwidth. There are two situations where link bandwidth needs to be shared between different users. The first situation is when several hosts are attached to the same physical link. This situation mainly occurs in Local Area Networks (LAN). A LAN is a network that efficiently interconnects several hosts (usually a few dozens to a few hundreds) in the same room, building or campus. Consider for a example a network with five hosts. Any of these hosts needs to be able to exchange information with any of the other five hosts. A first organisation for this LAN is the full-mesh.
+
+.. figure:: ../../book/intro/svg/fullmesh.*
+   :align: center
+   :scale: 50
+
+   A Full mesh network
+
+The full-mesh is the most reliable and highest performing network to interconnect these five hosts. However, this network organisation has two important drawbacks. First, if a network contains `n` hosts, then :math:`\frac{n\times(n-1)}{2}` links are required. If the network contains more than a few hosts, if becomes impossible to lay down the required physical links. Second, if the network contains `n` hosts, then each host must have :math:`n-1` interfaces to terminante :math:`n-1` links. This is beyond the capabilities of most hosts. Furthermore, if a new host is added to the network, new links have to be laid down and one interface has to be added to each participating host. However, full-mesh has the advantage of providing the lowest delay between the hosts and the best resiliency against link failures. In practice, full-mesh networks are rarely used expected when there are few network nodes and resiliency is key.
+
+
+The second possible physical organisation, which is also used inside computers to connect different extension cards, is the bus. In a bus network, all hosts are attached to a shared medium, usually a cable through a single interface. When one host sends an electrical signal on the bus, the signal is received by all hosts attached to the bus. A drawback of bus-based networks is that if the bus is physically cut, then the network is split into two isolated networks.  For this reason, bus-based networks are sometimes considered to be difficult to operate and maintain, especially when the cable is long and there are many places where it can break. Such a bus-based topology was used in early Ethernet networks. 
+
+.. figure:: ../../book/intro/svg/bus.*
+   :align: center
+   :scale: 50 
+
+   A network organized as a Bus
+
+A third organisation of a computer network is a star topology. In such topologies, hosts have a single physical interface and there is one physical link between each host and the center of the star. The node at the center of the star can be either a piece of equipment that amplifies an electrical signal, or an active device, such as a piece of equipment that understands the format of the messages exchanged through the network. Of course, the failure of the central node implies the failure of the network. However, if one physical link fails (e.g. because the cable has been cut), then only one node is disconnected from the network. In practice, star-shaped networks are easier to operate and maintain than bus-shaped networks. Many network administrators also appreciate the fact that they can control the network from a central point. Administered from a Web interface, or through a console-like connection, the center of the star is a useful point of control (enabling or disabling devices) and an excellent observation point (usage statistics).
+
+
+.. figure:: ../../book/intro/svg/star.*
+   :align: center
+   :scale: 50 
+
+   A network organised as a Star
+
+A fourth physical organisation of a network is the ring topology. Like the bus organisation, each host has a single physical interface connecting it to the ring. Any signal sent by a host on the ring will be received by all hosts attached to the ring. From a redundancy point of view, a single ring is not the best solution, as the signal only travels in one direction on the ring; thus if one of the links composing the ring is cut, the entire network fails. In practice, such rings have been used in local area networks, but are now often replaced by star-shaped networks. In metropolitan networks, rings are often used to interconnect multiple locations. In this case, two parallel links, composed of different cables, are often used for redundancy. With such a dual ring, when one ring fails all the traffic can be quickly switched to the other ring.
+
+.. figure:: ../../book/intro/svg/ring.*
+   :align: center
+   :scale: 50 
+
+   A network organised as a ring
+
+A fifth physical organisation of a network is the tree. Such networks are typically used when a large number of customers must be connected in a very cost-effective manner. Cable TV networks are often organised as trees.
+
+.. figure:: ../../book/intro/svg/tree.*
+   :align: center
+   :scale: 50 
+
+   A network organised as a Tree
+   
+In all these networks, except the full-mesh, the link bandwidth is shared among all connected hosts. Various algorithms have been proposed and are used to efficiently share the access to this ressource. We explain several of them in the Medium Access Control section below.
+
+
+Sharing bandwidth among the hosts directly attached to a link is not the only bandwidth sharing problem that occurs in computer networks. To understand the general problem, let us consider a very simple network which contains only point-to-point links. This network contains three hosts and two network nodes. All links inside the network have the same capacity. For example, let us assume that all links have a bandwidth of 1000 bits per second and that the hosts send packets containing exactly one thousand bits. 
+
+
+.. graphviz::
+
+   graph foo {
+      A [shape=box];
+      B [shape=box];
+      C [shape=box];
+      A--R1 ;
+      B--R1;
+      R1--R2 [];
+      R2--C [];
+   }
+
+
+In the network above, consider the case where host `A` is transmitting packets to destination `C`. `A` can send one packet per second and its packets will be delivered to `C`. Now, let us explore what happens when host `B` also starts to transmit a packet. Node `R1` will receive two packets that must be forwarded to `R2`. Unfortunately, due to the limited bandwidth on the `R1-R2` link, only one of these two packets can be transmitted. The outcome of the second packet will depend on the available buffers on `R1`. If `R1` has one available buffer, it could store the packet that has not been transmitted on the `R1-R2` link until the link becomes available. If `R1` does not have available buffers, then the packet needs to be discarded. 
+
+.. index:: network congestion
+
+Besides the link bandwidth, the buffers on the network nodes are the second type of ressource that needs to be shared inside the network. The node buffers play an important role in the operation of the network because that can be used to absorb transient traffic peaks. Consider again the example above. Assume that one average host `A` and host `B` send a group of three packets every ten seconds. Their combined transmission rate (0.6 packets per second) is, on average, lower than the network capacity (1 packet per second). However, if they both start to transmit at the same time, node `R1` will have to absorb a burst of packets. This burst of packets is a small `network congestion`. We will say that a network is congested, when the sum of the traffic demand from the hosts is larger than the network capacity :math:`\sum{demand}>capacity`. This `network congestion` problem is one of the most difficult ressource sharing problem in computer networks. `Congestion` occurs is almost all networks. Minimizing the amount of congestion is a key objective for many network operators. In most cases, they will have to accept transient congestion, i.e. congestion lasting a few seconds or perhaps minutes, but will want to prevent congestion that lasts days or months. For this, they can rely on a wide range of solutions. We briefly present some of these in the paragraphs below. A detailed overview of the congestion problem would require an entire book.
+
+.. todo:: provide references to congestion books
+
+.. index:: congestion collapse
+
+If `R1` has enough buffers, it will be able to absorb the load without having to discard packets. The packets sent by hosts `A` and `B` will reach their final destination `C`, but will experience a longer delay than when they are transmitting alone. The amount of buffering on the network node is the first paper that a network operator can tune to control congestion inside her network. Given the decreasing cost of memory, one could be tempted to put as many buffers [#fbufferbloat]_ as possible on the network nodes. Let us consider this case in the network above and assume that `R1` has infinite buffers. Assume now that hosts `A` and `B` try to transmit a file that corresponds to one thousand packets each. Both are using a reliable protocol that relies on go-back-n to recover from transmission errors. The transmission starts and packets start to accumulate in `R1`'s buffers. These presence of these packets in the buffers increases the delay between the transmission of a packet by `A` and the return of the corresponding acknowledgement. Given the increasing delay, host `A` (and `B` as well) will consider that some of the packets that it sent have been lost. These packets will be retransmitted and will enter the buffers of `R1`. The occupancy of the buffers of `R1` will continue to increase and the delays as well. This will cause new retransmissions, ... In the end, several copies of the same packet will be transmitted over the `R1-R2`, but only one file will be delivered (very slowly) to the destination. This is known as the `congestion collapse` problem :rfc:`896`. Congestion collapse is the nightmare for network operators. When it happens, the network carries packet without delivering useful data to the end users.
+
+.. note:: Congestion collapse on the Internet
+
+ Congestion collapse is unfortunately not only an academic experience. Van Jacobson reports in [Jacobson1988]_ one of these events that affected him while he was working at the Lawrence Berkeley Laboratory (LBL). LBL was two network nodes away from the University of California in Berkeley. At that time, the link between the two sites had a bandwidth of 32 Kbps, but some hosts were already attached to 10 Mbps LANs. `In October 1986,  the data throughput from LBL to UC Berkeley ... dropped from 32 Kbps to 40
+bps. We were fascinated by this sudden factor-of-thousand
+drop in bandwidth and embarked on an investigation of why
+things had gotten so bad.` This work lead to the development of various congestion control techniques that have allowed the Internet to continue to grow without experiencing widespread congestion collapse events. 
+
+Besides bandwidth and memory, a third ressource that needs to be shared inside a network is the (packet) processing capacity. To forward a packet, a network node needs bandwidth on the outgoing link, but it also needs to analyze the packet header to perform a lookup inside its forwarding table. Performing these lookup operations require ressources such as CPU cycles or memory accesses. Network nodes are usually designed to be able to sustain a given packet processing rate, measured in packets per second. 
+
+.. note:: Packets per second versus bits per second
+
+
+ The performance of network nodes can be characterized by two key metrics :
+ 
+  - the node's capacity measured in bits per second
+  - the node's lookup performance measured in packets per second
+
+ The node's capacity in bits per second mainly depends on the physical interfaces that it uses and also on the capacity of the internal interconnection (bus, crossbar switch, ...) between the different interfaces inside the node. Many vendors, in particular for low-end devices will use the sum of the bandwidth of the nodes' interfaces as the node capacity in bits per second. Measurements do not always match this maximum theoretical capacity. A well designed network node will usually have a capacity in bits per second larger than the sum of its link capacities. Such nodes will usually reach this maximum capacity when forwarding large packets. 
+
+ When a network node forwards small packets, its performance is usually limited by the number of lookup operations that it can perform every second. This lookup performance is measured in packets per second. The performance may depend on the length of the forwarded packets. The key performance factor is the number of minimal size packets that are forwarded by the node every second. This rate can lead to a capacity in bits per second which is much lower than the sum of the bandwidth of the node's links.
+
+.. add something on bisection bandwidth ?
+.. http://courses.cs.washington.edu/courses/csep524/99wi/lectures/lecture7/sld006.htm
+
+Let us now try to present a broad overview of the congestion problem in networks. We will assume that the network is composed of dedicated links having a fixed bandwidth [#fadjust]_. A network contains hosts that generate and receive packets and nodes that forward packets. Assuming that each host is connected via a single link to the network, the largest demand is :math:`sum{Access Links}`. In practice, this largest demand is never reached and the network will be engineered to sustain a much lower traffic demand. The difference between the worst-case traffic demand and the sustainable traffic demand can be large, up to several orders of magnitude. Fortunately, the hosts are not completely dump and they can adapt their traffic demand to the current state of the network and the available bandwidth. For this, the hosts need to `sense` the current level of congestion and adjust their own traffic demand based on the estimated congestion. Network nodes can react in different ways to network congestion and hosts can sense the level of congestion in different ways.
+
+Let us first explore which mechanisms can be used inside a network to control congestion and how these mechanisms can influence the behavior of the end hosts.
+
+As explained earlier, one of the first manifestation of congestion on network nodes is the saturation of the network links that leads to a growth in the occupancy of the buffers of the node. This growth of the buffer occupancy implies that some packets will spend more time in the buffer and thus in the network. If hosts measure the network delays (e.g. by measuring the round-trip-time between the transmission of a packet and the return of the corresponding acknowledgement) they could start to sense congestion. On low bandwidth links, a growth in the buffer occupancy can lead to an increase of the delays which can be easily measured by the end hosts. On high bandwidth links, a few packets inside the buffer will cause a small variation in the delay which may not necessarily be larger that the natural fluctuations of the delay measurements. 
+
+If the buffer's occupancy continues to grow, it will overflow and packets will need to be discarded. Discarding packets during congestion is the second possible reaction of a network node to congestion. Before looking at how a node can discard packets, it is interesting to discuss qualitatively the impact of the buffer occupancy on the reliable delivery of data through a network. This is illustrated by the figure below, adapted from [Jain1990]_. 
+
+.. figure:: jain.png
+   :align: center
+
+   Network congestion
+
+
+When the network load is low, buffer occupancy and link utilizations are low. The buffers on the network nodes are mainly used to absorb very short bursts of packets, but on average the traffic demand is lower than the network capacity. If the demand increases, the average buffer occupancy will increase as well. Measurements have shown that the total throughput increases as well. If the buffer occupancy is zero or very low, transmission opportunities on network links can be missed. This is not the case when the buffer occupancy is small but non zero. However, if the buffer occupancy continues to increase, the buffer becomes overloaded and the throughput does not increase anymore. When the buffer occupancy is close to the maximum, the throughput may decrease. This drop is throughput can be caused by excessive retransmissions of reliable protocols that incorrectly assume that previously sent packets have been lost while they are still waiting in the buffer. The network delay on the other hand increases with the buffer occupancy. In practice, a good operating point for a network buffer is a low occupancy to achieve high link utilization and also low delay for interactive applications. 
+
+.. index:: packet discard mechanism
+
+Discarding packets is one of the signals that the network nodes can use to inform the hosts of the current level of congestion. Buffers on network nodes are usually used as FIFO queues to preserve packet ordering. Several `packet discard mechanisms` have been proposed for network nodes. These techniques basically answer two different questions :
+
+ - `What triggers a packet to be discarded ?` What are the conditions that lead a network node to decide to discard a packet. The simplest answer to this question is : `When the buffer is full`. Although this is a good congestion indication, it is probably not the best one from a performance viewpoint. An alternative is to discard packets when the buffer occupancy grows too much. In this case, it is likely that the buffer will become full shortly. Since packet discarding is an information that allows hosts to adapt their transmission rate, discarding packets early could allow hosts to react earlier and thus prevent congestion from happening.
+ - `Which packet(s) should be discarded ?` Once the network node has decided to discard packets, it needs to actually discard real packets.
+
+
+By combining different answers to these questions, network researchers are developed different packet discard mechanisms.
+
+ - `tail drop` is the simplest packet discard technique. When a buffer is full, the arriving packet is discarded. `Tail drop` can be easily implemented. This is, by far, the most widely used packet discard mechanism. However, it suffers from two important drawbacks. First, since `tail drop` discards packets only when the buffer is full, buffers tend to be congested and realtime applications may suffer from the increased delays. Second, `tail drop` is blind when it discards a packet. It may discard a packet from a low bandwidth interactive flow while most of the buffer is used by large file transfers. 
+ - `drop from front` is an alternative packet discard technique. When a packet arrives and the Instead of removing the arriving packet, it removes the packet that was at the head of the queue. Discarding this packet instead of the arriving one can have two advantages. First, it already stayed a long time in the buffer. Second, hosts should be able to detect the loss (and thus the congestion) earlier.
+ - `probabilistic drop`. Various random drop techniques have been proposed. Compared to the previous techniques. A frequently cited technique is `Random Early Discard` (RED) [FJ1993]_. RED measures the average buffer occupancy and probabilistically discards packets when this average occupancy is too high. Compared to `tail drop` and `drop from front`, an advantage of `RED` is that thanks to the probabilistic drops, packets should be discarded from different flows in proportion of their bandwidth. 
+
+
+Discarding packets is a frequent reaction to network congestion. Unfortunately, discarding packets is not optimal since a packet which is discarded on a network node has already consumed resources on the upstream nodes. There are other ways for the network to inform the end hosts of the current congestion level. A first solution is to mark the packets when a node is congested. Several networking technologies have relied on this kind of packet marking.
+
+.. index:: Forward Explicit Congestion Notification, FECN
+
+In datagram networks, `Forward Explicit Congestion Notification` (FECN) can be used. One field of the packet header, typically one bit, is used to indicate congestion. When a host sends a packet, the congestion bit is reset. If the packet passes through a congested node, the congestion bit is set. The destination can then determine the current congestion level by measuring the fraction of the packets that it received with the congestion bit set. It may then return this information to the sending host to allow it to adapt its retransmission rate. Compared to packet discarding, the main advantage of FECN is that hosts can detect congestion explicitly without having to rely on packet losses.
+
+In virtual circuit networks, packet marking can be improved if the return packets follow the reverse path of the forward packets. It this case, a network node can detect congestion on the forward path (e.g. due to the size of its buffer), but mark the packets on the return path. Marking the return packets (e.g. the acknowledgements used by reliable protocols) provides a faster feedback to the sending hosts compared to FECN. This technique is usually called `Backward Explicit Congestion Notification (BECN)`.
+
+If the packet header does not contain any bit in the header to represent the current congestion level, an alternative is to allow the network nodes to send a control packet to the source to indicate the current congestion level. Some networking technologies use such control packets to explicitly regulate the transmission rate of sources. However, their usage is mainly restricted to small networks. In large networks, network nodes usually avoid using such control packets. These controlled packets are even considered to be dangerous in some networks. First, using them increases the network load when the network is congested. Second, while network nodes are optimized to forward packets, they are usually pretty slow at creating new packets.
+
+Delays, packet discards, packet markings and control packets are the main types of information that the network can exchange with the end hosts. Discarding packets is the main action that a network node can perform if the congestion is too severe. Besides tackling congestion at each node, it is also possible to change the divert some traffic flows from heavily loaded links to reduce congestion. Early routing algorithms [MRR1980]_ have used delay measurements to detect congestion between network nodes and update the link weights dynamically. By reflecting the delay perceived by applications in the link weights used for the shortest paths computation, these routing algorithms managed to dynamically change the forwarding paths in reaction to congestion. However, deployment experience showed that these dynamic routing algorithms could cause oscillations and did not necessarily lower congestion. Deployed datagram networks rarely use dynamic routing algorithms, except in some wireless networks. In datagram networks, the state of the art reaction to long term congestion, i.e. congestion lasting hours, days or more, is to measure the traffic demand and then select the link weights [FRT2002]_ that allow to minimize the maximum link loads. If the congestion lasts longer, changing the weights is not sufficient anymore and the network needs to be upgraded with few or faster links. However, in Wide Area Networks, adding new links can take months.
+
+In virtual circuit networks, another way to manage or prevent congestion is to limit the number of circuits that use the network at any time. This technique is usually called `connection admission control`. When a host requests the creation of a new circuit in the network, it specifies the destination and in some networking technologies the required bandwidth. With this information, the network can check whether there are enough resources available to reach this particular destination. If yes, the circuit is established. However, the requested is denied and the host will have to defer the creation of its virtual circuit. `Connection admission control` schemes are widely used in the telephone networks. In these networks, a busy tone corresponds to an unavailable destination or a congested network. 
+
+In datagram networks, this technique cannot be easily used since the basic assumption of such a network is that a host can send any packet towards any destination at any time. A host does not need to request the authorization of the network to send packets towards a particular destination.
+
+Based on the feedback received from the network, the hosts can adjust their transmission rate. We discuss in section `Congestion control` some techniques that allow hosts to react to congestion.
+
+
+.. note:: Spatial congestion control with Bittorrent
+
+.. ieee ethernet mac ?
 
 
 MAC
 ---
 
-Medium Access Control
-#####################
-
-Point-to-point datalink layers need to select one of the framing techniques described above and optionally add retransmission algorithms such as those explained for the transport layer to provide a reliable service. Datalink layers for Local Area Networks face two additional problems. A LAN is composed of several hosts that are attached to the same shared physical medium. From a physical layer perspective, a LAN can be organised in four different ways :
-
- - a bus-shaped network where all hosts are attached to the same physical cable
- - a ring-shaped where all hosts are attached to an upstream and a downstream node so that the entire network forms a ring
- - a star-shaped network where all hosts are attached to the same device
- - a wireless network where all hosts can send and receive frames using radio signals
-
-These four basic physical organisations of Local Area Networks are shown graphically in the figure below. We will first focus on one physical organisation at a time.
-
-.. figure:: svg/bus-ring-star.png
-   :align: center
-   :scale: 90
-   
-   Bus, ring and star-shaped Local Area Network 
-
 
 .. index:: collision
 
-The common problem among all of these network organisations is how to efficiently share the access to the Local Area Network. If two devices send a frame at the same time, the two electrical, optical or radio signals that correspond to these frames will appear at the same time on the transmission medium and a receiver will not be able to decode either frame. Such simultaneous transmissions are called `collisions`. A `collision` may involve frames transmitted by two or more devices attached to the Local Area Network. Collisions are the main cause of errors in wired Local Area Networks.
+The common problem among Local Area Networks is how to efficiently share the access to the shared bandwidth. If two devices send a frame at the same time, the two electrical, optical or radio signals that correspond to these frames will appear at the same time on the transmission medium and a receiver will not be able to decode either frame. Such simultaneous transmissions are called `collisions`. A `collision` may involve frames transmitted by two or more devices attached to the Local Area Network. Collisions are the main cause of errors in wired Local Area Networks.
 
 
 All Local Area Network technologies rely on a `Medium Access Control` algorithm to regulate the transmissions to either minimise or avoid collisions. There are two broad families of `Medium Access Control` algorithms :
@@ -65,7 +200,7 @@ Limited resources need to be shared in other environments than Local Area Networ
 `Time Division Multiplexing` (TDM) is a static bandwidth allocation method that was initially defined for the telephone network. In the fixed telephone network, a voice conversation is usually transmitted as a 64 Kbps signal. Thus, a telephone conservation generates 8 KBytes per second or one byte every 125 microseconds. Telephone conversations often need to be multiplexed together on a single line. For example, in Europe, thirty 64 Kbps voice signals are multiplexed over a single 2 Mbps (E1) line. This is done by using  `Time Division Multiplexing` (TDM). TDM divides the transmission opportunities into slots. In the telephone network, a slot corresponds to 125 microseconds. A position inside each slot is reserved for each voice signal. The figure below illustrates TDM on a link that is used to carry four voice conversations. The vertical lines represent the slot boundaries and the letters the different voice conversations. One byte from each voice conversation is sent during each 125 microseconds slot. The byte corresponding to a given conversation is always sent at the same position in each slot.
 
 
-.. figure:: png/lan-fig-012-c.png
+.. figure:: ../../book/lan/png/lan-fig-012-c.png
    :align: center
    :scale: 70
    
@@ -128,7 +263,7 @@ ALOHA and slotted ALOHA can easily be implemented, but unfortunately, they can o
 
 .. index:: persistent CSMA, CSMA (persistent)
 
-.. code-block:: text
+.. code-block:: python
 
   # persistent CSMA
   N=1
@@ -149,7 +284,7 @@ The above pseudo-code is often called `persistent CSMA` [KT1975]_ as the termina
 
 .. index:: non-persistent CSMA, CSMA (non-persistent)
 
-.. code-block:: text
+.. code-block:: python
 
  # Non persistent CSMA
  N=1
@@ -180,7 +315,7 @@ Carrier Sense Multiple Access with Collision Detection
 
 CSMA improves channel utilization compared to ALOHA. However, the performance can still be improved, especially in wired networks. Consider the situation of two terminals that are connected to the same cable. This cable could, for example, be a coaxial cable as in the early days of Ethernet [Metcalfe1976]_. It could also be built with twisted pairs. Before extending CSMA, it is useful to understand more intuitively, how frames are transmitted in such a network and how collisions can occur. The figure below illustrates the physical transmission of a frame on such a cable. To transmit its frame, host A must send an electrical signal on the shared medium. The first step is thus to begin the transmission of the electrical signal. This is point `(1)` in the figure below. This electrical signal will travel along the cable. Although electrical signals travel fast, we know that information cannot travel faster than the speed of light (i.e. 300.000 kilometers/second). On a coaxial cable, an electrical signal is slightly slower than the speed of light and 200.000 kilometers per second is a reasonable estimation. This implies that if the cable has a length of one kilometer, the electrical signal will need 5 microseconds to travel from one end of the cable to the other. The ends of coaxial cables are equipped with termination points that ensure that the electrical signal is not reflected back to its source. This is illustrated at point `(3)` in the figure, where the electrical signal has reached the left endpoint and host B. At this point, B starts to receive the frame being transmitted by A. Notice that there is a delay between the transmission of a bit on host A and its reception by host B. If there were other hosts attached to the cable, they would receive the first bit of the frame at slightly different times. As we will see later, this timing difference is a key problem for MAC algorithms. At point `(4)`, the electrical signal has reached both ends of the cable and occupies it completely. Host A continues to transmit the electrical signal until the end of the frame. As shown at point `(5)`, when the sending host stops its transmission, the electrical signal corresponding to the end of the frame leaves the coaxial cable. The channel becomes empty again once the entire electrical signal has been removed from the cable.
 
-.. figure:: png/lan-fig-024-c.png
+.. figure:: ../../book/lan/png/lan-fig-024-c.png
    :align: center
    :scale: 70
    
@@ -189,7 +324,7 @@ CSMA improves channel utilization compared to ALOHA. However, the performance ca
 Now that we have looked at how a frame is actually transmitted as an electrical signal on a shared bus, it is interesting to look in more detail at what happens when two hosts transmit a frame at almost the same time. This is illustrated in the figure below, where hosts A and B start their transmission at the same time (point `(1)`). At this time, if host C senses the channel, it will consider it to be free. This will not last a long time and at point `(2)` the electrical signals from both host A and host B reach host C. The combined electrical signal (shown graphically as the superposition of the two curves in the figure) cannot be decoded by host C. Host C detects a collision, as it receives a signal that it cannot decode. Since host C cannot decode the frames, it cannot determine which hosts are sending the colliding frames. Note that host A (and host B) will detect the collision after host C (point `(3)` in the figure below).
 
 
-.. figure:: png/lan-fig-025-c.png
+.. figure:: ../../book/lan/png/lan-fig-025-c.png
    :align: center
    :scale: 70
    
@@ -205,7 +340,7 @@ As shown above, hosts detect collisions when they receive an electrical signal t
 To better understand these collisions, it is useful to analyse what would be the worst collision on a shared bus network. Let us consider a wire with two hosts attached at both ends, as shown in the figure below. Host A starts to transmit its frame and its electrical signal is propagated on the cable. Its propagation time depends on the physical length of the cable and the speed of the electrical signal. Let us use :math:`\tau` to represent this propagation delay in seconds. Slightly less than :math:`\tau` seconds after the beginning of the transmission of A's frame, B decides to start transmitting its own frame. After :math:`\epsilon` seconds, B senses A's frame, detects the collision and stops transmitting. The beginning of B's frame travels on the cable until it reaches host A. Host A can thus detect the collision at time :math:`\tau-\epsilon+\tau \approx 2\times\tau`. An important point to note is that a collision can only occur during the first :math:`2\times\tau` seconds of its transmission. If a collision did not occur during this period, it cannot occur afterwards since the transmission channel is busy after :math:`\tau` seconds and CSMA/CD hosts sense the transmission channel before transmitting their frame. 
 
 
-.. figure:: png/lan-fig-027-c.png
+.. figure:: ../../book/lan/png/lan-fig-027-c.png
    :align: center
    :scale: 70
    
@@ -218,7 +353,7 @@ Furthermore, on the wired networks where CSMA/CD is used, collisions are almost 
 Removing acknowledgements is an interesting optimisation as it reduces the number of frames that are exchanged on the network and the number of frames that need to be processed by the hosts. However, to use this optimisation, we must ensure that all hosts will be able to detect all the collisions that affect their frames. The problem is important for short frames. Let us consider two hosts, A and B, that are sending a small frame to host C as illustrated in the figure below. If the frames sent by A and B are very short, the situation illustrated below may occur. Hosts A and B send their frame and stop transmitting (point `(1)`). When the two short frames arrive at the location of host C, they collide and host C cannot decode them (point `(2)`). The two frames are absorbed by the ends of the wire. Neither host A nor host B have detected the collision. They both consider their frame to have been received correctly by its destination.
 
 
-.. figure:: png/lan-fig-026-c.png
+.. figure:: ../../book/lan/png/lan-fig-026-c.png
    :align: center
    :scale: 70
    
@@ -248,7 +383,7 @@ In the second and third cases, both hosts have flipped different coins. The dela
 If two hosts are competing, the algorithm above will avoid a second collision 50% of the time. However, if the network is heavily loaded, several hosts may be competing at the same time. In this case, the hosts should be able to automatically adapt their retransmission delay. The `binary exponential back-off` performs this adaptation based on the number of collisions that have affected a frame. After the first collision, the host flips a coin and waits 0 or 1 `slot time`. After the second collision, it generates a random number and waits 0, 1, 2 or 3 `slot times`, etc. The duration of the waiting time is doubled after each collision. The complete pseudo-code for the CSMA/CD algorithm is shown in the figure below. 
 
 
-.. code-block:: text
+.. code-block:: python
 
  # CSMA/CD pseudo-code
  N=1
@@ -296,7 +431,7 @@ Compared to CSMA, CSMA/CA defines more precisely when a device is allowed to sen
 The figure below shows the basic operation of CSMA/CA devices. Before transmitting, host `A` verifies that the channel is empty for a long enough period. Then, its sends its data frame. After checking the validity of the received frame, the recipient sends an acknowledgement frame after a short SIFS delay. Host `C`, which does not participate in the frame exchange, senses the channel to be busy at the beginning of the data frame. Host `C` can use this information to determine how long the channel will be busy for. Note that as :math:`SIFS<DIFS<EIFS`, even a device that would start to sense the channel immediately after the last bit of the data frame could not decide to transmit its own frame during the transmission of the acknowledgement frame.
 
 
-.. figure:: svg/datalink-fig-006-c.png
+.. figure:: ../../book/lan/svg/datalink-fig-006-c.png
    :align: center
    :scale: 70
    
@@ -308,7 +443,7 @@ The figure below shows the basic operation of CSMA/CA devices. Before transmitti
 
 The main difficulty with CSMA/CA is when two or more devices transmit at the same time and cause collisions. This is illustrated in the figure below, assuming a fixed timeout after the transmission of a data frame. With CSMA/CA, the timeout after the transmission of a data frame is very small, since it corresponds to the SIFS plus the time required to transmit the acknowledgement frame.
 
-.. figure:: svg/datalink-fig-007-c.png
+.. figure:: ../../book/lan/svg/datalink-fig-007-c.png
    :align: center
    :scale: 70
    
@@ -317,7 +452,7 @@ The main difficulty with CSMA/CA is when two or more devices transmit at the sam
 To deal with this problem, CSMA/CA relies on a backoff timer. This backoff timer is a random delay that is chosen by each device in a range that depends on the number of retransmissions for the current frame. The range grows exponentially with the retransmissions as in CSMA/CD. The minimum range for the backoff timer is :math:`[0,7*slotTime]` where the `slotTime` is a parameter that depends on the underlying physical layer. Compared to CSMA/CD's exponential backoff, there are two important differences to notice. First, the initial range for the backoff timer is seven times larger. This is because it is impossible in CSMA/CA to detect collisions as they happen. With CSMA/CA, a collision may affect the entire frame while with CSMA/CD it can only affect the beginning of the frame. Second, a CSMA/CA device must regularly sense the transmission channel during its back off timer. If the channel becomes busy (i.e. because another device is transmitting), then the back off timer must be frozen until the channel becomes free again. Once the channel becomes free, the back off timer is restarted. This is in contrast with CSMA/CD where the back off is recomputed after each collision. This is illustrated in the figure below. Host `A` chooses a smaller backoff than host `C`. When `C` senses the channel to be busy, it freezes its backoff timer and only restarts it once the channel is free again.
 
 
-.. figure:: svg/datalink-fig-008-c.png
+.. figure:: ../../book/lan/svg/datalink-fig-008-c.png
    :align: center
    :scale: 70
    
@@ -326,7 +461,7 @@ To deal with this problem, CSMA/CA relies on a backoff timer. This backoff timer
 
 The pseudo-code below summarises the operation of a CSMA/CA device. The values of the SIFS, DIFS, EIFS and slotTime depend on the underlying physical layer technology [802.11]_
 
-.. code-block:: text
+.. code-block:: python
 
  # CSMA/CA simplified pseudo-code
  N=1
@@ -354,7 +489,7 @@ The pseudo-code below summarises the operation of a CSMA/CA device. The values o
 Another problem faced by wireless networks is often called the `hidden station problem`. In a wireless network, radio signals are not always propagated same way in all directions. For example, two devices separated by a wall may not be able to receive each other's signal while they could both be receiving the signal produced by a third host. This is illustrated in the figure below, but it can happen in other environments. For example, two devices that are on different sides of a hill may not be able to receive each other's signal while they are both able to receive the signal sent by a station at the top of the hill. Furthermore, the radio propagation conditions may change with time. For example, a truck may temporarily block the communication between two nearby devices. 
 
 
-.. figure:: svg/datalink-fig-009-c.png
+.. figure:: ../../book/lan/svg/datalink-fig-009-c.png
    :align: center
    :scale: 70
    
@@ -366,7 +501,7 @@ Another problem faced by wireless networks is often called the `hidden station p
 
 To avoid collisions in these situations, CSMA/CA allows devices to reserve the transmission channel for some time. This is done by using two control frames : `Request To Send` (RTS) and `Clear To Send` (CTS). Both are very short frames to minimize the risk of collisions. To reserve the transmission channel, a device sends a RTS frame to the intended recipient of the data frame. The RTS frame contains the duration of the requested reservation. The recipient replies, after a SIFS delay, with a CTS frame which also contains the duration of the reservation. As the duration of the reservation has been sent in both RTS and CTS, all hosts that could collide with either the sender or the reception of the data frame are informed of the reservation. They can compute the total duration of the transmission and defer their access to the transmission channel until then. This is illustrated in the figure below where host `A` reserves the transmission channel to send a data frame to host `B`. Host `C` notices the reservation and defers its transmission.
 
-.. figure:: svg/datalink-fig-010-c.png
+.. figure:: ../../book/lan/svg/datalink-fig-010-c.png
    :align: center
    :scale: 70
    
@@ -570,7 +705,11 @@ The analysis of [CJ1989]_ shows that to be fair and efficient, such a binary rat
 
 .. rubric:: Footnotes
 
+.. [#fbufferbloat] There are still some vendors that try to put as many buffers as possible on their network nodes. A recent example is the buffer bloat problem that plagues some low-end Internet routers [GN2011]_. 
 
+.. [#fpps] Some examples of the performance of various types of commercial networks nodes may be found in http://www.cisco.com/web/partners/downloads/765/tools/quickreference/routerperformance.pdf and http://www.cisco.com/web/partners/downloads/765/tools/quickreference/switchperformance.pdf
+
+.. [#fadjust] Some networking technologies allow to adjust dynamically the bandwidth of links. For example, some devices can reduce their bandwidth to preserve energy. We ignore these technologies in this basic course and assume that all links used inside the network have a fixed bandwidth. 
 
 .. include:: /links.rst
 

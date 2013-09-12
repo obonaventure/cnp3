@@ -22,7 +22,7 @@ import sys, os
 
 # Add any Sphinx extension module names here, as strings. They can be extensions
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.#
-extensions = ['sphinx.ext.todo', 'sphinx.ext.pngmath', 'sphinxcontrib.mscgen'] 
+extensions = ['sphinx.ext.todo', 'sphinx.ext.pngmath', 'sphinxcontrib.mscgen','sphinx.ext.graphviz'] 
 #'rst2pdf.pdfbuilder', 'rst2pdf.pdfmath', 'sphinx.ext.pngmath' ]
 #, 
 # 'sphinx.ext.autodoc','rst2pdf.pdfbuilder']
@@ -72,7 +72,7 @@ exclude_trees = ['_build']
 
 # List of files that should not be automatically compiled by sphynx because they are included
 
-exclude_patterns = [ '.#*',   # emacs backups
+exclude_patterns = [ '*.#*',   # emacs backups
 #                     'intro/organisation.rst',
 #                     'intro/referencemodels.rst',
 #                     'intro/services-protocols.rst',

@@ -6,25 +6,28 @@
 Computer Networking : Principles, Protocols and Practice, 2nd edition
 #####################################################################
 
+.. only:: html
+
+
 .. figure:: cnp3.png
    :align: center
    :scale: 60
 
-.. only:: html
-
-   This is the current HTML version of the `Computer Networking : Principles, Protocols and Practice <http://inl.info.ucl.ac.be/cnp3/>`_. You can login with your yahoo, google or openid account to provide comments and suggestions to improve the text. You can also directly download the textbook in various formats from the links below :
+   This is the draft of the second edition of `Computer Networking : Principles, Protocols and Practice`. The ebook is being entirely rewritten until the end of 2013. It will be updated on a weekly basis. You can also directly download the current ebook draft in various formats from the links below :
 
    	- :download:`distrib/cnp3b.epub` suitable for viewing on tablets like ipad
  	- :download:`distrib/cnp3b.mobi` suitable for viewing on amazon kindle
  	- :download:`distrib/cnp3b.pdf` suitable for viewing and printing anywhere
 
-    The development of this edition of the textbook is done on `github
-    <https://github.com/obonaventure/cnp3>`_ 
+    The development of this edition of the textbook is carried out on `github
+    <https://github.com/obonaventure/cnp3/tree/master/book-2nd>`_ 
 
-    	- posting comments, suggestions or bug reports on github
-	- proposing new exercices or sending patches on the `CNP3 <https://listes-2.sipr.ucl.ac.be/sympa/subscribe/cnp3>`_ mailing list.
+    You can help to improve this ebook by :
+
+    	- posting comments, suggestions or bug reports on `github <https://github.com/obonaventure/cnp3/tree/master/book-2nd>`_
+	- proposing new exercices or sending patches on `github <https://github.com/obonaventure/cnp3/tree/master/book-2nd>`_
 	
-    The source code of the entire textbook is written in `reStructuredText <http://docutils.sourceforge.net/rst.html>`_ and uses several `sphinx <http://sphinx.pocoo.org>`_ features. You can browse it from https://github.com/obonaventure/cnp3 
+    The source code of the entire textbook is written in `reStructuredText <http://docutils.sourceforge.net/rst.html>`_ and uses several `sphinx <http://sphinx.pocoo.org>`_ features. You can browse it from `github <https://github.com/obonaventure/cnp3/tree/master/book-2nd>`_ 
 
 
 Table of Contents
@@ -44,6 +47,12 @@ Part 1: Principles
 
    principles/reliability
    principles/network
+   principles/dv
+   principles/linkstate
+   principles/sharing
+   principles/transport
+
+
 ..   intro/organisation
 
 

@@ -61,7 +61,7 @@ The first condition ensures that the router discovers the shortest path towards 
 To understand the operation of a distance vector protocol, let us consider the network of five routers shown below.
 
 
-.. figure:: svg/dv-1.png
+.. figure:: ../../book/network/svg/dv-1.png
    :align: center
    :scale: 100   
 
@@ -78,7 +78,7 @@ Assume that `A` is the first to send its distance vector `[A=0]`.
 
 At this point, all routers can reach all other routers in the network thanks to the routing tables shown in the figure below.
 
-.. figure:: svg/dv-full.png
+.. figure:: ../../book/network/svg/dv-full.png
    :align: center
    :scale: 100   
 
@@ -97,7 +97,7 @@ At this point, all routers have a routing table allowing them to reach all anoth
 
 .. _fig-afterfailure:
 
-.. figure:: svg/dv-failure-2.png
+.. figure:: ../../book/network/svg/dv-failure-2.png
    :align: center
    :scale: 100   
 
@@ -149,7 +149,7 @@ This technique is called `split-horizon`. With this technique, the count to infi
 
 Unfortunately, split-horizon, is not sufficient to avoid all count to infinity problems with distance vector routing. Consider the failure of link `A-B` in the network of four routers below.
 
-.. figure:: svg/dv-infinity.png
+.. figure:: ../../book/network/svg/dv-infinity.png
    :align: center
    :scale: 100   
 
