@@ -42,7 +42,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'Computer networking : Principles, Protocols and Practice'
-copyright = u'2011 Olivier Bonaventure'
+copyright = u'2013 Olivier Bonaventure'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the

@@ -13,11 +13,11 @@ Computer Networking : Principles, Protocols and Practice, 2nd edition
    :align: center
    :scale: 60
 
-   This is the draft of the second edition of `Computer Networking : Principles, Protocols and Practice`. The ebook is being entirely rewritten until the end of 2013. It will be updated on a weekly basis. You can also directly download the current ebook draft in various formats from the links below :
+   This is the current draft of the second edition of `Computer Networking : Principles, Protocols and Practice`. The ebook is being entirely rewritten until the end of 2013. It will be updated on a weekly basis. You can also directly download the current ebook draft in various formats from the links below :
 
-   	- :download:`distrib/cnp3b.epub` suitable for viewing on tablets like ipad
- 	- :download:`distrib/cnp3b.mobi` suitable for viewing on amazon kindle
- 	- :download:`distrib/cnp3b.pdf` suitable for viewing and printing anywhere
+   	- :download:`distrib/cnp3bis.epub` suitable for viewing on tablets like ipad
+ 	- :download:`distrib/cnp3bis.pdf` suitable for viewing and printing anywhere
+.. 	- :download:`distrib/cnp3b.mobi` suitable for viewing on amazon kindle
 
     The development of this edition of the textbook is carried out on `github
     <https://github.com/obonaventure/cnp3/tree/master/book-2nd>`_ 
@@ -46,11 +46,11 @@ Part 1: Principles
    :maxdepth: 4
 
    principles/reliability
-   principles/network
-   principles/dv
-   principles/linkstate
-   principles/sharing
-   principles/transport
+..   principles/network
+..   principles/dv
+..   principles/linkstate
+..   principles/sharing
+..   principles/transport
 
 
 ..   intro/organisation
@@ -86,6 +86,8 @@ Part 3: Practice
 .. toctree::
    :maxdepth: 4
 
+
+   exercises/reliable
 ..  application/exercises/ex-application
 
 ..   transport/exercises/ex-transport
@@ -115,7 +117,7 @@ Indices and tables
 
 .. only:: html
 
-.. figure:: cc-by.png
+.. figure:: ../book/cc-by.png
    :align: center
    :scale: 100
 

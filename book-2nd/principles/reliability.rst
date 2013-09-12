@@ -6,9 +6,10 @@
 Connecting two hosts
 ====================
 
-The first step when building a network, even a worldwide network such as the Internet, is to connect two hosts together. To enable the two hosts to exchange information, they need to be linked together by some kind of physical media. Computer networks have used various types of physical media to exchange information, notably :
-
 .. index:: electrical cable, optical fiber, multimode optical fiber, monomode optical fiber 
+
+
+The first step when building a network, even a worldwide network such as the Internet, is to connect two hosts together. To enable the two hosts to exchange information, they need to be linked together by some kind of physical media. Computer networks have used various types of physical media to exchange information, notably :
 
  - `electrical cable`. Information can be transmitted over different types of electrical cables. The most common ones are the twisted pairs that are used in the telephone network, but also in enterprise networks and coaxial cables. Coaxial cables are still used in cable TV networks, but are no longer used in enterprise networks. Some networking technologies operate over the classical electrical cable.
  - `optical fiber`. Optical fibers are frequently used in public and enterprise networks when the distance between the communication devices is larger than one kilometer. There are two main types of optical fibers : multimode and monomode. Multimode is much cheaper than monomode fiber because a LED can be used to send a signal over a multimode fiber while a monomode fiber must be driven by a laser. Due to the different modes of propagation of light, monomode fibers are limited to distances of a few kilometers while multimode fibers can be used over distances greater than several tens of kilometers. In both cases, repeaters can be used to regenerate the optical signal at one endpoint of a fiber to send it over another fiber. 
@@ -166,7 +167,7 @@ A first solution to this problem is to require the physical layer to remain idle
 
 .. note:: Bit rate and bandwidth
 
-Bit rate and bandwidth are often used to characterize the transmission capacity of the physical service. The original definition of `bandwidth <http://www.merriam-webster.com/dictionary/bandwidth>`_, as listed in the `Webster dictionary <http://www.merriam-webster.com/dictionary>`_ is `a range of radio frequencies which is occupied by a modulated carrier wave, which is assigned to a service, or over which a device can operate`. This definition corresponds to the characteristics of a given transmission medium or receiver. For example, the human ear is able to decode sounds in roughly the 0-20 KHz frequency range. By extension, bandwidth is also used to represent the capacity of a communication system in bits per second. For example, a Gigabit Ethernet link is theoretically capable of transporting on billion bits per second.
+  Bit rate and bandwidth are often used to characterize the transmission capacity of the physical service. The original definition of `bandwidth <http://www.merriam-webster.com/dictionary/bandwidth>`_, as listed in the `Webster dictionary <http://www.merriam-webster.com/dictionary>`_ is `a range of radio frequencies which is occupied by a modulated carrier wave, which is assigned to a service, or over which a device can operate`. This definition corresponds to the characteristics of a given transmission medium or receiver. For example, the human ear is able to decode sounds in roughly the 0-20 KHz frequency range. By extension, bandwidth is also used to represent the capacity of a communication system in bits per second. For example, a Gigabit Ethernet link is theoretically capable of transporting on billion bits per second.
 
 
 .. index:: bit stuffing, stuffing (bit)
@@ -266,7 +267,7 @@ Other more powerful error correction codes have been proposed and are used in so
 .. index:: Physical layer
 
 
-.. figure:: ../../book/intro/svg/intro-figures-027-c.*
+.. figure:: ../../book/intro/svg/intro-figures-027-c.png
    :align: center
    :scale: 80
 
@@ -312,7 +313,7 @@ The datalink layer will send and receive frames on behalf of a user. We model th
 
 This is illustrated in the figure below.
 
-.. figure:: ../../book/transport/svg/transport-fig-007-c.*
+.. figure:: ../../book/transport/svg/transport-fig-007-c.png
    :align: center
    :scale: 80 
 
@@ -335,7 +336,7 @@ When running on top of a perfect framing sublayer, a datalink entity can simply 
       c=>d [ label = "DATA.ind(SDU)" ];
 
 
-.. .. figure:: ../../book/transport/svg/transport-fig-004.*
+.. .. figure:: ../../book/transport/svg/transport-fig-004.png
    :align: center
    :scale: 70 
 
@@ -356,33 +357,58 @@ These two types of frames can be distinguished by dividing the frame in two part
 
 The datalink entity can then be modelled as a finite state machine, containing two states for the receiver and two states for the sender. The figure below provides a graphical representation of this state machine with the sender above and the receiver below.
 
-.. digraph:: sender
-
+..
+  .. digraph:: sender
 	rankdir=LR;
 	node [shape = circle label="Wait\nfor\nSDU"] Wait_SDU; 
 	node [shape = circle label="Wait\nfor\n\OK"] Wait_OK;
-	Wait_SDU -> Wait_OK [label=<<font color="red">DATA.req(SDU)</font><br/>========<br/><font color="blue">send(D(SDU))</font>>]; 
-	Wait_OK -> Wait_SDU [label=<<font color="blue">recvd(C(OK))</font><br/>=======<br/>>]; 
+	Wait_SDU -> Wait_OK[label= <<TABLE BORDER="0" CELLBORDER="0">
+                       <TR>
+                          <TD>DATA.req(SDU)</TD>
+                       </TR>
+		       <hr/>
+                       <TR>
+                          <TD>send(D(SDU))</TD>
+                       </TR>
+                    </TABLE>>];
 
-next FSM
 
-.. digraph:: receiver
+..	Wait_OK -> Wait_SDU [label=<<font color="blue">recvd(C(OK))</font><br/>=======<br/>>]; 
 
+..
+ .. digraph:: receiver
 	rankdir=LR;
 	node [shape=circle label=<Wait<br/>for<br/>frame>] Wait_frame; 
 	node [shape=circle label=<Process<br/>SDU>] Process_SDU;
-	Wait_frame -> Process_SDU [label=<
-	<font color="blue">recvd(D(SDU))</font>
-	<br/>=========<br/>
-	<font color="red">DATA.ind(SDU)</font>
-	>]; 
+	Process_SDU -> Wait_frame [label= <<TABLE BORDER="0" CELLBORDER="0">
+                       <TR>
+                          <TD>recvd(D(SDU))</TD>
+                       </TR>
+		       <hr/>
+                       <TR>
+                          <TD>Data.ind(SDU)</TD>
+                       </TR>
+                    </TABLE>>];
+	Wait_frame -> Process_SDU -> [label= <<TABLE BORDER="0" CELLBORDER="0">
+                       <TR>
+                          <TD> </TD>
+                       </TR>
+		       <hr/>
+                       <TR>
+                          <TD>send(C(OK))</TD>
+                       </TR>
+                    </TABLE>>];
+
+.. /<br/><font color="blue">send(C(OK))</font>>]; 
 
 
-
-..	Process_SDU -> Wait_frame [label=<
-..	<br/>=======<br/>
-..	<font color="blue">send(C(OK))</font>
+..	Wait_frame -> Process_SDU [label=<
+..	<font color="blue">recvd(D(SDU))</font>
+..	<br/>=========<br/>
+..	<font color="red">DATA.ind(SDU)</font>
 ..	>]; 
+
+
 
 
 
@@ -414,7 +440,7 @@ Time sequence diagram illustrating the operation of the simplest transport proto
 
 
 ..
-  .. figure:: ../../book/transport/svg/transport-fig-009.*
+  .. figure:: ../../book/transport/svg/transport-fig-009.png
      :align: center
      :scale: 80 
 
@@ -504,18 +530,18 @@ The simplest error detection scheme is the checksum. A checksum is basically an 
       b->a [linecolour=white, label="cancel timer"];
       
       a=>b [ label = "DATA.req(b)\nstart timer" ] ,
-      b>>c [ label = "D(b)", arcskip="1"],
-      c-x d [label="lost frame", linecolour=white];
+      b-xc [ label = "D(b)", arcskip="1"],
+      c->d [label="lost frame", linecolour=white];
       |||;
       a=>b [ linecolour=white, label = "timer expires" ] ,
       b>>c [ label = "D(b)", arcskip="1"];
       c=>d [ label = "DATA.ind(b)" ],
-      c>>b [label= "C(OK)", arcskip="1"];
+      c>>b [label= "C(OK)", arcskip="2"];
 
 
-.. figure:: ../../book/transport/svg/transport-fig-018.png
-   :align: center
-   :scale: 70 
+.. .. figure:: ../../book/transport/svg/transport-fig-018.png
+      :align: center
+      :scale: 70 
 
    Using retransmission timers to recover from segment losses
 
@@ -705,11 +731,11 @@ The figure below illustrates the operation of `selective repeat` when frames are
 
 Pure cumulative acknowledgements work well with the `go-back-n` strategy. However, with only cumulative acknowledgements a `selective repeat` sender cannot easily determine which frames have been correctly received after a data frame has been lost. For example, in the figure above, the second `C(OK,0)` does not inform explicitly the sender of the reception of `D(2,c)` and the sender could retransmit this frame although it has already been received. A possible solution to improve the performance of `selective repeat` is to provide additional information about the received frames in the acknowledgements that are returned by the receiver. For example, the receiver could add in the returned acknowledgement the list of the sequence numbers of all frames that have already been received. Such acknowledgements are sometimes called `selective acknowledgements`. This is illustrated in the figure below. 
 
-.. figure:: png/manque
-   :align: center
-   :scale: 70 
+.. ..figure:: png/manque
+      :align: center
+      :scale: 70 
 
-   TODO : SACK Selective repeat : example 
+..   TODO : SACK Selective repeat : example 
 
 
 In the figure above, when the sender receives `C(OK,0,[2])`, it knows that all frames up to and including `D(0,...)` have been correctly received. It also knows that frame `D(2,...)` has been received and can cancel the retransmission timer associated to this frame. However, this frame should not be removed from the sending buffer before the reception of a cumulative acknowledgement (`C(OK,2)` in the figure above) that covers this frame. 
@@ -725,7 +751,7 @@ In the figure above, when the sender receives `C(OK,0,[2])`, it knows that all f
 
 .. To deal with this issue, transport protocols allow the receiver to advertise the current size of its receiving window in all the acknowledgements that it sends. The receiving window advertised by the receiver bounds the size of the sending buffer used by the sender. In practice, the sender maintains two state variables : `swin`, the size of its sending window (that may be adjusted by the system) and `rwin`, the size of the receiving window advertised by the receiver. At any time, the number of unacknowledged segments cannot be larger than `min(swin,rwin)` [#facklost]_ . The utilisation of dynamic windows is illustrated in the figure below.
 
-.. figure:: ../../book/transport/svg/transport-fig-039.*
+.. figure:: ../../book/transport/svg/transport-fig-039.png
    :align: center
    :scale: 90 
 
