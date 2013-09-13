@@ -1,0 +1,62 @@
+/*
+:Author: 3.14r
+:Contact: 3@14r.com
+:Copyright: This stylesheet has been placed in the public domain.
+
+Stylesheet for use with Docutils.
+
+*/
+
+/* @import url(html4css1.css); */
+
+
+/* Your customizations go here.  For example: */
+
+body {
+    padding: 2% 5% 0 5%;
+}
+
+h1, h2, h3 {
+    background-color: #2c5aa0;
+    padding: 3px 0 3px 40px;
+    color: white;
+    border-radius: 10px 0 0 10px;
+    -moz-border-radius: 10px 0 0 10px;
+    -webkit-border-radius: 10px 0 0 10px;
+    font-size: 150%;
+}
+h1.title {
+    text-align: left;
+}
+
+div.section {
+    margin-top: 35px;
+    margin-bottom: 10px;
+}
+
+.checker>h1, div.section>h1 {
+    font-size: 100%;
+}
+
+li p.first {
+    display: inline;
+}
+
+li>img.checkmark {
+    margin-left: -50px;
+}
+
+ul {
+    list-style-type: none;
+}
+
+input[type=radio] {
+    margin-right: 15px;
+    vertical-align: center;
+}
+
+.result {
+    display: inline;
+    margin-left: 30px;
+    font-weight: bold;
+}
