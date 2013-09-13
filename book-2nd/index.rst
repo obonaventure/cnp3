@@ -29,18 +29,18 @@ Computer Networking : Principles, Protocols and Practice, 2nd edition
 	
     The source code of the entire textbook is written in `reStructuredText <http://docutils.sourceforge.net/rst.html>`_ and uses several `sphinx <http://sphinx.pocoo.org>`_ features. You can browse it from `github <https://github.com/obonaventure/cnp3/tree/master/book-2nd>`_ 
 
-
+#################
 Table of Contents
-:::::::::::::::::
+#################
 
 .. toctree:: 
    :maxdepth: 2
 
    preface
 
-
+##################
 Part 1: Principles
-::::::::::::::::::
+##################
 
 .. toctree::
    :maxdepth: 4
@@ -64,8 +64,9 @@ Part 1: Principles
 ..   intro/services-protocols
 ..   intro/referencemodels
 
+#################
 Part 2: Protocols
-:::::::::::::::::
+#################
 
 .. toctree::
    :maxdepth: 4
@@ -80,8 +81,9 @@ Part 2: Protocols
 ..   transport/udp
 ..   transport/tcp
 
+################
 Part 3: Practice
-::::::::::::::::
+################
 
 .. toctree::
    :maxdepth: 4

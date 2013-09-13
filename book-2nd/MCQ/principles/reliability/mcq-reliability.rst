@@ -13,7 +13,7 @@ Reliable data transfer
 =======================
 
 
-#. Framing problem - Bit stuffing.
+1. Framing problem - Bit stuffing.
 ----------------------------------
 
 Consider a simple protocol that uses 16 bits frames. Bit stuffing can be used to recover the frames from a string of bits. The table below shows an original frame (before bit stuffing) and a transmitted frame (after having applied bit stuffing). Only one of the lines below corresponds to a valid utilisation of bit stuffing ((The frame boundary marker is 01111110). Which one ? 
@@ -47,7 +47,7 @@ Consider a simple protocol that uses 16 bits frames. Bit stuffing can be used to
 
 
 
-#. Character stuffing
+2. Character stuffing
 ---------------------
 
 Character stuffing is another framing technique. It uses the `DLE`, `STX` and `ETX` characters. The table blow shows original (before stuffing) and transmitted frames (after stuffing). Only one of the proposed answers is valid. Which one ? 
@@ -67,6 +67,7 @@ Character stuffing is another framing technique. It uses the `DLE`, `STX` and `E
 -  ================  ================================================
    DLE DLE DLE DLE   DLE STX DLE DLE DLE DLE DLE DLE DLE DLE DLE ETX 
    ================  ================================================
+
 .. class:: negative
 
 -  =================== ===================================
@@ -80,15 +81,12 @@ Character stuffing is another framing technique. It uses the `DLE`, `STX` and `E
    =========================================== =========================================================================
 
 
-#. Error detection code
+3. Error detection code
 -----------------------
 
-We considere here 16-bits blocs. For each sequence of 3 blocs, we compute parity bloc
-where each parity bits of this bloc refer to the bits occupying the same position in the 3 previous blocs.
-The parity bloc is therefore used to verify the integrity of the 3 previous
-blocs, using XOR on the parity bloc received with the parity bloc rebuilded.
+For this question, we assume 16-bits blocks. For each sequence of 3 blocks, we compute a parity block where each parity bit of this block refer to the bits occupying the same position in the 3 previous blocks. The parity block can be used as an error detection scheme. 
 
-Which one of these parity blocs is correct ?
+Among the examples below, only one corresponds to a valid parity block. Which one (assuming that the parity block has been computed by using XOR of the corresponding bits) ?
 
 .. class:: positive
         
@@ -98,7 +96,7 @@ Which one of these parity blocs is correct ?
         1010111011110101
         1110101010101011 
         1111111011111111  
-        1011101010100001 => parity bloc
+        1011101010100001 => parity block
         
 
 -
@@ -107,7 +105,7 @@ Which one of these parity blocs is correct ?
         1010111011110101
         1110101010101011 
         1111111011111111  
-        0100010101011110 => parity bloc
+        0100010101011110 => parity block
       
 .. class:: negative
 
@@ -117,7 +115,7 @@ Which one of these parity blocs is correct ?
         1010101011111001
         0101110110011011
         1010111011111010
-        1111111111111111 => parity bloc
+        1111111111111111 => parity block
 
 -
   .. code-block::
@@ -125,7 +123,7 @@ Which one of these parity blocs is correct ?
         1010111011110101
         1110101010101011 
         1111111011111111  
-        1011101001011110 => parity bloc
+        1011101001011110 => parity block
   
 - 
   .. code-block::
@@ -133,7 +131,7 @@ Which one of these parity blocs is correct ?
         1011101111&10111
         1001011101010101
         1010000011111111
-        1010000011111111 => parity bloc
+        1010000011111111 => parity block
 
 
 -
@@ -142,26 +140,25 @@ Which one of these parity blocs is correct ?
         1011101001100111
         1010101010010101
         1001010111111111
-        1011101001100111 => parity bloc
+        1011101001100111 => parity block
 
 
 
-Question 5. Error detection code (suite)
-----------------------------------------
-We consider here 16-bits blocs. For each sequence of 4 blocs, we compute parity
-bloc where each parity bits of this bloc refer to the bits occupying the same
-position in the previous blocs. The parity bloc is therefore used to verify the
-integrity of the 4 previous block.
-One of the 4 blocs has been lost. Can you find wich one using the three other
-blocs and the parity bloc?
+4. Error correction codes
+-------------------------
+
+Parity blocks can also be used to recover from transmission errors. For this question, we assume that one parity block has been computed for 4 blocks and one of the block was discarded due to transmission errors. 
   
-  .. code-block::
+  .. code-block:: text
         
         1001011010100101
         0001000111001000
         0101001011101001
-        ................ =>missing bloc
-        1001100110011010 =>parity bloc
+        ................ =>missing block
+        1001100110011010 =>parity block
+
+
+Only one of the blocks below is a recovered block. Which one ?
 
 .. class:: positive
 
@@ -170,9 +167,11 @@ blocs and the parity bloc?
 
         0100110000011110
 
+-
   .. code-block::
 
         1011001111100001
+
 
 .. class:: negative
 
@@ -181,88 +180,99 @@ blocs and the parity bloc?
 
         1011001100011110
 
+
 -
   .. code-block::
         
         0100110001100001
+
            
 -
   .. code-block::
         
         1001011010100101
 
+
 -
   .. code-block::
         
         0100111000011110
 
-Question 6. The One Bit Protocol
---------------------------------------------
+
+5. Alternating Bit Protocol
+---------------------------
+
 One timing diagram is displaying a correct transfert of 3 frames with the one bit protocol. Wich one?
 
 .. class:: positive
 
 -
-  .. figure:: ../../png/lan/qcm1-1-solution1.png
+  .. figure:: images/qcm1-1-solution1.png
      :align: center
      :scale: 100
 
 -
-  .. figure:: ../../png/lan/qcm1-1-solution2.png
+  .. figure:: images/qcm1-1-solution2.png
      :align: center
      :scale: 100
 
 -
-  .. figure:: ../../png/lan/qcm1-1-solution3.png
+  .. figure:: images/qcm1-1-solution3.png
      :align: center
      :scale: 100
 
 .. class:: negative
 
 -
-  .. figure:: ../../png/lan/qcm1-1-wrong1.png
+  .. figure:: images/qcm1-1-wrong1.png
      :align: center
      :scale: 100
 
 -
-  .. figure:: ../../png/lan/qcm1-1-wrong2.png
+  .. figure:: images/qcm1-1-wrong2.png
      :align: center
      :scale: 100
 
 -
-  .. figure:: ../../png/lan/qcm1-1-wrong3.png
+  .. figure:: images/qcm1-1-wrong3.png
      :align: center
      :scale: 100
 
 -
-  .. figure:: ../../png/lan/qcm1-1-wrong4.png
+  .. figure:: images/qcm1-1-wrong4.png
      :align: center
      :scale: 100
 
-Question 7. The One Bit Protocol (suite)
-----------------------------------------
+
+6. Alternating Bit Protocol
+---------------------------
 Observe the following time diagram. What's the next frame send by the sender?
 
-  .. figure:: ../../png/lan/qcm1-7-nextstep.png
+  .. figure:: images/qcm1-7-nextstep.png
      :align: center
      :scale: 100
+
 .. class:: positive
 
-  .. figure:: ../../png/lan/qcm1-7-solution.png
+-
+  .. figure:: images/qcm1-7-solution.png
      :align: center
      :scale: 100
 
 .. class:: negative
 
-  .. figure:: ../../png/lan/qcm1-7-wrong1.png
+- 
+  .. figure:: images/qcm1-7-wrong1.png
      :align: center
      :scale: 100
 
-  .. figure:: ../../png/lan/qcm1-7-wrong2.png
+-
+  .. figure:: images/qcm1-7-wrong2.png
      :align: center
      :scale: 100
 
-  .. figure:: ../../png/lan/qcm1-7-wrong3.png
+-
+  .. figure:: images/qcm1-7-wrong3.png
      :align: center
      :scale: 100
  

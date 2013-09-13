@@ -3,8 +3,9 @@
 .. This file is licensed under a `creative commons licence <http://creativecommons.org/licenses/by-sa/3.0/>`_
 
 
+********************
 Connecting two hosts
-====================
+********************
 
 .. index:: electrical cable, optical fiber, multimode optical fiber, monomode optical fiber 
 
@@ -159,7 +160,7 @@ To enable the transmission/reception of frames, the first problem to be solved i
 If the physical layer were perfect, the problem would be very simple. We would simply need to define how to encode each frame as a sequence of consecutive bits. The receiver would then easily be able to extract the frames from the received bits. Unfortunately, the imperfections of the physical layer make this framing problem slightly more complex. Several solutions have been proposed and are used in practice in different network technologies.
 
 Framing
-=======
+-------
 
 The `framing` problem can be defined as : "`How does a sender encode frames so that the receiver can efficiently extract them from the stream of bits that it receives from the physical layer`". 
 
@@ -225,7 +226,7 @@ Some characters are used as markers to delineate the frame boundaries. Many `cha
 `Character stuffing` , like bit stuffing, increases the length of the transmitted frames. For `character stuffing`, the worst frame is a frame containing many `DLE` characters. When transmission errors occur, the receiver may incorrectly decode one or two frames (e.g. if the errors occur in the markers). However, it will be able to resynchronise itself with the next correctly received markers.
 
 Error detection
-===============
+---------------
 
 Besides framing, datalink layers also include mechanisms to detect and sometimes even recover from transmission errors. To allow a receiver to detect transmission errors, a sender must add some redundant information as an `error detection` code to the frame sent. This `error detection` code is computed by the sender on the frame that it transmits. When the receiver receives a frame with an error detection code, it recomputes it and verifies whether the received `error detection code` matches the computer `error detection code`. If they match, the frame is considered to be valid. Many error detection schemes exist and entire books have been written on the subject. A detailed discussion of these techniques is outside the scope of this book, and we will only discuss some examples to illustrate the key principles.
 
@@ -303,7 +304,7 @@ In this section, we develop a reliable datalink protocol running above the physi
 We will then remove each of these assumptions one after the other in order to better understand the mechanisms used to solve each imperfection.
 
 Reliable data transfer on top of a perfect physical service
-===========================================================
+-----------------------------------------------------------
 
 The datalink layer will send and receive frames on behalf of a user. We model these interactions by using the `DATA.req` and `DATA.ind` primitives. However, to simplify the presentation and to avoid confusion between a `DATA.req` primitive issued by the user of the datalink layer entity, and a `DATA.req` issued by the datalink layer entity itself, we will use the following terminology :
 
@@ -453,7 +454,7 @@ Time sequence diagram illustrating the operation of the simplest transport proto
 
 
 Reliable data transfer on top of an imperfect link
-==================================================
+--------------------------------------------------
 
 The datalink layer must deal with the transmission errors. In practice, we mainly have to deal with two types of errors in the datalink layer : 
 
@@ -615,7 +616,7 @@ The Alternating Bit Protocol can recover from transmission errors and frame loss
 
 
 Go-back-n and selective repeat
-------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 To overcome the performance limitations of the alternating bit protocol, reliable protocols rely on `pipelining`. This technique allows a sender to transmit several consecutive frames without being forced to wait for an acknowledgement after each frame. Each data frame contains a sequence number encoded in an `n` bits field.
 

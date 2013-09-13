@@ -20,6 +20,8 @@ qcm: $(EXNAME)
 $(EXNAME): $(RST_FILES)
 	@for i in $(RST_FILES); do\
 	( rst2html.py --stylesheet-path=$(CSS)  $$i > $(TARGET)/$(EXNAME) ; ) ; done
+	cp images/* $(TARGET)/images
+
 all: qcm
 
 clean:

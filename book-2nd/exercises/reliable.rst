@@ -1,13 +1,17 @@
-.. Copyright |copy| 2010 by Olivier Bonaventure
+.. Copyright |copy| 2013 by Olivier Bonaventure
 .. This file is licensed under a `creative commons licence <http://creativecommons.org/licenses/by/3.0/>`_
 
 
-==================
-Reliable transfert
-==================
+*****************
+Reliable transfer
+*****************
+
+
+`Multiple Choice Questions </mcq-reliability.html>`_
+
 
 Alternating Bit Protocol
-------------------------
+========================
 
 The Alternating Bit Protocol is the simplest reliable protocol. The following questions should allow you to get a better understanding of the operation of this protocol.
 
@@ -46,7 +50,7 @@ The Alternating Bit Protocol is the simplest reliable protocol. The following qu
 8. Consider an Alternating Bit Protocol that is used over a link that suffers from deterministic errors. When the error ratio is set to :math:`\frac{1}{p}`, this means that :math:`p-1` bits are transmitted correctly and the :math:`p^{th}` bit is corrupted. Discuss the factors that affect the performance of the Alternating Bit Protocol over such a link.
 
 Go-back-n and selective repeat
-------------------------------
+==============================
 
 Most reliable protocols use a window and either go-back-n or selective repeat as retransmission strategy.
 
@@ -93,7 +97,7 @@ Most reliable protocols use a window and either go-back-n or selective repeat as
 #. Consider a protocol that supports window of one hundred 1250 Bytes segments. What is the maximum bandwidth that this protocol can achieve if the round-trip-time is set to one second ? What happens if, instead of advertising a window of one hundred frames, the receiver decides to advertise a window of 10 frames ?
 
 Error detection
----------------
+===============
 
 Reliable protocols depend on error detection algorithms to detect transmission errors. The following questions will reinforce your understanding of these algorithms.
 
