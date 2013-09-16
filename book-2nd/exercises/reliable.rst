@@ -25,7 +25,7 @@ The Alternating Bit Protocol is the simplest reliable protocol. The following qu
 2. How would you set the retransmission timer if you were implementing the Alternating Bit Protocol to exchange files with a server such as the one that you measured above ?
 
 3. What are the factors that affect the performance of the Alternating Bit Protocol ?
- QCM 
+
 
 4. A version of the Alternating Bit Protocol supporting variable length frames uses a header that contains the following fields :
 

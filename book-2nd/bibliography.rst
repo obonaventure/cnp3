@@ -67,7 +67,7 @@ Whenever possible, the bibliography includes stable hypertext links to the refer
 .. [GC2000] Grier, D., Campbell, M., `A social history of Bitnet and Listserv <http://www.computer.org/portal/web/csdl/doi/10.1109/85.841135>`_, 1985-1991, Annals of the History of Computing, IEEE, Volume 22, Issue 2, Apr-Jun 2000, pp. 32 - 41 
 .. [Genilloud1990] Genilloud, G., `X.400 MHS: first steps towards an EDI communication standard <http://doi.acm.org/10.1145/378570.378712>`_. SIGCOMM Comput. Commun. Rev. 20, 2 (Apr. 1990), 72-86. 
 .. [GGR2001] Gao, L., Griffin, T., Rexford, J., `Inherently safe backup routing with BGP <http://dx.doi.org/10.1109/INFCOM.2001.916777>`_, Proc. IEEE INFOCOM, April 2001 
-.. [GN2011] Gettys, J., Nichols, K., `Bufferbloat: dark buffers in the internet<http://queue.acm.org/detail.cfm?id=2063196>`_. Communications of the ACM 55, no. 1 (2012): 57-65.
+.. [GN2011] Gettys, J., Nichols, K., `Bufferbloat: dark buffers in the internet <http://queue.acm.org/detail.cfm?id=2063196>`_. Communications of the ACM 55, no. 1 (2012): 57-65.
 .. [GR2001] Gao, L., Rexford, J., `Stable Internet routing without global coordination <http://dx.doi.org/10.1109/90.974523>`_, IEEE/ACM Transactions on Networking, December 2001, pp. 681-692 
 .. [GSW2002] Griffin, T. G., Shepherd, F. B., and Wilfong, G., `The stable paths problem and interdomain routing <http://dx.doi.org/10.1109/90.993304>`_. IEEE/ACM Trans. Netw. 10, 2 (Apr. 2002), 232-243 
 .. [GW1999] Griffin, T. G. and Wilfong, G., `An analysis of BGP convergence properties <http://doi.acm.org/10.1145/316194.316231>`_. SIGCOMM Comput. Commun. Rev. 29, 4 (Oct. 1999), 277-288. 
