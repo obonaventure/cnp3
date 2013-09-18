@@ -10,11 +10,11 @@ In the previous section, we have explained how reliable protocols allow hosts to
 The main objective of the network layer is to allow endsystems, connected to different networks, to exchange information through intermediate systems called :term:`router`. The unit of information in the network layer is called a :term:`packet`.
 
 
-.. figure:: ../../book/network/svg/osi-network.png
+.. figure:: figures/network.png
    :align: center
    :scale: 80
    
-   TODO The network layer in the reference model
+   A simple network 
 
 Before explaining the network layer in detail, it is useful to remember the characteristics of the service provided by the `datalink` layer. There are many variants of the datalink layer. Some provide a reliable service while others do not provide any guarantee of delivery. The reliable datalink layer services are popular in environments such as wireless networks were transmission errors are frequent. On the other hand, unreliable services are usually used when the physical layer provides an almost reliable service (i.e. only a negligible fraction of the frames are affected by transmission errors). Such `almost reliable` services are frequently in wired and optical networks. In this chapter, we will assume that the datalink layer service provides an `almost reliable` service since this is both the most general one and also the most widely deployed one. 
 
@@ -42,9 +42,30 @@ As a first step, let us assume that we only need to exchange small amount of dat
 .. graphviz::
 
    graph foo {
-      A [shape=box];
-      B [shape=box];
-      C [shape=box];
+      A [color=white, shape=box label=<<TABLE border="0" cellborder="0">
+                       <TR><TD width="45" height="60" fixedsize="true"><IMG SRC="icons/host.png" scale="true"/></TD></TR><TR><td>A</td></TR>
+              </TABLE>>];
+      B [color=white, shape=box label=<<TABLE border="0" cellborder="0">
+                       <TR><TD width="45" height="60" fixedsize="true"><IMG SRC="icons/host.png" scale="true"/></TD></TR><TR><td>B</td></TR>
+              </TABLE>>];
+      C [color=white, shape=box label=<<TABLE border="0" cellborder="0">
+                       <TR><TD width="45" height="60" fixedsize="true"><IMG SRC="icons/host.png" scale="true"/></TD></TR><TR><td>C</td></TR>
+              </TABLE>>];
+      R1[shape=box, color=white, label=<<TABLE border="0" cellborder="0">
+                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="icons/router.png" scale="true"/></TD></TR><TR><td>R1</td></TR>
+              </TABLE>>];
+       R2[color=white, label=<<TABLE border="0" cellborder="0">
+                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="icons/router.png" scale="true"/></TD></TR><TR><td>R2</td></TR>
+              </TABLE>>];
+       R3[color=white, label=<<TABLE border="0" cellborder="0">
+                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="icons/router.png" scale="true"/></TD></TR><TR><td>R3</td></TR>
+              </TABLE>>];
+       R4[color=white, label=<<TABLE border="0" cellborder="0">
+                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="icons/router.png" scale="true"/></TD></TR><TR><td>R4</td></TR>
+              </TABLE>>];
+       R5[color=white, label=<<TABLE border="0" cellborder="0">
+                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="icons/router.png" scale="true"/></TD></TR><TR><td>R5</td></TR>
+              </TABLE>>];
       A--R1;
       R1--R3;
       R3--R5;
@@ -57,9 +78,8 @@ As a first step, let us assume that we only need to exchange small amount of dat
       R5--B;
    }
 
-.. figure:: todo
 
-   TODO figure with 5 routers and hosts
+   A network with 5 routers and hosts
 
 
 This network contains two types of devices. The end hosts, represented as a small workstation and the routers, represented as boxes with three arrows. An endhost is a device which is able to send and receive data for its own usage in contrast with routers that most of the time forward data towards their final destination. Routers have multiple links to neighboring routers or endhosts. Endhosts are usually attached via a single link to the network. Nowadays, with the growth of wireless networks, more and more endhosts are equipped with several physical interfaces. These endhosts are often called `multihomed`. Still, using several interfaces at the same time often leads to practical issues that are beyond the scope of this document. For this reason, we will only consider `single-homed` hosts in this ebook.
@@ -151,9 +171,30 @@ To understand the operation of the port-address table, let us consider the examp
 .. graphviz::
 
    graph foo {
-      A [shape=box];
-      B [shape=box];
-      C [shape=box];
+      A [color=white, shape=box label=<<TABLE border="0" cellborder="0">
+                       <TR><TD width="45" height="60" fixedsize="true"><IMG SRC="icons/host.png" scale="true"/></TD></TR><TR><td>A</td></TR>
+              </TABLE>>];
+      B [color=white, shape=box label=<<TABLE border="0" cellborder="0">
+                       <TR><TD width="45" height="60" fixedsize="true"><IMG SRC="icons/host.png" scale="true"/></TD></TR><TR><td>B</td></TR>
+              </TABLE>>];
+      C [color=white, shape=box label=<<TABLE border="0" cellborder="0">
+                       <TR><TD width="45" height="60" fixedsize="true"><IMG SRC="icons/host.png" scale="true"/></TD></TR><TR><td>C</td></TR>
+              </TABLE>>];
+      R1[shape=box, color=white, label=<<TABLE border="0" cellborder="0">
+                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="icons/router.png" scale="true"/></TD></TR><TR><td>R1</td></TR>
+              </TABLE>>];
+       R2[color=white, label=<<TABLE border="0" cellborder="0">
+                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="icons/router.png" scale="true"/></TD></TR><TR><td>R2</td></TR>
+              </TABLE>>];
+       R3[color=white, label=<<TABLE border="0" cellborder="0">
+                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="icons/router.png" scale="true"/></TD></TR><TR><td>R3</td></TR>
+              </TABLE>>];
+       R4[color=white, label=<<TABLE border="0" cellborder="0">
+                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="icons/router.png" scale="true"/></TD></TR><TR><td>R4</td></TR>
+              </TABLE>>];
+       R5[color=white, label=<<TABLE border="0" cellborder="0">
+                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="icons/router.png" scale="true"/></TD></TR><TR><td>R5</td></TR>
+              </TABLE>>];
       A--R1;
       R1--R3;
       R3--R5;
@@ -171,8 +212,21 @@ By inspecting the source and destination addresses of packets, network nodes can
 .. graphviz::
 
    graph foo {
-      A [shape=box];
-      B [shape=box];
+      A [color=white, shape=box label=<<TABLE border="0" cellborder="0">
+                       <TR><TD width="45" height="60" fixedsize="true"><IMG SRC="icons/host.png" scale="true"/></TD></TR><TR><td>A</td></TR>
+              </TABLE>>];
+      B [color=white, shape=box label=<<TABLE border="0" cellborder="0">
+                       <TR><TD width="45" height="60" fixedsize="true"><IMG SRC="icons/host.png" scale="true"/></TD></TR><TR><td>B</td></TR>
+              </TABLE>>];
+      R1[shape=box, color=white, label=<<TABLE border="0" cellborder="0">
+                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="icons/router.png" scale="true"/></TD></TR><TR><td>R1</td></TR>
+              </TABLE>>];
+       R2[color=white, label=<<TABLE border="0" cellborder="0">
+                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="icons/router.png" scale="true"/></TD></TR><TR><td>R2</td></TR>
+              </TABLE>>];
+       R3[color=white, label=<<TABLE border="0" cellborder="0">
+                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="icons/router.png" scale="true"/></TD></TR><TR><td>R3</td></TR>
+              </TABLE>>];
       A--R1 ;
       R1--R2 ;
       R1--R3;
@@ -202,8 +256,24 @@ Another technique can be used to automatically compute forwarding tables. It has
 .. graphviz::
 
    graph foo {
-      A [shape=box];
-      B [shape=box];
+      A [color=white, shape=box label=<<TABLE border="0" cellborder="0">
+                       <TR><TD width="45" height="60" fixedsize="true"><IMG SRC="icons/host.png" scale="true"/></TD></TR><TR><td>A</td></TR>
+              </TABLE>>];
+      B [color=white, shape=box label=<<TABLE border="0" cellborder="0">
+                       <TR><TD width="45" height="60" fixedsize="true"><IMG SRC="icons/host.png" scale="true"/></TD></TR><TR><td>B</td></TR>
+              </TABLE>>];
+      R1[shape=box, color=white, label=<<TABLE border="0" cellborder="0">
+                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="icons/router.png" scale="true"/></TD></TR><TR><td>R1</td></TR>
+              </TABLE>>];
+       R2[color=white, label=<<TABLE border="0" cellborder="0">
+                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="icons/router.png" scale="true"/></TD></TR><TR><td>R2</td></TR>
+              </TABLE>>];
+       R3[color=white, label=<<TABLE border="0" cellborder="0">
+                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="icons/router.png" scale="true"/></TD></TR><TR><td>R3</td></TR>
+              </TABLE>>];
+       R4[color=white, label=<<TABLE border="0" cellborder="0">
+                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="icons/router.png" scale="true"/></TD></TR><TR><td>R4</td></TR>
+              </TABLE>>];
       A--R1 ;
       R1--R2 [];
       R1--R3 [];
@@ -246,8 +316,24 @@ This hierarchical allocation of addresses can be applied in any type of network.
 .. graphviz::
 
    graph foo {
-      A [shape=box];
-      B [shape=box];
+      A [color=white, shape=box label=<<TABLE border="0" cellborder="0">
+                       <TR><TD width="45" height="60" fixedsize="true"><IMG SRC="icons/host.png" scale="true"/></TD></TR><TR><td>A</td></TR>
+              </TABLE>>];
+      B [color=white, shape=box label=<<TABLE border="0" cellborder="0">
+                       <TR><TD width="45" height="60" fixedsize="true"><IMG SRC="icons/host.png" scale="true"/></TD></TR><TR><td>B</td></TR>
+              </TABLE>>];
+      R1[shape=box, color=white, label=<<TABLE border="0" cellborder="0">
+                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="icons/router.png" scale="true"/></TD></TR><TR><td>R1</td></TR>
+              </TABLE>>];
+       R2[color=white, label=<<TABLE border="0" cellborder="0">
+                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="icons/router.png" scale="true"/></TD></TR><TR><td>R2</td></TR>
+              </TABLE>>];
+       R3[color=white, label=<<TABLE border="0" cellborder="0">
+                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="icons/router.png" scale="true"/></TD></TR><TR><td>R3</td></TR>
+              </TABLE>>];
+       R4[color=white, label=<<TABLE border="0" cellborder="0">
+                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="icons/router.png" scale="true"/></TD></TR><TR><td>R4</td></TR>
+              </TABLE>>];
       A--R1 ;
       R1--R2 [];
       R1--R3 [];
@@ -262,6 +348,58 @@ The main advantage of hierarchical addresses is that it is possible to significa
 
 Despite their popularity, `hierarchical addresses` have some drawbacks. Their first drawback is that a lookup in the forwarding table is more complex than when using `flat addresses`. For example, on the Internet, network nodes have to perform a longest-match to forward each packet. This is partially compensated by the reduction in the size of the forwarding tables, but the additional complexity of the lookup operation has been a difficulty to implement hardware support for packet forwarding. A second drawback of the utilisation of hierarchical addresses is that when a host connects for the first time to a network, it must contact one network node to determine its own address. This requires some packet exchanges between the host and some network nodes. Furthermore, if a host moves and is attached to another network node, its network address will change. This can be an issue with some mobile hosts. 
 
+Sometimes, the network layer needs to deal with heterogenous datalink layers. For example, two hosts connected to different datalink layers exchange packets via routers that are using other types of datalink layers. Thanks to the network layer, this exchange of packets is possible provided that each packet can be placed inside a datalink layer frame before being transmitted. If all datalink layers support the same frame size, this is simple. When a node receives a frame, it decapsulate the packet that it contains, checks the header and forwards it, encapsulated inside another frame, to the outgoing interface. Unfortunately, the encapsulation operation is not always possible. Each datalink layer is characterized by the maximum frame size that it supports. Datalink layers typically support frames containing up to a few hundreds or a few thousands of bytes. The maximum frame size that a given datalink layer supports depends on its underlying technology and unfortunately, most datalink layers support a different maximum frame size. This implies that when a host sends a large packet inside a frame to its nexthop router, there is a risk that this packet will have to traverse a link that is not capable of forwarding the packet inside a single frame. In principle, there are three possibilities to solve this problem. We will discuss them by considering a simpler scenario with two hosts connected to a router as shown in the figure below.
+
+.. graphviz::
+
+   graph foo {
+    rankdir=LR;
+    node [fontsize="10"];
+    ranksep="0.2";
+      A [color=white, shape=box label=<<TABLE border="0" cellborder="0">
+                       <TR><TD width="45" height="60" fixedsize="true"><IMG SRC="icons/host.png" scale="true"/></TD></TR><TR><td>A</td></TR>
+              </TABLE>>];
+      B [color=white, shape=box label=<<TABLE border="0" cellborder="0">
+                       <TR><TD width="45" height="60" fixedsize="true"><IMG SRC="icons/host.png" scale="true"/></TD></TR><TR><td>B</td></TR>
+              </TABLE>>];
+      R1[shape=box, color=white, label=<<TABLE border="0" cellborder="0">
+                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="icons/router.png" scale="true"/></TD></TR><TR><td>R1</td></TR>
+              </TABLE>>];
+      R2[shape=box, color=white, label=<<TABLE border="0" cellborder="0">
+                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="icons/router.png" scale="true"/></TD></TR><TR><td>R2</td></TR>
+              </TABLE>>];
+      A--R1 [label="Max.\n1000 bytes"] ;
+      R1--R2 [label="Max.\n500 bytes"] ;
+      R2--B [label="Max.\n1000 bytes"] ;
+
+   }
+
+Considering in the network above that host `A` wants to send a 900 bytes packet (870 bytes of payload and 30 bytes of header) to host `B` via router `R1`. Host `A` encapsulates this packet inside a single frame. The frame is received by router `R1` which extracts the packet. Router `R1` has three possible options to process this packet.
+
+ #. The packet is too large and router `R1` cannot forward it to router `R2`. It rejects the packet and sends a control packet back to the source (host `A`) to indicate that it cannot forward packets longer than 500 bytes (minus the packet header). The source will have to react to this control packet by retransmitting the information in smaller packets.
+
+ #. The network layer is able to fragment a packet. In our example, the router could fragment the packet in two parts. The first part contains the beginning of the payload and the second the end. There are two possible ways to achieve this fragmentation.
+
+
+   #. Router `R1` fragments the packet in two fragments before transmitting them to router `R2`. Router `R2` reassembles the two packet fragments in a larger packet before transmitting them on the link towards host `B`.
+
+   #. Each of the packet fragments is a valid packet that contains a header with the source (host `A`) and destination (host `B`) addresses. When router `R2` receives a packet fragment, it treats this packet as a regular packet and forwards it to its final destination (host `B`). Host `B` reassembles the received fragments.
+
+
+These three solutions have advantages and drawbacks. With the first solution, routers remain simple and do not need to perform any fragmentation operation. This is important when routers are implemented mainly in hardware. However, hosts are more complex since they need to store the packets that they produce if they need to pass through a link that does not support large packets. This increases the buffering required on the end hosts. Furthermore, a single large packet may potentially need to be retransmitted several times. Consider for example a network similar to the one shown above but with four routers. Assume that the link `R1->R2` supports 1000 bytes packets, link `R2->R3` 800 bytes packets and link `R3->R4` 600 bytes packets. A host attached to `R1` that sends large packet will have to first try 1000 bytes, then 800 bytes and finally 600 bytes. Fortunately, this scenario does not occur very often in practice and this is the reason why this solution is used in real networks. 
+
+Fragmenting packets on a per-link basis, as presented for the second solution, can minimize the transmission overhead since a packet is only fragmente on the links where fragmentation is required. Large packets can continue to be used downstream of a link that only accepts small packets. However, this reduction of the overhead comes with two drawbacks. First, fragmenting packets, potentially on all links, increases the processing time and the buffer requirements on the routers. Second, this solution leads to a longer end-to-end delay since the downstream router has to reassemble all the packet fragments before forwarding the packet. 
+
+
+The last solution is a compromise between the two others. Routers need to perform fragmentation but they do not need to reassemble packet fragments. Only the hosts need to have buffers to reassemble the received fragments. This solution has a lower end-to-end delay and requires fewer processing time and memory on the routers.
+
+The first solution to the fragmentation problem presented above suggests the utilization of control packets to inform the source about the reception of a too long packet. This is only one of the functions that are performed by the control protocol in the network layer. Other functions include :
+
+ - sending a control packet back to the source if a packet is received by a router that does not have a valid entry in its forwarding table
+ - sending a control packet back to the source if a router detects that a packet is looping inside the network
+ - verifying that packets can reach a given destination
+
+We will discuss these functions in more details when we will describe the protocols that are used in the network layer of the TCP/IP protocol suite.
 
 
 Virtual circuit organisation
@@ -299,7 +437,21 @@ If this node receives a packet with `label=2`, it forwards the packet on its `We
 .. graphviz::
 
    graph foo {
-      R1--R2 [];
+      R1[shape=box, color=white, label=<<TABLE border="0" cellborder="0">
+                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="icons/router.png" scale="true"/></TD></TR><TR><td>R1</td></TR>
+              </TABLE>>];
+       R2[color=white, label=<<TABLE border="0" cellborder="0">
+                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="icons/router.png" scale="true"/></TD></TR><TR><td>R2</td></TR>
+              </TABLE>>];
+       R3[color=white, label=<<TABLE border="0" cellborder="0">
+                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="icons/router.png" scale="true"/></TD></TR><TR><td>R3</td></TR>
+              </TABLE>>];
+       R4[color=white, label=<<TABLE border="0" cellborder="0">
+                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="icons/router.png" scale="true"/></TD></TR><TR><td>R4</td></TR>
+              </TABLE>>];
+       R5[color=white, label=<<TABLE border="0" cellborder="0">
+                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="icons/router.png" scale="true"/></TD></TR><TR><td>R5</td></TR>
+              </TABLE>>];      R1--R2 [];
       R1--R3 [];
       R2--R4 [];
       R3--R4 [];
@@ -348,7 +500,6 @@ With the above `label forwarding table`, `R1` needs to originate the packets tha
 +--------+--------------------+----------+
 |  1     |  none              |    1     |
 +--------+--------------------+----------+
-
 
 
 
@@ -402,7 +553,7 @@ The control plane
 
 One of the objectives of the `control plane` in the network layer is to maintain the routing tables that are used on all routers. As indicated earlier, a routing table is a data structure that contains, for each destination address (or block of addresses) known by the router, the outgoing interface over which the router must forward a packet destined to this address. The routing table may also contain additional information such as the address of the next router on the path towards the destination or an estimation of the cost of this path. 
 
-In this section, we discuss the three main techniques that can be used to maintain the routing tables in a network.
+In this section, we discuss the main techniques that can be used to maintain the forwarding tables in a network.
 
 
 

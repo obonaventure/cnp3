@@ -46,9 +46,9 @@ Part 1: Principles
    :maxdepth: 4
 
    principles/reliability
-..   principles/network
-..   principles/dv
-..   principles/linkstate
+   principles/network
+   principles/dv
+   principles/linkstate
 ..   principles/sharing
 ..   principles/transport
 
