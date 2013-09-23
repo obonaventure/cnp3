@@ -1,7 +1,7 @@
 #
 # OB
 #
-SUBDIRS = principles/reliability
+SUBDIRS = principles/reliability principles/network
      
 subdirs:
 	for dir in $(SUBDIRS); do \

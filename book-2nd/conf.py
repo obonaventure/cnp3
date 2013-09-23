@@ -72,46 +72,8 @@ exclude_trees = ['_build']
 
 # List of files that should not be automatically compiled by sphynx because they are included
 
-exclude_patterns = [ '*.#*',   # emacs backups
-#                     'intro/organisation.rst',
-#                     'intro/referencemodels.rst',
-#                     'intro/services-protocols.rst',
-#                     'application/dns.rst',
-#                     'application/email.rst',
-#                     'application/http.rst',
-#                     'application/ex-application.rst',
-##                     'application/practice.rst',
-#                     'application/principles.rst',
-#                     'application/socket.rst',
-#                     'application/transport-service.rst',
-#                     'application/exercises/ex-application.rst',
-#                     'application/Mission/*',
-#                     'transport/principles.rst',
-#                     'transport/tcp.rst',
-#                     'transport/udp.rst',
-#                     'transport/footnotes.rst',
-#                     'transport/exercises/*',
-                     'network/bgp.rst',
-                     'network/dv.rst',
-                     'network/ipv4.rst',
-                     'network/ipv6.rst',
-                     'network/linkstate.rst',
-                     'network/middleboxes.rst',
-                     'network/ospf.rst',
-                     'network/principles.rst',
-                     'network/rip.rst',
-                     'network/exercises/*',
-                     'network/footnotes.rst',
-                     'lan/ethernet.rst',
-                     'lan/ppp.rst',
-                     'lan/principles.rst',
-                     'lan/technologies.rst',
-                     'lan/exercises/ex-lan.rst',
-                     'lan/lan-footnotes.rst',
-                     'lan/wifi.rst',
-                     'links.rst',
-                     'application/Mission/application.rst',
-                     'mpls/*', 'tc/*']
+exclude_patterns = [ '*#*',   # emacs backups
+                     'MCQ/*']
 
 # epilog add to all included files
 #rst_epilog = """

@@ -47,8 +47,6 @@ Part 1: Principles
 
    principles/reliability
    principles/network
-   principles/dv
-   principles/linkstate
 ..   principles/sharing
 ..   principles/transport
 
@@ -90,6 +88,7 @@ Part 3: Practice
 
 
    exercises/reliable
+   exercises/network
 ..  application/exercises/ex-application
 
 ..   transport/exercises/ex-transport
