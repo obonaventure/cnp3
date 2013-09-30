@@ -72,7 +72,7 @@ Assume that `A` is the first to send its distance vector `[A=0]`.
  - `B` and `D` process the received distance vector and update their routing table with a route towards `A`. 
  - `D` sends its distance vector `[D=0,A=1]` to `A` and `E`. `E` can now reach `A` and `D`.
  - `C` sends its distance vector `[C=0]` to `B` and `E`
- - `E` sends its distance vector `[E=0,D=1,A=2,C=2]` to `D`, `B` and `C`. `B` can now reach `A`, `C`, `D` and `E`
+ - `E` sends its distance vector `[E=0,D=1,A=2,C=1]` to `D`, `B` and `C`. `B` can now reach `A`, `C`, `D` and `E`
  - `B` sends its distance vector `[B=0,A=1,C=1,D=2,E=1]` to `A`, `C` and `E`. `A`, `B`, `C` and `E` can now reach all destinations.
  - `A` sends its distance vector `[A=0,B=1,C=2,D=1,E=2]` to `B` and `D`. 
 
