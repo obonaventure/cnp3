@@ -155,7 +155,7 @@ Unfortunately, split-horizon, is not sufficient to avoid all count to infinity p
 
    Count to infinity problem
 
-After having detected the failure, router `A` sends its distance vectors :
+After having detected the failure, router `B` sends its distance vectors :
 
  - :math:`[A=\infty,B=0,C=\infty,E=1]` to router `C`
  - :math:`[A=\infty,B=0,C=1,E=\infty]` to router `E`

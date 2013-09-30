@@ -47,8 +47,10 @@ Part 1: Principles
 
    principles/reliability
    principles/network
+   principles/transport
+   principles/naming
 ..   principles/sharing
-..   principles/transport
+
 
 
 ..   intro/organisation
@@ -89,6 +91,7 @@ Part 3: Practice
 
    exercises/reliable
    exercises/network
+   exercises/ex-transport
 ..  application/exercises/ex-application
 
 ..   transport/exercises/ex-transport
@@ -98,8 +101,9 @@ Part 3: Practice
 
 ..  lan/lan
 
+##########
 Appendices
-::::::::::
+##########
 
 .. toctree::
    :maxdepth: 4

@@ -5,17 +5,42 @@
 Building a network
 ******************
 
+.. warning:: 
 
-In the previous section, we have explained how reliable protocols allow hosts to exchange data reliably even if the underlying physical layer is imperfect and thus unreliable. Connecting two hosts together through a wire is the first step to build a network. However, this is not sufficient. Hosts usually need to interact with remote hosts that are not directly connected through a direct physical layer link. This can be achieve by adding one layer above the datalink layer : the `network` layer.
+   This is an unpolished draft of the second edition of this ebook. If you find any error or have suggestions to improve the text, please create an issue via https://github.com/obonaventure/cnp3/issues?milestone=2
+
+
+In the previous section, we have explained how reliable protocols allow hosts to exchange data reliably even if the underlying physical layer is imperfect and thus unreliable. Connecting two hosts together through a wire is the first step to build a network. However, this is not sufficient. Hosts usually need to interact with remote hosts that are not directly connected through a direct physical layer link. This can be achieved by adding one layer above the datalink layer : the `network` layer.
 
 The main objective of the network layer is to allow endsystems, connected to different networks, to exchange information through intermediate systems called :term:`router`. The unit of information in the network layer is called a :term:`packet`.
 
 
-.. figure:: figures/network.png
-   :align: center
-   :scale: 80
-   
-   A simple network 
+.. _fig-simplenet
+
+.. graphviz::
+
+   graph foo {
+      A [color=white, shape=box label=<<TABLE border="0" cellborder="0">
+                       <TR><TD width="45" height="60" fixedsize="true"><IMG SRC="icons/host.png" scale="true"/></TD></TR><TR><td>A</td></TR>
+              </TABLE>>];
+      B [color=white, shape=box label=<<TABLE border="0" cellborder="0">
+                       <TR><TD width="45" height="60" fixedsize="true"><IMG SRC="icons/host.png" scale="true"/></TD></TR><TR><td>B</td></TR>
+              </TABLE>>];
+      R1[shape=box, color=white, label=<<TABLE border="0" cellborder="0">
+                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="icons/router.png" scale="true"/></TD></TR><TR><td>R1</td></TR>
+              </TABLE>>];
+       R2[color=white, label=<<TABLE border="0" cellborder="0">
+                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="icons/router.png" scale="true"/></TD></TR><TR><td>R2</td></TR>
+              </TABLE>>];
+       R3[color=white, label=<<TABLE border="0" cellborder="0">
+                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="icons/router.png" scale="true"/></TD></TR><TR><td>R3</td></TR>
+              </TABLE>>];
+      A--R1;
+      R1--R3;
+      R3--R2;
+      R1--R2;
+      R3--B;
+   }
 
 Before explaining the network layer in detail, it is useful to remember the characteristics of the service provided by the `datalink` layer. There are many variants of the datalink layer. Some provide a reliable service while others do not provide any guarantee of delivery. The reliable datalink layer services are popular in environments such as wireless networks were transmission errors are frequent. On the other hand, unreliable services are usually used when the physical layer provides an almost reliable service (i.e. only a negligible fraction of the frames are affected by transmission errors). Such `almost reliable` services are frequently in wired and optical networks. In this chapter, we will assume that the datalink layer service provides an `almost reliable` service since this is both the most general one and also the most widely deployed one. 
 
@@ -34,7 +59,7 @@ There are three main types of datalink layers. The simplest datalink layer is wh
 
 The second type of datalink layer is the one used in Local Area Networks (LAN). Conceptually, a LAN is a set of communicating devices such that any two devices can directly exchange frames through the datalink layer. Both endsystems and routers can be connected to a LAN. Some LANs only connect a few devices, but there are LANs that can connect hundreds or even thousands of devices. In this chapter, we focus on the utilization of point-to-point datalink layers. We will describe later the organisation and the operation of Local Area Networks and their impact on the network layer.
 
-Even if we only consider the point-to-point datalink layers, there is an important characteristics of these layers that we cannot ignore. No datalink layer is able to send frames of unlimited side. Each datalink layer is characterized by a maximum frame size. There are more than a dozen different datalink layers and unfortunately most of them use a different maximum frame size. This heterogeneity in the maximum frame sizes will cause problems when we will need to exchange data between hosts attached to different types of datalink layers.
+Even if we only consider the point-to-point datalink layers, there is an important characteristics of these layers that we cannot ignore. No datalink layer is able to send frames of unlimited size. Each datalink layer is characterized by a maximum frame size. There are more than a dozen different datalink layers and unfortunately most of them use a different maximum frame size. This heterogeneity in the maximum frame sizes will cause problems when we will need to exchange data between hosts attached to different types of datalink layers.
 
 As a first step, let us assume that we only need to exchange small amount of data. In this case, there is no issue with the maximum length of the frames. However, there are other more interesting problems that we need to tackle. To understand these problems, let us consider the network represented in the figure below.
 
@@ -128,7 +153,7 @@ The figure illustrates some possible forwarding tables in this network. By inspe
 
 The computation of the forwarding tables of all the routers inside a network is a key element for the correct operation of the network. This computation can be carried out in different ways and it is possible to use both distributed and centralized algorithms. These algorithms provide different performance, may lead to different types of paths, but their composition must lead to valid path. 
 
-In a network, a path can be defined as the list of all intermediate routers for a given source destination pair. For a given source/destination pair, the path can be derived by first consulting the forwarding table of the router attached the source to determine the next router on the path towards the chosen destination. Then, the forwarding table of this router is queried for the same destination... The queries continue until the destination is reached. In a network that has valid forwarding tables, all the paths between all source/destination pairs contain a finite number of intermediate routers. However, if forwarding tables have not been correctly computed, two types of invalid path can occur. 
+In a network, a path can be defined as the list of all intermediate routers for a given source destination pair. For a given source/destination pair, the path can be derived by first consulting the forwarding table of the router attached to the source to determine the next router on the path towards the chosen destination. Then, the forwarding table of this router is queried for the same destination... The queries continue until the destination is reached. In a network that has valid forwarding tables, all the paths between all source/destination pairs contain a finite number of intermediate routers. However, if forwarding tables have not been correctly computed, two types of invalid path can occur. 
 
 .. index:: black hole
 
@@ -174,7 +199,7 @@ The first technique assumes that the underlying network topology is a tree. A tr
 
 .. index:: port-address table
 
-In a tree-shaped network, it is relatively simple to for each node to automatically compute its forwarding table by inspecting the packets that it receives. For this, each node uses the sources and destination addresses present inside each packet. The source address allows to learn the location of the different sources inside the network. Each source has a unique address. When a node receives a packet over a given interface, it learns that the source (address) of this packet is reachable via this interface. The node maintains a data structure that maps each known source address to an incoming interface. This data structure is often called the port-address table since it indicates the interface (or port) to reach a given address. Learning the location of the sources is not sufficient, nodes also need to forward packets towards their destination. When a node receives a packet whose destination address is already present inside its port-address table, it simply forwards the packet on the interface listed in the port-address table. In this case, the packet will follow the port-address table entries in the downstream nodes and will reach the destination. If the destination address is not included in the port-address table, the node simply forwards the packet on all its interfaces, except the interface from which the packet was received. Forwarding a packet over all interfaces is usually called `broadcasting` in the terminology of computer networks. Sending the packet over all interfaces except one is a costly operation since the packet will be sent over links that do not reach the destination. Given the tree-shape of the network, the packet will explore all downstream branches of the tree and will thus finally reach its destination. In practice, the `broadcasting` operation does not occur too often and its cost is limited. 
+In a tree-shaped network, it is relatively simple for each node to automatically compute its forwarding table by inspecting the packets that it receives. For this, each node uses the sources and destination addresses present inside each packet. The source address allows to learn the location of the different sources inside the network. Each source has a unique address. When a node receives a packet over a given interface, it learns that the source (address) of this packet is reachable via this interface. The node maintains a data structure that maps each known source address to an incoming interface. This data structure is often called the port-address table since it indicates the interface (or port) to reach a given address. Learning the location of the sources is not sufficient, nodes also need to forward packets towards their destination. When a node receives a packet whose destination address is already present inside its port-address table, it simply forwards the packet on the interface listed in the port-address table. In this case, the packet will follow the port-address table entries in the downstream nodes and will reach the destination. If the destination address is not included in the port-address table, the node simply forwards the packet on all its interfaces, except the interface from which the packet was received. Forwarding a packet over all interfaces is usually called `broadcasting` in the terminology of computer networks. Sending the packet over all interfaces except one is a costly operation since the packet will be sent over links that do not reach the destination. Given the tree-shape of the network, the packet will explore all downstream branches of the tree and will thus finally reach its destination. In practice, the `broadcasting` operation does not occur too often and its cost is limited. 
 
 To understand the operation of the port-address table, let us consider the example network shown in the figure below. This network contains three hosts : `A`, `B` and `C` and five nodes, `R1` to `R5`. When the network boots, all the forwarding tables of the nodes are empty.
 
@@ -215,7 +240,7 @@ To understand the operation of the port-address table, let us consider the examp
    }
 
 
-Host `A` sends a packet towards `B`. When receiving this packet, `R1` learns that `A` is reachable via its `North` interface. Since it does not have an entry for destination `B` in its port-address table, it forwards the packet to both `R2` and `R3`. When `R2` receives the packet, it updates its own forwarding table and forward the packet to `C`. Since `C` is not the intended recipient, it simply discards the received packet. Node `R3` also received the packet. It learns that `A` is reachable via its `North` interface and broadcasts the packet to `R4` and `R5`. `R5` also updates its forwarding table and finally forwards it to destination `B`.`Let us now consider what happens when `B` sends a reply to `A`. `R5`  first learns that `A` is attached to its `South` port. It then consults its port-address table and finds that `A` is reachable via its `North` interface. The packet is then forwarded hop-by-hop to `A` without any broadcasting. If `C` sends a packet to `B`, this packet will reach `R1` that contains a valid forwarding entry in its forwarding table.
+Host `A` sends a packet towards `B`. When receiving this packet, `R1` learns that `A` is reachable via its `North` interface. Since it does not have an entry for destination `B` in its port-address table, it forwards the packet to both `R2` and `R3`. When `R2` receives the packet, it updates its own forwarding table and forward the packet to `C`. Since `C` is not the intended recipient, it simply discards the received packet. Node `R3` also received the packet. It learns that `A` is reachable via its `North` interface and broadcasts the packet to `R4` and `R5`. `R5` also updates its forwarding table and finally forwards it to destination `B`.`Let us now consider what happens when `B` sends a reply to `A`. `R5`  first learns that `B` is attached to its `South` port. It then consults its port-address table and finds that `A` is reachable via its `North` interface. The packet is then forwarded hop-by-hop to `A` without any broadcasting. If `C` sends a packet to `B`, this packet will reach `R1` that contains a valid forwarding entry in its forwarding table.
 
 By inspecting the source and destination addresses of packets, network nodes can automatically derive their forwarding tables. As we will discuss later, this technique is used in Ethernet networks. Despite being widely used, it has two important drawbacks. First, packets sent to unknown destinations are broadcasted in the network even if the destination is not attached to the network. Consider the transmission of ten packets destined to `Z` in the network above. When a node receives a packet towards this destination, it can only broadcast the packet. Since `Z` is not attached to the network, no node will ever receive a packet whose source is `Z` to update its forwarding table. The second and more important problem is that few networks have a tree-shaped topology. It is interesting to analyze what happens when a port-address table is used in a network that contains a cycle. Consider the simple network shown below with a single host.
 
@@ -294,7 +319,7 @@ Another technique can be used to automatically compute forwarding tables. It has
       R4--B ;
    }
 
-In this network above, node `R2` is attached to two outgoing links. `R2` is connected to both `R1` and `R3`. `R2` can easily determine that it is connected to these two nodes by exchanging packets with them or observing the packets that it receives over each interface. Assume for example that when a host or node starts, it sends a special control packet over each of its interfaces to advertise its own address to its neighbors. When a host or node receives such a packet, it automatically replies with its own address. This exchange can also be used to verify whether a neighbor, either node or host, is still alive. whose identifiers are respectively `R2.ne` and `R2.se`. With `source routing`, the data plane packets include a list identifiers. This list is called a `source route` and indicates the path to be followed by the packet as a sequence of link identifiers. When a node receives such a `data plane` packet, it first checks whether the packet's destination is direct neighbor. In this case, the packet is forwarded to the destination. Otherwise, the node extracts the next address from the list and forwards it to the neighbor. This allows the source to specify the explicit path to be followed for each packet. For example, in the figure above there are two possible paths between `A` and `B`. To use the path via `R2`, `A` would send a packet that contains `R1,R2,R3` as source route. To avoid going via `R2`, `A` would place `R1,R3` as the source route in its transmitted packet. If `A` knows the complete network topology and all link identifiers, it can easily compute the source route towards each destination. If needed, it could even use different paths, e.g. for redundancy, to reach a given destination. However, in a real network hosts do not usually have a map of the entire network topology. 
+In the network above, node `R2` is attached to two outgoing links. `R2` is connected to both `R1` and `R3`. `R2` can easily determine that it is connected to these two nodes by exchanging packets with them or observing the packets that it receives over each interface. Assume for example that when a host or node starts, it sends a special control packet over each of its interfaces to advertise its own address to its neighbors. When a host or node receives such a packet, it automatically replies with its own address. This exchange can also be used to verify whether a neighbor, either node or host, is still alive. With `source routing`, the data plane packets include a list identifiers. This list is called a `source route` and indicates the path to be followed by the packet as a sequence of link identifiers. When a node receives such a `data plane` packet, it first checks whether the packet's destination is direct neighbor. In this case, the packet is forwarded to the destination. Otherwise, the node extracts the next address from the list and forwards it to the neighbor. This allows the source to specify the explicit path to be followed for each packet. For example, in the figure above there are two possible paths between `A` and `B`. To use the path via `R2`, `A` would send a packet that contains `R1,R2,R3` as source route. To avoid going via `R2`, `A` would place `R1,R3` as the source route in its transmitted packet. If `A` knows the complete network topology and all link identifiers, it can easily compute the source route towards each destination. If needed, it could even use different paths, e.g. for redundancy, to reach a given destination. However, in a real network hosts do not usually have a map of the entire network topology. 
 
 .. index:: record route
 
@@ -505,7 +530,7 @@ Two virtual circuits pass through `R3`. They both need to be forwarded to `R4`, 
 |  1     |  ->R4              |    1     |
 +--------+--------------------+----------+
 
-With the above `label forwarding table`, `R1` needs to originate the packets that belong to the `R1->R3->R4->R2->R5` with `label=1`. The packets received from `R2` and belonging to the `R2->R1->R3->R4->R5` would then use `label=0` on the `R1-R3` link. `R1`'s label forwarding could be built as follows :
+With the above `label forwarding table`, `R1` needs to originate the packets that belong to the `R1->R3->R4->R2->R5` with `label=1`. The packets received from `R2` and belonging to the `R2->R1->R3->R4->R5` would then use `label=0` on the `R1-R3` link. `R1`'s label forwarding table could be built as follows :
 
 +--------+--------------------+----------+
 | index  | outgoing interface | label    |
@@ -515,6 +540,7 @@ With the above `label forwarding table`, `R1` needs to originate the packets tha
 |  1     |  none              |    1     |
 +--------+--------------------+----------+
 
+The figure below shows the path followed by the packets on the `R1->R3->R4->R2->R5` path in red with on each arrow the label used in the packets.
 
 
 We will discuss later Multi-Protocol Label Switching (MPLS) as the example of a deployed networking technology that relies on label switching. MPLS is more complex than the above description because it has been designed to be easily integrated with datagram technologies. However, the principles remain. `Asynchronous Transfer Mode`(ATM) and Frame Relay are other examples of technologies that rely on `label switching`.
@@ -548,19 +574,7 @@ Nowadays, most deployed networks rely on distributed algorithms, called routing 
 
 .. The independence of the network layer from the underlying datalink layer is a key principle of the network layer. It ensures that the network layer can be used to allow hosts attached to different types of datalink layers to exchange packets through intermediate routers. Furthermore, this allows the datalink layers and the network layer to evolve independently from each other. This enables the network layer to be easily adapted to a new datalink layer every time a new datalink layer is invented.
 
-..
- 
- There are two types of service that can be provided by the network layer :
 
-..
-
- - an `unreliable connectionless` service
- - a `connection-oriented`, reliable or unreliable, service
-
-..  Connection-oriented services have been popular with technologies such as :term:`X.25` and :term:`ATM` or :term:`frame-relay`, but nowadays most networks use an `unreliable connectionless` service. This is our main focus in this chapter.
-
-
-.. maybe add more information
 
 The control plane
 =================
