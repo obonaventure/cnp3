@@ -125,7 +125,17 @@ A network is always designed and built to enable applications running on hosts t
 
 .. index:: connectionless service
 
-The network layer provides a service to the upper layer. In practice, this layer is usually the `transport layer` that improves the service provided by the `network layer` to make it useable by applications. Most networks use a datagram organisation and provide a simple service which is called the `connectionless service`. 
+The network layer ensures the delivery of packets on a hop-by-hop basis through intermediate nodes. As such, it provides a service to the upper layer. In practice, this layer is usually the `transport layer` that improves the service provided by the `network layer` to make it useable by applications. 
+
+
+.. figure:: ../../book/intro/svg/intro-figures-030-c.png
+   :align: center
+   :scale: 80 
+
+   The transport layer
+
+
+Most networks use a datagram organisation and provide a simple service which is called the `connectionless service`. 
 
 The figure below provides a representation of the connectionless service as a `time-sequence diagram`. The user on the left, having address `S`, issues a `Data.request` primitive containing Service Data Unit (SDU) `M` that must be delivered by the service provider to destination `D`. The dashed line between the two primitives indicates that the `Data.indication` primitive that is delivered to the user on the right corresponds to the `Data.request` primitive sent by the user on the left.
 
@@ -168,7 +178,7 @@ Finally, some unreliable connectionless service providers may deliver to a desti
 
 As the transport layer is built on top of the network layer, it is important to know the key features of the network layer service. In this book, we only consider the `connectionless network layer service` which is the most widespread. Its main characteristics are :
 
- - the `connectionless network layer service` can only transfer SDUs of *limited size* [#fsize]_
+ - the `connectionless network layer service` can only transfer SDUs of *limited size* 
  - the `connectionless network layer service` may discard SDUs
  - the `connectionless network layer service` may corrupt SDUs
  - the `connectionless network layer service` may delay, reorder or even duplicate SDUs
@@ -195,7 +205,6 @@ When two applications need to communicate, they need to structure their exchange
 
 The connectionless service
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
-
 
 The `connectionless service` that we have described earlier is frequently used by users who need to exchange small SDUs. It can be easily built on top of the connectionless network layer service that we have described earlier. Users needing to either send or receive several different and potentially large SDUs, or who need structured exchanges often prefer the `connection-oriented service`. 
 
@@ -269,6 +278,7 @@ An abrupt connection release can also be triggered by one of the users. If a use
    Abrupt connection release initiated by a user
 
 .. index:: graceful connection release
+
 To ensure a reliable delivery of the SDUs sent by each user over a connection, we need to consider the two streams that compose a connection as independent. A user should be able to release the stream that it uses to send SDUs once it has sent all the SDUs that it planned to send over this connection, but still continue to receive SDUs over the opposite stream. This `graceful` connection release is usually performed as shown in the figure below. One user issues a `Disconnect.request` primitive to its provider once it has issued all its `Data.request` primitives. The service provider will wait until all `Data.indication` primitives have been delivered to the receiving user before issuing the `Disconnnect.indication` primitive. This primitive informs the receiving user that it will no longer receive SDUs over this connection, but it is still able to issue `Data.request` primitives on the stream in the opposite direction. Once the user has issued all of its `Data.request` primitives, it issues a `Disconnnect.request` primitive to request the termination of the remaining stream. The service provider will process the request and deliver the corresponding `Disconnect.indication` to the other user once it has delivered all the pending `Data.indication` primitives. At this point, all data has been delivered and the two streams have been released successfully and the connection is completely closed.
 
 
@@ -310,6 +320,10 @@ The `request-response service` allows to efficiently exchange small amounts of i
       c>>b [ arcskip="1"];
       b=>a [ label = "DATA.confirm(response)" ];
 
+
+.. note:: Services and layers
+
+ In the previous sections, we have described services that are provided by the transport layer. However, it is important to note that the notion of service is more general than in the transport layer. As explained earlier, the network layer also provides a service, which in most networks is an unreliable connectionless service. There are network layers that provide a connection-oriented service. Similarly, the datalink layer also provides services. Some datalink layers will provide a connectionless service. This will be the case in Local Area Networks for examples. Other datalink layers, e.g. in public networks, provide a connection oriented service.
 
 
 

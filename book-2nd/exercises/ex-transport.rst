@@ -34,7 +34,7 @@ The `DATA` primitives are exchanged through a service access point. In the socke
 
 A simple client that sends a request to a server is often written as follows in descriptions of the socket API.
 
-.. literalinclude:: exercices/python/simpleclientip6.py
+.. literalinclude:: /exercises/python/simpleclientip6.py
    :language: python
 
 A typical usage of this application would be 
@@ -101,7 +101,7 @@ As mentioned above, the socket API is very low-level. This is the interface to t
 
 Another module, `urllib2 <http://docs.python.org/library/urllib2.html>`_ allows the programmer to directly use URLs. This is much more simpler than directly using sockets. 
 
-.. literalinclude:: python/http-cclient-urllib2.py
+.. literalinclude:: python/http-client-urllib2.py
  :language: python
 
 But simplicity is not the only advantage of using high-level libraries. They allow the programmer to manipulate higher-level concepts ( e.g. `I want the content pointed by this URL`) but also include many features such as transparent support for the utilisation of :term:`TLS` or IPv6.
@@ -167,7 +167,7 @@ Exercises
 
 .. todo:: provide server
 
-6. The socket_ library is also used to develop applications above the reliable bytestream service provided by TCP. We have installed on the `cnp3.info.ucl.ac.be` server a simple server that provides a simple client-server service. The service operates as follows :
+6. The socket_ library is also used to develop applications above the reliable bytestream service provided by TCP. We have implemented in C language a small tool to send information to a server on port `62141`. This server should operate as follows :
 
  - the server listens on port `62141` for a TCP connection
  - upon the establishment of a TCP connection, the server sends an integer by using the following TLV format :
@@ -175,14 +175,14 @@ Exercises
     - the first two bits indicate the type of information (01 for ASCII, 10 for boolean)
     - the next six bits indicate the length of the information (in bytes)
     - An ASCII TLV has a variable length and the next bytes contain one ASCII character per byte. A boolean TLV has a length of one byte. The byte is set to `00000000b` for `true` and `00000001b` for false. 
+
  - the client replies by sending the received integer encoded as a 32 bits integer in `network byte order`
  - the server returns a TLV containing `true` if the integer was correct and a TLV containing `false` otherwise and closes the TCP connection
 
- Implement a client to interact with this server in C
+ Implement a server in C that interacts with our client :download:`/exercises/c/tlv_ex.c`
 
 7. The Trivial File Transfer Protocol (TFTP), defined in :rfc:`1350` is a simple file transfer protocol that runs on top of UDP. Implement a client for this protocol that allows to retrieve a file on a remote server.
 
-.. 5. JSON ?
 
 ..  To be written : connect by name API is key !  http://www.stuartcheshire.org/IETF72/
 

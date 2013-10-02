@@ -15,8 +15,6 @@ In the previous section, we have explained how reliable protocols allow hosts to
 The main objective of the network layer is to allow endsystems, connected to different networks, to exchange information through intermediate systems called :term:`router`. The unit of information in the network layer is called a :term:`packet`.
 
 
-.. _fig-simplenet
-
 .. graphviz::
 
    graph foo {

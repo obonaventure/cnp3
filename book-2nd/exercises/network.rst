@@ -213,7 +213,7 @@ Routing protocols
 
     A simple network
 
-2. When a network specialist designs a network, one of the problems that he needs to solve is to set the metrics the links in his network. In the USA, the Abilene network interconnects most of the research labs and universities. The figure below shows the topology [#fabilene]_ of this network in 2009.
+2. When a network specialist designs a network, one of the problems that he needs to solve is to set the metrics the links in his network. In the USA, the Abilene network interconnects most of the research labs and universities. The figure below shows the topology  of this network in 2009.
 
  .. figure:: /principles/figures/abilene-web-map.png
     :align: center
@@ -243,7 +243,7 @@ Routing protocols
 
 4. In the five nodes network shown above, can you configure the link weights so that the packets sent by router `E` (resp. `F`) follow the `E->B->A` path (resp. `F->D->B->A`) ?
 
-5. In the above questions, you have worked on the stable state of the routing tables computed by routing protocols. Let us now consider the transient problems that mainly happen when the network topology changes [#ffailures]_. For this, consider the network topology shown in the figure below and assume that all routers use a distance vector protocol that uses split horizon.
+5. In the above questions, you have worked on the stable state of the routing tables computed by routing protocols. Let us now consider the transient problems that mainly happen when the network topology changes. For this, consider the network topology shown in the figure below and assume that all routers use a distance vector protocol that uses split horizon.
 
  .. figure:: ../../book/network/svg/ex-five-routers-redundant.png
     :align: center
