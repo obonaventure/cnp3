@@ -1,0 +1,22 @@
+   graph foo {
+      randkir="LR";
+      A [color=white, shape=box label=<<TABLE border="0" cellborder="0">
+                       <TR><TD width="45" height="60" fixedsize="true"><IMG SRC="icons/host.png" scale="true"/></TD></TR><TR><td>A</td></TR>
+              </TABLE>>];
+      B [color=white, shape=box label=<<TABLE border="0" cellborder="0">
+                       <TR><TD width="45" height="60" fixedsize="true"><IMG SRC="icons/host.png" scale="true"/></TD></TR><TR><td>B</td></TR>
+              </TABLE>>];
+      D [color=white, shape=box label=<<TABLE border="0" cellborder="0">
+                       <TR><TD width="45" height="60" fixedsize="true"><IMG SRC="icons/host.png" scale="true"/></TD></TR><TR><td>D</td></TR>
+              </TABLE>>];
+      R1[shape=box, color=white, label=<<TABLE border="0" cellborder="0">
+                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="icons/router.png" scale="true"/></TD></TR><TR><td>R1</td></TR>
+              </TABLE>>];
+       R2[color=white, label=<<TABLE border="0" cellborder="0">
+                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="icons/router.png" scale="true"/></TD></TR><TR><td>R2</td></TR>
+              </TABLE>>];
+      A--R1 [label="1 Mbps, 10 msec"];
+      B--R1 [label="10 Mbps, 5 msec"];
+      R1--R2 [label="100 kbps, 10 msec"];
+      R2--D [label="1 Mbps, 1 msec"];
+   }

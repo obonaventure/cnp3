@@ -22,7 +22,8 @@ import sys, os
 
 # Add any Sphinx extension module names here, as strings. They can be extensions
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.#
-extensions = ['sphinx.ext.todo', 'sphinx.ext.pngmath', 'sphinxcontrib.mscgen','sphinx.ext.graphviz', 'sphinx.ext.numfig'] 
+extensions = ['sphinx.ext.todo', 'sphinx.ext.pngmath', 'sphinxcontrib.mscgen','sphinx.ext.graphviz']
+#, 'sphinx.ext.numfig'] 
 #'rst2pdf.pdfbuilder', 'rst2pdf.pdfmath', 'sphinx.ext.pngmath' ]
 #, 
 # 'sphinx.ext.autodoc','rst2pdf.pdfbuilder']
@@ -337,5 +338,5 @@ epub_cover=('cnp3.png','')
 
 
 # numfig:
-numfig_number_figures = True
-numfig_figure_caption_prefix = "Fig."
+#numfig_number_figures = True
+#numfig_figure_caption_prefix = "Fig."

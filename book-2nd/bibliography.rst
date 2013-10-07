@@ -307,6 +307,7 @@ Whenever possible, the bibliography includes stable hypertext links to the refer
 .. [Stevens1998] Stevens, R., `UNIX Network Programming, Volume 1, Second Edition: Networking APIs: Sockets and XTI <http://books.google.com/books?id=ptSC4LpwGA0C>`_, Prentice Hall, 1998 
 .. [Stewart1998] Stewart, J., `BGP4: Inter-Domain Routing In The Internet <http://books.google.com/books?id=UEcHpN4QHrAC>`_, Addison-Wesley, 1998
 .. [Stoll1988] Stoll, C., `Stalking the wily hacker <http://doi.acm.org/10.1145/42411.42412>`_, Commun. ACM 31, 5 (May. 1988), 484-497. 
+.. [SV1995] M. Shreedhar and G. Varghese. `Efficient fair queueing using deficit round robin <http://doi.acm.org/10.1145/217391.217453>`_ SIGCOMM Comput. Commun. Rev. 25, 4 (October 1995), 231-242.
 .. [TE1993] Tsuchiya, P. F. and Eng, T., `Extending the IP internet through address reuse <http://doi.acm.org/10.1145/173942.173944>`_. SIGCOMM Comput. Commun. Rev. 23, 1 (Jan. 1993), 16-33. 
 .. [Thomborson1992] Thomborson, C., `The V.42bis Standard for Data-Compressing Modems <http://www.computer.org/portal/web/csdl/doi/10.1109/40.166712>`_, IEEE Micro, September/October 1992 (vol. 12 no. 5), pp. 41-53 
 .. [Unicode] The Unicode Consortium. `The Unicode Standard <http://unicode.org/versions/Unicode5.0.0/>`_, Version 5.0.0, defined by: The Unicode Standard, Version 5.0 (Boston, MA, Addison-Wesley, 2007

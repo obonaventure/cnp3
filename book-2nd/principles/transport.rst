@@ -488,11 +488,11 @@ Reliable transport protocols also use sequence numbers and acknowledgement numbe
 
       a=>b [ label = "DATA.req(abcde)" ] ,
       b>>c [ arcskip="1", label="1:abcd"],
-      d=>c [label="DATA.ind(abcde)"];
+      c=>d [label="DATA.ind(abcde)"];
       |||;
       a=>b [ label = "DATA.req(fghijkl)" ] ,
       b>>c [ arcskip="1", label="5:fghijkl"],
-      d=>c [label="DATA.ind(fghijkl)"];
+      c=>d [label="DATA.ind(fghijkl)"];
 
 
 Using sequence numbers to count bytes has also one advantage when the transport layer needs to fragment SDUs in several segments. The figure below shows the fragmentation of a large SDU in two segments. Upon reception of the segments, the receiver will use the sequence numbers to correctly reorder the data.

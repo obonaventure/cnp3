@@ -49,7 +49,7 @@ Part 1: Principles
    principles/network
    principles/transport
    principles/naming
-..   principles/sharing
+   principles/sharing
 
 
 
@@ -92,6 +92,8 @@ Part 3: Practice
    exercises/reliable
    exercises/network
    exercises/ex-transport
+   exercises/ex-sharing
+
 ..  application/exercises/ex-application
 
 ..   transport/exercises/ex-transport

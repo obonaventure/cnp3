@@ -4,13 +4,13 @@
 .. index:: congestion control, medium access control
 
 Sharing ressources
-------------------
+==================
 
 A network is designed to support a potentially large number of users that exchange information with each other. These users produce and consume information which is exchanged through the network. To support its users, a network uses several types of ressources. It is important to keep in mind the different ressources that are shared inside the network.
 
 The first and more important ressource inside a network is the link bandwidth. There are two situations where link bandwidth needs to be shared between different users. The first situation is when several hosts are attached to the same physical link. This situation mainly occurs in Local Area Networks (LAN). A LAN is a network that efficiently interconnects several hosts (usually a few dozens to a few hundreds) in the same room, building or campus. Consider for a example a network with five hosts. Any of these hosts needs to be able to exchange information with any of the other five hosts. A first organisation for this LAN is the full-mesh.
 
-.. figure:: ../../book/intro/svg/fullmesh.*
+.. figure:: ../../book/intro/svg/fullmesh.png
    :align: center
    :scale: 50
 
@@ -18,10 +18,9 @@ The first and more important ressource inside a network is the link bandwidth. T
 
 The full-mesh is the most reliable and highest performing network to interconnect these five hosts. However, this network organisation has two important drawbacks. First, if a network contains `n` hosts, then :math:`\frac{n\times(n-1)}{2}` links are required. If the network contains more than a few hosts, if becomes impossible to lay down the required physical links. Second, if the network contains `n` hosts, then each host must have :math:`n-1` interfaces to terminante :math:`n-1` links. This is beyond the capabilities of most hosts. Furthermore, if a new host is added to the network, new links have to be laid down and one interface has to be added to each participating host. However, full-mesh has the advantage of providing the lowest delay between the hosts and the best resiliency against link failures. In practice, full-mesh networks are rarely used expected when there are few network nodes and resiliency is key.
 
-
 The second possible physical organisation, which is also used inside computers to connect different extension cards, is the bus. In a bus network, all hosts are attached to a shared medium, usually a cable through a single interface. When one host sends an electrical signal on the bus, the signal is received by all hosts attached to the bus. A drawback of bus-based networks is that if the bus is physically cut, then the network is split into two isolated networks.  For this reason, bus-based networks are sometimes considered to be difficult to operate and maintain, especially when the cable is long and there are many places where it can break. Such a bus-based topology was used in early Ethernet networks. 
 
-.. figure:: ../../book/intro/svg/bus.*
+.. figure:: ../../book/intro/svg/bus.png
    :align: center
    :scale: 50 
 
@@ -30,7 +29,7 @@ The second possible physical organisation, which is also used inside computers t
 A third organisation of a computer network is a star topology. In such topologies, hosts have a single physical interface and there is one physical link between each host and the center of the star. The node at the center of the star can be either a piece of equipment that amplifies an electrical signal, or an active device, such as a piece of equipment that understands the format of the messages exchanged through the network. Of course, the failure of the central node implies the failure of the network. However, if one physical link fails (e.g. because the cable has been cut), then only one node is disconnected from the network. In practice, star-shaped networks are easier to operate and maintain than bus-shaped networks. Many network administrators also appreciate the fact that they can control the network from a central point. Administered from a Web interface, or through a console-like connection, the center of the star is a useful point of control (enabling or disabling devices) and an excellent observation point (usage statistics).
 
 
-.. figure:: ../../book/intro/svg/star.*
+.. figure:: ../../book/intro/svg/star.png
    :align: center
    :scale: 50 
 
@@ -38,7 +37,7 @@ A third organisation of a computer network is a star topology. In such topologie
 
 A fourth physical organisation of a network is the ring topology. Like the bus organisation, each host has a single physical interface connecting it to the ring. Any signal sent by a host on the ring will be received by all hosts attached to the ring. From a redundancy point of view, a single ring is not the best solution, as the signal only travels in one direction on the ring; thus if one of the links composing the ring is cut, the entire network fails. In practice, such rings have been used in local area networks, but are now often replaced by star-shaped networks. In metropolitan networks, rings are often used to interconnect multiple locations. In this case, two parallel links, composed of different cables, are often used for redundancy. With such a dual ring, when one ring fails all the traffic can be quickly switched to the other ring.
 
-.. figure:: ../../book/intro/svg/ring.*
+.. figure:: ../../book/intro/svg/ring.png
    :align: center
    :scale: 50 
 
@@ -46,24 +45,93 @@ A fourth physical organisation of a network is the ring topology. Like the bus o
 
 A fifth physical organisation of a network is the tree. Such networks are typically used when a large number of customers must be connected in a very cost-effective manner. Cable TV networks are often organised as trees.
 
-.. figure:: ../../book/intro/svg/tree.*
+.. figure:: ../../book/intro/svg/tree.png
    :align: center
    :scale: 50 
 
    A network organised as a Tree
+
+Sharing bandwidth
+-----------------
    
 In all these networks, except the full-mesh, the link bandwidth is shared among all connected hosts. Various algorithms have been proposed and are used to efficiently share the access to this ressource. We explain several of them in the Medium Access Control section below.
 
+.. note:: Fairness in computer networks
 
-Sharing bandwidth among the hosts directly attached to a link is not the only bandwidth sharing problem that occurs in computer networks. To understand the general problem, let us consider a very simple network which contains only point-to-point links. This network contains three hosts and two network nodes. All links inside the network have the same capacity. For example, let us assume that all links have a bandwidth of 1000 bits per second and that the hosts send packets containing exactly one thousand bits. 
+ Sharing resources is important to ensure that the network efficiently serves its user. In practice, there are many ways to share resources. Some resource sharing schemes consider that some users are more important than others and should obtain more resources. For example, on the highways, police cars and ambulances have priority to use the highways. In some cities, traffic lanes are reserved for buses to promote public services, ... In computer networks, the same problem arise. Given that resources are limited, the network needs to enable users to efficiently share them. Before designing an efficient resource sharing scheme, one needs to first formalize its objectives. In computer networks, the most popular objective for resource sharing schemes is that they must be `fair`. In a simple situation, for example two hosts using a shared 2 Mbps link, the sharing scheme should allocate the same bandwidth to each user, in this case 1 Mbps. However, in a large networks, simply dividing the available resources by the number of users is not sufficient. Consider the network shown in the figure below where `A1` sends data to `A2`, `B1` to `B2`, ... In this network, how should we divide the bandwidth among the different flows ? A first approach would be to allocate the same bandwidth to each flow. In this case, each flow would obtain 5 Mbps and the link between `R2` and `R3` would not be fully loaded. Another approach would be to allocate 10 Mbps to `A1-A2`, 20 Mbps to `C1-C2` and nothing to `B1-B2`. This is clearly unfair. 
 
+   .. graphviz::
+
+      graph foo {
+       rankdir="LR";
+       A1 [color=white, shape=box label=<<TABLE border="0" cellborder="0">
+                       <TR><TD width="45" height="60" fixedsize="true"><IMG SRC="icons/host.png" scale="true"/></TD></TR><TR><td>A1</td></TR>
+              </TABLE>>];
+       A2 [color=white, shape=box label=<<TABLE border="0" cellborder="0">
+                       <TR><TD width="45" height="60" fixedsize="true"><IMG SRC="icons/host.png" scale="true"/></TD></TR><TR><td>A2</td></TR>
+              </TABLE>>];
+       B1 [color=white, shape=box label=<<TABLE border="0" cellborder="0">
+                       <TR><TD width="45" height="60" fixedsize="true"><IMG SRC="icons/host.png" scale="true"/></TD></TR><TR><td>B1</td></TR>
+              </TABLE>>];
+       B2 [color=white, shape=box label=<<TABLE border="0" cellborder="0">
+                       <TR><TD width="45" height="60" fixedsize="true"><IMG SRC="icons/host.png" scale="true"/></TD></TR><TR><td>B2</td></TR>
+              </TABLE>>];
+       C1 [color=white, shape=box label=<<TABLE border="0" cellborder="0">
+                       <TR><TD width="45" height="60" fixedsize="true"><IMG SRC="icons/host.png" scale="true"/></TD></TR><TR><td>C1</td></TR>
+              </TABLE>>];
+       C2 [color=white, shape=box label=<<TABLE border="0" cellborder="0">
+                       <TR><TD width="45" height="60" fixedsize="true"><IMG SRC="icons/host.png" scale="true"/></TD></TR><TR><td>C2</td></TR>
+              </TABLE>>];
+
+       R1[shape=box, color=white, label=<<TABLE border="0" cellborder="0">
+                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="icons/router.png" scale="true"/></TD></TR><TR><td>R1</td></TR>
+              </TABLE>>];
+       R2[color=white, label=<<TABLE border="0" cellborder="0">
+                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="icons/router.png" scale="true"/></TD></TR><TR><td>R2</td></TR>
+              </TABLE>>];
+       R3[color=white, label=<<TABLE border="0" cellborder="0">
+                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="icons/router.png" scale="true"/></TD></TR><TR><td>R3</td></TR>
+              </TABLE>>];
+       A1--R1 ;
+       B1--R1;
+       R1--R2 [label="10 Mbps"];
+       C1--R2;
+       A2--R2;
+       R2--R3 [label="20 Mbps"];
+       C2--R3;
+       B2--R3;
+      }
+
+ .. index:: max-min fairness
+
+ In large networks, fairness is always a compromise. The most widely used definition of fairness is the `max-min fairness`. A bandwidth allocation in a network is said to be `max-min fair` if it is such that it is impossible to allocate more bandwidth to one of the flows without reducing the bandwidth of a flow that already has a smaller allocation than the flow that we want to increase. If the network is completely known, it is possible to derive a `max-min fair` allocation as follows. Initially, all flows have a null bandwidth and they are placed in the candidate set. The bandwidth allocation of all flows in the candidate set is increased until one link becomes congested. At this point, the flows that use the congested link have reached their maximum allocation. They are removed from the candidate set and the process continues until the candidate set becomes empty.
+
+ In the above network, the allocation of all flows would grow until `A1-A2` and `B1-B2` reach 5 Mbps. At this point, link `R1-R2` becomes congested and these two flows have reached their maximum. The allocation for flow `C1-C2` can increase until reaching 15 Mbps. At this point, link `R2-R3` is congested. To increase the bandwidth allocated to `C1-C2`, one would need to reduce the allocation to flow `B1-B2`. Similarly, the only way to increase the allocation to flow `B1-B2` would require a decrease of the allocation to `A1-A2`.  
+
+Network congestion
+------------------
+
+Sharing bandwidth among the hosts directly attached to a link is not the only sharing problem that occurs in computer networks. To understand the general problem, let us consider a very simple network which contains only point-to-point links. This network contains three hosts and two network nodes. All links inside the network have the same capacity. For example, let us assume that all links have a bandwidth of 1000 bits per second and that the hosts send packets containing exactly one thousand bits. 
 
 .. graphviz::
 
    graph foo {
-      A [shape=box];
-      B [shape=box];
-      C [shape=box];
+      rankdir=LR;
+      A [color=white, shape=box label=<<TABLE border="0" cellborder="0">
+                       <TR><TD width="45" height="60" fixedsize="true"><IMG SRC="icons/host.png" scale="true"/></TD></TR><TR><td>A</td></TR>
+              </TABLE>>];
+      B [color=white, shape=box label=<<TABLE border="0" cellborder="0">
+                       <TR><TD width="45" height="60" fixedsize="true"><IMG SRC="icons/host.png" scale="true"/></TD></TR><TR><td>B</td></TR>
+              </TABLE>>];
+      C [color=white, shape=box label=<<TABLE border="0" cellborder="0">
+                       <TR><TD width="45" height="60" fixedsize="true"><IMG SRC="icons/host.png" scale="true"/></TD></TR><TR><td>C</td></TR>
+              </TABLE>>];
+      R1[shape=box, color=white, label=<<TABLE border="0" cellborder="0">
+                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="icons/router.png" scale="true"/></TD></TR><TR><td>R1</td></TR>
+              </TABLE>>];
+       R2[color=white, label=<<TABLE border="0" cellborder="0">
+                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="icons/router.png" scale="true"/></TD></TR><TR><td>R2</td></TR>
+              </TABLE>>];
       A--R1 ;
       B--R1;
       R1--R2 [];
@@ -71,11 +139,12 @@ Sharing bandwidth among the hosts directly attached to a link is not the only ba
    }
 
 
+ 
 In the network above, consider the case where host `A` is transmitting packets to destination `C`. `A` can send one packet per second and its packets will be delivered to `C`. Now, let us explore what happens when host `B` also starts to transmit a packet. Node `R1` will receive two packets that must be forwarded to `R2`. Unfortunately, due to the limited bandwidth on the `R1-R2` link, only one of these two packets can be transmitted. The outcome of the second packet will depend on the available buffers on `R1`. If `R1` has one available buffer, it could store the packet that has not been transmitted on the `R1-R2` link until the link becomes available. If `R1` does not have available buffers, then the packet needs to be discarded. 
 
 .. index:: network congestion
 
-Besides the link bandwidth, the buffers on the network nodes are the second type of ressource that needs to be shared inside the network. The node buffers play an important role in the operation of the network because that can be used to absorb transient traffic peaks. Consider again the example above. Assume that one average host `A` and host `B` send a group of three packets every ten seconds. Their combined transmission rate (0.6 packets per second) is, on average, lower than the network capacity (1 packet per second). However, if they both start to transmit at the same time, node `R1` will have to absorb a burst of packets. This burst of packets is a small `network congestion`. We will say that a network is congested, when the sum of the traffic demand from the hosts is larger than the network capacity :math:`\sum{demand}>capacity`. This `network congestion` problem is one of the most difficult ressource sharing problem in computer networks. `Congestion` occurs is almost all networks. Minimizing the amount of congestion is a key objective for many network operators. In most cases, they will have to accept transient congestion, i.e. congestion lasting a few seconds or perhaps minutes, but will want to prevent congestion that lasts days or months. For this, they can rely on a wide range of solutions. We briefly present some of these in the paragraphs below. A detailed overview of the congestion problem would require an entire book.
+Besides the link bandwidth, the buffers on the network nodes are the second type of ressource that needs to be shared inside the network. The node buffers play an important role in the operation of the network because that can be used to absorb transient traffic peaks. Consider again the example above. Assume that one average host `A` and host `B` send a group of three packets every ten seconds. Their combined transmission rate (0.6 packets per second) is, on average, lower than the network capacity (1 packet per second). However, if they both start to transmit at the same time, node `R1` will have to absorb a burst of packets. This burst of packets is a small `network congestion`. We will say that a network is congested, when the sum of the traffic demand from the hosts is larger than the network capacity :math:`\sum{demand}>capacity`. This `network congestion` problem is one of the most difficult ressource sharing problem in computer networks. `Congestion` occurs is almost all networks. Minimizing the amount of congestion is a key objective for many network operators. In most cases, they will have to accept transient congestion, i.e. congestion lasting a few seconds or perhaps minutes, but will want to prevent congestion that lasts days or months. For this, they can rely on a wide range of solutions. We briefly present some of these in the paragraphs below. 
 
 .. todo:: provide references to congestion books
 
@@ -85,10 +154,10 @@ If `R1` has enough buffers, it will be able to absorb the load without having to
 
 .. note:: Congestion collapse on the Internet
 
- Congestion collapse is unfortunately not only an academic experience. Van Jacobson reports in [Jacobson1988]_ one of these events that affected him while he was working at the Lawrence Berkeley Laboratory (LBL). LBL was two network nodes away from the University of California in Berkeley. At that time, the link between the two sites had a bandwidth of 32 Kbps, but some hosts were already attached to 10 Mbps LANs. `In October 1986,  the data throughput from LBL to UC Berkeley ... dropped from 32 Kbps to 40
+ Congestion collapse is unfortunately not only an academic experience. Van Jacobson reports in [Jacobson1988]_ one of these events that affected him while he was working at the Lawrence Berkeley Laboratory (LBL). LBL was two network nodes away from the University of California in Berkeley. At that time, the link between the two sites had a bandwidth of 32 Kbps, but some hosts were already attached to 10 Mbps LANs. "In October 1986,  the data throughput from LBL to UC Berkeley ... dropped from 32 Kbps to 40
 bps. We were fascinated by this sudden factor-of-thousand
 drop in bandwidth and embarked on an investigation of why
-things had gotten so bad.` This work lead to the development of various congestion control techniques that have allowed the Internet to continue to grow without experiencing widespread congestion collapse events. 
+things had gotten so bad." This work lead to the development of various congestion control techniques that have allowed the Internet to continue to grow without experiencing widespread congestion collapse events. 
 
 Besides bandwidth and memory, a third ressource that needs to be shared inside a network is the (packet) processing capacity. To forward a packet, a network node needs bandwidth on the outgoing link, but it also needs to analyze the packet header to perform a lookup inside its forwarding table. Performing these lookup operations require ressources such as CPU cycles or memory accesses. Network nodes are usually designed to be able to sustain a given packet processing rate, measured in packets per second. 
 
@@ -107,7 +176,8 @@ Besides bandwidth and memory, a third ressource that needs to be shared inside a
 .. add something on bisection bandwidth ?
 .. http://courses.cs.washington.edu/courses/csep524/99wi/lectures/lecture7/sld006.htm
 
-Let us now try to present a broad overview of the congestion problem in networks. We will assume that the network is composed of dedicated links having a fixed bandwidth [#fadjust]_. A network contains hosts that generate and receive packets and nodes that forward packets. Assuming that each host is connected via a single link to the network, the largest demand is :math:`sum{Access Links}`. In practice, this largest demand is never reached and the network will be engineered to sustain a much lower traffic demand. The difference between the worst-case traffic demand and the sustainable traffic demand can be large, up to several orders of magnitude. Fortunately, the hosts are not completely dump and they can adapt their traffic demand to the current state of the network and the available bandwidth. For this, the hosts need to `sense` the current level of congestion and adjust their own traffic demand based on the estimated congestion. Network nodes can react in different ways to network congestion and hosts can sense the level of congestion in different ways.
+
+Let us now try to present a broad overview of the congestion problem in networks. We will assume that the network is composed of dedicated links having a fixed bandwidth [#fadjust]_. A network contains hosts that generate and receive packets and nodes that forward packets. Assuming that each host is connected via a single link to the network, the largest demand is :math:`\sum{Access Links}`. In practice, this largest demand is never reached and the network will be engineered to sustain a much lower traffic demand. The difference between the worst-case traffic demand and the sustainable traffic demand can be large, up to several orders of magnitude. Fortunately, the hosts are not completely dump and they can adapt their traffic demand to the current state of the network and the available bandwidth. For this, the hosts need to `sense` the current level of congestion and adjust their own traffic demand based on the estimated congestion. Network nodes can react in different ways to network congestion and hosts can sense the level of congestion in different ways.
 
 Let us first explore which mechanisms can be used inside a network to control congestion and how these mechanisms can influence the behavior of the end hosts.
 
@@ -131,7 +201,7 @@ Discarding packets is one of the signals that the network nodes can use to infor
  - `Which packet(s) should be discarded ?` Once the network node has decided to discard packets, it needs to actually discard real packets.
 
 
-By combining different answers to these questions, network researchers are developed different packet discard mechanisms.
+By combining different answers to these questions, network researchers have developed different packet discard mechanisms.
 
  - `tail drop` is the simplest packet discard technique. When a buffer is full, the arriving packet is discarded. `Tail drop` can be easily implemented. This is, by far, the most widely used packet discard mechanism. However, it suffers from two important drawbacks. First, since `tail drop` discards packets only when the buffer is full, buffers tend to be congested and realtime applications may suffer from the increased delays. Second, `tail drop` is blind when it discards a packet. It may discard a packet from a low bandwidth interactive flow while most of the buffer is used by large file transfers. 
  - `drop from front` is an alternative packet discard technique. When a packet arrives and the Instead of removing the arriving packet, it removes the packet that was at the head of the queue. Discarding this packet instead of the arriving one can have two advantages. First, it already stayed a long time in the buffer. Second, hosts should be able to detect the loss (and thus the congestion) earlier.
@@ -148,6 +218,39 @@ In virtual circuit networks, packet marking can be improved if the return packet
 
 If the packet header does not contain any bit in the header to represent the current congestion level, an alternative is to allow the network nodes to send a control packet to the source to indicate the current congestion level. Some networking technologies use such control packets to explicitly regulate the transmission rate of sources. However, their usage is mainly restricted to small networks. In large networks, network nodes usually avoid using such control packets. These controlled packets are even considered to be dangerous in some networks. First, using them increases the network load when the network is congested. Second, while network nodes are optimized to forward packets, they are usually pretty slow at creating new packets.
 
+.. index:: scheduler, scheduling algorithm
+
+Dropping and marking packets is not the only possible reaction of a router that becomes congested. A router could also selectively delay packets belonging to some flows. There are different algorithms that can be used by a router to delay packets. If the objective of the router is to fairly distribute to bandwidth of an output link among competing flows, one possibility is to organize the buffers of the router as a set of queues. For simplicity, let us assume that the router is capable of supporting a fixed number of concurrent flows, say `N`. One of the queues of the router is associated to each flow and when a packet arrives, it is placed at the tail of the corresponding queue. All the queues are controlled by a `scheduler`. A `scheduler` is an algorithm that is run each time there is an opportunity to transmit a packet on the outgoing link. Various schedulers have been proposed in the scientific literature and some are used in real routers.
+
+.. figure:: scheduler.png
+
+   A scheduler 
+
+
+A very simple scheduler is the `round-robin scheduler`. This scheduler serves all the queues in a round-robin fashion. If all flows send packets of the same size, then the round-robin scheduler allocates the bandwidth fairly among the different flows. Otherwise, it favors flows that are using larger packets. Extensions to the `round-robin scheduler` have been proposed to provide a fair distribution of the bandwidth with variable-length packets [SV1995]_ but these are outside the scope of this chapter.
+
+.. code-block:: python
+   
+   # N queues
+   # state variable : next_queue
+   next_queue=0
+   while (true) :
+     if isEmpty(buffer) :
+       wait
+       # wait for next packet in buffer
+     if !isEmpty(queue[next_queue]) :
+         # Send packet at head of next_queue
+         p=remove_packet(queue[next_queue])
+        send(p)
+     next_queue=(next_queue+1)%N
+   # end while
+
+
+Distributing the load across the network
+----------------------------------------
+
+.. distributing the load
+
 Delays, packet discards, packet markings and control packets are the main types of information that the network can exchange with the end hosts. Discarding packets is the main action that a network node can perform if the congestion is too severe. Besides tackling congestion at each node, it is also possible to change the divert some traffic flows from heavily loaded links to reduce congestion. Early routing algorithms [MRR1980]_ have used delay measurements to detect congestion between network nodes and update the link weights dynamically. By reflecting the delay perceived by applications in the link weights used for the shortest paths computation, these routing algorithms managed to dynamically change the forwarding paths in reaction to congestion. However, deployment experience showed that these dynamic routing algorithms could cause oscillations and did not necessarily lower congestion. Deployed datagram networks rarely use dynamic routing algorithms, except in some wireless networks. In datagram networks, the state of the art reaction to long term congestion, i.e. congestion lasting hours, days or more, is to measure the traffic demand and then select the link weights [FRT2002]_ that allow to minimize the maximum link loads. If the congestion lasts longer, changing the weights is not sufficient anymore and the network needs to be upgraded with few or faster links. However, in Wide Area Networks, adding new links can take months.
 
 In virtual circuit networks, another way to manage or prevent congestion is to limit the number of circuits that use the network at any time. This technique is usually called `connection admission control`. When a host requests the creation of a new circuit in the network, it specifies the destination and in some networking technologies the required bandwidth. With this information, the network can check whether there are enough resources available to reach this particular destination. If yes, the circuit is established. However, the requested is denied and the host will have to defer the creation of its virtual circuit. `Connection admission control` schemes are widely used in the telephone networks. In these networks, a busy tone corresponds to an unavailable destination or a congested network. 
@@ -156,20 +259,24 @@ In datagram networks, this technique cannot be easily used since the basic assum
 
 Based on the feedback received from the network, the hosts can adjust their transmission rate. We discuss in section `Congestion control` some techniques that allow hosts to react to congestion.
 
+Another way to share the network resources is to distribute the load across multiple links. Many techniques have been designed to spread the load over the network. As an illustration, let us briefly consider how load can be shared when accessing some content. Consider a large and popular file such as the image of a Linux distribution or the upgrade of a commercial operating system that will be download by many users. There are many ways to distribute this large file. A naive solution is to place one copy of the file on a server and allow all users to download this file from the server. If the file is popular and millions of users want to download it, the server will quickly become overloaded. There are two classes of solutions that can be used to serve a large number of users. A first approach is to store the file on servers whose name is known by the clients. Before retrieving the file, each client will query the name service to obtain the address of the server. If the file is available from many servers, the name service can provide different addresses to different clients. This will automatically spread the load since different clients will download the file from different servers. Most large content providers use such a solution to distribute large files or videos.
 
-.. note:: Spatial congestion control with Bittorrent
+There is another solution that allows to spread the load among many sources without relying on the name service. The popular bittorent service 
+is an example of this approach. With this solution, each file is divided in blocks of a fixed size. To retrieve a file, a client needs to retrieve all the blocks that compose the file. However, nothing forces the client to retrieve all the blocks in sequence and from the same server. Each file is associated with metadata that indicates for each block a list of addresses of hosts that store this block. To retrieve a complete file, a client first downloads the metadata. Then, it tries to retrieve each block from one of the hosts that store the block. In practice, implementations often try to download several blocks in parallel. Once one block has been successfully downloaded, the next block can be requested. If a host is slow to provide one block or becomes unavailable, the client can contact another host listed in the metadata. Most deployments of bittorrent allow the clients to participate to the distribution of blocks. Once a client has downloaded one block, it contacts the server which stores the metadata to indicate that it can also provide this block. With this scheme, when a file is popular, its blocks are downloaded by many hosts that automatically participate in the distribution of the blocks. Thus, the number of `servers` that are capable of providing blocks from a popular file automatically increases with the file's popularity. 
+
+
+Now that we have provided a broad overview of the techniques that can be used to spread the load and allocate resources in the network, let us analyze two techniques in more details : Medium Access Control and Congestion control.
 
 .. ieee ethernet mac ?
 
 
-MAC
----
+Medium Access Control algorithms
+--------------------------------
 
 
 .. index:: collision
 
-The common problem among Local Area Networks is how to efficiently share the access to the shared bandwidth. If two devices send a frame at the same time, the two electrical, optical or radio signals that correspond to these frames will appear at the same time on the transmission medium and a receiver will not be able to decode either frame. Such simultaneous transmissions are called `collisions`. A `collision` may involve frames transmitted by two or more devices attached to the Local Area Network. Collisions are the main cause of errors in wired Local Area Networks.
-
+The common problem among Local Area Networks is how to efficiently share the available bandwidth. If two devices send a frame at the same time, the two electrical, optical or radio signals that correspond to these frames will appear at the same time on the transmission medium and a receiver will not be able to decode either frame. Such simultaneous transmissions are called `collisions`. A `collision` may involve frames transmitted by two or more devices attached to the Local Area Network. Collisions are the main cause of errors in wired Local Area Networks.
 
 All Local Area Network technologies rely on a `Medium Access Control` algorithm to regulate the transmissions to either minimise or avoid collisions. There are two broad families of `Medium Access Control` algorithms :
 
@@ -181,7 +288,7 @@ We first discuss a simple deterministic MAC algorithm and then we describe sever
 
 
 Static allocation methods
-=========================
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
 A first solution to share the available resources among all the devices attached to one Local Area Network is to define, `a priori`, the distribution of the transmission resources among the different devices. If `N` devices need to share the transmission capacities of a LAN operating at `b` Mbps, each device could be allocated a bandwidth of :math:`\frac{b}{N}` Mbps. 
 
@@ -213,7 +320,7 @@ TDM and FDM are widely used in telephone networks to support fixed bandwidth con
 
 
 ALOHA
-=====
+^^^^^
 
 .. index:: packet radio
 
@@ -256,7 +363,7 @@ Many improvements to ALOHANet have been proposed since the publication of [Abram
 
 
 Carrier Sense Multiple Access
-=============================
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
 ALOHA and slotted ALOHA can easily be implemented, but unfortunately, they can only be used in networks that are very lightly loaded. Designing a network for a very low utilisation is possible, but it clearly increases the cost of the network. To overcome the problems of ALOHA, many Medium Access Control mechanisms have been proposed which improve channel utilization. Carrier Sense Multiple Access (CSMA) is a significant improvement compared to ALOHA. CSMA requires all nodes to listen to the transmission channel to verify that it is free before transmitting a frame [KT1975]_. When a node senses the channel to be busy, it defers its transmission until the channel becomes free again. The pseudo-code below provides a more detailed description of the operation of CSMA. 
@@ -308,7 +415,7 @@ The above pseudo-code is often called `persistent CSMA` [KT1975]_ as the termina
 .. index:: Carrier Sense Multiple Access with Collision Detection, CSMA/CD
 
 Carrier Sense Multiple Access with Collision Detection
-======================================================
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
 .. index:: speed of light
@@ -414,7 +521,7 @@ The inter-frame delay used in this pseudo-code is a short delay corresponding to
 .. index:: Carrier Sense Multiple Access with Collision Avoidance, CSMA/CA
 
 Carrier Sense Multiple Access with Collision Avoidance
-======================================================
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The `Carrier Sense Multiple Access with Collision Avoidance` (CSMA/CA) Medium Access Control algorithm was designed for the popular WiFi wireless network technology [802.11]_. CSMA/CA also senses the transmission channel before transmitting a frame. Furthermore, CSMA/CA tries to avoid collisions by carefully tuning the timers used by CSMA/CA devices.
 
@@ -459,7 +566,7 @@ To deal with this problem, CSMA/CA relies on a backoff timer. This backoff timer
    Detailed example with CSMA/CA
 
 
-The pseudo-code below summarises the operation of a CSMA/CA device. The values of the SIFS, DIFS, EIFS and slotTime depend on the underlying physical layer technology [802.11]_
+The pseudo-code below summarizes the operation of a CSMA/CA device. The values of the SIFS, DIFS, EIFS and slotTime depend on the underlying physical layer technology [802.11]_
 
 .. code-block:: python
 
@@ -511,7 +618,7 @@ The utilization of the reservations with CSMA/CA is an optimisation that is usef
 
 	
 Deterministic Medium Access Control algorithms
-==============================================
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 During the 1970s and 1980s, there were huge debates in the networking community about the best suited Medium Access Control algorithms for Local Area Networks. The optimistic algorithms that we have described until now were relatively easy to implement when they were designed. From a performance perspective, mathematical models and simulations showed the ability of these optimistic techniques to sustain load. However, none of the optimistic techniques are able to guarantee that a frame will be delivered within a given delay bound and some applications require predictable transmission delays. The deterministic MAC algorithms were considered by a fraction of the networking community as the best solution to fulfill the needs of Local Area Networks. 
 
@@ -524,7 +631,7 @@ A Token Ring network is composed of a set of stations that are attached to a uni
 
 
 .. _fig-tokenring:
-.. figure:: svg/datalink-fig-011-c.png
+.. figure:: ../../book/lan/svg/datalink-fig-011-c.png
    :align: center
    :scale: 70
    
@@ -541,7 +648,7 @@ The first problem faced by a Token Ring network is that as the token represents 
 
 .. index:: Token Ring token frame, 802.5 token frame
 
-.. figure:: pkt/token.png
+.. figure:: ../../book/lan/pkt/token.png
    :align: center
    :scale: 100
 
@@ -555,14 +662,14 @@ The token is composed of three fields. First, the `Starting Delimiter` is the ma
 
 .. index:: Token Ring Monitor
 
-Let us consider the five station network depicted in figure :ref:`fig-tokenring` above and assume that station `S1` sends a token. If we neglect the propagation delay on the inter-station links, as each station introduces a one bit delay, the first bit of the frame would return to `S1` while it sends the fifth bit of the token. If station `S1` is powered off at that time, only the first five bits of the token will travel on the ring. To avoid this problem, there is a special station called the `Monitor` on each Token Ring. To ensure that the token can travel forever on the ring, this `Monitor` inserts a delay that is equal to at least 24 bit transmission times. If station `S3` was the `Monitor` in figure :ref:`fig-tokenring`, `S1` would have been able to transmit the entire token before receiving the first bit of the token from its upstream neighbour.
+Let us consider the five station network depicted in figure :ref:`fig-tokenring` above and assume that station `S1` sends a token. If we neglect the propagation delay on the inter-station links, as each station introduces a one bit delay, the first bit of the frame would return to `S1` while it sends the fifth bit of the token. If station `S1` is powered off at that time, only the first five bits of the token will travel on the ring. To avoid this problem, there is a special station called the `Monitor` on each Token Ring. To ensure that the token can travel forever on the ring, this `Monitor` inserts a delay that is equal to at least 24 bit transmission times. If station `S3` was the `Monitor` in figure :ref:`fig-tokenring`, `S1` would have been able to transmit the entire token before receiving the first bit of the token from its upstream neighbor.
 
 
 Now that we have explained how the token can be forwarded on the ring, let us analyse how a station can capture a token to transmit a data frame. For this, we need some information about the format of the data frames. An 802.5 data frame begins with the `Starting Delimiter` followed by the `Access Control` field whose `Token` bit is reset, a `Frame Control` field that allows for the definition of several types of frames, destination and source address, a payload, a CRC, the `Ending Delimiter` and a `Frame Status` field. The format of the Token Ring data frames is illustrated below.
 
 .. index:: Token Ring data frame, 802.5 data frame
 
-.. figure:: pkt/8025.png
+.. figure:: ../../book/lan/pkt/8025.png
    :align: center
    :scale: 100
 
@@ -573,7 +680,7 @@ To capture a token, a station must operate in `Listen` mode. In this mode, the s
 
 After having transmitted its data frame, the station must remain in `Transmit` mode until it has received the last bit of its own data frame. This ensures that the bits sent by a station do not remain in the network forever. A data frame sent by a station in a Token Ring network passes in front of all stations attached to the network. Each station can detect the data frame and analyse the destination address to possibly capture the frame. 
 
-The `Frame Status` field that appears after the `Ending Delimiter` is used to provide acknowledgements without requiring special frames. The `Frame Status` contains two flags : `A` and `C`. Both flags are reset when a station sends a data frame. These flags can be modified by their recipients. When a station senses its address as the destination address of a frame, it can capture the frame, check its CRC and place it in its own buffers. The destination of a frame must set the `A` bit (resp. `C` bit) of the `Frame Status` field once it has seen (resp. copied) a data frame. By inspecting the `Frame Status` of the returning frame, the sender can verify whether its frame has been received correctly by its destination.
+.. The `Frame Status` field that appears after the `Ending Delimiter` is used to provide acknowledgements without requiring special frames. The `Frame Status` contains two flags : `A` and `C`. Both flags are reset when a station sends a data frame. These flags can be modified by their recipients. When a station senses its address as the destination address of a frame, it can capture the frame, check its CRC and place it in its own buffers. The destination of a frame must set the `A` bit (resp. `C` bit) of the `Frame Status` field once it has seen (resp. copied) a data frame. By inspecting the `Frame Status` of the returning frame, the sender can verify whether its frame has been received correctly by its destination.
 
 
 
@@ -587,52 +694,46 @@ Several other anomalies may occur in a Token Ring network. For example, a statio
 Congestion control
 ------------------
 
-
-TCP congestion control
-----------------------
-
-In the previous sections, we have explained the mechanisms that TCP uses to deal with transmission errors and segment losses. In a heterogeneous network such as the Internet or enterprise IP networks, endsystems have very different levels of performance. Some endsystems are high-end servers attached to 10 Gbps links while others are mobile devices attached to a very low bandwidth wireless link. Despite these huge differences in performance, a mobile device should be able to efficiently exchange segments with a high-end server.
+Most networks contain links having different bandwidth. Some hosts can use low bandwidth wireless networks. Some servers are attached via 10 Gbps interfaces and inter-router links may vary from a few tens of kilobits per second up to hundred Gbps.Despite these huge differences in performance, any host should be able to efficiently exchange segments with a high-end server.
 
 .. index:: TCP self clocking
 
-To understand this problem better, let us consider the scenario shown in the figure below, where a server (`A`) attached to a `10 Mbps` link is sending TCP segments to another computer (`C`) through a path that contains a `2 Mbps` link.
+To understand this problem better, let us consider the scenario shown in the figure below, where a server (`A`) attached to a `10 Mbps` link needs to reliably transfer segments to another computer (`C`) through a path that contains a `2 Mbps` link.
 
-.. figure:: svg/tcp-2mbps.png 
+.. figure:: ../../book/transport/svg/tcp-2mbps.png 
    :align: center
    :scale: 70 
 
-   TCP over heterogeneous links 
+   Reliable transport with heterogeneous links 
 
-In this network, the TCP segments sent by the server reach router `R1`. `R1` forwards the segments towards router `R2`. Router `R2` can potentially receive segments at `10 Mbps`, but it can only forward them at `2 Mbps` to router `R2` and then to host `C`.  Router `R2` contains buffers that allow it to store the packets that cannot immediately be forwarded to their destination. To understand the operation of TCP in this environment, let us consider a simplified model of this network where host `A` is attached to a `10 Mbps` link to a queue that represents the buffers of router `R2`. This queue is emptied at a rate of `2 Mbps`.
+In this network, the segments sent by the server reach router `R1`. `R1` forwards the segments towards router `R2`. Router `R1` can potentially receive segments at `10 Mbps`, but it can only forward them at `2 Mbps` to router `R2` and then to host `C`.  Router `R1` includes buffers that allow it to store the packets that cannot immediately be forwarded to their destination. To understand the operation of a reliable transport protocol in this environment, let us consider a simplified model of this network where host `A` is attached to a `10 Mbps` link to a queue that represents the buffers of router `R1`. This queue is emptied at a rate of `2 Mbps`.
 
 
-.. figure:: svg/tcp-self-clocking.png
+.. figure:: ../../book/transport/svg/tcp-self-clocking.png
    :align: center
    :scale: 70 
 
-   TCP self clocking
+   Self clocking
 
 
-Let us consider that host `A` uses a window of three segments. It thus sends three back-to-back segments at `10 Mbps` and then waits for an acknowledgement. Host `A` stops sending segments when its window is full. These segments reach the buffers of router `R2`. The first segment stored in this buffer is sent by router `R2` at a rate of `2 Mbps` to the destination host. Upon reception of this segment, the destination sends an acknowledgement. This acknowledgement allows host `A` to transmit a new segment. This segment is stored in the buffers of router `R2` while it is transmitting the second segment that was sent by host `A`... Thus, after the transmission of the first window of segments, TCP sends one data segment after the reception of each acknowledgement returned by the destination [#fdelack]_ . In practice, the acknowledgements sent by the destination serve as a kind of `clock` that allows the sending host to adapt its transmission rate to the rate at which segments are received by the destination. This `TCP self-clocking` is the first mechanism that allows TCP to adapt to heterogeneous networks [Jacobson1988]_. It depends on the availability of buffers to store the segments that have been sent by the sender but have not yet been transmitted to the destination.
+Let us consider that host `A` uses a window of three segments. It thus sends three back-to-back segments at `10 Mbps` and then waits for an acknowledgement. Host `A` stops sending segments when its window is full. These segments reach the buffers of router `R2`. The first segment stored in this buffer is sent by router `R2` at a rate of `2 Mbps` to the destination host. Upon reception of this segment, the destination sends an acknowledgement. This acknowledgement allows host `A` to transmit a new segment. This segment is stored in the buffers of router `R2` while it is transmitting the second segment that was sent by host `A`... Thus, after the transmission of the first window of segments, the reliable transport protocol sends one data segment after the reception of each acknowledgement returned by the destination. In practice, the acknowledgements sent by the destination serve as a kind of `clock` that allows the sending host to adapt its transmission rate to the rate at which segments are received by the destination. This `self-clocking` is the first mechanism that allows a window-based reliable transport protocol to adapt to heterogeneous networks [Jacobson1988]_. It depends on the availability of buffers to store the segments that have been sent by the sender but have not yet been transmitted to the destination.
 
-
-However, TCP is not always used in this environment. In the global Internet, TCP is used in networks where a large number of hosts send segments to a large number of receivers. For example, let us consider the network depicted below which is similar to the one discussed in [Jacobson1988]_ and :rfc:`896`. In this network, we assume that the buffers of the router are infinite to ensure that no packet is lost.
+However, transport protocols are not only used in this environment. In the global Internet, a large number of hosts send segments to a large number of receivers. For example, let us consider the network depicted below which is similar to the one discussed in [Jacobson1988]_ and :rfc:`896`. In this network, we assume that the buffers of the router are infinite to ensure that no packet is lost.
 
 .. index:: congestion collapse
 
-.. figure:: png/transport-fig-083-c.png 
+.. figure:: ../../book/transport/png/transport-fig-083-c.png 
    :align: center
    :scale: 70 
 
    The congestion collapse problem
 
 
-
-If many TCP senders are attached to the left part of the network above, they all send a window full of segments. These segments are stored in the buffers of the router before being transmitted towards their destination. If there are many senders on the left part of the network, the occupancy of the buffers quickly grows. A consequence of the buffer occupancy is that the round-trip-time, measured by TCP, between the sender and the receiver increases. Consider a network where 10,000 bits segments are sent. When the buffer is empty, such a segment requires 1 millisecond to be transmitted on the `10 Mbps` link and 5 milliseconds to be the transmitted on the `2 Mbps` link. Thus, the round-trip-time measured by TCP is roughly 6 milliseconds if we ignore the propagation delay on the links. Most routers manage their buffers as a FIFO queue [#ffifo]_. If the buffer contains 100 segments, the round-trip-time becomes :math:`1+100 \times 5+ 5` milliseconds as new segments are only transmitted on the `2 Mbps` link once all previous segments have been transmitted. Unfortunately, TCP uses a retransmission timer and performs `go-back-n` to recover from transmission errors. If the buffer occupancy is high, TCP assumes that some segments have been lost and retransmits a full window of segments. This increases the occupancy of the buffer and the delay through the buffer... Furthermore, the buffer may store and send on the low bandwidth links several retransmissions of the same segment. This problem is called `congestion collapse`. It occurred several times in the late 1980s. For example, [Jacobson1988]_ notes that in 1986, the usable bandwidth of a 32 Kbits link dropped to 40 bits per second due to congestion collapse [#foldtcp]_ !
+If many senders are attached to the left part of the network above, they all send a window full of segments. These segments are stored in the buffers of the router before being transmitted towards their destination. If there are many senders on the left part of the network, the occupancy of the buffers quickly grows. A consequence of the buffer occupancy is that the round-trip-time, measured by the transport protocol, between the sender and the receiver increases. Consider a network where 10,000 bits segments are sent. When the buffer is empty, such a segment requires 1 millisecond to be transmitted on the `10 Mbps` link and 5 milliseconds to be the transmitted on the `2 Mbps` link. Thus, the measured round-trip-time measured is roughly 6 milliseconds if we ignore the propagation delay on the links. If the buffer contains 100 segments, the round-trip-time becomes :math:`1+100 \times 5+ 5` milliseconds as new segments are only transmitted on the `2 Mbps` link once all previous segments have been transmitted. Unfortunately, if the reliable transport protocol uses a retransmission timer and performs `go-back-n` to recover from transmission errors it will retransmit a full window of segments. This increases the occupancy of the buffer and the delay through the buffer... Furthermore, the buffer may store and send on the low bandwidth links several retransmissions of the same segment. This problem is called `congestion collapse`. It occurred several times during the late 1980s on the Internet. For example, [Jacobson1988]_ notes that in 1986, the usable bandwidth of a 32 Kbits link dropped to 40 bits per second due to congestion collapse [#foldtcp]_ !
 
 The `congestion collapse` is a problem that all heterogeneous networks face. Different mechanisms have been proposed in the scientific literature to avoid or control network congestion. Some of them have been implemented and deployed in real networks. To understand this problem in more detail, let us first consider a simple network with two hosts attached to a high bandwidth link that are sending segments to destination `C` attached to a low bandwidth link as depicted below.
 
-.. figure:: svg/congestion-problem.png 
+.. figure:: ../../book/transport/svg/congestion-problem.png 
    :align: center
    :scale: 70 
 
@@ -654,13 +755,13 @@ Depending on the network, a `max-min fair allocation` may not always exist. In p
 
 To visualise the different rate allocations, it is useful to consider the graph shown below. In this graph, we plot on the `x-axis` (resp. `y-axis`) the rate allocated to host `B` (resp. `A`). A point in the graph :math:`(r_B,r_A)` corresponds to a possible allocation of the transmission rates. Since there is a `2 Mbps` bottleneck link in this network, the graph can be divided into two regions. The lower left part of the graph contains all allocations :math:`(r_B,r_A)` such that the bottleneck link is not congested (:math:`r_A+r_B<2`). The right border of this region is the `efficiency line`, i.e. the set of allocations that completely utilise the bottleneck link (:math:`r_A+r_B=2`). Finally, the `fairness line` is the set of fair allocations. 
 
-.. figure:: png/transport-fig-092-c.png 
+.. figure:: ../../book/transport/png/transport-fig-092-c.png 
    :align: center
    :scale: 70 
 
    Possible allocated transmission rates
 
-As shown in the graph above, a rate allocation may be fair but not efficient (e.g. :math:`r_A=0.7,r_B=0.7`), fair and efficient ( e.g. :math:`r_A=1,r_B=1`) or efficient but not fair (e.g. :math:`r_A=1.5,r_B=0.5`). Ideally, the allocation should be both fair and efficient. Unfortunately, maintaining such an allocation with fluctuations in the number of flows that use the network is a challenging problem. Furthermore, there might be several thousands of TCP connections or more that pass through the same link [#fflowslink]_.
+As shown in the graph above, a rate allocation may be fair but not efficient (e.g. :math:`r_A=0.7,r_B=0.7`), fair and efficient ( e.g. :math:`r_A=1,r_B=1`) or efficient but not fair (e.g. :math:`r_A=1.5,r_B=0.5`). Ideally, the allocation should be both fair and efficient. Unfortunately, maintaining such an allocation with fluctuations in the number of flows that use the network is a challenging problem. Furthermore, there might be several thousands flows that pass through the same link [#fflowslink]_.
 
 To deal with these fluctuations in demand, which result in fluctuations in the available bandwidth, computer networks use a congestion control scheme. This congestion control scheme should achieve the three objectives listed above. Some congestion control schemes rely on a close cooperation between the endhosts and the routers, while others are mainly implemented on the endhosts with limited support from the routers. 
 
@@ -671,7 +772,7 @@ A congestion control scheme can be modelled as an algorithm that adapts the tran
 
 Let us focus on the binary feedback scheme which is the most widely used today. Intuitively, the congestion control scheme should decrease the transmission rate of a host when congestion has been detected in the network, in order to avoid congestion collapse. Furthermore, the hosts should increase their transmission rate when the network is not congested. Otherwise, the hosts would not be able to efficiently utilise the network. The rate allocated to each host fluctuates with time, depending on the feedback received from the network. The figure below illustrates the evolution of the transmission rates allocated to two hosts in our simple network. Initially, two hosts have a low allocation, but this is not efficient. The allocations increase until the network becomes congested. At this point, the hosts decrease their transmission rate to avoid congestion collapse. If the congestion control scheme works well, after some time the allocations should become both fair and efficient.
 
-.. figure:: png/transport-fig-093-c.png 
+.. figure:: ../../book/transport/png/transport-fig-093-c.png 
    :align: center
    :scale: 70 
 
@@ -686,13 +787,16 @@ The simplest form of feedback that the network can send to a source is a binary 
  - :math:`rate(t+1)=\alpha_N + \beta_N rate(t)` when the network is *not* congested
 
 With a linear adaption algorithm, :math:`\alpha_C,\alpha_N, \beta_C` and :math:`\beta_N` are constants. 
-The analysis of [CJ1989]_ shows that to be fair and efficient, such a binary rate adaption mechanism must rely on `Additive Increase and Multiplicative Decrease`. When the network is not congested, the hosts should slowly increase their transmission rate (:math:`\beta_N=1~and~\alpha_N>0`). When the network is congested, the hosts must multiplicatively decrease their transmission rate (:math:`\beta_C < 1~and~\alpha_C = 0`). Such an AIMD rate adaptation algorithm can be implemented by the pseudo-code below ::
+The analysis of [CJ1989]_ shows that to be fair and efficient, such a binary rate adaption mechanism must rely on `Additive Increase and Multiplicative Decrease`. When the network is not congested, the hosts should slowly increase their transmission rate (:math:`\beta_N=1~and~\alpha_N>0`). When the network is congested, the hosts must multiplicatively decrease their transmission rate (:math:`\beta_C < 1~and~\alpha_C = 0`). Such an AIMD rate adaptation algorithm can be implemented by the pseudo-code below. 
 
- # Additive Increase Multiplicative Decrease	
- if congestion :
-    rate=rate*betaC    # multiplicative decrease, betaC<1
- else
-    rate=rate+alphaN    # additive increase, v0>0
+
+.. code-block:: python
+
+    # Additive Increase Multiplicative Decrease	
+    if congestion :
+       rate=rate*betaC    # multiplicative decrease, betaC<1
+    else
+       rate=rate+alphaN    # additive increase, v0>0
 
 
 .. note:: Which binary feedback ?
@@ -701,7 +805,213 @@ The analysis of [CJ1989]_ shows that to be fair and efficient, such a binary rat
  Another solution is to rely on explicit feedback. This is the solution proposed in the DECBit congestion control scheme [RJ1995]_ and used in Frame Relay and ATM networks. This explicit feedback can be implemented in two ways. A first solution would be to define a special message that could be sent by routers to hosts when they are congested. Unfortunately, generating such messages may increase the amount of congestion in the network. Such a congestion indication packet is thus discouraged :rfc:`1812`. A better approach is to allow the intermediate routers to indicate, in the packets that they forward, their current congestion status. Binary feedback can be encoded by using one bit in the packet header. With such a scheme, congested routers set a special bit in the packets that they forward while non-congested routers leave this bit unmodified. The destination host returns the congestion status of the network in the acknowledgements that it sends. Details about such a solution in IP networks may be found in :rfc:`3168`. Unfortunately, as of this writing, this solution is still not deployed despite its potential benefits.
 
 
-.. todo provide illustrations with simulations
+Congestion control in a window-based transport protocol
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+AIMD controls congestion by adjusting the transmission rate of the sources in reaction to the current congestion level. If the network is no congested, the transmission rate increases. If congestion is detected, the transmission rate is multiplicatively decreased. In practice, directly adjusting the transmission rate can be difficult since it requires the utilisation of fine grained timers. In reliable transport protocols, an alternative is to dynamically adjust the sending window. This is the solution chosen for protocols like TCP and SCTP that will be described in more details later. To understand how window-based protocols can adjust their transmission rate, let us consider the very simple scenario of a reliable transport protocol that uses `go-back-n`. Consider the very simple scenario shown in the figure below.
+
+
+.. graphviz::
+
+   graph foo {
+      randkir=LR;
+      A [color=white, shape=box label=<<TABLE border="0" cellborder="0">
+                       <TR><TD width="45" height="60" fixedsize="true"><IMG SRC="icons/host.png" scale="true"/></TD></TR><TR><td>A</td></TR>
+              </TABLE>>];
+      B [color=white, shape=box label=<<TABLE border="0" cellborder="0">
+                       <TR><TD width="45" height="60" fixedsize="true"><IMG SRC="icons/host.png" scale="true"/></TD></TR><TR><td>B</td></TR>
+              </TABLE>>];
+      D [color=white, shape=box label=<<TABLE border="0" cellborder="0">
+                       <TR><TD width="45" height="60" fixedsize="true"><IMG SRC="icons/host.png" scale="true"/></TD></TR><TR><td>D</td></TR>
+              </TABLE>>];
+
+      R1[shape=box, color=white, label=<<TABLE border="0" cellborder="0">
+                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="icons/router.png" scale="true"/></TD></TR><TR><td>R1</td></TR>
+              </TABLE>>];
+       R2[color=white, label=<<TABLE border="0" cellborder="0">
+                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="icons/router.png" scale="true"/></TD></TR><TR><td>R2</td></TR>
+              </TABLE>>];
+      A--R1;
+      B--R1;
+      R1--R2 [label="500 kbps"];
+      R2--D;
+   }
+
+
+The links between the hosts and the routers have a bandwidth of 1 Mbps while the link between the two routers has a bandwidth of 500 Kbps. There is no significant propagation delay in this network. For simplicity, assume that hosts `A` and `B` send 1000 bits packets. The transmission of such a packet on a `host-router` (resp. `router-router` ) link requires 1 msec (resp. 2 msec). If there is no traffic in the network, round-trip-time measured by host `A` is slightly larger than 4 msec. Let us observe the flow of packets with different window sizes to understand the relationship between sending window and transmission rate.
+
+Consider first a window of one segment. This segment takes 4 msec to reach host `D`. The destination replies with an acknowledgement and the next segment can be transmitted. With such a sending window, the transmission rate is roughly 250 segments per second of 250 Kbps. 
+
+.. code-block:: console
+
+ +-----+----------+----------+----------+
+ |Time | A-R1     | R1-R2    | R2-D     |
+ +=====+==========+==========+==========+
+ |t0   | data(0)  |          |          |
+ +-----+----------+----------+          |
+ |t0+1 |          |          |          |
+ +-----+          |  data(0) |          |
+ |t0+2 |          |          |          |
+ +-----+          +----------+----------+
+ |t0+3 |          |          | data(0)  |
+ +-----+----------+          +----------+
+ |t0+4 | data(1)  |          |          |
+ +-----+----------+----------+          |
+ |t0+5 |          |          |          |
+ +-----+          |  data(1) |          |
+ |t0+6 |          |          |          |
+ +-----+          +----------+----------+
+ |t0+7 |          |          | data(1)  |
+ +-----+----------+          +----------+
+ |t0+8 | data(2)  |                     |
+ +-----+----------+----------------------
+ 
+
+Consider now a window of two segments. Host `A` can send two segments within 2 msec on its 1 Mbps link. If the first segment is sent at time :math:`t_{0}`, it reaches host `D` at :math:`t_{0}+4`. Host `D` replies with an acknowledgement that opens the sending window on host `A` and enables it to transmit a new segment. In the meantime, the second segment was buffered by router `R1`. It reaches host `D` at :math:`t_{0}+6` and an acknowledgement is returned. With a window of two segments, host `A` transmits at roughly 500 Kbps, i.e. the transmission rate of the bottleneck link.
+
+
+.. code-block:: console
+
+ +-----+----------+----------+----------+
+ |Time | A-R1     | R1-R2    | R2-D     |
+ +=====+==========+==========+==========+
+ |t0   | data(0)  |          |          |
+ +-----+----------+----------+          |
+ |t0+1 | data(1)  |          |          |
+ +-----+----------+ data(0)  |          |
+ |t0+2 |          |          |          |
+ +-----+          +----------+----------+
+ |t0+3 |          |          | data(0)  |
+ +-----+----------+ data(1)  +----------+
+ |t0+4 | data(2)  |          |          |
+ +-----+----------+----------+----------+
+ |t0+5 |          |          | data(1)  |
+ +-----+----------+ data(2)  +----------+
+ |t0+6 | data(3)  |          |          |
+ +-----+----------+----------+----------+
+
+  
+Our last example is a window of four segments. These segments are sent at :math:`t_{0}`, :math:`t_{0}+1`, :math:`t_{0}+2` and :math:`t_{0}+3`. The first segment reaches host `D` at :math:`t_{0}+4`. Host `D` replies to this segment by sending an acknowledgement that enables host `A` to transmit its fifth segment. This segment reaches router `R1` at :math:`t_{0}+5`. At that time, router `R1` is transmitting the third segment to router `R2` and the fourth segment is still in its buffers. At time :math:`t_{0}+6`, host `D` receives the second segment and returns the corresponding acknowledgement. This acknowledgement enables host `A` to send its sixth segment. This segment reaches router `R1` at roughly :math:`t_{0}+7`. At that time, the router starts to transmit the fourth segment to router `R2`. Since link `R1-R2` can only sustain 500 Kbps, packets will accumulate in the buffers of `R1`. On average, there will be two packets waiting in the buffers of `R1`. The presence of these two packets will induce an increase of the round-trip-time as measured by the transport protocol. While the first segment was acknowledged within 4 msec, the fifth segment (`data(4)`) that was transmitted at time :math:`t_{0}+4` is only acknowledged at time :math:`t_{0}+11`. On average, the sender transmits at 500 Kbps, but the utilisation of a large window induces a longer delay through the network. 
+
+.. code-block:: console
+
+ +-----+----------+----------+----------+
+ |Time | A-R1     | R1-R2    | R2-D     |
+ +=====+==========+==========+==========+
+ |t0   | data(0)  |          |          |
+ +-----+----------+----------+          |
+ |t0+1 | data(1)  |          |          |
+ +-----+----------+  data(0) |          |
+ |t0+2 | data(2)  |          |          |
+ +-----+----------+----------+----------+
+ |t0+3 | data(3)  |          | data(0)  |
+ +-----+----------+  data(1) +----------+
+ |t0+4 | data(4)  |          |          |
+ +-----+----------+----------+----------+
+ |t0+5 |          |          | data(1)  |
+ +-----+----------+  data(2) +----------+
+ |t0+6 | data(5)  |          |          |
+ +-----+----------+----------+----------+
+ |t0+7 |          |          | data(2)  |
+ +-----+----------+  data(3) +----------+
+ |t0+8 | data(6)  |          |          |
+ +-----+----------+----------+----------+
+ |t0+9 |          |          | data(3)  |
+ +-----+----------+  data(4) +----------+
+ |t0+10| data(7)  |          |          |
+ +-----+----------+----------+----------+ 
+ |t0+11|          |          | data(4)  |
+ +-----+----------+  data(5) +----------+
+ |t0+12| data(8)  |          |          |
+ +-----+----------+----------+----------+ 
+
+.. index:: congestion window
+
+From the above example, we can adjust the transmission rate by adjusting the sending window of a reliable transport protocol. A reliable transport protocol cannot send data faster than :math:`\frac{window}{rtt}` where :math:`window` is current sending window. To control the transmission rate, we introduce a `congestion window`. This congestion window limits the sending window. A any time, the sending window is restricted to :math:`min(swin,cwin)`, where `swin` is the sending window and `cwin` the current `congestion window`. Of course, the window is further constrained by the receive window advertised by the remote peer. With the utilization of a congestion window, a simple reliable transport protocol that uses fixed size segments could implement `AIMD` as follows. 
+
+For the `Additive Increase` part our simple protocol would simply increase its `congestion window` by one segment every round-trip-time. The 
+`Multiplicative Decrease` part of `AIMD` could be implemented by halving the congestion window when congestion is detected. For simplicity, we assume that congestion is detected thanks to a binary feedback and that no segments are lost. We will discuss in more details how losses affect a real transport protocol like TCP. 
+
+A congestion control scheme for our simple transport protocol could be implemented as follows.
+
+.. code-block:: python
+
+   # Initialisation 
+   cwin = 1  # congestion window measured in segments
+    
+   # Ack arrival 
+   if newack :  # new ack, no congestion
+      # increase cwin by one every rtt
+      cwin = cwin+ (1/cwin)
+   else: 
+      # no increase
+  
+   Congestion detected: 
+      cwnd=cwin/2 # only once per rtt
+
+
+In the above pseudocode, `cwin` contains the congestion window stored as a real in segments. This congestion window is updated upon the arrival of each acknowledgment and when congestion is detected.
+
+
+As an illustration, let us consider the network scenario above and assume that the router implements the DECBit binary feedback scheme [RJ1995]_. This scheme uses Forward Explicit Congestion Notification and a router marks the congestion bit in arriving packets when its buffer contains one or more packets. In the figure below, we use a `*` to indicate a marked packet.
+
+
+.. code-block:: console
+
+ +-----+----------+----------+----------+
+ |Time | A-R1     | R1-R2    | R2-D     |
+ +-----+==========+==========+==========+
+ |t0   | data(0)  |          |          |
+ +-----+----------+----------+          |
+ |t0+1 |          |          |          |
+ +-----+          |  data(0) |          |
+ |t0+2 |          |          |          |
+ +-----+          +----------+----------+
+ |t0+3 |          |          | data(0)  |
+ +-----+----------+          +----------+
+ |t0+4 | data(1)  |          |          |
+ +-----+----------+----------+          |
+ |t0+5 | data(2)  |          |          |
+ +-----+----------+ data(1)  |          |
+ |t0+6 |          |          |          |
+ +-----+          +----------+----------+
+ |t0+7 |          |          | data(1)  |
+ +-----+----------+ data(2)  +----------+
+ |t0+8 | data(3)  |          |          |
+ +-----+----------+----------+----------+
+ |t0+9 |          |          | data(2)  |
+ +-----+----------+ data(3)  +----------+
+ |t0+10| data(4)  |          |          |
+ +-----+----------+----------+----------+
+ |t0+11| data(5)  |          | data(3)  |
+ +-----+----------+ data(4)  +----------+
+ |t0+12| data(6)  |          |          |
+ +-----+----------+----------+----------+
+ |t0+13|          |          | data(4)  |
+ +-----+----------+ data(5)  +----------+
+ |t0+14| data(7)  |          |          |
+ +-----+----------+----------+----------+
+ |t0+15|          |          | data(5)  |
+ +-----+----------+ data*(6) +----------+
+ |t0+16| data(8)  |          |          |
+ +-----+----------+----------+----------+
+ |t0+17| data(9)  |          | data*(6) |
+ +-----+----------+ data*(7) +----------+
+ |t0+18|          |          |          |
+ +-----+          |----------+----------
+ |t0+19|          |          | data*(7) |
+ +-----+          | data*(8) +----------+
+ |t0+20|          |          |          |
+ +-----+          |----------+----------+
+ |t0+21|          |          | data*(8) |
+ +-----+----------+ data*(9) +----------+
+ |t0+22| data(10) |          |          |
+ +-----+----------+----------+----------+
+
+
+When the connection starts, its congestion window is set to one segment. Segment `data(0)` is sent at acknowledgment at roughly :math:`t_{0}+4`. The congestion window is increased by one segment and `data(1)` and `data(2)` are transmitted at time :math:`t_{0}+4` and :math:`t_{0}+5`. The corresponding acknowledgements are received at times :math:`t_{0}+8` and :math:`t_{0}+10`. Upon reception of this last acknowledgement, the congestion window reaches `3` and segments can be sent (`data(4)` and `data(5)`). When segment `data(6)` reaches router `R1`, its buffers already contain `data(5)`. The packet containing `data(6)` is thus marked to inform the sender of the congestion. Note that the sender will only notice the congestion once it receives the corresponding acknowledgement at :math:`t_{0}+18`. In the meantime, the congestion window continues to increase. At :math:`t_{0}+16`, upon reception of the acknowledgement for `data(5)`, it reaches `4`. When congestion is detected, the congestion window is decreased down to `2`. This explains the idle time between the reception of the acknowledgement for `data*(6)` and the transmission of `data(10)`.
+
 
 .. rubric:: Footnotes
 
@@ -710,6 +1020,11 @@ The analysis of [CJ1989]_ shows that to be fair and efficient, such a binary rat
 .. [#fpps] Some examples of the performance of various types of commercial networks nodes may be found in http://www.cisco.com/web/partners/downloads/765/tools/quickreference/routerperformance.pdf and http://www.cisco.com/web/partners/downloads/765/tools/quickreference/switchperformance.pdf
 
 .. [#fadjust] Some networking technologies allow to adjust dynamically the bandwidth of links. For example, some devices can reduce their bandwidth to preserve energy. We ignore these technologies in this basic course and assume that all links used inside the network have a fixed bandwidth. 
+
+.. [#fcredit] In this section, we focus on congestion control mechanisms that regulate the transmission rate of the hosts. Other types of mechanisms have been proposed in the literature. For example, `credit-based` flow-control has been proposed to avoid congestion in ATM networks [KR1995]_. With a credit-based mechanism, hosts can only send packets once they have received credits from the routers and the credits depend on the occupancy of the router's buffers. 
+
+.. [#fflowslink] For example, the measurements performed in the Sprint network in 2004 reported more than 10k active TCP connections on a link, see https://research.sprintlabs.com/packstat/packetoverview.php. More recent information about backbone links may be obtained from caida_ 's realtime measurements, see e.g.  http://www.caida.org/data/realtime/passive/ 
+
 
 .. include:: /links.rst
 
