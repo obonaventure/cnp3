@@ -175,7 +175,15 @@ Exercises
  In this network, all hosts are attached with a 100 Mbps link, except hosts `D1` and `D2`. Data always flows from the host named `X1` to the host named `X2`.
 
 
-7. Consider the simple network depicted in the figure below.
+7. Compute the max-min fair bandwidth allocation in the network below.
+
+ .. figure:: /principles/figures/png/ex-fairness.png
+    :align: center
+
+
+    Simple network topology
+
+8. Consider the simple network depicted in the figure below.
 
  .. graphviz::
 
@@ -201,11 +209,11 @@ Exercises
 
  In this network, hosts are attached via 1 Mbps links while a 250 Kbps link is used between the routers. The propagation delays in the network are negligible. Host `A` sends 1000 bits long segments so that it takes one msec to transmit one segment on the `A-R1` link. Neglecting the transmission delays for the acknowledgements, what is the minimum round-trip time measured on host `A` with such segments ?
 
-8. In the network above, represent by using a table as in the book the transmission of five 1000 bits segment by host `A`. How long does this transmission lasts if there is no congestion control and host `A` uses a sending window of two segments.
+9. In the network above, represent by using a table as in the book the transmission of five 1000 bits segment by host `A`. How long does this transmission lasts if there is no congestion control and host `A` uses a sending window of two segments.
 
-9. Same question as above, but now host `A` uses the simple DECBIT congestion control mechanism and a maximum window size of four segments.
+10. Same question as above, but now host `A` uses the simple DECBIT congestion control mechanism and a maximum window size of four segments.
 
-10. Consider the network depicted in the figure below.
+11. Consider the network depicted in the figure below.
 
  .. graphviz::
 
@@ -228,6 +236,19 @@ Exercises
       R1--D [label="500 kbps, 0 msec"];
     }
 
- Hosts `A` and `B` use the simple congestion control scheme described in the book and router `R1` uses the DECBIT mechanism to mark packets as soon as its buffers are full. Hosts `A` and `B` need to send five segments and start exactly at the same time. How long does each hosts needs to wait to receive the acknowledgement for its fifth segment ?
+ Hosts `A` and `B` use the simple congestion control scheme described in the book and router `R1` uses the DECBIT mechanism to mark packets as soon as its buffers contain one packet. Hosts `A` and `B` need to send five segments and start exactly at the same time. How long does each hosts needs to wait to receive the acknowledgement for its fifth segment ?
+
+12. CSMA uses acknowledgements but not CSMA/CD. In networks using CSMA/CD how can a host verify that its frame has been received correctly ?
+
+13. In CSMA/CD, would it be possible to increase or decrease the duration of the slottime ? Justify your answer
+
+14. Consider a CSMA/CD network that contains hosts that generate frames at a regular rate. When the transmission rate increases, the amount of collisions increases. For a given network load, measured in bits/sec, would the number of collisions be smaller, equal or larger with short frames than with long frames ?
+
+15. Compare two CSMA sources in a network with some load. When the channel becomes free, the first source is able to transmit its frame within less than one microsecond. The second source is slower and takes half a slotTime to transmit its frame. Compare the collisions that will affect the two sources.
+
+16. What is the capture effect in a network using CSMA/CD ?
+
+17. What is the hidden station problem in a network using CSMA/CA ?
+
 
 .. include:: /links.rst

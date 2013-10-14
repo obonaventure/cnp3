@@ -3,8 +3,9 @@
 
 .. index:: congestion control, medium access control
 
+******************
 Sharing ressources
-==================
+******************
 
 A network is designed to support a potentially large number of users that exchange information with each other. These users produce and consume information which is exchanged through the network. To support its users, a network uses several types of ressources. It is important to keep in mind the different ressources that are shared inside the network.
 
@@ -49,10 +50,10 @@ A fifth physical organisation of a network is the tree. Such networks are typica
    :align: center
    :scale: 50 
 
-   A network organised as a Tree
+   A network organized as a Tree
 
 Sharing bandwidth
------------------
+=================
    
 In all these networks, except the full-mesh, the link bandwidth is shared among all connected hosts. Various algorithms have been proposed and are used to efficiently share the access to this ressource. We explain several of them in the Medium Access Control section below.
 
@@ -109,7 +110,7 @@ In all these networks, except the full-mesh, the link bandwidth is shared among 
  In the above network, the allocation of all flows would grow until `A1-A2` and `B1-B2` reach 5 Mbps. At this point, link `R1-R2` becomes congested and these two flows have reached their maximum. The allocation for flow `C1-C2` can increase until reaching 15 Mbps. At this point, link `R2-R3` is congested. To increase the bandwidth allocated to `C1-C2`, one would need to reduce the allocation to flow `B1-B2`. Similarly, the only way to increase the allocation to flow `B1-B2` would require a decrease of the allocation to `A1-A2`.  
 
 Network congestion
-------------------
+==================
 
 Sharing bandwidth among the hosts directly attached to a link is not the only sharing problem that occurs in computer networks. To understand the general problem, let us consider a very simple network which contains only point-to-point links. This network contains three hosts and two network nodes. All links inside the network have the same capacity. For example, let us assume that all links have a bandwidth of 1000 bits per second and that the hosts send packets containing exactly one thousand bits. 
 
@@ -185,7 +186,7 @@ As explained earlier, one of the first manifestation of congestion on network no
 
 If the buffer's occupancy continues to grow, it will overflow and packets will need to be discarded. Discarding packets during congestion is the second possible reaction of a network node to congestion. Before looking at how a node can discard packets, it is interesting to discuss qualitatively the impact of the buffer occupancy on the reliable delivery of data through a network. This is illustrated by the figure below, adapted from [Jain1990]_. 
 
-.. figure:: jain.png
+.. figure:: figures/png/jain.png
    :align: center
 
    Network congestion
@@ -222,9 +223,10 @@ If the packet header does not contain any bit in the header to represent the cur
 
 Dropping and marking packets is not the only possible reaction of a router that becomes congested. A router could also selectively delay packets belonging to some flows. There are different algorithms that can be used by a router to delay packets. If the objective of the router is to fairly distribute to bandwidth of an output link among competing flows, one possibility is to organize the buffers of the router as a set of queues. For simplicity, let us assume that the router is capable of supporting a fixed number of concurrent flows, say `N`. One of the queues of the router is associated to each flow and when a packet arrives, it is placed at the tail of the corresponding queue. All the queues are controlled by a `scheduler`. A `scheduler` is an algorithm that is run each time there is an opportunity to transmit a packet on the outgoing link. Various schedulers have been proposed in the scientific literature and some are used in real routers.
 
-.. figure:: scheduler.png
+.. figure:: figures/png/scheduler.png
+   
 
-   A scheduler 
+   A round-robin scheduler 
 
 
 A very simple scheduler is the `round-robin scheduler`. This scheduler serves all the queues in a round-robin fashion. If all flows send packets of the same size, then the round-robin scheduler allocates the bandwidth fairly among the different flows. Otherwise, it favors flows that are using larger packets. Extensions to the `round-robin scheduler` have been proposed to provide a fair distribution of the bandwidth with variable-length packets [SV1995]_ but these are outside the scope of this chapter.
@@ -247,7 +249,7 @@ A very simple scheduler is the `round-robin scheduler`. This scheduler serves al
 
 
 Distributing the load across the network
-----------------------------------------
+========================================
 
 .. distributing the load
 
@@ -271,7 +273,7 @@ Now that we have provided a broad overview of the techniques that can be used to
 
 
 Medium Access Control algorithms
---------------------------------
+================================
 
 
 .. index:: collision
@@ -288,7 +290,7 @@ We first discuss a simple deterministic MAC algorithm and then we describe sever
 
 
 Static allocation methods
-^^^^^^^^^^^^^^^^^^^^^^^^^
+-------------------------
 
 A first solution to share the available resources among all the devices attached to one Local Area Network is to define, `a priori`, the distribution of the transmission resources among the different devices. If `N` devices need to share the transmission capacities of a LAN operating at `b` Mbps, each device could be allocated a bandwidth of :math:`\frac{b}{N}` Mbps. 
 
@@ -320,7 +322,7 @@ TDM and FDM are widely used in telephone networks to support fixed bandwidth con
 
 
 ALOHA
-^^^^^
+-----
 
 .. index:: packet radio
 
@@ -363,7 +365,7 @@ Many improvements to ALOHANet have been proposed since the publication of [Abram
 
 
 Carrier Sense Multiple Access
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-----------------------------
 
 
 ALOHA and slotted ALOHA can easily be implemented, but unfortunately, they can only be used in networks that are very lightly loaded. Designing a network for a very low utilisation is possible, but it clearly increases the cost of the network. To overcome the problems of ALOHA, many Medium Access Control mechanisms have been proposed which improve channel utilization. Carrier Sense Multiple Access (CSMA) is a significant improvement compared to ALOHA. CSMA requires all nodes to listen to the transmission channel to verify that it is free before transmitting a frame [KT1975]_. When a node senses the channel to be busy, it defers its transmission until the channel becomes free again. The pseudo-code below provides a more detailed description of the operation of CSMA. 
@@ -415,7 +417,7 @@ The above pseudo-code is often called `persistent CSMA` [KT1975]_ as the termina
 .. index:: Carrier Sense Multiple Access with Collision Detection, CSMA/CD
 
 Carrier Sense Multiple Access with Collision Detection
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+------------------------------------------------------
 
 
 .. index:: speed of light
@@ -521,7 +523,7 @@ The inter-frame delay used in this pseudo-code is a short delay corresponding to
 .. index:: Carrier Sense Multiple Access with Collision Avoidance, CSMA/CA
 
 Carrier Sense Multiple Access with Collision Avoidance
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+------------------------------------------------------
 
 The `Carrier Sense Multiple Access with Collision Avoidance` (CSMA/CA) Medium Access Control algorithm was designed for the popular WiFi wireless network technology [802.11]_. CSMA/CA also senses the transmission channel before transmitting a frame. Furthermore, CSMA/CA tries to avoid collisions by carefully tuning the timers used by CSMA/CA devices.
 
@@ -618,7 +620,7 @@ The utilization of the reservations with CSMA/CA is an optimisation that is usef
 
 	
 Deterministic Medium Access Control algorithms
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+----------------------------------------------
 
 During the 1970s and 1980s, there were huge debates in the networking community about the best suited Medium Access Control algorithms for Local Area Networks. The optimistic algorithms that we have described until now were relatively easy to implement when they were designed. From a performance perspective, mathematical models and simulations showed the ability of these optimistic techniques to sustain load. However, none of the optimistic techniques are able to guarantee that a frame will be delivered within a given delay bound and some applications require predictable transmission delays. The deterministic MAC algorithms were considered by a fraction of the networking community as the best solution to fulfill the needs of Local Area Networks. 
 
@@ -692,7 +694,7 @@ Several other anomalies may occur in a Token Ring network. For example, a statio
 
 
 Congestion control
-------------------
+==================
 
 Most networks contain links having different bandwidth. Some hosts can use low bandwidth wireless networks. Some servers are attached via 10 Gbps interfaces and inter-router links may vary from a few tens of kilobits per second up to hundred Gbps.Despite these huge differences in performance, any host should be able to efficiently exchange segments with a high-end server.
 
@@ -806,7 +808,7 @@ The analysis of [CJ1989]_ shows that to be fair and efficient, such a binary rat
 
 
 Congestion control in a window-based transport protocol
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-------------------------------------------------------
 
 
 AIMD controls congestion by adjusting the transmission rate of the sources in reaction to the current congestion level. If the network is no congested, the transmission rate increases. If congestion is detected, the transmission rate is multiplicatively decreased. In practice, directly adjusting the transmission rate can be difficult since it requires the utilisation of fine grained timers. In reliable transport protocols, an alternative is to dynamically adjust the sending window. This is the solution chosen for protocols like TCP and SCTP that will be described in more details later. To understand how window-based protocols can adjust their transmission rate, let us consider the very simple scenario of a reliable transport protocol that uses `go-back-n`. Consider the very simple scenario shown in the figure below.
@@ -951,10 +953,10 @@ A congestion control scheme for our simple transport protocol could be implement
       cwnd=cwin/2 # only once per rtt
 
 
-In the above pseudocode, `cwin` contains the congestion window stored as a real in segments. This congestion window is updated upon the arrival of each acknowledgment and when congestion is detected.
+In the above pseudocode, `cwin` contains the congestion window stored as a real in segments. This congestion window is updated upon the arrival of each acknowledgment and when congestion is detected. For simplicity, we assume that `cwin` is stored as a floating point number but only full segments can be transmitted. 
 
 
-As an illustration, let us consider the network scenario above and assume that the router implements the DECBit binary feedback scheme [RJ1995]_. This scheme uses Forward Explicit Congestion Notification and a router marks the congestion bit in arriving packets when its buffer contains one or more packets. In the figure below, we use a `*` to indicate a marked packet.
+As an illustration, let us consider the network scenario above and assume that the router implements the DECBit binary feedback scheme [RJ1995]_. This scheme uses a form of Forward Explicit Congestion Notification and a router marks the congestion bit in arriving packets when its buffer contains one or more packets. In the figure below, we use a `*` to indicate a marked packet.
 
 
 .. code-block:: console

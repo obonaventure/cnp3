@@ -18,7 +18,7 @@ The connectionless transport service allows networked application to exchange me
  - the `host` on which the application is running
  - the `port number` on which the application `listens` for SDUs
 
-On the Internet, the `port number` is an integer and the `host` is identified by its network address. As we will see in chapter :ref:`chapter-network` there are two types of Internet Addresses :
+On the Internet, the `port number` is an integer and the `host` is identified by its network address. There are two types of Internet Addresses :
 
  - `IP version 4` addresses that are 32 bits wide
  - `IP version 6` addresses that are 128 bits wide

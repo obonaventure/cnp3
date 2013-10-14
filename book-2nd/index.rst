@@ -50,7 +50,7 @@ Part 1: Principles
    principles/transport
    principles/naming
    principles/sharing
-
+   principles/referencemodels
 
 
 ..   intro/organisation
@@ -71,10 +71,19 @@ Part 2: Protocols
 .. toctree::
    :maxdepth: 4
 
+
+   protocols/transport-service
+   protocols/dns
+   protocols/email
+   protocols/http
+   protocols/rpc
+
+..   application/app-protocols
+
 ..  transport/principles
 
 ..   application/transport-service
-..   application/app-protocols
+
 ..   application/socket
 ..   application/summary
 

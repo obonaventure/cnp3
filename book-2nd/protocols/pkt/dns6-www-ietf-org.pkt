@@ -1,0 +1,39 @@
+
+; <<>> DiG 9.6-ESV-R4-P3 <<>> -t AAAA www.ietf.org
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 55279
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 6, ADDITIONAL: 11
+
+;; QUESTION SECTION:
+;www.ietf.org.			IN	AAAA
+
+;; ANSWER SECTION:
+www.ietf.org.		1661	IN	AAAA	2001:1890:123a::1:1e
+
+;; AUTHORITY SECTION:
+ietf.org.		1661	IN	NS	ns1.hkg1.afilias-nst.info.
+ietf.org.		1661	IN	NS	ns1.sea1.afilias-nst.info.
+ietf.org.		1661	IN	NS	ns0.amsl.com.
+ietf.org.		1661	IN	NS	ns1.yyz1.afilias-nst.info.
+ietf.org.		1661	IN	NS	ns1.ams1.afilias-nst.info.
+ietf.org.		1661	IN	NS	ns1.mia1.afilias-nst.info.
+
+;; ADDITIONAL SECTION:
+ns1.sea1.afilias-nst.info. 70552 IN	A	65.22.8.1
+ns1.sea1.afilias-nst.info. 74301 IN	AAAA	2a01:8840:8::1
+ns1.yyz1.afilias-nst.info. 70552 IN	A	65.22.9.1
+ns1.yyz1.afilias-nst.info. 74301 IN	AAAA	2a01:8840:9::1
+ns1.ams1.afilias-nst.info. 2597	IN	A	65.22.6.79
+ns0.amsl.com.		148523	IN	A	64.170.98.2
+ns0.amsl.com.		148523	IN	AAAA	2001:1890:126c::1:2
+ns1.hkg1.afilias-nst.info. 2073	IN	A	65.22.6.1
+ns1.hkg1.afilias-nst.info. 2073	IN	AAAA	2a01:8840:6::1
+ns1.mia1.afilias-nst.info. 70552 IN	A	65.22.7.1
+ns1.mia1.afilias-nst.info. 74301 IN	AAAA	2a01:8840:7::1
+
+;; Query time: 16 msec
+;; SERVER: 109.88.203.3#53(109.88.203.3)
+;; WHEN: Tue Oct  8 20:59:02 2013
+;; MSG SIZE  rcvd: 451
+
