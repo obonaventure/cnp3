@@ -28,7 +28,7 @@ Our reference model is divided into five layers, as shown in the figure below.
 .. index:: physical layer
 
 The Physical layer
-------------------
+==================
 
 Starting from the bottom, the first layer is the Physical layer. Two communicating devices are linked through a physical medium. This physical medium is used to transfer an electrical or optical signal between two directly connected devices. 
 
@@ -50,7 +50,7 @@ An important point to note about the Physical layer is the service that it provi
 .. index:: Datalink layer, frame
 
 The Datalink layer
-------------------
+==================
 
 The `Datalink layer` builds on the service provided by the underlying physical layer. The `Datalink layer` allows two hosts that are directly connected through the physical layer to exchange information. The unit of information exchanged between two entities in the `Datalink layer` is a frame. A frame is a finite sequence of bits. Some `Datalink layers` use variable-length frames while others only use fixed-length frames. Some `Datalink layers` provide a connection-oriented service while others provide a connectionless service. Some `Datalink layers` provide reliable delivery while others do not guarantee the correct delivery of the information.
 
@@ -65,7 +65,7 @@ An important point to note about the `Datalink layer` is that although the figur
 
 
 The Network layer
------------------
+=================
 
 .. index:: Network layer, packet
 
@@ -81,7 +81,7 @@ The `Datalink layer` allows directly connected hosts to exchange information, bu
 .. index:: Transport layer, segment
 
 The Transport layer
--------------------
+===================
 
 Most realisations of the network layer, including the internet, do not provide a reliable service. However, many applications need to exchange information reliably and so using the network layer service directly would be very difficult for them. Ensuring the reliable delivery of the data produced by applications is the task of the `transport layer`. `Transport layer` entities exchange `segments`. A segment is a finite sequence of bytes that are transported inside one or more packets. A transport layer entity issues segments (or sometimes part of segments) as `Data.request` to the underlying network layer entity. 
 
@@ -95,11 +95,11 @@ There are different types of transport layers. The most widely used transport la
    The transport layer
 
 The Application layer
----------------------
+=====================
 
 .. index:: Application layer
 
-The upper layer of our architecture is the `Application layer`. This layer includes all the mechanisms and data structures that are necessary for the applications. We will use Application Data Unit (ADU) to indicate the data exchanged between two entities of the Application layer.
+The upper layer of our architecture is the `Application layer`. This layer includes all the mechanisms and data structures that are necessary for the applications. We will use Application Data Unit (ADU) or the generic Service Data Unit (SDU) term to indicate the data exchanged between two entities of the Application layer.
 
 .. figure:: /../book/intro/svg/intro-figures-031-c.png
    :align: center
@@ -110,15 +110,32 @@ The upper layer of our architecture is the `Application layer`. This layer inclu
 .. index:: TCP/IP reference model
 
 
+In the remaining chapters of this text, we will often refer to the information exchanged between entities located in different layers. To avoid any confusion, we will stick to the terminology defined earlier, i.e. :
+
+ - physical layer entities exchange bits
+ - datalink layer entities exchange *frames*
+ - network layer entities exchange *packets*
+ - transport layer entities exchange *segments*
+ - application layer entities exchange *SDUs* 
+
+
+
+Reference models
+================
+
+
+Two reference models have been successful in the networking community : the OSI reference model and the TCP/IP reference model. We discuss them briefly in this section. 
+
+
 The TCP/IP reference model
 --------------------------
 
 In contrast with OSI, the TCP/IP community did not spend a lot of effort defining a detailed reference model; in fact, the goals of the Internet architecture were only documented after TCP/IP had been deployed [Clark88]_. :rfc:`1122` , which defines the requirements for Internet hosts, mentions four different layers. Starting from the top, these are :
 
-- an Application layer
-- a Transport layer
-- an Internet layer which is equivalent to the network layer of our reference model
-- a Link layer which combines the functionalities of the physical and datalink layers of our five-layer reference model
+- the Application layer
+- the Transport layer
+- the Internet layer which is equivalent to the network layer of our reference model
+- the Link layer which combines the functionalities of the physical and datalink layers of our five-layer reference model
 
 Besides this difference in the lower layers, the TCP/IP reference model is very close to the five layers that we use throughout this document.
 

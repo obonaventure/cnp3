@@ -102,6 +102,7 @@ Part 3: Practice
    exercises/network
    exercises/ex-transport
    exercises/ex-sharing
+   exercises/ex-app
 
 ..  application/exercises/ex-application
 

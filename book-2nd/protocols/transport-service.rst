@@ -5,6 +5,9 @@
 The application layer
 *********************
 
+.. warning:: 
+
+   This is an unpolished draft of the second edition of this ebook. If you find any error or have suggestions to improve the text, please create an issue via https://github.com/obonaventure/cnp3/issues?milestone=5
 
 Networked applications rely the transport service. As explained earlier, there are two main types of transport services :
 
@@ -58,3 +61,4 @@ The second transport service is the connection-oriented service. On the Internet
    :scale: 80 
 
    The connection-oriented or byte-stream service 
+
