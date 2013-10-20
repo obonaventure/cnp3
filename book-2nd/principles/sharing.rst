@@ -155,10 +155,7 @@ If `R1` has enough buffers, it will be able to absorb the load without having to
 
 .. note:: Congestion collapse on the Internet
 
- Congestion collapse is unfortunately not only an academic experience. Van Jacobson reports in [Jacobson1988]_ one of these events that affected him while he was working at the Lawrence Berkeley Laboratory (LBL). LBL was two network nodes away from the University of California in Berkeley. At that time, the link between the two sites had a bandwidth of 32 Kbps, but some hosts were already attached to 10 Mbps LANs. "In October 1986,  the data throughput from LBL to UC Berkeley ... dropped from 32 Kbps to 40
-bps. We were fascinated by this sudden factor-of-thousand
-drop in bandwidth and embarked on an investigation of why
-things had gotten so bad." This work lead to the development of various congestion control techniques that have allowed the Internet to continue to grow without experiencing widespread congestion collapse events. 
+ Congestion collapse is unfortunately not only an academic experience. Van Jacobson reports in [Jacobson1988]_ one of these events that affected him while he was working at the Lawrence Berkeley Laboratory (LBL). LBL was two network nodes away from the University of California in Berkeley. At that time, the link between the two sites had a bandwidth of 32 Kbps, but some hosts were already attached to 10 Mbps LANs. "In October 1986,  the data throughput from LBL to UC Berkeley ... dropped from 32 Kbps to 40 bps. We were fascinated by this sudden factor-of-thousand drop in bandwidth and embarked on an investigation of why things had gotten so bad." This work lead to the development of various congestion control techniques that have allowed the Internet to continue to grow without experiencing widespread congestion collapse events. 
 
 Besides bandwidth and memory, a third ressource that needs to be shared inside a network is the (packet) processing capacity. To forward a packet, a network node needs bandwidth on the outgoing link, but it also needs to analyze the packet header to perform a lookup inside its forwarding table. Performing these lookup operations require ressources such as CPU cycles or memory accesses. Network nodes are usually designed to be able to sustain a given packet processing rate, measured in packets per second. 
 
