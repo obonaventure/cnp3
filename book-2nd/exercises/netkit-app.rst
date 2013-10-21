@@ -10,7 +10,7 @@ Configuring DNS and HTTP servers can be complex on real hosts. To allow you to l
 
 .. note:: Where can I find Netkit?
 
- Netkit_ is available at http://www.netkit.org. For the labs, we have built a custom netkit image which is available from 
+ Netkit_ is available at http://www.netkit.org. For the labs, we have built a custom netkit image which is available from :download:`/netkit/netkit-images.zip`
 
 
 There are two ways to use Netkit : The manual way, and by using pre-configured labs.  In the first case, you boot and control each machine individually, using the commands starting with a "v" (for virtual machine).   In the second case, you can start a whole network in a single operation.  The commands for controlling the lab start with a "l".  The man pages of those commands is available from http://wiki.netkit.org/man/man7/netkit.7.html
@@ -25,21 +25,25 @@ You must be careful not to forgot to stop your virtual machines and labs, using 
 .. export PATH=$NETKIT_HOME/bin:$PATH
 .. It is usually convenient to put those lines in your shell initialization file.  
 
-A netkit_ lab is simply a directory containing at least a configuration file called `lab.conf`, and one directory for each virtual machine.  In the case the lab available on iCampus, the network is composed of two pcs, `pc1` and `pc2`, both of them being connected to a router `r1`.  The lab.conf file contains the following lines : 
+A netkit_ lab is simply a directory containing at least a configuration file called `lab.conf`, and one directory for each virtual machine.  
 
-.. code-block:: text
+.. In the case the lab available on iCampus, the network is composed of two pcs, `pc1` and `pc2`, both of them being connected to a router `r1`.  The lab.conf file contains the following lines : 
 
- pc1[0]=A
- pc2[0]=B
- r1[0]=A
- r1[1]=B
+.. .. code-block:: text
+
+..    pc1[0]=A
+..  pc2[0]=B
+.. r1[0]=A
+..  r1[1]=B
 
 
-This means that `pc1` and `r1` are connected to a "virtual LAN" named `A` via their interface `eth0`, while `pc2` and `r1` are connected to the "virtual LAN" `B` via respectively their interfaces `eth0` and `eth1`.  
+.. This means that `pc1` and `r1` are connected to a "virtual LAN" named `A` via their interface `eth0`, while `pc2` and `r1` are connected to the "virtual LAN" `B` via respectively their interfaces `eth0` and `eth1`.  
 
 The directory of each device is initially empty, but will be used by Netkit_ to store their filesystem. 
 
-The lab directory can contain optional files.  In the lab provided to you, the "pc1.startup" file contains the shell instructions to be executed on startup of the virtual machine.  In this specific case, the script configures the interface `eth0` to allow traffic exchanges between `pc1` and `r1`, as well as the routing table entry to join `pc2`.   
+The lab directory can contain optional files. Some labs will include configuration files while others will use scripts that are executed when the virtual machines boot.
+
+.. In the lab provided to you, the "pc1.startup" file contains the shell instructions to be executed on startup of the virtual machine.  In this specific case, the script configures the interface `eth0` to allow traffic exchanges between `pc1` and `r1`, as well as the routing table entry to join `pc2`.   
 
 Starting a lab consists thus simply in unpacking the provided archive, going into the lab directory and typing `lstart` to start the network.  
 
@@ -47,7 +51,7 @@ Starting a lab consists thus simply in unpacking the provided archive, going int
 
  Virtual machines can access to the directory of the lab they belong to.  This repertory is mounted in their filesystem at the path  `/hostlab`.  
 
-In the netkit lab (:download:`exercises/netkit/netkit_lab_2hosts_1rtr_ipv4.tar.tar.gz`, you can find a simple python_ client/server application that establishes TCP connections. Feel free to re-use this code to perform your analysis.    
+.. In the netkit lab (:download:`exercises/netkit/netkit_lab_2hosts_1rtr_ipv4.tar.tar.gz`, you can find a simple python_ client/server application that establishes TCP connections. Feel free to re-use this code to perform your analysis.    
 
 .. note:: netkit tools
 
@@ -149,3 +153,6 @@ Once the DNS entry is set up, it is time to configure the web server. ``Apache2`
 The configuration files of apache are located in ``/etc/apache2/``
 
 Enjoy !
+
+
+.. include:: /links.rst

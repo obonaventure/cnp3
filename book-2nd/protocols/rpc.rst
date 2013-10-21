@@ -105,7 +105,7 @@ The JSON-RPC is encoded as a JSON object. For example, the example below shows a
 
 Upon reception of this JSON structure, the callee parses the object, locates the corresponding method and passes the parameters. This method returns a response which is also encoded as a JSON structure. This response contains the following information :
 
- - `jsonrpc: a string indicating the version of the protocol used to encode the response
+ - `jsonrpc`: a string indicating the version of the protocol used to encode the response
  - `id`: the same identifier as the identifier chosen by the caller
  - `result`: if the request succeeded, this member contains the result of the request (in our example, value `4`).
  - `error`: if the method called does not exist or its execution causes an error, the `result` element will be replaced by an `error` element which contains the following members :
