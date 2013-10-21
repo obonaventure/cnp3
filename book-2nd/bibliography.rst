@@ -286,6 +286,7 @@ Whenever possible, the bibliography includes stable hypertext links to the refer
 .. [RFC6274] Gont, F., `Security Assessment of the Internet Protocol Version 4`, :rfc:`6274`, July 2011
 .. [RG2010] Rhodes, B. and Goerzen, J., `Foundations of Python Network Programming: The Comprehensive Guide to Building Network Applications with Python <http://books.google.com/books?id=9HGUc8AO2xQC>`_, Second Edition, Academic Press, 2004
 .. [RJ1995] Ramakrishnan, K. K. and Jain, R., `A binary feedback scheme for congestion avoidance in computer networks with a connectionless network layer <http://doi.acm.org/10.1145/205447.205461>`_. SIGCOMM Comput. Commun. Rev. 25, 1 (Jan. 1995), 138-156. 
+.. [RJB2013] Raiciu, C., Iyengar, J., Bonaventure, O., `Recent Advances in Reliable Transport Protocols <http://sigcomm.org/education/ebook/SIGCOMMeBook2013v1_chapter2.pdf>`_, in H. Haddadi, O. Bonaventure (Eds.), `Recent Advances in Networking <http://sigcomm.org/content/ebook>`_, (2013), pp. 59-106. 
 .. [RY1994] Ramakrishnan, K.K. and Henry Yang, `The Ethernet Capture Effect: Analysis and Solution <http://www2.research.att.com/~kkrama/papers/capture_camera.pdf>`_, Proceedings of IEEE 19th Conference on Local Computer Networks, MN, Oct. 1994. 
 .. [Roberts1975] Roberts, L., `ALOHA packet system with and without slots and capture <http://doi.acm.org/10.1145/1024916.1024920>`_. SIGCOMM Comput. Commun. Rev. 5, 2 (Apr. 1975), 28-42. 
 .. [Ross1989] Ross, F., `An overview of FDDI: The fiber distributed data interface <http://dx.doi.org/10.1109/49.44552>`_, IEEE J. Selected Areas in Comm., vol. 7, no. 7, pp. 1043-1051, Sept. 1989
@@ -305,7 +306,8 @@ Whenever possible, the bibliography includes stable hypertext links to the refer
 .. [Selinger] Selinger, P., `MD5 collision demo`, http://www.mscs.dal.ca/~selinger/md5collision/
 .. [SFR2004] Stevens R. and Fenner, and Rudoff, A., `UNIX Network Programming: The sockets networking API <http://books.google.com/books?id=ptSC4LpwGA0C>`_, Addison Wesley, 2004 
 .. [Sklower89] Sklower, K. 1989. `Improving the efficiency of the OSI checksum calculation <http://doi.acm.org/10.1145/74681.74684>`_. SIGCOMM Comput. Commun. Rev. 19, 5 (Oct. 1989), 32-43. 
-.. [Smm98] Semke, J., Mahdavi, J., and Mathis, M., `Automatic TCP buffer tuning <http://doi.acm.org/10.1145/285243.285292>`_. SIGCOMM Comput. Commun. Rev. 28, 4 (Oct. 1998), 315-323. 
+.. [SMASU2012] Sarrar, N., Maier, G., Ager, B., Sommer, R. and Uhlig, S., `Investigating IPv6 traffic <http://link.springer.com/chapter/10.1007/978-3-642-28537-0_2>`_, Passive and Active Measurements, Lecture Notes in Computer Science vol 7192, 2012, pp.11-20
+.. [SMM98] Semke, J., Mahdavi, J., and Mathis, M., `Automatic TCP buffer tuning <http://doi.acm.org/10.1145/285243.285292>`_. SIGCOMM Comput. Commun. Rev. 28, 4 (Oct. 1998), 315-323. 
 .. [Stevens1994] Stevens, R., `TCP/IP Illustrated : the Protocols <http://books.google.com/books?id=-btNds68w84C>`_, Addison-Wesley, 1994 
 .. [Stevens1998] Stevens, R., `UNIX Network Programming, Volume 1, Second Edition: Networking APIs: Sockets and XTI <http://books.google.com/books?id=ptSC4LpwGA0C>`_, Prentice Hall, 1998 
 .. [Stewart1998] Stewart, J., `BGP4: Inter-Domain Routing In The Internet <http://books.google.com/books?id=UEcHpN4QHrAC>`_, Addison-Wesley, 1998

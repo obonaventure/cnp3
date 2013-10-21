@@ -77,6 +77,10 @@ Part 2: Protocols
    protocols/email
    protocols/http
    protocols/rpc
+   protocols/transport
+   protocols/udp
+   protocols/tcp
+..   protocols/sctp
 
 ..   application/app-protocols
 
@@ -103,6 +107,9 @@ Part 3: Practice
    exercises/ex-transport
    exercises/ex-sharing
    exercises/ex-app
+   exercises/netkit-app
+..   exercises/ex-tcp
+..   exercises/netkit-tcp
 
 ..  application/exercises/ex-application
 
