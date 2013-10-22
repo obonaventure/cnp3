@@ -10,10 +10,10 @@ Configuring DNS and HTTP servers can be complex on real hosts. To allow you to l
 
 .. note:: Where can I find Netkit?
 
- Netkit_ is available at http://www.netkit.org. For the labs, we have built a custom netkit image which is available from :download:`/netkit/netkit-images.zip`
+ Netkit_ is available at http://www.netkit.org. For the labs, we have built a custom netkit image which is available from :download:`/netkit/netkit-images.zip` Note that this image has a size of more than 1 GByte. It should not be downloaded unless you are connected to a high performance network.
 
 
-There are two ways to use Netkit : The manual way, and by using pre-configured labs.  In the first case, you boot and control each machine individually, using the commands starting with a "v" (for virtual machine).   In the second case, you can start a whole network in a single operation.  The commands for controlling the lab start with a "l".  The man pages of those commands is available from http://wiki.netkit.org/man/man7/netkit.7.html
+There are two ways to use Netkit_ : The manual way, and by using pre-configured labs.  In the first case, you boot and control each machine individually, using the commands starting with a "v" (for virtual machine).   In the second case, you can start a whole network in a single operation.  The commands for controlling the lab start with a "l".  The man pages of those commands is available from http://wiki.netkit.org/man/man7/netkit.7.html
 
 You must be careful not to forgot to stop your virtual machines and labs, using either `vhalt` or `lhalt`.  
 
@@ -47,15 +47,17 @@ The lab directory can contain optional files. Some labs will include configurati
 
 Starting a lab consists thus simply in unpacking the provided archive, going into the lab directory and typing `lstart` to start the network.  
 
-.. note:: File sharing between virtual machines and host
+.. .. note:: File sharing between virtual machines and host
 
- Virtual machines can access to the directory of the lab they belong to.  This repertory is mounted in their filesystem at the path  `/hostlab`.  
+ 
 
 .. In the netkit lab (:download:`exercises/netkit/netkit_lab_2hosts_1rtr_ipv4.tar.tar.gz`, you can find a simple python_ client/server application that establishes TCP connections. Feel free to re-use this code to perform your analysis.    
 
 .. note:: netkit tools
 
  As the virtual machines run Linux, standard networking tools such as ping_, tcpdump_, netstat_ etc. are available.  
+
+ Another useful hint is that is it possible to share files between the Netkit_ virtual machines and the local host. Virtual machines can access to the directory of the lab they belong to. This directory is mounted in their filesystem at the path  `/hostlab`.  
 
 .. Note that capturing network traces can be facilitated by using the `uml_dump` extension available at http://kartoch.msi.unilim.fr/blog/?p=19 .  This extension is already installed in the Netkit installation on the student lab.  In order to capture the traffic exchanged on a given 'virtual LAN', you simply need to issue the command `vdump <LAN name>` on the host. If you want to pipe the trace to wireshark, you can use `vdump A | wireshark -i - -k`
 
