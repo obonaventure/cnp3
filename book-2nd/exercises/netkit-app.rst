@@ -5,17 +5,16 @@
 Configuring DNS and HTTP servers
 ================================
 
-Configuring DNS and HTTP servers can be complex on real hosts. To allow you to learn network configurations without risking breaking anything, we will use Netkit_. Netkit_ is network emulator based on User Mode Linux.  It allows to easily set up an emulated network of Linux machines, that can act as end-host or routers.  
+Configuring DNS and HTTP servers can be complex on real hosts. To allow you to learn network configurations without risking breaking anything, we will use Netkit_. Netkit_ is network emulator based on User Mode Linux. It allows to easily set up an emulated network composed of virtual Linux machines, that can act as end-host or routers.  
 
 
 .. note:: Where can I find Netkit?
 
- Netkit_ is available at http://www.netkit.org. For the labs, we have built a custom netkit image which is available from :download:`/netkit/netkit-images.zip` Note that this image has a size of more than 1 GByte. It should not be downloaded unless you are connected to a high performance network.
-
+ Netkit_ is available at http://www.netkit.org. For the labs, we have built a custom netkit image which is installed on the INGI servers [#fimage]_ . 
 
 There are two ways to use Netkit_ : The manual way, and by using pre-configured labs.  In the first case, you boot and control each machine individually, using the commands starting with a "v" (for virtual machine).   In the second case, you can start a whole network in a single operation.  The commands for controlling the lab start with a "l".  The man pages of those commands is available from http://wiki.netkit.org/man/man7/netkit.7.html
 
-You must be careful not to forgot to stop your virtual machines and labs, using either `vhalt` or `lhalt`.  
+.. You must be careful not to forgot to stop your virtual machines and labs, using either `vhalt` or `lhalt`.  
 
 .. Netkit has already been installed in the student labs, in `/etinfo/applications/netkit` . All you have to do in order to use it is to set the following environment variables :
 
@@ -55,7 +54,7 @@ Starting a lab consists thus simply in unpacking the provided archive, going int
 
 .. note:: netkit tools
 
- As the virtual machines run Linux, standard networking tools such as ping_, tcpdump_, netstat_ etc. are available.  
+ As the virtual machines run Linux, standard networking tools such as :manpage:`ping(8)`, tcpdump_, netstat_ etc. are available.  
 
  Another useful hint is that is it possible to share files between the Netkit_ virtual machines and the local host. Virtual machines can access to the directory of the lab they belong to. This directory is mounted in their filesystem at the path  `/hostlab`.  
 
@@ -79,12 +78,12 @@ To launch a single host instance, use the command ``vstart``:
    
     vstart hostname
 
-To launch the DNS lab, use the following command:
+To launch the DNS lab[#fdnslab]_, use the following commands:
 
  .. code:: console
  
     cp -r /etinfo/applications/netkit/dnslab/ $HOME/	# do not forget the trailing /'s
-    lstart -d $HOME/dnslab
+    lstart -f -d $HOME/dnslab
 
 To stop the lab, please stop all the involved instances by using the command ``halt`` inside each virtual machine.
 
@@ -103,7 +102,7 @@ Below, you can find a graph where the DNS topology we will use is depicted.
 
   .. figure:: fig/dns-lab.png
      :align: center
-     :scale: 100
+     :scale: 50
 
 To begin experimentation, start the lab by using the commands explained above. In this lab, the DNS servers are correctly configured. We ask you to find the IP address of the following fully qualified domain names (FQDN):
 
@@ -123,7 +122,7 @@ While doing these requests, observe the packets that are exchanged between the d
 
   .. figure:: fig/dns-lab.png
      :align: center
-     :scale: 100
+     :scale: 50
 
 You have learned that DNS can work in two ways: Forward and Reverse. We will now resolve IPv6 addresses into their corresponding DNS names. Find the FQDN domain name of the following IPv6 addresses :
 
@@ -156,5 +155,10 @@ The configuration files of apache are located in ``/etc/apache2/``
 
 Enjoy !
 
+.. rubric:: Footnotes
+
+.. [#fimage] The image that we use is a custom Netkit_ filesystem with a recent 64 bits Linux kernel. If you wish to test it on your own Linux machine, you can install Netkit_ as explained on http://wiki.netkit.org and download the filesystem and kernel images from http://cnp3bis.info.ucl.ac.be/netkit/netkit-images.zip  Note that this archive has a compressed size of more than 1 GByte ! 
+
+.. [#fdnslab] The files used by the DNS lab are available from :download:`/netkit/netkit-lab_dns.zip` if you would like to use them on your laptop.
 
 .. include:: /links.rst

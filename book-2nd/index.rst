@@ -81,6 +81,7 @@ Part 2: Protocols
    protocols/udp
    protocols/tcp
 ..   protocols/sctp
+..   protocols/congestion
 
 ..   application/app-protocols
 
@@ -108,8 +109,7 @@ Part 3: Practice
    exercises/ex-sharing
    exercises/ex-app
    exercises/netkit-app
-..   exercises/ex-tcp
-..   exercises/netkit-tcp
+   exercises/netkit-tcp
 
 ..  application/exercises/ex-application
 

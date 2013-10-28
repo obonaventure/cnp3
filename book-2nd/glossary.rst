@@ -206,6 +206,7 @@ Glossary
 
    X11
 	The XWindow system and the associated protocols are defined in [SG1990]_   
+
    DNS
 	The Domain Name System is defined in :rfc:`1035`
 

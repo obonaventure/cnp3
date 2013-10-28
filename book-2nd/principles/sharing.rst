@@ -83,7 +83,6 @@ In all these networks, except the full-mesh, the link bandwidth is shared among 
        C2 [color=white, shape=box label=<<TABLE border="0" cellborder="0">
                        <TR><TD width="45" height="60" fixedsize="true"><IMG SRC="icons/host.png" scale="true"/></TD></TR><TR><td>C2</td></TR>
               </TABLE>>];
-
        R1[shape=box, color=white, label=<<TABLE border="0" cellborder="0">
                        <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="icons/router.png" scale="true"/></TD></TR><TR><td>R1</td></TR>
               </TABLE>>];
@@ -102,6 +101,7 @@ In all these networks, except the full-mesh, the link bandwidth is shared among 
        C2--R3;
        B2--R3;
       }
+
 
  .. index:: max-min fairness
 
@@ -139,7 +139,6 @@ Sharing bandwidth among the hosts directly attached to a link is not the only sh
       R2--C [];
    }
 
-
  
 In the network above, consider the case where host `A` is transmitting packets to destination `C`. `A` can send one packet per second and its packets will be delivered to `C`. Now, let us explore what happens when host `B` also starts to transmit a packet. Node `R1` will receive two packets that must be forwarded to `R2`. Unfortunately, due to the limited bandwidth on the `R1-R2` link, only one of these two packets can be transmitted. The outcome of the second packet will depend on the available buffers on `R1`. If `R1` has one available buffer, it could store the packet that has not been transmitted on the `R1-R2` link until the link becomes available. If `R1` does not have available buffers, then the packet needs to be discarded. 
 
@@ -155,10 +154,7 @@ If `R1` has enough buffers, it will be able to absorb the load without having to
 
 .. note:: Congestion collapse on the Internet
 
- Congestion collapse is unfortunately not only an academic experience. Van Jacobson reports in [Jacobson1988]_ one of these events that affected him while he was working at the Lawrence Berkeley Laboratory (LBL). LBL was two network nodes away from the University of California in Berkeley. At that time, the link between the two sites had a bandwidth of 32 Kbps, but some hosts were already attached to 10 Mbps LANs. "In October 1986,  the data throughput from LBL to UC Berkeley ... dropped from 32 Kbps to 40
-bps. We were fascinated by this sudden factor-of-thousand
-drop in bandwidth and embarked on an investigation of why
-things had gotten so bad." This work lead to the development of various congestion control techniques that have allowed the Internet to continue to grow without experiencing widespread congestion collapse events. 
+ Congestion collapse is unfortunately not only an academic experience. Van Jacobson reports in [Jacobson1988]_ one of these events that affected him while he was working at the Lawrence Berkeley Laboratory (LBL). LBL was two network nodes away from the University of California in Berkeley. At that time, the link between the two sites had a bandwidth of 32 Kbps, but some hosts were already attached to 10 Mbps LANs. "In October 1986,  the data throughput from LBL to UC Berkeley ... dropped from 32 Kbps to 40 bps. We were fascinated by this sudden factor-of-thousand drop in bandwidth and embarked on an investigation of why things had gotten so bad." This work lead to the development of various congestion control techniques that have allowed the Internet to continue to grow without experiencing widespread congestion collapse events. 
 
 Besides bandwidth and memory, a third ressource that needs to be shared inside a network is the (packet) processing capacity. To forward a packet, a network node needs bandwidth on the outgoing link, but it also needs to analyze the packet header to perform a lookup inside its forwarding table. Performing these lookup operations require ressources such as CPU cycles or memory accesses. Network nodes are usually designed to be able to sustain a given packet processing rate, measured in packets per second. 
 
@@ -167,8 +163,8 @@ Besides bandwidth and memory, a third ressource that needs to be shared inside a
 
  The performance of network nodes can be characterized by two key metrics :
  
-  - the node's capacity measured in bits per second
-  - the node's lookup performance measured in packets per second
+   - the node's capacity measured in bits per second
+   - the node's lookup performance measured in packets per second
 
  The node's capacity in bits per second mainly depends on the physical interfaces that it uses and also on the capacity of the internal interconnection (bus, crossbar switch, ...) between the different interfaces inside the node. Many vendors, in particular for low-end devices will use the sum of the bandwidth of the nodes' interfaces as the node capacity in bits per second. Measurements do not always match this maximum theoretical capacity. A well designed network node will usually have a capacity in bits per second larger than the sum of its link capacities. Such nodes will usually reach this maximum capacity when forwarding large packets. 
 
@@ -208,7 +204,6 @@ By combining different answers to these questions, network researchers have deve
  - `drop from front` is an alternative packet discard technique. When a packet arrives and the Instead of removing the arriving packet, it removes the packet that was at the head of the queue. Discarding this packet instead of the arriving one can have two advantages. First, it already stayed a long time in the buffer. Second, hosts should be able to detect the loss (and thus the congestion) earlier.
  - `probabilistic drop`. Various random drop techniques have been proposed. Compared to the previous techniques. A frequently cited technique is `Random Early Discard` (RED) [FJ1993]_. RED measures the average buffer occupancy and probabilistically discards packets when this average occupancy is too high. Compared to `tail drop` and `drop from front`, an advantage of `RED` is that thanks to the probabilistic drops, packets should be discarded from different flows in proportion of their bandwidth. 
 
-
 Discarding packets is a frequent reaction to network congestion. Unfortunately, discarding packets is not optimal since a packet which is discarded on a network node has already consumed resources on the upstream nodes. There are other ways for the network to inform the end hosts of the current congestion level. A first solution is to mark the packets when a node is congested. Several networking technologies have relied on this kind of packet marking.
 
 .. index:: Forward Explicit Congestion Notification, FECN
@@ -225,7 +220,6 @@ Dropping and marking packets is not the only possible reaction of a router that 
 
 .. figure:: figures/png/scheduler.png
    
-
    A round-robin scheduler 
 
 
@@ -246,6 +240,7 @@ A very simple scheduler is the `round-robin scheduler`. This scheduler serves al
         send(p)
      next_queue=(next_queue+1)%N
    # end while
+
 
 
 Distributing the load across the network
@@ -350,6 +345,7 @@ The pseudo-code below shows the operation of an ALOHANet terminal. We use this p
   else:		
     # Too many transmission attempts
 
+
 [Abramson1970]_ analysed the performance of ALOHANet under particular assumptions and found that ALOHANet worked well when the channel was lightly loaded. In this case, the frames are rarely retransmitted and the `channel traffic`, i.e. the total number of (correct and retransmitted) frames transmitted per unit of time is close to the `channel utilization`, i.e. the number of correctly transmitted frames per unit of time. Unfortunately, the analysis also reveals that the `channel utilization` reaches its maximum at :math:`\frac{1}{2 \times e}=0.186` times the channel bandwidth. At higher utilization, ALOHANet becomes unstable and the network collapses due to collided retransmissions.
 
 
@@ -388,6 +384,7 @@ ALOHA and slotted ALOHA can easily be implemented, but unfortunately, they can o
   # end of while loop 
     # Too many transmission attempts
 
+
 The above pseudo-code is often called `persistent CSMA` [KT1975]_ as the terminal will continuously listen to the channel and transmit its frame as soon as the channel becomes free. Another important variant of CSMA is the `non-persistent CSMA` [KT1975]_. The main difference between persistent and non-persistent CSMA described in the pseudo-code below is that a non-persistent CSMA node does not continuously listen to the channel to determine when it becomes free. When a non-persistent CSMA terminal senses the transmission channel to be busy, it waits for a random time before sensing the channel again. This improves channel utilization compared to persistent CSMA. With persistent CSMA, when two terminals sense the channel to be busy, they will both transmit (and thus cause a collision) as soon as the channel becomes free. With non-persistent CSMA, this synchronisation does not occur, as the terminals wait a random time after having sensed the transmission channel. However, the higher channel utilization achieved by non-persistent CSMA comes at the expense of a slightly higher waiting time in the terminals when the network is lightly loaded. 
 
 
@@ -411,6 +408,7 @@ The above pseudo-code is often called `persistent CSMA` [KT1975]_ as the termina
        wait(random_time)
   # end of while loop		
     # Too many transmission attempts
+
 
 [KT1975]_ analyzes in detail the performance of several CSMA variants. Under some assumptions about the transmission channel and the traffic, the analysis compares ALOHA, slotted ALOHA, persistent and non-persistent CSMA. Under these assumptions, ALOHA achieves a channel utilization of only 18.4% of the channel capacity. Slotted ALOHA is able to use 36.6% of this capacity. Persistent CSMA improves the utilization by reaching 52.9% of the capacity while non-persistent CSMA achieves 81.5% of the channel capacity. 
 
@@ -731,7 +729,7 @@ However, transport protocols are not only used in this environment. In the globa
    The congestion collapse problem
 
 
-If many senders are attached to the left part of the network above, they all send a window full of segments. These segments are stored in the buffers of the router before being transmitted towards their destination. If there are many senders on the left part of the network, the occupancy of the buffers quickly grows. A consequence of the buffer occupancy is that the round-trip-time, measured by the transport protocol, between the sender and the receiver increases. Consider a network where 10,000 bits segments are sent. When the buffer is empty, such a segment requires 1 millisecond to be transmitted on the `10 Mbps` link and 5 milliseconds to be the transmitted on the `2 Mbps` link. Thus, the measured round-trip-time measured is roughly 6 milliseconds if we ignore the propagation delay on the links. If the buffer contains 100 segments, the round-trip-time becomes :math:`1+100 \times 5+ 5` milliseconds as new segments are only transmitted on the `2 Mbps` link once all previous segments have been transmitted. Unfortunately, if the reliable transport protocol uses a retransmission timer and performs `go-back-n` to recover from transmission errors it will retransmit a full window of segments. This increases the occupancy of the buffer and the delay through the buffer... Furthermore, the buffer may store and send on the low bandwidth links several retransmissions of the same segment. This problem is called `congestion collapse`. It occurred several times during the late 1980s on the Internet. For example, [Jacobson1988]_ notes that in 1986, the usable bandwidth of a 32 Kbits link dropped to 40 bits per second due to congestion collapse [#foldtcp]_ !
+If many senders are attached to the left part of the network above, they all send a window full of segments. These segments are stored in the buffers of the router before being transmitted towards their destination. If there are many senders on the left part of the network, the occupancy of the buffers quickly grows. A consequence of the buffer occupancy is that the round-trip-time, measured by the transport protocol, between the sender and the receiver increases. Consider a network where 10,000 bits segments are sent. When the buffer is empty, such a segment requires 1 millisecond to be transmitted on the `10 Mbps` link and 5 milliseconds to be the transmitted on the `2 Mbps` link. Thus, the measured round-trip-time measured is roughly 6 milliseconds if we ignore the propagation delay on the links. If the buffer contains 100 segments, the round-trip-time becomes :math:`1+100 \times 5+ 5` milliseconds as new segments are only transmitted on the `2 Mbps` link once all previous segments have been transmitted. Unfortunately, if the reliable transport protocol uses a retransmission timer and performs `go-back-n` to recover from transmission errors it will retransmit a full window of segments. This increases the occupancy of the buffer and the delay through the buffer... Furthermore, the buffer may store and send on the low bandwidth links several retransmissions of the same segment. This problem is called `congestion collapse`. It occurred several times during the late 1980s on the Internet [Jacobson1988]_. 
 
 The `congestion collapse` is a problem that all heterogeneous networks face. Different mechanisms have been proposed in the scientific literature to avoid or control network congestion. Some of them have been implemented and deployed in real networks. To understand this problem in more detail, let us first consider a simple network with two hosts attached to a high bandwidth link that are sending segments to destination `C` attached to a low bandwidth link as depicted below.
 
@@ -740,6 +738,7 @@ The `congestion collapse` is a problem that all heterogeneous networks face. Dif
    :scale: 70 
 
    The congestion problem
+
 
 To avoid `congestion collapse`, the hosts must regulate their transmission rate [#fcredit]_ by using a `congestion control` mechanism. Such a mechanism can be implemented in the transport layer or in the network layer. In TCP/IP networks, it is implemented in the transport layer, but other technologies such as `Asynchronous Transfer Mode (ATM)` or `Frame Relay` include congestion control mechanisms in lower layers.
 
@@ -750,8 +749,9 @@ Let us first consider the simple problem of a set of :math:`i` hosts that share 
  #. The congestion control scheme must `avoid congestion`. In practice, this means that the bottleneck link cannot be overloaded. If :math:`r_i(t)` is the transmission rate allocated to host :math:`i` at time :math:`t` and :math:`R` the bandwidth of the bottleneck link, then the congestion control scheme should ensure that, on average, :math:`\forall{t} \sum{r_i(t)} \le R`. 
  #. The congestion control scheme must be `efficient`. The bottleneck link is usually both a shared and an expensive resource. Usually, bottleneck links are wide area links that are much more expensive to upgrade than the local area networks. The congestion control scheme should ensure that such links are efficiently used. Mathematically, the control scheme should ensure that :math:`\forall{t} \sum{r_i(t)} \approx R`.
  #. The congestion control scheme should be `fair`. Most congestion schemes aim at achieving `max-min fairness`. An allocation of transmission rates to sources is said to be `max-min fair` if :
-  - no link in the network is congested 
-  - the rate allocated to source :math:`j` cannot be increased without decreasing the rate allocated to a source :math:`i` whose allocation is smaller than the rate allocated to source :math:`j` [Leboudec2008]_ .  
+
+   - no link in the network is congested 
+   - the rate allocated to source :math:`j` cannot be increased without decreasing the rate allocated to a source :math:`i` whose allocation is smaller than the rate allocated to source :math:`j` [Leboudec2008]_ .  
 
 Depending on the network, a `max-min fair allocation` may not always exist. In practice, `max-min fairness` is an ideal objective that cannot necessarily be achieved. When there is a single bottleneck link as in the example above, `max-min fairness` implies that each source should be allocated the same transmission rate.
 
@@ -762,6 +762,7 @@ To visualise the different rate allocations, it is useful to consider the graph 
    :scale: 70 
 
    Possible allocated transmission rates
+
 
 As shown in the graph above, a rate allocation may be fair but not efficient (e.g. :math:`r_A=0.7,r_B=0.7`), fair and efficient ( e.g. :math:`r_A=1,r_B=1`) or efficient but not fair (e.g. :math:`r_A=1.5,r_B=0.5`). Ideally, the allocation should be both fair and efficient. Unfortunately, maintaining such an allocation with fluctuations in the number of flows that use the network is a challenging problem. Furthermore, there might be several thousands flows that pass through the same link [#fflowslink]_.
 
@@ -785,8 +786,8 @@ Various types of rate adaption algorithms are possible. `Dah Ming Chiu`_ and `Ra
 
 The simplest form of feedback that the network can send to a source is a binary feedback (the network is congested or not congested). In this case, a `linear` rate adaptation algorithm can be expressed as :
 
- - :math:`rate(t+1)=\alpha_C + \beta_C rate(t)` when the network is congested
- - :math:`rate(t+1)=\alpha_N + \beta_N rate(t)` when the network is *not* congested
+  - :math:`rate(t+1)=\alpha_C + \beta_C rate(t)` when the network is congested
+  - :math:`rate(t+1)=\alpha_N + \beta_N rate(t)` when the network is *not* congested
 
 With a linear adaption algorithm, :math:`\alpha_C,\alpha_N, \beta_C` and :math:`\beta_N` are constants. 
 The analysis of [CJ1989]_ shows that to be fair and efficient, such a binary rate adaption mechanism must rely on `Additive Increase and Multiplicative Decrease`. When the network is not congested, the hosts should slowly increase their transmission rate (:math:`\beta_N=1~and~\alpha_N>0`). When the network is congested, the hosts must multiplicatively decrease their transmission rate (:math:`\beta_C < 1~and~\alpha_C = 0`). Such an AIMD rate adaptation algorithm can be implemented by the pseudo-code below. 
@@ -799,6 +800,7 @@ The analysis of [CJ1989]_ shows that to be fair and efficient, such a binary rat
        rate=rate*betaC    # multiplicative decrease, betaC<1
     else
        rate=rate+alphaN    # additive increase, v0>0
+
 
 
 .. note:: Which binary feedback ?
@@ -827,7 +829,6 @@ AIMD controls congestion by adjusting the transmission rate of the sources in re
       D [color=white, shape=box label=<<TABLE border="0" cellborder="0">
                        <TR><TD width="45" height="60" fixedsize="true"><IMG SRC="icons/host.png" scale="true"/></TD></TR><TR><td>D</td></TR>
               </TABLE>>];
-
       R1[shape=box, color=white, label=<<TABLE border="0" cellborder="0">
                        <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="icons/router.png" scale="true"/></TD></TR><TR><td>R1</td></TR>
               </TABLE>>];
@@ -893,6 +894,7 @@ Consider now a window of two segments. Host `A` can send two segments within 2 m
  |t0+6 | data(3)  |          |          |
  +-----+----------+----------+----------+
 
+
   
 Our last example is a window of four segments. These segments are sent at :math:`t_{0}`, :math:`t_{0}+1`, :math:`t_{0}+2` and :math:`t_{0}+3`. The first segment reaches host `D` at :math:`t_{0}+4`. Host `D` replies to this segment by sending an acknowledgement that enables host `A` to transmit its fifth segment. This segment reaches router `R1` at :math:`t_{0}+5`. At that time, router `R1` is transmitting the third segment to router `R2` and the fourth segment is still in its buffers. At time :math:`t_{0}+6`, host `D` receives the second segment and returns the corresponding acknowledgement. This acknowledgement enables host `A` to send its sixth segment. This segment reaches router `R1` at roughly :math:`t_{0}+7`. At that time, the router starts to transmit the fourth segment to router `R2`. Since link `R1-R2` can only sustain 500 Kbps, packets will accumulate in the buffers of `R1`. On average, there will be two packets waiting in the buffers of `R1`. The presence of these two packets will induce an increase of the round-trip-time as measured by the transport protocol. While the first segment was acknowledged within 4 msec, the fifth segment (`data(4)`) that was transmitted at time :math:`t_{0}+4` is only acknowledged at time :math:`t_{0}+11`. On average, the sender transmits at 500 Kbps, but the utilisation of a large window induces a longer delay through the network. 
 
@@ -928,6 +930,7 @@ Our last example is a window of four segments. These segments are sent at :math:
  |t0+12| data(8)  |          |          |
  +-----+----------+----------+----------+ 
 
+
 .. index:: congestion window
 
 From the above example, we can adjust the transmission rate by adjusting the sending window of a reliable transport protocol. A reliable transport protocol cannot send data faster than :math:`\frac{window}{rtt}` where :math:`window` is current sending window. To control the transmission rate, we introduce a `congestion window`. This congestion window limits the sending window. A any time, the sending window is restricted to :math:`min(swin,cwin)`, where `swin` is the sending window and `cwin` the current `congestion window`. Of course, the window is further constrained by the receive window advertised by the remote peer. With the utilization of a congestion window, a simple reliable transport protocol that uses fixed size segments could implement `AIMD` as follows. 
@@ -951,6 +954,7 @@ A congestion control scheme for our simple transport protocol could be implement
   
    Congestion detected: 
       cwnd=cwin/2 # only once per rtt
+
 
 
 In the above pseudocode, `cwin` contains the congestion window stored as a real in segments. This congestion window is updated upon the arrival of each acknowledgment and when congestion is detected. For simplicity, we assume that `cwin` is stored as a floating point number but only full segments can be transmitted. 
