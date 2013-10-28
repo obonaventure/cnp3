@@ -1,0 +1,28 @@
+ifconfig eth0 up 
+ifconfig eth0 add 2001:db8:0b0:15:da:b055::1/96
+ifconfig eth1 up
+ifconfig eth1 add 2001:db8:be:600d::1/64 
+sysctl -w net.ipv6.conf.all.forwarding=1
+insmod sch_htb
+tc qdisc del dev eth0
+tc qdisc add dev eth0 root handle 1: htb default 1 
+tc class add dev eth0 parent 1: classid 1:1 htb rate 1000kbit
+sysctl -w net.ipv4.tcp_wmem='4096 4096 4096' 
+sysctl -w net.ipv4.tcp_rmem='4096 4096 4096' 
+sysctl -w net.ipv4.tcp_no_metrics_save=1 
+sysctl -w net.ipv4.tcp_slow_start_after_idle=1 
+sysctl -w net.ipv4.tcp_ecn=0 
+sysctl -w net.ipv4.tcp_keepalive_time=7200 
+sysctl -w net.ipv4.tcp_moderate_rcvbuf=0 
+sysctl -w net.ipv4.tcp_timestamps=0 
+sysctl -w net.ipv4.tcp_keepalive_intvl=15 
+sysctl -w net.ipv4.tcp_dsack=0 
+sysctl -w net.ipv4.tcp_frto=0 
+sysctl -w net.ipv4.tcp_adv_win_scale=0 
+sysctl -w net.ipv4.tcp_reordering=3 
+sysctl -w net.ipv4.tcp_window_scaling=0 
+sysctl -w net.ipv4.tcp_low_latency=0 
+sysctl -w net.ipv4.tcp_mtu_probing=2 
+sysctl -w net.ipv4.tcp_sack=0 
+sysctl -w net.ipv4.tcp_allowed_congestion_control=reno 
+sysctl -w net.ipv4.tcp_fack=0 

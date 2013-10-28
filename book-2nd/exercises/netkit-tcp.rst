@@ -147,7 +147,7 @@ The `webserver` has been configured as a server that supports the following serv
 
  - ``http`` over TCP on port ``80``
  - ``echo`` over both UDP and TCP on port ``7``
- - ``discard`` over both UDP and TCP on port ``8``
+ - ``discard`` over both UDP and TCP on port ``9``
  - ``daytime`` over both UDP and TCP on port ``13``
  - ``telnet`` over TCP on port ``23``
 
@@ -192,8 +192,14 @@ Start by using :manpage:`tcpdump` on `router` to capture all the packets sent on
 
 4. Perform the same experiment as above, but now by using ``wget`` to retrieve the homepage on `webserver`. Which version of HTTP is used ? How is the TCP connection closed ?
 
-5. The MSS option is the first option that was specified in TCP. It is used during the three-way-handshake to announce the Maximum Segment Size supported by a host. On Linux, the MSS value is computed from the maximum packet size of the underlying, but this value can be configured by using the ``min_adv_mss`` ``sysctl``. On Linux, the :manpage:`systctl` command allows to tune several configuration parameters of the kernel. The ``sysctl`` parameters that are relevant for the network stack are described in https://www.kernel.org/doc/Documentation/networking/ip-sysctl.txt
-The :manpage:`tcp(7)` manpage also describes the parameters of the TCP implementation. Change the MSS size on the client. Use :manpage:`tcpdump(8)` to observe whether this change affects the segments sent by the client or by the server when :manpage:`nc(1)` is used with the ``echo`` service.
+5. The MSS option is the first option that was specified in TCP. It is used during the three-way-handshake to announce the Maximum Segment Size supported by a host. On Linux, the MSS value is computed from the maximum packet size of the underlying network. You can change the maximum packet size of the underlying network (or Maximum Transmission Unit - MTU) by using the command :manpage:`ifconfig(8)` ::
+
+  ifconfig eth0 mtu 1000
+
+ This command reduces the MTU of interface ``eth0`` to 1000 bytes.  Use :manpage:`tcpdump(8)` to observe whether this change affects the segments sent by the client or by the server when :manpage:`nc(1)` is used with the ``echo`` service.
+
+.. , but this value can be configured by using the ``min_adv_mss`` ``sysctl``. On Linux, the :manpage:`systctl` command allows to tune several configuration parameters of the kernel. The ``sysctl`` parameters that are relevant for the network stack are described in https://www.kernel.org/doc/Documentation/networking/ip-sysctl.txt
+
 
 6. The TCP stack on `Client1` was configured to disable all recent TCP options, including Window Scale, Timestamp and Selective acknowledgements. Enable the Timestamp option using the correct ``sysctl`` and verify with :manpage:`tcpdump(8)` that this extension is actually used
 

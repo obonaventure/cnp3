@@ -1,0 +1,30 @@
+win scale desactiver
+congestion control (new)reno
+app win 
+base mss
+tcp_bic off
+dsack off
+ecn (p-e desactiver)
+fack off
+frto off
+response off
+keepalive_intvl 15 sec
+	prob ok
+	time changer keepalive_time
+low latenci off
+moderate rcvbuf off
+tcp_mem pas touche
+mtu_probing (2 en ipv6)
+no_etrics_save enable
+reordering 3
+tcp_rmem meme valeur pour min defalut et max pour fixer la taile de la fenetre tcp
+sack disable
+slow_start_after_idle enable
+syncookies off
+timestamp off
+window scaling off (p-e un exo ou on active)
+wmem voir rmem.
+
+Sctp utilisable sur linux? lksctp voir si possible de l'utiliser.
+
+Labo spanning tree brctl

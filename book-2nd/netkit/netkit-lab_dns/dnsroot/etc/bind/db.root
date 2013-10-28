@@ -1,0 +1,18 @@
+$TTL   60000
+@               IN      SOA     ROOT-SERVER.    root.ROOT-SERVER. (
+                        2006031201 ; serial
+                        28800 ; refresh
+                        14400 ; retry
+                        3600000 ; expire
+                        0 ; negative cache ttl
+                        )
+
+@               IN      NS      ROOT-SERVER.
+ROOT-SERVER.	IN	AAAA	2001:db8:ba1:b0a::5
+dnsroot.	IN	CNAME	ROOT-SERVER.
+
+org.		IN	NS	dnsorg.org.
+dnsorg.org.	IN	AAAA	2001:db8:ba1:b0a::1
+
+net.		IN	NS	dnsnet.net.
+dnsnet.net.	IN	AAAA	2001:db8:ba1:b0a::2

@@ -1,0 +1,11 @@
+$TTL 60000
+@               IN      SOA     dnsnano.nanoinside.net.    root.dnsnano.nanoinside.net. (
+                        2006031201 ; serial
+                        28 ; refresh
+                        14400 ; retry
+                        3600000 ; expire
+                        15 ; negative cache ttl
+                        )
+@               IN      NS      dnsnano.nanoinside.net.
+dnsnano         IN      AAAA    2001:db8:ba1:b0a::22
+pc2		IN	AAAA	2001:db8:ba1:b0a::222

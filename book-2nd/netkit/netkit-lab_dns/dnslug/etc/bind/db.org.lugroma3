@@ -1,0 +1,11 @@
+$TTL    60000
+@               IN      SOA     dnslug.lugroma3.org.    root.dnslug.lugroma3.org. (
+                        2006031201 ; serial
+                        28 ; refresh
+                        14 ; retry
+                        3600000 ; expire
+                        0 ; negative cache ttl
+                        )
+@               IN      NS      dnslug.lugroma3.org.
+dnslug          IN      AAAA    2001:db8:ba1:b0a::11
+pc1		IN	AAAA	2001:db8:ba1:b0a::111

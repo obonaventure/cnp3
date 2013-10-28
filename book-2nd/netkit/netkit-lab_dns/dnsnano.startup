@@ -1,0 +1,3 @@
+/sbin/ifconfig eth0 up
+/sbin/ifconfig eth0 add 2001:db8:ba1:b0a::22/64
+/etc/init.d/bind start
