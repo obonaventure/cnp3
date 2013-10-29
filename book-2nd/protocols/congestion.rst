@@ -123,7 +123,7 @@ If TCP acknowledgements are overloaded to carry the `ECE` bit, the situation is 
       |||;
       server=>router [ label = "data[seq=x,ack=2,ECE=0,ECT=1,CE=0]", arcskip="1" ];
       router=>client [ label = "data[seq=x,ack=2,ECE=0,ECT=1,CE=0]", arcskip="1"];
-     
+      |||;     
 
 To solve this problem, :rfc:`3168` uses an additional bit in the TCP header : the `Congestion Window Reduced` (CWR) bit. 
 
@@ -144,13 +144,25 @@ To solve this problem, :rfc:`3168` uses an additional bit in the TCP header : th
       |||;
       client=>router [ label = "data[seq=1,ECT=1,CE=0,CWR=1]", arcskip="1" ];
       router=>server [ label = "data[seq=1,ECT=1,CE=1,CWR=1]", arcskip="1"];
-     
+      |||;
 
+
+     
 The `CWR` bit of the TCP header provides some form of acknowledgement for the `ECE` bit. When a TCP receiver detects a packet marked with the `CE` bit, it sets the `ECE` bit in all segments that it returns to the sender. Upon reception of an acknowledgement with the `ECE` bit set, the sender reduces its congestion window to reflect a mild congestion and sets the `CWR` bit. This bit remains set as long as the segments received contained the `ECE` bit set. A sender should only react once per round-trip-time to marked packets.
 
 .. index:: SCTP ECN Echo chunk, SCTP CWR chunk
 
 SCTP uses a different approach to inform the sender once congestion has been detected. Instead of using one bit to carry the congestion notification from the receiver to the sender, SCTP defines an entire ``ECN Echo`` chunk for this. This chunk contains the lowest ``TSN`` that was received in a packet with the `CE` bit set and the number of marked packets received. The SCTP ``CWR`` chunk allows to acknowledge the reception of an ``ECN Echo`` chunk. It echoes the lowest ``TSN`` placed in the ``ECN Echo`` chunk. 
+
+
+The last point that needs to be discussed about Explicit Congestion Notification is the algorithm that is used by routers to detect congestion. On a router, congestion manifests itself by the number of packets that are stored inside the router buffers. As explained earlier, we need to distinguish between two types of routers :
+
+ - routers that have a single FIFO queue
+ - routers that have several queues served by a round-robin scheduler
+
+Routers that use a single queue measure their buffer occupancy as the number of bytes of packets stored in the queue [#fslot]_. A first method to detect congestion is to measure the instantaneous buffer occupancy and consider the router to be congested as soon as this occupancy is above a threshold. Typical values of the threshold could be 40% of the total buffer. Measuring the instantaneous buffer occupancy is simple since it only requires one counter. However, this value is fragile from a control viewpoint since it changes frequently. A better solution is to measure the *average* buffer occupancy and consider the router to be congested when this average occupancy is too high. Random Early Detection (RED) [FJ1993]_ is an algorithm that was designed to support Explicit Congestion Notification. In addition to measuring the average buffer occupancy, it also uses probabilistic marking. When the router is congested, the arriving packets are marked with a probability that increases with the average buffer occupancy. The main advantage of using probabilistic marking instead of marking all arriving packets is that flows will be marked in proportion of the number of packets that they transmit. If the router marks 10% of the arriving packets when congested, then a large flow that sends hundred packets per second will be marked 10 times while a flow that only sends one packet per second will not be marked. This probabilistic marking allows to mark packets in proportion of their usage of the network ressources.
+
+If the router uses several queues served by a scheduler, the situation is different. If a large and a small flow are competing for bandwidth, the scheduler will already favor the small flow that is not using its fair share of the bandwidth. The queue for the small flow will be almost empty while the queue for the large flow will build up. On routers using such schedulers, a good way of marking the packets is to set a threshold on the occupancy of each queue and mark the packets that arrive in a particular queue as soon as its occupancy is above the configured threshold. 
 
 
 Modeling TCP congestion control
@@ -206,5 +218,7 @@ In general, the maximum throughput that can be achieved by a TCP connection depe
 .. [#fprivate] In enterprise networks or datacenters, the situation is different since a single company typically controls all the sources and all the routers. In such networks it is possible to ensure that all hosts and routers have been upgraded before turning on ECN on the routers.
 
 .. [#fecnnonce] With the ECT bit, the deployment issue with ECN is solved provided that all sources cooperate. If some sources do not support ECN but still set the ECT bit in the packets that they sent, they will have an unfair advantage over the sources that correctly react to packet markings. Several solutions have been proposed to deal with this problem :rfc:`3540`, but they are outside the scope of this book.
+
+.. [#fslot] The buffers of a router can be implemented as variable or fixed-length slots. If the router uses variable length slots to store the queued packets, then the occupancy is usually measured in bytes. Some routers have use fixed-length slots with each slot large enough to store a maximum-length packet. In this case, the buffer occupancy is measured in packets.
 
 .. include:: /links.rst
