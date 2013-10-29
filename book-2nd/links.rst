@@ -73,7 +73,7 @@
 
 .. _wireshark: http://www.wireshark.org
 
-.. _iperf: http://iperf.sourceforge.net/
+.. _iperf: https://code.google.com/p/iperf/
 
 .. _tcpprobe: http://www.linuxfoundation.org/en/Net:TcpProbe
 

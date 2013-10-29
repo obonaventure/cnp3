@@ -105,7 +105,7 @@ For these UDP experiments, you will use a simple lab that contains four hosts.
       router--webserver;
    }
 
-This lab can be downloaded from :download:`netkit/netkit-lab_tcpudp.zip`
+This lab can be downloaded from :download:`/netkit/netkit-lab_tcpudp.zip`
 
 Two hosts, `Client1` and `Client2` are clients that you will use to send information to the `webserver` host through an intermediate `router`. Thanks to the `router`, you will be able to easily observe the packets that are exchanged and delay or discard some of them to see how the protocol reacts to these events.
 
