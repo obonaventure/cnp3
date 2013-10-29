@@ -102,7 +102,7 @@ Below, you can find a graph where the DNS topology we will use is depicted.
 
   .. figure:: fig/dns-lab.png
      :align: center
-     :scale: 50
+     :scale: 40
 
 To begin experimentation, start the lab by using the commands explained above. In this lab, the DNS servers are correctly configured. We ask you to find the IP address of the following fully qualified domain names (FQDN):
 

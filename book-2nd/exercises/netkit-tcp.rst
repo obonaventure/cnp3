@@ -29,16 +29,17 @@ The text below is an example of the output of tcpdump_ for all the TCP segments 
 
 .. code-block:: console
 
-11:58:54.207193 IP6 2001:db8:b0:15:da:b055:0:2.52305 > 2001:db8:be:600d::2.80: Flags [S], seq 544531601, win 2880, options [mss 1440], length 0
-11:58:54.207628 IP6 2001:db8:be:600d::2.80 > 2001:db8:b0:15:da:b055:0:2.52305: Flags [S.], seq 1907676151, ack 544531602, win 14400, options [mss 1440], length 0
-11:58:54.208344 IP6 2001:db8:b0:15:da:b055:0:2.52305 > 2001:db8:be:600d::2.80: Flags [.], ack 1, win 2880, length 0
-11:58:54.208360 IP6 2001:db8:b0:15:da:b055:0:2.52305 > 2001:db8:be:600d::2.80: Flags [P.], seq 1:110, ack 1, win 2880, length 109
-11:58:54.208750 IP6 2001:db8:be:600d::2.80 > 2001:db8:b0:15:da:b055:0:2.52305: Flags [.], ack 110, win 14400, length 0
-11:58:54.227126 IP6 2001:db8:be:600d::2.80 > 2001:db8:b0:15:da:b055:0:2.52305: Flags [P.], seq 1:491, ack 110, win 14400, length 490
-11:58:54.227526 IP6 2001:db8:b0:15:da:b055:0:2.52305 > 2001:db8:be:600d::2.80: Flags [.], ack 491, win 2390, length 0
-11:58:54.234242 IP6 2001:db8:b0:15:da:b055:0:2.52305 > 2001:db8:be:600d::2.80: Flags [F.], seq 110, ack 491, win 2390, length 0
-11:58:54.234921 IP6 2001:db8:be:600d::2.80 > 2001:db8:b0:15:da:b055:0:2.52305: Flags [F.], seq 491, ack 111, win 14400, length 0
-11:58:54.235245 IP6 2001:db8:b0:15:da:b055:0:2.52305 > 2001:db8:be:600d::2.80: Flags [.], ack 492, win 2389, length 0
+  11:58:54.207193 IP6 2001:db8:b0:15:da:b055:0:2.52305 > 2001:db8:be:600d::2.80: Flags [S], seq 544531601, win 2880, options [mss 1440], length 0
+  11:58:54.207628 IP6 2001:db8:be:600d::2.80 > 2001:db8:b0:15:da:b055:0:2.52305: Flags [S.], seq 1907676151, ack 544531602, win 14400, options [mss 1440], length 0
+  11:58:54.208344 IP6 2001:db8:b0:15:da:b055:0:2.52305 > 2001:db8:be:600d::2.80: Flags [.], ack 1, win 2880, length 0
+  11:58:54.208360 IP6 2001:db8:b0:15:da:b055:0:2.52305 > 2001:db8:be:600d::2.80: Flags [P.], seq 1:110, ack 1, win 2880, length 109
+  11:58:54.208750 IP6 2001:db8:be:600d::2.80 > 2001:db8:b0:15:da:b055:0:2.52305: Flags [.], ack 110, win 14400, length 0
+  11:58:54.227126 IP6 2001:db8:be:600d::2.80 > 2001:db8:b0:15:da:b055:0:2.52305: Flags [P.], seq 1:491, ack 110, win 14400, length 490
+  11:58:54.227526 IP6 2001:db8:b0:15:da:b055:0:2.52305 > 2001:db8:be:600d::2.80: Flags [.], ack 491, win 2390, length 0
+  11:58:54.234242 IP6 2001:db8:b0:15:da:b055:0:2.52305 > 2001:db8:be:600d::2.80: Flags [F.], seq 110, ack 491, win 2390, length 0
+  11:58:54.234921 IP6 2001:db8:be:600d::2.80 > 2001:db8:b0:15:da:b055:0:2.52305: Flags [F.], seq 491, ack 111, win 14400, length 0
+  11:58:54.235245 IP6 2001:db8:b0:15:da:b055:0:2.52305 > 2001:db8:be:600d::2.80: Flags [.], ack 492, win 2389, length 0
+
 
 You can easily recognize in the output above the `SYN` segment containing the `MSS` option, the `SYN+ACK` segment returned by the server and then the few data segments exchanged on the connection.
 
@@ -103,6 +104,8 @@ For these UDP experiments, you will use a simple lab that contains four hosts.
       client2--router;
       router--webserver;
    }
+
+This lab can be downloaded from :download:`netkit/netkit-lab_tcpudp.zip`
 
 Two hosts, `Client1` and `Client2` are clients that you will use to send information to the `webserver` host through an intermediate `router`. Thanks to the `router`, you will be able to easily observe the packets that are exchanged and delay or discard some of them to see how the protocol reacts to these events.
 
@@ -269,7 +272,7 @@ A detailed description of packetdrill_ and one example can be found in [CCB+2013
    0.700 < . 1001:1001(0) ack 1001 win 257
 
    // We inject a RST to close connection
-   0.701 < R. 1001:1001(0) ack 1001
+   0.701 < R. 1001:1001(0) ack 1001 win 4096
 
 
 1. To show your understanding of the TCP state machine, use packetdrill_ to develop one script that demonstrates the operation of TCP. Inside each group, ensure that there is at least one script that demonstrates :
