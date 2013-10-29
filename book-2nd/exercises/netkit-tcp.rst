@@ -144,7 +144,7 @@ Two hosts, `Client1` and `Client2` are clients that you will use to send informa
                  RX bytes:200 (200.0 B)  TX bytes:200 (200.0 B)
 
      
-   The output of :manpage:`ifconfig(8)` shows that this `router` has three interfaces. The loopback interface (``lo`` on Linux) is the default software-based interface of all hosts. The ``eth0`` interface is connected to the two clients while the ``eth1`` interface is connected to the webserver. The IP address of the `router` on ``eth0`` (resp. ``eth1``) is ``2001:db8:b0:15:da:b055:0::1`` (resp. ``2001:db8:be:600d::1``).
+  The output of :manpage:`ifconfig(8)` shows that this `router` has three interfaces. The loopback interface (``lo`` on Linux) is the default software-based interface of all hosts. The ``eth0`` interface is connected to the two clients while the ``eth1`` interface is connected to the webserver. The IP address of the `router` on ``eth0`` (resp. ``eth1``) is ``2001:db8:b0:15:da:b055:0::1`` (resp. ``2001:db8:be:600d::1``).
 
 The `webserver` has been configured as a server that supports the following services :
 

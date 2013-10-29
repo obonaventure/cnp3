@@ -124,6 +124,9 @@ If TCP acknowledgements are overloaded to carry the `ECE` bit, the situation is 
       server=>router [ label = "data[seq=x,ack=2,ECE=0,ECT=1,CE=0]", arcskip="1" ];
       router=>client [ label = "data[seq=x,ack=2,ECE=0,ECT=1,CE=0]", arcskip="1"];
       |||;     
+      client->server [linecolour=white];
+
+
 
 To solve this problem, :rfc:`3168` uses an additional bit in the TCP header : the `Congestion Window Reduced` (CWR) bit. 
 
@@ -132,7 +135,6 @@ To solve this problem, :rfc:`3168` uses an additional bit in the TCP header : th
       client [label="client", linecolour=black],
       router [label="router", linecolour=black],
       server [label="server", linecolour=black];
-
       client=>router [ label = "data[seq=1,ECT=1,CE=0]", arcskip="1" ];
       router=>server [ label = "data[seq=1,ECT=1,CE=1]", arcskip="1"];
       |||;  
@@ -145,7 +147,7 @@ To solve this problem, :rfc:`3168` uses an additional bit in the TCP header : th
       client=>router [ label = "data[seq=1,ECT=1,CE=0,CWR=1]", arcskip="1" ];
       router=>server [ label = "data[seq=1,ECT=1,CE=1,CWR=1]", arcskip="1"];
       |||;
-
+      client->server [linecolour=white];
 
      
 The `CWR` bit of the TCP header provides some form of acknowledgement for the `ECE` bit. When a TCP receiver detects a packet marked with the `CE` bit, it sets the `ECE` bit in all segments that it returns to the sender. Upon reception of an acknowledgement with the `ECE` bit set, the sender reduces its congestion window to reflect a mild congestion and sets the `CWR` bit. This bit remains set as long as the segments received contained the `ECE` bit set. A sender should only react once per round-trip-time to marked packets.
