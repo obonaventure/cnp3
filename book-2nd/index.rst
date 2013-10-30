@@ -80,8 +80,8 @@ Part 2: Protocols
    protocols/transport
    protocols/udp
    protocols/tcp
-..   protocols/sctp
-..   protocols/congestion
+   protocols/sctp
+   protocols/congestion
 
 ..   application/app-protocols
 
