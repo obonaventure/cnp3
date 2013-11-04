@@ -1,6 +1,8 @@
 .. Copyright |copy| 2010 by Olivier Bonaventure
 .. This file is licensed under a `creative commons licence <http://creativecommons.org/licenses/by/3.0/>`_
 
+.. _tcptrace: http://www.tcptrace.org
+
 .. _packetdrill: https://code.google.com/p/packetdrill/
 
 .. _caida: http://www.caida.org

@@ -1,0 +1,8 @@
+ifconfig eth0 up
+ifconfig eth0 add 2001:db8:be:b00b::11/64
+/etc/init.d/apache2 start
+/etc/init.d/inetd start
+ip -6 ro ad default via 2001:db8:be:b00b::1
+dd if=/dev/zero of=/var/www/1Mo.zero bs=1K count=1000
+dd if=/dev/zero of=/var/www/10Mo.zero bs=1K count=10000
+dd if=/dev/zero of=/var/www/100Mo.zero bs=1K count=100000

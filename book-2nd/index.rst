@@ -110,6 +110,7 @@ Part 3: Practice
    exercises/ex-app
    exercises/netkit-app
    exercises/netkit-tcp
+   exercises/netkit-congestion
 
 ..  application/exercises/ex-application
 

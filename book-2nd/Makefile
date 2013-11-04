@@ -5,7 +5,7 @@
 
 
 # You can set these variables from the command line.
-SPHINXOPTS    = -N -n -T
+SPHINXOPTS    = -N -n 
 SPHINXBUILD   = sphinx-build
 PAPER         =
 BUILDDIR      = _build

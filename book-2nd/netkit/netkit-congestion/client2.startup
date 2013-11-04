@@ -1,0 +1,23 @@
+ifconfig eth0 up
+ifconfig eth0 add 2001:db8:be:beef::11/64
+ip -6 ro ad default via 2001:db8:be:beef::1
+echo -e "\n2001:db8:be:600d::2 webserver\n" >> /etc/hosts
+sysctl -w net.ipv4.tcp_wmem='65536 65536 65536' 
+sysctl -w net.ipv4.tcp_rmem='65536 65536 65536' 
+sysctl -w net.ipv4.tcp_no_metrics_save=1 
+sysctl -w net.ipv4.tcp_slow_start_after_idle=1 
+sysctl -w net.ipv4.tcp_ecn=0 
+sysctl -w net.ipv4.tcp_keepalive_time=7200 
+sysctl -w net.ipv4.tcp_moderate_rcvbuf=0 
+sysctl -w net.ipv4.tcp_timestamps=0 
+sysctl -w net.ipv4.tcp_keepalive_intvl=15 
+sysctl -w net.ipv4.tcp_dsack=0 
+sysctl -w net.ipv4.tcp_frto=0 
+sysctl -w net.ipv4.tcp_adv_win_scale=0 
+sysctl -w net.ipv4.tcp_reordering=3 
+sysctl -w net.ipv4.tcp_window_scaling=0 
+sysctl -w net.ipv4.tcp_low_latency=0 
+sysctl -w net.ipv4.tcp_mtu_probing=2 
+sysctl -w net.ipv4.tcp_sack=0 
+sysctl -w net.ipv4.tcp_allowed_congestion_control=reno 
+sysctl -w net.ipv4.tcp_fack=0 
