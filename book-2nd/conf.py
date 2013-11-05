@@ -340,3 +340,9 @@ epub_cover=('cnp3.png','')
 # numfig:
 #numfig_number_figures = True
 #numfig_figure_caption_prefix = "Fig."
+
+
+
+# graphviz
+
+#graphviz_dot_args= "-v"
