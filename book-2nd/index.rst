@@ -112,6 +112,7 @@ Part 3: Practice
    exercises/netkit-app
    exercises/netkit-tcp
    exercises/netkit-congestion
+   exercises/netkit-ipv6
 
 ..  application/exercises/ex-application
 
