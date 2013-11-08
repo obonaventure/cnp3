@@ -107,7 +107,7 @@ you need to create a directory for each virtual machine and a startup script. Th
 
 
 
-With these files, you can start the lab, but the virtual machines need to be configured before you can exchange packets. For this, you need first to manually assign IPv6 addresses. On Linux, IP addresses are configured by using the :manpage:`iconfig(8)` command [#fipcommand]_. This command takes a lot of parameters. A typical usage is the following :
+With these files, you can start the lab, but the virtual machines need to be configured before you can exchange packets. For this, you need first to manually assign IPv6 addresses. On Linux, IP addresses are configured by using the :manpage:`ifconfig(8)` command [#fipcommand]_. This command takes a lot of parameters. A typical usage is the following :
 
 .. code-block:: console
 
@@ -164,10 +164,10 @@ The next step is to configure the routes on the three routers. For this, you nee
 
 A first approach is to use shortest path routing. In this case, you need to make sure that :
 
- - ``r1`` has a route to ``2001:db8:be:feed/64`` via ``r2``
- - ``r3`` has a route to ``2001:db8:be:feed/64`` via ``r2``
- - ``r2`` has a route to ``2001:db8:be:beef/64`` via ``r1``
- - ``r3`` has a route to ``2001:db8:be:beef/64`` via ``r1``
+ - ``r1`` has a route to ``2001:db8:be:beef/64`` via ``r2``
+ - ``r3`` has a route to ``2001:db8:be:beef/64`` via ``r2``
+ - ``r2`` has a route to ``2001:db8:be:feed/64`` via ``r1``
+ - ``r3`` has a route to ``2001:db8:be:feed/64`` via ``r1``
  - ``r1`` has a route to ``2001:db8:be:b00b/64`` via ``r3`` 
  - ``r2`` has a route to ``2001:db8:be:b00b/64`` via ``r3``
 
@@ -183,10 +183,10 @@ Assuming that subnet ``2001:db8:bad:1212/64`` has been used on the link between 
 
    Note that when manually configuring the routes as above, nothing forces you to use symmetric routes. For example, the following paths could be configured in the network above.
 
-     - ``r1`` has a route to ``2001:db8:be:feed/64`` via ``r2``
-     - ``r3`` has a route to ``2001:db8:be:feed/64`` via ``r1``
-     - ``r2`` has a route to ``2001:db8:be:beef/64`` via ``r3``
+     - ``r1`` has a route to ``2001:db8:be:beef/64`` via ``r2``
      - ``r3`` has a route to ``2001:db8:be:beef/64`` via ``r1``
+     - ``r2`` has a route to ``2001:db8:be:feed/64`` via ``r3``
+     - ``r3`` has a route to ``2001:db8:be:feed/64`` via ``r1``
      - ``r1`` has a route to ``2001:db8:be:b00b/64`` via ``r2`` 
      - ``r2`` has a route to ``2001:db8:be:b00b/64`` via ``r3``
 
