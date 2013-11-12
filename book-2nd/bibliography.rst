@@ -83,6 +83,7 @@ Whenever possible, the bibliography includes stable hypertext links to the refer
 .. [Goralski2009] Goralski, W., `The Illustrated network : How TCP/IP works in a modern network <http://books.google.com/books?id=6nDtNA6VJ5YC>`_, Morgan Kaufmann, 2009 
 .. [HFPMC2002] Huffaker, B., Fomenkov, M., Plummer, D., Moore, D., Claffy, K., `Distance Metrics in the Internet <http://www.caida.org/outreach/papers/2002/Distance/>`_, Presented at the IEEE International Telecommunications Symposium (ITS) in 2002. 
 .. [HRX2008] Ha, S., Rhee, I., and Xu, L., `CUBIC: a new TCP-friendly high-speed TCP variant <http://doi.acm.org/10.1145/1400097.1400105>`_. SIGOPS Oper. Syst. Rev. 42, 5 (Jul. 2008), 64-74. 
+.. [HV2008] Hogg, S. Vyncke, E., `IPv6 Security <http://www.ciscopress.com/store/ipv6-security-9780133346312>`_, Cisco Press, 2008
 .. [ISO10589] ISO, `Intermediate System to Intermediate System intra-domain routeing information exchange protocol for use in conjunction with the protocol for providing the connectionless-mode network service (ISO 8473) <http://standards.iso.org/ittf/PubliclyAvailableStandards/c030932_ISO_IEC_10589_2002(E).zip>`_ , 2002 
 .. [Jacobson1988] Jacobson, V., `Congestion avoidance and control <http://doi.acm.org/10.1145/52324.52356>`_. In Symposium Proceedings on Communications Architectures and Protocols (Stanford, California, United States, August 16 - 18, 1988). V. Cerf, Ed. SIGCOMM '88. ACM, New York, NY, 314-329. 
 .. [Jain1990] Jain, R., `Congestion control in computer networks : Issues and trends <http://dx.doi.org/10.1109/65.56532>`_, IEEE Network Magazine, May 1990, pp. 24-30
@@ -103,6 +104,8 @@ Whenever possible, the bibliography includes stable hypertext links to the refer
 .. [Licklider1963] Licklider, J., `Memorandum For Members and Affiliates of the Intergalactic Computer Network <http://www.kurzweilai.net/articles/art0366.html?printable=1>`_, 1963 
 .. [LCCD09] Leiner, B. M., Cerf, V. G., Clark, D. D., Kahn, R. E., Kleinrock, L., Lynch, D. C., Postel, J., Roberts, L. G., and Wolff, S., `A brief history of the internet <http://doi.acm.org/10.1145/1629607.1629613>`_. SIGCOMM Comput. Commun. Rev. 39, 5 (Oct. 2009), 22-31. 
 .. [LCP2005] Eng Keong Lua, Crowcroft, J., Pias, M., Sharma, R., Lim, S., `A survey and comparison of peer-to-peer overlay network schemes <http://dx.doi.org/10.1109/COMST.2005.1610546>`_, Communications Surveys & Tutorials, IEEE, Volume: 7 , Issue: 2, 2005, pp. 72-93
+.. [LeB2009] Leroy, D. and O. Bonaventure, `Preparing network
+               configurations for IPv6 renumbering <http://inl.info.ucl.ac.be/system/files/dleroy-nem-2009.pdf>`_, International of Network Management, 2009 
 .. [LFJLMT] Leffler, S., Fabry, R., Joy, W., Lapsley, P., Miller, S., Torek, C., `An Advanced 4.4BSD Interprocess Communication Tutorial <http://docs.freebsd.org/44doc/psd/21.ipc/paper.pdf>`_, 4.4 BSD Programmer's Supplementary Documentation 
 .. [LNO1996] T. V. Lakshman, Arnold Neidhardt, and Teunis J. Ott. 1996. `The drop from front strategy in TCP and in TCP over ATM <http://dx.doi.org/10.1109/INFCOM.1996.493070>`_. INFOCOM'96, Vol. 3. IEEE Computer Society, Washington, DC, USA, 1242-1250.
 .. [LSP1982] Lamport, L., Shostak, R., and Pease, M., `The Byzantine Generals Problem <http://doi.acm.org/10.1145/357172.357176>`_. ACM Trans. Program. Lang. Syst. 4, 3 (Jul. 1982), 382-401. 

@@ -83,6 +83,8 @@ Part 2: Protocols
    protocols/sctp
    protocols/congestion
    protocols/ipv6
+   protocols/ipv6b
+   protocols/routing
 
 ..   application/app-protocols
 
