@@ -86,9 +86,9 @@ For example, the network shown in the figure below has been divided into three a
 
 Inside each non-backbone area, routers distribute the topology of the area by exchanging link state packets with the other routers in the area. The internal routers do not know the topology of other areas, but each router knows how to reach the backbone area. Inside an area, the routers only exchange link-state packets for all destinations that are reachable inside the area. In OSPF, the inter-area routing is done by exchanging distance vectors. This is illustrated by the network topology shown below.
 
-.. figure:: /../book/network/png/network-fig-102-c.png
+.. figure:: /protocols/figures/ospf-area.png
    :align: center
-   :scale: 70
+   :scale: 40
    
    Hierarchical routing with OSPF 
 
@@ -116,16 +116,16 @@ The second OSPF particularity that is worth discussing is the support of Local A
       randkir=LR;
       lan;
       R1[color=white, label=<<TABLE border="0" cellborder="0">
-                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="icons/router.png" scale="true"/></TD></TR><TR><td>R1</br>2001:db8:1234::11/48</td></TR>
+                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="/icons/router.png" scale="true"/></TD></TR><TR><td>R1<br/>2001:db8:1234::11/48</td></TR>
               </TABLE>>];
       R2[color=white, label=<<TABLE border="0" cellborder="0">
-                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="icons/router.png" scale="true"/></TD></TR><TR><td>R2</br>2001:db8:1234::22/48</td></TR>
+                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="/icons/router.png" scale="true"/></TD></TR><TR><td>R2<br/>2001:db8:1234::22/48</td></TR>
               </TABLE>>];
       R3[color=white, label=<<TABLE border="0" cellborder="0">
-                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="icons/router.png" scale="true"/></TD></TR><TR><td>R3</br>2001:db8:1234::33/48</td></TR>
+                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="/icons/router.png" scale="true"/></TD></TR><TR><td>R3<br/>2001:db8:1234::33/48</td></TR>
               </TABLE>>];
       R4[color=white, label=<<TABLE border="0" cellborder="0">
-                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="icons/router.png" scale="true"/></TD></TR><TR><td>R4</br>2001:db8:1234::44/48</td></TR>
+                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="/icons/router.png" scale="true"/></TD></TR><TR><td>R4<br/>2001:db8:1234::44/48</td></TR>
               </TABLE>>];
 	R1--lan;
 	R2--lan;
@@ -171,8 +171,6 @@ In this formula, `N` is the number of outgoing interfaces on the equal cost path
 .. rubric:: Footnotes
 
 .. [#fas] See http://bgp.potaroo.net/index-as.html for reports on the evolution of the number of Autonomous Systems over time.
-
-.. [#fafi] The Address Family Identifiers are maintained by IANA at http://www.iana.org/assignments/address-family-numbers/
 
 
 .. [#fvirtual] OSPF can support `virtual links` to connect routers together that belong to the same area but are not directly connected. However, this goes beyond this introduction to OSPF.
