@@ -305,7 +305,11 @@ When a host receives an IPv6 packet, it needs to determine which transport proto
  - ``UDP`` uses `Next Header` number ``17`` 
  - ``SCTP`` uses `Next Header` number ``132``
 
-For example, an IPv6 packet that contains an SCTP segment would appear as :
+For example, an IPv6 packet that contains an SCTP segment would appear as shown in the figure below.
+
+.. figure:: pkt/ipv6-sctp.png
+
+   An IPv6 packet containing an SCTP segment
 
 .. _IPv6Options:
 
