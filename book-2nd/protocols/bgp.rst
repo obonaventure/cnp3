@@ -300,7 +300,7 @@ The `local-pref` attribute is often used to prefer some routes over others.
 
 A common utilisation of `local-pref` is to support backup links. Consider the situation depicted in the figure below. `AS1` would always like to use the high bandwidth link to send and receive packets via `AS2` and only use the backup link upon failure of the primary one.
 
-.. figure:: /../book/network/svg/bgp-backup.*
+.. figure:: /../book/network/svg/bgp-backup.png
    :align: center
    :scale: 70
    
@@ -327,7 +327,7 @@ The import filter above modifies the selection of the BGP routes inside `AS1`. T
 
 Sometimes, the `local-pref` attribute is used to prefer a `cheap` link compared to a more expensive one. For example, in the network below, `AS1` could wish to send and receive packets mainly via its interdomain link with `AS4`.
 
-.. figure:: /../book/network/svg/bgp-prefer.*
+.. figure:: /../book/network/svg/bgp-prefer.png
    :align: center
    :scale: 70
    
@@ -352,7 +352,7 @@ Another important utilisation of the `local-pref` attribute is to support the `c
 
 With such an import filter, the routers of a domain always prefer to reach destinations via their customers whenever such a route exists. Otherwise, they prefer to use `shared-cost` peering relationships and they only send packets via their providers when they do not know any alternate route. A consequence of setting the `local-pref` attribute like this is that Internet paths are often asymmetrical. Consider for example the internetwork shown in the figure below.
 
-.. figure:: /../book/network/svg/asymetry.*
+.. figure:: /../book/network/svg/asymetry.png
    :align: center
    :scale: 70
    
@@ -369,7 +369,7 @@ BGP convergence
 In the previous sections, we have explained the operation of BGP routers. Compared to intradomain routing protocols, a key feature of BGP is its ability to support interdomain routing policies that are defined by each domain as its import and export filters and ranking process. A domain can define its own routing policies and router vendors have implemented many configuration tweaks to support complex routing policies. However, the routing policy chosen by a domain may interfere with the routing policy chosen by another domain. To understand this issue, let us first consider the simple internetwork shown below.
 
 
-.. figure:: /../book/network/svg/disagree.*
+.. figure:: /../book/network/svg/disagree.png
    :align: center
    :scale: 70
    
@@ -385,7 +385,7 @@ The example above has shown that the routes selected by BGP routers may sometime
 
 From an operational perspective, the above configuration is annoying since the network operators cannot easily predict which paths are chosen. Unfortunately, there are even more annoying BGP configurations. For example, let us consider the configuration below which is often named `Bad Gadget` [GW1999]_
 
-.. figure:: /../book/network/svg/bad-gadget.*
+.. figure:: /../book/network/svg/bad-gadget.png
    :align: center
    :scale: 70
    
@@ -425,7 +425,7 @@ In practice, researchers and operators expect that these guidelines are verified
 
 Based on these studies and [ATLAS2009]_, the AS-level Internet topology can be summarised as shown in the figure below.
 
-.. figure:: /../book/network/svg/bgp-hierarchy.* 
+.. figure:: /../book/network/svg/bgp-hierarchy.png
    :align: center
    :scale: 70
    
@@ -466,8 +466,6 @@ Due to this organisation of the Internet and due to the BGP decision process, mo
 
 .. [#fflap] A link is said to be flapping if it switches several between an operational state and a disabled state within a short period of time. A router attached to such a link would need to frequently send routing messages.
 
-.. [#fnexthopself] Some routers, when they receive a `BGP Update` over an `eBGP session`, set the nexthop of the received route to one of their own addresses. This is called `nexthop-self`. See e.g. [WMS2004]_ for additional details.
-
 
 .. [#fgranularity] Researchers such as [MUF+2007]_ have shown that modelling the Internet topology at the AS-level requires more than the `shared-cost` and `customer->provider` peering relationships. However, there is no publicly available model that goes beyond these classical peering relationships.
 
@@ -475,3 +473,6 @@ Due to this organisation of the Internet and due to the BGP decision process, mo
 
 
 .. [#fpotaroo] Several web sites collect and analyse data about the evolution of BGP in the global Internet. http://bgp.potaroo.net provides lots of statistics and analyses that are updated daily.
+
+
+.. include:: /links.rst
