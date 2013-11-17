@@ -116,16 +116,16 @@ The second OSPF particularity that is worth discussing is the support of Local A
       randkir=LR;
       lan;
       R1[color=white, label=<<TABLE border="0" cellborder="0">
-                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="/icons/router.png" scale="true"/></TD></TR><TR><td>R1<br/>2001:db8:1234::11/48</td></TR>
+                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="icons/router.png" scale="true"/></TD></TR><TR><td>R1<br/>2001:db8:1234::11/48</td></TR>
               </TABLE>>];
       R2[color=white, label=<<TABLE border="0" cellborder="0">
-                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="/icons/router.png" scale="true"/></TD></TR><TR><td>R2<br/>2001:db8:1234::22/48</td></TR>
+                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="icons/router.png" scale="true"/></TD></TR><TR><td>R2<br/>2001:db8:1234::22/48</td></TR>
               </TABLE>>];
       R3[color=white, label=<<TABLE border="0" cellborder="0">
-                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="/icons/router.png" scale="true"/></TD></TR><TR><td>R3<br/>2001:db8:1234::33/48</td></TR>
+                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="icons/router.png" scale="true"/></TD></TR><TR><td>R3<br/>2001:db8:1234::33/48</td></TR>
               </TABLE>>];
       R4[color=white, label=<<TABLE border="0" cellborder="0">
-                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="/icons/router.png" scale="true"/></TD></TR><TR><td>R4<br/>2001:db8:1234::44/48</td></TR>
+                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="icons/router.png" scale="true"/></TD></TR><TR><td>R4<br/>2001:db8:1234::44/48</td></TR>
               </TABLE>>];
 	R1--lan;
 	R2--lan;
