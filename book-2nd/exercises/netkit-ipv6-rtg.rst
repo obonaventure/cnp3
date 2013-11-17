@@ -82,7 +82,7 @@ Router ``r`` uses IPv6 address ``2001:db8:dead:beef::11/64`` and is configured t
        };
    };
 
-Unlike previous labs, IPv6 addresses are not configured with :manpage:ìfconfig(8)` on the virtual hosts. These addresses will be obtained dynamically. All host interfaces are ``down`` at the startup, so you need to activate them with ``ifconfig eth0 up`` when you are ready to monitor the address assignment process. Use ``tcpdump`` on a host (for instance, ``hostA``) to capture the packets in the link (or ``wireshark`` if you have root access to your machine). Look at the exchanged packets when the interfaces are activated.
+Unlike previous labs, IPv6 addresses are not configured with :manpage:`ifconfig(8)` on the virtual hosts. These addresses will be obtained dynamically. All host interfaces are ``down`` at the startup, so you need to activate them with ``ifconfig eth0 up`` when you are ready to monitor the address assignment process. Use ``tcpdump`` on a host (for instance, ``hostA``) to capture the packets in the link (or ``wireshark`` if you have root access to your machine). Look at the exchanged packets when the interfaces are activated.
 
 1. How are global-scope addresses assigned ? Describe the observed router discovery process.   
 
@@ -183,7 +183,7 @@ Now you can interact with the OSPF daemon and observe its current state and the 
 
 Now it is time to play with the topology. You can request the shortest path tree computed by a router (and monitor how it changes) with the command ``show ipv6 ospf6 spf tree`` when connected via ``telnet`` to the ``ospf6d`` daemon.
 
-5. Try to disable some link sand observe what is happening. You can disable a link with the :manpage:ìfconfig(8)` command :
+5. Try to disable some link sand observe what is happening. You can disable a link with the :manpage:`ifconfig(8)` command :
 
      .. code-block:: console
 
