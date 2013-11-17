@@ -1,0 +1,11 @@
+ifconfig eth0 up 
+ifconfig eth0 add 2001:db8:c001::3/48
+ifconfig eth1 up
+ifconfig eth1 add 2001:db8:5afe::1/48
+ifconfig eth2 up
+ifconfig eth2 add 2001:db8:cafe::1/48
+sysctl -w net.ipv6.conf.all.forwarding=1
+route -A inet6 add 2001:db8:5afe::/48 gw 2001:db8:cafe::2
+echo "2001:db8:c001::1 r1" >> /etc/hosts
+echo "2001:db8:cafe::2 r4" >> /etc/hosts
+echo "2001:db8:5afe::2 r3" >> /etc/hosts

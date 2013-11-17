@@ -1,0 +1,7 @@
+ifconfig eth0 up
+ifconfig eth1 up
+ifconfig eth1 add 2001:db8:dead::1/48
+# Active ipv6 forwarding 
+sysctl -w net.ipv6.conf.all.forwarding=1
+
+/etc/init.d/dibbler-server start

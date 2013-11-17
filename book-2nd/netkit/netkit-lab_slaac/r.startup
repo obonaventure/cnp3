@@ -1,0 +1,8 @@
+# enable interface eth0
+ifconfig eth0 up
+# add one IPv6 address on this interface
+ifconfig eth0 add 2001:db8:be:feed::11/64
+sysctl -w net.ipv6.conf.all.forwarding=1
+
+chmod u=rw,go= /etc/radvd.conf
+/etc/init.d/radvd start

@@ -1,0 +1,15 @@
+127.0.0.1 bb4
+127.0.0.1 localhost localhost.localdomain
+
+::1     ip6-localhost ip6-loopback
+fe00::0 ip6-localnet
+ff00::0 ip6-mcastprefix
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+ff02::3 ip6-allhosts
+ff02::5 ip6-allspfrouters
+
+2001:db8:cafe::1 bb1
+2001:db8:c001::2 bb2
+2001:db8:beef::2 bb3
+2001:db8:cad0::4 bb4

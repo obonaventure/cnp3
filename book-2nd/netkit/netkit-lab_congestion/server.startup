@@ -1,0 +1,8 @@
+ifconfig eth0 up
+ifconfig eth0 add 2001:db8:be:600d::2/64
+/etc/init.d/apache2 start
+/etc/init.d/inetd start
+route -A inet6 add default gw 2001:DB8:be:600d::1
+dd if=/dev/zero of=/var/www/1Mo.zero bs=1K count=1000
+dd if=/dev/zero of=/var/www/10Mo.zero bs=1K count=10000
+dd if=/dev/zero of=/var/www/100Mo.zero bs=1K count=100000
