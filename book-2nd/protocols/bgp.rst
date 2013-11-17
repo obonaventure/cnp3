@@ -96,7 +96,7 @@ The Internet uses a single interdomain routing protocol : the Border Gateway Pro
 
 The figure below shows a simple example of the BGP routes that are exchanged between domains. In this example, prefix `2001:db8:1234/48` is announced by `AS1`. `AS1` advertises a BGP route towards this prefix to `AS2`. The AS-Path of this route indicates that `AS1` is the originator of the prefix. When `AS4` receives the BGP route from `AS1`, it re-announces it to `AS2` and adds its AS number to the AS-Path. `AS2` has learned two routes towards prefix `2001:db8:1234/48`. It compares the two routes and prefers the route learned from `AS4` based on its own ranking algorithm. `AS2` advertises to `AS5` a route towards `2001:db8:1234/48` with its AS-Path set to `AS2:AS4:AS1`. Thanks to the AS-Path, `AS5` knows that if it sends a packet towards `2001:db8:1234/48` the packet first passes through `AS2`, then through `AS4` before reaching its destination inside `AS1`.
 
-.. figure:: png/network-fig-111-c.png
+.. figure:: /protocols/figures/bgp-example.*
    :align: center
    :scale: 70
    
@@ -251,7 +251,7 @@ Let us now discuss in more detail the operation of BGP in an IPv6 network. For t
 
 .. todo:: ipv6
 
-This network contains three routers : `R1`, `R2` and `R3`. Each router is attached to a local IPv4 subnet that it advertises using BGP. There are two BGP sessions, one between `R1` and `R2` and the second between `R2` and `R3`. A `/127` subnet is used on each interdomain link (`195.100.0.0/30` on `R1-R2` and `195.100.0.4/30` on `R2-R3`) in conformance with the latest recommendation :rfc:`6164`. The BGP sessions run above TCP connections established between the neighbouring routers (e.g. `195.100.0.1 - 195.100.0.2` for the `R1-R2` session).
+This network contains three routers : `R1`, `R2` and `R3`. Each router is attached to a local IPv4 subnet that it advertises using BGP. There are two BGP sessions, one between `R1` and `R2` and the second between `R2` and `R3`. A `/127` subnet is used on each interdomain link (`2001:db8::4/127` on `R1-R2` and `2001:db8::0/127` on `R2-R3`) in conformance with the latest recommendation :rfc:`6164`. The BGP sessions run above TCP connections established between the neighboring routers (e.g. `2001:db8::5 - 2001:db8::6` for the `R1-R2` session).
 
 
 .. index:: BGP nexthop
@@ -262,11 +262,11 @@ Let us assume that the `R1-R2` BGP session is the first to be established. A `BG
  - the `BGP nexthop`
  - the attributes including the AS-Path 
 
-We use the notation `U(prefix, nexthop, attributes)` to represent such a `BGP Update` message in this section. Similarly, `W(prefix)` represents a `BGP withdraw` for the specified prefix. Once the `R1-R2` session has been established, `R1` sends `U(194.100.0.0/24,195.100.0.1,AS10)` to `R2` and `R2` sends `U(194.100.2.0/23,195.100.0.2,AS20)`. At this point, `R1` can reach `194.100.2.0/23` via `195.100.0.2` and `R2` can reach `194.100.0.0/24` via `195.100.0.1`.
+We use the notation `U(prefix, nexthop, attributes)` to represent such a `BGP Update` message in this section. Similarly, `W(prefix)` represents a `BGP withdraw` for the specified prefix. Once the `R1-R2` session has been established, `R1` sends `U(2001:db8:1234::/48,2001:db8::5,AS10)` to `R2` and `R2` sends `U(2001:db8:5678:/48,2001:db8::6,AS20)`. At this point, `R1` can reach `2001:db8:5678::/48` via `2001:db8::6` and `R2` can reach `2001:db8:1234::/47` via `2001:db8::5`.
 
-Once the `R2-R3` has been established, `R3` sends `U(194.100.1.0/24,195.100.0.6,AS30)`. `R2` announces on the `R2-R3` session all the routes inside its RIB. It thus sends to `R3` : `U(194.100.0.0/24,195.100.0.5,AS20:AS10)` and `U(194.100.2.0/23,195.100.0.5,AS20)`. Note that when `R2` advertises the route that it learned from `R1`, it updates the BGP nexthop and adds its AS number to the AS-Path. `R2` also sends `U(194.100.1.0/24,195.100.0.2,AS20:AS30)` to `R1` on the `R1-R3` session. At this point, all BGP routes have been exchanged and all routers can reach `194.100.0.0/24`, `194.100.2.0/23` and `194.100.1.0/24`.
+Once the `R2-R3` has been established, `R3` sends `U(2001:db8:acbd::/48,2001:db8::2,AS30)`. `R2` announces on the `R2-R3` session all the routes inside its RIB. It thus sends to `R3` : `U(2001:db8:1234::/48,2001:db8::1,AS20:AS10)` and `U(2001:db8:5678::/48,2001:db8::1,AS20)`. Note that when `R2` advertises the route that it learned from `R1`, it updates the BGP nexthop and adds its AS number to the AS-Path. `R2` also sends `U(2001:db8:abcd::48,2001:db8::6,AS20:AS30)` to `R1` on the `R1-R3` session. At this point, all BGP routes have been exchanged and all routers can reach `2001:db8::1234/48`, `2001:db8:5678::/48` and `2001:db8:abcd::/48`.
 
-If the link between `R2` and `R3` fails, `R3` detects the failure as it did not receive `KEEPALIVE` messages recently from `R2`. At this time, `R3` removes from its RIB all the routes learned over the `R2-R3` BGP session. `R2` also removes from its RIB the routes learned from `R3`. `R2` also sends  `W(194.100.1.0/24)` to `R1` over the `R1-R3` BGP session since it does not have a route anymore towards this prefix.
+If the link between `R2` and `R3` fails, `R3` detects the failure as it did not receive `KEEPALIVE` messages recently from `R2`. At this time, `R3` removes from its RIB all the routes learned over the `R2-R3` BGP session. `R2` also removes from its RIB the routes learned from `R3`. `R2` also sends  `W(2001:db8:acbd::/48)` to `R1` over the `R1-R3` BGP session since it does not have a route anymore towards this prefix.
 
 .. note:: Origin of the routes advertised by a BGP router
 
