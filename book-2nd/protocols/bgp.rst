@@ -243,7 +243,7 @@ If the import filter accepts the BGP message, the pseudo-code distinguishes two 
 
 Let us now discuss in more detail the operation of BGP in an IPv6 network. For this, let us consider the simple network composed of three routers located in three different ASes and shown in the figure below.
 
-.. figure:: svg/bgp-nexthop.png
+.. figure:: /protocols/figures/bgp-nexthop.png
    :align: center
    :scale: 70
    
