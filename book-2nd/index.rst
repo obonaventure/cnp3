@@ -86,7 +86,8 @@ Part 2: Protocols
    protocols/ipv6b
    protocols/routing
    protocols/bgp
-
+   protocols/lan
+   
 ..   application/app-protocols
 
 ..  transport/principles
