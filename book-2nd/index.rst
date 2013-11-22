@@ -115,6 +115,8 @@ Part 3: Practice
    exercises/netkit-tcp
    exercises/netkit-congestion
    exercises/netkit-ipv6
+   exercises/netkit-ipv6-rtg
+   exercises/ex-bgp
 
 ..  application/exercises/ex-application
 
