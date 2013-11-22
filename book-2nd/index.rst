@@ -6,14 +6,18 @@
 Computer Networking : Principles, Protocols and Practice, 2nd edition
 #####################################################################
 
-.. only:: html
+
 
 
 .. figure:: cnp3.png
    :align: center
    :scale: 60
 
-   This is the current draft of the second edition of `Computer Networking : Principles, Protocols and Practice`. The ebook is being entirely rewritten until the end of 2013. It will be updated on a weekly basis. You can also directly download the current ebook draft in various formats from the links below :
+.. only:: html
+
+   This is an unpolished draft of the second edition of this ebook. If you find any error or have suggestions to improve the text, please create an issue via https://github.com/obonaventure/cnp3/issues/new
+
+    You can also directly download the current ebook draft in various formats from the links below :
 
    	- :download:`distrib/cnp3bis.epub` suitable for viewing on tablets like ipad
  	- :download:`distrib/cnp3bis.pdf` suitable for viewing and printing anywhere
@@ -22,10 +26,10 @@ Computer Networking : Principles, Protocols and Practice, 2nd edition
     The development of this edition of the textbook is carried out on `github
     <https://github.com/obonaventure/cnp3/tree/master/book-2nd>`_ 
 
-    You can help to improve this ebook by :
+..    You can help to improve this ebook by :
 
-    	- posting comments, suggestions or bug reports on `github <https://github.com/obonaventure/cnp3/tree/master/book-2nd>`_
-	- proposing new exercices or sending patches on `github <https://github.com/obonaventure/cnp3/tree/master/book-2nd>`_
+..    	- posting comments, suggestions or bug reports on `github <https://github.com/obonaventure/cnp3/tree/master/book-2nd>`_
+..	- proposing new exercices or sending patches on `github <https://github.com/obonaventure/cnp3/tree/master/book-2nd>`_
 	
     The source code of the entire textbook is written in `reStructuredText <http://docutils.sourceforge.net/rst.html>`_ and uses several `sphinx <http://sphinx.pocoo.org>`_ features. You can browse it from `github <https://github.com/obonaventure/cnp3/tree/master/book-2nd>`_ 
 

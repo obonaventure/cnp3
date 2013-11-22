@@ -1,0 +1,13 @@
+ifconfig eth0 up
+ifconfig eth0 add 2001:db8:b::2/48
+
+ifconfig eth1 up
+ifconfig eth1 add 2001:db8:f::2/48
+
+
+# Active ipv6 forwarding 
+sysctl -w net.ipv6.conf.all.forwarding=1
+
+tc qdisc add dev eth1 root netem delay 100ms
+
+/etc/init.d/zebra start
