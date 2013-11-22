@@ -13,6 +13,7 @@ Exercises
 ---------
 
 
+
 1. Consider the interdomain topology shown in the figure below.
 
 
@@ -87,10 +88,12 @@ Once the interdomain network has fully converged, analyze the consequence of a f
      :align: center
      :scale: 100
 
+
  
  Should `AS123` change its configuration ? 
 
 5. Consider that the AS stub (`AS456`) shown in the figure below decides to advertise two ``/48`` prefixes instead of its allocated ``/47`` prefix.
+
 
   .. figure:: fig/ex-bgp-stub-two-providers-specific.png
      :align: center
@@ -105,15 +108,19 @@ Once the interdomain network has fully converged, analyze the consequence of a f
 
 6. Consider the network shown in the figure below. In this network, each AS contains a single BGP router. Assume that `R1` advertises a single prefix. `R1` receives a lot of packets from `R9`. Without any help from `R2`, `R9` or `R4`, how could `R1` configure its BGP advertisement such that it receives the packets from `R9` via `R3` ? What happens when a link fails ?
 
+
   .. figure:: fig/ex-bgp-internetwork.png
      :align: center
      :scale: 100
 
+
 7. Consider the network shown in the figure below where R1 advertises a single prefix. In this network, the link between R1 and R2 is considered as a backup link. It should only be used only when the primary link (R1-R4) fails. 
+
 
   .. figure:: fig/ex-bgp-backup.png
      :align: center
      :scale: 100
+
 
   - Can you implement this in `R2` ? How ?
  
@@ -127,7 +134,9 @@ Once the interdomain network has fully converged, analyze the consequence of a f
 Netkit BGP lab
 --------------
 
-This lab, :download:`netkit/netkit-lab_bgp.zip`, allows you to experiment with the BGP operation. The simulated internetwork consists of 8 BGP routers, each one corresponding to a different Autonomous System (AS). They have the peering relations shown in the figure:
+
+This lab, :download:`/netkit/netkit-lab_bgp.zip`, allows you to experiment with the BGP operation. The simulated internetwork consists of 8 BGP routers, each one corresponding to a different Autonomous System (AS). They have the peering relations shown in the figure:
+
 
   .. figure:: fig/bgp-topology.png
      :align: center
@@ -155,6 +164,7 @@ In the ``telnet`` terminal you can use:
     show ip bgp neighbors
     show ip community-list
 
+
 to get more infos. (Note that neighbors and community list queries use the `ip` command instead of the `ipv6` command). See the ``quagga manual<http://www.nongnu.org/quagga/docs/quagga.html#BGP>`_ for ``bgpd`` for a more complete description of available commands.
 
 You can find the configuration files of the running daemons in the routers' folders. For instance, consider router ``r1``. You can find 3 configuration files in ``lab/r1/etc/quagga``:
@@ -165,11 +175,13 @@ You can find the configuration files of the running daemons in the routers' fold
 
 - The third one is ``bgpd.conf``. This is the configuration file of our bgpd daemon. The following picture details the meaning of Let's see what all these lines means.
 
+
      .. figure:: fig/bgpdconf.png
         :align: center
         :scale: 100
 
 With this in mind, you are able to play with the topology and even create new routers that use BGP. Try some different configurations, try to change how the filters work and observe what happens. On the original lab, for instance, you can cause a failure on the `AS9`-`AS1` link (with the command ``ifconfig ... down``). Observe which BGP messages are exchanged and how the state of router ``r7`` changes. What are your expectations? Are your observations consistent with what you expected ?
+
 
 
 .. include:: /links.rst
