@@ -67,7 +67,7 @@ Are all ASes capable of reaching all the other ASes in this simple Internet ?
  Assume that the BGP sessions are activated in the following order :
 
   - `AS1-AS2`
-  - `AS2-AS3` 
+  - `AS2-AS1` 
   - `AS3-AS4` 
   - `AS1-AS3`
   - `AS1-AS4`
