@@ -27,7 +27,8 @@ Exercises
       AS4 -> AS3 [dir=none,label=<<font color="blue">=</font>>, color=blue];   
    }
 
- In this network, what are the paths :
+
+In this network, what are the paths :
 
   - from `AS1` to `AS4` 
   - from `AS4` to `AS2` 
@@ -61,10 +62,9 @@ Are all ASes capable of reaching all the other ASes in this simple Internet ?
       AS1 -- AS2;
       AS3 -- AS4; 
       AS1 -- AS4;
-
    }
 
- Assume that the BGP sessions are activated in the following order :
+Assume that the BGP sessions are activated in the following order :
 
   - `AS1-AS2`
   - `AS2-AS3` 
@@ -72,9 +72,9 @@ Are all ASes capable of reaching all the other ASes in this simple Internet ?
   - `AS1-AS3`
   - `AS1-AS4`
 
- At each step of this activation sequence, show the BGP messages for prefix `p` that are exchanged and provide the BGP routing table of the different ASes. Assume that BGP always prefers the short AS-Path.
+At each step of this activation sequence, show the BGP messages for prefix `p` that are exchanged and provide the BGP routing table of the different ASes. Assume that BGP always prefers the short AS-Path.
 
- Once the interdomain network has fully converged, analyze the consequence of a failure of the following BGP sessions on the routes towards prefix `p` :
+Once the interdomain network has fully converged, analyze the consequence of a failure of the following BGP sessions on the routes towards prefix `p` :
 
   - `AS1-AS2`
   - `AS1-AS4`

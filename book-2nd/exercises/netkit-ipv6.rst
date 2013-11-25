@@ -96,7 +96,7 @@ To build your own lab, you need to first define the subnetworks that compose the
 The above ``lab.conf`` file defines the network topology and the configuration of the virtual machines. To allow `lstart <http://wiki.netkit.org/man/man1/lstart.1.html>`_ to start the lab,
 you need to create a directory for each virtual machine and a startup script. The directory is named ``machine`` where ``machine`` is the name chosen for the virtual machine. The startup script is specific for each virtual machine and is called ``machine.startup``. For example, to create these directories and files, you could run the following bash script in the directory where the ``lab.conf`` file is stored.
 
-.. code-block:: shell
+.. code-block:: console
 
 
    for vm in hostA hostB hostC r1 r2 r3
