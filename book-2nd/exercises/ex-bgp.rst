@@ -81,7 +81,7 @@ Are all ASes capable of reaching all the other ASes in this simple Internet ?
 
 
 
-4. Consider the network below in which a stub domain, `AS456`, is connected to two providers `AS123` and `AS789`. `AS456` advertises its prefix to both its providers. On the other hand, `AS123` advertises `2001:db8:dead://48` while `AS789` advertises `2001:db8:beef::/48` and `2001:db8:dead:cafe:://63`. Via which provider will the packets destined to ``2001:db8:cafe::1`` will be received by `AS456` ?
+4. Consider the network below in which a stub domain, `AS456`, is connected to two providers `AS123` and `AS789`. `AS456` advertises its prefix to both its providers. On the other hand, `AS123` advertises `2001:db8:dead://48` while `AS789` advertises `2001:db8:beef::/48` and `2001:db8:dead:cafe::/63`. Via which provider will the packets destined to ``2001:db8:dead:cafe::1`` will be received by `AS456` ?
 
   .. figure:: fig/ex-bgp-stub-two-providers.png
      :align: center
@@ -101,7 +101,7 @@ Are all ASes capable of reaching all the other ASes in this simple Internet ?
   
   - How is the reachability of these addresses affected when link `R1`-`R3` fails ?
 
-  - Propose a configuration on R1 that achieves the same objective as the one shown in the figure but also preserves the reachability of all IP addresses inside `AS4567` if one of `AS4567`'s interdomain links fails.
+  - Propose a configuration on R1 that achieves the same objective as the one shown in the figure but also preserves the reachability of all IP addresses inside `AS456` if one of `AS456`'s interdomain links fails.
 
 6. Consider the network shown in the figure below. In this network, each AS contains a single BGP router. Assume that `R1` advertises a single prefix. `R1` receives a lot of packets from `R9`. Without any help from `R2`, `R9` or `R4`, how could `R1` configure its BGP advertisement such that it receives the packets from `R9` via `R3` ? What happens when a link fails ?
 
