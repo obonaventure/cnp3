@@ -57,7 +57,7 @@ Exercises
 Netkit STP lab
 --------------
 
-In this lab, you can explore the behavior of a network with switches that use the Spanning Tree Protocol (STP). This protocol allows switches to automatically disable ports on Ethernet switches to ensure that the network does not contain any cycle that could cause frames to loop forever.
+In the lab ``lab_stp`` (:download:`/netkit/netkit-lab_stp.zip`), you can explore the behavior of a network with switches that use the Spanning Tree Protocol (STP). This protocol allows switches to automatically disable ports on Ethernet switches to ensure that the network does not contain any cycle that could cause frames to loop forever.
 
 Here is the topology of the network:
 
@@ -66,13 +66,13 @@ Here is the topology of the network:
      :scale: 100
 
 
-To use STP, these switches uses ``brctl``, a tool that allows to make bridges and build the spanning tree.
+To use STP, these switches uses ``brctl``, a tool that allows to configure devices as Ethernet bridges and build the spanning tree.
 
-For this lab, you can use the "Wireshark" tool. It's a packet sniffer (like tcpdump) but it is more convenient to use.
+For this lab, you can use the ``wireshark`` or ``tcpdump`` as packet sniffers. 
 
-To launch the lab you have to go in the directory of the lab and launch it with netkit using command ``lstart`` (you can add the option -f for a quick launch). 
+To launch the lab you have to go in the directory of the lab and launch it with netkit using command ``lstart`` (you can add the option ``-f`` for a quick launch). 
 
-You can see that the 6 machines are launched. For the moment, no one of them runs STP. You will run it (via the ``brctl`` daemon) on two routers and activate wireshark on one of them as explained above. To activate the STP on one switch type in his terminal:
+You can see that the 6 machines are launched. For the moment, no one of them runs STP. You will run it (via the ``brctl`` command) on two routers and activate wireshark on one of them as explained above. To activate the STP on one switch type in his terminal:
 
  .. code:: console
 
@@ -88,7 +88,7 @@ You can see the state of a bridge by typing :
 
 This command brings information about the designated root of the tree, the root port of the switch and the cost to the root switch.
 
-Now, we will launch some other switches. By doing that we change the topology. With wireshark you can observe the packets of the spanning tree protocol that are exchanged. The switches already launched will generate a "topology change notification", then others switches will acknowlegde these changes.
+Now, you can launch some other switches. By doing that you change the topology. With ``wireshark`` you can observe the packets of the spanning tree protocol that are exchanged. The switches already launched will generate a "topology change notification", then others switches will acknowlegde these changes.
 
 When all switches are launched, you can look at the bridge state of each switches: 
 
@@ -110,7 +110,7 @@ You can make some links fail and observe what is happening. You can do that by s
 
     ifconfig IF down
 
-where IF is the name of your interface.
+where ``IF`` is the name of your interface.
 
 
 .. include:: /links.rst
