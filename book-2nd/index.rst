@@ -123,6 +123,7 @@ Part 3: Practice
    exercises/netkit-ipv6
    exercises/netkit-ipv6-rtg
    exercises/ex-bgp
+   exercises/ex-stp
 
 ..  application/exercises/ex-application
 
