@@ -162,7 +162,7 @@ When a BGP session starts, the routers first exchange `OPEN` messages to negotia
 
 .. code-block:: python
 
-  def initiliaze_BGP_session( RemoteAS, RemoteIP):
+  def initialize_BGP_session( RemoteAS, RemoteIP):
     # Initialize and start BGP session
     # Send BGP OPEN Message to RemoteIP on port 179
     # Follow BGP state machine 

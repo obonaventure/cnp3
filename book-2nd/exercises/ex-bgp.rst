@@ -138,6 +138,7 @@ Netkit BGP lab
 This lab, :download:`/netkit/netkit-lab_bgp.zip`, allows you to experiment with the BGP operation. The simulated internetwork consists of 8 BGP routers, each one corresponding to a different Autonomous System (AS). They have the peering relations shown in the figure:
 
 
+
   .. figure:: fig/bgp-topology.png
      :align: center
      :scale: 100
