@@ -166,7 +166,7 @@ In the ``telnet`` terminal you can use:
     show ip community-list
 
 
-to get more infos. (Note that neighbors and community list queries use the `ip` command instead of the `ipv6` command). See the ``quagga manual<http://www.nongnu.org/quagga/docs/quagga.html#BGP>`_ for ``bgpd`` for a more complete description of available commands.
+to get more infos. (Note that neighbors and community list queries use the `ip` command instead of the `ipv6` command). See the `quagga manual <http://www.nongnu.org/quagga/docs/quagga.html#BGP>`_ for ``bgpd`` for a more complete description of available commands.
 
 You can find the configuration files of the running daemons in the routers' folders. For instance, consider router ``r1``. You can find 3 configuration files in ``lab/r1/etc/quagga``:
 
