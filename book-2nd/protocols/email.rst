@@ -227,7 +227,7 @@ The example below, from :rfc:`4648`, illustrates the `Base64` encoding.
  +----------------+----------------------------------------------------------+
    
 
-The last point to be discussed about `base64` is what happens when the length of the sequence of bytes to be encoded is not a multiple of three. In this case, the last group of bytes may contain one or two bytes instead of three. `Base64` reserves the `=` character as a padding character. This character is used twice when the last group contains two bytes and once when it contains one byte as illustrated by the two examples below. 
+The last point to be discussed about `base64` is what happens when the length of the sequence of bytes to be encoded is not a multiple of three. In this case, the last group of bytes may contain one or two bytes instead of three. `Base64` reserves the `=` character as a padding character. This character is used once when the last group contains two bytes and twice when it contains one byte as illustrated by the two examples below.
 
  +----------------+-----------------------+
  |  Input data    | 0x14                  |

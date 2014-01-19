@@ -15,7 +15,7 @@ Many `FTP` clients offer a user interface similar to a Unix shell and allow the 
 
 ftp was very popular in the 1990s and early 2000s, but today it has mostly been superseded by more recent protocols. Authenticated access to files is mainly done by using the Secure Shell (ssh_) protocol defined in :rfc:`4251` and supported by clients such as scp_ or sftp_. Nowadays, anonymous access is mainly provided by web protocols.
 
-In the late 1980s, high energy physicists working at CERN_ had to efficiently exchange documents about their ongoing and planned experiments. `Tim Berners-Lee`_ evaluated several of the documents sharing techniques that were available at that time [B1989]_. As none of the existing solutions met CERN's requirements, they choose to develop a completely new document sharing system. This system was initially called the `mesh`, but was quickly renamed the `world wide web`. The starting point for the `world wide web` are hypertext documents. An hypertext document is a document that contains references (hyperlinks) to other documents that the reader can immediately access. Hypertext was not invented for the world wide web. The idea of hypertext documents was proposed in 1945 [Bush1945]_ and the first experiments were done during the 1960s [Nelson1965]_ [Myers1998]_ . Compared to the hypertext documents that were used in the late 1980s, the main innovation introduced by the `world wide web` was to allow hyperlinks to reference documents stored on remote machines. 
+In the late 1980s, high energy physicists working at CERN_ had to efficiently exchange documents about their ongoing and planned experiments. `Tim Berners-Lee`_ evaluated several of the documents sharing techniques that were available at that time [B1989]_. As none of the existing solutions met CERN's requirements, they chose to develop a completely new document sharing system. This system was initially called the `mesh`, but was quickly renamed the `world wide web`. The starting point for the `world wide web` are hypertext documents. An hypertext document is a document that contains references (hyperlinks) to other documents that the reader can immediately access. Hypertext was not invented for the world wide web. The idea of hypertext documents was proposed in 1945 [Bush1945]_ and the first experiments were done during the 1960s [Nelson1965]_ [Myers1998]_ . Compared to the hypertext documents that were used in the late 1980s, the main innovation introduced by the `world wide web` was to allow hyperlinks to reference documents stored on remote machines.
 
 
 .. figure:: ../../book/application/svg/www-basics.png
@@ -115,9 +115,9 @@ Several types of method can be used in HTTP requests. The three most important o
 
  - the `GET` method is the most popular one. It is used to retrieve a document from a server. The `GET` method is encoded as `GET` followed by the path of the URI of the requested document and the version of HTTP used by the client. For example, to retrieve the http://www.w3.org/MarkUp/ URI, a client must open a TCP on port `80` with host `www.w3.org` and send a HTTP request containing the following line :
 
-.. code-block:: console
+ .. code-block:: console
 
-   GET /MarkUp/ HTTP/1.0
+    GET /MarkUp/ HTTP/1.0
 
  - the `HEAD` method is a variant of the `GET` method that allows the retrieval of the header lines for a given URI without retrieving the entire document. It can be used by a client to verify if a document exists, for instance. 
  - the `POST` method can be used by a client to send a document to a server. The sent document is attached to the HTTP request as a MIME document.
@@ -300,7 +300,7 @@ The third, and widely adopted, solution are HTTP cookies. HTTP cookies were init
  
 .. rubric:: Footnotes
 
-.. [#furiretrieve] An example of a non-retrievable URI is `urn:isbn:0-380-81593-1` which is an unique identifier for a book, through the urn scheme (see :rfc:`3187`). Of course, any URI can be make retrievable via a dedicated server or a new protocol but this one has no explicit protocol. Same thing for the scheme tag (see :rfc:`4151`), often used in Web syndication (see :rfc:`4287` about the Atom syndication format). Even when the scheme is retrievable (for instance with http`), it is often used only as an identifier, not as a way to get a resource. See  http://norman.walsh.name/2006/07/25/namesAndAddresses for a good explanation.
+.. [#furiretrieve] An example of a non-retrievable URI is `urn:isbn:0-380-81593-1` which is an unique identifier for a book, through the urn scheme (see :rfc:`3187`). Of course, any URI can be made retrievable via a dedicated server or a new protocol but this one has no explicit protocol. Same thing for the scheme tag (see :rfc:`4151`), often used in Web syndication (see :rfc:`4287` about the Atom syndication format). Even when the scheme is retrievable (for instance with http`), it is often used only as an identifier, not as a way to get a resource. See  http://norman.walsh.name/2006/07/25/namesAndAddresses for a good explanation.
 
 
 .. [#furilist] The list of standard URI schemes is maintained by IANA_ at http://www.iana.org/assignments/uri-schemes.html

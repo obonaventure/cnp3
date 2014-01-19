@@ -255,7 +255,7 @@ Let us now discuss in more detail the operation of BGP in an IPv6 network. For t
 
 .. todo:: ipv6
 
-This network contains three routers : `R1`, `R2` and `R3`. Each router is attached to a local IPv4 subnet that it advertises using BGP. There are two BGP sessions, one between `R1` and `R2` and the second between `R2` and `R3`. A `/127` subnet is used on each interdomain link (`2001:db8::4/127` on `R1-R2` and `2001:db8::0/127` on `R2-R3`) in conformance with the latest recommendation :rfc:`6164`. The BGP sessions run above TCP connections established between the neighboring routers (e.g. `2001:db8::5 - 2001:db8::6` for the `R1-R2` session).
+This network contains three routers : `R1`, `R2` and `R3`. Each router is attached to a local IPv6 subnet that it advertises using BGP. There are two BGP sessions, one between `R1` and `R2` and the second between `R2` and `R3`. A `/127` subnet is used on each interdomain link (`2001:db8::4/127` on `R1-R2` and `2001:db8::0/127` on `R2-R3`) in conformance with the latest recommendation :rfc:`6164`. The BGP sessions run above TCP connections established between the neighboring routers (e.g. `2001:db8::5 - 2001:db8::6` for the `R1-R2` session).
 
 
 .. index:: BGP nexthop
@@ -362,7 +362,7 @@ With such an import filter, the routers of a domain always prefer to reach desti
    
    Asymmetry of Internet paths
 
-Consider in this internetwork the routes available inside `AS1` to reach `AS5`. `AS1` learns the `AS4:AS6:AS7:AS5` path from `AS4`, the `AS3:AS8:AS5` path from `AS3` and the `AS2:AS5` path from `AS2`. The first path is chosen since it was from learned from a customer. `AS5` on the other hand receives three paths towards `AS1` via its providers. It may select any of these paths to reach `AS1` , depending on how it prefers one provider over the others.
+Consider in this internetwork the routes available inside `AS1` to reach `AS5`. `AS1` learns the `AS4:AS6:AS7:AS5` path from `AS4`, the `AS3:AS8:AS5` path from `AS3` and the `AS2:AS5` path from `AS2`. The first path is chosen since it was learned from a customer. `AS5` on the other hand receives three paths towards `AS1` via its providers. It may select any of these paths to reach `AS1` , depending on how it prefers one provider over the others.
 
 
 

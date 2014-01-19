@@ -160,7 +160,7 @@ There is one difficulty with the utilisation of these IPv6 prefixes. Consider Be
 
 
 
-The Belnet network advertises prefix ``2001:6a8::/32`` that includes the prefixes from both UCL and ULg. These two subnetworks can be easily reached from any internet connected host. After a few years, UCL decides to increase the redundancy of its Internet connectivity and buys transit service from ISP1. The network is now as shown below with a direct link between UCL and the commercial ISP. UCL expects to receive packets from both Belnet and the commercial ISP.
+The Belnet network advertises prefix ``2001:6a8::/32`` that includes the prefixes from both UCL and ULg. These two subnetworks can be easily reached from any internet connected host. After a few years, UCL decides to increase the redundancy of its Internet connectivity and buys transit service from ISP1. A direct link between UCL and the commercial ISP appears on the network and UCL expects to receive packets from both Belnet and the commercial ISP.
 
 
 Now, consider how a router inside ``alpha.com`` would reach a host in the ``UCL`` network. This router has two routes towards ``2001:6a8:3080::1``. The first one, for prefix ``2001:6a8:3080::/48`` is via the direct link between the commercial ISP and UCL. The second one, for prefix ``2001:6a8::/32`` is via the Internet and Belnet. Since :rfc:`1519` when a router knows several routes towards the same destination address, it must forward packets along the route having the longest prefix length. In the case of ``2001:6a8:3080::1``, this is the route ``2001:6a8:3080::/48`` that is used to forward the packet. This forwarding rule is called the `longest prefix match` or the `more specific match`. All IP routers implement this forwarding rule.
@@ -353,7 +353,7 @@ The `Fragment Options` header is more important. An important problem in the net
 
 .. index:: Maximum Transmission Unit, MTU
 
-Each datalink layer has its own characteristics and as indicated earlier, each datalink layer is characterised by a maximum frame size. From IP's point of view, a datalink layer interface is characterised by its `Maximum Transmission Unit (MTU)`. The MTU of an interface is the largest packet (including header) that it can send. The table below provides some common MTU sizes [#f6lowpan]_. 
+Each datalink layer has its own characteristics and as indicated earlier, each datalink layer is characterised by a maximum frame size. From IP's point of view, a datalink layer interface is characterised by its `Maximum Transmission Unit (MTU)`. The MTU of an interface is the largest packet (including header) that it can send. The table below provides some common MTU sizes [#f6lowpan]_.
 
 ==============      ==================
 Datalink layer      MTU

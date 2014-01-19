@@ -27,7 +27,7 @@ Interactions between IPv6 and the datalink layer
 
 .. index:: Neighbour Discovery Protocol
 
-IPv6 hosts and routers frequently interact with the datalink layer service. To understand the main interactions, it is useful to analyze all the packets that are exchanged when a simply network containing a few hosts and routers is built. Let us first start with a LAN containing two hosts [#fMAC]_. 
+IPv6 hosts and routers frequently interact with the datalink layer service. To understand the main interactions, it is useful to analyze all the packets that are exchanged when a simple network containing a few hosts and routers is built. Let us first start with a LAN containing two hosts [#fMAC]_.
 
 
 .. graphviz::
@@ -65,7 +65,7 @@ Hosts ``A`` and ``B`` are attached to the same datalink layer network. They can 
 
      A MAC address converted into a 64 bits host identifier
 
- Inside a MAC address, the two bits indicated as `0` and `g` in the figure above play a special role. The first bit indicates whether the address is local or local. The `g` bit indicates whether this is a multicast address or a unicast address. The MAC address can be converted into a 64 bits host identifier by flipping the value of the `0` bit and inserting ``FFFE``, i.e. ``1111111111111110`` in binary, in the middle of the address as shown in the figure below. The `c`, `m` and `g` bits of the MAC address are not modified.
+ Inside a MAC address, the two bits indicated as `0` and `g` in the figure above play a special role. The first bit indicates whether the address is universal or local. The `g` bit indicates whether this is a multicast address or a unicast address. The MAC address can be converted into a 64 bits host identifier by flipping the value of the `0` bit and inserting ``FFFE``, i.e. ``1111111111111110`` in binary, in the middle of the address as shown in the figure below. The `c`, `m` and `g` bits of the MAC address are not modified.
 
 
 The next step is to connect the LAN to the Internet. For this, a router is attached to the LAN.
@@ -136,7 +136,7 @@ Few users manually configure the IPv6 addresses on their hosts. They prefer to r
 
 The Stateless Address Autoconfiguration (SLAAC) mechanism defined in :rfc:`4862` enables hosts to automatically configure their addresses without maintaining any state. When a host boots, it derives its identifier from its datalink layer address [#fprivacy]_ as explained earlier and concatenates this 64 bits identifier to the `FE80::/64` prefix to obtain its link-local IPv6 address. It then multicasts a Neighbour Solicitation with its link-local address as a target to verify whether another host is using the same link-local address on this subnet. If it receives a Neighbour Advertisement indicating that the link-local address is used by another host, it generates another 64 bits identifier and sends again a Neighbour Solicitation. If there is no answer, the host considers its link-local address to be valid. This address will be used as the source address for all NDP messages sent on the subnet. 
 
-To automatically configure its global IPv6 address, the host must know the globally routable IPv6 prefix that is used on the local subnet. IPv6 routers regularly multicast ICMPv6 Router Advertisement messages that indicate the IPv6 prefix assigned to the subnet. The Router Advertisement message contain several interesting fields.
+To automatically configure its global IPv6 address, the host must know the globally routable IPv6 prefix that is used on the local subnet. IPv6 routers regularly multicast ICMPv6 Router Advertisement messages that indicate the IPv6 prefix assigned to the subnet. The Router Advertisement message contains several interesting fields.
 
 .. figure:: pkt/router-adv.png
    :align: center
