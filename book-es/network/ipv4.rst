@@ -1,10 +1,10 @@
 .. Copyright |copy| 2010 by Olivier Bonaventure
 .. This file is licensed under a `creative commons licence <http://creativecommons.org/licenses/by/3.0/>`_
 
-IP version 4
+IP versión 4
 ============
 
-IP version 4 is the data plane protocol of the network layer in the TCP/IP protocol suite. The design of IP version 4 was based on the following assumptions :
+.. IP version 4 is the data plane protocol of the network layer in the TCP/IP protocol suite. The design of IP version 4 was based on the following assumptions :
 
  - IP should provide an unreliable connectionless service (TCP provides reliability when required by the application)
  - IP operates with the datagram transmission mode
@@ -12,133 +12,244 @@ IP version 4 is the data plane protocol of the network layer in the TCP/IP proto
  - IP must be usable above different types of datalink layers
  - IP hosts exchange variable length packets
 
-The addresses are an important part of any network layer protocol. In the late 1970s, the developers of IPv4 designed IPv4 for a research network that would interconnect some research labs and universities. For this utilisation, 32 bits wide addresses were much larger than the expected number of hosts on the network. Furthermore, 32 bits was a nice address size for software-based routers. None of the developers of IPv4 were expecting that IPv4 would become as widely used as it is today.
+
+IP versión 4 (`IPv4`) es el protocolo del plano de datos de la capa de red en el conjunto de protocolos TCP/IP. El diseño de IPv4 se basó en las premisas siguientes:
+
+ - IP debía proveer un servicio sin conexión, no confiable (TCP ofrece confiabilidad cuando la aplicación lo requiera)
+ - IP opera en el modo de transmisión de datagramas
+ - Las direcciones IP tienen un tamaño fijo de 32 bits
+ - IP debe ser usable sobre diferentes tipos de capa de enlace
+ - Los hosts IP intercambian paquetes de longitud variable
 
 
-IPv4 addresses are encoded as a 32 bits field. IPv4 addresses are often represented in `dotted-decimal` format as a sequence of four integers separated by a `dot`. The first integer is the decimal representation of the most significant byte of the 32 bits IPv4 address, ... For example, 
+
+.. The addresses are an important part of any network layer protocol. In the late 1970s, the developers of IPv4 designed IPv4 for a research network that would interconnect some research labs and universities. For this utilisation, 32 bits wide addresses were much larger than the expected number of hosts on the network. Furthermore, 32 bits was a nice address size for software-based routers. None of the developers of IPv4 were expecting that IPv4 would become as widely used as it is today.
+
+Las direcciones son una parte importante de cualquier protocolo de capa de red. El protocolo IPv4 fue diseñado a fines de los años 70, para una red de investigación que interconectaría una cierta cantidad de laboratorios de investigación y universidades. Para este destino, las direcciones de 32 bits eran mucho más grandes que la cantidad esperada de hosts sobre la red. Por otro lado, 32 bits era un tamaño de direcciones conveniente para los routers basados en software. Ninguno de los desarrolladores de IPv4 esperaba que el protocolo llegara a ser tan usado como lo es hoy.
+
+.. IPv4 addresses are encoded as a 32 bits field. IPv4 addresses are often represented in `dotted-decimal` format as a sequence of four integers separated by a `dot`. The first integer is the decimal representation of the most significant byte of the 32 bits IPv4 address, ... For example, 
 
  * 1.2.3.4 corresponds to 00000001000000100000001100000100
  * 127.0.0.1 corresponds to 01111111000000000000000000000001
  * 255.255.255.255 corresponds to 11111111111111111111111111111111
 
+
+Las direcciones IPv4 se codifican como un campo de 32 bits. Estas direcciones suelen representarse en el formato "decimal con puntos" (`dotted-decimal`) como una secuencia de cuatro enteros separados por un punto (`dot`). El primer entero es la representación decimal del byte más significativo de la dirección. Por ejemplo,
+
+ * 1.2.3.4 corresponde a 00000001000000100000001100000100
+ * 127.0.0.1 corresponde a 01111111000000000000000000000001
+ * 255.255.255.255 corresponde a 11111111111111111111111111111111
+
+
 .. index:: multihomed host
 
-An IPv4 address is used to identify an interface on a router or a host. A router has thus as many IPv4 addresses as the number of interfaces that it has in the datalink layer. Most hosts have a single datalink layer interface and thus have a single IPv4 address. However, with the growth of wireless, more and more hosts have several datalink layer interfaces (e.g. an Ethernet interface and a WiFi interface). These hosts are said to be `multihomed`. A multihomed host with two interfaces has thus two IPv4 addresses.
+.. An IPv4 address is used to identify an interface on a router or a host. A router has thus as many IPv4 addresses as the number of interfaces that it has in the datalink layer. Most hosts have a single datalink layer interface and thus have a single IPv4 address. However, with the growth of wireless, more and more hosts have several datalink layer interfaces (e.g. an Ethernet interface and a WiFi interface). These hosts are said to be `multihomed`. A multihomed host with two interfaces has thus two IPv4 addresses.
 
-An important point to be defined in a network layer protocol is the allocation of the network layer addresses. A naive allocation scheme would be to provide an IPv4 address to each host when the host is attached to the Internet on a first come first served basis. With this solution, a host in Belgium could have address 2.3.4.5 while another host located in Africa would use address 2.3.4.6. Unfortunately, this would force all routers to maintain a specific route towards each host. The figure below shows a simple enterprise network with two routers and three hosts and the associated routing tables if such isolated addresses were used.
+Una dirección IPv4 se usa para identificar una interfaz de un router o host. Un router tiene, entonces, tantas direcciones IPv4 como interfaces en la capa de enlace. La mayoría de los hosts tiene una única interfaz de capa de enlace, y por lo tanto tienen una única dirección IPv4. Sin embargo, con el crecimiento de las redes inalámbricas, existen cada vez más interfaces de nivel de enlace (por ejemplo, una interfaz Ethernet y una interfaz WiFi). Estos hosts se llaman `multihomed`. Un host `multihomed` con dos interfaces tiene entonces dos direcciones IPv4.
+
+
+.. An important point to be defined in a network layer protocol is the allocation of the network layer addresses. A naive allocation scheme would be to provide an IPv4 address to each host when the host is attached to the Internet on a first come first served basis. With this solution, a host in Belgium could have address 2.3.4.5 while another host located in Africa would use address 2.3.4.6. Unfortunately, this would force all routers to maintain a specific route towards each host. The figure below shows a simple enterprise network with two routers and three hosts and the associated routing tables if such isolated addresses were used.
+
+Un punto importante a definir en un protocolo de nivel de red es la asignación de direcciones de capa de red. Un esquema de asignación ingenuo sería proveer una dirección IPv4 a cada host al conectarse, según el orden `FCFS` (primero en llegar, primero en ser servido). Con esta solución, un host en Bélgica podría tener la dirección 2.3.4.5 mientras que otro ubicado en África podría usar la dirección 2.3.4.6. Desafortunadamente, esto obligaría a todos los routers a mantener una ruta específica hacia cada host. La figura siguiente muestra una red corporativa sencilla con dos routers y tres hosts; y las tablas de ruteo asociadas que resultarían si se usaran esas direcciones aisladas. 
+
 
 .. figure:: svg/ip-scalability.png
    :align: center
    :scale: 70
    
-   Scalability issues when using isolated IP addresses 
+   Problemas de escalabilidad al usar direcciones IP aisladas
+..   Scalability issues when using isolated IP addresses 
 
 .. index:: IP subnet, IP prefix, subnet mask
 
+.. To preserve the scalability of the routing system, it is important to minimize the number of routes that are stored on each router. A router cannot store and maintain one route for each of the almost 1 billion hosts that are connected to today's Internet. Routers should only maintain routes towards blocks of addresses and not towards individual hosts. For this, hosts are grouped in `subnets` based on their location in the network. A typical subnet groups all the hosts that are part of the same enterprise. An enterprise network is usually composed of several LANs interconnected by routers. A small block of addresses from the Enterprise's block is usually assigned to each LAN. An IPv4 address is composed of two parts : a `subnetwork identifier` and  a `host identifier`. The `subnetwork identifier` is composed of the high order bits of the address and the host identifier is encoded in the low order bits of the address. This is illustrated in the figure below.
 
-To preserve the scalability of the routing system, it is important to minimize the number of routes that are stored on each router. A router cannot store and maintain one route for each of the almost 1 billion hosts that are connected to today's Internet. Routers should only maintain routes towards blocks of addresses and not towards individual hosts. For this, hosts are grouped in `subnets` based on their location in the network. A typical subnet groups all the hosts that are part of the same enterprise. An enterprise network is usually composed of several LANs interconnected by routers. A small block of addresses from the Enterprise's block is usually assigned to each LAN. An IPv4 address is composed of two parts : a `subnetwork identifier` and  a `host identifier`. The `subnetwork identifier` is composed of the high order bits of the address and the host identifier is encoded in the low order bits of the address. This is illustrated in the figure below.
+Para preservar la escalabilidad del sistema de ruteo, es importante minimizar la cantidad de rutas que se almacenan en cada router. Un router no puede almacenar y mantener una ruta por cada uno de los casi mil millones de hosts que están conectados a la Internet de hoy. Los routers deberían mantener sólo las rutas hacia bloques de direcciones, y no hacia hosts individuales. Para esto, los hosts se agrupan en `subredes` según su ubicación en la red. Una subred típica agrupa todos los hosts que son parte de la misma organización. Una red de organización se compone normalmente de varias LANs interconectadas por routers. Generalmente se asigna a cada LAN un pequeño bloque de direcciones tomado del bloque de direcciones de la organización. Una dirección IPv4 se compone de dos partes: un `identificador de subred` y un `identificador de host` . El identificador de subred se compone de los bits de orden más alto de la dirección, y el identificador de host se codifica en los bits más bajos de la dirección. Esto se ilustra en la figura siguiente.
+
 
 .. figure:: png/network-fig-054-c.png
    :align: center
    :scale: 70
    
-   The subnetwork and host identifiers inside an IPv4 address
+   Identificadores de subred y de host dentro de una dirección IPv4
+
+..   The subnetwork and host identifiers inside an IPv4 address
 
 .. index:: Class A IPv4 address, Class B IPv4 address, Class C IPv4 address
 
-When a router needs to forward a packet, it must know the `subnet` of the destination address to be able to consult its forwarding table to forward the packet. :rfc:`791` proposed to use the high-order bits of the address to encode the length of the subnet identifier. This led to the definition of three `classes` of unicast addresses [#fclasses]_
+.. When a router needs to forward a packet, it must know the `subnet` of the destination address to be able to consult its forwarding table to forward the packet. :rfc:`791` proposed to use the high-order bits of the address to encode the length of the subnet identifier. This led to the definition of three `classes` of unicast addresses [#fclasses]_
 
-=======  ==========  =========  =============	=============
-Class    High-order  Length of  Number of	Addresses per
-         bits        subnet id	networks   	network
-=======  ==========  =========  =============	=============
-Class A	 `0`	     8 bits	128 		16,777,216 (:math:`2^{24}`)	
-Class B	 `10`        16 bits	16,384     	65,536 (:math:`2^{16}`)	
-Class C	 `110`	     24 bits	2,097,152  	256 (:math:`2^8`)
-=======  ==========  =========  =============	=============
+Cuando un router necesita reenviar un paquete, debe conocer la `subred` de la dirección destino para poder consultar su propia tabla de reenvío, a fin de poder reenviar el paquete. El documento :rfc:`791` propuso el uso de los bits de orden más alto de la dirección para codificar la longitud del identificador de subred. Esto llevó a la definición de tres `clases` de direcciones unicast [#fclasses]_.
 
-However, these three classes of addresses were not flexible enough. A class `A` subnet was too large for most organisations and a class `C` subnet was too small. Flexibility was added by the introduction of `variable-length subnets` in :rfc:`1519`. With `variable-length` subnets, the subnet identifier can be any size, from `1` to `31` bits. `Variable-length` subnets allow the network operators to use a subnet that better matches the number of hosts that are placed inside the subnet. A subnet identifier or IPv4 prefix is usually [#fnetmask]_ represented as `A.B.C.D/p` where `A.B.C.D` is the network address obtained by concatenating the subnet identifier with a host identifier containing only `0` and `p` is the length of the subnet identifier in bits. The table below provides examples of IP subnets.
+=======	=============	============	=============	===============
+Clase	Bits de orden	Longitud de	Número de		Direcciones por
+	alto		id de subred	redes		red
+=======	=============	============	=============	===============
+Clase A	`0`		8 bits		128		16,777,216 (:math:`2^{24}`)
+Clase B	`10`		16 bits		16,384		65,536 (:math:`2^{16}`)
+Clase C	`110`		24 bits		2,097,152		256 (:math:`2^8`)
+=======	=============	============	=============	===============
 
-============== 	==========  ============  ===============
-Subnet      	Number of   Smallest      Highest
+.. However, these three classes of addresses were not flexible enough. A class `A` subnet was too large for most organisations and a class `C` subnet was too small. Flexibility was added by the introduction of `variable-length subnets` in :rfc:`1519`. With `variable-length` subnets, the subnet identifier can be any size, from `1` to `31` bits. `Variable-length` subnets allow the network operators to use a subnet that better matches the number of hosts that are placed inside the subnet. A subnet identifier or IPv4 prefix is usually [#fnetmask]_ represented as `A.B.C.D/p` where `A.B.C.D` is the network address obtained by concatenating the subnet identifier with a host identifier containing only `0` and `p` is the length of the subnet identifier in bits. The table below provides examples of IP subnets.
+
+Sin embargo, estas tres clases de direcciones no resultaron del todo flexibles. Una subred clase `A` era demasiado grande para la mayor parte de las organizaciones, y una clase `C` era demasiado pequeña. La flexibilidad se añadió introduciendo `subredes de longitud variable` en :rfc:`1519`. Con subredes de longitud variable, el identificador de red puede ser de cualquier tamaño, de 1 a 31 bits. Las subredes de longitud variable permiten a los operadores de redes usar una subred que se adapte mejor a la cantidad de hosts que se ubicarán dentro de ella. Un identificador de subred, o prefijo IPv4 [#fnetmask]_ generalmente se representa como `A.B.C.D/p`, donde `A.B.C.D` es la dirección de red obtenida concatenando el identificador de subred con un identificador de host que contenga sólo ceros, y `p` es la longitud del identificador de subred en bits. La tabla siguiente ofrece ejemplos de subredes IP.
+
+.. 
+ ============== 	==========  ============  ===============
+ Subnet      	Number of   Smallest      Highest
 	    	addresses   address	  address
-============== 	==========  ============  ===============
-10.0.0.0/8  	16,777,216  10.0.0.0      10.255.255.255	
-192.168.0.0/16	65,536	    192.168.0.0   192.168.255.255
-198.18.0.0/15	131,072	    198.18.0.0 	  198.19.255.255
-192.0.2.0/24	256	    192.0.2.0 	  192.0.2.255
-10.0.0.0/30	4	    10.0.0.0	  10.0.0.3
-10.0.0.0/31	2	    10.0.0.0	  10.0.0.1
-============== 	==========  ============  ===============
+ ============== 	==========  ============  ===============
+ 10.0.0.0/8  	16,777,216  10.0.0.0      10.255.255.255	
+ 192.168.0.0/16	65,536	    192.168.0.0   192.168.255.255
+ 198.18.0.0/15	131,072	    198.18.0.0 	  198.19.255.255
+ 192.0.2.0/24	256	    192.0.2.0 	  192.0.2.255
+ 10.0.0.0/30	4	    10.0.0.0	  10.0.0.3
+ 10.0.0.0/31	2	    10.0.0.0	  10.0.0.1
+ ============== 	==========  ============  ===============
 
 
+==============	===========	============	===============
+Subred		Cantidad de	Dirección		Dirección
+		direcciones	inicial		final
+============== 	===========	============	===============
+10.0.0.0/8  	16,777,216	10.0.0.0		10.255.255.255	
+192.168.0.0/16	65,536		192.168.0.0	192.168.255.255
+198.18.0.0/15	131,072		198.18.0.0	198.19.255.255
+192.0.2.0/24	256		192.0.2.0		192.0.2.255
+10.0.0.0/30	4		10.0.0.0		10.0.0.3
+10.0.0.0/31	2		10.0.0.0		10.0.0.1
+============== 	===========	============	===============
 
-The figure below provides a simple example of the utilisation of IPv4 subnets in an enterprise network. The length of the subnet identifier assigned to a LAN usually depends on the expected number of hosts attached to the LAN. For point-to-point links, many deployments have used `/30` prefixes, but recent routers are now using `/31` subnets on point-to-point links :rfc:`3021` or do not even use IPv4 addresses on such links [#funumbered]_. 
+.. The figure below provides a simple example of the utilisation of IPv4 subnets in an enterprise network. The length of the subnet identifier assigned to a LAN usually depends on the expected number of hosts attached to the LAN. For point-to-point links, many deployments have used `/30` prefixes, but recent routers are now using `/31` subnets on point-to-point links :rfc:`3021` or do not even use IPv4 addresses on such links [#funumbered]_. 
+
+La figura siguiente provee un ejemplo sencillo de la utilización de subredes IPv4 en una red de una organización. La longitud del identificador de subred asignado a una LAN normalmente depende de la cantidad prevista de hosts a ser conectados a la LAN. Para enlaces punto a punto, muchas instalaciones han usado prefijos `/30`, pero los routers más recientes usan subredes `/31` en enlaces punto a punto (:rfc:`3021`) o ni siquiera usan direcciones IPv4 en dichos enlaces [#funumbered]_. 
+
  
 .. figure:: svg/ip-subnets.png
    :align: center
    :scale: 70
    
-   IP subnets in a simple enterprise network
+   Subredes IP en una red organizacional simple
+..   IP subnets in a simple enterprise network
 
-A second issue concerning the addresses of the network layer is the allocation scheme that is used to allocate blocks of addresses to organisations. The first allocation scheme was based on the different classes of addresses. The pool of IPv4 addresses was managed by a secretariat who allocated address blocks on a first-come first served basis. Large organisations such as IBM, BBN, as well as Stanford or the MIT were able to obtain a class `A` address block. Most organisations requested a class `B` address block containing 65536 addresses, which was suitable for most enterprises and universities. The table below provides examples of some IPv4 address blocks in the class `B` space. 
+.. A second issue concerning the addresses of the network layer is the allocation scheme that is used to allocate blocks of addresses to organisations. The first allocation scheme was based on the different classes of addresses. The pool of IPv4 addresses was managed by a secretariat who allocated address blocks on a first-come first served basis. Large organisations such as IBM, BBN, as well as Stanford or the MIT were able to obtain a class `A` address block. Most organisations requested a class `B` address block containing 65536 addresses, which was suitable for most enterprises and universities. The table below provides examples of some IPv4 address blocks in the class `B` space. 
+
+Otro asunto concerniente a las direcciones de la capa de red es el esquema de asignación usado para repartir los bloques de direcciones entre organizaciones. El reservorio de direcciones IPv4 era manejado por una secretaría que asignaba bloques de direcciones a medida que se presentaban los requerimientos. Organizaciones grandes como IBM, BBN, Stanford o el MIT, podían obtener un bloque de direcciones clase `A`. La mayoría de las organizaciones solicitaban un bloque de direcciones clase `B`, que era conveniente para la mayor parte de las empresas y universidades. La tabla siguiente ofrece ejemplos de algunos bloques de direcciones IPv4 en el espacio clase `B`.
+
+
+.. ==============            ===========================================
+.. Subnet	       		  Organisation
+.. --------------            -------------------------------------------
+.. 130.100.0.0/16 		  Ericsson, Sweden
+.. 130.101.0.0/16		  University of Akron, USA
+.. 130.102.0.0/16		  The University of Queensland, Australia
+.. 130.103.0.0/16		  Lotus Development, USA
+.. 130.104.0.0/16 		  Universite catholique de Louvain, Belgium
+.. 130.105.0.0/16		  Open Software Foundation, USA
+.. ==============            ===========================================
 
 ==============            ===========================================
-Subnet	       		  Organisation
+Subred	       		  Organización
 --------------            -------------------------------------------
-130.100.0.0/16 		  Ericsson, Sweden
+130.100.0.0/16 		  Ericsson, Suecia
 130.101.0.0/16		  University of Akron, USA
 130.102.0.0/16		  The University of Queensland, Australia
 130.103.0.0/16		  Lotus Development, USA
-130.104.0.0/16 		  Universite catholique de Louvain, Belgium
+130.104.0.0/16 		  Université catholique de Louvain, Bélgica
 130.105.0.0/16		  Open Software Foundation, USA
 ==============            ===========================================
 
-However, the Internet was a victim of its own success and in the late 1980s, many organisations were requesting blocks of IPv4 addresses and started connecting to the Internet. Most of these organisations requested class `B` address blocks, as class `A` address blocks were too large and in limited supply while class `C` address blocks were considered to be too small. Unfortunately, there were only 16,384 different class `B` address blocks and this address space was being consumed quickly. As a consequence, the routing tables maintained by the routers were growing quickly and some routers had difficulties maintaining all these routes in their limited memory [#fciscoags]_.
+.. However, the Internet was a victim of its own success and in the late 1980s, many organisations were requesting blocks of IPv4 addresses and started connecting to the Internet. Most of these organisations requested class `B` address blocks, as class `A` address blocks were too large and in limited supply while class `C` address blocks were considered to be too small. Unfortunately, there were only 16,384 different class `B` address blocks and this address space was being consumed quickly. As a consequence, the routing tables maintained by the routers were growing quickly and some routers had difficulties maintaining all these routes in their limited memory [#fciscoags]_.
+
+Sin embargo, Internet fue víctima de su propio éxito, y a fines de los años 80, muchas organizaciones solicitaban bloques de direcciones IPv4 y se conectaban a Internet. La mayoría de estas organizaciones solicitaban bloques clase `B`, ya que los bloques clase `A` eran demasiado grandes (además de escasos), mientras que los bloques clase `C` eran considerados demasiado pequeños. Desafortunadamente, sólo había 16384 diferentes bloques de direcciones clase `B`, y este espacio de direcciones estaba siendo consumido rápidamente. Como consecuencia, las tablas de ruteo mantenidas por los routers estaban creciendo con rapidez y algunos routers tenían dificultades para mantener todas estas rutas en su limitada memoria [#fciscoags]_.
+
 
 .. figure:: png/network-fig-162-c.png
    :align: center
    :scale: 70
    
-   Evolution of the size of the routing tables on the Internet (Jul 1988- Dec 1992 - source : :rfc:`1518`)
+   Evolución del tamaño de las tablas de ruteo en Internet (Jul 1988 a Dic 1992 - fuente: :rfc:`1518`)
 
+.. Evolution of the size of the routing tables on the Internet (Jul 1988- Dec 1992 - source : :rfc:`1518`)
+    
 .. index:: Classless Interdomain Routing
 
-Faced with these two problems, the Internet Engineering Task Force decided to develop the Classless Interdomain Routing (CIDR) architecture :rfc:`1518`. This architecture aims at allowing IP routing to scale better than the class-based architecture. CIDR contains three important modifications compared to :rfc:`791`.
+.. Faced with these two problems, the Internet Engineering Task Force decided to develop the Classless Interdomain Routing (CIDR) architecture :rfc:`1518`. This architecture aims at allowing IP routing to scale better than the class-based architecture. CIDR contains three important modifications compared to :rfc:`791`.
 
       1. IP address classes are deprecated. All IP equipment must use and support variable-length subnets.
       2. IP address blocks are no longer allocated on a first-come-first-served basis. Instead, CIDR introduces a hierarchical address allocation scheme.
       3. IP routers must use longest-prefix match when they lookup a destination address in their forwarding table
 
+Frente a estos dos problemas, el equipo de diseño de Internet (`Internet Engineering Task Force`, IETF) decidió desarrollar la arquitectura de Ruteo Interdominios sin Clases (`Classless Interdomain Routing`, CIDR) :rfc:`1518`. Esta arquitectura intenta que el ruteo IP escale mejor que con la arquitectura basada en clases. CIDR contiene tres importantes modificaciones en comparación con :rfc:`791`:
 
-The last two modifications were introduced to improve the scalability of the IP routing system. The main drawback of the first-come-first-served address block allocation scheme was that neighbouring address blocks were allocated to very different organisations and conversely, very different address blocks were allocated to similar organisations. With CIDR, address blocks are allocated by Regional IP Registries (RIR) in an aggregatable manner. A RIR is responsible for a large block of addresses and a region. For example, RIPE_ is the RIR that is responsible for Europe. A RIR allocates smaller address blocks from its large block to Internet Service Providers :rfc:`2050`. Internet Service Providers then allocate smaller address blocks to their customers. When an organisation requests an address block, it must prove that it already has or expects to have in the near future, a number of hosts or customers that is equivalent to the size of the requested address block. 
+      1. Las clases de direcciones IP son un concepto obsoleto. Todo el equipamiento IP debe usar y soportar subredes de longitud variable.
+      2. Los bloques de direcciones IP ya no se asignan en modo `first-come-first-served`. En su lugar, CIDR presenta un esquema de asignación de direcciones jerárquico. 
+      3. Los routers IP deben usar coincidencias por los prefijos más largos al buscar una dirección destino en su tabla de reenvío. 
 
-The main advantage of this hierarchical address block allocation scheme is that it allows the routers to maintain fewer routes. For example, consider the address blocks that were allocated to some of the Belgian universities as shown in the table below.
+.. The last two modifications were introduced to improve the scalability of the IP routing system. The main drawback of the first-come-first-served address block allocation scheme was that neighbouring address blocks were allocated to very different organisations and conversely, very different address blocks were allocated to similar organisations. With CIDR, address blocks are allocated by Regional IP Registries (RIR) in an aggregatable manner. A RIR is responsible for a large block of addresses and a region. For example, RIPE_ is the RIR that is responsible for Europe. A RIR allocates smaller address blocks from its large block to Internet Service Providers :rfc:`2050`. Internet Service Providers then allocate smaller address blocks to their customers. When an organisation requests an address block, it must prove that it already has or expects to have in the near future, a number of hosts or customers that is equivalent to the size of the requested address block. 
 
-==============            =============================================
-Address block   	  Organisation
-==============            =============================================
-130.104.0.0/16 		  Universite catholique de Louvain
-134.58.0.0/16		  Katholiek Universiteit Leuven
-138.48.0.0/16		  Facultes universitaires Notre-Dame de la Paix
-139.165.0.0/16		  Universite de Liege
-164.15.0.0/16		  Universite Libre de Bruxelles
-==============            =============================================
+Las últimas dos modificaciones fueron introducidas para mejorar la escalabilidad del sistema de ruteo IP. La principal desventaja del esquema de asignación FCFS era que los bloques vecinos eran asignados a organizaciones muy diferentes, y, a la inversa, bloques de direcciones muy diferentes se asignaban a organizaciones similares. Con CIDR, los bloques de direcciones son asignados por autoridades regionales (`Regional IP Registries`, RIR) en forma acumulable. Un RIR es responsable de un gran bloque de direcciones y de una región. Por ejemplo, RIPE_ es el RIR responsable por Europa. Un RIR asigna pequeños bloques de direcciones, extraídos de su gran bloque propio, a los ISP :rfc:`2050`. Los ISP luego asignan bloques aún más pequeños a sus clientes. Cuando una organización solicita un bloque de direcciones, debe demostrar que ya tiene, o espera tener en el futuro cercano, una cantidad de hosts o clientes equivalente al tamaño del bloque que solicita.
 
-These universities are all connected to the Internet exclusively via  `Belnet <http://www.belnet.be>`_. As each university has been allocated a different address block, the routers of `Belnet <http://www.belnet.be>`_ must announce one route for each university and all routers on the Internet must maintain a route towards each university. In contrast, consider all the high schools and the government institutions that are connected to the Internet via `Belnet <http://www.belnet.be>`_. An address block was assigned to these institutions after the introduction of CIDR in the `193.190.0.0/15` address block owned by `Belnet <http://www.belnet.be>`_. With CIDR, `Belnet <http://www.belnet.be>`_ can announce a single route towards `193.190.0.0/15` that covers all of these high schools. 
 
+
+
+.. The main advantage of this hierarchical address block allocation scheme is that it allows the routers to maintain fewer routes. For example, consider the address blocks that were allocated to some of the Belgian universities as shown in the table below.
+
+.. ==============            =============================================
+.. Address block   	  Organisation
+.. ==============            =============================================
+.. 130.104.0.0/16 		  Universite catholique de Louvain
+.. 134.58.0.0/16		  Katholiek Universiteit Leuven
+.. 138.48.0.0/16		  Facultes universitaires Notre-Dame de la Paix
+.. 139.165.0.0/16		  Universite de Liege
+.. 164.15.0.0/16		  Universite Libre de Bruxelles
+.. ==============            =============================================
+
+La principal ventaja de este esquema de asignación jerárquica de bloques es que permite que los routers deban manteter menos rutas. Por ejemplo, consideremos los bloques de direcciones que fueron asignados a algunas de las universidades belgas como se muestra en la tabla siguiente. 
+
+===================== =============================================
+Bloque de direcciones            Organización
+===================== =============================================
+130.104.0.0/16        Université catholique de Louvain
+134.58.0.0/16         Katholiek Universiteit Leuven
+138.48.0.0/16         Facultés universitaires Notre-Dame de la Paix
+139.165.0.0/16        Université de Liège
+164.15.0.0/16         Université Libre de Bruxelles
+===================== =============================================
+
+
+.. These universities are all connected to the Internet exclusively via  `Belnet <http://www.belnet.be>`_. As each university has been allocated a different address block, the routers of `Belnet <http://www.belnet.be>`_ must announce one route for each university and all routers on the Internet must maintain a route towards each university. In contrast, consider all the high schools and the government institutions that are connected to the Internet via `Belnet <http://www.belnet.be>`_. An address block was assigned to these institutions after the introduction of CIDR in the `193.190.0.0/15` address block owned by `Belnet <http://www.belnet.be>`_. With CIDR, `Belnet <http://www.belnet.be>`_ can announce a single route towards `193.190.0.0/15` that covers all of these high schools. 
+
+Todas estas universidades están conectadas a Internet exclusivamente a través de `Belnet <http://www.belnet.be>`_. Como cada universidad ha recibido un bloque de direcciones diferente, los routers de `Belnet <http://www.belnet.be>`_ deben anunciar una ruta para cada universidad, y todos los routers de Internet deben mantener una ruta hacia cada una de ellas. En contraste, consideremos todas las escuelas secundarias e instituciones de gobierno que están conectadas a Internet a través de `Belnet <http://www.belnet.be>`_. Todas estas instituciones recibieron un  único bloque dentro del bloque de direcciones `193.190.0.0/15` mantenido por `Belnet <http://www.belnet.be>`_, luego de la introducción de CIDR. Con CIDR, `Belnet <http://www.belnet.be>`_ puede anunciar una única ruta hacia  `193.190.0.0/15` que cubre a todas estas escuelas. 
+ 
  
 .. index:: multihomed network
 
-However, there is one difficulty with the aggregatable variable length subnets used by CIDR. Consider for example `FEDICT <http://www.fedict.be>`_, a government institution that uses the `193.191.244.0/23` address block. Assume that in addition to being connected to the Internet via `Belnet <http://www.belnet.be>`_ , `FEDICT <http://www.fedict.be>`_ also wants to be connected to another Internet Service Provider. The FEDICT network is then said to be multihomed. This is shown in the figure below.
+.. However, there is one difficulty with the aggregatable variable length subnets used by CIDR. Consider for example `FEDICT <http://www.fedict.be>`_, a government institution that uses the `193.191.244.0/23` address block. Assume that in addition to being connected to the Internet via `Belnet <http://www.belnet.be>`_ , `FEDICT <http://www.fedict.be>`_ also wants to be connected to another Internet Service Provider. The FEDICT network is then said to be multihomed. This is shown in the figure below.
 
-.. figure:: png/network-fig-163-c.png
+.. .. figure:: png/network-fig-163-c.png
    :align: center
    :scale: 70
    
    Multihoming and CIDR
 
-With such a multihomed network, routers `R1` and `R2` would have two routes towards IPv4 address `193.191.245.88` : one route via Belnet (`193.190.0.0/15`) and one direct route  (`193.191.244.0/23`). Both routes match IPv4 address `193.191.145.88`. Since :rfc:`1519` when a router knows several routes towards the same destination address, it must forward packets along the route having the longest prefix length. In the case of `193.191.245.88`, this is the route `193.191.244.0/23` that is used to forward the packet. This forwarding rule is called the `longest prefix match` or the `more specific match`. All IPv4 routers implement this forwarding rule.
+Sin embargo, existe una dificultad con las subredes de longitud variable, acumulables, usadas por CIDR. Consideremos, por ejemplo, `FEDICT <http://www.fedict.be>`_, una institución gubernamental que usa el bloque de direcciones `193.191.244.0/23`. Supongamos que, además de estar conectado a Internet mediante `Belnet <http://www.belnet.be>`_ , `FEDICT <http://www.fedict.be>`_ también desea conectarse a través de otro ISP. La red FEDICT se dice, entonces, una red `multihomed`. Esto se muestra en la figura siguiente. 
+
+.. figure:: png/network-fig-163-c.png
+   :align: center
+   :scale: 70
+   
+   Multihoming y CIDR
+
+
+
+
+
+.. With such a multihomed network, routers `R1` and `R2` would have two routes towards IPv4 address `193.191.245.88` : one route via Belnet (`193.190.0.0/15`) and one direct route  (`193.191.244.0/23`). Both routes match IPv4 address `193.191.145.88`. Since :rfc:`1519` when a router knows several routes towards the same destination address, it must forward packets along the route having the longest prefix length. In the case of `193.191.245.88`, this is the route `193.191.244.0/23` that is used to forward the packet. This forwarding rule is called the `longest prefix match` or the `more specific match`. All IPv4 routers implement this forwarding rule.
+
+Con esta red multihomed, los routers `R1` y `R2` tendrían dos rutas hacia la dirección IPv4 `193.191.245.88`: una ruta a través de Belnet (`193.190.0.0/15`) y una ruta directa (`193.191.244.0/23`). Ambas rutas coinciden con la dirección IPv4 `193.191.145.88`. A partir de :rfc:`1519`, cuando un router conoce varias rutas hacia la misma dirección destino, debe reenviar paquetes a lo largo de la ruta que tenga el prefijo coincidente más largo. En el caso de `193.191.245.88`, es la ruta `193.191.244.0/23` la que es usada para reenviar el paquete. Esta regla de reenvío se llama `del prefijo coincidente más largo` o `de coincidencia más específica`. Todos los routers IPv4 implementan esta regla de reenvío. 
+
+
 
 To understand the `longest prefix match` forwarding, consider the figure below. With this rule, the route `0.0.0.0/0` plays a particular role. As this route has a prefix length of `0` bits, it matches all destination addresses. This route is often called the `default` route. 
 

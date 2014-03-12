@@ -1,10 +1,12 @@
 .. Copyright |copy| 2010 by Olivier Bonaventure
+
 .. This file is licensed under a `creative commons licence <http://creativecommons.org/licenses/by/3.0/>`_
 
 Bibliografía
 ============
 
 .. Whenever possible, the bibliography includes stable hypertext links to the references cited. 
+
 Siempre que sea posible, la bibliografía incluye enlaces hipertextuales estables a las referencias citadas.
 
 

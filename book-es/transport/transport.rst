@@ -3,27 +3,35 @@
 
 .. _chapter-transport:
 
-=====================
- The transport layer
-=====================
+======================
+ La Capa de Transporte
+======================
 
+Como la capa de Transporte está construida encima de la capa de Red, es importante conocer las características más importantes del servicio de la capa de Red. Existen dos tipos de servicios de capa de Red: sin conexión, y orientado a conexión. El servicio sin conexión es el más difundido. Sus principales rasgos son:
 
-As the transport layer is built on top of the network layer, it is important to know the key features of the network layer service. There are two types of network layer services : connectionless and connection-oriented. The connectionless network layer service is the most widespread. Its main characteristics are :
+ - El servicio sin conexión de la capa de Red sólo puede transferir SDUs de *tamaño limitado* [#fsize]_
+ - Puede descartar SDUs
+ - Puede corromper SDUs
+ - Puede demorar, reordenar, e incluso duplicar, SDUs
 
- - the connectionless network layer service can only transfer SDUs of *limited size* [#fsize]_
- - the connectionless network layer service may discard SDUs
- - the connectionless network layer service may corrupt SDUs
- - the connectionless network layer service may delay, reorder or even duplicate SDUs
+.. As the transport layer is built on top of the network layer, it is important to know the key features of the network layer service. There are two types of network layer services : connectionless and connection-oriented. The connectionless network layer service is the most widespread. Its main characteristics are :
+
+.. - the connectionless network layer service can only transfer SDUs of *limited size* [#fsize]_
+.. - the connectionless network layer service may discard SDUs
+.. - the connectionless network layer service may corrupt SDUs
+.. - the connectionless network layer service may delay, reorder or even duplicate SDUs
 
 
 .. figure:: png/transport-fig-001-c.png
    :align: center
    :scale: 80 
 
-   The transport layer in the reference model
+   La Capa de Transporte en el modelo de referencia
+..   The transport layer in the reference model
 
-
-These imperfections of the connectionless network layer service will become much clearer once we have explained the network layer in the next chapter. At this point, let us simply assume that these imperfections occur without trying to understand why they occur.
+Estas imperfecciones del servicio sin conexión de la capa de Red se harán mucho más evidentes una vez que hayamos explicado la capa de Red, en el próximo capítulo. Por el momento simplemente supongamos que estas imperfecciones ocurren, sin tratar de comprender por qué ocurren.
+ 
+.. These imperfections of the connectionless network layer service will become much clearer once we have explained the network layer in the next chapter. At this point, let us simply assume that these imperfections occur without trying to understand why they occur.
 
 Some transport protocols can be used on top of a connection-oriented network service, such as class 0 of the ISO Transport Protocol (TP0) defined in [X224]_ , but they have not been widely used. We do not discuss in further detail such utilisation of a connection-oriented network service in this book.
 

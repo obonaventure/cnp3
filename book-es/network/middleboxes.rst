@@ -123,7 +123,7 @@ El dispositivo NAT más simple es un middlebox que usa un mapeo uno a uno entre 
 
  - La dirección origen del paquete (`S`) se reemplaza por la dirección pública mapeada (`P1`).
  - El checksum de la cabecera IP se actualiza incrementalmente según cambia su contenido. 
- - Si el paquete transportaba un segmento TCP o UDP, el checksum de la capa de transporte que se encuentra en el segmento incluido también debe ser actualizado, ya que se computa sobre el segmento y un pseudo-header que iuncluye las direcciones origen y destino.
+ - Si el paquete transportaba un segmento TCP o UDP, el checksum de la capa de transporte que se encuentra en el segmento incluido también debe ser actualizado, ya que se computa sobre el segmento y un pseudo-header que incluye las direcciones origen y destino.
 
 .. When a packet destined to `P1` is received from the public Internet, the NAT consults its mapping table to find `S`. The received packet is translated and forwarded in the internal network. 
 Cuando se recibe un paquete destinado a `P1` desde la Internet pública, el NAT consulta su tabla de mapeo buscando `S`. El paquete recibido se traduce y se reenvía a la red interna. 

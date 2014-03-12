@@ -144,7 +144,7 @@ Para asegurar que todos los routers reciban todos los LSPs, aun cuando haya erro
 
 .. note:: ¿Métricas de enlaces dinámicas o estáticas?
 
- Como los paquetes de estado de enlace son inundados periódicamente, los routers pueden medir la calidad (por ejemplo, el retardo, o la carga) de sus enlaces, y ajustar la métrica de cada enlace de acuerdo a su callidad en cada momento. Dichos ajustes dinámicos se incluyeron en el protocolo de ruteo ARPANET [MRR1979]_. Sin embargo, la experiencia mostró que era difícil afinar los ajustes dinámicos y asegurar que no se formaran ciclos de reenvío en la red [KZ1989]_. Los protocolos de estado de enlace de hoy usan métricas que se configuran manualmente en los routers, y sólo son modificados por los operadores de red o por herramientas de administración de red [FRT2002]_.
+ Como los paquetes de estado de enlace son inundados periódicamente, los routers pueden medir la calidad (por ejemplo, el retardo, o la carga) de sus enlaces, y ajustar la métrica de cada enlace de acuerdo a su calidad en cada momento. Dichos ajustes dinámicos se incluyeron en el protocolo de ruteo ARPANET [MRR1979]_. Sin embargo, la experiencia mostró que era difícil afinar los ajustes dinámicos y asegurar que no se formaran ciclos de reenvío en la red [KZ1989]_. Los protocolos de estado de enlace de hoy usan métricas que se configuran manualmente en los routers, y sólo son modificados por los operadores de red o por herramientas de administración de red [FRT2002]_.
 
 .. index:: two-way connectivity
 
