@@ -260,3 +260,5 @@
 .. _troff: http://en.wikipedia.org/wiki/Troff
 
 .. _Latex: http://en.wikipedia.org/wiki/Latex
+
+.. _netem: http://www.linuxfoundation.org/collaborate/workgroups/networking/netem

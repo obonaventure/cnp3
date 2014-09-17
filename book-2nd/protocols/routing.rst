@@ -182,3 +182,6 @@ In this formula, `N` is the number of outgoing interfaces on the equal cost path
 
 
 .. [#fmaxpaths] In some networks, there are several dozens of paths towards a given destination. Some routers, due to hardware limitations, cannot install more than 8 or 16 paths in their forwarding table. In this case, a subset of the computed paths is installed in the forwarding table.
+
+
+.. include:: /links.rst

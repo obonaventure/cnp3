@@ -92,7 +92,6 @@ The first problem is that electrical transmission can be affected by electromagn
       z [label="Physical link", linecolour=white],
       c [label="Host B", linecolour=black],
       d [label="", linecolour=white];
-
       a=>b [ label = "DATA.req(0)" ] ,
       b>>c [ label = "", arcskip="1"];
       c=>d [ label = "DATA.ind(1)" ];

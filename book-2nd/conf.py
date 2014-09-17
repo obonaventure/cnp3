@@ -22,12 +22,16 @@ import sys, os
 
 # Add any Sphinx extension module names here, as strings. They can be extensions
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.#
-extensions = ['sphinx.ext.todo', 'sphinx.ext.pngmath', 'sphinxcontrib.mscgen','sphinx.ext.graphviz']
-#, 'sphinx.ext.numfig'] 
-#'rst2pdf.pdfbuilder', 'rst2pdf.pdfmath', 'sphinx.ext.pngmath' ]
-#, 
-# 'sphinx.ext.autodoc','rst2pdf.pdfbuilder']
-#extensions = ['sphinx.ext.pngmath', 'rst2pdf.pdfbuilder']
+
+sys.path.append(os.path.abspath('mcq'))
+
+extensions = ['sphinx.ext.todo', 'sphinx.ext.pngmath', 'sphinxcontrib.mscgen','sphinx.ext.graphviz','sphinxcontrib.tikz']
+
+# mcq
+
+mcq_nb_prop=3
+mcq_upload_url='http://cnp3bis.info.ucl.ac.be'
+mcq_inginious_url='http://inginious.info.ucl.ac.be/cnp3'
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -74,7 +78,7 @@ exclude_trees = ['_build']
 # List of files that should not be automatically compiled by sphynx because they are included
 
 exclude_patterns = [ '*#*',   # emacs backups
-                     'MCQ/*']
+                     'MCQ.old/*']
 
 # epilog add to all included files
 #rst_epilog = """
@@ -116,7 +120,7 @@ html_theme = 'haiku'
 #html_theme_options = {stickysidebar=True}
 
 # Add any paths that contain custom themes here, relative to this directory.
-#html_theme_path = []
+html_theme_path = ['']
 
 # The name for this set of Sphinx documents.  If None, it defaults to
 # "<project> v<release> documentation".
@@ -137,7 +141,7 @@ html_logo = None
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ['_static']
+html_static_path = ['_static', 'mcq/static']
 
 # If not '', a 'Last updated on:' timestamp is inserted at every page bottom,
 # using the given strftime format.
@@ -204,12 +208,24 @@ latex_logo = "cnp3.png"
 # Additional stuff for the LaTeX preamble.
 #latex_preamble = ''
 
+latex_elements = {
+'preamble': '''
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usetikzlibrary{arrows,positioning, matrix}
+'''
+}
+
 # Documents to append as an appendix to all manuals.
 #latex_appendices = []
 
 # If false, no module index is generated.
 #latex_use_modindex = True
 
+tikz_libraries="positioning"
+
+
+tikz_proc_suite='ImageMagick'
 
 # -- Options for PDF output --------------------------------------------------
 # Grouping the document tree into PDF files. List of tuples # (source start file, target name, title, author, options). # # If there is more than one author, separate them with \\. # For example: r'Guido van Rossum\\Fred L. Drake, Jr., editor' #

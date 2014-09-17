@@ -14,31 +14,28 @@ In the previous section, we have explained how reliable protocols allow hosts to
 
 The main objective of the network layer is to allow endsystems, connected to different networks, to exchange information through intermediate systems called :term:`router`. The unit of information in the network layer is called a :term:`packet`.
 
+.. tikz::
+   :libs: positioning, matrix
 
-.. graphviz::
+    \tikzset{router/.style = {rectangle, draw, text centered, minimum height=2em}, }
+    \tikzset{host/.style = {circle, draw, text centered, minimum height=2em}, }
+    \node[router] (R3) {R3};
+    \node[router, below left=of R3] (R1) {R1};
+    \node[router, below right=of R3] (R2) {R2};
+ 
+    \node[host, left=of R1] (A) {A};
+    \node[host, right=of R3] (B) {B};
 
-   graph foo {
-      A [color=white, shape=box label=<<TABLE border="0" cellborder="0">
-                       <TR><TD width="45" height="60" fixedsize="true"><IMG SRC="icons/host.png" scale="true"/></TD></TR><TR><td>A</td></TR>
-              </TABLE>>];
-      B [color=white, shape=box label=<<TABLE border="0" cellborder="0">
-                       <TR><TD width="45" height="60" fixedsize="true"><IMG SRC="icons/host.png" scale="true"/></TD></TR><TR><td>B</td></TR>
-              </TABLE>>];
-      R1[shape=box, color=white, label=<<TABLE border="0" cellborder="0">
-                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="icons/router.png" scale="true"/></TD></TR><TR><td>R1</td></TR>
-              </TABLE>>];
-       R2[color=white, label=<<TABLE border="0" cellborder="0">
-                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="icons/router.png" scale="true"/></TD></TR><TR><td>R2</td></TR>
-              </TABLE>>];
-       R3[color=white, label=<<TABLE border="0" cellborder="0">
-                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="icons/router.png" scale="true"/></TD></TR><TR><td>R3</td></TR>
-              </TABLE>>];
-      A--R1;
-      R1--R3;
-      R3--R2;
-      R1--R2;
-      R3--B;
-   }
+
+    \path[draw,thick]
+    (R1) edge (R2)
+    (R2) edge (R3)
+    (R3) edge (R1)
+    (R1) edge (A)
+    (R3) edge (B);
+
+
+
 
 Before explaining the network layer in detail, it is useful to remember the characteristics of the service provided by the `datalink` layer. There are many variants of the datalink layer. Some provide a reliable service while others do not provide any guarantee of delivery. The reliable datalink layer services are popular in environments such as wireless networks were transmission errors are frequent. On the other hand, unreliable services are usually used when the physical layer provides an almost reliable service (i.e. only a negligible fraction of the frames are affected by transmission errors). Such `almost reliable` services are frequently in wired and optical networks. In this chapter, we will assume that the datalink layer service provides an `almost reliable` service since this is both the most general one and also the most widely deployed one. 
 
@@ -61,48 +58,34 @@ Even if we only consider the point-to-point datalink layers, there is an importa
 
 As a first step, let us assume that we only need to exchange small amount of data. In this case, there is no issue with the maximum length of the frames. However, there are other more interesting problems that we need to tackle. To understand these problems, let us consider the network represented in the figure below.
 
+.. tikz::
+   :libs: positioning, matrix
 
-.. graphviz::
-
-   graph foo {
-      A [color=white, shape=box label=<<TABLE border="0" cellborder="0">
-                       <TR><TD width="45" height="60" fixedsize="true"><IMG SRC="icons/host.png" scale="true"/></TD></TR><TR><td>A</td></TR>
-              </TABLE>>];
-      B [color=white, shape=box label=<<TABLE border="0" cellborder="0">
-                       <TR><TD width="45" height="60" fixedsize="true"><IMG SRC="icons/host.png" scale="true"/></TD></TR><TR><td>B</td></TR>
-              </TABLE>>];
-      C [color=white, shape=box label=<<TABLE border="0" cellborder="0">
-                       <TR><TD width="45" height="60" fixedsize="true"><IMG SRC="icons/host.png" scale="true"/></TD></TR><TR><td>C</td></TR>
-              </TABLE>>];
-      R1[shape=box, color=white, label=<<TABLE border="0" cellborder="0">
-                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="icons/router.png" scale="true"/></TD></TR><TR><td>R1</td></TR>
-              </TABLE>>];
-       R2[color=white, label=<<TABLE border="0" cellborder="0">
-                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="icons/router.png" scale="true"/></TD></TR><TR><td>R2</td></TR>
-              </TABLE>>];
-       R3[color=white, label=<<TABLE border="0" cellborder="0">
-                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="icons/router.png" scale="true"/></TD></TR><TR><td>R3</td></TR>
-              </TABLE>>];
-       R4[color=white, label=<<TABLE border="0" cellborder="0">
-                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="icons/router.png" scale="true"/></TD></TR><TR><td>R4</td></TR>
-              </TABLE>>];
-       R5[color=white, label=<<TABLE border="0" cellborder="0">
-                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="icons/router.png" scale="true"/></TD></TR><TR><td>R5</td></TR>
-              </TABLE>>];
-      A--R1;
-      R1--R3;
-      R3--R5;
-      R1--R2;
-      R2--R4;
-      R4--R5;
-      R3--R4;
-      R2--C;
-      R4--C;
-      R5--B;
-   }
+    \tikzset{router/.style = {rectangle, draw, text centered, minimum height=2em}, }
+    \tikzset{host/.style = {circle, draw, text centered, minimum height=2em}, }
+    \node[host] (A) {A};
+    \node[router, right of=A] (R1) {R1};
+    \node[router, right=of R1] (R3) {R3};
+    \node[router, right=of R3] (R5) {R5};
+    \node[router, below=of R1] (R2) {R2};
+    \node[router, below=of R3] (R4) {R4};
+    \node[host, below of=R4] (C) {C};
+    \node[host, right of=R5] (B) {B};
 
 
-   A network with 5 routers and hosts
+    \path[draw,thick]
+    (A) edge (R1)
+    (R1) edge (R2)
+    (R3) edge (R1)
+    (R2) edge (R4)
+    (R4) edge (R3)
+    (R4) edge (R5)
+    (R3) edge (R5)
+    (R4) edge (C)
+    (R5) edge (B)
+    (R2) edge (C);
+
+
 
 
 This network contains two types of devices. The end hosts, represented as a small workstation and the routers, represented as boxes with three arrows. An endhost is a device which is able to send and receive data for its own usage in contrast with routers that most of the time forward data towards their final destination. Routers have multiple links to neighboring routers or endhosts. Endhosts are usually attached via a single link to the network. Nowadays, with the growth of wireless networks, more and more endhosts are equipped with several physical interfaces. These endhosts are often called `multihomed`. Still, using several interfaces at the same time often leads to practical issues that are beyond the scope of this document. For this reason, we will only consider `single-homed` hosts in this ebook.
@@ -376,7 +359,7 @@ This hierarchical allocation of addresses can be applied in any type of network.
       R4--B ;
    }
 
-In the above figure, assume that the network uses 16 bits addresses and that the prefix `01001010` has been assigned to the entire network. Since the network contains four routers, the network operator could assign one block of sixty-four addresses to each router. `R1` would use address `0100101000000000` while `A` could use address `0100101000000001`. `R2` could be assigned all adresses from `0100101001000000`  to `0100101001111111`. `R4` could then use `0100101011000000` and assign ``0100101011000001` to `B`. Other allocation schemes are possible. For example, `R3` could be allocated a larger block of addresses than `R2` and `R4` could use a sub-block from `R3` 's address block. 
+In the above figure, assume that the network uses 16 bits addresses and that the prefix `01001010` has been assigned to the entire network. Since the network contains four routers, the network operator could assign one block of sixty-four addresses to each router. `R1` would use address `0100101000000000` while `A` could use address `0100101000000001`. `R2` could be assigned all adresses from `0100101001000000`  to `0100101001111111`. `R4` could then use `0100101011000000` and assign `0100101011000001` to `B`. Other allocation schemes are possible. For example, `R3` could be allocated a larger block of addresses than `R2` and `R4` could use a sub-block from `R3` 's address block. 
 
 The main advantage of hierarchical addresses is that it is possible to significantly reduce the size of the forwarding tables. In many networks, the number of nodes can be several orders of magnitude smaller than the number of hosts. A campus network may contain a few dozen of network nodes for thousands of hosts. The largest Internet Services Providers typically contain no more than a few tens of thousands of network nodes but still serve tens or hundreds of millions of hosts.
 

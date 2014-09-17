@@ -353,7 +353,7 @@ The `Fragment Options` header is more important. An important problem in the net
 
 .. index:: Maximum Transmission Unit, MTU
 
-Each datalink layer has its own characteristics and as indicated earlier, each datalink layer is characterised by a maximum frame size. From IP's point of view, a datalink layer interface is characterised by its `Maximum Transmission Unit (MTU)`. The MTU of an interface is the largest packet (including header) that it can send. The table below provides some common MTU sizes [#f6lowpan]_.
+Each datalink layer has its own characteristics and as indicated earlier, each datalink layer is characterised by a maximum frame size. From IP's point of view, a datalink layer interface is characterised by its `Maximum Transmission Unit (MTU)`. The MTU of an interface is the largest packet (including header) that it can send. The table below provides some common MTU sizes.
 
 ==============      ==================
 Datalink layer      MTU
@@ -596,5 +596,7 @@ Another very useful debugging tool is :manpage:`traceroute6(8)`. The traceroute 
 .. [#fipv4checksum] When IPv4 was designed, the situation was different. The IPv4 header includes a checksum that only covers the network header. This checksum is computed by the source and updated by all intermediate routers that decrement the TTL, which is the IPv4 equivalent of the `HopLimit` used by IPv6.
 
 .. [#fpingproblems] Until a few years ago, all hosts replied to `Echo request` ICMP messages. However, due to the security problems that have affected TCP/IP implementations, many of these implementations can now be configured to disable answering `Echo request` ICMP messages. 
+
+
 
 .. include:: /links.rst

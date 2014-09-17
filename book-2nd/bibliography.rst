@@ -146,7 +146,7 @@ Whenever possible, the bibliography includes stable hypertext links to the refer
 .. [RFC819] Su, Z. and Postel, J., `Domain naming convention for Internet user applications`, :rfc:`819`, Aug. 1982
 .. [RFC821] Postel, J., `Simple Mail Transfer Protocol`, :rfc:`821`, Aug. 1982
 .. [RFC822] Crocker, D., `Standard for the format of ARPA Internet text messages, :rfc:`822`, Aug. 1982
-.. [RFC826] Plummer, D., ``Ethernet Address Resolution Protocol: Or Converting Network Protocol Addresses to 48.bit Ethernet Address for Transmission on Ethernet Hardware`, :rfc:`826`, Nov. 1982
+.. [RFC826] Plummer, D., `Ethernet Address Resolution Protocol: Or Converting Network Protocol Addresses to 48.bit Ethernet Address for Transmission on Ethernet Hardware`, :rfc:`826`, Nov. 1982
 .. [RFC879] Postel, J., `TCP maximum segment size and related topics`, :rfc:`879`, Nov. 1983
 .. [RFC893] Leffler, S. and Karels, M., `Trailer encapsulations`, :rfc:`893`, April 1984
 .. [RFC894] Hornig, C., `A Standard for the Transmission of IP Datagrams over Ethernet Networks`, :rfc:`894`, April 1984

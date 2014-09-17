@@ -1,4 +1,4 @@
-.. Copyright |copy| 2013 by `Olivier Bonaventure <http://inl.info.ucl.ac.be/obo>`_
+.. Copyright |copy| 2013,2014 by `Olivier Bonaventure <http://inl.info.ucl.ac.be/obo>`_
 .. This file is licensed under a `creative commons licence <http://creativecommons.org/licenses/by/3.0/>`_
 
 
@@ -33,6 +33,8 @@ Computer Networking : Principles, Protocols and Practice, 2nd edition
 	
     The source code of the entire textbook is written in `reStructuredText <http://docutils.sourceforge.net/rst.html>`_ and uses several `sphinx <http://sphinx.pocoo.org>`_ features. You can browse it from `github <https://github.com/obonaventure/cnp3/tree/master/book-2nd>`_ 
 
+.. _toc:
+
 #################
 Table of Contents
 #################
@@ -41,6 +43,9 @@ Table of Contents
    :maxdepth: 2
 
    preface
+
+
+.. _part1:
 
 ##################
 Part 1: Principles
@@ -67,6 +72,8 @@ Part 1: Principles
 ..   intro/introduction
 ..   intro/services-protocols
 ..   intro/referencemodels
+
+.. _part2:
 
 #################
 Part 2: Protocols
@@ -104,6 +111,8 @@ Part 2: Protocols
 ..   transport/udp
 ..   transport/tcp
 
+.. _part3:
+
 ################
 Part 3: Practice
 ################
@@ -111,19 +120,21 @@ Part 3: Practice
 .. toctree::
    :maxdepth: 4
 
-
+   exercises/intro           
+   mcq-ex/mcq-reliability
    exercises/reliable
-   exercises/network
-   exercises/ex-transport
-   exercises/ex-sharing
-   exercises/ex-app
-   exercises/netkit-app
-   exercises/netkit-tcp
-   exercises/netkit-congestion
-   exercises/netkit-ipv6
-   exercises/netkit-ipv6-rtg
-   exercises/ex-bgp
-   exercises/ex-stp
+..   mcq-ex/mcq-network
+..   exercises/network
+..   exercises/ex-transport
+..   exercises/ex-sharing
+..   exercises/ex-app
+..   exercises/netkit-app
+..   exercises/netkit-tcp
+..   exercises/netkit-congestion
+..   exercises/netkit-ipv6
+..   exercises/netkit-ipv6-rtg
+..   exercises/ex-bgp
+..   exercises/ex-stp
 
 ..  application/exercises/ex-application
 
