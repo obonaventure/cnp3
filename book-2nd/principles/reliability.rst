@@ -288,7 +288,7 @@ Bit stuffing and character stuffing allow to recover frames from a stream of bit
       cf=>d [ label = "DATA.ind(1...1)", textcolour=red ];
 
 
-We can now build upon the framing mechanism to allow the hosts to exchange frames containing an integer number of bits or bytes. Once the framing problem has been solved, we can focus our designing a technique that allows to reliably exchange frames. 
+We can now build upon the framing mechanism to allow the hosts to exchange frames containing an integer number of bits or bytes. Once the framing problem has been solved, we can focus on designing a technique that allows to reliably exchange frames. 
 
 
 Recovering from transmission errors
@@ -916,7 +916,7 @@ Reliable protocols often need to send data in both directions. To reduce the ove
 
 .. .. [#fqueuesize] In the application layer, most servers are implemented as processes. The network and transport layer on the other hand are usually implemented inside the operating system and the amount of memory that they can use is limited by the amount of memory allocated to the entire kernel.
 
-.. [#fsizesliding] The size of the sliding window can be either fixed for a given protocol or negotiated during the connection establishment phase. Some protocols allow to change the maximum window size during the data transfert. We will see explain with real protocols later. 
+.. [#fsizesliding] The size of the sliding window can be either fixed for a given protocol or negotiated during the connection establishment phase. Some protocols allow to change the maximum window size during the data transfert. We will explain these techniques with real protocols later. 
 
 .. .. [#fautotune] For a discussion on how the sending buffer can change, see e.g. [SMM1998]_
 
