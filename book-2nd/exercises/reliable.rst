@@ -67,7 +67,7 @@ Reliable protocols depend on error detection algorithms to detect transmission e
 
  Implement a small software that computes the CRC-32 for a text file. Then, modify the contents of the file to change an even number of bits or an odd number of bits inside the file. When modifying the file, remember that an ASCII file is composed of 8 bits characters that are encoded by using the ASCII table that you can find at : http://en.wikipedia.org/wiki/ASCII . You can also write a small program that produces binary files that are a small variation of each other.
 
-3. Checksums and CRCs should not be confused with secure hash functions such as MD5 defined in :rfc:`1321` or SHA-1 described in :rfc:`4634`. Secure hash functions are used to ensure that files or sometimes packets/segments have not been modified. Secure hash functions aim at detecting malicious changes while checksums and CRCs only detect random transmission errors. Use the `shasum <http://linux.die.net/man/1/shasum>`_ or `md5sum <http://linux.die.net/man/1/md5sum`_ programs on Linux to perform the same tests as above.
+3. Checksums and CRCs should not be confused with secure hash functions such as MD5 defined in :rfc:`1321` or SHA-1 described in :rfc:`4634`. Secure hash functions are used to ensure that files or sometimes packets/segments have not been modified. Secure hash functions aim at detecting malicious changes while checksums and CRCs only detect random transmission errors. Use the `shasum <http://linux.die.net/man/1/shasum>`_ or `md5sum <http://linux.die.net/man/1/md5sum>`_ programs on Linux to perform the same tests as above.
 
 
 
