@@ -4,15 +4,15 @@
 Virtual circuits
 ----------------
 
-:task_id: networkftable
+:task_id: networkvc
 
- .. question:: vc1
+.. question:: vc1
    :nb_prop: 3
-   :nb_pos: 1          
+   :nb_pos: 1
 
    1. In a network that uses virtual circuits, the forwarding paths depend on the label tables installed inside each network node. 
-   
-   .. tikz::
+
+    .. tikz::
       :libs: positioning, matrix, arrows 
 
       \tikzstyle{arrow} = [thick,->,>=stealth]
@@ -44,47 +44,37 @@ Virtual circuits
       4 & E & 1 \\
       \end{tabular}\\};
       \node[host, right=of R3] (B) {B};
-
       \path[draw,thick]
       (A) edge (R1) 
       (R1) edge (R2) 
       (R2) edge (R3) 
       (R1) edge (R3)
       (R3) edge (B); 
-
       \draw[arrow, dashed] (FR1) -- (R1); 
       \draw[arrow, dashed] (FR2) -- (R2); 
       \draw[arrow, dashed] (FR3) -- (R3); 
- 
+
    In this network, only one of the affirmations about the forwarding paths is correct. Which one ?
 
-   .. positive::
+   .. positive:: To reach `B`, `A` must send packets with `label=2` and the path is `R1->R2->R3`
 
-      To reach `B`, `A` must send packets with `label=2` and the path is `R1->R2->R3`
+   .. positive:: To reach `A`, `B` must send packets with `label=3` and the path is `R3->R2->R1` 
 
-   .. positive::
-
-      To reach `A`, `B` must send packets with `label=3` and the path is `R3->R2->R1` 
-
-   .. negative::
-
-      To reach `B`, `A` must send packets with `label=3` and the path is `R1->R3`
+   .. negative:: To reach `B`, `A` must send packets with `label=3` and the path is `R1->R3`
 
       .. comment:: This path is incorrect. If `A` sends a packet with `label=3`, the packet will follow the path `R1->R3->R2->R1` and return to `A`. 
 
-   .. negative::
-
-      To reach `A`, `B` must send packets with `label=1` and the path is `R3->R2->R1` 
+   .. negative:: To reach `A`, `B` must send packets with `label=1` and the path is `R3->R2->R1` 
 
       .. comment:: This path is incorrect. If `B` sends a packet with `label=1`, the packet will follow the path `R3->R2` and will loop on link `R2-R3`
 
 
- .. question:: vcSym
+.. question:: vcSym
    :nb_prop: 3 
-   :nb_pos: 1          
+   :nb_pos: 1 
 
    2. The forwarding paths used in a virtual circuits network depend on the label forwarding tables installed in the network nodes. Sometimes, these tables must be configured manually. 
-   
+
    .. tikz::
       :libs: positioning, matrix, arrows 
 
@@ -128,14 +118,11 @@ Virtual circuits
       \draw[arrow, dashed] (FR4) -- (R4); 
 
    In this network, which of the label forwarding tables below ensures that : 
-   
+
      - `A` and `B` can exchange packets in both directions.
      - the path from `A` to `B` is the reverse of the path from `B` to `A`
-   
-   .. positive::
 
-      To reach `B`, `A` sends packet with `label=2`. To reach `A`, `B` sends packets with `label=3`. 
-      New label forwarding table for `R3`:
+   .. positive:: To reach `B`, `A` sends packet with `label=2`. To reach `A`, `B` sends packets with `label=3`.  New label forwarding table for `R3`:
 
        ======== ======= ========
        InLabel  OutPort OutLabel 
@@ -155,10 +142,7 @@ Virtual circuits
        ======== ======= ========
 
 
-   .. positive::
-
-      To reach `B`, `A` sends packet with `label=3`. To reach `A`, `B` sends packets with `label=2`. 
-      New label forwarding table for `R2`:
+   .. positive:: To reach `B`, `A` sends packet with `label=3`. To reach `A`, `B` sends packets with `label=2`. New label forwarding table for `R2`:
 
        ======== ======= ========
        InLabel  OutPort OutLabel 
@@ -177,10 +161,7 @@ Virtual circuits
        5        N       2 
        ======== ======= ========
 
-   .. negative::
-
-      To reach `B`, `A` sends packet with `label=2`. To reach `A`, `B` sends packets with `label=2`. 
-      New label forwarding table for `R2`:
+   .. negative:: To reach `B`, `A` sends packet with `label=2`. To reach `A`, `B` sends packets with `label=2`.  New label forwarding table for `R2`:
 
        ======== ======= ========
        InLabel  OutPort OutLabel 
@@ -201,10 +182,7 @@ Virtual circuits
 
       .. comment:: With these label forwarding tables, the path from `A` to `B` is not the reverse of the path from `B` to `A`.
 
-   .. negative::
-
-      To reach `B`, `A` sends packet with `label=3`. To reach `A`, `B` sends packets with `label=3`. 
-      New label forwarding table for `R2`:
+   .. negative:: To reach `B`, `A` sends packet with `label=3`. To reach `A`, `B` sends packets with `label=3`. New label forwarding table for `R2`:
 
        ======== ======= ========
        InLabel  OutPort OutLabel 
@@ -226,10 +204,7 @@ Virtual circuits
       .. comment:: With these label forwarding tables, the path from `A` to `B` is not the reverse of the path from `B` to `A`.
 
 
-   .. negative::
-
-      To reach `B`, `A` sends packet with `label=2`. To reach `A`, `B` sends packets with `label=3`. 
-      New label forwarding table for `R2`:
+   .. negative:: To reach `B`, `A` sends packet with `label=2`. To reach `A`, `B` sends packets with `label=3`. New label forwarding table for `R2`:
 
        ======== ======= ========
        InLabel  OutPort OutLabel 
@@ -250,12 +225,9 @@ Virtual circuits
       .. comment:: The packets sent by `A` towards `B` reach `R3` which sends them to `R2` that returns them to `R1`.
 
 
- .. question:: vcAdd
-   :nb_prop: 3 
-   :nb_pos: 1          
 
-   3. The forwarding paths used in a virtual circuits network depend on the label forwarding tables installed in the network nodes. Sometimes, these tables must be configured manually. 
-   
+3. The forwarding paths used in a virtual circuits network depend on the label forwarding tables installed in the network nodes. Sometimes, these tables must be configured manually. 
+
    .. tikz::
       :libs: positioning, matrix, arrows 
 
@@ -298,13 +270,14 @@ Virtual circuits
       \draw[arrow, dashed] (FR1) -- (R1); 
       \draw[arrow, dashed] (FR4) -- (R4); 
 
+.. question:: vcAdd
+   :nb_prop: 3
+   :nb_pos: 1
+
    In this network, which of the label forwarding tables below ensures that- `A` and `B` can exchange packets in both directions.
 
-   
-   .. positive::
 
-      To reach `B`, `A` sends packet with `label=3`. To reach `A`, `B` sends packets with `label=2`. 
-      New label forwarding table for `R2`:
+   .. positive:: To reach `B`, `A` sends packet with `label=3`. To reach `A`, `B` sends packets with `label=2`. New label forwarding table for `R2`:
 
        ======== ======= ========
        InLabel  OutPort OutLabel 
@@ -316,11 +289,7 @@ Virtual circuits
       The label forwarding table for `R3` remains empty. 
 
 
-   .. positive::
-
-      To reach `B`, `A` sends packet with `label=3`. To reach `A`, `B` sends packets with `label=3`. 
-
-      New label forwarding table for `R2`:
+   .. positive:: To reach `B`, `A` sends packet with `label=3`. To reach `A`, `B` sends packets with `label=3`. New label forwarding table for `R2`:
 
        ======== ======= ========
        InLabel  OutPort OutLabel 
@@ -338,10 +307,7 @@ Virtual circuits
        ======== ======= ========
 
 
-   .. negative::
-
-      To reach `B`, `A` sends packet with `label=2`. To reach `A`, `B` sends packets with `label=1`. 
-      New label forwarding table for `R2`:
+   .. negative:: To reach `B`, `A` sends packet with `label=2`. To reach `A`, `B` sends packets with `label=1`. New label forwarding table for `R2`:
 
        ======== ======= ========
        InLabel  OutPort OutLabel 
@@ -361,10 +327,8 @@ Virtual circuits
 
       .. comment:: The packets sent by `A` towards `B` reach `R3` which returns them to `R1`.
 
-   .. negative::
-
-      To reach `B`, `A` sends packet with `label=3`. To reach `A`, `B` sends packets with `label=2`. 
-      New label forwarding table for `R2`:
+   .. negative:: To reach `B`, `A` sends packet with `label=3`. To reach `A`, `B` sends packets with `label=2`. 
+ New label forwarding table for `R2`:
 
        ======== ======= ========
        InLabel  OutPort OutLabel 

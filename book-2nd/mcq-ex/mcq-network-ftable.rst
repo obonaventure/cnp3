@@ -8,12 +8,8 @@ Building forwarding tables
 
 :task_id: networkftable
 
- .. question:: ftable1
-   :nb_prop: 3
-   :nb_pos: 1          
+1. The forwarding paths used in a network depend on the forwarding tables installed in the network nodes. Consider the network shown below with the forwarding tables.
 
-   1. The forwarding paths used in a network depend on the forwarding tables installed in the network nodes. Consider the network shown below with the forwarding tables.
-   
     .. tikz::
        :libs: positioning, matrix, arrows 
 
@@ -44,7 +40,7 @@ Building forwarding tables
        B & E \\
        \end{tabular}\\};
        \node[host, right=of R3] (B) {B};
-       
+
        \path[draw,thick]
        (A) edge (R1) 
        (R1) edge (R2) 
@@ -56,32 +52,25 @@ Building forwarding tables
        \draw[arrow, dashed] (FR2) -- (R2); 
        \draw[arrow, dashed] (FR3) -- (R3); 
  
-   In this network, only one of the affirmations about the forwarding paths is correct. Which one ?
-
-   .. positive::
-
-      The path from `A` to `B` is `R1->R2->R3`
-
-   .. positive::
-
-      The path from `B` to `A` is `R3->R1`
-
-   .. negative::
-
-      The path from `B` to `A` is `R3->R2->R1`
-
-   .. negative::
-
-      The path from `A` to `B` is `R1->R3`
-
-
-
- .. question:: ftableAdd
-   :nb_prop: 3 
+.. question:: ftable1
+   :nb_prop: 3
    :nb_pos: 1          
 
-   2. The forwarding paths used in a network depend on the forwarding tables installed in the network nodes. Sometimes, these forwarding tables must be configured manually. 
-   
+   In this network, only one of the affirmations about the forwarding paths is correct. Which one ?
+
+   .. positive:: The path from `A` to `B` is `R1->R2->R3`
+
+   .. positive:: The path from `B` to `A` is `R3->R1`
+
+   .. negative:: The path from `B` to `A` is `R3->R2->R1`
+
+   .. negative:: The path from `A` to `B` is `R1->R3`
+
+
+
+
+2. The forwarding paths used in a network depend on the forwarding tables installed in the network nodes. Sometimes, these forwarding tables must be configured manually. 
+
      .. tikz::
         :libs: positioning, matrix, arrows 
 
@@ -109,7 +98,7 @@ Building forwarding tables
         B & E \\
         \end{tabular}\\};
         \node[host, right=of R4] (B) {B};
-        
+
         \path[draw,thick]
         (A) edge (R1) 
         (R1) edge (R2) 
@@ -122,14 +111,16 @@ Building forwarding tables
         \draw[arrow, dashed] (FR1) -- (R1); 
         \draw[arrow, dashed] (FR4) -- (R4); 
 
+.. question:: ftableAdd
+   :nb_prop: 3 
+   :nb_pos: 1 
+
    In this network, which of the forwarding tables below ensures that both :
 
      - `A` and `B` can exchange packets in both directions 
      - the path from `A` to `B` is the reverse of the path from `B` to `A` 
 
-   .. positive::
-
-      New forwarding table for `R3`:
+   .. positive:: New forwarding table for `R3`:
 
        ====== =====
        Dest.  Port 
@@ -147,9 +138,7 @@ Building forwarding tables
        B      S 
        ====== =====
 
-   .. negative::
-
-      New forwarding table for `R3`:
+   .. negative:: New forwarding table for `R3`:
 
        ====== =====
        Dest.  Port 
@@ -170,9 +159,7 @@ Building forwarding tables
       .. comment:: There is a forwarding loop with this forwarding table. `B` cannot reach `A` because the packets that it sends loop on the `R2-R3` link. 
 
 
-   .. negative::
-
-      New forwarding table for `R3`:
+   .. negative:: New forwarding table for `R3`:
 
        ====== =====
        Dest.  Port 
@@ -193,9 +180,7 @@ Building forwarding tables
       .. comment:: There is a forwarding loop with this forwarding table. `A` cannot reach `B` because the packets that it sends loop on the `R2-R3` link. 
 
 
-   .. negative::
-
-      New forwarding table for `R3`:
+   .. negative:: New forwarding table for `R3`:
 
        ====== =====
        Dest.  Port 
@@ -216,12 +201,9 @@ Building forwarding tables
       .. comment:: The path from `A` to `B` is not the reverse of the path from `B` to `A` with these forwarding tables.
 
 
- .. question:: ftableErr 
-   :nb_prop: 3 
-   :nb_pos: 1          
 
-   3. The forwarding paths used in a network depend on the forwarding tables installed in the network nodes. Sometimes, these forwarding tables are configured manually and an incorrect configuration may cause some paths to be impossible. 
-   
+3. The forwarding paths used in a network depend on the forwarding tables installed in the network nodes. Sometimes, these forwarding tables are configured manually and an incorrect configuration may cause some paths to be impossible. 
+
    .. tikz::
       :libs: positioning, matrix, arrows 
 
@@ -273,12 +255,14 @@ Building forwarding tables
       \draw[arrow, dashed] (FR2) -- (R2); 
       \draw[arrow, dashed] (FR3) -- (R3); 
       \draw[arrow, dashed] (FR4) -- (R4); 
- 
+
+.. question:: ftableErr 
+   :nb_prop: 3 
+   :nb_pos: 1          
+
    In this network, `B` can send packets to `A`, but when `A` sends a packet to `B`, this packet never reaches its destination. Among the following forwarding tables, which is the one that ensures that `A` can exchange packets with `B` ? 
 
-   .. positive::
-
-      New forwarding table for `R3`:
+   .. positive:: New forwarding table for `R3`:
 
        ====== =====
        Dest.  Port 
@@ -287,9 +271,7 @@ Building forwarding tables
        B      E 
        ====== =====
 
-   .. positive::
-
-      New forwarding table for `R2`:
+   .. positive:: New forwarding table for `R2`:
 
        ====== =====
        Dest.  Port 
@@ -299,9 +281,7 @@ Building forwarding tables
        ====== =====
 
 
-   .. negative::
-
-      New forwarding table for `R4`:
+   .. negative:: New forwarding table for `R4`:
 
        ====== =====
        Dest.  Port 
@@ -310,9 +290,7 @@ Building forwarding tables
        B      E 
        ====== =====
 
-   .. negative::
-
-      New forwarding table for `R2`:
+   .. negative:: New forwarding table for `R2`:
 
        ====== =====
        Dest.  Port 

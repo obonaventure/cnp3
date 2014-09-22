@@ -13,8 +13,6 @@
 
 .. _freebsd: http://www.freebsd.org
 
-.. _apache: http://www.apache.org
-
 .. _RFC: http://www.ietf.org/rfc.html
 
 .. _Unicode: http://en.wikipedia.org/wiki/Unicode
@@ -81,7 +79,6 @@
 
 .. _ASCII: http://en.wikipedia.org/wiki/ASCII
 
-.. _minicomputer: http://en.wikipedia.org/wiki/Minicomputer
 
 .. _dig: http://linux.die.net/man/1/dig
 
@@ -148,8 +145,6 @@
 .. _ARIN: http://www.arin.net
 
 .. _afrinic: http://www.afrinic.net
-
-.. _IANA: http://www.iana.org
 
 .. _snort: http://www.snort.org/
 

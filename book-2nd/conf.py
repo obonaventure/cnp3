@@ -25,7 +25,7 @@ import sys, os
 
 sys.path.append(os.path.abspath('mcq'))
 
-extensions = ['sphinx.ext.todo', 'sphinx.ext.pngmath', 'sphinxcontrib.mscgen','sphinx.ext.graphviz','sphinxcontrib.tikz']
+extensions = ['mcq','sphinx.ext.todo', 'sphinx.ext.pngmath', 'sphinxcontrib.mscgen','sphinx.ext.graphviz','sphinxcontrib.tikz']
 
 # mcq
 

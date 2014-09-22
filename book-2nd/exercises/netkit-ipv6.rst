@@ -8,6 +8,21 @@ Configuring IPv6
 
    This is an unpolished draft of the second edition of this ebook. If you find any error or have suggestions to improve the text, please create an issue via https://github.com/obonaventure/cnp3/issues?milestone=6
 
+.. todo:: add this question somewhere
+
+9. Consider the network shown below. In this network, the metric of each link is set to `1` except link `A-B` whose metric is set to `4` in both directions. In this network, there are two paths with the same cost between `D` and `C`. Old routers would randomly select one of these equal cost paths and install it in their forwarding table. Recent routers are able to use up to `N` equal cost paths towards the same destination. 
+
+ .. figure:: ../../book/network/svg/ex-five-routers-weigth4.png
+    :align: center
+    :scale: 30
+
+    A simple network 
+
+ On recent routers, a lookup in the forwarding table for a destination address returns a set of outgoing interfaces. How would you design an algorithm that selects the outgoing interface used for each packet, knowing that to avoid reordering, all segments of a given TCP connection should follow the same path ? 
+
+
+
+
 During the previous labs, you have mainly used existing netkit_ labs to understand transport layer protocols such as TCP and UDP. This is one usage of netkit_, but not the most interesting one. An advantage of netkit_ compared to the utilisation of real networking devices is that it allows you to build quickly a network, configure it and test its operation. The netkit_ manpages, available from http://wiki.netkit.org/man/man7/netkit.7.html provide many details on the operation of netkit_
 
 netkit_ is composed of a set of scripts that read configuration files and allow you to run scripts and copy files on the virtual machines that represent the routers and the switches. All the information about a netkit_ lab resides in a directory. The first file in such a directory is the `lab.conf <http://wiki.netkit.org/man/man5/lab.conf.5.html>`_ file. This file is a text file that describes the network topology that you want to emulate.
@@ -242,6 +257,9 @@ To demonstrate your understanding of ICMPv6, prepare a lab with a few hosts and 
  
 
 Provide in your report a short text that explains why the ICMPv6 error message is generated and show a tcpdump_ output containing this message.
+
+
+
 
 .. rubric:: Footnotes
 

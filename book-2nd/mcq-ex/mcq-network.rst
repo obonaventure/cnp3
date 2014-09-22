@@ -1,22 +1,6 @@
-.. Copyright |copy| 2013 by Olivier Bonaventure
+.. Copyright |copy| 2014 by Olivier Bonaventure
 .. This file is licensed under a
    `creative commons licence <http://creativecommons.org/licenses/by/3.0/>`_
-
-
-.. _mcq-network:
-
-******************
-Building a network
-******************
-
-.. warning::
-
-   This is an unpolished draft of the second edition of this ebook.
-   If you find any error or have suggestions to improve the text, please
-   create an issue via https://github.com/obonaventure/cnp3/issues?milestone=2
-
-Multiple choice questions
-=========================
 
 
 :task_id: networkrouting
@@ -133,13 +117,13 @@ Routing protocols
           \node[router] (R1) { R1 };
           \node[router,right=of R1] (R2) {R2};
           \node[router,below=of R1] (R3) {R3};
-          \node[router,below=of R2] (R4) {R4};
+          \node[router,above=of R2] (R4) {R4};
           \path[draw,thick]
           (R3) edge node [midway,fill=white] {\em{3}} (R2)
           (R1) edge (R2)
           (R1) edge (R3)
           (R2) edge (R4)
-          (R4) edge [bend left] R1;
+          (R4) edge (R1);
 
    Among the link state packets shown below, which corresponds to link state packets that could be transmitted by the nodes of this network ? Select all the valid answers.
 

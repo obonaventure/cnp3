@@ -123,8 +123,13 @@ Part 3: Practice
    exercises/intro           
    mcq-ex/mcq-reliability
    exercises/reliable
-..   mcq-ex/mcq-network
-..   exercises/network
+   mcq-ex/mcq-network-ftable	
+   mcq-ex/mcq-network-vc
+   mcq-ex/mcq-network-pftables	
+   mcq-ex/mcq-network-shortest	
+   mcq-ex/mcq-network
+   exercises/network
+
 ..   exercises/ex-transport
 ..   exercises/ex-sharing
 ..   exercises/ex-app

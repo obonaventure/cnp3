@@ -8,14 +8,12 @@ Shortest paths
 
 :task_id: networkshortest 
 
-.. question:: shortest1
-   :nb_prop: 3
-   :nb_pos: 2
 
-   1. Consider the network below.
+1. Consider the network below.
 
    .. tikz::
       :libs: positioning, matrix, arrows
+
       \tikzstyle{arrow} = [thick,->,>=stealth]
       \tikzset{router/.style = {rectangle, draw, text centered, minimum height=2em}, }
       \tikzset{host/.style = {circle, draw, text centered, minimum height=2em}, }
@@ -27,10 +25,13 @@ Shortest paths
       \path[draw,thick]
       (R1) edge node [midway,fill=white] {\em{3}} (R2)
       (R3) edge node [midway,fill=white] {\em{3}} (R2)
-      (R1) edge node [midway, fill=white] {\em{2}} (R3 
+      (R1) edge node [midway, fill=white] {\em{2}} (R3)
       (R4) edge (R3)
       (R2) edge (R4);
 
+.. question:: shortest1
+   :nb_prop: 3
+   :nb_pos: 2
 
    Given the link weights shown in the figure above, which of the following affirmations about the shortest paths in this network are correct ? 
 
