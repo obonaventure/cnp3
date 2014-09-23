@@ -3,6 +3,21 @@
 
 
 
+******************
+Building a network
+******************
+
+.. warning:: 
+
+   This is an unpolished draft of the second edition of this ebook. If you find any error or have suggestions to improve the text, please create an issue via https://github.com/obonaventure/cnp3/issues?milestone=2 
+
+.. _mcq-network:
+
+
+Multiple choice questions
+=========================
+
+
 Building forwarding tables
 --------------------------
 

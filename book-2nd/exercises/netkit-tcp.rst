@@ -195,9 +195,11 @@ Start by using :manpage:`tcpdump` on `router` to capture all the packets sent on
 
 4. Perform the same experiment as above, but now by using ``wget`` to retrieve the homepage on `webserver`. Which version of HTTP is used ? How is the TCP connection closed ?
 
-5. The MSS option is the first option that was specified in TCP. It is used during the three-way-handshake to announce the Maximum Segment Size supported by a host. On Linux, the MSS value is computed from the maximum packet size of the underlying network. You can change the maximum packet size of the underlying network (or Maximum Transmission Unit - MTU) by using the command :manpage:`ifconfig(8)` ::
+5. The MSS option is the first option that was specified in TCP. It is used during the three-way-handshake to announce the Maximum Segment Size supported by a host. On Linux, the MSS value is computed from the maximum packet size of the underlying network. You can change the maximum packet size of the underlying network (or Maximum Transmission Unit - MTU) by using the command :manpage:`ifconfig(8)` :
 
-  ifconfig eth0 mtu 1300
+ .. code-block:: console
+
+   ifconfig eth0 mtu 1300
 
  This command reduces the MTU of interface ``eth0`` to 1300 bytes.  Use :manpage:`tcpdump(8)` to observe whether this change affects the segments sent by the client or by the server when :manpage:`nc(1)` is used with the ``echo`` service.
 

@@ -17,10 +17,10 @@ Computer Networking : Principles, Protocols and Practice, 2nd edition
 
    This is an unpolished draft of the second edition of this ebook. If you find any error or have suggestions to improve the text, please create an issue via https://github.com/obonaventure/cnp3/issues/new
 
-    You can also directly download the current ebook draft in various formats from the links below :
+..    You can also directly download the current ebook draft in various formats from the links below :
 
-   	- :download:`distrib/cnp3bis.epub` suitable for viewing on tablets like ipad
- 	- :download:`distrib/cnp3bis.pdf` suitable for viewing and printing anywhere
+..   	- :download:`distrib/cnp3bis.epub` suitable for viewing on tablets like ipad
+.. 	- :download:`distrib/cnp3bis.pdf` suitable for viewing and printing anywhere
 .. 	- :download:`distrib/cnp3b.mobi` suitable for viewing on amazon kindle
 
     The development of this edition of the textbook is carried out on `github

@@ -123,16 +123,7 @@ Open questions
 
  Assuming that the network uses source routing, what are the possible paths from `R1` to `R4` ?
 
-Practice
-========
-
-
-
-Discussion questions
-====================
-
-
-1. Consider the network shown in the figure below.
+9. Consider the network shown in the figure below.
 
  .. tikz::
     :libs: positioning, matrix
@@ -161,7 +152,7 @@ Discussion questions
  Is it possible to achieve these paths and if so what are the required forwarding tables ?
 
 
-2. Consider the network shown in the figure below.
+10. Consider the network shown in the figure below.
 
 
  .. tikz::
@@ -193,7 +184,7 @@ Discussion questions
 
  Same question with virtual circuits.
 
-3. Consider the network shown in the figure below.
+11. Consider the network shown in the figure below.
 
   .. tikz::
     :libs: positioning, matrix
@@ -221,7 +212,13 @@ Discussion questions
 
  Are these paths possible with link-state or distance vector routing ? If yes, how do configure the link weights. If no, explain your answer.
 
-4. The network below uses port forwarding tables. It has been running for several hours and all hosts have exchanged packets. What is the content of the port forwarding tables ?
+
+
+Discussion questions
+====================
+
+
+1. The network below uses port forwarding tables. It has been running for several hours and all hosts have exchanged packets. What is the content of the port forwarding tables ?
 
    .. tikz::
       :libs: positioning, matrix, arrows 
@@ -247,7 +244,7 @@ Discussion questions
 At this point, a new link is added between `R1` and `R3`. What happens for the forwarding of packets ?
 
 
-5. The network below uses port forwarding tables. What happens if host `A` moves by removing its link with `R1` and replacing it with a link with `R3`? How should networks using port forwarding deal with such mobile hosts ?
+2. The network below uses port forwarding tables. What happens if host `A` moves by removing its link with `R1` and replacing it with a link with `R3`? How should networks using port forwarding deal with such mobile hosts ?
 
     .. tikz::
        :libs: positioning, matrix, arrows
@@ -270,7 +267,7 @@ At this point, a new link is added between `R1` and `R3`. What happens for the f
        (R3) edge (B);
 
 
-6. Some hosts need to be multihomed, i.e. attached to two different network nodes as shown in the figure below.
+3. Some hosts need to be multihomed, i.e. attached to two different network nodes as shown in the figure below.
 
   .. tikz::
       :libs: positioning, matrix, arrows 
@@ -299,11 +296,11 @@ At this point, a new link is added between `R1` and `R3`. What happens for the f
    a. Host `A` uses the same flat address for both links.
    b. Host `A` uses a different flat address on each of its links
 
-7. What are the advantages and drawbacks of flat addresses versus hierarchical addresses ?
+4. What are the advantages and drawbacks of flat addresses versus hierarchical addresses ?
 
 
 
-8. Let us now consider the transient problems that mainly happen when the network topology changes. For this, consider the network topology shown in the figure below and assume that all routers use a distance vector protocol that uses split horizon.
+5. Let us now consider the transient problems that mainly happen when the network topology changes. For this, consider the network topology shown in the figure below and assume that all routers use a distance vector protocol that uses split horizon.
 
  .. figure:: ../../book/network/svg/ex-five-routers-redundant.png
     :align: center
@@ -332,7 +329,7 @@ At this point, a new link is added between `R1` and `R3`. What happens for the f
 
   * Consider the same distance vector protocol, but now with `triggered updates`. When link `B-C` fails, assume that `B` updates its routing table immediately and sends its distance vector to `A` and `D`. Assume that both `A` and `D` process the received distance vector and that `A` sends its own distance vector, ... Indicate all the distance vectors that are exchanged and update the table above each time a distance vector is sent by a router (and received by other routers) until all routers have learned a new route to each destination. How many distance vector messages must be exchanged until the network converges to a stable state ?
 
-9. Consider again the network shown above. After some time, link state routing converges and all routers compute the following routing tables :
+6. Consider again the network shown above. After some time, link state routing converges and all routers compute the following routing tables :
 
  ===========  ========  =========  =========  =========  =========
  Destination   Routes   Routes     Routes     Routes     Routes
@@ -349,7 +346,7 @@ At this point, a new link is added between `R1` and `R3`. What happens for the f
 
  Router `B` will flood its updated link state packet through the entire network and all routers will recompute their forwarding table. Upon reception of a link state packet, routers usually first flood the received link-state packet and then recompute their forwarding table. Assume that `B` is the first to recompute its forwarding table, followed by `D`, `A`, `C` and finally `E`
 
-10. After each update of a forwarding table, verify which pairs of routers are able to exchange packets. Provide your answer using a table similar to the one shown above.
+7. After each update of a forwarding table, verify which pairs of routers are able to exchange packets. Provide your answer using a table similar to the one shown above.
 
 .. 8. Can you find an ordering of the updates of the forwarding tables that avoids all transient problems ?
 
