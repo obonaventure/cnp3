@@ -45,7 +45,7 @@ Building forwarding tables
        Dest. & Port \\
        \hline 
        A & E \\
-       B & S-E \\
+       B & S-W \\
        \end{tabular}\\};
        \node[router,below=of R1] (R3) {R3};
        \node[ftable, below=of R3] (FR3) { \begin{tabular}{l|l} 
@@ -275,7 +275,7 @@ Building forwarding tables
    :nb_prop: 3 
    :nb_pos: 1          
 
-   In this network, `B` can send packets to `A`, but when `A` sends a packet to `B`, this packet never reaches its destination. Among the following forwarding tables, which is the one that ensures that `A` can exchange packets with `B` ? 
+   In this network, `A` can send packets to `B`, but when `B` sends a packet to `A`, this packet never reaches its destination. Among the following forwarding tables, which is the one that ensures that `A` can exchange packets with `B` ? 
 
    .. positive:: New forwarding table for `R3`:
 
@@ -292,7 +292,7 @@ Building forwarding tables
        Dest.  Port 
        ====== =====
        A      W 
-       B      E 
+       B      S-W 
        ====== =====
 
 
