@@ -3,11 +3,11 @@
    `creative commons licence <http://creativecommons.org/licenses/by/3.0/>`_
 
 
-:task_id: networkrouting
-
 
 Routing protocols
 -----------------
+
+:task_id: networkrouting
 
 .. question:: dv1
    :nb_prop: 4
