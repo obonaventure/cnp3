@@ -147,7 +147,7 @@ Port forwarding tables are used in tree-shaped networks to automatically build t
       Dest.   OutPort 
       ======  ========
       A       W 
-      B       S 
+      B       E 
       ======  ========
 
    .. negative::    
