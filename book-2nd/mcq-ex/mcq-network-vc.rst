@@ -140,7 +140,7 @@ Virtual circuits
       InLabel  OutPort OutLabel 
       ======== ======= ========
       4        E       1 
-      1        N       1 
+      3        N       1 
       ======== ======= ========
 
    .. negative:: To reach `B`, `A` sends packet with `label=2`. To reach `A`, `B` sends packets with `label=1`. New label forwarding table for `R2`:
@@ -253,7 +253,7 @@ Virtual circuits
       InLabel  OutPort OutLabel 
       ======== ======= ========
       5        W       1 
-      6        S       1 
+      3        S       1 
       ======== ======= ========
 
 
