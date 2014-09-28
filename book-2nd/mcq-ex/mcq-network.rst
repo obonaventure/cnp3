@@ -14,7 +14,7 @@ Routing protocols
    :nb_pos: 2
 
    1. Consider the network represented in the figure below. Assume that the
-      network is using a distance vector protocol as its routing protocol
+      network is using a distance vector protocol as its routing protocol.
       When the network boots, which of the following distance vectors
       correspond to the first vector
       that each router sends ? We assume that the link weights are configured on
@@ -76,13 +76,13 @@ Routing protocols
 
       .. comment:: A router always sends a summary of its routing table. After several hours, `R1` already knows how to reach `R4`.
 
-   .. positive:: Router `R2` sends `[ R2=0, R1=1, R3=3, R4=1]`
+   .. positive:: Router `R2` sends `[ R2=0, R1=1, R3=2, R4=1]`
 
    .. negative:: Router `R3` sends `[ R3=0, R1=1, R2=3]`
 
       .. comment:: A router always sends a summary of its routing table. After several hours, `R3` already knows how to reach `R4`.
 
-   .. positive:: Router `R4` sends `[ R4=0, R2=1, R3=3, R4=1]`
+   .. positive:: Router `R4` sends `[ R4=0, R2=1, R3=3, R1=2]`
 
    .. negative:: Router `R4` sends `[ R4=0 ]`
 
@@ -96,7 +96,7 @@ Routing protocols
 
       .. comment:: A router always sends a summary of its entire routing table. This is not the case here.
 
-   .. positive:: Router `R1` sends `[ R1=0 ]`
+   .. negative:: Router `R1` sends `[ R1=0 ]`
 
       .. comment:: A router always sends a summary of its entire routing table. This is not the case here.
 
@@ -131,7 +131,7 @@ Routing protocols
 
    .. positive:: Router `R1` sends LSP : `R1-0 [R2:1] [R3:1] [R4:1]`
 
-   .. positive:: Router `R2` sends LSP : `R2-0 [R2:1] [R3:3] [R4:1]`
+   .. positive:: Router `R2` sends LSP : `R2-0 [R1:1] [R3:3] [R4:1]`
 
    .. positive:: Router `R3` sends LSP : `R3-0 [R1:1] [R2:3]`
 
