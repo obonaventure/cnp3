@@ -71,7 +71,6 @@ Routing protocols
    2. Consider the same network as in the previous question. The network has been running for several hours. Among the following answers, what are the distance vectors that are produced by the routers at that time ?
 
 
-
    .. negative:: Router `R1` sends `[ R1=0, R2=1, R3=1]`
 
       .. comment:: A router always sends a summary of its routing table. After several hours, `R1` already knows how to reach `R4`.
