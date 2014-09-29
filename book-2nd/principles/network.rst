@@ -454,30 +454,26 @@ If this node receives a packet with `label=2`, it forwards the packet on its `We
 
 `Label switching` enables a full control over the path followed by packets inside the network. Consider the network below and assume that we want to use two virtual circuits : `R1->R3->R4->R2->R5` and `R2->R1->R3->R4->R5`.
 
-.. graphviz::
+    .. tikz::
+      :libs: positioning, matrix, arrows 
 
-   graph foo {
-      R1[shape=box, color=white, label=<<TABLE border="0" cellborder="0">
-                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="icons/router.png" scale="true"/></TD></TR><TR><td>R1</td></TR>
-              </TABLE>>];
-       R2[color=white, label=<<TABLE border="0" cellborder="0">
-                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="icons/router.png" scale="true"/></TD></TR><TR><td>R2</td></TR>
-              </TABLE>>];
-       R3[color=white, label=<<TABLE border="0" cellborder="0">
-                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="icons/router.png" scale="true"/></TD></TR><TR><td>R3</td></TR>
-              </TABLE>>];
-       R4[color=white, label=<<TABLE border="0" cellborder="0">
-                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="icons/router.png" scale="true"/></TD></TR><TR><td>R4</td></TR>
-              </TABLE>>];
-       R5[color=white, label=<<TABLE border="0" cellborder="0">
-                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="icons/router.png" scale="true"/></TD></TR><TR><td>R5</td></TR>
-              </TABLE>>];      R1--R2 [];
-      R1--R3 [];
-      R2--R4 [];
-      R3--R4 [];
-      R4--R5 [];
-      R2--R5 [];
-   }
+      \tikzstyle{arrow} = [thick,->,>=stealth]
+      \tikzset{router/.style = {rectangle, draw, text centered, minimum height=2em}, }
+      \tikzset{host/.style = {circle, draw, text centered, minimum height=2em}, }
+      \tikzset{ftable/.style={rectangle, dashed, draw} }
+      \node[router] (R1) {R1};
+      \node[router,below right=of R1] (R2) {R2};
+      \node[router,below left=of R1] (R3) {R3};
+      \node[router, below right=of R3] (R4) {R4};
+      \node[router, below=of R4] (R5) {R5};
+      \path[draw,thick]
+      (R1) edge (R2) 
+      (R1) edge (R3) 
+      (R4) edge (R3) 
+      (R4) edge (R2) 
+      (R2) edge (R5) 
+      (R4) edge (R5); 
+
 
 
 To create these virtual circuits, we need to configure the 
@@ -511,7 +507,7 @@ Two virtual circuits pass through `R3`. They both need to be forwarded to `R4`, 
 |  1     |  ->R4              |    1     |
 +--------+--------------------+----------+
 
-With the above `label forwarding table`, `R1` needs to originate the packets that belong to the `R1->R3->R4->R2->R5` with `label=1`. The packets received from `R2` and belonging to the `R2->R1->R3->R4->R5` would then use `label=0` on the `R1-R3` link. `R1`'s label forwarding table could be built as follows :
+With the above `label forwarding table`, `R1` needs to originate the packets that belong to the `R1->R3->R4->R2->R5` with `label=1`. The packets received from `R2` and belonging to the `R2->R1->R3->R4->R5` would then use `label=0` on the `R1-R3` link. `R1` 's label forwarding table could be built as follows :
 
 +--------+--------------------+----------+
 | index  | outgoing interface | label    |
@@ -523,9 +519,30 @@ With the above `label forwarding table`, `R1` needs to originate the packets tha
 
 The figure below shows the path followed by the packets on the `R1->R3->R4->R2->R5` path in red with on each arrow the label used in the packets.
 
+    .. tikz::
+      :libs: positioning, matrix, arrows 
 
-We will discuss later Multi-Protocol Label Switching (MPLS) as the example of a deployed networking technology that relies on label switching. MPLS is more complex than the above description because it has been designed to be easily integrated with datagram technologies. However, the principles remain. `Asynchronous Transfer Mode`(ATM) and Frame Relay are other examples of technologies that rely on `label switching`.
+      \tikzstyle{arrow} = [thick,->,>=stealth]
+      \tikzset{router/.style = {rectangle, draw, text centered, minimum height=2em}, }
+      \tikzset{host/.style = {circle, draw, text centered, minimum height=2em}, }
+      \tikzset{ftable/.style={rectangle, dashed, draw} }
+      \node[router] (R1) {R1};
+      \node[router,below right=of R1] (R2) {R2};
+      \node[router,below left=of R1] (R3) {R3};
+      \node[router, below right=of R3] (R4) {R4};
+      \node[router, below=of R4] (R5) {R5};
+      \path[draw,thick]
+      (R1) edge (R2) 
+      (R4) edge (R5); 
+      \draw[arrow, dashed, red] (R1) -- (R3) node [midway, fill=white] {1}; 
+      \draw[arrow, dashed, red] (R3) -- (R4) node [midway, fill=white] {0}; 
+      \draw[arrow, dashed, red] (R4) -- (R2) node [midway, fill=white] {0}; 
+      \draw[arrow, dashed, red] (R2) -- (R5) node [midway, fill=white] {1};
+ 
 
+
+
+Multi-Protocol Label Switching (MPLS) is the example of a deployed networking technology that relies on label switching. MPLS is more complex than the above description because it has been designed to be easily integrated with datagram technologies. However, the principles remain. `Asynchronous Transfer Mode` (ATM) and Frame Relay are other examples of technologies that rely on `label switching`.
 
 Nowadays, most deployed networks rely on distributed algorithms, called routing protocols, to compute the forwarding tables that are installed on the network nodes. These distributed algorithms are part of the `control plane`. They are usually implemented in software and are executed on the main CPU of the network nodes. There are two main families of routing protocols : distance vector routing and link state routing. Both are capable of discovering autonomously the network and react dynamically to topology changes.
 
