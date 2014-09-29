@@ -10,8 +10,122 @@ Serving applications
 
    This is an unpolished draft of the second edition of this ebook. If you find any error or have suggestions to improve the text, please create an issue via https://github.com/obonaventure/cnp3/issues?milestone=3
 
-Writing simple networked applications
-=====================================
+Open questions
+==============
+
+1. What are the mechanisms that should be included in a transport protocol that provides an unreliable connectionless transport service that can detect transmission errors but not correct them ?
+
+2. A reliable connection oriented transport places a 32 bits sequence number inside the segment header to number the segments. This sequence number is incremented for each data segment. The connection starts as shown in the figure below :
+
+  .. msc::
+
+     a [label="", linecolour=white],
+     b [label="Host A", linecolour=black],
+     z [label="", linecolour=white],
+     c [label="Host B", linecolour=black],
+     d [label="", linecolour=white];
+     a=>b [ label = "CONNECT.req()" ] ,
+     b>>c [ label = "CR(seq=1341)", arcskip="1"];
+     c=>d [ label = "CONNECT.ind()" ];
+     d=>c [ label = "CONNECT.resp()" ],
+     c>>b [ label = "CR(ack=1341,seq=2141)", arcskip="1"];
+     b=>a [ label = "CONNECT.conf()" ]; 
+     b>>c [ label = "CA(seq=1341,ack=2141)", arcskip="1"];
+     |||;
+     a=>b [ label = "DATA.req(a)" ];
+
+
+ Continue the connection so that `Host B` sends `Hello` as data and `Host A` replies by sending `Pleased to meet you`. After havng received the response, `Host B` closes the connection gracefully and `Host A` does the same. Discuss on the state that needs to be maintained inside each host.
+
+3. A transport connection that provides a message-mode service has been active for some time and all data has been exchanged and acknowledged in both directions. As in the exercise above, the sequence number is incremented after the transmission of each segment. At this time, `Host A` sends two DATA segments as shown in the figure below.
+
+  .. msc::
+
+     a [label="", linecolour=white],
+     b [label="Host A", linecolour=black],
+     z [label="", linecolour=white],
+     c [label="Host B", linecolour=black],
+     d [label="", linecolour=white];
+     a=>b [ label = "DATA.req(abc)" ] ,
+     b-x c [ label = "DATA(seq=1123,abc)", arcskip="1"];
+     a=>b [ label = "DATA.req(def)" ] ,
+     b>>c [ label = "DATA(seq=1124,def)", arcskip="1"];
+     a=>b [ label = "DISCONNECT.req(graceful,A->B)" ];
+     |||;
+     
+
+  What are the acknowledgements sent by `Host B`, how does `Host A` react and how does it terminate the connection ?
+ 
+
+4. Consider a reliable connection-oriented transport protocol that provides the bytestream service. In this transport protocol, the sequence number that is placed inside each DATA segment reflects the position of the bytes in the bytestream. Considering the connection shown below, provide the DATA segments that are sent by `Host A` in response to the `DATA.request`, assuming that one segment is sent for each `DATA.request`.
+
+  .. msc::
+
+     a [label="", linecolour=white],
+     b [label="Host A", linecolour=black],
+     z [label="", linecolour=white],
+     c [label="Host B", linecolour=black],
+     d [label="", linecolour=white];
+     a=>b [ label = "CONNECT.req()" ] ,
+     b>>c [ label = "CR(seq=8765)", arcskip="1"];
+     c=>d [ label = "CONNECT.ind()" ];
+     d=>c [ label = "CONNECT.resp()" ],
+     c>>b [ label = "CR(ack=8765,seq=4321)", arcskip="1"];
+     b=>a [ label = "CONNECT.conf()" ]; 
+     b>>c [ label = "CA(seq=8765,ack=4321)", arcskip="1"];
+     |||;
+     a=>b [ label = "DATA.req(a)" ];
+     |||;
+     a=>b [ label = "DATA.req(bcdefg)" ];
+     |||;
+     a=>b [ label = "DATA.req(ab)" ];
+     |||;
+     a=>b [ label = "DATA.req(bbbbbbbbbbbb)" ];
+
+
+5. Same question as above, but consider now that the transport protocol tries to send large DATA segments whenever possible. For this exercise, we consider that a DATA segment can contain up to 8 bytes of data in the payload. Do not forget to show the acknowledgements in your answer.
+
+6. Consider a transport protocol that provides a reliable connection-oriented bystream service. You observe the segments sent by a host that uses this protocol. Does the time-sequence diagram below reflects a valid implementation of this protocol ? Justify your answer.
+
+  .. msc::
+
+     a [label="", linecolour=white],
+     b [label="Host A", linecolour=black],
+     z [label="", linecolour=white],
+     c [label="Host B", linecolour=black],
+     d [label="", linecolour=white];
+     a=>b [ label = "DATA.req(abc)" ] ,
+     b-x c [ label = "DATA(seq=1123,abc)", arcskip="1"];
+     a=>b [ label = "DATA.req(def)" ] ,
+     b-x c [ label = "DATA(seq=1126,def)", arcskip="1"];
+     |||;
+     b>>c [ label = "DATA(seq=1123,abcdef)", arcskip="1"];
+     |||;
+
+7. In the above example, the two `DATA` segments were lost before arriving at the destination. Discuss the following scenario and explain how the receiver should react to the reception of the last `DATA` segment.
+
+  .. msc::
+
+     a [label="", linecolour=white],
+     b [label="Host A", linecolour=black],
+     z [label="", linecolour=white],
+     c [label="Host B", linecolour=black],
+     d [label="", linecolour=white];
+     a=>b [ label = "DATA.req(abc)" ] ,
+     b-x c [ label = "DATA(seq=1123,abc)", arcskip="1"];
+     a=>b [ label = "DATA.req(def)" ] ,
+     b>> c [ label = "DATA(seq=1126,def)", arcskip="1"];
+     |||;
+     b>>c [ label = "DATA(seq=1123,abcdef)", arcskip="1"];
+     |||;
+
+8. A network layer service guarantees that network will never live during more than 100 seconds inside the network. A reliable connection-oriented transport protocol places a 32 bits sequence number inside each segment. What is the maximum rate (in segments per second) at which is should sent data segments to prevent having two segments with the same sequence number inside the network ?
+
+
+
+
+Using the socket API
+====================
 
 
 Networked applications were usually implemented by using the :term:`socket` :term:`API`. This API was designed when TCP/IP was first implemented in the `Unix BSD`_ operating system [Sechrest]_ [LFJLMT]_, and has served as the model for many APIs between applications and the networking stack in an operating system. Although the socket API is very popular, other APIs have also been developed. For example, the STREAMS API has been added to several Unix System V variants [Rago1993]_. The socket API is supported by most programming languages and several textbooks have been devoted to it. Users of the C language can consult [DC2009]_, [Stevens1998]_, [SFR2004]_ or [Kerrisk2010]_. The Java implementation of the socket API is described in [CD2008]_ and in the `Java tutorial <http://java.sun.com/docs/books/tutorial/networking/sockets/index.html>`_. In this section, we will use the python_ implementation of the socket_ API to illustrate the key concepts. Additional information about this API may be found in the `socket section <http://docs.python.org/library/socket.html>`_ of the `python documentation <http://docs.python.org/>`_ .
@@ -86,25 +200,25 @@ Now that we have described the utilisation of the socket API to write a simple c
  - ``socket.shutdown`` : this method is used to release the underlying connection. On some platforms, it is possible to specify the direction of transfer to be released (e.g. ``socket.SHUT_WR`` to release the outgoing direction or ``socket.SHUT_RDWR`` to release both directions).
  - ``socket.close``: this method is used to close the socket. It calls ``socket.shutdown`` if the underlying connection is still open.
 
-With these methods, it is now possible to write a simple HTTP client. This client operates over both IPv6 and IPv4 and writes the main page of the remote server on the standard output. It also reports the number of ``socket.recv`` calls that were used to retrieve the homepage [#fnumrecv]_ . 
+With these methods, it is now possible to write a simple HTTP client. This client operates over both IPv6 and IPv4 and writes the main page of the remote server on the standard output. It also reports the number of ``socket.recv`` calls that were used to retrieve the homepage [#fnumrecv]_ . We will provide more details on the HTTP protocol that is used in this example later.
 
 
 .. literalinclude:: python/httpclient.py
    :language: python
 
 
-As mentioned above, the socket API is very low-level. This is the interface to the transport service. For a common and simple task, like retrieving a document from the Web, there are much simpler solutions. For example, the python_ `standard library <http://docs.python.org/library/>`_ includes several high-level APIs to implementations of various application layer protocols including HTTP. For example, the `httplib <http://docs.python.org/library/httplib.html>`_ module can be used to easily access documents via HTTP. 
+.. As mentioned above, the socket API is very low-level. This is the interface to the transport service. For a common and simple task, like retrieving a document from the Web, there are much simpler solutions. For example, the python_ `standard library <http://docs.python.org/library/>`_ includes several high-level APIs to implementations of various application layer protocols including HTTP. For example, the `httplib <http://docs.python.org/library/httplib.html>`_ module can be used to easily access documents via HTTP. 
 
 
-.. literalinclude:: python/http-client-httplib.py
- :language: python
+.. .. literalinclude:: python/http-client-httplib.py
+..  :language: python
 
-Another module, `urllib2 <http://docs.python.org/library/urllib2.html>`_ allows the programmer to directly use URLs. This is much more simpler than directly using sockets. 
+.. Another module, `urllib2 <http://docs.python.org/library/urllib2.html>`_ allows the programmer to directly use URLs. This is much more simpler than directly using sockets. 
 
-.. literalinclude:: python/http-client-urllib2.py
- :language: python
+.. .. literalinclude:: python/http-client-urllib2.py
+..  :language: python
 
-But simplicity is not the only advantage of using high-level libraries. They allow the programmer to manipulate higher-level concepts ( e.g. `I want the content pointed by this URL`) but also include many features such as transparent support for the utilisation of :term:`TLS` or IPv6.
+.. But simplicity is not the only advantage of using high-level libraries. They allow the programmer to manipulate higher-level concepts ( e.g. `I want the content pointed by this URL`) but also include many features such as transparent support for the utilisation of :term:`TLS` or IPv6.
 
 The second type of applications that can be written by using the socket API are the servers. A server is typically runs forever waiting to process requests coming from remote clients. A server using the connectionless will typically start with the creation of a `socket` with the ``socket.socket``. This socket can be created above the TCP/IPv4 networking stack (``socket.AF_INET``) or the TCP/IPv6 networking stack (``socket.AF_INET6``), but not both by default. If a server is willing to use the two networking stacks, it must create two threads, one to handle the TCP/IPv4 socket and the other to handle the TCP/IPv6 socket. It is unfortunately impossible to define a socket that can receive data from both networking stacks at the same time with the python_ socket API.
 
@@ -127,23 +241,23 @@ A server that uses the reliable byte stream service can also be built above the 
 
 This server is far from a production-quality web server. A real web server would use multiple threads and/or non-blocking IO to process a large number of concurrent requests [#fapache]_ . Furthermore, it would also need to handle all the errors that could happen while receiving data over a transport connection. These are outside the scope of this section and additional information on more complex networked applications may be found elsewhere. For example, [RG2010]_ provides an in-depth discussion of the utilisation of the socket API with python while [SFR2004]_ remains an excellent source of information on the socket API in C.
 
-Exercises
-=========
+Practice
+========
 
-1. Amazon provides the `S3 storage service <https://s3.amazonaws.com/>`_ where companies and researchers can store lots of information and perform computations on the stored information. Amazon allows users to send files through the Internet, but also by sending hard-disks. Assume that a 1 Terabyte hard-disk can be delivered within 24 hours to Amazon by courier service. What is the minimum bandwidth required to match the bandwidth of this courier service ? 
+.. 1. Amazon provides the `S3 storage service <https://s3.amazonaws.com/>`_ where companies and researchers can store lots of information and perform computations on the stored information. Amazon allows users to send files through the Internet, but also by sending hard-disks. Assume that a 1 Terabyte hard-disk can be delivered within 24 hours to Amazon by courier service. What is the minimum bandwidth required to match the bandwidth of this courier service ? 
 
-2. Several large data centers operators (e.g. `Microsoft <http://www.microsoft.com/showcase/en/us/details/bafe5c0f-8651-4609-8c71-24c733ce628b>`_ and `google <http://www.youtube.com/watch?v=zRwPSFpLX8I>`_) have announced that they install servers as containers with each container hosting up to 2000 servers. Assuming a container with 2000 servers and each storing 500 GBytes of data, what is the time required to move all the data stored in one container over one 10 Gbps link ? What is the bandwidth of a truck that needs 10 hours to move one container from one data center to another. 
+.. 2. Several large data centers operators (e.g. `Microsoft <http://www.microsoft.com/showcase/en/us/details/bafe5c0f-8651-4609-8c71-24c733ce628b>`_ and `google <http://www.youtube.com/watch?v=zRwPSFpLX8I>`_) have announced that they install servers as containers with each container hosting up to 2000 servers. Assuming a container with 2000 servers and each storing 500 GBytes of data, what is the time required to move all the data stored in one container over one 10 Gbps link ? What is the bandwidth of a truck that needs 10 hours to move one container from one data center to another. 
 
-3. The socket_ interface allows you to use the UDP protocol that provides the connectionless service on a Unix host. UDP, in theory, allows you to send SDUs of up to 64 KBytes. 
+1. The socket_ interface allows you to use the UDP protocol that provides the connectionless service on a Unix host. UDP, in theory, allows you to send SDUs of up to 64 KBytes. 
 
  - Implement a small UDP client and a small UDP server in C 
- - run the client and the servers on different workstations to determine experimentally the largest SDU that is supported by your language and OS. If possible, use different languages and Operating Systems in each group.
+ - run the client and the servers on different workstations to determine experimentally the largest SDU that is supported by your language and OS. 
 
 .. socket layer with UDP, what is the largest data that you can send by using C, Java or python, is it 64KBytes or less ?
 
-4. The time protocol, defined in :rfc:`868` allows to read the current time on a remote host. Implement this very simple protocol on top of the UDP and TCP sockets. Compared the time required to retrieve this time information over UDP and TCP. 
+2. The time protocol, defined in :rfc:`868` allows to read the current time on a remote host. Implement this very simple protocol on top of the UDP and TCP sockets. Compare the time required to retrieve this time information over UDP and TCP. 
 
-5. By using the socket interface, implement on top of the connectionless unreliable service provided by UDP a simple client that sends the message shown in the figure below.
+3. By using the socket interface, implement on top of the connectionless unreliable service provided by UDP a simple client that sends the message shown in the figure below.
 
  In this message, the bit flags should be set to `01010011b`, the value of the 16 bits field must be the square root of the value contained in the 32 bits field, the character string must be an ASCII representation (without any trailing `\0`) of the number contained in the 32 bits character field. The last 16 bits of the message contain an Internet checksum that has been computed over the entire message.
 
@@ -160,14 +274,14 @@ Exercises
 
 .. To ensure that your implementation is portable, try to Inside each group, implement two different clients and two different servers (both using different languages). The clients and the servers must run on both the Linux workstations and the Sun server (`sirius`). Verify the interoperability of the clients and the servers inside the group. You can use C, Java or python to write these implementations. 
 
-.. figure:: ../../book/transport/pkt/simple-transport.png
-   :align: center
+ .. figure:: ../../book/transport/pkt/simple-transport.png
+    :align: center
 
-   Simple SDU format 
+    Simple SDU format 
 
 .. todo:: provide server
 
-6. The socket_ library is also used to develop applications above the reliable bytestream service provided by TCP. We have implemented in C language a small tool to send information to a server on port `62141`. This server should operate as follows :
+4. The socket_ library is also used to develop applications above the reliable bytestream service provided by TCP. We have implemented in C language a small application that sends information to a server on port `62141`. This server should operate as follows :
 
  - the server listens on port `62141` for a TCP connection
  - upon the establishment of a TCP connection, the server sends an integer by using the following TLV format :
@@ -179,10 +293,47 @@ Exercises
  - the client replies by sending the received integer encoded as a 32 bits integer in `network byte order`
  - the server returns a TLV containing `true` if the integer was correct and a TLV containing `false` otherwise and closes the TCP connection
 
- Implement a server in C that interacts with our client :download:`/exercises/c/tlv_ex.c`
+ Implement a server in C that interacts with our client available at :download:`/exercises/c/tlv_ex.c`
 
-7. The Trivial File Transfer Protocol (TFTP), defined in :rfc:`1350` is a simple file transfer protocol that runs on top of UDP. Implement a client for this protocol that allows to retrieve a file on a remote server.
+5. The Trivial File Transfer Protocol (TFTP), defined in :rfc:`1350` is a simple file transfer protocol that runs on top of UDP. Read the specification to answer the following questions : 
 
+   - What is the maximum length of the DATA segments exchanged by this protocol ?
+      .. up to 512 bytes long
+
+   - What is the legnth of the header in DATA segments ?
+
+      .. four bytes
+
+   - What is the first sequence number for DATA segments ?
+
+      .. 1
+
+   - Do sequence number count the segments or the bytes that are transmitted ?
+
+     .. the segments
+
+   - Does this protocol uses a sliding window ?
+
+     .. no
+
+   - How does the data transfer ends ? Consider two different files. The first one has a length of exactly 1024 bytes, the second 513 bytes. Explain what is the last segment sent in each direction in each case. 
+
+
+Discussion questions
+====================
+
+1. In the transport layer, the receive window advertised by a receiver can vary during the lifetime of the connection. What are the causes for these variations ?
+
+2. A reliable connection-oriented protocol can provide a message-mode service or a byte stream service. Which of the following usages of the sequence numbers is the best suited for each of these services ?
+
+  a. DATA segments contain a sequence number that is incremented for each byte transmitted
+  b. DATA segments contain a sequence number that is incremented for each DATA segment transmitted
+
+3. Some transport protocols use 32 bits sequence numbers while others use 64 bits sequence number. What are the advantages and drawbacks of each approach ? 
+
+4. Consider a transport protocol that provides the bytestream service and uses 32 bits sequence number to represent the position of the first byte of the payload of DATA segments in the bytestream. How would you modify this protocol so that it can provide a message-mode service ? Consider first short messages that always fit inside a single segment. In a second step, discuss how you could support messages of unlimited size.
+
+5. What is piggybacking and what are the benefits of this technique. 
 
 ..  To be written : connect by name API is key !  http://www.stuartcheshire.org/IETF72/
 
