@@ -2,10 +2,10 @@
 .. This file is licensed under a `creative commons licence <http://creativecommons.org/licenses/by/3.0/>`_
 
 
-:task_id: networkpftable
-
 Port forwarding tables
 ----------------------
+
+:task_id: networkpftable
 
 Port forwarding tables are used in tree-shaped networks to automatically build the forwarding tables that allow the network nodes to forward packets towards their destinations.
 
