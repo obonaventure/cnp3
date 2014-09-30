@@ -573,6 +573,12 @@ Nowadays, most deployed networks rely on distributed algorithms, called routing 
 .. The independence of the network layer from the underlying datalink layer is a key principle of the network layer. It ensures that the network layer can be used to allow hosts attached to different types of datalink layers to exchange packets through intermediate routers. Furthermore, this allows the datalink layers and the network layer to evolve independently from each other. This enables the network layer to be easily adapted to a new datalink layer every time a new datalink layer is invented.
 
 
+.. rubric:: Footnotes 
+
+
+.. [#flabels] We will see later a more detailed description of Multiprotocol Label Switching, a networking technology that is capable of using one or more labels. 
+
+
 
 The control plane
 =================
@@ -585,10 +591,6 @@ In this section, we discuss the main techniques that can be used to maintain the
 .. include:: /principles/dv.rst
 .. include:: /principles/linkstate.rst
 
-.. rubric:: Footnotes
-
-
-.. [#flabels] We will see later a more detailed description of Multiprotocol Label Switching, a networking technology that is capable of using one or more labels.
 
 .. include:: /links.rst
 

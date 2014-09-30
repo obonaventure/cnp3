@@ -333,7 +333,7 @@ Discussion questions
 
 4. Consider a transport protocol that provides the bytestream service and uses 32 bits sequence number to represent the position of the first byte of the payload of DATA segments in the bytestream. How would you modify this protocol so that it can provide a message-mode service ? Consider first short messages that always fit inside a single segment. In a second step, discuss how you could support messages of unlimited size.
 
-5. What is piggybacking and what are the benefits of this technique. 
+5. What is piggybacking and what are the benefits of this technique ?
 
 ..  To be written : connect by name API is key !  http://www.stuartcheshire.org/IETF72/
 
