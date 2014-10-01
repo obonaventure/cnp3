@@ -129,8 +129,8 @@ Part 3: Practice
    mcq-ex/mcq-network-shortest	
    mcq-ex/mcq-network
    exercises/network
-
-..   exercises/ex-transport
+   mcq-ex/mcq-transport
+   exercises/ex-transport
 ..   exercises/ex-sharing
 ..   exercises/ex-app
 ..   exercises/netkit-app
