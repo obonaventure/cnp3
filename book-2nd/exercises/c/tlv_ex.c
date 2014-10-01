@@ -108,7 +108,12 @@ int main(int ac, char **av)
      * "[-] Timeout" then exit.
      */
     if (setjmp(timeout_jump) == 1) {
-        printf("[-] Timeout\n");
+        /* This code is executed within the signal handler, it can only call
+         * async-safe functions i.e. NOT printf(3).
+         * See signal(7) for a list of allowed functions.
+         */
+        const char timeout_str[] = "[-] Timeout\n";
+        write(STDOUT_FILENO, timeout_str, sizeof(timeout_str));
         return 1;
     }
 
