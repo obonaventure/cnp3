@@ -502,7 +502,7 @@ If two hosts are competing, the algorithm above will avoid a second collision 50
 	stop transmitting
 	send(jamming)
 	k = min (10, N)
-	r = random(0, 2k - 1) * slotTime
+	r = random(0, 2**k - 1) * slotTime
 	wait(r*slotTime)
 	N=N+1
     else :	
@@ -590,6 +590,7 @@ The pseudo-code below summarizes the operation of a CSMA/CA device. The values o
     else:
        # retransmission required
        N=N+1
+ # end of while loop	
 
 .. index:: hidden station problem
 
