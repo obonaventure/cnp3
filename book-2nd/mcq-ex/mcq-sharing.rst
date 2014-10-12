@@ -91,6 +91,7 @@ Multiple choice questions
    :nb_pos: 1 
 
    5. Consider a network that is using CSMA/CD. An important parameter in such networks is the minimum frame size. Which of the following affirmations is true ?
+
    .. positive:: If the shared medium has a bandwidth of 100 Mbps and a length of 10 kilometers, then the minimum frame size is 10000 bits.
 
    .. positive:: If the shared medium has a bandwidth of 10 Mbps and a length of 2 kilometers, then the minimum frame size is 200 bits.
