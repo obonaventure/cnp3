@@ -224,7 +224,7 @@ In a shared medium, a collision may happen if two hosts transmit at almost the s
 
 
 
-6. With CSMA, hosts need to listen to the communication channel before starting their transmission. Consider again a 2 kilometers long cable where hosts send frames at 100 Mbps. Show in the figure below the correct transmission of frames with CSMAthe Same question as above, but now assume that the retransmission timer of each host is set to 50 microseconds.
+6. With CSMA, hosts need to listen to the communication channel before starting their transmission. Consider again a 2 kilometers long cable where hosts send frames at 100 Mbps. Show in the figure below the correct transmission of frames with CSMA. 
 
 
  .. tikz::
@@ -309,7 +309,7 @@ In a shared medium, a collision may happen if two hosts transmit at almost the s
      \draw[very thick, blue, ->] (10,6) node [anchor=north, fill=white] {B$\rightarrow$A [10000 bits]} -- (9,5);
      \draw[very thick, red, ->] (0,5.5) node [anchor=north, fill=white] {A$\rightarrow$B [10000 bits]} -- (1,4.5);
 
-9. An important part of the CSMA/CD algorithm is the exponential backoff. To illustrate the operation of this algorithm, let us consider a cable that has a length of one kilometer. The bandwidth of the network is set to 10 Mbps. Assume that when a collision occurs, host A always selects the highest possible random delay according to the exponential backoff algorithm while host B always selects the shortest one. In this network, the slot time is equal to the time required to transmit 100 bits.
+9. An important part of the CSMA/CD algorithm is the exponential backoff. To illustrate the operation of this algorithm, let us consider a cable that has a length of one kilometer. The bandwidth of the network is set to 10 Mbps. Assume that when a collision occurs, host A always selects the highest possible random delay according to the exponential backoff algorithm while host B always selects the shortest one. In this network, the slot time is equal to the time required to transmit 100 bits. We further assume that a host can detect collision immediately (i.e. as soon as the other frame arrives).
 
  .. tikz::
      :libs: positioning, matrix, arrows 
@@ -550,7 +550,7 @@ In general, the links have a non-zero delay. This is illustrated in the figure b
 
  a. In this network, compute the minimum round-trip-time between `A` (resp. `B`) and `D`. Perform the computation if the hosts send segments containing 1000 bits. 
  b. How is the maximum round-trip-time influenced if the buffers of router `R1` store 10 packets ?  
- c. If hosts `A` and `B` transmit 1000 bits segments and use a sending window of four segments, what is the maximum throughput that they can achieve ?
+ c. If hosts `A` and `B` send to `D` 1000 bits segments and use a sending window of four segments, what is the maximum throughput that they can achieve ?
  d. Assume now that `R1` is using round-robin scheduling instead of a FIFO buffer. One queue is used to store the packets sent by `A` and another for the packets sent by `B`. `A` sends one 1000 bits packet every second while `B` sends packets at 10 Mbps. What is the round-trip-time measured by each of these two hosts if each of the two queues of `R1` can store 5 packets ? 
 
 
@@ -599,7 +599,7 @@ In general, the links have a non-zero delay. This is illustrated in the figure b
       \draw[-] (R2) -- node [midway, below, align=center] { 100 Mbps} (D); 
 
 
- a. In this network, hosts are attached via 1 Mbps links while a 250 Kbps link is used between the routers. The propagation delays in the network are negligible. Host `A` sends 1000 bits long segments so that it takes one msec to transmit one segment on the `A-R1` link. Neglecting the transmission delays for the acknowledgements, what is the minimum round-trip time measured on host `A` with such segments ?
+ a. In this network, a 250 Kbps link is used between the routers. The propagation delays in the network are negligible. Host `A` sends 1000 bits long segments so that it takes one msec to transmit one segment on the `A-R1` link. Neglecting the transmission delays for the acknowledgements, what is the minimum round-trip time measured on host `A` with such segments ?
  b. If host `A` uses a window of two segments and needs to transmit five segments of data. How long does the entire transfer lasts ?
  c. Same question as above, but now host `A` uses the simple DECBIT congestion control mechanism and a maximum window size of four segments.
 
