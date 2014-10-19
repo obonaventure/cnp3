@@ -85,6 +85,12 @@ To launch the DNS lab[#fdnslab]_, use the following commands:
     cp -r /etinfo/applications/netkit/dnslab/ $HOME/	# do not forget the trailing /'s
     lstart -f -d $HOME/dnslab
 
+An interesting option for ``lstart`` is this one in order to use Gnome-Terminal instead of Xterm windows:
+
+ .. code:: console
+ 
+    lstart -f -d $HOME/dnslab -o --xterm=gnome
+
 To stop the lab, please stop all the involved instances by using the command ``halt`` inside each virtual machine.
 
 Do not forget to cleanup the virtual disks when you are finished:
@@ -92,6 +98,12 @@ Do not forget to cleanup the virtual disks when you are finished:
  .. code:: console
 
     rm -f $HOME/dnslab/\*.disk
+
+Note that you can also use ``lcrash`` command in order to immediately stop all your instances and remove all virtual disks.
+
+ .. code:: console
+
+    lcrash -d $HOME/dnslab
 
 Exploring DNS
 -------------
