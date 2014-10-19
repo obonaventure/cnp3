@@ -169,7 +169,7 @@ Enjoy !
 
 .. rubric:: Footnotes
 
-.. [#fimage] The image that we use is a custom Netkit_ filesystem with a recent 64 bits Linux kernel. If you wish to test it on your own Linux machine, you can install Netkit_ as explained on http://wiki.netkit.org and download the filesystem and kernel images from http://cnp3bis.info.ucl.ac.be/netkit/netkit-images.zip  Note that this archive has a compressed size of more than 1 GByte ! 
+.. [#fimage] The image that we use is a custom Netkit_ filesystem with a recent 64 bits Linux kernel. If you wish to test it on your own Linux machine, you can install Netkit_ as explained on http://wiki.netkit.org and download the filesystem and kernel images from http://cnp3book.info.ucl.ac.be/netkit/netkit-images.zip  Note that this archive has a compressed size of more than 1 GByte ! 
 
 .. [#fdnslab] The files used by the DNS lab are available from :download:`/netkit/netkit-lab_dns.zip` if you would like to use them on your laptop.
 

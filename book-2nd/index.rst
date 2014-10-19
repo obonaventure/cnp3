@@ -133,6 +133,7 @@ Part 3: Practice
    exercises/ex-transport
    mcq-ex/mcq-sharing
    exercises/ex-sharing
+   mcq-ex/mcq-app
    exercises/ex-app
    exercises/netkit-app
 ..   exercises/netkit-tcp
