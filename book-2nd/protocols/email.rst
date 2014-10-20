@@ -282,7 +282,7 @@ The SMTP protocol, like most text-based protocols, is specified as a :term:`BNF`
 
    BNF specification of the SMTP commands
 
-In this BNF, `atext` corresponds to printable ASCII characters. This BNF rule is defined in :rfc:`5322`. The five main commands are `EHLO`, `MAIL FROM:`, `RCPT TO:`, `DATA` and `QUIT` [#fehlo]_. `Postmaster` is the alias of the system administrator who is responsible for a given domain or SMTP server. All domains must have a `Postmaster` alias.
+In this BNF, `atext` corresponds to printable ASCII characters. This BNF rule is defined in :rfc:`5322`. The five main commands are `HELO`, `MAIL FROM:`, `RCPT TO:`, `DATA` and `QUIT` [#fehlo]_. `Postmaster` is the alias of the system administrator who is responsible for a given domain or SMTP server. All domains must have a `Postmaster` alias.
 
 The SMTP responses are defined by the BNF shown in the figure below. 
 
