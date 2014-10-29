@@ -1,0 +1,27 @@
+//the support of the TCP timestamp option
+//Note: pas oublier d'activer l'option TCP timestamp
+
+0   socket(..., SOCK_STREAM, IPPROTO_TCP) = 3
++0  setsockopt(3, SOL_SOCKET, SO_REUSEADDR, [1], 4) = 0
++0  bind(3, ..., ...) = 0
++0  listen(3, 1) = 0
+
+/*  #1 Client A  --> Server A - Initial SYN should contain TSVAL = Time Cx1 and TSECR = 0*/
+/*  #2 Server A --> Client A - SYN + ACK should contain TSVAL = Time Cy1 and TSECR = Cx1*/
+/*  #3 Client A  --> Server A - ACK should contain TSVAL = Cx2 and TSECR = Cy1*/
+/*  #4 Server A --> Client A - Packet should contain TSVAL = Cy2 and TSEC = Cx2*/
+/*  */
+/*  Cx2 - Cx1 = TCP RTT in ms*/
+
+/*}*/
+
+
+//TCP three-way handshake
++0  < S 0:0(0) win 257 <TS val 100 ecr 0, nop, nop>
++0  > S. 0:0(0) ack 1 <mss 1460,nop,nop,TS val 50 ecr 100>
++.1 < . 1:1(0) ack 1 win 257 <TS val 110 ecr 50, nop, nop>
++0  accept(3, ..., ...) = 4
+
++0 write(4, ..., 57) = 57
++0 > P. 1:58(57) ack 1  <nop,nop,TS val 150 ecr 110>
+

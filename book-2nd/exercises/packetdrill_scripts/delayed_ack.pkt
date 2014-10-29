@@ -1,0 +1,31 @@
+//The support of delayed acknowledgements (i.e. an acknowledgement is sent
+//for every second segment or after 50 msec of delay when there is no reordering)
+
+0   socket(..., SOCK_STREAM, IPPROTO_TCP) = 3
++0  setsockopt(3, SOL_SOCKET, SO_REUSEADDR, [1], 4) = 0
++0  bind(3, ..., ...) = 0
++0  listen(3, 1) = 0
+
++0  < S 0:0(0) win 1024
++0  > S. 0:0(0) ack 1 <...>
++.1 < . 1:1(0) ack 1 win 1024
++0  accept(3, ..., ...) = 4
+
++0  write(4, ..., 50) = 50
++0  > P. 1:51(50) ack 1
+
+//Delayed ack
++0.05 < . 1:1(0) ack 51 win 1024 
+
++0  write(4, ..., 50) = 50
++0  > P. 51:101(50) ack 1
+
+//Delayed ack
++0.05 < . 1:1(0) ack 101 win 1024 
+
++0 < F. 1:1(0) ack 101 win 1024
++0 > . 101:101(0) ack 2
++0 close(4) = 0
++0 > F. 101:101(0) ack 2
++0 < . 2:2(0) ack 102 win 1024
+

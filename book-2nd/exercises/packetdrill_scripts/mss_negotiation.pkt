@@ -1,0 +1,26 @@
+//MSS "negotiation"
+0   socket(..., SOCK_STREAM, IPPROTO_TCP) = 3
++0  setsockopt(3, SOL_SOCKET, SO_REUSEADDR, [1], 4) = 0
++0  bind(3, ..., ...) = 0
++0  listen(3, 1) = 0
+
+//"A device can inform the other of the MSS it wants to use during the connection establishment process.
+//A device that chooses to do so includes in its SYN message the TCP option called, appropriately, Maximum Segment Size.
+//The other device receives this option and records the MSS for the connection.
+//Each device can specify the MSS it wants for the segments it receives independently."
+
+//TCP three-way handshake
++0  < S 0:0(0) win 257 <mss 1400> //Just specify the MSS in the syn
++0  > S. 0:0(0) ack 1 <...> //Kernel specifiy a MSS if it wants to
++.1 < . 1:1(0) ack 1 win 257
++0  accept(3, ..., ...) = 4
+
+//Packetdrill closes connection gracefully
++0 < F. 1:1(0) ack 1 win 257
++0 > . 1:1(0) ack 2
+
+//Kernel closes connection gracefully
++0 close(4) = 0
++0 > F. 1:1(0) ack 2
++0 < . 2:2(0) ack 2 win 257
+

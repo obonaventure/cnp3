@@ -1,0 +1,42 @@
+// Fast retransmit
+
+// Establish a connection.
+0   socket(..., SOCK_STREAM, IPPROTO_TCP) = 3
++0  setsockopt(3, SOL_SOCKET, SO_REUSEADDR, [1], 4) = 0
++0  bind(3, ..., ...) = 0
++0  listen(3, 1) = 0
+
++0  < S 0:0(0) win 250 <mss 157>
++0  > S. 0:0(0) ack 1 <...>
++.1 < . 1:1(0) ack 1 win 250
++0  accept(3, ..., ...) = 4
+
+// Kernel sends 20 bytes and packetdrill sends an ACK, so cwnd is now 4.
++0  write(4, ..., 20) = 20
++0  > P. 1:21(20) ack 1
++.1 < . 1:1(0) ack 21 win 250
+
+// Write 80 bytes
++0  write(4, ..., 80) = 80
++0  > P. 21:101(80) ack 1
+
+// Send 3 ACKs.
++.1 < . 1:1(0) ack 21 win 250
++0  < . 1:1(0) ack 21 win 250
++0  < . 1:1(0) ack 21 win 250
+
+// Kernel received 3 duplicate ACKs, so it does a fast retransmit.
++0.2  > P. 21:101(80) ack 1
+
+// Receiver ACKs all data.
++.1 < . 1:1(0) ack 101 win 250
+
+//Packetdrill closes connection gracefully
++0 < F. 1:1(0) ack 101 win 250
++0 > . 101:101(0) ack 2
+
+//Kernel closes connection gracefully
++0 close(4) = 0
++0 > F. 101:101(0) ack 2
++0 < . 1:1(0) ack 101 win 250
+
