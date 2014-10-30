@@ -1,12 +1,8 @@
 //the Nagle algorithm
+// Arnaud Schils, Olivier Bonaventure, 2014
 
-/*
-On peut résumer son fonctionnement ainsi :
-
-1) Le premier octet reçu par TCP est envoyé immédiatement ;
-2) Tant que l'accusé de réception n'a pas été reçu, les octets à envoyer sont stockés dans un tampon. Après l'acquittement du premier octet, les données du tampon sont envoyées en un seul paquet (si la taille du tampon atteint la taille maximale d'un paquet, l'envoi des données a lieu) ;
-3)  On stocke de nouveau les données dans le tampon en attendant l'acquittement.
-*/
+// disable low_latency mode
++0  `sysctl -q net.ipv4.tcp_low_latency=0`
 
 0   socket(..., SOCK_STREAM, IPPROTO_TCP) = 3
 +0  setsockopt(3, SOL_SOCKET, SO_REUSEADDR, [1], 4) = 0
@@ -14,21 +10,33 @@ On peut résumer son fonctionnement ainsi :
 +0  listen(3, 1) = 0
 
 //TCP three-way handshake
-+0  < S 0:0(0) win 257
++0  < S 0:0(0) win 4000 <mss 1000>
 +0  > S. 0:0(0) ack 1 <...>
-+.1 < . 1:1(0) ack 1 win 257
++.1 < . 1:1(0) ack 1 win 4000
 +0  accept(3, ..., ...) = 4
 
 +0 write(4, ..., 1) = 1
 +0 > P. 1:2(1) ack 1
 
-+0 write(4, ..., 2) = 2
-+0 write(4, ..., 1) = 1
-+0 write(4, ..., 2) = 2
-+0 write(4, ..., 3) = 3
-+0 write(4, ..., 4) = 4
++0.001 write(4, ..., 100) = 100
++0.001 write(4, ..., 200) = 200
++0.001 write(4, ..., 400) = 400
++0.001 write(4, ..., 800) = 800
++0 > . 2:1002(1000) ack 1
 
-+0 < . 1:1(0) ack 2 win 257
-+0 > P. 2:14(12) ack 1
++0.05 < . 1:1(0) ack 1002 win 4000
++0 > P. 1002:1502(500) ack 1
+
+//Packetdrill closes connection gracefully
++0 < F. 1:1(0) ack 1502 win 4000
++0 > . 1502:1502(0) ack 2
+
+//Kernel closes connection gracefully
++0 close(4) = 0
++0 > F. 1502:1502(0) ack 2
++0 < . 2:2(0) ack 1503 win 4000
 
 
+
+// reenable low latency
++0  `sysctl -q net.ipv4.tcp_low_latency=1 `

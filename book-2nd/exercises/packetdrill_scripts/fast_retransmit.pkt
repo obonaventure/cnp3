@@ -1,4 +1,5 @@
 // Fast retransmit
+// Arnaud Schils, Olivier Bonaventure, 2014
 
 // Establish a connection.
 0   socket(..., SOCK_STREAM, IPPROTO_TCP) = 3
@@ -6,37 +7,28 @@
 +0  bind(3, ..., ...) = 0
 +0  listen(3, 1) = 0
 
-+0  < S 0:0(0) win 250 <mss 157>
++0  < S 0:0(0) win 4000 <mss 1440>
 +0  > S. 0:0(0) ack 1 <...>
-+.1 < . 1:1(0) ack 1 win 250
++.1 < . 1:1(0) ack 1 win 4000
 +0  accept(3, ..., ...) = 4
 
-// Kernel sends 20 bytes and packetdrill sends an ACK, so cwnd is now 4.
-+0  write(4, ..., 20) = 20
-+0  > P. 1:21(20) ack 1
-+.1 < . 1:1(0) ack 21 win 250
++0  write(4, ..., 20000) = 20000
++0  > . 1:1441(1440) ack 1
++.01 < . 1:1(0) ack 1441 win 4000
 
-// Write 80 bytes
-+0  write(4, ..., 80) = 80
-+0  > P. 21:101(80) ack 1
++0  > P. 1441:2881(1440) ack 1
++0  > . 2881:4321(1440) ack 1
++0.1 < . 1:1(0) ack 2881 win 6000
++0 < . 1:1(0) ack 4321 win 6000
 
-// Send 3 ACKs.
-+.1 < . 1:1(0) ack 21 win 250
-+0  < . 1:1(0) ack 21 win 250
-+0  < . 1:1(0) ack 21 win 250
++0  > P. 4321:5761(1440) ack 1
++0  > . 5761:7201(1440) ack 1
++0  > P. 7201:8641(1440) ack 1
++0  > . 8641:10081(1440) ack 1
 
-// Kernel received 3 duplicate ACKs, so it does a fast retransmit.
-+0.2  > P. 21:101(80) ack 1
++0 < . 1:1(0) ack 4321 win 6000
++0 < . 1:1(0) ack 4321 win 6000
++0 < . 1:1(0) ack 4321 win 6000
 
-// Receiver ACKs all data.
-+.1 < . 1:1(0) ack 101 win 250
-
-//Packetdrill closes connection gracefully
-+0 < F. 1:1(0) ack 101 win 250
-+0 > . 101:101(0) ack 2
-
-//Kernel closes connection gracefully
-+0 close(4) = 0
-+0 > F. 101:101(0) ack 2
-+0 < . 1:1(0) ack 101 win 250
-
++0 > P. 4321:5761(1440) ack 1
++0.5 < . 1:1(0) ack 10081 win 6000

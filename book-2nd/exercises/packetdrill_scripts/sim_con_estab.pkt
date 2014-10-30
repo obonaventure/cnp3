@@ -1,5 +1,6 @@
 //the simultaneous establishment of a TCP connection when the client and the
 //server generate a SYN almost at the same time
+// Arnaud Schils, Olivier Bonaventure, 2014
 
 +0   socket(..., SOCK_STREAM, IPPROTO_TCP) = 3
 +0 fcntl(3, F_GETFL) = 0x2 (flags O_RDWR)
@@ -8,9 +9,11 @@
 // Establish connection
 +0 connect(3, ..., ...) = -1 EINPROGRESS (Operation now in progress)
 +0 > S 0:0(0) <...>
-+0 < S 0:0(0) win 5792
++0 < S 0:0(0) win 5792 <mss 1000>
 +0 > S. 0:0(0) ack 1 <...>
 +0 < . 1:1(0) ack 1 win 5792
+
+// no data exchanged
 
 +0 < F. 1:1(0) ack 1 win 5792
 +0 > . 1:1(0) ack 2

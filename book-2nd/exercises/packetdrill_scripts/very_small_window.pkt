@@ -1,4 +1,5 @@
 //TCP behavior dealing with a very small window.
+// Arnaud Schils, Olivier Bonaventure, 2014
 
 0   socket(..., SOCK_STREAM, IPPROTO_TCP) = 3
 +0  setsockopt(3, SOL_SOCKET, SO_REUSEADDR, [1], 4) = 0
@@ -7,23 +8,25 @@
 
 //TCP three-way handshake
 //Packetdrill advertises small window size
-+0  < S 0:0(0) win 4 <mss 100>
++0  < S 0:0(0) win 1000 <mss 1000>
 +0  > S. 0:0(0) ack 1 <...>
-+.1 < . 1:1(0) ack 1 win 4
++.1 < . 1:1(0) ack 1 win 100
 +0  accept(3, ..., ...) = 4
-
++0 < R. 1:1(0) ack 9 win 4
 //Sending less or equal bytes than window size should be fine.
-+0 write(4, ..., 4) = 4
-+0 > P. 1:5(4) ack 1
++0 write(4, ..., 1000)= 1000
++0 > P. 1:101(100) ack 1
 
 //Be nice send an ack.
-+0 < . 1:1(0) ack 5 win 4
++0 < . 1:1(0) ack 101 win 1000
 
 //Now try with more bytes than window size
-+0 write(4, ..., 8) = 8
++0 write(4, ..., 4000) = 4000
+
+
 
 //You should receive the first 4 bytes.
-+0.295 > P. 5:9(4) ack 1 //It's slow! Because kernel has to split in two segments?
++0 > P. 1001:2001(1000) ack 1 //It's slow! Because kernel has to split in two segments?
 
 //You must ack to free the packetdrill receiving window.
 +0 < . 1:1(0) ack 9 win 4

@@ -1,8 +1,9 @@
-//the Nagle algorithm
+// The Nagle algorithm
 // Arnaud Schils, Olivier Bonaventure, 2014
 
-// disable low_latency mode
-+0  `sysctl -q net.ipv4.tcp_low_latency=0`
+// enable low_latency mode
++0  `sysctl -q net.ipv4.tcp_low_latency=1`
++0  `sysctl -q net.ipv4.tcp_autocorking=1`
 
 0   socket(..., SOCK_STREAM, IPPROTO_TCP) = 3
 +0  setsockopt(3, SOL_SOCKET, SO_REUSEADDR, [1], 4) = 0
@@ -19,13 +20,16 @@
 +0 > P. 1:2(1) ack 1
 
 +0.001 write(4, ..., 100) = 100
++0 > . 2:102(100) ack 1
 +0.001 write(4, ..., 200) = 200
++0 > . 102:302(200) ack 1
 +0.001 write(4, ..., 400) = 400
++0 > . 302:702(400) ack 1
 +0.001 write(4, ..., 800) = 800
-+0 > . 2:1002(1000) ack 1
++0 > . 702:1502(800) ack 1
 
-+0.05 < . 1:1(0) ack 1002 win 4000
-+0 > P. 1002:1502(500) ack 1
++0.05 < . 1:1(0) ack 1502 win 4000
+
 
 //Packetdrill closes connection gracefully
 +0 < F. 1:1(0) ack 1502 win 4000

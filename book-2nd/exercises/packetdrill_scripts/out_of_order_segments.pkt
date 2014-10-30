@@ -1,33 +1,35 @@
-//Out of order segments
+// Out of order segments
+// Arnaud Schils, Olivier Bonaventure, 2014
+
 0   socket(..., SOCK_STREAM, IPPROTO_TCP) = 3
 +0  setsockopt(3, SOL_SOCKET, SO_REUSEADDR, [1], 4) = 0
 +0  bind(3, ..., ...) = 0
 +0  listen(3, 1) = 0
 
 //TCP three-way handshake
-+0  < S 0:0(0) win 257
++0  < S 0:0(0) win 4000 <mss 1000>
 +0  > S. 0:0(0) ack 1 <...>
-+.1 < . 1:1(0) ack 1 win 257
++.1 < . 1:1(0) ack 1 win 1000
 +0  accept(3, ..., ...) = 4
 
-+0 < P. 1:201(200) win 257
++0 < P. 1:201(200) win 4000
 +0 > . 1:1(0) ack 201
 
-+0 < P. 231:251(20) win 257
++0 < P. 231:251(20) win 4000
 +0 > . 1:1(0) ack 201
 
-+0 < P. 201:231(30) win 257
-+0 > . 1:1(0) ack 251
+//
+//+0 > . 1:1(0) ack 251
 
-+0 read(4, ..., 250) = 250
+//
 
 //Packetdrill closes connection gracefully
 +0 < F. 251:251(0) win 257
-+0.039 > . 1:1(0) ack 252
++0.039 > . 1:1(0) ack 201
 
-//Kernel closes connection gracefully
-+0 close(4) = 0
-+0 > F. 1:1(0) ack 252
-+0 < . 251:251(0) ack 2 win 257
++0 < P. 201:231(30) win 4000
++0.039 > . 1:1(0) ack 252
++0 read(4, ..., 250) = 250
+
 
 
