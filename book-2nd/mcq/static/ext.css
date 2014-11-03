@@ -1,0 +1,72 @@
+.query, .textbox textarea {
+	margin-bottom: 10px;
+}
+
+div:not(.content) {
+	clear: both;
+}
+
+.choice, .checkmark, .content {
+	position: relative;
+	margin-bottom: 10px;
+}
+
+.choice, .content {
+	left: 55px;
+}
+
+.choice {
+	margin-bottom: -20px;
+}
+
+.content {
+	margin-left: 30px;
+	margin-right: 55px;
+}
+
+.checkmark + .content {
+	margin-top: -20px;
+	min-height: 76px;
+}
+
+.query + .checkmark {
+	left: 0px;
+}
+
+.checkmark {
+	left: -20px;
+	margin-bottom: -56px;
+}
+
+.textbox textarea {
+	width: 100%;
+}
+
+.result {
+    display: inline;
+    margin-left: 30px;
+    font-weight: bold;
+}
+
+#results p, p.problem {
+	padding: 20px;
+	border-bottom-left-radius: 10%;
+	border-bottom-right-radius: 10%;
+	color: white;
+}
+
+#results .success {
+	background-color: #1a3511;
+}
+
+#results .failed, p.problem {
+	background-color: #666666;
+}
+
+#results .error {
+	background-color: #691414;
+}
+
+#results .request-failed {
+	background-color: #320a73;
+}

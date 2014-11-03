@@ -32,16 +32,29 @@ The text below is an example of the output of tcpdump_ for all the TCP segments 
   11:58:54.207193 IP6 2001:db8:b0:15:da:b055:0:2.52305 > 2001:db8:be:600d::2.80: Flags [S], seq 544531601, win 2880, options [mss 1440], length 0
   11:58:54.207628 IP6 2001:db8:be:600d::2.80 > 2001:db8:b0:15:da:b055:0:2.52305: Flags [S.], seq 1907676151, ack 544531602, win 14400, options [mss 1440], length 0
   11:58:54.208344 IP6 2001:db8:b0:15:da:b055:0:2.52305 > 2001:db8:be:600d::2.80: Flags [.], ack 1, win 2880, length 0
+
+You can easily recognize in the output above the `SYN` segment containing the `MSS` option, the `SYN+ACK` segment returned by the server. Note that tcpdump_ shows relative sequence numbers by default, except in the SYN segments. Thus, the acknowledgment that you observe in the third segment is an acknowledgement for the `SYN` returned by the server.
+
+.. code-block:: console
+
   11:58:54.208360 IP6 2001:db8:b0:15:da:b055:0:2.52305 > 2001:db8:be:600d::2.80: Flags [P.], seq 1:110, ack 1, win 2880, length 109
   11:58:54.208750 IP6 2001:db8:be:600d::2.80 > 2001:db8:b0:15:da:b055:0:2.52305: Flags [.], ack 110, win 14400, length 0
+
+The two lines above correspond to the request sent by the client and the acknowledgement returned by the server. Note that the first byte sent by the client has `1` as relative sequence number. In this example, the HTTP request has a total length of 109 bytes and a second segment is sent by the server.
+
+.. code-block:: console
+
   11:58:54.227126 IP6 2001:db8:be:600d::2.80 > 2001:db8:b0:15:da:b055:0:2.52305: Flags [P.], seq 1:491, ack 110, win 14400, length 490
   11:58:54.227526 IP6 2001:db8:b0:15:da:b055:0:2.52305 > 2001:db8:be:600d::2.80: Flags [.], ack 491, win 2390, length 0
+
+The TCP connection is then closed by exchanging three segments, the first two having the `FIN` flag set.
+
+.. code-block:: console
+
   11:58:54.234242 IP6 2001:db8:b0:15:da:b055:0:2.52305 > 2001:db8:be:600d::2.80: Flags [F.], seq 110, ack 491, win 2390, length 0
   11:58:54.234921 IP6 2001:db8:be:600d::2.80 > 2001:db8:b0:15:da:b055:0:2.52305: Flags [F.], seq 491, ack 111, win 14400, length 0
   11:58:54.235245 IP6 2001:db8:b0:15:da:b055:0:2.52305 > 2001:db8:be:600d::2.80: Flags [.], ack 492, win 2389, length 0
 
-
-You can easily recognize in the output above the `SYN` segment containing the `MSS` option, the `SYN+ACK` segment returned by the server and then the few data segments exchanged on the connection.
 
 wireshark_ is more recent than tcpdump_. It evolved from the ethereal packet trace analysis software. It can be used as a text tool like tcpdump_. For a TCP connection, wireshark_ would provide almost the same output as tcpdump_. The main advantage of wireshark_ is that it also includes a graphical user interface that allows to perform various types of analysis on a packet trace.
 
@@ -154,15 +167,19 @@ The `webserver` has been configured as a server that supports the following serv
  - ``daytime`` over both UDP and TCP on port ``13``
  - ``telnet`` over TCP on port ``23``
 
-The last three services were popular services installed on all TCP/IP hosts. However, some of them caused security problems and nowadays they are rarely enabled on real servers. 
+The last three services were popular services installed on all TCP/IP hosts. However, some of them caused security problems and nowadays they are rarely enabled on real servers. Despite of these security concerns, they are very useful to perform simple tests with TCP implementations.
 
-``echo`` is a very simple service. When a server receives some information, over UDP or TCP, it simply returns it to the client. ``discard`` is a kind of blackhole. All the information, sent over UDP or TCP, to a ``discard`` server is simply discarded upon reception. ``daytime`` is a very simple protocol that allows to query the current time on the server. The format of the response is described in :rfc:`867`.
+``echo`` is a very simple service. When a server receives some information, over UDP or TCP, it simply returns it to the client.
 
-Several tools allow to send information over UDP and TCP. :manpage:`telnet` is very useful to interact with TCP servers. :manpage:`nc` (or ``netcat``) is another tool which can be very useful when debugging network problems. It allows to easily contact servers over UDP or TCP, but can also be used to create simple but powerful servers from the command line. Several versions of ``nc``/``netcat`` have been written. See http://en.wikipedia.org/wiki/Netcat for additional details.
+``discard`` is a kind of blackhole. All the information, sent over UDP or TCP, to a ``discard`` server is simply discarded upon reception. 
+
+``daytime`` is a very simple protocol that allows to query the current time on the server. The format of the response is described in :rfc:`867`.
+
+Several tools allow to send information over UDP and TCP. :manpage:`telnet` is very useful to interact with TCP servers. :manpage:`nc` (or ``netcat``) is another tool which can be very useful when debugging network problems. It allows to easily contact servers over UDP or TCP, but can also be used to create simple but powerful servers from the command line. Several versions of ``nc`` or ``netcat`` have been written. See http://en.wikipedia.org/wiki/Netcat for additional details.
 
 Start ``tcpdump`` on ``router`` to capture all UDP segments. The ``tcpdump`` manpage will show you how to only capture UDP segments. 
 
-1. Using ``nc`` on `Client1`, send data to the ``discard`` server running on `webserver`. Observe the segments that are exchanged. How does the client select its source port number ?
+1. Using ``nc`` on `Client1`, send data to the ``discard`` server running on `webserver`. Observe the segments that are exchanged. How does the client select its source port number ? Can you explain why this method of allocating source ports is used.
 
 2. Using ``nc`` on `Client2`, send data to the ``echo`` server running on `webserver`. Use ``tcpdump`` to verify whether the data returned by the server is the same as the one sent by the client. 
 
@@ -180,16 +197,15 @@ Start ``tcpdump`` on ``router`` to capture all UDP segments. The ``tcpdump`` man
 Experiments with TCP
 --------------------
 
-:manpage:`nc` can also be used to interact with TCP servers. TCP is a complex protocol and a TCP implementation such the Linux kernel contains a large number of configuration parameters. To ease your understanding of the basic mechanisms of TCP, we have disabled most of the TCP options on `Client1` and `Client2`.
+:manpage:`nc` can also be used to interact with TCP servers. TCP is a complex protocol and a TCP implementation such the Linux kernel contains a large number of configuration parameters. To ease your understanding of the basic mechanisms of TCP, we have disabled most of the TCP extensions that are used by a modern TCP implementation on `Client1` and `Client2`.
 
-.. todo:: simplifier configuration server
 
 Start by using :manpage:`tcpdump` on `router` to capture all the packets sent on the interface attached to `webserver`
 
 
-1. Using :manpage:`nc`, try to open a TCP connection to a port on  `webserver` where there is no listening server, e.g. port ``5``. How does :manpage:`tcpdump` shows the first segment of the three way handshake. How does the TCP stack on `webserver` answers to this segment ? What are the TCP options used 
+1. Using :manpage:`nc`, try to open a TCP connection to a port on  `webserver` where there is no listening server, e.g. port ``5``. How does :manpage:`tcpdump` shows the first segment of the three way handshake. How does the TCP stack on `webserver` answers to this segment ? What are the TCP options used ?
 
-2. Using :manpage:`nc`, open a TCP connection to the ``echo`` port on `webserver` and send some information. From the :manpage:`tcpdump` output, how does the server closes the TCP connection ? 
+2. Using :manpage:`nc`, open a TCP connection to the ``echo`` port on `webserver` and send some information. By looking at the :manpage:`tcpdump` output, explain the method used by :manpage:`nc`  to close the TCP connection. 
 
 3. Perform the same experiment as above, but now by using the ``daytime`` server.
 
@@ -201,12 +217,12 @@ Start by using :manpage:`tcpdump` on `router` to capture all the packets sent on
 
    ifconfig eth0 mtu 1300
 
- This command reduces the MTU of interface ``eth0`` to 1300 bytes.  Use :manpage:`tcpdump(8)` to observe whether this change affects the segments sent by the client or by the server when :manpage:`nc(1)` is used with the ``echo`` service.
+ This command reduces the MTU of interface ``eth0`` to 1300 bytes.  Use :manpage:`tcpdump(8)` to observe whether this change affects the segments sent by the client or by the server when :manpage:`nc(1)` is used with the ``echo`` service. To see an impact, you need to send more than several KBytes of data with :manpage:`nc(1)`.
 
 .. , but this value can be configured by using the ``min_adv_mss`` ``sysctl``. On Linux, the :manpage:`systctl` command allows to tune several configuration parameters of the kernel. The ``sysctl`` parameters that are relevant for the network stack are described in https://www.kernel.org/doc/Documentation/networking/ip-sysctl.txt
 
 
-6. The TCP stack on `Client1` was configured to disable all recent TCP options, including Window Scale, Timestamp and Selective acknowledgements. Enable the Timestamp option using the correct ``sysctl`` and verify with :manpage:`tcpdump(8)` that this extension is actually used
+6. The TCP stack on `Client1` was configured to disable all recent TCP extensions, including Window Scale defined in :rfc:`1323`, Timestamps defined in :rfc:`1323` and Selective acknowledgements defined in :rfc:`2018`. Enable the Timestamp option by setting the configuration variable ``net.ipv4.tcp_timestamps`` to 1 using ``sysctl -w`` and verify with :manpage:`tcpdump(8)` that this extension is actually used.
 
 7. The main benefit of TCP is that it can react to delays, losses and packet duplications. In a netkit lab, there are usually no delay and no losses or duplications. Fortunately, various tools can be used on the Linux kernel to emulate various network properties. `Netem <http://www.linuxfoundation.org/collaborate/workgroups/networking/netem>`_ is one of these tools. It can be used on a router to add delay, losses or duplications when a router sends packets. Using the commands described in http://www.linuxfoundation.org/collaborate/workgroups/networking/netem, configure the interface between `router` and `websever` with :
   
@@ -223,74 +239,7 @@ Start by using :manpage:`tcpdump` on `router` to capture all the packets sent on
 
 8. Perform the same experiment with the ``discard`` service, but this time introduce errors on the link between `router` and `Client1`. Is TCP more affected from errors on the data segments or on the acknowledgements ?
 
-9. Using a configuration with netem that includes a non-zero delay, packet losses and reordering, observe the benefits of using Selective Acknowledgements. For this, configure netem on the link between `router` and `webserver` and enable the selective acknowledgements with the ``tcp_sack`` ``sysctl`` on `Client2`. Observe the difference between `Client1`, which does not use the selective acknowledgements and `Client2`.
+9. Using a configuration with netem that includes a non-zero delay, packet losses and reordering, observe the benefits of using Selective Acknowledgements. For this, configure netem on the link between `router` and `webserver` and enable the selective acknowledgements with the ``tcp_sack`` configuration variable with ``sysctl`` on `Client2`. Observe the difference between `Client1`, which does not use the selective acknowledgements and `Client2`.
 
  
 
-Injecting TCP segments
-----------------------
-
-Packet capture tools like tcpdump_ and Wireshark_ are very useful to observe the segments that transport protocols exchange. They are also very useful to understand and debug network problems as we'll discuss in subsequent labs. TCP is a complex protocol that has evolved a lot since its first specification :rfc:`793`. TCP includes a large number of heuristics that influence the reaction of a TCP implementation to various types of events. A TCP implementation interacts with the application through the ``socket`` API. Recently, several researchers from Google proposed packetdrill_ [CCB+2013]_.  packetdrill_ is a TCP test suite that was designed to develop unit tests to verify the correct operation of a TCP implementation. packetdrill_ interacts with the Linux TCP implementation in two ways :
-
- - packetdrill_ can issue any system call through the socket interface
- - packetdrill_ can inject any segment in the TCP stack as if it was received from a remote host
-
-A detailed description of packetdrill_ and one example can be found in [CCB+2013]_. packetdrill_ uses a syntax which is a mix between the C language and the tcpdump_syntax. The following example illustrates the three-way handshake with packetdrill_
-
-.. code-block:: console
-
-   // create socket and listen for incoming connections
-   0.000 socket(..., SOCK_STREAM, IPPROTO_TCP) = 3
-   0.000 setsockopt(3, SOL_SOCKET, SO_REUSEADDR, [1], 4) = 0
-   0.000 bind(3, ..., ...) = 0
-   0.000 listen(3, 1) = 0
-
-   // inject the first SYN segment in the TCP stack at time 0.200
-   // MSS is set to 1000 to simplify computation
-
-   0.200 < S 0:0(0) win 4096 <mss 1000>
-   // We expect a SYN+ACK with the default Linux MSS
-   0.200 > S. 0:0(0) ack 1 <mss 1460>
-   // We reply by injecting a valid ack at time 0.300
-   0.300 < . 1:1(0) ack 1 win 4096
-   // At that time, the connection is established
-   0.300 accept(3, ..., ...) = 4
-
-   // Receive first segment
-   0.510 < . 1:1001(1000) ack 1 win 4096
-
-   // Expects one ack in response
-   0.510 > . 1:1(0) ack 1001
-
-   // Application reads received data
-   0.600 read(4, ..., 1000) = 1000
-
-   // Application writes 1000 bytes
-   0.650 write(4, ..., 1000) = 1000
-   // Expects that it will send one segment
-   0.650 > P. 1:1001(1000) ack 1001
-
-   // We reply with an acknowledgement after 50 msec
-   0.700 < . 1001:1001(0) ack 1001 win 257
-
-   // We inject a RST to close connection
-   0.701 < R. 1001:1001(0) ack 1001 win 4096
-
-
-1. To show your understanding of the TCP state machine, use packetdrill_ to develop one script that demonstrates the operation of TCP. Inside each group, ensure that there is at least one script that demonstrates :
-
- - the simultaneous establishment of a TCP connection when the client and the server generate a SYN almost at the same time
- - the ability of TCP to accept out-of-order segments
- - the Nagle algorithm
- - the operation of TCP when the server announces a very small window
- - the support of delayed acknowledgements (i.e. an acknowledgement is sent for every second segment or after 50 msec of delay when there is no reordering)  
- - the TCP fast retransmit
- - different paths through the TCP state machine when closing a TCP connection (e.g. client sends FIN first, server sends FIN first, client and server send FIN at the same time, ...)
- - the negotiation of the MSS during the three-way handshake
- - the support of the TCP timestamp option
- - the reaction of TCP when out-of-window data is received
- - the reaction of TCP upon reception of a SYN+ACK segment when a connection has not yet been established
-
-
-
-.. include:: /links.rst
