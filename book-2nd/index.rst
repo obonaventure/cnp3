@@ -136,10 +136,10 @@ Part 3: Practice
    mcq-ex/mcq-app
    exercises/ex-app
    exercises/netkit-app
-   mcq-ex/mcq-tcp
    exercises/netkit-tcp
    exercises/packetdrill
-..   exercises/netkit-congestion
+   mcq-ex/mcq-congestion
+   exercises/netkit-congestion
 ..   exercises/netkit-ipv6
 ..   exercises/netkit-ipv6-rtg
 ..   exercises/ex-bgp
