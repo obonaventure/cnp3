@@ -30,7 +30,7 @@ Unless otherwise noted, we assume for the exercices in this section that the fol
 Congestion control
 ------------------
 
-1. To understand the operation of the TCP congestion control, it is often useful to write time-sequence diagrams for different scenarios. The example below shows the operation of the TCP congestion control scheme in a very simple scenario. The initial congestion window is set to 2000 bytes and the receive window advertised by the server (supposed constant for the entire connection) is set to 2000 bytes. 
+1. To understand the operation of the TCP congestion control, it is often useful to write time-sequence diagrams for different scenarios. The example below shows the operation of the TCP congestion control scheme in a very simple scenario. The initial congestion window (``cwnd``) is set to 1000 bytes and the receive window (``rwin``) advertised by the server (supposed constant for the entire connection) is set to 2000 bytes. The slow-start threshold (``ssthresh``) is set to 64000 bytes.
 
  .. tikz::
     :libs: positioning, matrix, arrows 
@@ -67,7 +67,7 @@ Congestion control
 
  a. Can you explain why the client only sends one segment first and then two successive segments (the delay between the two segments on the figure is due to graphical reasons) ?
 
- b. Can you explain why the congestion control increases after the reception of the first ack ?
+ b. Can you explain why the congestion window is increased after the reception of the first ack ?
 
  c. How long does it take for the client to deliver 3 KBytes to the server ?
 
@@ -94,7 +94,7 @@ Congestion control
       ssthresh=64000\\
      \end{tabular}\end{small}};
     
-    \draw[red, ->] (0,9) node [anchor=north, fill=white] {send(3k)} -- (3,9);
+    \draw[red, ->] (0,9) node [anchor=north, fill=white] {send(10k)} -- (3,9);
 
 3. Same question as the first one, but consider that the MSS on the client is set to 500 bytes. How does this modification affect the entire delay ? 
 
@@ -117,7 +117,7 @@ Congestion control
       ssthresh=64000\\
      \end{tabular}\end{small}};
     
-    \draw[red, ->] (0,9) node [anchor=north, fill=white] {send(3k)} -- (3,9);
+    \draw[red, ->] (0,9) node [anchor=north, fill=white] {send(10k)} -- (3,9);
    
 4. Assuming that there are no losses and that there is no congestion in the network. If the client write `x` bytes on a newly established TCP connection, derive a formula that computes the minimum time required to deliver all these `x` bytes to the server. For the derivation of this formula, assume that `x` is a multiple of the maximum segment size and that the receive window and the slow-start threshold are larger than `x`. 
 
@@ -242,7 +242,7 @@ Congestion control
 
  b. Same question, but assume now that the fourth segment sent by the client experienced congestion (but was not discarded).
 
-8. A TCP has been active for some time and reached a congestion window of 8000 bytes. At this point, there is no unacknowledged data and the application running on the client tries to send 2000 bytes of data.
+8. A TCP has been active for some time and reached a congestion window of 8000 bytes (its initial value was 1000 bytes). At this point, there is no unacknowledged data and the application running on the client tries to send 2000 bytes of data.
 
  .. tikz::
     :libs: positioning, matrix, arrows 
@@ -259,7 +259,7 @@ Congestion control
     % initial state       
     \node [state] at (0,11) {\begin{small}\begin{tabular}{l}
       rwin=64000 \\
-      cwnd=4000 \\ 
+      cwnd=8000 \\ 
       ssthresh=64000\\
      \end{tabular}\end{small}};
     
@@ -272,7 +272,7 @@ Congestion control
    :nb_pos: 1 
    :nb_prop: 3
 
-   None of these two segments reach the server. Which of the graphs below correspond to a correct reaction of the TCP stack running on the client ?
+   None of these two segments reaches the server. Which of the graphs below correspond to a correct reaction of the TCP stack running on the client ?
 
    .. negative:: 
 
@@ -291,7 +291,7 @@ Congestion control
          % initial state       
          \node [state] at (0,11) {\begin{small}\begin{tabular}{l}
          rwin=64000 \\
-         cwnd=4000 \\ 
+         cwnd=8000 \\ 
          ssthresh=64000\\
          \end{tabular}\end{small}};    
          \draw[red, ->] (0,9) node [anchor=north, fill=white] {send(2k)} -- (3,9);
@@ -331,7 +331,7 @@ Congestion control
          % initial state       
          \node [state] at (0,11) {\begin{small}\begin{tabular}{l}
          rwin=64000 \\
-         cwnd=4000 \\ 
+         cwnd=8000 \\ 
          ssthresh=64000\\
          \end{tabular}\end{small}};    
          \draw[red, ->] (0,9) node [anchor=north, fill=white] {send(2k)} -- (3,9);
@@ -371,7 +371,7 @@ Congestion control
          % initial state       
          \node [state] at (0,11) {\begin{small}\begin{tabular}{l}
          rwin=64000 \\
-         cwnd=4000 \\ 
+         cwnd=8000 \\ 
          ssthresh=64000\\
          \end{tabular}\end{small}};    
          \draw[red, ->] (0,9) node [anchor=north, fill=white] {send(2k)} -- (3,9);
@@ -411,7 +411,7 @@ Congestion control
          % initial state       
          \node [state] at (0,11) {\begin{small}\begin{tabular}{l}
          rwin=64000 \\
-         cwnd=4000 \\ 
+         cwnd=8000 \\ 
          ssthresh=64000\\
          \end{tabular}\end{small}};    
          \draw[red, ->] (0,9) node [anchor=north, fill=white] {send(2k)} -- (3,9);
@@ -481,7 +481,7 @@ Congestion control
       - Upon reception of the third acknowledgement, ``cwnd`` is set to 2225 bytes and ``ssthresh`` is set to 2000 bytes  
       - Upon reception of the fourth acknowledgement, ``cwnd`` and ``ssthresh`` are unchanged
  
-      .. comment:: Given the initial values for ``cwnd`` and ``ssthresh``, this connection operates in congestion avoidance mode. The first acknowledgement increases the congestion window since it acknowledges new date. The third acknowledgement does not acknowledged new data. The congestion window cannot increase due to the reception of this acknowledgement. Furthermore, a single duplicate acknowledgement is not sufficient to detect a loss segment and trigger a fast retransmit.
+      .. comment:: Given the initial values for ``cwnd`` and ``ssthresh``, this connection operates in congestion avoidance mode. The first acknowledgement increases the congestion window since it acknowledges new data. The third acknowledgement does not acknowledged new data. The congestion window cannot increase due to the reception of this acknowledgement. Furthermore, a single duplicate acknowledgement is not sufficient to detect a loss segment and trigger a fast retransmit.
 
    .. negative::
 
@@ -490,7 +490,7 @@ Congestion control
       - Upon reception of the third acknowledgement, ``cwnd`` is set to 6000 bytes and ``ssthresh`` is unchanged 
       - Upon reception of the fourth acknowledgement, ``cwnd`` is set to 7000 bytes and ``ssthresh`` is unchanged 
 
-      .. comment:: Given the initial values for ``cwnd`` and ``ssthresh``, this connection operates in congestion avoidance mode. The first acknowledgement increases the congestion window since it acknowledges new date, but not the two others. 
+      .. comment:: Given the initial values for ``cwnd`` and ``ssthresh``, this connection operates in congestion avoidance mode. The first acknowledgement increases the congestion window since it acknowledges new data, but not the two others. 
 
    .. negative::
 
@@ -498,7 +498,7 @@ Congestion control
       - Upon reception of the third acknowledgement, ``cwnd`` is set to 4485 bytes and ``ssthresh`` is unchanged 
       - Upon reception of the fourth acknowledgement, ``cwnd`` is set to 4707 bytes and ``ssthresh`` is unchanged 
 
-      .. comment:: Given the initial values for ``cwnd`` and ``ssthresh``, this connection operates in congestion avoidance mode. The first acknowledgement increases the congestion window since it acknowledges new date, but not the two others. 
+      .. comment:: Given the initial values for ``cwnd`` and ``ssthresh``, this connection operates in congestion avoidance mode. The first acknowledgement increases the congestion window since it acknowledges new data, but not the two others. 
 
 
 10. Draw the complete time-sequence diagram for the scenario used in question 9.
