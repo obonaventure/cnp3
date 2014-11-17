@@ -140,7 +140,8 @@ Part 3: Practice
    exercises/packetdrill
    mcq-ex/mcq-congestion
    exercises/netkit-congestion
-..   exercises/netkit-ipv6
+   mcq-ex/mcq-ipv6
+   exercises/netkit-ipv6
 ..   exercises/netkit-ipv6-rtg
 ..   exercises/ex-bgp
 ..   exercises/ex-stp
