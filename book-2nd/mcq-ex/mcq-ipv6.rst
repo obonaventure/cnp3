@@ -824,7 +824,7 @@ Design questions
 
 The routers have one address inside each network :
 
- - router ``R1`` uses address ``2001:db8:1341:1::1`` on its West interface, address ``2001:db8:1341:12::1`` on its East interface and address ``2001:db8:1341:13::A`` on its South interface
+ - router ``R1`` uses address ``2001:db8:1341:1::1`` on its West interface, address ``2001:db8:1341:12::1`` on its East interface and address ``2001:db8:1341:13::1`` on its South interface
  - router ``R2`` uses address ``2001:db8:1341:12::2`` on its West interface, and address ``2001:db8:1341:24::2`` on its South interface
  - router ``R3`` uses address ``2001:db8:1341:34::3`` on its West interface and address ``2001:db8:1341:13::3`` on its North interface
  - router ``R4`` uses address ``2001:db8:1341:34::4`` on its West interface, address ``2001:db8:1341:24::4`` on its North interface and address ``2001:db8:1341:4::4`` on its East interface
@@ -902,7 +902,7 @@ How do you configure the forwarding tables on ``R1`` and ``R4`` so that ``A`` ca
 
 The routers have one address inside each network :
 
- - router ``R1`` uses address ``2001:db8:1341:1::1`` on its West interface, address ``2001:db8:1341:12::1`` on its East interface, address ``2001:db8:1341:14::1`` on its South-East interface and address ``2001:db8:1341:13::A`` on its South interface
+ - router ``R1`` uses address ``2001:db8:1341:1::1`` on its West interface, address ``2001:db8:1341:12::1`` on its East interface, address ``2001:db8:1341:14::1`` on its South-East interface and address ``2001:db8:1341:13::1`` on its South interface
  - router ``R2`` uses address ``2001:db8:1341:12::2`` on its West interface, and address ``2001:db8:1341:24::2`` on its South interface
  - router ``R3`` uses address ``2001:db8:1341:34::3`` on its West interface and address ``2001:db8:1341:13::3`` on its North interface
  - router ``R4`` uses address ``2001:db8:1341:34::4`` on its West interface, address ``2001:db8:1341:24::4`` on its North interface, address ``2001:db8:1341:14::4`` on its North-West interface and address ``2001:db8:1341:4::4`` on its East interface
