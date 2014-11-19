@@ -224,8 +224,8 @@ The second way to automate a lab is by automatically copying files on the virtua
 
 These commands create the hostA/etc directory and copy the hosts file that we created earlier at its final location. This file will be copied as ``/etc/hosts`` in the filesystem used by virtual machine ``hostA``.
 
-Assignment
-----------
+Exercise
+--------
 
 ICMPv6 :rfc:`4443`, the Internet Control Message Protocol, is a key companion to IPv6. ICMPv6 can report to the sender various types of errors that can occur during the transmission of a packet. :manpage:`traceroute6(8)` exploits one of these messages to determine the path followed by packets towards a given destination.
 
@@ -241,7 +241,7 @@ To demonstrate your understanding of ICMPv6, prepare a lab with a few hosts and 
  - `Time Exceeded` message (but only Code ``1`` - Fragment reassembly time exceeded)
  
 
-Provide in your report a short text that explains why each ICMPv6 error message is generated and show a tcpdump_ output containing this message.
+.. Provide in your report a short text that explains why each ICMPv6 error message is generated and show a tcpdump_ output containing this message.
 
 
 
