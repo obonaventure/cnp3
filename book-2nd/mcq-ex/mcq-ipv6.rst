@@ -11,32 +11,48 @@ Building a network
 
    This is an unpolished draft of the second edition of this ebook. If you find any error or have suggestions to improve the text, please create an issue via https://github.com/obonaventure/cnp3/issues?milestone=2 
 
-9. Consider the network shown below. In this network, the metric of each link is set to `1` except link `A-B` whose metric is set to `4` in both directions. In this network, there are two paths with the same cost between `D` and `C`. Old routers would randomly select one of these equal cost paths and install it in their forwarding table. Recent routers are able to use up to `N` equal cost paths towards the same destination. 
-
- .. figure:: ../../book/network/svg/ex-five-routers-weigth4.png
-    :align: center
-    :scale: 30
-
-    A simple network 
-
- On recent routers, a lookup in the forwarding table for a destination address returns a set of outgoing interfaces. How would you design an algorithm that selects the outgoing interface used for each packet, knowing that to avoid reordering, all segments of a given TCP connection should follow the same path ? 
-
-.. todo:: exercice avec routage statique normal et ping
-.. todo:: exercice avec routage statique et plus spécifique et ping
-.. todo:: exercice avec routage statique plus erreurs et ping (un dans foward et autre dans backward)
-.. todo:: exercice avec les memes problems mais traceroute a la place de ping
-.. todo:: exercice avec des erreurs de  configuration sur LAN ? probablement trop tôt
-  
 
 .. _mcq-ipv6:
+
 
 
 Multiple choice questions
 =========================
 :task_id: mcqipv6
 
+1. The IPv6 packet header includes several fields that are shown in the figure below.
 
-   1. The IPv6 addresses are 128 bits wide and can be represented by using the hexadecimal representation defined in :rfc:`5952`.
+   .. figure:: /../book/network/pkt/ipv6.png
+      :align: center
+      :scale: 100
+
+.. question:: ipv6packet
+   :nb_prop: 3
+   :nb_pos: 1
+
+   Among the following affirmations about the role of these different fields, only one is *incorrect*. Selection the incorrect affirmation.
+
+   .. positive:: A router never changes any field of an IPv6 packet that it forwards.
+
+      .. comment:: This affirmation is incorrect. A router changes the Hop-Limit of the packets that it forwards. It may also change other fields such as the TClass, but this is outside the scope of this ebook.
+
+   .. positive:: When a host sends an IPv6 packet, its HopLimit is always set to zero. Routers increment the value of this field for each packet that they forward.
+
+      .. comment:: This affirmation is incorrect. A host sends packets with a positive HopLimit and routers decrement this field. 
+
+   .. negative:: A router always decrements the HopLimit of all forwarded IPv6 packets.
+   
+      .. comment:: This affirmation is correct. 
+ 
+   .. negative:: To forward a packet, a router always looksup the destination address inside its forwarding table.
+
+      .. comment:: This affirmation is correct. 
+
+   .. negative:: The NextHeader field of the IPv6 packet identifies the type of transport segment contained in the packet.
+                  
+
+
+2. The IPv6 addresses are 128 bits wide and can be represented by using the hexadecimal representation defined in :rfc:`5952`.
 
 .. question:: ip6addre
    :nb_prop: 5
@@ -77,7 +93,7 @@ Multiple choice questions
    :nb_prop: 4
    :nb_pos: 2
 
-   2. Among the textual representation for IPv6 addresses below, select all the ones that correspond to IPv6 address ``2001:db8:0:0:a::cafe``.
+   3. Among the textual representation for IPv6 addresses below, select all the ones that correspond to IPv6 address ``2001:db8:0:0:a::cafe``.
 
    .. positive::  ``2001:db8:0:0:a:0:0:cafe``
 
@@ -102,7 +118,7 @@ Multiple choice questions
       .. comment:: This IPv6 address does not correspond to ``2001:db8:0:0:a::cafe``. In this address, the ``db8`` 16 bits block corresponds to the following binary representation ``0000 1101 1011 1000`` while the binary representation for ``db80`` is ``1101 1011 1000 0000 `.
 
 
-3. The forwarding tables used in an IPv6 network define the forwarding paths that are used for the packets. Consider the simple network depicted in the figure below. In this network, the hosts have the following addresses :
+4. The forwarding tables used in an IPv6 network define the forwarding paths that are used for the packets. Consider the simple network depicted in the figure below. In this network, the hosts have the following addresses :
 
  - host ``A`` : ``2001:db8:1341:1::A`` and its default route points to ``2001:db8:1341:1::1``
  - host ``B`` : ``2001:db8:1341:3::B`` and its default route points to ``2001:db8:1341:3::3``
@@ -249,7 +265,7 @@ The forwarding tables of these three routers, ignoring the routes to the local i
          \draw[arrow, color=red] (R3) -- (R1); 
          \draw[arrow, color=red] (R1) -- (A);
 
-4. Consider the network shown in the figure below. In this network, the following addresses are used.
+5. Consider the network shown in the figure below. In this network, the following addresses are used.
 
   - host ``A`` : ``2001:db8:1341:1::A`` and its default route points to ``2001:db8:1341:1::1``
   - host ``B`` : ``2001:db8:1341:4::B`` and its default route points to ``2001:db8:1341:4::4``
@@ -461,9 +477,7 @@ The forwarding paths used in a network depend on the forwarding tables installed
       .. comment:: These forwarding tables are incorrect. Check what happens when ``R2`` receives a packet towards ``2001:db8:1341::4/64``
 
 
-5. Consider the same network as in the previous question, but now the forwarding tables of ``R2`` and ``R3`` are configured as shown below :
-
-
+6. Consider the same network as in the previous question, but now the forwarding tables of ``R2`` and ``R3`` are configured as shown below :
 
      .. tikz::
         :libs: positioning, matrix, arrows 
@@ -587,7 +601,7 @@ The forwarding paths used in a network depend on the forwarding tables installed
       .. comment:: The two paths ``A->B`` and ``B->A`` do not pass through the same routers.
 
 
-6. Consider again the same network with three routers as discussed earlier. Let us know explore how :manpage:`traceroute6(8)` operates in such a network. A key point to remember about :manpage:`traceroute6(8)` is that when it returns an ICMP message, this message is sent inside a packet whose source is one of the addresses of the router and whose destination is the source address of the packet that triggered the generation of this ICMP message. In this network, the hosts have the following addresses :
+7. Consider again the same network with three routers as discussed earlier. Let us know explore how :manpage:`traceroute6(8)` operates in such a network. A key point to remember about :manpage:`traceroute6(8)` is that when it returns an ICMP message, this message is sent inside a packet whose source is one of the addresses of the router and whose destination is the source address of the packet that triggered the generation of this ICMP message. In this network, the hosts have the following addresses :
 
  - host ``A`` : ``2001:db8:1341:1::A`` and its default route points to ``2001:db8:1341:1::1``
  - host ``B`` : ``2001:db8:1341:3::B`` and its default route points to ``2001:db8:1341:3::3``
@@ -694,7 +708,7 @@ The forwarding tables of these three routers, ignoring the routes to the local i
          4  2001:db8:1341:3::B 
 
 
-7. When manipulating IPv6 address, it is sometimes necessary to convert an IPv6 address in its binary representation. 
+8. When manipulating IPv6 address, it is sometimes necessary to convert an IPv6 address in its binary representation. 
 
 .. question:: ipv6addr 
    :nb_prop: 3 
@@ -740,7 +754,7 @@ The forwarding tables of these three routers, ignoring the routes to the local i
 
 
 
-8. When an IPv6 router receives a packet to be forwarded, it finds the most specific match for the destination address of this packet in its forwarding table. Consider the following forwarding table from an hypothetical IPv6 router.
+9. When an IPv6 router receives a packet to be forwarded, it finds the most specific match for the destination address of this packet in its forwarding table. Consider the following forwarding table from an hypothetical IPv6 router.
 
  .. code-block:: console
 
@@ -811,6 +825,19 @@ The forwarding tables of these three routers, ignoring the routes to the local i
 
        .. comment:: No, this destination address matches route ``2001:DB8:1341:5000/52``
 
+10. The ICMP protocol is often used when debugging networking. A good understanding of the different types of ICMP messages can be useful when debugging such problems. Before looking at ICMP, let us first look at sample IPv6 packets captured with tcpdump_ 
+
+A first example is a three-way handshake to open a TCP connection.
+
+ .. code-block:: console
+
+    09:43:00.966268 IP6 (flowlabel 0x96318, hlim 64, next-header TCP (6) payload length: 44) 2a02:2788:2c4:16f:1165:3f01:b6af:6cb9.61072 > 2001:41d0:a:6759::1.9: Flags [S], cksum 0xb9b8 (correct), seq 3712396944, win 65535, options [mss 1440,nop,wscale 5,nop,nop,TS val 404903939 ecr 0,sackOK,eol], length 0
+    09:43:00.992376 IP6 (hlim 53, next-header TCP (6) payload length: 40) 2001:41d0:a:6759::1.9 > 2a02:2788:2c4:16f:1165:3f01:b6af:6cb9.61072: Flags [S.], cksum 0x79c2 (correct), seq 2854095636, ack 3712396945, win 28560, options [mss 1440,sackOK,TS val 1074195486 ecr 404903939,nop,wscale 7], length 0
+    09:43:00.992442 IP6 (flowlabel 0x96318, hlim 64, next-header TCP (6) payload length: 32) 2a02:2788:2c4:16f:1165:3f01:b6af:6cb9.61072 > 2001:41d0:a:6759::1.9: Flags [.], cksum 0x07e8 (correct), ack 1, win 4105, options [nop,nop,TS val 404903965 ecr 1074195486], length 0 
+
+
+
+
 Design questions
 ----------------
 
@@ -868,7 +895,7 @@ Routers ``R2`` and ``R3`` are buggy in this network. Besides the routes for thei
 
 How do you configure the forwarding tables on ``R1`` and ``R4`` so that ``A`` can reach ``B`` and the reverse ?
 
-2. Consider a slightly different network than in the question above. 
+2. Consider a slightly different network than in the previous question. 
 
      .. tikz::
         :libs: positioning, matrix, arrows 
@@ -1106,7 +1133,9 @@ The students have configured the following forwarding tables on these four route
         p:56::/64  & North\\
         \end{tabular}};
 
-4. When a network is designed, an important element of the design is the IP address allocation plan. A good allocation plan can provide flexibility and help to reduce the size of the forwarding tables. 
+
+
+4. Sometimes, static routes must be configured on networks to enforce certain paths. Consider the six routers network shown in the figure below.
 
      .. tikz::
         :libs: positioning, matrix, arrows 
@@ -1141,4 +1170,51 @@ The students have configured the following forwarding tables on these four route
         (R6) edge (B2);
 
 
+   In this network, we will focus on four IPv6 prefixes :
+
+     - ``p:0000::/64`` used on the link ``A1-R1``. ``A1`` uses address ``p:0000::A1/64``
+     - ``p:0001::/64`` used on the link ``A2-R2``. ``A2`` uses address ``p:0001::A2/64``
+     - ``p:0002::/64`` used on the link ``B1-R5``. ``B1`` uses address ``p:0002::B1/64``
+     - ``p:0003::/64`` used on the link ``B2-R6``. ``B2`` uses address ``p:0003::B2/64``
+
+   Can you configure the forwarding tables of the six routers to achieve the following network objectives :
+
+    a. All packets sent by ``B1`` and ``B2`` to ``A1`` and ``A2`` are always forwarded via ``R2`` while all packets from ``A1`` and ``A2`` are always forwarded via ``R4``
+    b. The packets whose destinations are ``A1``,  ``A2``, ``B1`` or ``B2`` are never forwarded via router ``R4``
+    c. The packets sent by ``A1`` or ``A2`` towards ``B1`` are always forwarded via ``R2`` while the packets towards ``B2`` are always forwarded via ``R4``.
+ 
+   When creating these forwarding tables, try to minimise the number of entries that you install on each router.
+
+5. When a network is designed, an important element of the design is the IP address allocation plan. A good allocation plan can provide flexibility and help to reduce the size of the forwarding tables. 
+
+     .. tikz::
+        :libs: positioning, matrix, arrows 
+
+        \tikzstyle{arrow} = [thick,->,>=stealth]
+        \tikzset{router/.style = {rectangle, draw, text centered, minimum height=2em}, }
+        \tikzset{host/.style = {circle, draw, text centered, minimum height=2em}, }
+        \tikzset{ftable/.style={rectangle, dashed, draw} }
+        \node[host] (A1) {A1};
+        \node[router, right=of A1] (R1) {R1};
+        \node[host, below=of A1] (A2) {A2};
+        \node[router,right=of R1] (R2) {R2};
+        \node[router,right=of R2] (R5) {R5};
+        \node[router,below=of R1] (R3) {R3};
+         \node[router,below=of R5] (R6) {R6};
+        \node[host, right=of R5] (B1) {B1};
+        \node[host, right=of R6] (B2) {B2};
+
+
+        \path[draw,thick]
+        (A1) edge (R1)
+        (A2) edge (R3)
+        (R1) edge (R3)
+        (R2) edge (R3)
+        (R2) edge (R5)
+        (R2) edge (R6)
+        (R5) edge (R6)
+        (R5) edge (B1)
+        (R6) edge (B2);
+
+  Assign IP subnets to all links in this network so that you can reduce the number of entries in the forwarding tables of all routers. Assume that you have received a ``/56`` prefix that you can use as you want. Each subnet containing a host must be allocated a ``/64`` subnet. 
 

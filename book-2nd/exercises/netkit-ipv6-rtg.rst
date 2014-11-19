@@ -5,6 +5,24 @@
 IP Address Assignment Methods and Intradomain Routing
 *****************************************************
 
+9. Consider the network shown below. In this network, the metric of each link is set to `1` except link `A-B` whose metric is set to `4` in both directions. In this network, there are two paths with the same cost between `D` and `C`. Old routers would randomly select one of these equal cost paths and install it in their forwarding table. Recent routers are able to use up to `N` equal cost paths towards the same destination. 
+
+ .. figure:: ../../book/network/svg/ex-five-routers-weigth4.png
+    :align: center
+    :scale: 30
+
+    A simple network 
+
+ On recent routers, a lookup in the forwarding table for a destination address returns a set of outgoing interfaces. How would you design an algorithm that selects the outgoing interface used for each packet, knowing that to avoid reordering, all segments of a given TCP connection should follow the same path ? 
+
+.. todo:: exercice avec routage statique normal et ping
+.. todo:: exercice avec routage statique et plus spécifique et ping
+.. todo:: exercice avec routage statique plus erreurs et ping (un dans foward et autre dans backward)
+.. todo:: exercice avec les memes problems mais traceroute a la place de ping
+.. todo:: exercice avec des erreurs de  configuration sur LAN ? probablement trop tôt
+  
+
+
 .. warning:: 
    This is an unpolished draft of the second edition of this ebook. If you find any error or have suggestions to improve the text, please create an issue via https://github.com/obonaventure/cnp3/issues/new
 
