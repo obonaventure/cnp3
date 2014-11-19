@@ -17,7 +17,7 @@ A complete TCP implementation includes several mechanisms that interact together
 
 Unless otherwise noted, we assume for the exercices in this section that the following conditions hold.
 
- - the client/server perform a single :manpage:`send(3)` of `x` bytes
+ - the sender/receiver performs a single :manpage:`send(3)` of `x` bytes
  - the round-trip-time is fixed and does not change during the lifetime of the TCP connection. We assume a fixed value of 100 milliseconds for the rtt and a fixed value of 200 milliseconds for the retransmission timer.
  - the delay required to transmit a single TCP segment containing MSS bytes is small and set to 1 milliseconds, independently of the MSS size
  - the transmission delay for a TCP is negligible
@@ -30,7 +30,7 @@ Unless otherwise noted, we assume for the exercices in this section that the fol
 Congestion control
 ------------------
 
-1. To understand the operation of the TCP congestion control, it is often useful to write time-sequence diagrams for different scenarios. The example below shows the operation of the TCP congestion control scheme in a very simple scenario. The initial congestion window (``cwnd``) is set to 1000 bytes and the receive window (``rwin``) advertised by the server (supposed constant for the entire connection) is set to 2000 bytes. The slow-start threshold (``ssthresh``) is set to 64000 bytes.
+1. To understand the operation of the TCP congestion control, it is often useful to write time-sequence diagrams for different scenarios. The example below shows the operation of the TCP congestion control scheme in a very simple scenario. The initial congestion window (``cwnd``) is set to 1000 bytes and the receive window (``rwin``) advertised by the receiver (supposed constant for the entire connection) is set to 2000 bytes. The slow-start threshold (``ssthresh``) is set to 64000 bytes.
 
  .. tikz::
     :libs: positioning, matrix, arrows 
@@ -40,8 +40,8 @@ Congestion control
     \draw[step=0.5cm,lightgray,very thin] (0,0) grid (10,10);
     \draw[very thick, <->] (9.7,10) -- (9.7,9.5) node [anchor=west, fill=white] {$25 msec$};
     \tikzset{state/.style={rectangle, dashed, draw, fill=white} }
-    \node [black, fill=white] at (3,10) {Client};
-    \node [black, fill=white] at (7,10) {Server};
+    \node [black, fill=white] at (3,10) {Sender};
+    \node [black, fill=white] at (7,10) {Receiver};
     \draw[very thick,->] (3,9.5) -- (3,0.5);
     \draw[very thick,->] (7,9.5) -- (7,0.5);
     % initial state       
@@ -65,11 +65,11 @@ Congestion control
     \draw[black,thick, ->] (7,5.5) -- (3,4.5) node [midway, fill=white] {ack 3000};
 
 
- a. Can you explain why the client only sends one segment first and then two successive segments (the delay between the two segments on the figure is due to graphical reasons) ?
+ a. Can you explain why the sender only sends one segment first and then two successive segments (the delay between the two segments on the figure is due to graphical reasons) ?
 
  b. Can you explain why the congestion window is increased after the reception of the first ack ?
 
- c. How long does it take for the client to deliver 3 KBytes to the server ?
+ c. How long does it take for the sender to deliver 3 KBytes to the receiver ?
 
 
 2. Same question as above but now with a small variation. Recent TCP implementations use a large initial value for the congestion window. Draw the time-sequence diagram that corresponds to an initial value of 10000 bytes for this congestion window.
@@ -83,8 +83,8 @@ Congestion control
     \draw[step=0.5cm,lightgray,very thin] (0,0) grid (10,10);
     \draw[very thick, <->] (9.7,10) -- (9.7,9.5) node [anchor=west, fill=white] {$25 msec$};
     \tikzset{state/.style={rectangle, dashed, draw, fill=white} }
-    \node [black, fill=white] at (3,10) {Client};
-    \node [black, fill=white] at (7,10) {Server};
+    \node [black, fill=white] at (3,10) {Sender};
+    \node [black, fill=white] at (7,10) {Receiver};
     \draw[very thick,->] (3,9.5) -- (3,0.5);
     \draw[very thick,->] (7,9.5) -- (7,0.5);
     % initial state       
@@ -96,7 +96,7 @@ Congestion control
     
     \draw[red, ->] (0,9) node [anchor=north, fill=white] {send(10k)} -- (3,9);
 
-3. Same question as the first one, but consider that the MSS on the client is set to 500 bytes. How does this modification affect the entire delay ? 
+3. Same question as the first one, but consider that the MSS on the sender is set to 500 bytes. How does this modification affect the entire delay ? 
 
  .. tikz::
     :libs: positioning, matrix, arrows 
@@ -106,8 +106,8 @@ Congestion control
     \draw[step=0.5cm,lightgray,very thin] (0,0) grid (10,10);
     \draw[very thick, <->] (9.7,10) -- (9.7,9.5) node [anchor=west, fill=white] {$25 msec$};
     \tikzset{state/.style={rectangle, dashed, draw, fill=white} }
-    \node [black, fill=white] at (3,10) {Client};
-    \node [black, fill=white] at (7,10) {Server};
+    \node [black, fill=white] at (3,10) {Sender};
+    \node [black, fill=white] at (7,10) {Receiver};
     \draw[very thick,->] (3,9.5) -- (3,0.5);
     \draw[very thick,->] (7,9.5) -- (7,0.5);
     % initial state       
@@ -119,9 +119,9 @@ Congestion control
     
     \draw[red, ->] (0,9) node [anchor=north, fill=white] {send(10k)} -- (3,9);
    
-4. Assuming that there are no losses and that there is no congestion in the network. If the client write `x` bytes on a newly established TCP connection, derive a formula that computes the minimum time required to deliver all these `x` bytes to the server. For the derivation of this formula, assume that `x` is a multiple of the maximum segment size and that the receive window and the slow-start threshold are larger than `x`. 
+4. Assuming that there are no losses and that there is no congestion in the network. If the sender writes `x` bytes on a newly established TCP connection, derive a formula that computes the minimum time required to deliver all these `x` bytes to the receiver. For the derivation of this formula, assume that `x` is a multiple of the maximum segment size and that the receive window and the slow-start threshold are larger than `x`. 
 
-5. In question 1, we assumed that the server acknowledged every segment received from the client. In practice, many deployed TCP implementations use delayed acknowledgements. Assuming a delayed acknowledgement timer of 50 milliseconds, modify the time-sequence diagram below to reflect the impact of these delayed acknowledgement. Does their usage decreases or increased the transmission delay ?
+5. In question 1, we assumed that the receiver acknowledged every segment received from the sender. In practice, many deployed TCP implementations use delayed acknowledgements. Assuming a delayed acknowledgement timer of 50 milliseconds, modify the time-sequence diagram below to reflect the impact of these delayed acknowledgement. Does their usage decreases or increased the transmission delay ?
 
  .. tikz::
     :libs: positioning, matrix, arrows 
@@ -131,8 +131,8 @@ Congestion control
     \draw[step=0.5cm,lightgray,very thin] (0,0) grid (10,10);
     \draw[very thick, <->] (9.7,10) -- (9.7,9.5) node [anchor=west, fill=white] {$25 msec$};
     \tikzset{state/.style={rectangle, dashed, draw, fill=white} }
-    \node [black, fill=white] at (3,10) {Client};
-    \node [black, fill=white] at (7,10) {Server};
+    \node [black, fill=white] at (3,10) {Sender};
+    \node [black, fill=white] at (7,10) {Receiver};
     \draw[very thick,->] (3,9.5) -- (3,0.5);
     \draw[very thick,->] (7,9.5) -- (7,0.5);
     % initial state       
@@ -192,8 +192,8 @@ Congestion control
     \draw[step=0.5cm,lightgray,very thin] (0,0) grid (10,10);
     \draw[very thick, <->] (9.7,10) -- (9.7,9.5) node [anchor=west, fill=white] {$20 msec$};
     \tikzset{state/.style={rectangle, dashed, draw, fill=white} }
-    \node [black, fill=white] at (3,10) {Client};
-    \node [black, fill=white] at (7,10) {Server};
+    \node [black, fill=white] at (3,10) {Sender};
+    \node [black, fill=white] at (7,10) {Receiver};
     \draw[very thick,->] (3,9.5) -- (3,0.5);
     \draw[very thick,->] (7,9.5) -- (7,0.5);
     % initial state       
@@ -238,11 +238,11 @@ Congestion control
      \end{tabular}\end{small}};
 
 
- a. Redraw the same figure assuming that the second segment that was sent by the client in the figure experienced congestion. In a network that uses Explicit Congestion Notification, this segment would be marked by routers and the server would return the congestion mark in the corresponding acknowledgement. 
+ a. Redraw the same figure assuming that the second segment that was delivered by the sender in the figure experienced congestion. In a network that uses Explicit Congestion Notification, this segment would be marked by routers and the receiver would return the congestion mark in the corresponding acknowledgement. 
 
- b. Same question, but assume now that the fourth segment sent by the client experienced congestion (but was not discarded).
+ b. Same question, but assume now that the fourth segment delivered by the sender experienced congestion (but was not discarded).
 
-8. A TCP has been active for some time and reached a congestion window of 8000 bytes (its initial value was 1000 bytes). At this point, there is no unacknowledged data and the application running on the client tries to send 2000 bytes of data.
+8. A TCP has been active for some time and reached a congestion window of 8000 bytes (its initial value was 1000 bytes). At this point, there is no unacknowledged data and the application running on the sender tries to send 2000 bytes of data.
 
  .. tikz::
     :libs: positioning, matrix, arrows 
@@ -252,8 +252,8 @@ Congestion control
     \draw[step=0.5cm,lightgray,very thin] (0,0) grid (10,10);
     \draw[very thick, <->] (9.7,10) -- (9.7,9.5) node [anchor=west, fill=white] {$20 msec$};
     \tikzset{state/.style={rectangle, dashed, draw, fill=white} }
-    \node [black, fill=white] at (3,10) {Client};
-    \node [black, fill=white] at (7,10) {Server};
+    \node [black, fill=white] at (3,10) {Sender};
+    \node [black, fill=white] at (7,10) {Receiver};
     \draw[very thick,->] (3,9.5) -- (3,0.5);
     \draw[very thick,->] (7,9.5) -- (7,0.5);
     % initial state       
@@ -272,7 +272,7 @@ Congestion control
    :nb_pos: 1 
    :nb_prop: 3
 
-   None of these two segments reaches the server. Which of the graphs below correspond to a correct reaction of the TCP stack running on the client ?
+   None of these two segments reaches the receiver. Which of the graphs below corresponds to a correct reaction of the TCP stack running on the sender ?
 
    .. negative:: 
 
@@ -284,8 +284,8 @@ Congestion control
          \draw[step=0.5cm,lightgray,very thin] (0,0) grid (10,10);
          \draw[very thick, <->] (9.7,10) -- (9.7,9.5) node [anchor=west, fill=white] {$20 msec$};
          \tikzset{state/.style={rectangle, dashed, draw, fill=white} }
-         \node [black, fill=white] at (3,10) {Client};
-         \node [black, fill=white] at (7,10) {Server};
+         \node [black, fill=white] at (3,10) {Sender};
+         \node [black, fill=white] at (7,10) {Receiver};
          \draw[very thick,->] (3,9.5) -- (3,0.5);
          \draw[very thick,->] (7,9.5) -- (7,0.5);
          % initial state       
@@ -324,8 +324,8 @@ Congestion control
          \draw[step=0.5cm,lightgray,very thin] (0,0) grid (10,10);
          \draw[very thick, <->] (9.7,10) -- (9.7,9.5) node [anchor=west, fill=white] {$20 msec$};
          \tikzset{state/.style={rectangle, dashed, draw, fill=white} }
-         \node [black, fill=white] at (3,10) {Client};
-         \node [black, fill=white] at (7,10) {Server};
+         \node [black, fill=white] at (3,10) {Sender};
+         \node [black, fill=white] at (7,10) {Receiver};
          \draw[very thick,->] (3,9.5) -- (3,0.5);
          \draw[very thick,->] (7,9.5) -- (7,0.5);
          % initial state       
@@ -364,8 +364,8 @@ Congestion control
          \draw[step=0.5cm,lightgray,very thin] (0,0) grid (10,10);
          \draw[very thick, <->] (9.7,10) -- (9.7,9.5) node [anchor=west, fill=white] {$20 msec$};
          \tikzset{state/.style={rectangle, dashed, draw, fill=white} }
-         \node [black, fill=white] at (3,10) {Client};
-         \node [black, fill=white] at (7,10) {Server};
+         \node [black, fill=white] at (3,10) {Sender};
+         \node [black, fill=white] at (7,10) {Receiver};
          \draw[very thick,->] (3,9.5) -- (3,0.5);
          \draw[very thick,->] (7,9.5) -- (7,0.5);
          % initial state       
@@ -404,8 +404,8 @@ Congestion control
          \draw[step=0.5cm,lightgray,very thin] (0,0) grid (10,10);
          \draw[very thick, <->] (9.7,10) -- (9.7,9.5) node [anchor=west, fill=white] {$20 msec$};
          \tikzset{state/.style={rectangle, dashed, draw, fill=white} }
-         \node [black, fill=white] at (3,10) {Client};
-         \node [black, fill=white] at (7,10) {Server};
+         \node [black, fill=white] at (3,10) {Sender};
+         \node [black, fill=white] at (7,10) {Receiver};
          \draw[very thick,->] (3,9.5) -- (3,0.5);
          \draw[very thick,->] (7,9.5) -- (7,0.5);
          % initial state       
@@ -442,8 +442,8 @@ Congestion control
     \draw[step=0.5cm,lightgray,very thin] (0,0) grid (10,10);
     \draw[very thick, <->] (9.7,10) -- (9.7,9.5) node [anchor=west, fill=white] {$20 msec$};
     \tikzset{state/.style={rectangle, dashed, draw, fill=white} }
-    \node [black, fill=white] at (3,10) {Client};
-    \node [black, fill=white] at (7,10) {Server};
+    \node [black, fill=white] at (3,10) {Sender};
+    \node [black, fill=white] at (7,10) {Receiver};
     \draw[very thick,->] (3,9.5) -- (3,0.5);
     \draw[very thick,->] (7,9.5) -- (7,0.5);
     % initial state       
