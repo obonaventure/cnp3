@@ -111,7 +111,7 @@ Multiple choice questions
 
 The routers have one address inside each network :
 
- - router ``R1`` uses address ``2001:db8:1341:1::1`` on its West interface, address ``2001:db8:1341:12::1`` on its East interface and address ``2001:db8:1341:13::A`` on its South interface
+ - router ``R1`` uses address ``2001:db8:1341:1::1`` on its West interface, address ``2001:db8:1341:12::1`` on its East interface and address ``2001:db8:1341:13::1`` on its South interface
  - router ``R2`` uses address ``2001:db8:1341:12::2`` on its West interface and address ``2001:db8:1341:23::2`` on its South-West interface 
  - router ``R3`` uses address ``2001:db8:1341:3::3`` on its West interface, address ``2001:db8:1341:23::3`` on its North-East interface and address ``2001:db8:1341:13::3`` on its North interface
 
