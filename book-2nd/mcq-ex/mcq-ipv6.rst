@@ -22,10 +22,10 @@ Building a network
  On recent routers, a lookup in the forwarding table for a destination address returns a set of outgoing interfaces. How would you design an algorithm that selects the outgoing interface used for each packet, knowing that to avoid reordering, all segments of a given TCP connection should follow the same path ? 
 
 .. todo:: exercice avec routage statique normal et ping
-.. todo:: exercice avec routage statique et plus spécifique et ping
+.. todo:: exercice avec routage statique et plus spÃ©cifique et ping
 .. todo:: exercice avec routage statique plus erreurs et ping (un dans foward et autre dans backward)
 .. todo:: exercice avec les memes problems mais traceroute a la place de ping
-.. todo:: exercice avec des erreurs de  configuration sur LAN ? probablement trop tôt
+.. todo:: exercice avec des erreurs de  configuration sur LAN ? probablement trop tÃ´t
   
 
 .. _mcq-ipv6:
@@ -49,17 +49,19 @@ Multiple choice questions
 
    .. positive:: ``2001:db8:a:bb:cc:ddd::1``
 
-   .. positive:: ``2001:db8:a:bb:cc:ddd:eeee::1``
+   .. negative:: ``2001:db8:a:bb:cc:ddd:eeee::1``
+   
+      .. comment:: This address is invalid. The textual representation of an IPv6 address cannot contain more than 7 individual fields if we two semi columns ``::``
 
-   .. negative:: ``2001:db8:a:bb:cc:ddd:eeee:fffff::1``
+   .. negative:: ``2001:db8:a:bb:cc:ddddd::1``
 
       .. comment:: This address is invalid. The textual representation of an IPv6 address cannot contain more than 4 hexadecimal characters between two semi columns ``:``
 
-   .. negative:: ``2001:db8:a:bb::cc:ddd:eeee::1``
+   .. negative:: ``2001:db8:a:bb::cc:ddd::1``
 
       ..comment:: This address is invalid. An IPv6 address cannot contain twice two consecutive semicolumns ``::``
 
-   .. positive:: ``2001:db8:1234:1234:1234:5678:abc::1``
+   .. positive:: ``2001:db8:1234:1234:1234:5678::1``
 
    .. positive:: ``2001:db8:1234::1234:5678:abc:1``
 
@@ -89,7 +91,7 @@ Multiple choice questions
 
    .. positive::  ``2001:0db8::a::0:0:cafe``
 
-   .. negative::  ``2001:0db8::a:::cafe``
+   .. negative::  ``2001:0db8::a::cafe``
 
       .. comment:: This IPv6 address is ambiguous. An IPv6 address cannot contain twice two successive semi-columns ``::``.
 
