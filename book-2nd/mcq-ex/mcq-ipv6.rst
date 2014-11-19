@@ -22,10 +22,10 @@ Building a network
  On recent routers, a lookup in the forwarding table for a destination address returns a set of outgoing interfaces. How would you design an algorithm that selects the outgoing interface used for each packet, knowing that to avoid reordering, all segments of a given TCP connection should follow the same path ? 
 
 .. todo:: exercice avec routage statique normal et ping
-.. todo:: exercice avec routage statique et plus spécifique et ping
+.. todo:: exercice avec routage statique et plus spÃ©cifique et ping
 .. todo:: exercice avec routage statique plus erreurs et ping (un dans foward et autre dans backward)
 .. todo:: exercice avec les memes problems mais traceroute a la place de ping
-.. todo:: exercice avec des erreurs de  configuration sur LAN ? probablement trop tôt
+.. todo:: exercice avec des erreurs de  configuration sur LAN ? probablement trop tÃ´t
   
 
 .. _mcq-ipv6:
@@ -1034,7 +1034,7 @@ The students have configured the following forwarding tables on these four route
         \hline 
         ::/0  & p:12::1 \\
         p:12::/64  & West \\
-        p:13::/64 & p:24::5\\
+        p:13::/64 & p:24::4\\
         p:24::/64  & South\\
         p:25::/64  & East\\
         p:56::/64 & p:24::4\\
