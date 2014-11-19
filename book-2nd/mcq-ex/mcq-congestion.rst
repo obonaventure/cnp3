@@ -20,7 +20,7 @@ Unless otherwise noted, we assume for the exercices in this section that the fol
  - the sender/receiver performs a single :manpage:`send(3)` of `x` bytes
  - the round-trip-time is fixed and does not change during the lifetime of the TCP connection. We assume a fixed value of 100 milliseconds for the rtt and a fixed value of 200 milliseconds for the retransmission timer.
  - the delay required to transmit a single TCP segment containing MSS bytes is small and set to 1 milliseconds, independently of the MSS size
- - the transmission delay for a TCP is negligible
+ - the transmission delay for a TCP ack is negligible
  - the initial value of the congestion window is one MSS-sized segment
  - the value of the duplicate ack threshold is fixed and set to 3
  - TCP always acks each received segment
