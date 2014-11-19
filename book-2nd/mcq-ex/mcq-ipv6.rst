@@ -22,10 +22,10 @@ Building a network
  On recent routers, a lookup in the forwarding table for a destination address returns a set of outgoing interfaces. How would you design an algorithm that selects the outgoing interface used for each packet, knowing that to avoid reordering, all segments of a given TCP connection should follow the same path ? 
 
 .. todo:: exercice avec routage statique normal et ping
-.. todo:: exercice avec routage statique et plus spécifique et ping
+.. todo:: exercice avec routage statique et plus spÃ©cifique et ping
 .. todo:: exercice avec routage statique plus erreurs et ping (un dans foward et autre dans backward)
 .. todo:: exercice avec les memes problems mais traceroute a la place de ping
-.. todo:: exercice avec des erreurs de  configuration sur LAN ? probablement trop tôt
+.. todo:: exercice avec des erreurs de  configuration sur LAN ? probablement trop tÃ´t
   
 
 .. _mcq-ipv6:
@@ -822,7 +822,7 @@ Design questions
 
 The routers have one address inside each network :
 
- - router ``R1`` uses address ``2001:db8:1341:1::1`` on its West interface, address ``2001:db8:1341:12::1`` on its East interface and address ``2001:db8:1341:13::A`` on its South interface
+ - router ``R1`` uses address ``2001:db8:1341:1::1`` on its West interface, address ``2001:db8:1341:12::1`` on its East interface and address ``2001:db8:1341:13::1`` on its South interface
  - router ``R2`` uses address ``2001:db8:1341:12::2`` on its West interface, and address ``2001:db8:1341:24::2`` on its South interface
  - router ``R3`` uses address ``2001:db8:1341:34::3`` on its West interface and address ``2001:db8:1341:13::3`` on its North interface
  - router ``R4`` uses address ``2001:db8:1341:34::4`` on its West interface, address ``2001:db8:1341:24::4`` on its North interface and address ``2001:db8:1341:4::4`` on its East interface
@@ -900,7 +900,7 @@ How do you configure the forwarding tables on ``R1`` and ``R4`` so that ``A`` ca
 
 The routers have one address inside each network :
 
- - router ``R1`` uses address ``2001:db8:1341:1::1`` on its West interface, address ``2001:db8:1341:12::1`` on its East interface, address ``2001:db8:1341:14::1`` on its South-East interface and address ``2001:db8:1341:13::A`` on its South interface
+ - router ``R1`` uses address ``2001:db8:1341:1::1`` on its West interface, address ``2001:db8:1341:12::1`` on its East interface, address ``2001:db8:1341:14::1`` on its South-East interface and address ``2001:db8:1341:13::1`` on its South interface
  - router ``R2`` uses address ``2001:db8:1341:12::2`` on its West interface, and address ``2001:db8:1341:24::2`` on its South interface
  - router ``R3`` uses address ``2001:db8:1341:34::3`` on its West interface and address ``2001:db8:1341:13::3`` on its North interface
  - router ``R4`` uses address ``2001:db8:1341:34::4`` on its West interface, address ``2001:db8:1341:24::4`` on its North interface, address ``2001:db8:1341:14::4`` on its North-West interface and address ``2001:db8:1341:4::4`` on its East interface
