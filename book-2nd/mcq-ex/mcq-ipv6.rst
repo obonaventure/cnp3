@@ -1036,7 +1036,7 @@ The students have configured the following forwarding tables on these four route
         \hline 
         ::/0  & p:12::1 \\
         p:12::/64  & West \\
-        p:13::/64 & p:24::5\\
+        p:13::/64 & p:24::4\\
         p:24::/64  & South\\
         p:25::/64  & East\\
         p:56::/64 & p:24::4\\
