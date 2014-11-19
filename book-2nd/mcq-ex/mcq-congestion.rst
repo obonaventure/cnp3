@@ -90,11 +90,11 @@ Congestion control
     % initial state       
     \node [state] at (0,11) {\begin{small}\begin{tabular}{l}
       rwin=2000 \\
-      cwnd=3000 \\ 
+      cwnd=10000 \\ 
       ssthresh=64000\\
      \end{tabular}\end{small}};
     
-    \draw[red, ->] (0,9) node [anchor=north, fill=white] {send(10k)} -- (3,9);
+    \draw[red, ->] (0,9) node [anchor=north, fill=white] {send(3k)} -- (3,9);
 
 3. Same question as the first one, but consider that the MSS on the sender is set to 500 bytes. How does this modification affect the entire delay ? 
 
