@@ -661,6 +661,7 @@ The forwarding tables of these three routers, ignoring the routes to the local i
          2  2001:db8:1341:13::1 
          3  2001:db8:1341:1::A 
 
+      .. comment:: This traceroute is correct but note that it's likely possible that the penultimate address will be an other IPv6 address of `R1`: ``2001:db8:1341:12::1`` instead of ``2001:db8:1341:13::1``, it depends if the ICMP package takes the path to the previous router or to the source (the reversed path is different according to the forwarding tables).
 
    .. negative::
 
@@ -694,6 +695,9 @@ The forwarding tables of these three routers, ignoring the routes to the local i
          2  2001:db8:1341:12::2 
          3  2001:db8:1341:23::3
          4  2001:db8:1341:3::B 
+
+      .. comment:: This traceroute is correct but note that it's likely possible that the penultimate address will be an other IPv6 address of `R3`: ``2001:db8:1341:13::3`` instead of ``2001:db8:1341:23::3``, it depends if the ICMP package takes the path to the previous router or to the source (the reversed path is different according to the forwarding tables).
+
 
 
 7. When manipulating IPv6 address, it is sometimes necessary to convert an IPv6 address in its binary representation. 
