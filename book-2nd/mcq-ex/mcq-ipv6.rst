@@ -59,7 +59,7 @@ Multiple choice questions
 
    .. negative:: ``2001:db8:a:bb::cc:ddd::1``
 
-      ..comment:: This address is invalid. An IPv6 address cannot contain twice two consecutive semicolumns ``::``
+      .. comment:: This address is invalid. An IPv6 address cannot contain twice two consecutive semicolumns ``::``
 
    .. positive:: ``2001:db8:1234:1234:1234:5678::1``
 
