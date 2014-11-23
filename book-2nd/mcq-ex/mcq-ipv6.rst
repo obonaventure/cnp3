@@ -3,9 +3,6 @@
 
 
 
-******************
-Building a network
-******************
 
 .. warning:: 
 
@@ -828,18 +825,6 @@ The forwarding tables of these three routers, ignoring the routes to the local i
 
        .. comment:: No, this destination address matches route ``2001:DB8:1341:5000/52``
 
-10. The ICMP protocol is often used when debugging networking. A good understanding of the different types of ICMP messages can be useful when debugging such problems. Before looking at ICMP, let us first look at sample IPv6 packets captured with tcpdump_ 
-
-A first example is a three-way handshake to open a TCP connection.
-
- .. code-block:: console
-
-    09:43:00.966268 IP6 (flowlabel 0x96318, hlim 64, next-header TCP (6) payload length: 44) 2a02:2788:2c4:16f:1165:3f01:b6af:6cb9.61072 > 2001:41d0:a:6759::1.9: Flags [S], cksum 0xb9b8 (correct), seq 3712396944, win 65535, options [mss 1440,nop,wscale 5,nop,nop,TS val 404903939 ecr 0,sackOK,eol], length 0
-    09:43:00.992376 IP6 (hlim 53, next-header TCP (6) payload length: 40) 2001:41d0:a:6759::1.9 > 2a02:2788:2c4:16f:1165:3f01:b6af:6cb9.61072: Flags [S.], cksum 0x79c2 (correct), seq 2854095636, ack 3712396945, win 28560, options [mss 1440,sackOK,TS val 1074195486 ecr 404903939,nop,wscale 7], length 0
-    09:43:00.992442 IP6 (flowlabel 0x96318, hlim 64, next-header TCP (6) payload length: 32) 2a02:2788:2c4:16f:1165:3f01:b6af:6cb9.61072 > 2001:41d0:a:6759::1.9: Flags [.], cksum 0x07e8 (correct), ack 1, win 4105, options [nop,nop,TS val 404903965 ecr 1074195486], length 0 
-
-
-
 
 Design questions
 ----------------
@@ -993,7 +978,7 @@ The routers have one address inside each network :
         (R1) edge (R3)
         (R3) edge (R4);
 
- Which path is then used to reach host ``B`` which is attached to router ``R4`` ?
+ Do your forwarding tables impose the path used to reach host ``B`` which is attached to router ``R4`` or do you need to configure an additional entry in these tables ?
 
 3. Consider the network below that contains only routers. This network has been configured by a group of students and you must verify whether the configuration is correct. All the IPv6 addresses are part of the same ``/48`` prefix that we name ``p``. The following subnets are defined in this ``/48`` prefix.
 
