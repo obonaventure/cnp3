@@ -100,7 +100,7 @@ Multiple choice questions
 
    .. positive::  ``2001:0db8:0000:0000:000a::cafe``
 
-   .. positive::  ``2001:0db8::a::0:0:cafe``
+   .. positive::  ``2001:0db8::a:0:0:cafe``
 
    .. negative::  ``2001:0db8::a::cafe``
 
@@ -124,7 +124,7 @@ The routers have one address inside each network :
 
  - router ``R1`` uses address ``2001:db8:1341:1::1`` on its West interface, address ``2001:db8:1341:12::1`` on its East interface and address ``2001:db8:1341:13::1`` on its South interface
  - router ``R2`` uses address ``2001:db8:1341:12::2`` on its West interface and address ``2001:db8:1341:23::2`` on its South-West interface 
- - router ``R3`` uses address ``2001:db8:1341:3::3`` on its West interface, address ``2001:db8:1341:23::3`` on its North-East interface and address ``2001:db8:1341:13::3`` on its North interface
+ - router ``R3`` uses address ``2001:db8:1341:3::3`` on its East interface, address ``2001:db8:1341:23::3`` on its North-East interface and address ``2001:db8:1341:13::3`` on its North interface
 
 The forwarding tables of these three routers, ignoring the routes to the local interfaces, are shown in the figure below.
 
@@ -271,7 +271,7 @@ The routers have one address inside each network :
 
  - router ``R1`` uses address ``2001:db8:1341:1::1`` on its West interface, address ``2001:db8:1341:12::1`` on its East interface and address ``2001:db8:1341:13::1`` on its South interface
  - router ``R2`` uses address ``2001:db8:1341:12::2`` on its West interface, address ``2001:db8:1341:23::2`` on its South-West interface and address ``2001:db8:1341:24::2`` on its South interface.
- - router ``R3`` uses address ``2001:db8:1341:34::3`` on its West interface, address ``2001:db8:1341:23::3`` on its North-East interface and address ``2001:db8:1341:13::3`` on its North interface
+ - router ``R3`` uses address ``2001:db8:1341:34::3`` on its East interface, address ``2001:db8:1341:23::3`` on its North-East interface and address ``2001:db8:1341:13::3`` on its North interface
  - router ``R4`` uses address ``2001:db8:1341:34::4`` on its West interface, address ``2001:db8:1341:24::4`` on its North interface and address ``2001:db8:1341:4::4`` on its East interface
 
 The forwarding paths used in a network depend on the forwarding tables installed in the network nodes. Sometimes, these forwarding tables must be configured manually. 
@@ -607,7 +607,7 @@ The routers have one address inside each network :
 
  - router ``R1`` uses address ``2001:db8:1341:1::1`` on its West interface, address ``2001:db8:1341:12::1`` on its East interface and address ``2001:db8:1341:13::1`` on its South interface
  - router ``R2`` uses address ``2001:db8:1341:12::2`` on its West interface and address ``2001:db8:1341:23::2`` on its South-West interface 
- - router ``R3`` uses address ``2001:db8:1341:3::3`` on its West interface, address ``2001:db8:1341:23::3`` on its North-East interface and address ``2001:db8:1341:13::3`` on its North interface
+ - router ``R3`` uses address ``2001:db8:1341:3::3`` on its East interface, address ``2001:db8:1341:23::3`` on its North-East interface and address ``2001:db8:1341:13::3`` on its North interface
 
 The forwarding tables of these three routers, ignoring the routes to the local interfaces, are shown in the figure below.
 
@@ -670,6 +670,7 @@ The forwarding tables of these three routers, ignoring the routes to the local i
          2  2001:db8:1341:13::1 
          3  2001:db8:1341:1::A 
 
+      .. comment:: This traceroute is correct but note that it's likely possible that the penultimate address will be an other IPv6 address of `R1`: ``2001:db8:1341:12::1`` instead of ``2001:db8:1341:13::1``, it depends if the ICMP package takes the path to the previous router or to the source (the reversed path is different according to the forwarding tables).
 
    .. negative::
 
@@ -703,6 +704,9 @@ The forwarding tables of these three routers, ignoring the routes to the local i
          2  2001:db8:1341:12::2 
          3  2001:db8:1341:23::3
          4  2001:db8:1341:3::B 
+
+      .. comment:: This traceroute is correct but note that it's likely possible that the penultimate address will be an other IPv6 address of `R3`: ``2001:db8:1341:13::3`` instead of ``2001:db8:1341:23::3``, it depends if the ICMP package takes the path to the previous router or to the source (the reversed path is different according to the forwarding tables).
+
 
 
 8. When manipulating IPv6 address, it is sometimes necessary to convert an IPv6 address in its binary representation. 
@@ -836,7 +840,7 @@ The routers have one address inside each network :
 
  - router ``R1`` uses address ``2001:db8:1341:1::1`` on its West interface, address ``2001:db8:1341:12::1`` on its East interface and address ``2001:db8:1341:13::1`` on its South interface
  - router ``R2`` uses address ``2001:db8:1341:12::2`` on its West interface, and address ``2001:db8:1341:24::2`` on its South interface
- - router ``R3`` uses address ``2001:db8:1341:34::3`` on its West interface and address ``2001:db8:1341:13::3`` on its North interface
+ - router ``R3`` uses address ``2001:db8:1341:34::3`` on its East interface and address ``2001:db8:1341:13::3`` on its North interface
  - router ``R4`` uses address ``2001:db8:1341:34::4`` on its West interface, address ``2001:db8:1341:24::4`` on its North interface and address ``2001:db8:1341:4::4`` on its East interface
 
 Routers ``R2`` and ``R3`` are buggy in this network. Besides the routes for their local interfaces (not shown in the figure), they only have a default route which is shown in the figure below.
@@ -914,7 +918,7 @@ The routers have one address inside each network :
 
  - router ``R1`` uses address ``2001:db8:1341:1::1`` on its West interface, address ``2001:db8:1341:12::1`` on its East interface, address ``2001:db8:1341:14::1`` on its South-East interface and address ``2001:db8:1341:13::1`` on its South interface
  - router ``R2`` uses address ``2001:db8:1341:12::2`` on its West interface, and address ``2001:db8:1341:24::2`` on its South interface
- - router ``R3`` uses address ``2001:db8:1341:34::3`` on its West interface and address ``2001:db8:1341:13::3`` on its North interface
+ - router ``R3`` uses address ``2001:db8:1341:34::3`` on its East interface and address ``2001:db8:1341:13::3`` on its North interface
  - router ``R4`` uses address ``2001:db8:1341:34::4`` on its West interface, address ``2001:db8:1341:24::4`` on its North interface, address ``2001:db8:1341:14::4`` on its North-West interface and address ``2001:db8:1341:4::4`` on its East interface
 
  Can you configure the forwarding tables so that the following paths are used by packets sent by host ``A`` to reach one of the four addresses of router ``R4``?
