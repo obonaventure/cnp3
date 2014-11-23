@@ -89,7 +89,7 @@ Multiple choice questions
 
    .. positive::  ``2001:0db8:0000:0000:000a::cafe``
 
-   .. positive::  ``2001:0db8::a::0:0:cafe``
+   .. positive::  ``2001:0db8::a:0:0:cafe``
 
    .. negative::  ``2001:0db8::a::cafe``
 
