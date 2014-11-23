@@ -47,7 +47,6 @@ Multiple choice questions
    .. negative:: The NextHeader field of the IPv6 packet identifies the type of transport segment contained in the packet.
                   
 
-
 2. The IPv6 addresses are 128 bits wide and can be represented by using the hexadecimal representation defined in :rfc:`5952`.
 
 .. question:: ip6addre
@@ -114,8 +113,6 @@ Multiple choice questions
    .. negative:: ``2001:db80:0:0:a::cafe``
 
       .. comment:: This IPv6 address does not correspond to ``2001:db8:0:0:a::cafe``. In this address, the ``db8`` 16 bits block corresponds to the following binary representation ``0000 1101 1011 1000`` while the binary representation for ``db80`` is ``1101 1011 1000 0000``.
-
-
 
 
 4. The forwarding tables used in an IPv6 network define the forwarding paths that are used for the packets. Consider the simple network depicted in the figure below. In this network, the hosts have the following addresses :
