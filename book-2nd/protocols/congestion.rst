@@ -8,7 +8,7 @@
 Congestion control
 ------------------
 
-In an internetwork, i.e. a networking composed of different types of networks, such as the Internet, congestion control could be implemented either the network layer or the transport layer. The congestion problem was clearly identified in the later 1980s and the researchers who developed techniques to solve the problem opted for a solution in the transport layer. Adding congestion control to the transport layer makes sense since this layer provides a reliable data transfert and avoiding congestion is a factor in this reliable delivery. The transport layer already deals with heterogeneous networks thanks to its `self-clocking` property that we have already described. In this section, we explain how congestion control has been added to TCP (and SCTP whose congestion control scheme is very close to TCP's congestion control) and how this mechanism could be improved in the future.
+In an internetwork, i.e. a networking composed of different types of networks, such as the Internet, congestion control could be implemented either in the network layer or the transport layer. The congestion problem was clearly identified in the later 1980s and the researchers who developed techniques to solve the problem opted for a solution in the transport layer. Adding congestion control to the transport layer makes sense since this layer provides a reliable data transfert and avoiding congestion is a factor in this reliable delivery. The transport layer already deals with heterogeneous networks thanks to its `self-clocking` property that we have already described. In this section, we explain how congestion control has been added to TCP (and SCTP whose congestion control scheme is very close to TCP's congestion control) and how this mechanism could be improved in the future.
 
 The TCP congestion control scheme was initially proposed by `Van Jacobson`_ in [Jacobson1988]_. The current specification may be found in :rfc:`5681`. TCP relies on `Additive Increase and Multiplicative Decrease (AIMD)`. To implement :term:`AIMD`, a TCP host must be able to control its transmission rate. A first approach would be to use timers and adjust their expiration times in function of the rate imposed by :term:`AIMD`. Unfortunately, maintaining such timers for a large number of TCP connections can be difficult. Instead, `Van Jacobson`_ noted that the rate of TCP congestion can be artificially controlled by constraining its sending window. A TCP connection cannot send data faster than :math:`\frac{window}{rtt}` where :math:`window` is the maximum between the host's sending window and the window advertised by the receiver.
 
@@ -66,9 +66,8 @@ Most TCP implementations update the congestion window when they receive an ackno
          retransmitsegment(snd.una)
 	 ssthresh=max(cwnd/2,2*MSS)
 	 cwnd=ssthresh   
-       else:
-	 dupacks=0
-	 # ack for old segment, ignored
+     else:    # ack for old segment, ignored
+       dupacks=0
   
    Expiration of the retransmission timer:
     send(snd.una)     # retransmit first lost segment
