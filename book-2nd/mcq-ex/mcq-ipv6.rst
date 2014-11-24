@@ -11,25 +11,7 @@ Building a network
 
    This is an unpolished draft of the second edition of this ebook. If you find any error or have suggestions to improve the text, please create an issue via https://github.com/obonaventure/cnp3/issues?milestone=2 
 
-<<<<<<< HEAD
-=======
-9. Consider the network shown below. In this network, the metric of each link is set to `1` except link `A-B` whose metric is set to `4` in both directions. In this network, there are two paths with the same cost between `D` and `C`. Old routers would randomly select one of these equal cost paths and install it in their forwarding table. Recent routers are able to use up to `N` equal cost paths towards the same destination. 
 
- .. figure:: ../../book/network/svg/ex-five-routers-weigth4.png
-    :align: center
-    :scale: 30
-
-    A simple network 
-
- On recent routers, a lookup in the forwarding table for a destination address returns a set of outgoing interfaces. How would you design an algorithm that selects the outgoing interface used for each packet, knowing that to avoid reordering, all segments of a given TCP connection should follow the same path ? 
-
-.. todo:: exercice avec routage statique normal et ping
-.. todo:: exercice avec routage statique et plus spécifique et ping
-.. todo:: exercice avec routage statique plus erreurs et ping (un dans foward et autre dans backward)
-.. todo:: exercice avec les memes problems mais traceroute a la place de ping
-.. todo:: exercice avec des erreurs de  configuration sur LAN ? probablement trop tôt
-  
->>>>>>> origin/master
 
 .. _mcq-ipv6:
 
@@ -850,15 +832,6 @@ The forwarding tables of these three routers, ignoring the routes to the local i
 
        .. comment:: No, this destination address matches route ``2001:DB8:1341:5000/52``
 
-10. The ICMP protocol is often used when debugging networking. A good understanding of the different types of ICMP messages can be useful when debugging such problems. Before looking at ICMP, let us first look at sample IPv6 packets captured with tcpdump_ 
-
-A first example is a three-way handshake to open a TCP connection.
-
- .. code-block:: console
-
-    09:43:00.966268 IP6 (flowlabel 0x96318, hlim 64, next-header TCP (6) payload length: 44) 2a02:2788:2c4:16f:1165:3f01:b6af:6cb9.61072 > 2001:41d0:a:6759::1.9: Flags [S], cksum 0xb9b8 (correct), seq 3712396944, win 65535, options [mss 1440,nop,wscale 5,nop,nop,TS val 404903939 ecr 0,sackOK,eol], length 0
-    09:43:00.992376 IP6 (hlim 53, next-header TCP (6) payload length: 40) 2001:41d0:a:6759::1.9 > 2a02:2788:2c4:16f:1165:3f01:b6af:6cb9.61072: Flags [S.], cksum 0x79c2 (correct), seq 2854095636, ack 3712396945, win 28560, options [mss 1440,sackOK,TS val 1074195486 ecr 404903939,nop,wscale 7], length 0
-    09:43:00.992442 IP6 (flowlabel 0x96318, hlim 64, next-header TCP (6) payload length: 32) 2a02:2788:2c4:16f:1165:3f01:b6af:6cb9.61072 > 2001:41d0:a:6759::1.9: Flags [.], cksum 0x07e8 (correct), ack 1, win 4105, options [nop,nop,TS val 404903965 ecr 1074195486], length 0 
 
 
 
