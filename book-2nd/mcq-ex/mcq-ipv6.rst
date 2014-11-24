@@ -10,27 +10,7 @@ Building a network
 .. warning:: 
 
    This is an unpolished draft of the second edition of this ebook. If you find any error or have suggestions to improve the text, please create an issue via https://github.com/obonaventure/cnp3/issues?milestone=2 
-
-<<<<<<< HEAD
-=======
-9. Consider the network shown below. In this network, the metric of each link is set to `1` except link `A-B` whose metric is set to `4` in both directions. In this network, there are two paths with the same cost between `D` and `C`. Old routers would randomly select one of these equal cost paths and install it in their forwarding table. Recent routers are able to use up to `N` equal cost paths towards the same destination. 
-
- .. figure:: ../../book/network/svg/ex-five-routers-weigth4.png
-    :align: center
-    :scale: 30
-
-    A simple network 
-
- On recent routers, a lookup in the forwarding table for a destination address returns a set of outgoing interfaces. How would you design an algorithm that selects the outgoing interface used for each packet, knowing that to avoid reordering, all segments of a given TCP connection should follow the same path ? 
-
-.. todo:: exercice avec routage statique normal et ping
-.. todo:: exercice avec routage statique et plus spécifique et ping
-.. todo:: exercice avec routage statique plus erreurs et ping (un dans foward et autre dans backward)
-.. todo:: exercice avec les memes problems mais traceroute a la place de ping
-.. todo:: exercice avec des erreurs de  configuration sur LAN ? probablement trop tôt
   
->>>>>>> origin/master
-
 .. _mcq-ipv6:
 
 
@@ -1198,7 +1178,7 @@ The students have configured the following forwarding tables on these four route
    In this network, we will focus on four IPv6 prefixes :
 
      - ``p:0000::/64`` used on the link ``A1-R1``. ``A1`` uses address ``p:0000::A1/64``
-     - ``p:0001::/64`` used on the link ``A2-R2``. ``A2`` uses address ``p:0001::A2/64``
+     - ``p:0001::/64`` used on the link ``A2-R3``. ``A2`` uses address ``p:0001::A2/64``
      - ``p:0002::/64`` used on the link ``B1-R5``. ``B1`` uses address ``p:0002::B1/64``
      - ``p:0003::/64`` used on the link ``B2-R6``. ``B2`` uses address ``p:0003::B2/64``
 
