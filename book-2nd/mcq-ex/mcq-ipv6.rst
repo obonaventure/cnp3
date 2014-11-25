@@ -1035,7 +1035,7 @@ The routers have one address inside each network :
 .. note 46 pas de route sauf defaut
 .. note 56 tout vers R4 mais pas de route en R4
 
-The students have configured the following forwarding tables on these four routers.
+The students have configured the following forwarding tables on these six routers.
 
  - on router ``R1``
 
