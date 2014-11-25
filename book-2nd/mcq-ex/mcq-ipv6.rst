@@ -1100,7 +1100,7 @@ The students have configured the following forwarding tables on these six router
         \hline 
         ::/0 & p:56::6 \\
         p:12::/64 & p:25::2\\
-        p:24::/64  & East \\
+        p:25::/64  & West \\
         p:56::/64  & South\\
         \end{tabular}};
 
