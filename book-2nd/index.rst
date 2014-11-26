@@ -142,6 +142,7 @@ Part 3: Practice
    exercises/netkit-congestion
    mcq-ex/mcq-ipv6
    exercises/netkit-ipv6
+   exercises/ex-routing-policies
 ..   exercises/netkit-ipv6-rtg
 ..   exercises/ex-bgp
 ..   exercises/ex-stp

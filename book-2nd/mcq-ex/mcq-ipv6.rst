@@ -14,7 +14,7 @@
 
 Multiple choice questions
 =========================
-:task_id: mcqipv6
+:task_id: mcqipv6bis
 
 1. The IPv6 packet header includes several fields that are shown in the figure below.
 
@@ -26,7 +26,7 @@ Multiple choice questions
    :nb_prop: 3
    :nb_pos: 1
 
-   Among the following affirmations about the role of these different fields, only one is *incorrect*. Selection the incorrect affirmation.
+   Among the following affirmations about the role of these different fields, only one is *incorrect*. Select the incorrect affirmation.
 
    .. positive:: A router never changes any field of an IPv6 packet that it forwards.
 
