@@ -1019,7 +1019,7 @@ The routers have one address inside each network :
 .. note 46 pas de route sauf defaut
 .. note 56 tout vers R4 mais pas de route en R4
 
-The students have configured the following forwarding tables on these four routers.
+The students have configured the following forwarding tables on these six routers.
 
  - on router ``R1``
 
@@ -1084,7 +1084,7 @@ The students have configured the following forwarding tables on these four route
         \hline 
         ::/0 & p:56::6 \\
         p:12::/64 & p:25::2\\
-        p:24::/64  & East \\
+        p:25::/64  & West \\
         p:56::/64  & South\\
         \end{tabular}};
 
@@ -1162,7 +1162,7 @@ The students have configured the following forwarding tables on these four route
    In this network, we will focus on four IPv6 prefixes :
 
      - ``p:0000::/64`` used on the link ``A1-R1``. ``A1`` uses address ``p:0000::A1/64``
-     - ``p:0001::/64`` used on the link ``A2-R2``. ``A2`` uses address ``p:0001::A2/64``
+     - ``p:0001::/64`` used on the link ``A2-R3``. ``A2`` uses address ``p:0001::A2/64``
      - ``p:0002::/64`` used on the link ``B1-R5``. ``B1`` uses address ``p:0002::B1/64``
      - ``p:0003::/64`` used on the link ``B2-R6``. ``B2`` uses address ``p:0003::B2/64``
 

@@ -81,7 +81,7 @@ IPv6 supports unicast, multicast and anycast addresses. An IPv6 unicast address 
 
  It is sometimes necessary to write IPv6 addresses in text format, e.g. when manually configuring addresses or for documentation purposes. The preferred format for writing IPv6 addresses is ``x:x:x:x:x:x:x:x``, where the ``x`` 's are hexadecimal digits representing the eight 16-bit parts of the address. Here are a few examples of IPv6 addresses :
 
-  - ``abcd:Eef01:2345:6789:abcd:ef01:2345:6789``
+  - ``abcd:ef01:2345:6789:abcd:ef01:2345:6789``
   - ``2001:db8:0:0:8:800:200c:417a``
   - ``fe80:0:0:0:219:e3ff:fed7:1204``
 
