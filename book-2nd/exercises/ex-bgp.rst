@@ -14,46 +14,8 @@ Exercises
 
 
 
-1. Consider the interdomain topology shown in the figure below.
 
-
-.. graphviz::
-
-   digraph foo {
-      randkir=LR;
-      AS1 -> AS3 [label=<<font color="red">$</font>>, color=red];
-      AS1 -> AS2 [label=<<font color="red">$</font>>, color=red];
-      AS2 -> AS3 [dir=none,label=<<font color="blue">=</font>>, color=blue];
-      AS4 -> AS2 [label=<<font color="red">$</font>>, color=red];
-      AS4 -> AS3 [dir=none,label=<<font color="blue">=</font>>, color=blue];   
-   }
-
-
-In this network, what are the paths :
-
-  - from `AS1` to `AS4` 
-  - from `AS4` to `AS2` 
-  - from `AS4` to `AS1`
-
-
-2. Consider the interdomain topology shown in the figure below. Assuming, that `AS1` advertises prefix ``2001:db8:1::/48``,  `AS2` prefix ``2001:db8:2::/48``, ... compute the routing tables of the different ASes.
-
-
-.. graphviz::
-
-   digraph foo {
-      randkir=LR;
-      AS1 -> AS4 [label=<<font color="red">$</font>>, color=red];
-      AS3 -> AS4 [label=<<font color="red">$</font>>, color=red];
-      AS3 -> AS1 [label=<<font color="red">$</font>>, color=red];
-      AS2 -> AS3 [dir=none,label=<<font color="blue">=</font>>, color=blue];
-      AS2 -> AS1 [dir=none,label=<<font color="blue">=</font>>, color=blue];   
-   }
-
-
-Are all ASes capable of reaching all the other ASes in this simple Internet ?
-
-3. The interdomain topology below is composed of four domains. For this exercise, we assume that there are no routing policies, i.e. each domain advertise all its best paths to its peers. We focus on the prefix `p` advertised by `AS1`.
+1. The interdomain topology below is composed of four domains. For this exercise, we assume that there are no routing policies, i.e. each domain advertise all its best paths to its peers. We focus on the prefix `p` advertised by `AS1`.
 
 .. graphviz::
 
@@ -82,7 +44,7 @@ Once the interdomain network has fully converged, analyze the consequence of a f
 
 
 
-4. Consider the network below in which a stub domain, `AS456`, is connected to two providers `AS123` and `AS789`. `AS456` advertises its prefix to both its providers. On the other hand, `AS123` advertises `2001:db8:dead://48` while `AS789` advertises `2001:db8:beef::/48` and `2001:db8:dead:cafe::/63`. Via which provider will the packets destined to ``2001:db8:dead:cafe::1`` will be received by `AS456` ?
+2. Consider the network below in which a stub domain, `AS456`, is connected to two providers `AS123` and `AS789`. `AS456` advertises its prefix to both its providers. On the other hand, `AS123` advertises `2001:db8:dead://48` while `AS789` advertises `2001:db8:beef::/48` and `2001:db8:dead:cafe::/63`. Via which provider will the packets destined to ``2001:db8:dead:cafe::1`` will be received by `AS456` ?
 
   .. figure:: fig/ex-bgp-stub-two-providers.png
      :align: center
@@ -92,7 +54,7 @@ Once the interdomain network has fully converged, analyze the consequence of a f
  
  Should `AS123` change its configuration ? 
 
-5. Consider that the AS stub (`AS456`) shown in the figure below decides to advertise two ``/48`` prefixes instead of its allocated ``/47`` prefix.
+3. Consider that the AS stub (`AS456`) shown in the figure below decides to advertise two ``/48`` prefixes instead of its allocated ``/47`` prefix.
 
 
   .. figure:: fig/ex-bgp-stub-two-providers-specific.png
@@ -106,7 +68,7 @@ Once the interdomain network has fully converged, analyze the consequence of a f
 
   - Propose a configuration on R1 that achieves the same objective as the one shown in the figure but also preserves the reachability of all IP addresses inside `AS456` if one of `AS456`'s interdomain links fails.
 
-6. Consider the network shown in the figure below. In this network, each AS contains a single BGP router. Assume that `R1` advertises a single prefix. `R1` receives a lot of packets from `R9`. Without any help from `R2`, `R9` or `R4`, how could `R1` configure its BGP advertisement such that it receives the packets from `R9` via `R3` ? What happens when a link fails ?
+4. Consider the network shown in the figure below. In this network, each AS contains a single BGP router. Assume that `R1` advertises a single prefix. `R1` receives a lot of packets from `R9`. Without any help from `R2`, `R9` or `R4`, how could `R1` configure its BGP advertisement such that it receives the packets from `R9` via `R3` ? What happens when a link fails ?
 
 
   .. figure:: fig/ex-bgp-internetwork.png
@@ -114,7 +76,7 @@ Once the interdomain network has fully converged, analyze the consequence of a f
      :scale: 100
 
 
-7. Consider the network shown in the figure below where R1 advertises a single prefix. In this network, the link between R1 and R2 is considered as a backup link. It should only be used only when the primary link (R1-R4) fails. 
+5. Consider the network shown in the figure below where R1 advertises a single prefix. In this network, the link between R1 and R2 is considered as a backup link. It should only be used only when the primary link (R1-R4) fails. 
 
 
   .. figure:: fig/ex-bgp-backup.png
@@ -130,6 +92,50 @@ Once the interdomain network has fully converged, analyze the consequence of a f
  
   - Link `R1` - `R4` comes back. Which BGP messages are exchanged and what do the paths used to reach `R1` become ?
 
+6. Consider the small Internet show in the figure below.
+
+  .. graphviz::
+
+     digraph foo {
+       randkir=LR;
+       AS2 -> AS1 [label=<<font color="red">$</font>>, color=red];
+       AS2 -> AS3 [label=<<font color="red">$</font>>, color=red];
+       AS1 -> AS4 [label=<<font color="red">$</font>>, color=red];
+       AS3 -> AS4 [label=<<font color="red">$</font>>, color=red];
+       AS5 -> AS4 [label=<<font color="red">$</font>>, color=red];
+       AS1 -> AS3 [dir=none,label=<<font color="blue">=</font>>, color=blue];
+       AS3 -> AS5 [dir=none,label=<<font color="blue">=</font>>, color=blue];
+       AS2 -> AS5 [dir=none,label=<<font color="blue">=</font>>, color=blue];   
+       }
+
+
+  In this small Internet, ``AS5`` advertises prefix ``2001:db8:5/48``. Which BGP messages are exchanged concerning this prefix when the following events occur (one after the other) :
+
+   - the link between ``AS3`` and ``AS5`` fails
+   - the link between ``AS1`` and ``AS2`` fails
+   - the link between ``AS2`` and ``AS5`` fails
+
+7. Consider the small Internet show in the figure below.
+
+  .. graphviz::
+
+     digraph foo {
+       randkir=LR;
+       AS3 -> AS2 [label=<<font color="red">$</font>>, color=red];
+       AS5 -> AS1 [label=<<font color="red">$</font>>, color=red];
+       AS1 -> AS2 [label=<<font color="red">$</font>>, color=red];
+       AS1 -> AS4 [dir=none,label=<<font color="blue">=</font>>, color=blue];
+       AS4 -> AS2 [dir=none,label=<<font color="blue">=</font>>, color=blue];
+       AS5 -> AS4 [dir=none,label=<<font color="blue">=</font>>, color=blue];   
+       }
+
+ a. ``AS3`` advertises prefix ``2001:db8:3/48``. Compute the BGP routing tables of all ASes towards this prefix.
+
+ b. After a few months, ``AS3`` decides to become a customer of ``AS4``. Explain which BGP messages are exchanged when the link between ``AS3`` and ``AS4`` becomes active.
+
+ c. After a few months, ``AS3`` decides to become a customer of ``AS5``. Explain which BGP messages are exchanged when the link between ``AS3`` and ``AS5`` becomes active.
+
+ d. ``AS3`` is satisfied with its connectivity via ``AS4`` and ``AS5`` and decides to stop the BGP session with ``AS2``. Explain the BGP messages that are exchanged when this link is disabled.
 
 Netkit BGP lab
 --------------
