@@ -51,36 +51,8 @@ In this network, what are the paths :
 
 Are all ASes capable of reaching all the other ASes in this simple Internet ?
 
-3. The interdomain topology below is composed of four domains. For this exercise, we assume that there are no routing policies, i.e. each domain advertise all its best paths to its peers. We focus on the prefix `p` advertised by `AS1`.
 
-.. graphviz::
-
-   graph foo {
-      randkir=LR;
-      AS1 -- AS3; 
-      AS1 -- AS2;
-      AS3 -- AS4; 
-      AS1 -- AS4;
-   }
-
-Assume that the BGP sessions are activated in the following order :
-
-  - `AS1-AS2`
-  - `AS2-AS1` 
-  - `AS3-AS4` 
-  - `AS1-AS3`
-  - `AS1-AS4`
-
-At each step of this activation sequence, show the BGP messages for prefix `p` that are exchanged and provide the BGP routing table of the different ASes. Assume that BGP always prefers the short AS-Path.
-
-Once the interdomain network has fully converged, analyze the consequence of a failure of the following BGP sessions on the routes towards prefix `p` :
-
-  - `AS1-AS2`
-  - `AS1-AS4`
-
-
-
-4. Consider the interdomain topology shown in the figure below. Assuming, that `AS1` advertises prefix ``2001:db8:1::/48``,  `AS2` prefix ``2001:db8:2::/48``, ... compute the routing tables of the different ASes.
+3. Consider the interdomain topology shown in the figure below. Assuming, that `AS1` advertises prefix ``2001:db8:1::/48``,  `AS2` prefix ``2001:db8:2::/48``, ... compute the routing tables of the different ASes.
 
 
   .. graphviz::
@@ -98,7 +70,7 @@ Once the interdomain network has fully converged, analyze the consequence of a f
 
  In this internet, some ASes cannot reach all other ASes. Can you fix the problem by adding one shared-cost peering link or one customer-provider peering link ?
 
-5. Consider the network below in which a stub domain, `AS456`, is connected to two providers `AS123` and `AS789`. `AS456` advertises its prefix to both its providers. On the other hand, `AS123` advertises ``2001:db8:dead::/48`` while `AS789` advertises ``2001:db8:beef::/48`` and ``2001:db8:dead:cafe::/63``. Via which provider will the packets destined to ``2001:db8:dead:cafe::1`` will be received by `AS456` ?
+4. Consider the network below in which a stub domain, `AS456`, is connected to two providers `AS123` and `AS789`. `AS456` advertises its prefix to both its providers. On the other hand, `AS123` advertises ``2001:db8:dead::/48`` while `AS789` advertises ``2001:db8:beef::/48`` and ``2001:db8:dead:cafe::/63``. Via which provider will the packets destined to ``2001:db8:dead:cafe::1`` will be received by `AS456` ?
 
   .. figure:: fig/ex-bgp-stub-two-providers.png
      :align: center
@@ -108,7 +80,7 @@ Once the interdomain network has fully converged, analyze the consequence of a f
  
  Should `AS123` change its configuration ? 
 
-6. Consider that the AS stub (`AS456`) shown in the figure below decides to advertise two ``/48`` prefixes instead of its allocated ``/47`` prefix.
+5. Consider that the AS stub (`AS456`) shown in the figure below decides to advertise two ``/48`` prefixes instead of its allocated ``/47`` prefix.
 
 
   .. figure:: fig/ex-bgp-stub-two-providers-specific.png
@@ -122,7 +94,7 @@ Once the interdomain network has fully converged, analyze the consequence of a f
 
   - Propose a configuration on R1 that achieves the same objective as the one shown in the figure but also preserves the reachability of all IP addresses inside `AS456` if one of `AS456`'s interdomain links fails.
 
-7. Consider the network shown below. In this network, the metric of each link is set to `1` except link `A-B` whose metric is set to `4` in both directions. In this network, there are two paths with the same cost between `D` and `C`. Old routers would randomly select one of these equal cost paths and install it in their forwarding table. Recent routers are able to use up to `N` equal cost paths towards the same destination. 
+6. Consider the network shown below. In this network, the metric of each link is set to `1` except link `A-B` whose metric is set to `4` in both directions. In this network, there are two paths with the same cost between `D` and `C`. Old routers would randomly select one of these equal cost paths and install it in their forwarding table. Recent routers are able to use up to `N` equal cost paths towards the same destination. 
 
  .. figure:: ../../book/network/svg/ex-five-routers-weigth4.png
     :align: center
@@ -132,7 +104,7 @@ Once the interdomain network has fully converged, analyze the consequence of a f
 
  On recent routers, a lookup in the forwarding table for a destination address returns a set of outgoing interfaces. How would you design an algorithm that selects the outgoing interface used for each packet, knowing that to avoid reordering, all segments of a given TCP connection should follow the same path ? 
 
-8. A ``traceroute6`` towards ``ipv6.google.com`` provides the following output :
+7. A ``traceroute6`` towards ``ipv6.google.com`` provides the following output :
 
    .. code-block:: console
 
@@ -158,9 +130,9 @@ Once the interdomain network has fully converged, analyze the consequence of a f
 
  Can you explain why at the eighth, ninth and tenth hopes several IPv6 addresses are reported in the ``traceroute6`` output ?
 
-9. `Section 3.3 <https://tools.ietf.org/html/rfc4443#section-3.3>`_ of :rfc:`4443` explains two different reasons why an IPv6 enabled device could generate an ICMPv6 Time Exceeded message. Explain when a router could generate such a message with ``Code==0`` and when a host could generate such a message with ``Code==1``. 
+8. `Section 3.3 <https://tools.ietf.org/html/rfc4443#section-3.3>`_ of :rfc:`4443` explains two different reasons why an IPv6 enabled device could generate an ICMPv6 Time Exceeded message. Explain when a router could generate such a message with ``Code==0`` and when a host could generate such a message with ``Code==1``. 
 
-10. `Section 3.1 <https://tools.ietf.org/html/rfc4443#section-3.1>`_ of :rfc:`4443` seven different Codes for the ICMPv6 Destination Unreachable Message. Under which circumstances would a router generate such an ICMPv6 message with :
+9. `Section 3.1 <https://tools.ietf.org/html/rfc4443#section-3.1>`_ of :rfc:`4443` seven different Codes for the ICMPv6 Destination Unreachable Message. Under which circumstances would a router generate such an ICMPv6 message with :
 
    - ``Code==0``
 
@@ -178,7 +150,7 @@ Once the interdomain network has fully converged, analyze the consequence of a f
   
  .. no daemon running on this destination port (likely UDP)
 
-11. An ICMPv6 error message includes in its message body the beginning of the IPv6 packet that triggered this error. How many bytes of the original packet must be returned to allow the host to recover the original source and destination addresses and source and destination ports of the packet that caused the error ?
+10. An ICMPv6 error message includes in its message body the beginning of the IPv6 packet that triggered this error. How many bytes of the original packet must be returned to allow the host to recover the original source and destination addresses and source and destination ports of the packet that caused the error ?
   
   .. 40 bytes for IPv6 and 4 bytes for the port numbers
 
