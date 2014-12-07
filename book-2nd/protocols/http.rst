@@ -92,7 +92,7 @@ The HTML document shown below is composed of two parts : a header, delineated by
 
 Additional details about the various extensions to HTML may be found in the `official specifications <http://www.w3.org/MarkUp/>`_ maintained by W3C_.
 
-The third component of the `world wide web` is the HyperText Transport Protocol (HTTP). HTTP is a text-based protocol, in which the client sends a request and the server returns a response. HTTP runs above the bytestream service and HTTP servers listen by default on port `80`. The design of HTTP has largely been inspired by the Internet email protocols. Each HTTP request contains three parts :
+The third component of the `world wide web` is the HyperText Transfert Protocol (HTTP). HTTP is a text-based protocol, in which the client sends a request and the server returns a response. HTTP runs above the bytestream service and HTTP servers listen by default on port `80`. The design of HTTP has largely been inspired by the Internet email protocols. Each HTTP request contains three parts :
 
  - a `method` , that indicates the type of request, a URI, and the version of the HTTP protocol used by the client 
  - a `header` , that is used by the client to specify optional parameters for the request. An empty line is used to mark the end of the header
