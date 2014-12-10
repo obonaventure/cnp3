@@ -22,7 +22,32 @@ Exercises
 2. Consider the switched network shown in Fig. 1. In this network, assume that the LAN between switches S3 and S12 fails. How should the switches update their port/address tables after the link failure ?
 
 
-3. Many enterprise networks are organized with a set of backbone devices interconnected by using a full mesh of links as shown in Fig.2. In this network, what are the benefits and drawbacks of using Ethernet switches and IP routers running OSPF ?
+3. Consider the switched network shown in the figure below. Compute the Spanning Tree of this network.
+
+    .. tikz::
+       :libs: positioning, matrix, arrows, shapes 
+
+       \tikzstyle{arrow} = [thick,->,>=stealth]
+       \tikzset{switch/.style = {diamond, draw, text centered, minimum height=2em, node distance= 2cm}, }
+       \tikzset{router/.style = {rectangle, draw, text centered, minimum height=2em}, }
+       \tikzset{host/.style = {circle, draw, text centered, minimum height=2em}, }
+       \tikzset{ftable/.style={rectangle, dashed, draw} }
+       \node[switch] (S3) {S5};
+       \node[switch, left of=S3] (S6) {S9};
+       \node[switch, right of=S3] (S7) {S10};
+       \node[switch, above of=S3] (S4) {S2};
+       \node[switch, below of=S3] (S9) {S4};
+ 
+       \path[draw,thick]
+       (S3) edge (S6) 
+       (S3) edge (S7) 
+       (S6) edge (S4) 
+       (S4) edge (S7)
+       (S3) edge (S9)
+       (S9) edge (S7)
+       (S3) edge (S7); 
+
+4. Many enterprise networks are organized with a set of backbone devices interconnected by using a full mesh of links as shown in Fig.2. In this network, what are the benefits and drawbacks of using Ethernet switches and IP routers running OSPF ?
 
   .. figure:: fig/ex-stp-backbone.png
      :align: center
