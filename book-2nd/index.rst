@@ -146,7 +146,8 @@ Part 3: Practice
    exercises/netkit-ipv6-rtg
    mcq-ex/mcq-bgp
    exercises/ex-bgp
-..   exercises/ex-stp
+   mcq-ex/network-stp
+   exercises/ex-stp
 
 ..  application/exercises/ex-application
 
