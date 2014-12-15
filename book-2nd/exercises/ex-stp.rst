@@ -55,7 +55,7 @@ Exercises
 
      Fig. 2. A typical enterprise backbone network
 
-4. In the network depicted in Fig. 3, the host `H0` performs a traceroute toward its peer `H1` (designated by its name) through a network composed of switches and routers. Explain precisely the frames, packets, and segments exchanged since the network was turned on. You may assign addresses if you need to.
+5. In the network depicted in Fig. 3, the host `H0` performs a traceroute toward its peer `H1` (designated by its name) through a network composed of switches and routers. Explain precisely the frames, packets, and segments exchanged since the network was turned on. You may assign addresses if you need to.
 
   .. figure:: fig/ex-stp-switches_vs_routers.png
      :align: center
@@ -63,7 +63,7 @@ Exercises
 
      Fig. 3. Host `H0` performs a traceroute towards its peer `H1` through a network composed of switches and routers
 
-5. In the network represented in Fig. 4, can the host `H0` communicate with `H1` and vice-versa? Explain. Add whatever you need in the network to allow them to communicate.
+6. In the network represented in Fig. 4, can the host `H0` communicate with `H1` and vice-versa? Explain. Add whatever you need in the network to allow them to communicate.
 
   .. figure:: fig/ex-stp-routing_across_VLANs.png
      :align: center
@@ -71,13 +71,15 @@ Exercises
 
      Fig. 4. Can `H0` and `H1` communicate ?
 
-6. Consider the network depicted in Fig.5. Both of the hosts `H0` and `H1` have two interfaces: one connected to the switch `S0` and the other one to the switch `S1`. Will the link between `S0` and `S1` ever be used? If so, under which assumptions? Provide a comprehensive answer.
+7. Consider the network depicted in Fig. 5. Both of the hosts `H0` and `H1` have two interfaces: one connected to the switch `S0` and the other one to the switch `S1`. Will the link between `S0` and `S1` ever be used? If so, under which assumptions? Provide a comprehensive answer.
 
   .. figure:: fig/ex-stp-switches_wo_STP.png
      :align: center
      :scale: 100
 
-7. Most commercial Ethernet switches are able to run the Spanning tree protocol independently on each VLAN. What are the benefits of using per-VLAN spanning trees ?
+     Fig. 5. Will the link between `S0` and `S1` ever be used?
+
+8. Most commercial Ethernet switches are able to run the Spanning tree protocol independently on each VLAN. What are the benefits of using per-VLAN spanning trees ?
 
 Netkit STP lab
 --------------
