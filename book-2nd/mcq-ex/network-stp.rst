@@ -134,13 +134,13 @@ The third information contains two parts : the identifier of the switch that sen
 
    Which of the following affirmations about the state of the ports of switch ``32`` is correct ? 
 
-   .. positive:: The port towards switch ``25`` is the `root port` of the switch and the ports towards switches ``42``, ``19`` and ``46`` are `blocked`. 
+   .. negative:: The port towards switch ``25`` is the `root port` of the switch and the ports towards switches ``42``, ``19`` and ``46`` are `blocked`. 
 
    .. negative:: The port towards switch ``25`` is the `root port` of the switch. The ports towards switch ``19`` is `blocked` and the ports towards switches ``42`` and ``46`` are `designated`. 
 
    .. negative:: The port towards switch ``19`` is the `root port` of the switch. The ports towards switch ``46`` is `blocked` and the ports towards switches ``42`` and ``25`` are `designated`. 
 
-   .. negative:: The port towards switch ``25`` is the `root port` of the switch. The ports towards switches ``46``, ``42`` and ``25`` are `designated`. 
+   .. positive:: The port towards switch ``25`` is the `root port` of the switch. The ports towards switches ``46``, ``42`` and ``19`` are `designated`. 
 
 
 4. Consider the switched network shown in the figure below.
