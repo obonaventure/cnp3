@@ -165,7 +165,7 @@ To efficiently spread the load over different paths, routers need to implement `
 
 Fortunately, it is possible to perform `per-flow` load balancing without maintaining any state on the router. Most routers today use hash functions for this purpose :rfc:`2991`. When a packet arrives, the router extracts the Next Header information and the four-tuple from the packet and computes :
 
- :math:`hash(NextHeader,IP_{src},IP_{dst},Port_{src},Port_{dst}) mod N`
+ :math:`hash(NextHeader,IP_{src},IP_{dst},Port_{src},Port_{dst}) \pmod{N}`
 
 In this formula, `N` is the number of outgoing interfaces on the equal cost paths towards the packet's destination. Various hash functions are possible, including CRC, checksum or MD5 :rfc:`2991`. Since the hash function is computed over the four-tuple, the same hash value will be computed for all packets belonging to the same flow. This prevents reordering due to load balancing inside the network. Most routers support this kind of load-balancing today  [ACO+2006]_.
 
