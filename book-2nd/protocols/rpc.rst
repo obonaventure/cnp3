@@ -51,7 +51,7 @@ In this representation, the first bit (`S`) is the sign (`0` represents positive
 
 In some situations, it is necessary to encode fixed or variable length arrays. XDR :rfc:`1832` supports such arrays. For example, the encoding below corresponds to a variable length array containing n elements. The encoded representation starts with an integer that contains the number of elements and follows with all elements in sequence. It is also possible to encode a fixed-length array. In this case, the first integer is missing. 
 
-.. figure:: /protocols/pkt/xdr-string.png
+.. figure:: /protocols/pkt/xdr-array.png
    :align: center
 
 
