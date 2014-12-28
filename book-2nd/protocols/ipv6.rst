@@ -90,7 +90,7 @@ IPv6 supports unicast, multicast and anycast addresses. An IPv6 unicast address 
   - ``2001:db8:0:0:8:800:200c:417a``  is represented as  ``2001:db8::8:800:200c:417a``
   - ``ff01:0:0:0:0:0:0:101``   is represented as ``ff01::101`` 
   - ``0:0:0:0:0:0:0:1`` is represented as ``::1``
-  - ``0:0:0:0:0:0:0:0`` is represented as ``\:\:``
+  - ``0:0:0:0:0:0:0:0`` is represented as ``::``
 
  An IPv6 prefix can be represented as `address/length`, where `length` is the length of the prefix in bits. For example, the three notations below correspond to the same IPv6 prefix :
 
@@ -201,7 +201,7 @@ For the companies that want to use IPv6 without being connected to the IPv6 Inte
 Furthermore, the IETF has reserved some IPv6 addresses for a special usage. The two most important ones are :
 
  - ``0:0:0:0:0:0:0:1`` (``::1`` in compact form) is the IPv6 loopback address. This is the address of a logical interface that is always up and running on IPv6 enabled hosts. 
- - ``0:0:0:0:0:0:0:0`` (``\:\:`` in compact form) is the unspecified IPv6 address. This is the IPv6 address that a host can use as source address when trying to acquire an official address.
+ - ``0:0:0:0:0:0:0:0`` (``::`` in compact form) is the unspecified IPv6 address. This is the IPv6 address that a host can use as source address when trying to acquire an official address.
 
 .. index:: Link Local address
 
