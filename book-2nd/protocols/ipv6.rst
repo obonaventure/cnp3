@@ -422,14 +422,14 @@ The following pseudo-code details the IPv6 fragmentation, assuming that the pack
     if len(payload) > maxpayload :
        toSend=IP(dest=p.dest,src=p.src,
 	         hoplimit=p.hoplimit, id, 
-	         frag=p.frag+(pos/8), m=false,
+	         frag=p.frag+(pos/8), m=True,
 		 len=mtu, nextheader=p.nextheader)/payload[0:maxpayload]
        pos=pos+maxpayload
        payload=payload[maxpayload+1:]	   
     else
        toSend=IP(dest=p.dest,src=p.src,
 	         hoplimit=p.hoplimit, id, 
-	         frag=p.frag+(pos/8), m=true,
+	         frag=p.frag+(pos/8), m=False,
 		 len=len(payload), nextheader=p.nextheader)/payload
     forward(toSend)   
 
