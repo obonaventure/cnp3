@@ -11,7 +11,7 @@ The User Datagram Protocol
 The User Datagram Protocol (UDP) is defined in :rfc:`768`. It provides an unreliable connectionless transport service on top of the unreliable network layer connectionless service. The main characteristics of the UDP service are :
 
  - the UDP service cannot deliver SDUs that are larger than 65467 bytes [#fmtuudp]_ 
- - the UDP service does not guarantee the delivery of SDUs (losses and desquencing can occur)
+ - the UDP service does not guarantee the delivery of SDUs (losses and desequencing can occur)
  - the UDP service will not deliver a corrupted SDU to the destination
 
 Compared to the connectionless network layer service, the main advantage of the UDP service is that it allows several applications running on a host to exchange SDUs with several other applications running on remote hosts. Let us consider two hosts, e.g. a client and a server. The network layer service allows the client to send information to the server, but if an application running on the client wants to contact a particular application running on the server, then an additional addressing mechanism is required other than the IP address that identifies a host, in order to differentiate the application running on a host. This additional addressing is provided by `port numbers`. When a server using UDP is enabled on a host, this server registers a `port number`. This `port number` will be used by the clients to contact the server process via UDP. 
