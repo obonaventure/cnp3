@@ -119,7 +119,7 @@ Connection release
 ------------------
 
 
-SCTP uses a different approach to terminante connections. When an application requests a shutdown of a connection, SCTP performs a three-way handshake. This handshake uses the ``SHUTDOWN``, ``SHUTDOWN-ACK`` and ``SHUTDOWN-COMPLETE`` chunks. The ``SHUTDOWN`` chunk is sent once all outgoing data has been acknowledged. It contains the last cumulative sequence number. Upon reception of a ``SHUTDOWN`` chunk, an SCTP entity informs its application that it cannot accept anymore data over this connection. It then ensures that all outstanding data have been delivered correctly. At that point, it sends a ``SHUTDOWN-ACK`` to confirm the reception of the ``SHUTDOWN`` segment. The three-way handshake completes with the transmission of the ``SHUTDOWN-COMPLETE`` chunk :rfc:`4960`.
+SCTP uses a different approach to terminate connections. When an application requests a shutdown of a connection, SCTP performs a three-way handshake. This handshake uses the ``SHUTDOWN``, ``SHUTDOWN-ACK`` and ``SHUTDOWN-COMPLETE`` chunks. The ``SHUTDOWN`` chunk is sent once all outgoing data has been acknowledged. It contains the last cumulative sequence number. Upon reception of a ``SHUTDOWN`` chunk, an SCTP entity informs its application that it cannot accept anymore data over this connection. It then ensures that all outstanding data have been delivered correctly. At that point, it sends a ``SHUTDOWN-ACK`` to confirm the reception of the ``SHUTDOWN`` segment. The three-way handshake completes with the transmission of the ``SHUTDOWN-COMPLETE`` chunk :rfc:`4960`.
 
  .. msc::
 
