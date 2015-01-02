@@ -127,9 +127,9 @@ Error detection and correction
    :nb_prop: 3 
    :nb_pos: 1 
 
-   1. For this question, we assume 16-bits blocks. For each sequence of 3 blocks, we compute a parity block where each parity bit of this block refers to the bits occupying the same position in the 3 previous blocks. The parity block can be used as an error detection scheme. 
+   1. For this question, we assume 16-bits blocks. For each sequence of 3 blocks, we compute a parity block where each parity bit of this block refers to the bits occupying the same position in the 3 previous blocks. The parity block can then be used as an error detection scheme. 
 
-   Among the examples below, only one corresponds to a valid parity block. Which one (assuming that the parity block has been computed by using XOR of the corresponding bits) ?
+   Among the examples below, only one corresponds to a valid even parity block. Which one ?
 
    .. positive::
         
@@ -140,7 +140,7 @@ Error detection and correction
         1111111011111111  
         1011101010100001 => parity block
         
-   .. positive::
+   .. negative::
 
     .. code-block:: text
         
@@ -149,6 +149,8 @@ Error detection and correction
         1111111011111111  
         0100010101011110 => parity block
       
+      .. comment:: This is an odd parity block
+
    .. negative::
 
     .. code-block:: text
@@ -157,6 +159,7 @@ Error detection and correction
         0101110110011011
         1010111011111010
         1111111111111111 => parity block
+
 
    .. negative::
 
