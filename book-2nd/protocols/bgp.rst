@@ -195,7 +195,7 @@ At this point, the remote router has received all the exportable BGP routes. Aft
 .. code-block:: python
 
  def Recvd_BGPMsg(Msg, RemoteAS) :
-     B=apply_import_filer(Msg,RemoteAS)
+     B=apply_import_filter(Msg,RemoteAS)
      if (B== None): # Msg not acceptable 
      	return
      if IsUPDATE(Msg):
@@ -266,7 +266,7 @@ Let us assume that the `R1-R2` BGP session is the first to be established. A `BG
  - the `BGP nexthop`
  - the attributes including the AS-Path 
 
-We use the notation `U(prefix, nexthop, attributes)` to represent such a `BGP Update` message in this section. Similarly, `W(prefix)` represents a `BGP withdraw` for the specified prefix. Once the `R1-R2` session has been established, `R1` sends `U(2001:db8:1234::/48,2001:db8::5,AS10)` to `R2` and `R2` sends `U(2001:db8:5678:/48,2001:db8::6,AS20)`. At this point, `R1` can reach `2001:db8:5678::/48` via `2001:db8::6` and `R2` can reach `2001:db8:1234::/47` via `2001:db8::5`.
+We use the notation `U(prefix, nexthop, attributes)` to represent such a `BGP Update` message in this section. Similarly, `W(prefix)` represents a `BGP withdraw` for the specified prefix. Once the `R1-R2` session has been established, `R1` sends `U(2001:db8:1234::/48,2001:db8::5,AS10)` to `R2` and `R2` sends `U(2001:db8:5678:/48,2001:db8::6,AS20)`. At this point, `R1` can reach `2001:db8:5678::/48` via `2001:db8::6` and `R2` can reach `2001:db8:1234::/48` via `2001:db8::5`.
 
 Once the `R2-R3` has been established, `R3` sends `U(2001:db8:acbd::/48,2001:db8::2,AS30)`. `R2` announces on the `R2-R3` session all the routes inside its RIB. It thus sends to `R3` : `U(2001:db8:1234::/48,2001:db8::1,AS20:AS10)` and `U(2001:db8:5678::/48,2001:db8::1,AS20)`. Note that when `R2` advertises the route that it learned from `R1`, it updates the BGP nexthop and adds its AS number to the AS-Path. `R2` also sends `U(2001:db8:abcd::48,2001:db8::6,AS20:AS30)` to `R1` on the `R1-R3` session. At this point, all BGP routes have been exchanged and all routers can reach `2001:db8::1234/48`, `2001:db8:5678::/48` and `2001:db8:abcd::/48`.
 
