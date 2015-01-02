@@ -6,14 +6,14 @@
 The HyperText Transfer Protocol
 ===============================
 
-In the early days of the Internet was mainly used for remote terminal access with telnet_, email and file transfer. The default file transfer protocol, `FTP`, defined in :rfc:`959` was widely used and `FTP` clients and servers are still included in most operating systems.
+In its early days the Internet was mainly used for remote terminal access with telnet_, email and file transfer. The default file transfer protocol, `FTP`, defined in :rfc:`959` was widely used and `FTP` clients and servers are still included in most operating systems.
 
 Many `FTP` clients offer a user interface similar to a Unix shell and allow the client to browse the file system on the server and to send and retrieve files. `FTP` servers can be configured in two modes :
 
- - authenticated : in this mode, the ftp server only accepts users with a valid user name and password. Once authenticated, they can access the files and directories according to their permissions
+ - authenticated : in this mode, the `FTP` server only accepts users with a valid user name and password. Once authenticated, they can access the files and directories according to their permissions.
  - anonymous : in this mode, clients supply the `anonymous` userid and their email address as password. These clients are granted access to a special zone of the file system that only contains public files. 
 
-ftp was very popular in the 1990s and early 2000s, but today it has mostly been superseded by more recent protocols. Authenticated access to files is mainly done by using the Secure Shell (ssh_) protocol defined in :rfc:`4251` and supported by clients such as scp_ or sftp_. Nowadays, anonymous access is mainly provided by web protocols.
+`FTP` was very popular in the 1990s and early 2000s, but today it has mostly been superseded by more recent protocols. Authenticated access to files is mainly done by using the Secure Shell (ssh_) protocol defined in :rfc:`4251` and supported by clients such as scp_ or sftp_. Nowadays, anonymous access is mainly provided by web protocols.
 
 In the late 1980s, high energy physicists working at CERN_ had to efficiently exchange documents about their ongoing and planned experiments. `Tim Berners-Lee`_ evaluated several of the documents sharing techniques that were available at that time [B1989]_. As none of the existing solutions met CERN's requirements, they chose to develop a completely new document sharing system. This system was initially called the `mesh`, but was quickly renamed the `world wide web`. The starting point for the `world wide web` are hypertext documents. An hypertext document is a document that contains references (hyperlinks) to other documents that the reader can immediately access. Hypertext was not invented for the world wide web. The idea of hypertext documents was proposed in 1945 [Bush1945]_ and the first experiments were done during the 1960s [Nelson1965]_ [Myers1998]_ . Compared to the hypertext documents that were used in the late 1980s, the main innovation introduced by the `world wide web` was to allow hyperlinks to reference documents stored on remote machines.
 
@@ -27,9 +27,9 @@ In the late 1980s, high energy physicists working at CERN_ had to efficiently ex
 
 A document sharing system such as the `world wide web` is composed of three important parts.
 
- 1. A standardised addressing scheme that allows unambiguous identification of documents 
+ 1. A standardized addressing scheme that allows unambiguous identification of documents 
  2. A standard document format : the `HyperText Markup Language <http://www.w3.org/MarkUp>`_
- 3. A standardised protocol that facilitates efficient retrieval of documents stored on a server
+ 3. A standardized protocol that facilitates efficient retrieval of documents stored on a server
 
 
 .. note:: Open standards and open implementations
@@ -72,7 +72,7 @@ The third part of the URI is the path to the document. This path is structured a
 
 The first URI corresponds to a document named `rfc3986.html` that is stored on the server named `tools.ietf.org` and can be accessed by using the `http` protocol on its default port. The second URI corresponds to an email message, with subject `current-issue`, that will be sent to user `infobot` in domain `example.com`. The `mailto:` URI scheme is defined in :rfc:`6068`. The third URI references the portion `BaseHTTPServer.BaseHTTPRequestHandler` of the document `basehttpserver.html` that is stored in the `library` directory on server `docs.python.org`. This document can be retrieved by using the `http` protocol. The query `highlight=http` is associated to this URI. The fourth example is a server that operates the telnet_ protocol, uses IPv6 address `2001:db8:3080:3::2` and is reachable on port 80. The last URI is somewhat special. Most users will assume that it corresponds to a document stored on the `cnn.example.com` server. However, to parse this URI, it is important to remember that the `@` character is used to separate the user name from the host name in the authorisation part of a URI. This implies that the URI points to a document named `top_story.htm` on host having IPv4 address `10.0.0.1`. The document will be retrieved by using the `ftp` protocol with the user name set to `cnn.example.com&story=breaking_news`. 
 
-The second component of the `word wide web` is the HyperText Markup Language (HTML). HTML defines the format of the documents that are exchanged on the `web`. The `first version of HTML <http://www.w3.org/History/19921103-hypertext/hypertext/WWW/MarkUp/Tags.html>`_ was derived from the Standard Generalized Markup Language (SGML) that was standardised in 1986 by :term:`ISO`. SGML_ was designed to allow large project documents in industries such as government, law or aerospace to be shared efficiently in a machine-readable manner. These industries require documents to remain readable and editable for tens of years and insisted on a standardised format supported by multiple vendors. Today, SGML_ is no longer widely used beyond specific applications, but its descendants including :term:`HTML` and :term:`XML` are now widespread.
+The second component of the `word wide web` is the HyperText Markup Language (HTML). HTML defines the format of the documents that are exchanged on the `web`. The `first version of HTML <http://www.w3.org/History/19921103-hypertext/hypertext/WWW/MarkUp/Tags.html>`_ was derived from the Standard Generalized Markup Language (SGML) that was standardized in 1986 by :term:`ISO`. SGML_ was designed to allow large project documents in industries such as government, law or aerospace to be shared efficiently in a machine-readable manner. These industries require documents to remain readable and editable for tens of years and insisted on a standardized format supported by multiple vendors. Today, SGML_ is no longer widely used beyond specific applications, but its descendants including :term:`HTML` and :term:`XML` are now widespread.
 
 A markup language is a structured way of adding annotations about the formatting of the document within the document itself. Example markup languages include troff_, which is used to write the Unix man pages or Latex_. HTML uses markers to annotate text and a document is composed of `HTML elements`. Each element is usually composed of three items: a start tag that potentially includes some specific attributes, some text (often including other elements), and an end tag. A HTML tag is a keyword enclosed in angle brackets. The generic form of a HTML element is ::
 
@@ -94,15 +94,15 @@ Additional details about the various extensions to HTML may be found in the `off
 
 The third component of the `world wide web` is the HyperText Transfert Protocol (HTTP). HTTP is a text-based protocol, in which the client sends a request and the server returns a response. HTTP runs above the bytestream service and HTTP servers listen by default on port `80`. The design of HTTP has largely been inspired by the Internet email protocols. Each HTTP request contains three parts :
 
- - a `method` , that indicates the type of request, a URI, and the version of the HTTP protocol used by the client 
- - a `header` , that is used by the client to specify optional parameters for the request. An empty line is used to mark the end of the header
- - an optional MIME document attached to the request
+ - a `method`, that indicates the type of request, a URI, and the version of the HTTP protocol used by the client.
+ - a `header`, that is used by the client to specify optional parameters for the request. An empty line is used to mark the end of the header.
+ - an optional MIME document attached to the request.
 
 The response sent by the server also contains three parts :
 
- - a `status line` , that indicates whether the request was successful or not
- - a `header` , that contains additional information about the response. The response header ends with an empty line.
- - a MIME document 
+ - a `status line`, that indicates whether the request was successful or not.
+ - a `header`, that contains additional information about the response. The response header ends with an empty line.
+ - a MIME document.
 
 .. figure:: ../../book/application/svg/http-requests-responses.png
    :align: center
@@ -113,7 +113,7 @@ The response sent by the server also contains three parts :
 
 Several types of method can be used in HTTP requests. The three most important ones are :
 
- - the `GET` method is the most popular one. It is used to retrieve a document from a server. The `GET` method is encoded as `GET` followed by the path of the URI of the requested document and the version of HTTP used by the client. For example, to retrieve the http://www.w3.org/MarkUp/ URI, a client must open a TCP on port `80` with host `www.w3.org` and send a HTTP request containing the following line :
+ - the `GET` method is the most popular one. It is used to retrieve a document from a server. The `GET` method is encoded as `GET` followed by the path of the URI of the requested document and the version of HTTP used by the client. For example, to retrieve the http://www.w3.org/MarkUp/ URI, a client must open a TCP connection on port `80` with host `www.w3.org` and send a HTTP request containing the following line :
 
  .. code-block:: console
 
@@ -204,7 +204,7 @@ This problem was solved by extending HTTP to support persistent TCP connections 
 To allow the clients and servers to control the utilisation of these persistent TCP connections, HTTP 1.1 :rfc:`2616` defines several new HTTP headers :
 
  - The `Connection:` header is used with the `Keep-Alive` argument by the client to indicate that it expects the underlying TCP connection to be persistent. When this header is used with the `Close` argument, it indicates that the entity that sent it will close the underlying TCP connection at the end of the HTTP response.
- - The `Keep-Alive:` header is used by the server to inform the client about how it agrees to use the persistent connection. A typical `Keep-Alive:` contains two parameters : the maximum number of requests that the server agrees to serve on the underlying TCP connection and the timeout (in seconds) after which the server will close an idle connection
+ - The `Keep-Alive:` header is used by the server to inform the client about how it agrees to use the persistent connection. A typical `Keep-Alive:` contains two parameters : the maximum number of requests that the server agrees to serve on the underlying TCP connection and the timeout (in seconds) after which the server will close an idle connection.
 
 The example below shows the operation of HTTP/1.1 over a persistent TCP connection to retrieve three URIs stored on the same server. Once the connection has been established, the client sends its first request with the `Connection: keep-alive` header to request a persistent connection. 
 
@@ -296,7 +296,7 @@ The third, and widely adopted, solution are HTTP cookies. HTTP cookies were init
 
 .. note:: Privacy issues with HTTP cookies
 
- The HTTP cookies introduced by Netscape_ are key for large e-commerce websites. However, they have also raised many discussions concerning their `potential misuses <http://www.nytimes.com/2001/09/04/technology/04COOK.html>`_. Consider `ad.com`, a company that delivers lots of advertisements on web sites. A web site that wishes to include `ad.com`'s advertisements next to its content will add links to `ad.com` inside its HTML pages. If `ad.com` is used by many web sites, `ad.com` could be able to track the interests of all the users that visit its client websites and use this information to provide targeted advertisements. Privacy advocates have even `sued <http://epic.org/privacy/internet/cookies/>`_ online advertisement companies to force them to comply with the privacy regulations. More recent related technologies also raise `privacy concerns <http://www.eff.org/deeplinks/2009/09/new-cookie-technologies-harder-see-and-remove-wide>`_ 
+ The HTTP cookies introduced by Netscape_ are key for large e-commerce websites. However, they have also raised many discussions concerning their `potential misuses <http://www.nytimes.com/2001/09/04/technology/04COOK.html>`_. Consider `ad.com`, a company that delivers lots of advertisements on web sites. A web site that wishes to include `ad.com`'s advertisements next to its content will add links to `ad.com` inside its HTML pages. If `ad.com` is used by many web sites, `ad.com` could be able to track the interests of all the users that visit its client websites and use this information to provide targeted advertisements. Privacy advocates have even `sued <http://epic.org/privacy/internet/cookies/>`_ online advertisement companies to force them to comply with the privacy regulations. More recent related technologies also raise `privacy concerns <http://www.eff.org/deeplinks/2009/09/new-cookie-technologies-harder-see-and-remove-wide>`_.
  
 .. rubric:: Footnotes
 
