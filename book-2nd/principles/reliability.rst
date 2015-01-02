@@ -252,8 +252,8 @@ Some characters are used as markers to delineate the frame boundaries. Many `cha
  Original frame	      	                      Transmitted frame
  ===========================================  ===============================================================
  **1** **2** **3** **4**		      `DLE STX` **1** **2** **3** **4** `DLE ETX`
- **1** **2** **3** **DLE** **STX** **4**      `DLE STX` **1** **2** **3** `DLE` **DLE** **STX** `4` `DLE ETX`
- **DLE STX DLE ETX**	                      `DLE STX` `DLE` **DLE STX** `DLE` **DLE ETX** `DLE ETX`
+ **1** **2** **3** **DLE** **STX** **4**      `DLE STX` **1** **2** **3** **DLE** `DLE` **STX** `4` `DLE ETX`
+ **DLE STX DLE ETX**	                      `DLE STX` **DLE** `DLE` **STX** **DLE** `DLE` ETX** `DLE ETX`
  ===========================================  ===============================================================
 
 `Character stuffing` , like bit stuffing, increases the length of the transmitted frames. For `character stuffing`, the worst frame is a frame containing many `DLE` characters. When transmission errors occur, the receiver may incorrectly decode one or two frames (e.g. if the errors occur in the markers). However, it will be able to resynchronise itself with the next correctly received markers.
