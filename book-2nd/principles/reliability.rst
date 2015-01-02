@@ -304,8 +304,7 @@ The datalink layer is designed to send and receive frames on behalf of a user. W
  - the interactions between the user and the datalink layer entity are represented by using the classical `DATA.req` and the `DATA.ind` primitives
  - the interactions between the datalink layer entity and the framing sublayer are represented by using `send` instead of `DATA.req` and `recvd` instead of `DATA.ind`
  
-
-When running on top of a perfect framing sublayer, a datalink entity can simply issue a `send(SDU)` upon arrival of a `DATA.req(SDU)`. Similarly, the receiver issues a `DATA.ind(SDU)` upon receipt of a `recvd(SDU)`. Such a simple protocol is sufficient when a single SDU is sent. This is illustrated in the figure below.
+When running on top of a perfect framing sublayer, a datalink entity can simply issue a `send(SDU)` upon arrival of a `DATA.req(SDU)` [#fsdu]_ .Similarly, the receiver issues a `DATA.ind(SDU)` upon receipt of a `recvd(SDU)`. Such a simple protocol is sufficient when a single SDU is sent. This is illustrated in the figure below.
 
 
   .. msc::
@@ -916,7 +915,7 @@ Reliable protocols often need to send data in both directions. To reduce the ove
 
 
 
-.. .. [#fqueuesize] In the application layer, most servers are implemented as processes. The network and transport layer on the other hand are usually implemented inside the operating system and the amount of memory that they can use is limited by the amount of memory allocated to the entire kernel.
+.. [#fsdu] SDU is the acronym of Service Data Unit. We use it as a generic term to represent the data that is transported by a protocol.
 
 .. [#fsizesliding] The size of the sliding window can be either fixed for a given protocol or negotiated during the connection establishment phase. Some protocols allow to change the maximum window size during the data transfert. We will explain these techniques with real protocols later. 
 
