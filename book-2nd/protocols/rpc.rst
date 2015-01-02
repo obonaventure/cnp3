@@ -93,9 +93,9 @@ Reaching the callee
 The second subproblem is how to reach the callee. A simple solution to this problem is to make sure that the callee listens on a specific port on the remote machine and then exchange information with this server process. This is the solution chosen for JSON-RPC [JSON-RPC2]_. JSON-RPC can be used over the connectionless or the connection-oriented transport. A JSON-RPC request contains the following information :
 
  - `jsonrpc`: a string indicating the version of the protocol used. This is important to allow the protocol to evolve in the future.
- - `method`: a string that contains the name of the procedure which is invoked
- - `params`: a structure that contains the values of the parameters that are passed to the method
- - `id`: an identifier chosen by the caller
+ - `method`: a string that contains the name of the procedure which is invoked.
+ - `params`: a structure that contains the values of the parameters that are passed to the method.
+ - `id`: an identifier chosen by the caller.
 
 The JSON-RPC is encoded as a JSON object. For example, the example below shows an invokation of a method called `sum` with `1` and `3` as parameters.
 
@@ -105,8 +105,8 @@ The JSON-RPC is encoded as a JSON object. For example, the example below shows a
 
 Upon reception of this JSON structure, the callee parses the object, locates the corresponding method and passes the parameters. This method returns a response which is also encoded as a JSON structure. This response contains the following information :
 
- - `jsonrpc`: a string indicating the version of the protocol used to encode the response
- - `id`: the same identifier as the identifier chosen by the caller
+ - `jsonrpc`: a string indicating the version of the protocol used to encode the response.
+ - `id`: the same identifier as the identifier chosen by the caller.
  - `result`: if the request succeeded, this member contains the result of the request (in our example, value `4`).
  - `error`: if the method called does not exist or its execution causes an error, the `result` element will be replaced by an `error` element which contains the following members :
 
