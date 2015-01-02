@@ -45,8 +45,8 @@ The UDP header contains four fields :
 
 As the port numbers are encoded as a 16 bits field, there can be up to only 65535 different server processes that are bound to a different UDP port at the same time on a given server. In practice, this limit is never reached. However, it is worth noticing that most implementations divide the range of allowed UDP port numbers into three different ranges :
 
- - the privileged port numbers (1 < port < 1024 )
- - the ephemeral port numbers ( officially [#fephemeral]_ 49152 <= port <= 65535 )
+ - the privileged port numbers (1 < port < 1024)
+ - the ephemeral port numbers (officially [#fephemeral]_ 49152 <= port <= 65535)
  - the registered port numbers (officially 1024 <= port < 49152)
 
 In most Unix variants, only processes having system administrator privileges can be bound to port numbers smaller than `1024`. Well-known servers such as :term:`DNS`, :term:`NTP` or :term:`RPC` use privileged port numbers. When a client needs to use UDP, it usually does not require a specific port number. In this case, the UDP implementation will allocate the first available port number in the ephemeral range. The range of registered port numbers should be used by servers. In theory, developers of network servers should register their port number officially through IANA, but few developers do this. 
