@@ -465,7 +465,7 @@ ICMP version 6
 
 It is sometimes necessary for intermediate routers or the destination host to inform the sender of the packet of a problem that occurred while processing a packet. In the TCP/IP protocol suite, this reporting is done by the Internet Control Message Protocol (ICMP). ICMPv6 is defined in :rfc:`4443`. It is used both to report problems that occurred while processing an IPv6 packet, but also when distributing addresses. 
 
-ICMPv6 messages are carried inside IPv6 packets (the `Next Header` field for ICMPv6 is ``58``). Each ICMP message contains an 8 bits header with a `type` field, a `code` field and a 16 bits checksum computed over the entire ICMPv6 message. The message body contains a copy of the IPv6 packet in error.
+ICMPv6 messages are carried inside IPv6 packets (the `Next Header` field for ICMPv6 is ``58``). Each ICMP message contains a 32 bits header with an 8 bits `type` field, a `code` field and a 16 bits checksum computed over the entire ICMPv6 message. The message body contains a copy of the IPv6 packet in error.
 
 .. figure:: /../book/network/pkt/icmpv6.png
    :align: center
