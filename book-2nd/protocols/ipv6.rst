@@ -68,7 +68,7 @@ The IETF decided to pursue the development of IPng based on the SIPP proposal. A
 
 .. note:: The IPng address size
 
- When the work on IPng started, it was clear that 32 bits was too small to encode an IPng address and all proposals used longer addresses. However, there were many discussions about the most suitable address length. A first approach, proposed by SIP in :rfc:`1710`, was to use 64 bit addresses. A 64 bits address space was 4 billion times larger than the IPv4 address space and, furthermore, from an implementation perspective, 64 bit CPUs were being considered and 64 bit addresses would naturally fit inside their registers. Another approach was to use an existing address format. This was the TUBA proposal (:rfc:`1347`) that reuses the ISO CLNP 20 bytes addresses. The 20 bytes addresses provided room for growth, but using ISO CLNP was not favored by the IETF partially due to political reasons, despite the fact that mature CLNP implementations were already available. 128 bits appeared to be a reasonable compromise at that time.
+ When the work on IPng started, it was clear that 32 bits was too small to encode an IPng address and all proposals used longer addresses. However, there were many discussions about the most suitable address length. A first approach, proposed by SIP in :rfc:`1710`, was to use 64 bits addresses. A 64 bits address space was 4 billion times larger than the IPv4 address space and, furthermore, from an implementation perspective, 64-bit CPUs were being considered and 64 bits addresses would naturally fit inside their registers. Another approach was to use an existing address format. This was the TUBA proposal (:rfc:`1347`) that reuses the ISO CLNP 20 bytes addresses. The 20 bytes addresses provided room for growth, but using ISO CLNP was not favored by the IETF partially due to political reasons, despite the fact that mature CLNP implementations were already available. 128 bits appeared to be a reasonable compromise at that time.
 
 IPv6 addressing architecture
 ----------------------------
@@ -111,7 +111,7 @@ An IPv6 unicast address is composed of three parts :
  #. A subnet identifier that identifies a customer of the ISP
  #. An interface identifier that identifies a particular interface on an endsystem 
 
-The subnet identifier plays a key role in the scalability of network layer addressing architecture. An important point to be defined in a network layer protocol is the allocation of the network layer addresses. A naive allocation scheme would be to provide an address to each host when the host is attached to the Internet on a first come first served basis. With this solution, a host in Belgium could have address ``2001:db8::1`` while another host located in Africa would use address ``2001:db8::2``. Unfortunately, this would force all routers on the Internet to maintain one route towards each host. In the network layer, scalability is often a function of the number of routes stored on the router. A network will usually work better if its routers store fewer routes and network administrators usually try to minimize the number of routes that are known by their routers. For this, they often divide their network prefix in smaller subblocks. For example, consider a company with three campuses, a large one and two smaller ones. The network administrator would probably divide his block of addresses as follows :
+The subnet identifier plays a key role in the scalability of the network layer addressing architecture. An important point to be defined in a network layer protocol is the allocation of the network layer addresses. A naive allocation scheme would be to provide an address to each host when the host is attached to the Internet on a first come first served basis. With this solution, a host in Belgium could have address ``2001:db8::1`` while another host located in Africa would use address ``2001:db8::2``. Unfortunately, this would force all routers on the Internet to maintain one route towards each host. In the network layer, scalability is often a function of the number of routes stored on the router. A network will usually work better if its routers store fewer routes and network administrators usually try to minimize the number of routes that are known by their routers. For this, they often divide their network prefix in smaller subblocks. For example, consider a company with three campuses, a large one and two smaller ones. The network administrator would probably divide his block of addresses as follows :
  
  - the bottom half is used for the large campus
  - the top half is divided in two smaller blocks, one for each small campus
@@ -126,7 +126,7 @@ In today's deployments, interface identifiers are always 64 bits wide. This impl
 .. index:: Provider Independent address
 .. index:: Provider Aggregatable address
 
-In practice, there are several types of IPv6 unicast address. Most of the `IPv6 unicast addresses <http://www.iana.org/assignments/ipv6-address-space/ipv6-address-space.xhtml>`_ are allocated in blocks under the responsibility of IANA_. The current IPv6 allocations are part of the `2000::/3` address block. Regional Internet Registries (RIR) such as RIPE_ in Europe,  ARIN_ in North-America or AfriNIC in Africa have each received a `block of IPv6 addresses <http://www.iana.org/assignments/ipv6-unicast-address-assignments/ipv6-unicast-address-assignments.xhtml>`_ that they sub-allocate to Internet Service Providers in their region.  The ISPs then sub-allocate addresses to their customers. 
+In practice, there are several types of IPv6 unicast addresses. Most of the `IPv6 unicast addresses <http://www.iana.org/assignments/ipv6-address-space/ipv6-address-space.xhtml>`_ are allocated in blocks under the responsibility of IANA_. The current IPv6 allocations are part of the `2000::/3` address block. Regional Internet Registries (RIR) such as RIPE_ in Europe,  ARIN_ in North-America or AfriNIC in Africa have each received a `block of IPv6 addresses <http://www.iana.org/assignments/ipv6-unicast-address-assignments/ipv6-unicast-address-assignments.xhtml>`_ that they sub-allocate to Internet Service Providers in their region.  The ISPs then sub-allocate addresses to their customers. 
 
 When considering the allocation of IPv6 addresses, two types of address allocations are often distinguished. The RIRs allocate `provider-independent (PI)` addresses. PI addresses are usually allocated to Internet Service Providers and large companies that are connected to at least two different ISPs [CSP2009]_. Once a PI address block has been allocated to a company, this company can use its address block with the provider of its choice and change its provider at will. Internet Service Providers allocate `provider-aggregatable (PA)` address blocks from their own PI address block to their customers. A company that is connected to only one ISP should only use PA addresses. The drawback of PA addresses is that when a company using a PA address block changes its provider, it needs to change all the addresses that it uses. This can be a nightmare from an operational perspective and many companies are lobbying to obtain `PI` address blocks even if they are small and connected to a single provider. The typical size of the IPv6 address blocks are :
 
@@ -136,7 +136,7 @@ When considering the allocation of IPv6 addresses, two types of address allocati
  - ``/64`` for a single user (e.g. a home user connected via ADSL) 
  - ``/128`` in the rare case when it is known that no more than one endhost will be attached
 
-There is one difficulty with the utilisation of these IPv6 prefixes. Consider Belnet, the Belgian research  ISP that has been allocated the ``2001:6a8::/32`` prefix. Universities are connected to Belnet. UCL uses prefix ``2001:6a8:3080::/48`` while the University of Liege uses ``2001:6a8:2d80::/32``. A commercial ISP uses prefix ``2a02:2788::/32``. Both Belnet and the commercial ISP are connected to the global Internet. 
+There is one difficulty with the utilisation of these IPv6 prefixes. Consider Belnet, the Belgian research  ISP that has been allocated the ``2001:6a8::/32`` prefix. Universities are connected to Belnet. UCL uses prefix ``2001:6a8:3080::/48`` while the University of Liege uses ``2001:6a8:2d80::/48``. A commercial ISP uses prefix ``2a02:2788::/32``. Both Belnet and the commercial ISP are connected to the global Internet. 
 
 .. graphviz:: 
 
@@ -183,7 +183,7 @@ With the longest match rule, the route `::/0` plays a particular role. As this r
  - a packet with destination ``2a02:2788:2c4:16f::1`` received by router `R` is destined to a host on interface ``eth0`` .
  - a packet with destination ``2001:6a8:3080::1234`` matches three routes : ``::/0``, ``2001::6a8::/32`` and ``2001::6a8:3080``. The packet is forwarded via gateway ``fe80::bad:cafe``
  - a packet with destination ``2001:1890:123a::1:1e`` matches one route : ``::/0``. The packet is forwarded via ``fe80::dead:beef``
- - a packet with destination `2001:6a8:3880:40::2`` matches two routes : ``2001:6a8::/32`` and `::/0`. The packet is forwarded via ``fe80::aaaa:bbbb``
+ - a packet with destination ``2001:6a8:3880:40::2`` matches two routes : ``2001:6a8::/32`` and ``::/0``. The packet is forwarded via ``fe80::aaaa:bbbb``
 
 
 The longest prefix match can be implemented by using different data structures. One possibility is to use a trie. Details on how to implement efficient packet forwarding algorithms may be found in [Varghese2005]_.
@@ -289,8 +289,8 @@ The IPv6 packet format was heavily inspired by the packet format proposed for th
 
 Apart from the source and destination addresses, the IPv6 header contains the following fields :
 
- - `version` : a 4 bits field set to `6` and intended to allow IP to evolve in the future if needed
- - `Traffic class` : this 8 bits field allows to indicate the type of service expected by this packet and contains the ``CE`` and ``ECT`` flags that are used by `Explicit Congestion Notification`
+ - `version` : a 4 bits field set to `6` and intended to allow IP to evolve in the future if needed.
+ - `Traffic class` : this 8 bits field allows to indicate the type of service expected by this packet and contains the ``CE`` and ``ECT`` flags that are used by `Explicit Congestion Notification`.
  - `Flow label` : this field was initially intended to be used to tag packets belonging to the same `flow`. A recent document, :rfc:`6437` describes some possible usages of this field, but it is too early to tell whether it will be really used.
  - `Payload length` : this is the size of the packet payload in bytes. As the length is encoded as a 16 bits field, an IPv6 packet can contain up to 65535 bytes of payload.
  - `Hop Limit` : this 8 bits field indicates the number of routers that can forward the packet. It is decremented by one by each router and prevents packets from looping forever inside the network.
@@ -388,7 +388,7 @@ If a router receives a packet that is too long to be forwarded, the packet is dr
 
 In IPv6, fragmentation is performed exclusively by the source host and relies on the fragmentation header. This 64 bits header is composed of six fields :
 
- - a `Next Header` field that indicates the type of the header that follows the fragmentation header
+ - a `Next Header` field that indicates the type of the header that follows the fragmentation header.
  - a `reserved` field set to `0`. 
  - the `Fragment Offset` is a 13-bit unsigned integer that contains the offset, in 8 bytes units, of the data following this header, relative to the start of the original packet. 
  - the `More` flag, which is set to `0` in the last fragment of a packet and to `1` in all other fragments. 
@@ -409,7 +409,7 @@ The following pseudo-code details the IPv6 fragmentation, assuming that the pack
 .. code-block:: python
 
  #mtu : maximum size of the packet (including header) of outgoing link
- if p.len <  mtu : 
+ if p.len < mtu : 
     send(p)
  # packet is too large
  maxpayload=8*int((mtu-40)/8)  # must be n times 8 bytes
@@ -446,7 +446,7 @@ Note that the reassembly algorithm must deal with the unreliability of the IP ne
 
  Given the size of the IPv6 header, it can cause huge overhead on low bandwidth links, especially when small packets are exchanged such as for Voice over IP applications. In such environments, several techniques can be used to reduce the overhead. A first solution is to use data compression in the datalink layer to compress all the information exchanged [Thomborson1992]_. These techniques are similar to the data compression algorithms used in tools such as :manpage:`compress(1)` or :manpage:`gzip(1)` :rfc:`1951`. They compress streams of bits without taking advantage of the fact that these streams contain IP packets with a known structure. A second solution is to compress the IP and TCP header. These header compression techniques, such as the one defined in :rfc:`5795` take advantage of the redundancy found in successive packets from the same flow to significantly reduce the size of the protocol headers. Another solution is to define a compressed encoding of the IPv6 header that matches the capabilities of the underlying datalink layer :rfc:`4944`. 
 
-The last type of `IPv6 header extension` is the `Routing`header. The ``type 0`` routing header defined in :rfc:`2460` is an example of an IPv6 option that must be processed by some routers. This option is encoded as shown below.
+The last type of `IPv6 header extension` is the `Routing` header. The ``type 0`` routing header defined in :rfc:`2460` is an example of an IPv6 option that must be processed by some routers. This option is encoded as shown below.
 
 .. figure:: /../book/network/pkt/ipv6-routing-0.png
    :align: center
@@ -455,7 +455,7 @@ The last type of `IPv6 header extension` is the `Routing`header. The ``type 0`` 
    The Type 0 routing header (:rfc:`2460`)
 
 
-The type 0 routing option was intended to allow a host to indicate a loose source route that should be followed by a packet by specifying the addresses of some of the routers that must forward this packet. Unfortunately, further work with this routing header, including an entertaining demonstration with scapy_ [BE2007]_ , revealed severe security problems with this routing header. For this reason, loose source routing with the type 0 routing header has been removed from the IPv6 specification :rfc:`5095`.
+The type 0 routing option was intended to allow a host to indicate a loose source route that should be followed by a packet by specifying the addresses of some of the routers that must forward this packet. Unfortunately, further work with this routing header, including an entertaining demonstration with scapy_ [BE2007]_, revealed severe security problems with this routing header. For this reason, loose source routing with the type 0 routing header has been removed from the IPv6 specification :rfc:`5095`.
 
 
 .. _ICMPv6:
@@ -477,12 +477,12 @@ ICMPv6 messages are carried inside IPv6 packets (the `Next Header` field for ICM
 ICMPv6 specifies two classes of messages : error messages that indicate a problem in handling a packet and informational messages. Four types of error messages are defined in :rfc:`4443` :
 
  - ``1`` : Destination Unreachable. Such an ICMPv6 message is sent when the destination address of a packet is unreachable. The `code` field of the ICMP header contains additional information about the type of unreachability. The following codes are specified in :rfc:`4443` 
-     - ``0`` : No route to destination. This indicates that the router that sent the ICMPv6 message did not have a route towards the packet's destination
+     - ``0`` : No route to destination. This indicates that the router that sent the ICMPv6 message did not have a route towards the packet's destination.
      - ``1`` : Communication with destination administratively prohibited. This indicates that a firewall has refused to forward the packet towards its final destination. 
      - ``2`` : Beyond scope of source address. This message can be sent if the source is using link-local addresses to reach a global unicast address outside its subnet.
      - ``3`` : Address unreachable. This message indicates that the packet reached the subnet of the destination, but the host that owns this destination address cannot be reached.
      - ``4`` : Port unreachable. This message indicates that the IPv6 packet was received by the destination, but there was no application listening to the specified port.
- - ``2`` : Packet Too Big. The router that was to send the ICMPv6 message received an IPv6 packet that is larger than the MTU of the outgoing link. The ICMPv6 message contains the MTU of this link in bytes. This allows the sending host to implement Path MTU discovery :rfc:`1981`
+ - ``2`` : Packet Too Big. The router that was supposed to send the ICMPv6 message received an IPv6 packet that is larger than the MTU of the outgoing link. The ICMPv6 message contains the MTU of this link in bytes. This allows the sending host to implement Path MTU discovery :rfc:`1981`.
  - ``3`` : Time Exceeded. This error message can be sent either by a router or by a host. A router would set `code` to `0` to report the reception of a packet whose `Hop Limit` reached `0`. A host would set `code` to `1` to report that it was unable to reassemble received IPv6 fragments.
  - ``4`` : Parameter Problem. This ICMPv6 message is used to report either the reception of an IPv6 packet with an erroneous header field (type `0`) or an unknown `Next Header` or IP option (types `1` and `2`). In this case, the message body contains the erroneous IPv6 packet and the first 32 bits of the message body contain a pointer to the error.
 
