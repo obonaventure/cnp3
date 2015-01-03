@@ -14,10 +14,10 @@ The Transmission Control Protocol (TCP) was initially defined in :rfc:`793`. Sev
 TCP provides a reliable bytestream, connection-oriented transport service on top of the unreliable connectionless network service provided by :term:`IP`. TCP is used by a large number of applications, including :
 
  - Email (:term:`SMTP`, :term:`POP`, :term:`IMAP`)
- - World wide web ( :term:`HTTP`, ...)
- - Most file transfer protocols ( :term:`ftp`, peer-to-peer file sharing applications , ...)
- - remote computer access : :term:`telnet`, :term:`ssh`, :term:`X11`, :term:`VNC`, ...
- - non-interactive multimedia applications : flash
+ - World wide web (:term:`HTTP`, ...)
+ - Most file transfer protocols (:term:`ftp`, peer-to-peer file sharing applications , ...)
+ - Remote computer access : (:term:`telnet`, :term:`ssh`, :term:`X11`, :term:`VNC`, ...)
+ - Non-interactive multimedia applications : flash
 
 On the global Internet, most of the applications used in the wide area rely on TCP. Many studies [#ftcpusage]_ have reported that TCP was responsible for more than 90% of the data exchanged in the global Internet.
 
@@ -40,23 +40,22 @@ A TCP header contains the following fields :
    - the address of the server
    - the port chosen by the client
    - the port chosen by the server
-   - TCP
 
- - the `sequence number` (32 bits), `acknowledgement number` (32 bits) and `window` (16 bits) fields are used to provide a reliable data transfer, using a window-based protocol. In a TCP bytestream, each byte of the stream consumes one sequence number. Their utilisation will be described in more detail in section :ref:`TCPReliable`
- - the `Urgent pointer` is used to indicate that some data should be considered as urgent in a TCP bytestream. However, it is rarely used in practice and will not be described here. Additional details about the utilisation of this pointer may be found in :rfc:`793`, :rfc:`1122` or [Stevens1994]_
- - the flags field contains a set of bit flags that indicate how a segment should be interpreted by the TCP entity receiving it : 
+ - The `sequence number` (32 bits), `acknowledgement number` (32 bits) and `window` (16 bits) fields are used to provide a reliable data transfer, using a window-based protocol. In a TCP bytestream, each byte of the stream consumes one sequence number. Their utilisation will be described in more detail in section :ref:`TCPReliable`.
+ - The `Urgent pointer` is used to indicate that some data should be considered as urgent in a TCP bytestream. However, it is rarely used in practice and will not be described here. Additional details about the utilisation of this pointer may be found in :rfc:`793`, :rfc:`1122` or [Stevens1994]_.
+ - The flags field contains a set of bit flags that indicate how a segment should be interpreted by the TCP entity receiving it : 
 
-    - the `SYN` flag is used during connection establishment
-    - the `FIN` flag is used during connection release
-    - the `RST` is used in case of problems or when an invalid segment has been received
-    - when the `ACK` flag is set, it indicates that the `acknowledgment` field contains a valid number. Otherwise, the content of the `acknowledgment` field must be ignored by the receiver
-    - the `URG` flag is used together with the `Urgent pointer`
+    - the `SYN` flag is used during connection establishment.
+    - the `FIN` flag is used during connection release.
+    - the `RST` is used in case of problems or when an invalid segment has been received.
+    - when the `ACK` flag is set, it indicates that the `acknowledgment` field contains a valid number. Otherwise, the content of the `acknowledgment` field must be ignored by the receiver.
+    - the `URG` flag is used together with the `Urgent pointer`.
     - the `PSH` flag is used as a notification from the sender to indicate to the receiver that it should pass all the data it has received to the receiving process. However, in practice TCP implementations do not allow TCP users to indicate when the `PSH` flag should be set and thus there are few real utilizations of this flag. 
 
- - the `checksum` field contains the value of the Internet checksum computed over the entire TCP segment and a pseudo-header as with UDP
- - the `Reserved` field was initially reserved for future utilization. It is now used by :rfc:`3168`.
- - the `TCP Header Length` (THL) or `Data Offset` field is a four bits field that indicates the size of the TCP header in 32 bit words. The maximum size of the TCP header is thus 64 bytes.
- - the `Optional header extension` is used to add optional information to the TCP header. Thanks to this header extension, it is possible to add new fields to the TCP header that were not planned in the original specification. This allowed TCP to evolve since the early eighties. The details of the TCP header extension are explained in sections :ref:`TCPOpen` and :ref:`TCPReliable`.
+ - The `checksum` field contains the value of the Internet checksum computed over the entire TCP segment and a pseudo-header as with UDP.
+ - The `Reserved` field was initially reserved for future utilization. It is now used by :rfc:`3168`.
+ - The `TCP Header Length` (THL) or `Data Offset` field is a four bits field that indicates the size of the TCP header in 32 bit words. The maximum size of the TCP header is thus 64 bytes.
+ - The `Optional header extension` is used to add optional information to the TCP header. Thanks to this header extension, it is possible to add new fields to the TCP header that were not planned in the original specification. This allowed TCP to evolve since the early eighties. The details of the TCP header extension are explained in sections :ref:`TCPOpen` and :ref:`TCPReliable`.
  
 .. _fig-tcpports:
 
@@ -149,7 +148,7 @@ Apart from these two paths in the TCP connection establishment FSM, there is a t
 
 .. topic:: Denial of Service attacks
 
- When a TCP entity opens a TCP connection, it creates a Transmission Control Block (:term:`TCB`). The TCB contains the entire state that is maintained by the TCP entity for each TCP connection. During connection establishment, the TCB contains the local IP address, the remote IP address, the local port number, the remote port number, the current local sequence number, the last sequence number received from the remote entity. Until the mid 1990s, TCP implementations had a limit on the number of TCP connections that could be in the `SYN RCVD` state at a given time. Many implementations set this limit to about 100 TCBs. This limit was considered sufficient even for heavily load http servers given the small delay between the reception of a `SYN` segment and the reception of the `ACK` segment that terminates the establishment of the TCP connection. When the limit of 100 TCBs in the `SYN Rcvd` state is reached, the TCP entity discards all received TCP `SYN` segments that do not correspond to an existing TCB. 
+ When a TCP entity opens a TCP connection, it creates a Transmission Control Block (:term:`TCB`). The TCB contains the entire state that is maintained by the TCP entity for each TCP connection. During connection establishment, the TCB contains the local IP address, the remote IP address, the local port number, the remote port number, the current local sequence number, the last sequence number received from the remote entity. Until the mid 1990s, TCP implementations had a limit on the number of TCP connections that could be in the `SYN RCVD` state at a given time. Many implementations set this limit to about 100 TCBs. This limit was considered sufficient even for heavily loaded http servers given the small delay between the reception of a `SYN` segment and the reception of the `ACK` segment that terminates the establishment of the TCP connection. When the limit of 100 TCBs in the `SYN Rcvd` state is reached, the TCP entity discards all received TCP `SYN` segments that do not correspond to an existing TCB. 
 
  This limit of 100 TCBs in the `SYN Rcvd` state was chosen to protect the TCP entity from the risk of overloading its memory with too many TCBs in the `SYN Rcvd` state. However, it was also the reason for a new type of Denial of Service (DoS) attack :rfc:`4987`. A DoS attack is defined as an attack where an attacker can render a resource unavailable in the network. For example, an attacker may cause a DoS attack on a 2 Mbps link used by a company by sending more than 2 Mbps of packets through this link. In this case, the DoS attack was more subtle. As a TCP entity discards all received `SYN` segments as soon as it has 100 TCBs in the `SYN Rcvd` state, an attacker simply had to send a few 100 `SYN` segments every second to a server and never reply to the received `SYN+ACK` segments. To avoid being caught, attackers were of course sending these `SYN` segments with a different address than their own IP address [#fspoofing]_. On most TCP implementations, once a TCB entered the `SYN Rcvd` state, it remained in this state for several seconds, waiting for a retransmission of the initial `SYN` segment. This attack was later called a `SYN flood` attack and the servers of the ISP named panix were among the first to `be affected <http://memex.org/meme2-12.html>`_ by this attack.
 
@@ -179,8 +178,8 @@ Another utilisation of TCP options during connection establishment is to enable 
 The TCP options are encoded by using a Type Length Value format where :
 
  - the first byte indicates the `type` of the option.
- - the second byte indicates the total length of the option (including the first two bytes) in bytes
- - the last bytes are specific for each type of option
+ - the second byte indicates the total length of the option (including the first two bytes) in bytes.
+ - the last bytes are specific for each type of option.
 
 :rfc:`793` defines the Maximum Segment Size (MSS) TCP option that must be understood by all TCP implementations. This option (type 2) has a length of 4 bytes and contains a 16 bits word that indicates the MSS supported by the sender of the `SYN` segment. The MSS option can only be used in TCP segments having the `SYN` flag set.
 
@@ -229,7 +228,7 @@ TCP is a window-based transport protocol that provides a bi-directional byte str
 
 The original TCP specification can be categorised as a transport protocol that provides a byte stream service and uses `go-back-n`. 
 
-To send new data on an established connection, a TCP entity performs the following operations on the corresponding TCB. It first checks that the `sending buffer` does not contain more data than the receive window advertised by the remote host (`rcv.wnd`). If the window is not full, up to `MSS` bytes of data are placed in the payload of a TCP segment. The `sequence number` of this segment is the sequence number of the first byte of the payload. It is set to the first available sequence number : `snd.nxt` and `snd.nxt` is incremented by the length of the payload of the TCP segment. The `acknowledgement number` of this segment is set to the current value of `rcv.nxt` and the `window` field of the TCP segment is computed based on the current occupancy of the `receiving buffer`. The data is kept in the `sending buffer` in case it needs to be retransmitted later.
+To send new data on an established connection, a TCP entity performs the following operations on the corresponding TCB. It first checks that the `sending buffer` does not contain more data than the receive window advertised by the remote host (`rcv.wnd`). If the window is not full, up to `MSS` bytes of data are placed in the payload of a TCP segment. The `sequence number` of this segment is the sequence number of the first byte of the payload. It is set to the first available sequence number : `snd.nxt` and `snd.wnd` is incremented by the length of the payload of the TCP segment. The `acknowledgement number` of this segment is set to the current value of `rcv.nxt` and the `window` field of the TCP segment is computed based on the current occupancy of the `receiving buffer`. The data is kept in the `sending buffer` in case it needs to be retransmitted later.
 
 When a TCP segment with the `ACK` flag set is received, the following operations are performed. `rcv.wnd` is set to the value of the `window` field of the received segment. The `acknowledgement number` is compared to `snd.una`. The newly acknowledged data is removed from the `sending buffer` and `snd.una` is updated. If the TCP segment contained data, the `sequence number` is compared to `rcv.nxt`. If they are equal, the segment was received in sequence and the data can be delivered to the user and `rcv.nxt` is updated. The contents of the `receiving buffer` is checked to see whether other data already present in this buffer can be delivered in sequence to the user. If so, `rcv.nxt` is updated again. Otherwise, the segment's payload is placed in the `receiving buffer`.
 
@@ -273,7 +272,7 @@ This algorithm, called the Nagle algorithm, takes a few lines of code in all TCP
 TCP windows
 -----------
 
-From a performance point of view, one of the main limitations of the original TCP specification is the 16 bits `window` field in the TCP header. As this field indicates the current size of the receive window in bytes, it limits the TCP receive window at 65535 bytes. This limitation was not a severe problem when TCP was designed since at that time high-speed wide area networks offered a maximum bandwidth of 56 kbps. However, in today's network, this limitation is not acceptable anymore. The table below provides the rough [#faveragebandwidth]_ maximum throughput that can be achieved by a TCP connection with a 64 KBytes window in function of the connection's round-trip-time 
+From a performance point of view, one of the main limitations of the original TCP specification is the 16 bits `window` field in the TCP header. As this field indicates the current size of the receive window in bytes, it limits the TCP receive window at 65535 bytes. This limitation was not a severe problem when TCP was designed since at that time high-speed wide area networks offered a maximum bandwidth of 56 kbps. However, in today's network, this limitation is not acceptable anymore. The table below provides the rough [#faveragebandwidth]_ maximum throughput that can be achieved by a TCP connection with a 64 KBytes window in function of the connection's round-trip-time. 
 
 ======== ==================  
  RTT     Maximum Throughput  
@@ -523,7 +522,7 @@ The `TIME\_WAIT` state is different from the other states of the TCP FSM. A TCP 
 
 .. note:: TIME\_WAIT on busy TCP servers
 
- The :math:`2*MSL` seconds delay in the `TIME\_WAIT` state is an important operational problem on servers having thousands of simultaneously opened TCP connections [FTY99]_. Consider for example a busy web server that processes 10.000 TCP connections every second. If each of these connections remain in the `TIME\_WAIT` state for 4 minutes, this implies that the server would have to maintain more than 2 million TCBs at any time. For this reason, some TCP implementations prefer to perform an abrupt connection release by sending a `RST` segment to close the connection [AW05]_ and immediately discard the corresponding :term:`TCB`. However, if the `RST` segment is lost, the remote host continues to maintain a :term:`TCB` for a connection no longer exists. This optimisation reduces the number of TCBs maintained by the host sending the `RST` segment but at the potential cost of increased processing on the remote host when the `RST` segment is lost.
+ The :math:`2*MSL` seconds delay in the `TIME\_WAIT` state is an important operational problem on servers having thousands of simultaneously opened TCP connections [FTY99]_. Consider for example a busy web server that processes 10.000 TCP connections every second. If each of these connections remain in the `TIME\_WAIT` state for 4 minutes, this implies that the server would have to maintain more than 2 million TCBs at any time. For this reason, some TCP implementations prefer to perform an abrupt connection release by sending a `RST` segment to close the connection [AW05]_ and immediately discard the corresponding :term:`TCB`. However, if the `RST` segment is lost, the remote host continues to maintain a :term:`TCB` for a connection that no longer exists. This optimisation reduces the number of TCBs maintained by the host sending the `RST` segment but at the potential cost of increased processing on the remote host when the `RST` segment is lost.
 
 .. tuning timewait http://publib.boulder.ibm.com/infocenter/wasinfo/v7r0/index.jsp?topic=/com.ibm.websphere.edge.doc/cp/admingd45.htm bad idea
 
