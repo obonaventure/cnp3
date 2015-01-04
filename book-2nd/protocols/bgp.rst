@@ -8,7 +8,7 @@
 Interdomain routing
 ===================
 
-As explained earlier, the Internet is composed of more than 45,000 different networks [#fasnum]_ called `domains`. Each domain is composed of a group of routers and hosts that are managed by the same organisation. Example domains include belnet_, sprint_, level3_, geant_, abilene_, cisco_ or google_ ... 
+As explained earlier, the Internet is composed of more than 45,000 different networks [#fasnum]_ called `domains`. Each domain is composed of a group of routers and hosts that are managed by the same organisation. Example domains include belnet_, sprint_, level3_, geant_, abilene_, cisco_ or Google_ ... 
 
 .. index:: stub domain, transit domain
 
@@ -20,7 +20,7 @@ Each domain contains a set of routers. From a routing point of view, these domai
    
    Transit and stub domains 
 
-The stub domains can be further classified by considering whether they mainly send or receive packets. An `access-rich` stub domain is a domain that contains hosts that mainly receive packets. Typical examples include small ADSL- or cable modem-based Internet Service Providers or enterprise networks. On the other hand, a `content-rich` stub domain is a domain that mainly produces packets. Examples of `content-rich` stub domains include google_, yahoo_, microsoft_, facebook_ or content distribution networks such as akamai_ or limelight_ For the last few years, we have seen a rapid growth of these `content-rich` stub domains. Recent measurements [ATLAS2009]_ indicate that a growing fraction of all the packets exchanged on the Internet are produced in the data centers managed by these content providers.
+The stub domains can be further classified by considering whether they mainly send or receive packets. An `access-rich` stub domain is a domain that contains hosts that mainly receive packets. Typical examples include small ADSL- or cable modem-based Internet Service Providers or enterprise networks. On the other hand, a `content-rich` stub domain is a domain that mainly produces packets. Examples of `content-rich` stub domains include Google_, Yahoo_, Microsoft_, Facebook_ or content distribution networks such as Akamai_ or Limelight_. For the last few years, we have seen a rapid growth of these `content-rich` stub domains. Recent measurements [ATLAS2009]_ indicate that a growing fraction of all the packets exchanged on the Internet are produced in the data centers managed by these content providers.
 
 Domains need to be interconnected to allow a host inside a domain to exchange IP packets with hosts located in other domains. From a physical perspective, domains can be interconnected in two different ways. The first solution is to directly connect a router belonging to the first domain with a router inside the second domain. Such links between domains are called private interdomain links or `private peering links`. In practice, for redundancy or performance reasons, distinct physical links are usually established between different routers in the two domains that are interconnected. 
 
@@ -65,7 +65,7 @@ Coming back to the figure above, `AS4` advertises to its two providers `AS1` and
 
 The second type of peering relationship is the `shared-cost` peering relationship. Such a relationship usually does not involve a payment from one domain to the other in contrast with the `customer->provider` relationship. A `shared-cost` peering relationship is usually established between domains having a similar size and geographic coverage. For example, consider the figure above. If `AS3` and `AS4` exchange many packets via `AS1`, they both need to pay `AS1`. A cheaper alternative for `AS3` and `AS4` would be to establish a `shared-cost` peering. Such a peering can be established at IXPs where both `AS3` and `AS4` are present or by using private peering links. This `shared-cost` peering should be used to exchange packets between hosts inside `AS3` and hosts inside `AS4`. However, `AS3` does not want to receive on the `AS3-AS4` `shared-cost` peering links packets whose destination belongs to `AS1` as `AS3` would have to pay to send these packets to `AS1`.  
 
-From a routing perspective, over a `shared-cost` peering relationship a domain only advertises its internal routes and the routes that it has learned from its customers. This restriction ensures that only packets destined to the local domain or one of its customers is received over the `shared-cost` peering relationship. This implies that the routes that have been learned from a provider or from another `shared-cost` peer is not advertised over a `shared-cost` peering relationship. This is motivated by economical reasons. If a domain were to advertise the routes that it learned from a provider over a `shared-cost` peering relationship that does not bring revenue, it would have allowed its `shared-cost` peer to use the link with its provider without any payment. If a domain were to advertise the routes it learned over a `shared cost` peering over another `shared-cost` peering relationship, it would have allowed these `shared-cost` peers to use its own network (which may span one or more continents) freely to exchange packets. 
+From a routing perspective, over a `shared-cost` peering relationship a domain only advertises its internal routes and the routes that it has learned from its customers. This restriction ensures that only packets destined to the local domain or one of its customers is received over the `shared-cost` peering relationship. This implies that the routes that have been learned from a provider or from another `shared-cost` peer is not advertised over a `shared-cost` peering relationship. This is motivated by economical reasons. If a domain were to advertise the routes that it learned from a provider over a `shared-cost` peering relationship that does not bring revenue, it would have allowed its `shared-cost` peer to use the link with its provider without any payment. If a domain were to advertise the routes it learned over a `shared cost` peering over another `shared-cost` peering relationship, it would have allowed these `shared-cost` peers to use its own network (which may span across one or more continents) freely to exchange packets. 
 
 .. index:: sibling peering relationship
 
@@ -75,9 +75,9 @@ Finally, the last type of peering relationship is the `sibling`. Such a relation
 
 These different types of relationships are implemented in the `interdomain routing policies` defined by each domain. The `interdomain routing policy` of a domain is composed of three main parts : 
 
- - the `import filter` that specifies, for each peering relationship, the routes that can be accepted from the neighbouring domain (the non-acceptable routes are ignored and the domain never uses them to forward packets) 
- - the `export filter` that specifies, for each peering relationship, the routes that can be advertised to the neighbouring domain  
- - the `ranking` algorithm that is used to select the best route among all the routes that the domain has received towards the same destination prefix  
+ - the `import filter` that specifies, for each peering relationship, the routes that can be accepted from the neighbouring domain (the non-acceptable routes are ignored and the domain never uses them to forward packets).
+ - the `export filter` that specifies, for each peering relationship, the routes that can be advertised to the neighbouring domain.
+ - the `ranking` algorithm that is used to select the best route among all the routes that the domain has received towards the same destination prefix.  
 
 .. index:: import policy, export policy
 
@@ -96,9 +96,9 @@ The figure below provides a simple example of import and export filters for two 
 The Border Gateway Protocol
 ---------------------------
 
-The Internet uses a single interdomain routing protocol : the Border Gateway Protocol (BGP). The current version of BGP is defined in :rfc:`4271`. BGP differs from the intradomain routing protocols that we have already discussed in several ways. First, BGP is a `path-vector` protocol. When a BGP router advertises a route towards a prefix, it announces the IP prefix and the interdomain path used to reach this prefix. From BGP's point of view, each domain is identified by a unique `Autonomous System` (AS) number [#fasdomain]_ and the interdomain path contains the AS numbers of the transit domains that are used to reach the associated prefix. This interdomain path is called the `AS Path`. Thanks to these AS-Paths, BGP does not suffer from the count-to-infinity problems that affect distance vector routing protocols. Furthermore, the AS-Path can be used to implement some routing policies. Another difference between BGP and the intradomain routing protocols is that a BGP router does not send the entire contents of its routing table to its neighbours regularly. Given the size of the global Internet, routers would be overloaded by the number of BGP messages that they would need to process. BGP uses incremental updates, i.e. it only announces the routes that have changed to its neighbors.
+The Internet uses a single interdomain routing protocol : the Border Gateway Protocol (BGP). The current version of BGP is defined in :rfc:`4271`. BGP differs from the intradomain routing protocols that we have already discussed in several ways. First, BGP is a `path-vector` protocol. When a BGP router advertises a route towards a prefix, it announces the IP prefix and the interdomain path used to reach this prefix. From BGP's point of view, each domain is identified by a unique `Autonomous System` (AS) number [#fasdomain]_ and the interdomain path contains the AS numbers of the transit domains that are used to reach the associated prefix. This interdomain path is called the `AS Path`. Thanks to these AS-Paths, BGP does not suffer from the count-to-infinity problems that affect distance vector routing protocols. Furthermore, the AS-Path can be used to implement some routing policies. Another difference between BGP and the intradomain routing protocols is that a BGP router does not send the entire content of its routing table to its neighbours regularly. Given the size of the global Internet, routers would be overloaded by the number of BGP messages that they would need to process. BGP uses incremental updates, i.e. it only announces the routes that have changed to its neighbors.
 
-The figure below shows a simple example of the BGP routes that are exchanged between domains. In this example, prefix `2001:db8:1234/48` is announced by `AS1`. `AS1` advertises a BGP route towards this prefix to `AS2`. The AS-Path of this route indicates that `AS1` is the originator of the prefix. When `AS4` receives the BGP route from `AS1`, it re-announces it to `AS2` and adds its AS number to the AS-Path. `AS2` has learned two routes towards prefix `2001:db8:1234/48`. It compares the two routes and prefers the route learned from `AS4` based on its own ranking algorithm. `AS2` advertises to `AS5` a route towards `2001:db8:1234/48` with its AS-Path set to `AS2:AS4:AS1`. Thanks to the AS-Path, `AS5` knows that if it sends a packet towards `2001:db8:1234/48` the packet first passes through `AS2`, then through `AS4` before reaching its destination inside `AS1`.
+The figure below shows a simple example of the BGP routes that are exchanged between domains. In this example, prefix `2001:db8:cafe/48` is announced by `AS1`. `AS1` advertises a BGP route towards this prefix to `AS2` and `AS4`. The AS-Path of this route indicates that `AS1` is the originator of the prefix. When `AS4` receives the BGP route from `AS1`, it re-announces it to `AS2` and adds its AS number to the AS-Path. `AS2` has learned two routes towards prefix `2001:db8:cafe/48`. It compares the two routes and prefers the route learned from `AS4` based on its own ranking algorithm. `AS2` advertises to `AS5` a route towards `2001:db8:cafe/48` with its AS-Path set to `AS2:AS4:AS1`. Thanks to the AS-Path, `AS5` knows that if it sends a packet towards `2001:db8:cafe/48` the packet first passes through `AS2`, then through `AS4` before reaching its destination inside `AS1`.
 
 .. figure:: /protocols/figures/bgp-example.*
    :align: center
@@ -122,7 +122,7 @@ In practice, to establish a BGP session between routers `R1` and `R2` in the fig
 
 The BGP protocol :rfc:`4271` defines several types of messages that can be exchanged over a BGP session :
 
- - `OPEN` : this message is sent as soon as the TCP connection between the two routers has been established. It initialises the BGP session and allows the negotiation of some options. Details about this message may be found in :rfc:`4271`
+ - `OPEN` : this message is sent as soon as the TCP connection between the two routers has been established. It initialises the BGP session and allows the negotiation of some options. Details about this message may be found in :rfc:`4271`.
  - `NOTIFICATION` : this message is used to terminate a BGP session, usually because an error has been detected by the BGP peer. A router that sends or receives a `NOTIFICATION` message immediately shutdowns the corresponding BGP session.
  - `UPDATE`: this message is used to advertise new or modified routes or to withdraw previously advertised routes.
  - `KEEPALIVE` : this message is used to ensure a regular exchange of messages on the BGP session, even when no route changes. When a BGP router has not sent an `UPDATE` message during the last 30 seconds, it shall send a `KEEPALIVE` message to confirm to the other peer that it is still up. If a peer does not receive any BGP message during a period of 90 seconds [#fdefaultkeepalive]_, the BGP session is considered to be down and all the routes learned over this session are withdrawn. 
@@ -183,7 +183,7 @@ In the above pseudo-code, the `build\_BGP\_UPDATE(d)` procedure extracts from th
 
  def apply_export_filter(RemoteAS, BGPMsg) :
    # check if RemoteAS already received route
-   if RemoteAS is BGPMsg.ASPath :
+   if RemoteAS in BGPMsg.ASPath :
       BGPMsg=None
       # Many additional export policies can be configured : 
       # Accept or refuse the BGPMsg 
@@ -276,8 +276,8 @@ If the link between `R2` and `R3` fails, `R3` detects the failure as it did not 
 
  A frequent practical question about the operation of BGP is how a BGP router decides to originate or advertise a route for the first time. In practice, this occurs in two situations :
 
-  - the router has been manually configured by the network operator to always advertise one or several routes on a BGP session. For example, on the BGP session between UCLouvain and its provider, belnet_ , UCLouvain's router always advertises the `2001:6a8:3080/48` IPv6 prefix assigned to the campus network
-  - the router has been configured by the network operator to advertise over its BGP session some of the routes that it learns with its intradomain routing protocol. For example, an enterprise router may advertise over a BGP session with its provider the routes to remote sites when these routes are reachable and advertised by the intradomain routing protocol
+  - the router has been manually configured by the network operator to always advertise one or several routes on a BGP session. For example, on the BGP session between UCLouvain and its provider, belnet_, UCLouvain's router always advertises the `2001:6a8:3080/48` IPv6 prefix assigned to the campus network.
+  - the router has been configured by the network operator to advertise over its BGP session some of the routes that it learns with its intradomain routing protocol. For example, an enterprise router may advertise over a BGP session with its provider the routes to remote sites when these routes are reachable and advertised by the intradomain routing protocol.
 
  The first solution is the most frequent. Advertising routes learned from an intradomain routing protocol is not recommended, this is because if the route flaps [#fflap]_, this would cause a large number of BGP messages being exchanged in the global Internet.
 
@@ -294,7 +294,7 @@ Besides the import and export filters, a key difference between BGP and the intr
 
 .. index:: BGP local-preference
 
-The first BGP attribute that is used to rank BGP routes is the `local-preference` (local-pref) attribute. This attribute is an unsigned integer that is attached to each BGP route received over an eBGP session by the associated import filter.
+The first BGP attribute that is used to rank BGP routes is the `local-preference` (local-pref) attribute. This attribute is an unsigned integer that is attached to each BGP route received over a BGP session by the associated import filter.
 
 When comparing routes towards the same destination prefix, a BGP router always prefers the routes with the highest `local-pref`. If the BGP router knows several routes with the same `local-pref`, it prefers among the routes having this `local-pref` the ones with the shortest AS-Path.
 
@@ -310,7 +310,7 @@ A common utilisation of `local-pref` is to support backup links. Consider the si
    
    How to create a backup link with BGP ?
 
-As BGP routers always prefer the routes with the highest `local-pref` attribute, this policy can be implemented using the following import filter on `R1`
+As BGP routers always prefer the routes with the highest `local-pref` attribute, this policy can be implemented using the following import filter on `R1`:
 
 .. code-block:: text
 
@@ -318,7 +318,7 @@ As BGP routers always prefer the routes with the highest `local-pref` attribute,
          from  AS2 RB at R1 set localpref=200;
          accept ANY
 
-With this import filter, all the BGP routes learned from `RB` over the high bandwidth links are preferred over the routes learned over the backup link. If the primary link fails, the corresponding routes are removed from `R1`'s RIB and `R1` uses the route learned from `RA`. `R1` reuses the routes via `RB` as soon as they are advertised by `RB` once the `R1-RB` link comes back.
+With this import filter, all the BGP routes learned from `RB` over the high bandwidth links are preferred over the routes learned over the backup link. If the primary link fails, the corresponding routes are removed from `R1`'s RIB and `R1` uses the routes learned from `RA`. `R1` reuses the routes via `RB` as soon as they are advertised by `RB` once the `R1-RB` link comes back.
 
 The import filter above modifies the selection of the BGP routes inside `AS1`. Thus, it influences the route followed by the packets forwarded by `AS1`. In addition to using the primary link to send packets, `AS1` would like to receive its packets via the high bandwidth link. For this, `AS2` also needs to set the `local-pref` attribute in its import filter.
 
@@ -346,7 +346,7 @@ Sometimes, the `local-pref` attribute is used to prefer a `cheap` link compared 
          accept ANY
 
 
-However, this import filter does not influence how `AS3` , for example, prefers some routes over others. If the link between `AS3` and `AS2` is less expensive than the link between `AS3` and `AS4`, `AS3` could send all its packets via `AS2` and `AS1` would receive packets over its expensive link. An important point to remember about `local-pref` is that it can be used to prefer some routes over others to send packets, but it has no influence on the routes followed by received packets.
+However, this import filter does not influence how `AS3`, for example, prefers some routes over others. If the link between `AS3` and `AS2` is less expensive than the link between `AS3` and `AS4`, `AS3` could send all its packets via `AS2` and `AS1` would receive packets over its expensive link. An important point to remember about `local-pref` is that it can be used to prefer some routes over others to send packets, but it has no influence on the routes followed by received packets.
 
 Another important utilisation of the `local-pref` attribute is to support the `customer->provider` and `shared-cost` peering relationships. From an economic point of view, there is an important difference between these three types of peering relationships. A domain usually earns money when it sends packets over a `provider->customer` relationship. On the other hand, it must pay its provider when it sends packets over a `customer->provider` relationship. Using a `shared-cost` peering to send packets is usually neutral from an economic perspective. To take into account these economic issues, domains usually configure the import filters on their routers as follows :
 
@@ -362,7 +362,7 @@ With such an import filter, the routers of a domain always prefer to reach desti
    
    Asymmetry of Internet paths
 
-Consider in this internetwork the routes available inside `AS1` to reach `AS5`. `AS1` learns the `AS4:AS6:AS7:AS5` path from `AS4`, the `AS3:AS8:AS5` path from `AS3` and the `AS2:AS5` path from `AS2`. The first path is chosen since it was learned from a customer. `AS5` on the other hand receives three paths towards `AS1` via its providers. It may select any of these paths to reach `AS1` , depending on how it prefers one provider over the others.
+Consider in this internetwork the routes available inside `AS1` to reach `AS5`. `AS1` learns the `AS4:AS6:AS7:AS5` path from `AS4`, the `AS3:AS8:AS5` path from `AS3` and the `AS2:AS5` path from `AS2`. The first path is chosen since it was learned from a customer. `AS5` on the other hand receives three paths towards `AS1` via its providers. It may select any of these paths to reach `AS1`, depending on how it prefers one provider over the others.
 
 
 
@@ -381,13 +381,13 @@ In the previous sections, we have explained the operation of BGP routers. Compar
 
 In this internetwork, we focus on the route towards `2001:db8::1234/48` which is advertised by `AS1`. Let us also assume that `AS3` (resp. `AS4`) prefers, e.g. for economic reasons, a route learned from `AS4` (`AS3`) over a route learned from `AS1`. When `AS1` sends `U(2001:db8::1234/48,AS1)` to `AS3` and `AS4`, three sequences of exchanges of BGP messages are possible :
 
- #. `AS3` sends first `U(2001:db8:1234/48,AS3:AS1)` to `AS4`. `AS4` has learned two routes towards `2001:db8:1234/48`. It runs its BGP decision process and selects the route via `AS3` and does not advertise a route to `AS3`
- #. `AS4` first sends `U(2001:db8:1234/48,AS3:AS1)` to `AS3`. `AS3` has learned two routes towards `2001:db8:1234/48`. It runs its BGP decision process and selects the route via `AS4` and does not advertise a route to `AS4`
+ #. `AS3` sends first `U(2001:db8:1234/48,AS3:AS1)` to `AS4`. `AS4` has learned two routes towards `2001:db8:1234/48`. It runs its BGP decision process and selects the route via `AS3` and does not advertise a route to `AS3`.
+ #. `AS4` first sends `U(2001:db8:1234/48,AS3:AS1)` to `AS3`. `AS3` has learned two routes towards `2001:db8:1234/48`. It runs its BGP decision process and selects the route via `AS4` and does not advertise a route to `AS4`.
  #. `AS3` sends `U(2001:db8:1234/48,AS3:AS1)` to `AS4` and, at the same time, `AS4` sends `U(2001:db8:1234/48,AS4:AS1)`.  `AS3` prefers the route via `AS4` and thus sends `W(2001:db8:1234/48)` to `AS4`. In the mean time, `AS4` prefers the route via `AS3` and thus sends `W(2001:db8:1234/48)` to `AS3`. Upon reception of the `BGP Withdraws`, `AS3` and `AS4` only know the direct route towards `2001:db8:1234/48`. `AS3` (resp. `AS4`) sends `U(2001:db8:1234/48,AS3:AS1)` (resp. `U(2001:db8:1234/48,AS4:AS1)`) to `AS4` (resp. `AS3`). `AS3` and `AS4` could in theory continue to exchange BGP messages for ever. In practice, one of them sends one message faster than the other and BGP converges. 
 
 The example above has shown that the routes selected by BGP routers may sometimes depend on the ordering of the BGP messages that are exchanged. Other similar scenarios may be found in :rfc:`4264`. 
 
-From an operational perspective, the above configuration is annoying since the network operators cannot easily predict which paths are chosen. Unfortunately, there are even more annoying BGP configurations. For example, let us consider the configuration below which is often named `Bad Gadget` [GW1999]_
+From an operational perspective, the above configuration is annoying since the network operators cannot easily predict which paths are chosen. Unfortunately, there are even more annoying BGP configurations. For example, let us consider the configuration below which is often named `Bad Gadget` [GW1999]_ :
 
 .. figure:: /../book/network/svg/bad-gadget.png
    :align: center
@@ -415,7 +415,7 @@ This example shows that the convergence of BGP is unfortunately not always guara
 
 Fortunately, there are some operational guidelines [GR2001]_ [GGR2001]_ that can guarantee BGP convergence in the global Internet. To ensure that BGP will converge, these guidelines consider that there are two types of peering relationships : `customer->provider` and `shared-cost`. In this case, BGP convergence is guaranteed provided that the following conditions are fulfilled :
 
- #. The topology composed of all the directed `customer->provider` peering links is an acyclic graph
+ #. The topology composed of all the directed `customer->provider` peering links is an acyclic graph.
  #. An AS always prefers a route received from a `customer` over a route received from a `shared-cost` peer or a `provider`.
 
 
@@ -425,7 +425,7 @@ The second guideline also corresponds to economic preferences. Since a provider 
 
 From a theoretical perspective, these guidelines should be verified automatically to ensure that BGP will always converge in the global Internet. However, such a verification cannot be performed in practice because this would force all domains to disclose their routing policies (and few are willing to do so) and furthermore the problem is known to be NP-hard [GW1999]. 
 
-In practice, researchers and operators expect that these guidelines are verified [#fgranularity]_ in most domains. Thanks to the large amount of BGP data that has been collected by operators and researchers [#fbgpdata]_, several studies have analysed the AS-level topology of the Internet. [SARK2002]_ is one of the first analysis. More recent studies include [COZ2008]_ and [DKF+2007]_
+In practice, researchers and operators expect that these guidelines are verified [#fgranularity]_ in most domains. Thanks to the large amount of BGP data that has been collected by operators and researchers [#fbgpdata]_, several studies have analysed the AS-level topology of the Internet. [SARK2002]_ is one of the first analysis. More recent studies include [COZ2008]_ and [DKF+2007]_.
 
 Based on these studies and [ATLAS2009]_, the AS-level Internet topology can be summarised as shown in the figure below.
 
@@ -439,9 +439,9 @@ Based on these studies and [ATLAS2009]_, the AS-level Internet topology can be s
 
 The domains on the Internet can be divided in about four categories according to their role and their position in the AS-level topology. 
 
- - the core of the Internet is composed of a dozen-twenty `Tier-1` ISPs. A `Tier-1` is a domain that has no `provider`. Such an ISP has `shared-cost` peering relationships with all other `Tier-1` ISPs and `provider->customer` relationships with smaller ISPs. Examples of `Tier-1` ISPs include sprint_, level3_ or opentransit_
- - the `Tier-2` ISPs are national or continental ISPs that are customers of `Tier-1` ISPs. These `Tier-2` ISPs have smaller customers and `shared-cost` peering relationships with other `Tier-2` ISPs. Example of `Tier-2` ISPs include France Telecom, Belgacom, British Telecom, ...
- - the `Tier-3` networks are either stub domains such as enterprise or campus networks networks and smaller ISPs. They are customers of Tier-1 and Tier-2 ISPs and have sometimes `shared-cost` peering relationships
+ - the core of the Internet is composed of a dozen-twenty `Tier-1` ISPs. A `Tier-1` is a domain that has no `provider`. Such an ISP has `shared-cost` peering relationships with all other `Tier-1` ISPs and `provider->customer` relationships with smaller ISPs. Examples of `Tier-1` ISPs include sprint_, level3_ or opentransit_.
+ - the `Tier-2` ISPs are national or continental ISPs that are customers of `Tier-1` ISPs. These `Tier-2` ISPs have smaller customers and `shared-cost` peering relationships with other `Tier-2` ISPs. Examples of `Tier-2` ISPs include France Telecom, Belgacom, British Telecom, ...
+ - the `Tier-3` networks are either stub domains such as enterprise or campus networks networks and smaller ISPs. They are customers of Tier-1 and Tier-2 ISPs and have sometimes `shared-cost` peering relationships.
  - the large content providers that are managing large datacenters. These content providers are producing a growing fraction of the packets exchanged on the global Internet [ATLAS2009]_. Some of these content providers are customers of Tier-1 or Tier-2 ISPs, but they often try to establish `shared-cost` peering relationships, e.g. at IXPs, with many Tier-1 and Tier-2 ISPs.
 
 Due to this organisation of the Internet and due to the BGP decision process, most AS-level paths on the Internet have a length of 3-5 AS hops. 
@@ -455,7 +455,7 @@ Due to this organisation of the Internet and due to the BGP decision process, mo
 
 .. [#fasnum] An analysis of the evolution of the number of domains on the global Internet during the last ten years may be found in http://www.potaroo.net/tools/asn32/
 
-.. [#fasrank] See http://as-rank.caida.org/ for an  analysis of the interconnections between domains based on measurements collected in the global Internet
+.. [#fasrank] See http://as-rank.caida.org/ for an  analysis of the interconnections between domains based on measurements collected in the global Internet.
 
 
 .. [#fwish] Two routers that are attached to the same IXP only exchange packets when the owners of their domains have an economical incentive to exchange packets on this IXP. Usually, a router on an IXP is only able to exchange packets with a small fraction of the routers that are present on the same IXP.

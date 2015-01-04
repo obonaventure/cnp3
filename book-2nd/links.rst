@@ -156,7 +156,7 @@
 
 .. _level3: http://www.level3.com
 
-.. _google: http://www.google.com
+.. _Google: http://www.google.com
 
 .. _bing: http://www.bing.com
 
@@ -166,19 +166,19 @@
 
 .. _youtube: http://www.youtube.com
 
-.. _yahoo: http://www.yahoo.com
+.. _Yahoo: http://www.yahoo.com
 
-.. _microsoft: http://www.microsoft.com
+.. _Microsoft: http://www.microsoft.com
 
-.. _facebook: http://www.facebook.com
+.. _Facebook: http://www.facebook.com
 
-.. _akamai: http://www.akamai.com
+.. _Akamai: http://www.akamai.com
 
 .. _sprint: https://www.sprint.net/
 
 .. _opentransit: http://www.opentransit.net
 
-.. _limelight: http://uk.limelightnetworks.com/index.php
+.. _Limelight: http://uk.limelightnetworks.com/index.php
 
 .. _Olivier Bonaventure: http://inl.info.ucl.ac.be/obo
 
