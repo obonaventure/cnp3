@@ -15,7 +15,7 @@ The first solution to transport IP packets over a serial line was proposed in :r
 While SLIP was implemented and used in some environments, it had several limitations discussed in :rfc:`1055`. The `Point-to-Point Protocol` (PPP) was designed shortly after and is specified in :rfc:`1548`. PPP aims to support IP and other network layer protocols over various types of serial lines. PPP is in fact a family of three protocols that are used together :
  
  #. The `Point-to-Point Protocol` defines the framing technique to transport network layer packets.
- #. The `Link Control Protocol` that is used to negotiate options and authenticate the session by using username and password or other types of credentials
+ #. The `Link Control Protocol` that is used to negotiate options and authenticate the session by using username and password or other types of credentials.
  #. The `Network Control Protocol` that is specific for each network layer protocol. It is used to negotiate options that are specific for each protocol. For example, IPv4's NCP :rfc:`1548` can negotiate the IPv4 address to be used, the IPv4 address of the DNS resolver. IPv6's NCP is defined in :rfc:`5072`.
 
 The PPP framing :rfc:`1662` was inspired by the datalink layer protocols standardised by ITU-T and ISO. A typical PPP frame is composed of the fields shown in the figure below. A PPP frame starts with a one byte flag containing `01111110`. PPP can use bit stuffing or character stuffing depending on the environment where the protocol is used. The address and control fields are present for backward compatibility reasons. The 16 bit Protocol field contains the identifier [#fpppid]_ of the network layer protocol that is carried in the PPP frame. `0x002d` is used for an IPv4 packet compressed with :rfc:`1144` while `0x002f` is used for an uncompressed IPv4 packet. `0xc021` is used by the Link Control Protocol, `0xc023` is used by the Password Authentication Protocol (PAP). `0x0057` is used for IPv6 packets. PPP supports variable length packets, but LCP can negotiate a maximum packet length. The PPP frame ends with a Frame Check Sequence. The default is a 16 bits CRC, but some implementations can negotiate a 32 bits CRC. The frame ends with the `01111110` flag.
@@ -34,4 +34,4 @@ PPP played a key role in allowing Internet Service Providers to provide dial-up 
 
 .. [#flapb] `LAPB <http://en.wikipedia.org/wiki/LAPB>`_ and `HDLC <http://en.wikipedia.org/wiki/HDLC>`_ were widely used datalink layer protocols. 
 
-.. [#fpppid] The IANA maintains the registry of all assigned PPP protocol fields at : http://www.iana.org/assignments/ppp-numbers
+.. [#fpppid] The IANA maintains the registry of all assigned PPP protocol fields at : http://www.iana.org/assignments/ppp-numbers.

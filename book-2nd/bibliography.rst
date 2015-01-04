@@ -6,6 +6,7 @@ Bibliography
 
 Whenever possible, the bibliography includes stable hypertext links to the references cited. 
 
+.. [802] IEEE, Std 802-2001 : IEEE Standard for Local and Metropolitan Area Networks: Overview and Architecture, Available from http://standards.ieee.org/getieee802/download/802-2001.pdf
 .. [IEEE802.11] LAN/MAN Standards Committee of the IEEE Computer Society. `IEEE Standard for Information Technology - Telecommunications and information exchange between systems - local and  metropolitan area networks - specific requirements - Part 11 : Wireless LAN Medium Access Control (MAC) and Physical Layer (PHY) Specifications <http://standards.ieee.org/getieee802/802.11.html>`_. IEEE, 1999. 
 .. [IEEE802.1d] LAN/MAN Standards Committee of the IEEE Computer Society, `IEEE Standard for Local and metropolitan area networks Media Access Control (MAC) Bridges <http://standards.ieee.org/getieee802/download/802.1D-2004.pdf>`_ , IEEE Std 802.1DTM-2004, 2004, 
 .. [IEEE802.1q] LAN/MAN Standards Committee of the IEEE Computer Society, `IEEE Standard for Local and metropolitan area networks— Virtual Bridged Local Area Networks <http://standards.ieee.org/getieee802/download/802.1Q-2005.pdf>`_, 2005, 
