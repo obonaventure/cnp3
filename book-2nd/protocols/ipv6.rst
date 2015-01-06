@@ -519,7 +519,7 @@ The `Packet Too Big` ICMP messages enable the source endhost to discover the MTU
 
 If ``A`` sends a 1500 bytes packet, ``R1`` will return an ICMPv6 error message indicating a maximum packet length of 1400 bytes. ``A`` would then fragment the packet before retransmitting it. The small fragment would go through, but the large fragment will be refused by ``R2`` that would return an ICMPv6 error message. ``A`` can refragment the packet and send it to the final destination as two fragments.
 
-In practice, an IPv6 implementation does not store the transmitted packets to be able to retransmit them if needed. However, since TCP (and SCTP) buffer the segments that they transmit, a similar approach can be used in transport protocols to detect the maximum MTU on a path towards a given destination. This technique is called PathMTU Discovery :rfc:`1981`.
+In practice, an IPv6 implementation does not store the transmitted packets to be able to retransmit them if needed. However, since TCP (and SCTP) buffer the segments that they transmit, a similar approach can be used in transport protocols to detect the maximum MTU on a path towards a given destination. This technique is called Path MTU Discovery :rfc:`1981`.
 
 .. index:: Path MTU discovery
 
