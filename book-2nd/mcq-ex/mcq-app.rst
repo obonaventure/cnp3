@@ -186,13 +186,13 @@ Electronic mail
 
       .. comment:: The `HELO` command must be the first command issued on an SMTP session. It is always followed by a domain name
 
-   .. positive:: The `MAIL FROM:` command must be issued before the `DATA` comment. It contains as parameter a valid email address as in the example below :
+   .. positive:: The `MAIL FROM:` command must be issued before the `DATA` command. It contains as parameter a valid email address as in the example below :
 
       .. code-block:: console 
 
          MAIL FROM: <alice@example.net>
 
-   .. negative:: The `MAIL FROM:` command can only be issued after the `DATA` comment. It contains as parameter a valid email address as in the example below :
+   .. negative:: The `MAIL FROM:` command can only be issued after the `DATA` command. It contains as parameter a valid email address as in the example below :
 
       .. code-block:: console 
 
