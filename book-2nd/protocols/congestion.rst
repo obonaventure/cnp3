@@ -57,8 +57,8 @@ Most TCP implementations update the congestion window when they receive an ackno
        cwnd = cwnd + MSS
      else:
        # congestion avoidance : increase slowly cwnd
-       # increase cwnd by one mss every rtt
-       cwnd = cwnd+ mss*(mss/cwnd)
+       # increase cwnd by one MSS every rtt
+       cwnd = cwnd+ MSS*(MSS/cwnd)
    else: # duplicate or old ack
      if tcp.ack==snd.una:    # duplicate acknowledgement
        dupacks++
@@ -71,7 +71,7 @@ Most TCP implementations update the congestion window when they receive an ackno
   
    Expiration of the retransmission timer:
     send(snd.una)     # retransmit first lost segment
-    sshtresh=max(cwnd/2,2*MSS)
+    ssthresh=max(cwnd/2,2*MSS)
     cwnd=MSS
   
  
