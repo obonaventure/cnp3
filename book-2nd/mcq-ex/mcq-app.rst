@@ -238,7 +238,7 @@ The HyperText Transfer Protocol
 
    .. negative:: ``http:example.net``
  
-      .. comment:: In a URI, must be followed by the characters `:` and ``//`
+      .. comment:: In a URI, must be followed by the characters `:` and ``//``
    .. positive:: ``http://example.net@/example.com``
 
       .. comment:: This URI is valid, the string ``example.net`` corresponds to the authority part of the BNF that defines the format of the URI.

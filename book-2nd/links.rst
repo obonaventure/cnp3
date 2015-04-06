@@ -79,7 +79,6 @@
 
 .. _ASCII: http://en.wikipedia.org/wiki/ASCII
 
-
 .. _dig: http://linux.die.net/man/1/dig
 
 .. _curl: http://curl.haxx.se/

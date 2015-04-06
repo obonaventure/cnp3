@@ -78,7 +78,7 @@ packetdrill_ can also inject data that will be read by the stack as shown by the
 
 In the example above, packetdrill_ injects a segment containing two bytes. This segment is acknowledged and after that the :manpage:`read` system call succeeds and reads the available data with a buffer of 1000 bytes. It returns the amount of read bytes, i.e. ``2``.
 
-We can now close the connection gracefully. Let us first issue inject a segment with the ``FIN` flag set.
+We can now close the connection gracefully. Let us first issue inject a segment with the ``FIN`` flag set.
 
 .. code-block:: console
  
@@ -95,7 +95,7 @@ packetdrill_ injects the ``FIN`` segment and the instrumented kernel returns an 
    +0 < . 4:4(0) ack 12 win 4000
 
 
-The complete packetdrill_ script is available from :download:`exercices/packetdrill_scripts/connect.pkt`
+The complete packetdrill_ script is available from :download:`/exercises/packetdrill_scripts/connect.pkt`
 
 
 packetdrill_ can be used to explore in details the operation of the Linux TCP implementation to understand how it reacts to system calls and the reception of packets.
@@ -471,7 +471,7 @@ Consider a TCP connection where no data has been exchanged that needs to be grac
 
 .. rubric:: Footnotes
 
-.. [#fsysctl] On Linux, most of the parameters to tune the TCP stack are accessible via :manpage:`sysctl`. The :download:`exercices/packetdrill_scripts/sysctl-cnp3.conf` file contains all the sysctl variables that we change to disable these various TCP extensions.
+.. [#fsysctl] On Linux, most of the parameters to tune the TCP stack are accessible via :manpage:`sysctl`. The :download:`/exercises/packetdrill_scripts/sysctl-cnp3.conf` file contains all the sysctl variables that we change to disable these various TCP extensions.
 
 .. [#ftcpdump_pdrill] By default, packetdrill_ uses port 8080 when creating TCP segments. You can thus capture the packets injected by packetdrill_ and the responses from the stack by using. 
 

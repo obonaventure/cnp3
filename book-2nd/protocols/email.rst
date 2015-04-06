@@ -354,7 +354,7 @@ To send an email, the client must first provide the address of the recipient wit
 
  Given the amount of spam messages, SMTP servers are no longer open :rfc:`5068`. Several extensions to SMTP have been developed in recent years to deal with this problem. For example, the SMTP authentication scheme defined in :rfc:`4954` can be used by an SMTP server to authenticate a client. Several techniques have also been proposed to allow SMTP servers to `authenticate` the messages sent by their users :rfc:`4870` :rfc:`4871` .
 
-.. _POP:
+.. _POPprotocol:
 .. index:: Post Office Protocol
 
 The Post Office Protocol

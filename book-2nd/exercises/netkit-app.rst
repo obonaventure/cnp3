@@ -67,27 +67,27 @@ Starting Netkit in the lab
 
 Netkit_ has been installed in the INGI labs. In order to run the Netkit network emulator, launch the following commands:
 
- .. code:: console
+ .. code-block:: console
     
     ssh -Y <ingilogin>@permeke.info.ucl.ac.be
     export PATH=$PATH:/etinfo/applications/netkit/bin
 
 To launch a single host instance, use the command ``vstart``:
 
- .. code:: console
+ .. code-block:: console
    
     vstart hostname
 
 To launch the DNS lab[#fdnslab]_, use the following commands:
 
- .. code:: console
+ .. code-block:: console
  
     cp -r /etinfo/applications/netkit/dnslab/ $HOME/	# do not forget the trailing /'s
     lstart -f -d $HOME/dnslab
 
 An interesting option for ``lstart`` is this one in order to use Gnome-Terminal instead of Xterm windows:
 
- .. code:: console
+ .. code-block:: console
  
     lstart -f -d $HOME/dnslab -o --xterm=gnome
 
@@ -95,13 +95,13 @@ To stop the lab, please stop all the involved instances by using the command ``h
 
 Do not forget to cleanup the virtual disks when you are finished:
 
- .. code:: console
+ .. code-block:: console
 
     rm -f $HOME/dnslab/\*.disk
 
 Note that you can also use ``lcrash`` command in order to immediately stop all your instances and remove all virtual disks.
 
- .. code:: console
+ .. code-block:: console
 
     lcrash -d $HOME/dnslab
 
@@ -124,7 +124,7 @@ To begin experimentation, start the lab by using the commands explained above. I
 
 For this, you should use the ``dig`` command whose syntax is :
 
- .. code:: console
+ .. code-block:: console
 
     dig @server -t type FQDN
 
@@ -143,7 +143,7 @@ You have learned that DNS can work in two ways: Forward and Reverse. We will now
 
 Again, you should use the ``dig`` command but with the ``-x`` option.
 
- .. code:: console
+ .. code-block:: console
 
     dig @server -x ipv6
 
@@ -158,7 +158,7 @@ We will create the website on ``pc2`` and we will call it ``helloworld.nanoinsid
 
 Once the DNS entry is set up, it is time to configure the web server. ``Apache2`` is installed. See http://tuxtweaks.com/2009/07/how-to-configure-apache-linux/ for a tutorial. The final goal is to see "Hello world !" when accessing the website:
 
- .. code:: console
+ .. code-block:: console
 
     $ curl -s helloworld.nanoinside.net
     Hello world !

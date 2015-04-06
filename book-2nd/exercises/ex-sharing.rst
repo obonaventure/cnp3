@@ -20,6 +20,10 @@ To understand the operation of Medium Access Control algorithms, it is often int
      :libs: positioning, matrix, arrows
 
      \colorlet{lightgray}{black!20}
+     \tikzstyle{arrow} = [thick,->,>=stealth]
+     \tikzset{router/.style = {rectangle, draw, text centered, minimum height=2em}, }
+     \tikzset{host/.style = {circle, draw, text centered, minimum height=2em}, }
+     \tikzset{ftable/.style={rectangle, dashed, draw} }
      \draw[very thick, -, fill=red, red] (0.9,10) -- (1.1,10) -- ( 1.1, 10.1) -- (0.9,10.1);
      \node [red, fill=white] at (1,10.5) {A};
      \draw[very thick, -, fill=blue, blue] (8.9,10) -- (9.1,10) -- ( 9.1, 10.1) -- (8.9,10.1);

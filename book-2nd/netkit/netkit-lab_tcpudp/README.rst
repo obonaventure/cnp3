@@ -13,7 +13,7 @@ there is a webserver on a different collision domain than the hosts.
 On the webserver, you have files you can download. The router has a fixed
 maximum bandwidth of 1 Mb/s.
 
-  .. figure:: ../../../png/labs/webserver/figure.png
+  .. figure:: webserver.png
      :align: center
      :scale: 100
 
@@ -30,26 +30,28 @@ To modify tcp options, use the python script set_tcp_options.py. You can print
 the help with the command python set_tcp_options.py -h
 
 Our default options are 
-.. code-block::
- tcp_adv_win_scale = 0
- tcp_allowed_congestion_control = "reno"
- tcp_dsack = 0
- tcp_ecn = 0
- tcp_fack = 0
- tcp_frt = 0
- tcp_keepalive_time = 7200
- tcp_keepalive_intvl = 15
- tcp_low_latency = 0
- tcp_moderate_rcvbuf = 0
- tcp_mtu_probing = 2
- tcp_no_metrics_save = 1
- tcp_reordering = 3
- tcp_rmem = '4096 4096 4096'
- tcp_sack = 0
- tcp_slow_start_after_idle = 1
- tcp_timestamps = 0
- tcp_window_scaling = 0
- tcp_wmem = '4096 4096 4096'
+
+.. code-block:: console
+
+   tcp_adv_win_scale = 0
+   tcp_allowed_congestion_control = "reno"
+   tcp_dsack = 0
+   tcp_ecn = 0
+   tcp_fack = 0
+   tcp_frt = 0
+   tcp_keepalive_time = 7200
+   tcp_keepalive_intvl = 15
+   tcp_low_latency = 0
+   tcp_moderate_rcvbuf = 0
+   tcp_mtu_probing = 2
+   tcp_no_metrics_save = 1
+   tcp_reordering = 3
+   tcp_rmem = '4096 4096 4096'
+   tcp_sack = 0
+   tcp_slow_start_after_idle = 1
+   tcp_timestamps = 0
+   tcp_window_scaling = 0
+   tcp_wmem = '4096 4096 4096'
 
 All others are set to their default value
 
