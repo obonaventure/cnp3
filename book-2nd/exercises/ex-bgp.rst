@@ -157,7 +157,7 @@ In this lab, router ``r9`` announces via BGP an IPv6 prefix throughout the netwo
 
 You can have more advanced informations about how BGP runs on the routers by accessing to the ``bgpd`` daemon via ``telnet``:
 
- .. code:: console
+ .. code-block:: console
 
     telnet localhost bgpd
 
@@ -165,7 +165,7 @@ The password is ``zebra``, as usual.
 
 In the ``telnet`` terminal you can use:
 
- .. code:: console
+ .. code-block:: console
 
     show ipv6 bgp summary
     show ip bgp neighbors

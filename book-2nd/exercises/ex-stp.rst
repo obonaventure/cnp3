@@ -101,7 +101,7 @@ To launch the lab you have to go in the directory of the lab and launch it with 
 
 You can see that the 6 machines are launched. For the moment, no one of them runs STP. You will run it (via the ``brctl`` command) on two routers and activate wireshark on one of them as explained above. To activate the STP on one switch type in his terminal:
 
- .. code:: console
+ .. code-block:: console
 
     brctl stp br0 on
     ifconfig br0 up
@@ -109,7 +109,7 @@ You can see that the 6 machines are launched. For the moment, no one of them run
 With these two routers you can see what messages are exchanged for the root bridge election.
 You can see the state of a bridge by typing :
 
- .. code:: console
+ .. code-block:: console
 
     brctl showstp br0
 
@@ -119,7 +119,7 @@ Now, you can launch some other switches. By doing that you change the topology. 
 
 When all switches are launched, you can look at the bridge state of each switches: 
 
- .. code:: console
+ .. code-block:: console
 
     brctl showstp br0
 
@@ -127,13 +127,13 @@ You can see wich ports are in blocking state, wich are in forwarding state.
 
 You can also look at the port-station table by entering :
 
- .. code:: console
+ .. code-block:: console
 
     brctl showmacs br0
 
 You can make some links fail and observe what is happening. You can do that by stoping one interface on a switch or the entire bridge (if=br0) :
 
- .. code:: console
+ .. code-block:: console
 
     ifconfig IF down
 

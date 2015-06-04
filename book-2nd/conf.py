@@ -224,8 +224,9 @@ latex_elements = {
 
 tikz_libraries="positioning"
 
-
 tikz_proc_suite='pdf2svg'
+
+
 
 # -- Options for PDF output --------------------------------------------------
 # Grouping the document tree into PDF files. List of tuples # (source start file, target name, title, author, options). # # If there is more than one author, separate them with \\. # For example: r'Guido van Rossum\\Fred L. Drake, Jr., editor' #

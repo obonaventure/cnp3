@@ -242,4 +242,12 @@ Start by using :manpage:`tcpdump` on `router` to capture all the packets sent on
 9. Using a configuration with netem that includes a non-zero delay, packet losses and reordering, observe the benefits of using Selective Acknowledgements. For this, configure netem on the link between `router` and `webserver` and enable the selective acknowledgements with the ``tcp_sack`` configuration variable with ``sysctl`` on `Client2`. Observe the difference between `Client1`, which does not use the selective acknowledgements and `Client2`.
 
  
+.. include:: /links.rst
+
+
+ 
+
+ 
+
+
 

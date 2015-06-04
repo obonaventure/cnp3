@@ -2,7 +2,7 @@
 .. This file is licensed under a `creative commons licence <http://creativecommons.org/licenses/by/3.0/>`_
 
 
-.. _mcq-reliable:
+.. _mcq-reliabletcp:
 
 *****************
 Reliable transfer

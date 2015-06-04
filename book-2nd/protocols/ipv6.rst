@@ -90,7 +90,7 @@ IPv6 supports unicast, multicast and anycast addresses. An IPv6 unicast address 
   - ``2001:db8:0:0:8:800:200c:417a``  is represented as  ``2001:db8::8:800:200c:417a``
   - ``ff01:0:0:0:0:0:0:101``   is represented as ``ff01::101`` 
   - ``0:0:0:0:0:0:0:1`` is represented as ``::1``
-  - ``0:0:0:0:0:0:0:0`` is represented as ``\:\:``
+  - ``0:0:0:0:0:0:0:0`` is represented as ``::``
 
  An IPv6 prefix can be represented as `address/length`, where `length` is the length of the prefix in bits. For example, the three notations below correspond to the same IPv6 prefix :
 
@@ -181,7 +181,7 @@ To understand the `longest prefix match` forwarding, consider the IPv6 routing b
 With the longest match rule, the route `::/0` plays a particular role. As this route has a prefix length of `0` bits, it matches all destination addresses. This route is often called the `default` route. 
 
  - a packet with destination ``2a02:2788:2c4:16f::1`` received by router `R` is destined to a host on interface ``eth0`` .
- - a packet with destination ``2001:6a8:3080::1234`` matches three routes : ``::/0``, ``2001::6a8::/32`` and ``2001::6a8:3080``. The packet is forwarded via gateway ``fe80::bad:cafe``
+ - a packet with destination ``2001:6a8:3080::1234`` matches three routes : ``::/0``, ``2001:6a8::/32`` and ``2001:6a8:3080::/48``. The packet is forwarded via gateway ``fe80::bad:cafe``
  - a packet with destination ``2001:1890:123a::1:1e`` matches one route : ``::/0``. The packet is forwarded via ``fe80::dead:beef``
  - a packet with destination ``2001:6a8:3880:40::2`` matches two routes : ``2001:6a8::/32`` and ``::/0``. The packet is forwarded via ``fe80::aaaa:bbbb``
 
@@ -201,7 +201,7 @@ For the companies that want to use IPv6 without being connected to the IPv6 Inte
 Furthermore, the IETF has reserved some IPv6 addresses for a special usage. The two most important ones are :
 
  - ``0:0:0:0:0:0:0:1`` (``::1`` in compact form) is the IPv6 loopback address. This is the address of a logical interface that is always up and running on IPv6 enabled hosts. 
- - ``0:0:0:0:0:0:0:0`` (``\:\:`` in compact form) is the unspecified IPv6 address. This is the IPv6 address that a host can use as source address when trying to acquire an official address.
+ - ``0:0:0:0:0:0:0:0`` (``::`` in compact form) is the unspecified IPv6 address. This is the IPv6 address that a host can use as source address when trying to acquire an official address.
 
 .. index:: Link Local address
 
@@ -422,14 +422,14 @@ The following pseudo-code details the IPv6 fragmentation, assuming that the pack
     if len(payload) > maxpayload :
        toSend=IP(dest=p.dest,src=p.src,
 	         hoplimit=p.hoplimit, id, 
-	         frag=p.frag+(pos/8), m=false,
+	         frag=p.frag+(pos/8), m=True,
 		 len=mtu, nextheader=p.nextheader)/payload[0:maxpayload]
        pos=pos+maxpayload
        payload=payload[maxpayload+1:]	   
     else
        toSend=IP(dest=p.dest,src=p.src,
 	         hoplimit=p.hoplimit, id, 
-	         frag=p.frag+(pos/8), m=true,
+	         frag=p.frag+(pos/8), m=False,
 		 len=len(payload), nextheader=p.nextheader)/payload
     forward(toSend)   
 
@@ -465,7 +465,7 @@ ICMP version 6
 
 It is sometimes necessary for intermediate routers or the destination host to inform the sender of the packet of a problem that occurred while processing a packet. In the TCP/IP protocol suite, this reporting is done by the Internet Control Message Protocol (ICMP). ICMPv6 is defined in :rfc:`4443`. It is used both to report problems that occurred while processing an IPv6 packet, but also when distributing addresses. 
 
-ICMPv6 messages are carried inside IPv6 packets (the `Next Header` field for ICMPv6 is ``58``). Each ICMP message contains an 8 bits header with a `type` field, a `code` field and a 16 bits checksum computed over the entire ICMPv6 message. The message body contains a copy of the IPv6 packet in error.
+ICMPv6 messages are carried inside IPv6 packets (the `Next Header` field for ICMPv6 is ``58``). Each ICMP message contains a 32 bits header with an 8 bits `type` field, a `code` field and a 16 bits checksum computed over the entire ICMPv6 message. The message body contains a copy of the IPv6 packet in error.
 
 .. figure:: /../book/network/pkt/icmpv6.png
    :align: center

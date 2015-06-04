@@ -15,11 +15,7 @@ IP Address Assignment Methods and Intradomain Routing
 
  On recent routers, a lookup in the forwarding table for a destination address returns a set of outgoing interfaces. How would you design an algorithm that selects the outgoing interface used for each packet, knowing that to avoid reordering, all segments of a given TCP connection should follow the same path ? 
 
-.. todo:: exercice avec routage statique normal et ping
-.. todo:: exercice avec routage statique et plus spécifique et ping
-.. todo:: exercice avec routage statique plus erreurs et ping (un dans foward et autre dans backward)
-.. todo:: exercice avec les memes problems mais traceroute a la place de ping
-.. todo:: exercice avec des erreurs de  configuration sur LAN ? probablement trop tôt
+
   
 
 
@@ -48,13 +44,13 @@ Wireshark_ also allows to capture packets but provides a graphical user interfac
 
   When you have launched the lab, you can access to your ``$HOME`` directory or the lab directory (in the host machine) from a netkit_ virtual machine. These directories are located in ``/hosthome`` and ``/hostlab`` in netkit_ . Go into ``/hostlab`` :
 
-        .. code:: console
+        .. code-block:: console
 
            cd /hostlab
 
    Now you can launch a ``tcpdump`` capture and save the captured traffic on a file, in the hostlab (or hosthome) directory (option ``-w``). This allows you to start a capture from this file with ``wireshark``.
 
-         .. code:: console
+         .. code-block:: console
 
             tcpdump -n -i IF -w aaa.pcap &
 
@@ -62,7 +58,7 @@ Wireshark_ also allows to capture packets but provides a graphical user interfac
 
    You can then launch ``wireshark`` on your computer with the input file ``aaa.out`` :
 
-         .. code:: console
+         .. code-block:: console
 
             wireshark -k -i<(tail -f aaa.pcap)&
 
@@ -186,7 +182,7 @@ The daemon asks for a password. Use the default one, ``zebra``.
 
 Now you can interact with the OSPF daemon and observe its current state and the datastructures that it maintains. Some useful commands are :
 
- .. code:: console
+ .. code-block:: console
 
     show ipv6 ospf6 database
     show ipv6 ospf6 neighbor
