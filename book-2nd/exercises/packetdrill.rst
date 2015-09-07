@@ -473,11 +473,7 @@ Consider a TCP connection where no data has been exchanged that needs to be grac
 
 .. [#fsysctl] On Linux, most of the parameters to tune the TCP stack are accessible via :manpage:`sysctl`. The :download:`/exercises/packetdrill_scripts/sysctl-cnp3.conf` file contains all the sysctl variables that we change to disable these various TCP extensions.
 
-.. [#ftcpdump_pdrill] By default, packetdrill_ uses port 8080 when creating TCP segments. You can thus capture the packets injected by packetdrill_ and the responses from the stack by using. 
-
-   .. code-block:: console
-
-      tcpdump -i any -n port 8080
+.. [#ftcpdump_pdrill] By default, packetdrill_ uses port 8080 when creating TCP segments. You can thus capture the packets injected by packetdrill_ and the responses from the stack by using `` tcpdump -i any -n port 8080``
 
 
 .. [#fpush] The `Push` flag is one of the TCP flags defined in :rfc:`793`. TCP stacks usually set this flag when transmitting a segment that empties the send buffer. This is the reason why we observe this push flag in our example.

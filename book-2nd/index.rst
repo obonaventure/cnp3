@@ -8,7 +8,6 @@ Computer Networking : Principles, Protocols and Practice, 2nd edition
 
 
 
-
 .. figure:: cnp3.png
    :align: center
    :scale: 60
@@ -17,27 +16,26 @@ Computer Networking : Principles, Protocols and Practice, 2nd edition
 
    This is an unpolished draft of the second edition of this ebook. If you find any error or have suggestions to improve the text, please create an issue via https://github.com/obonaventure/cnp3/issues/new
 
+    The development of this edition of the textbook is carried out on `github
+    <https://github.com/obonaventure/cnp3/tree/master/book-2nd>`_ 
+
+    The source code of the entire textbook is written in `reStructuredText <http://docutils.sourceforge.net/rst.html>`_ and uses several `sphinx <http://sphinx.pocoo.org>`_ features. You can browse it from `github <https://github.com/obonaventure/cnp3/tree/master/book-2nd>`_ 
+
 ..    You can also directly download the current ebook draft in various formats from the links below :
 
 ..   	- :download:`distrib/cnp3bis.epub` suitable for viewing on tablets like ipad
 .. 	- :download:`distrib/cnp3bis.pdf` suitable for viewing and printing anywhere
 .. 	- :download:`distrib/cnp3b.mobi` suitable for viewing on amazon kindle
 
-    The development of this edition of the textbook is carried out on `github
-    <https://github.com/obonaventure/cnp3/tree/master/book-2nd>`_ 
 
 ..    You can help to improve this ebook by :
 
 ..    	- posting comments, suggestions or bug reports on `github <https://github.com/obonaventure/cnp3/tree/master/book-2nd>`_
 ..	- proposing new exercices or sending patches on `github <https://github.com/obonaventure/cnp3/tree/master/book-2nd>`_
 	
-    The source code of the entire textbook is written in `reStructuredText <http://docutils.sourceforge.net/rst.html>`_ and uses several `sphinx <http://sphinx.pocoo.org>`_ features. You can browse it from `github <https://github.com/obonaventure/cnp3/tree/master/book-2nd>`_ 
+
 
 .. _toc:
-
-#################
-Table of Contents
-#################
 
 .. toctree:: 
    :maxdepth: 2
@@ -121,33 +119,49 @@ Part 3: Practice
    :maxdepth: 4
 
    exercises/intro           
-   mcq-ex/mcq-reliability
    exercises/reliable
-   mcq-ex/mcq-network-ftable	
-   mcq-ex/mcq-network-vc
-   mcq-ex/mcq-network-pftables	
-   mcq-ex/mcq-network-shortest	
-   mcq-ex/mcq-network
    exercises/network
-   mcq-ex/mcq-transport
    exercises/ex-transport
-   mcq-ex/mcq-sharing
    exercises/ex-sharing
-   mcq-ex/mcq-app
    exercises/ex-app
    exercises/netkit-app
    exercises/netkit-tcp
    exercises/packetdrill
-   mcq-ex/mcq-congestion
    exercises/netkit-congestion
-   mcq-ex/mcq-ipv6
    exercises/netkit-ipv6
    exercises/ex-routing-policies
    exercises/netkit-ipv6-rtg
-   mcq-ex/mcq-bgp
    exercises/ex-bgp
-   mcq-ex/network-stp
    exercises/ex-stp
+
+..   exercises/intro           
+..   mcq-ex/mcq-reliability
+..   exercises/reliable
+..   mcq-ex/mcq-network-ftable	
+..   mcq-ex/mcq-network-vc
+..   mcq-ex/mcq-network-pftables	
+..   mcq-ex/mcq-network-shortest	
+..   mcq-ex/mcq-network
+..   exercises/network
+..   mcq-ex/mcq-transport
+..   exercises/ex-transport
+..   mcq-ex/mcq-sharing
+..   exercises/ex-sharing
+..   mcq-ex/mcq-app
+..   exercises/ex-app
+..   exercises/netkit-app
+..   exercises/netkit-tcp
+..   exercises/packetdrill
+..   mcq-ex/mcq-congestion
+..   exercises/netkit-congestion
+..   mcq-ex/mcq-ipv6
+..   exercises/netkit-ipv6
+..   exercises/ex-routing-policies
+..   exercises/netkit-ipv6-rtg
+..   mcq-ex/mcq-bgp
+..   exercises/ex-bgp
+..   mcq-ex/network-stp
+..   exercises/ex-stp
 
 ..  application/exercises/ex-application
 
@@ -179,9 +193,9 @@ Indices and tables
 
 .. only:: html
 
-.. figure:: ../book/cc-by.png
-   :align: center
-   :scale: 100
+  .. figure:: ../book/cc-by.png
+     :align: center
+     :scale: 100
 
 
 

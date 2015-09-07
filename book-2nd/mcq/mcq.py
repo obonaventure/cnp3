@@ -141,7 +141,8 @@ def latex_visit_question(self, node):
 def latex_visit_posneg(self, node):
 	latex_visit_posneg.count += 1
 	self.body.append('\n\\needspace{3\\baselineskip}'
-		'\n\\CheckBox[name=' + str(latex_visit_posneg.count) + ',bordercolor=0 0 0]{}'
+		'\n%\\CheckBox[name=' + str(latex_visit_posneg.count) + ',bordercolor=0 0 0]{}'
+		'\n$\\square$'	 
 		'\n\\vspace{-0.7cm}'
 		'\n\\begin{addmargin}[0.8cm]{0cm}')
 latex_visit_posneg.count = 0
@@ -223,6 +224,7 @@ def add_dependencies(app):
 	preamble = ('\\usepackage{scrextend}'
 		'\n\\usepackage{hyperref}'
 		'\n\\usepackage{needspace}'
+		'\n\\usepackage{amssymb}'    
 		'\n\n\\newlength\\TextFieldLength'
 		'\n\\newcommand\\TextFieldFill[2][]{%'
 		'\n\t\\setlength\\TextFieldLength{\\linewidth}%'

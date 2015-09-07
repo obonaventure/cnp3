@@ -51,7 +51,9 @@ IP version 6
 ============
 
 In the late 1980s and early 1990s the growth of the Internet was causing several operational problems on routers. Many of these routers had a single CPU and up to 1 MByte of RAM to store their operating system, packet buffers and routing tables. Given the rate of allocation of IPv4 prefixes to companies and universities willing to join the Internet, the routing tables where growing very quickly and some feared that all IPv4 prefixes would quickly be allocated. In 1987, a study cited in :rfc:`1752`, estimated that there would be 100,000 networks in the near future. In August 1990, estimates indicated that the class B space would be exhausted by March 1994. 
-Two types of solution were developed to solve this problem. The first short term solution was the introduction of Classless Inter Domain Routing (:term:`CIDR`). A second short term solution was the Network Address Translation (:term:`NAT`) mechanism, defined in :rfc:`1631`. NAT allowed multiple hosts to share a single public IP address, it is explained in section :ref:`Middleboxes`.
+Two types of solution were developed to solve this problem. The first short term solution was the introduction of Classless Inter Domain Routing (:term:`CIDR`). A second short term solution was the Network Address Translation (:term:`NAT`) mechanism, defined in :rfc:`1631`. NAT allowed multiple hosts to share a single public IPv4 address.
+
+..  it is explained in section :ref:`Middleboxes`.
 
 However, in parallel with these short-term solutions, which have allowed the IPv4 Internet to continue to be usable until now, the Internet Engineering Task Force started to work on developing a replacement for IPv4. This work started with an open call for proposals, outlined in :rfc:`1550`. Several groups responded to this call with proposals for a next generation Internet Protocol (IPng) :
 
@@ -136,7 +138,7 @@ When considering the allocation of IPv6 addresses, two types of address allocati
  - ``/64`` for a single user (e.g. a home user connected via ADSL) 
  - ``/128`` in the rare case when it is known that no more than one endhost will be attached
 
-There is one difficulty with the utilisation of these IPv6 prefixes. Consider Belnet, the Belgian research  ISP that has been allocated the ``2001:6a8::/32`` prefix. Universities are connected to Belnet. UCL uses prefix ``2001:6a8:3080::/48`` while the University of Liege uses ``2001:6a8:2d80::/32``. A commercial ISP uses prefix ``2a02:2788::/32``. Both Belnet and the commercial ISP are connected to the global Internet. 
+There is one difficulty with the utilisation of these IPv6 prefixes. Consider Belnet, the Belgian research  ISP that has been allocated the ``2001:6a8::/32`` prefix. Universities are connected to Belnet. UCL uses prefix ``2001:6a8:3080::/48`` while the University of Liege uses ``2001:6a8:2d80::/48``. A commercial ISP uses prefix ``2a02:2788::/32``. Both Belnet and the commercial ISP are connected to the global Internet. 
 
 .. graphviz:: 
 

@@ -75,5 +75,20 @@ Vagrant.configure(2) do |config|
      sudo apt-get install -y poppler-utils
      sudo easy_install -U sphinxcontrib-mscgen
      sudo easy_install -U sphinxcontrib-tikz
+     sudo apt-get install texlive-latex-extra
+     sudo apt-get install dvipng
+     sudo apt-get install texlive-fonts-recommended
+     # fix epstopdf which is broken
+     sed -i '1s/^/#!\/usr\/bin\/perl\n/' /usr/bin/epstopdf  		
+     # for tikz
+     sudo apt-get install netpbm
+     # need standalone.cls that is not in texlive :-(
+     mkdir ~/texmf
+     cd texmf	   
+     wget http://mirrors.ctan.org/install/macros/latex/contrib/standalone.tds.zip
+     sudo apt-get install unzip
+     unzip /tmp/standalone.tds.zip 
+     cd ..
+     texhash texmf/
   SHELL
 end

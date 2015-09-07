@@ -23,7 +23,7 @@ Building forwarding tables
 
 :task_id: networkftable
 
-1. The forwarding paths used in a network depend on the forwarding tables installed in the network nodes. Consider the network shown below with the forwarding tables.
+The forwarding paths used in a network depend on the forwarding tables installed in the network nodes. Consider the network shown below with the forwarding tables.
 
     .. tikz::
        :libs: positioning, matrix, arrows 
@@ -84,7 +84,7 @@ Building forwarding tables
 
 
 
-2. The forwarding paths used in a network depend on the forwarding tables installed in the network nodes. Sometimes, these forwarding tables must be configured manually. 
+The forwarding paths used in a network depend on the forwarding tables installed in the network nodes. Sometimes, these forwarding tables must be configured manually. 
 
      .. tikz::
         :libs: positioning, matrix, arrows 
@@ -162,7 +162,7 @@ Building forwarding tables
        B      N-E 
        ====== =====
 
-      New forwarding table for `R2`:
+      New forwarding table for `R1`:
 
        ====== =====
        Dest.  Port 
@@ -217,7 +217,7 @@ Building forwarding tables
 
 
 
-3. The forwarding paths used in a network depend on the forwarding tables installed in the network nodes. Sometimes, these forwarding tables are configured manually and an incorrect configuration may cause some paths to be impossible. 
+The forwarding paths used in a network depend on the forwarding tables installed in the network nodes. Sometimes, these forwarding tables are configured manually and an incorrect configuration may cause some paths to be impossible. 
 
    .. tikz::
       :libs: positioning, matrix, arrows 

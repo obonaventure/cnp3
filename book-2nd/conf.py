@@ -24,6 +24,7 @@ import sys, os
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.#
 
 sys.path.append(os.path.abspath('mcq'))
+#sys.path.insert(0, os.path.abspath('.'))
 
 extensions = ['mcq','sphinx.ext.todo', 'sphinx.ext.pngmath', 'sphinxcontrib.mscgen','sphinx.ext.graphviz','sphinxcontrib.tikz']
 
@@ -212,7 +213,7 @@ latex_elements = {
 'preamble': '''
 \usepackage{tikz}
 \usepackage{pgfplots}
-\usetikzlibrary{arrows,positioning, matrix}
+\usetikzlibrary{arrows,positioning, matrix,backgrounds,shapes}
 '''
 }
 
@@ -224,7 +225,7 @@ latex_elements = {
 
 tikz_libraries="positioning"
 
-tikz_proc_suite='pdf2svg'
+tikz_proc_suite='Netpbm'
 
 
 
