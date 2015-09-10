@@ -71,24 +71,30 @@ Vagrant.configure(2) do |config|
      sudo apt-get install -y python-setuptools
      sudo apt-get install -y mscgen
      sudo apt-get install -y graphviz
+     sudo apt-get install -y texlive
      sudo apt-get install -y texlive-pictures
-     sudo apt-get install -y poppler-utils
-     sudo easy_install -U sphinxcontrib-mscgen
-     sudo easy_install -U sphinxcontrib-tikz
      sudo apt-get install texlive-latex-extra
      sudo apt-get install dvipng
      sudo apt-get install texlive-fonts-recommended
-     # fix epstopdf which is broken
-     sed -i '1s/^/#!\/usr\/bin\/perl\n/' /usr/bin/epstopdf  		
+     sudo apt-get install -y poppler-utils
+     sudo easy_install -U sphinxcontrib-mscgen
+     sudo easy_install -U sphinxcontrib-tikz
      # for tikz
      sudo apt-get install netpbm
      # need standalone.cls that is not in texlive :-(
-     mkdir ~/texmf
-     cd texmf	   
-     wget http://mirrors.ctan.org/install/macros/latex/contrib/standalone.tds.zip
+     sudo -u vagrant wget  -q http://mirrors.ctan.org/install/macros/latex/contrib/standalone.tds.zip -O /tmp/standalone.tds.zip
+     sudo -u vagrant wget -q http://mirrors.ctan.org/macros/latex/contrib/titlesec.zip	-O /tmp/titlesec.zip
+     sudo -u vagrant wget -q http://mirrors.ctan.org/macros/latex/contrib/wrapfig.zip -O /tmp/wrapfig.zip
+     sudo mkdir /usr/share/texmf-texlive/tex/latex/needspace
+     sudo wget -q http://ftp.rz.uni-wuerzburg.de/pub/tex/latex2e/contrib/misc/needspace.sty -O /usr/share/texmf-texlive/tex/latex/needspace/needspace.sty
+     sudo -u vagrant wget -q http://mirrors.ctan.org/macros/latex/contrib/multirow.zip -O /tmp/multirow.zip	
      sudo apt-get install unzip
-     unzip /tmp/standalone.tds.zip 
-     cd ..
-     texhash texmf/
-  SHELL
+     sudo unzip -u /tmp/standalone.tds.zip -d /usr/share/texmf-texlive/tex/latex
+     sudo unzip -u /tmp/titlesec.zip -d /usr/share/texmf-texlive/tex/latex
+     sudo unzip -u /tmp/wrapfig.zip -d /usr/share/texmf-texlive/tex/latex
+     sudo unzip -u /tmp/multirow.zip -d /usr/share/texmf-texlive/tex/latex
+     sudo texhash 
+     # fix epstopdf which is broken
+     sudo sed -i -e '1i#!/usr/bin/perl\' /usr/share/texmf-texlive/scripts/epstopdf/epstopdf.pl
+     SHELL
 end
