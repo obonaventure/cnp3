@@ -58,7 +58,7 @@ Part 1: Principles
    principles/naming
    principles/sharing
    principles/referencemodels
-
+   principles/security
 
 ..   intro/organisation
 
@@ -84,8 +84,10 @@ Part 2: Protocols
    protocols/transport-service
    protocols/dns
    protocols/email
+   protocols/ssh
    protocols/http
    protocols/rpc
+   protocols/tls
    protocols/transport
    protocols/udp
    protocols/tcp

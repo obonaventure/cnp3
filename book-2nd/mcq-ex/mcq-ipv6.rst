@@ -18,7 +18,7 @@ Multiple choice questions
 
 1. The IPv6 packet header includes several fields that are shown in the figure below.
 
-   .. figure:: /../book/network/pkt/ipv6.png
+   .. figure:: /../../book/network/pkt/ipv6.png
       :align: center
       :scale: 100
 

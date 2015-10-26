@@ -786,4 +786,4 @@ Selective repeat
 
 
 
-.. include:: /links.rst
+.. include:: /../links.rst

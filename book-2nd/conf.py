@@ -23,16 +23,16 @@ import sys, os
 # Add any Sphinx extension module names here, as strings. They can be extensions
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.#
 
-sys.path.append(os.path.abspath('mcq'))
+#sys.path.append(os.path.abspath('mcq'))
 #sys.path.insert(0, os.path.abspath('.'))
 
-extensions = ['mcq','sphinx.ext.todo', 'sphinx.ext.pngmath', 'sphinxcontrib.mscgen','sphinx.ext.graphviz','sphinxcontrib.tikz']
+extensions = ['sphinx.ext.todo', 'sphinx.ext.pngmath', 'sphinxcontrib.mscgen','sphinx.ext.graphviz','sphinxcontrib.tikz']
 
 # mcq
 
-mcq_nb_prop=3
-mcq_upload_url='http://cnp3bis.info.ucl.ac.be'
-mcq_inginious_url='http://inginious.info.ucl.ac.be/cnp3'
+#mcq_nb_prop=3
+#mcq_upload_url='http://cnp3bis.info.ucl.ac.be'
+#mcq_inginious_url='http://inginious.info.ucl.ac.be/cnp3'
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -79,7 +79,8 @@ exclude_trees = ['_build']
 # List of files that should not be automatically compiled by sphynx because they are included
 
 exclude_patterns = [ '*#*',   # emacs backups
-                     'MCQ.old/*']
+                     'MCQ.old/*',
+                     'mcq-ex/*']
 
 # epilog add to all included files
 #rst_epilog = """
@@ -142,7 +143,7 @@ html_logo = None
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ['_static', 'mcq/static']
+html_static_path = ['_static']
 
 # If not '', a 'Last updated on:' timestamp is inserted at every page bottom,
 # using the given strftime format.

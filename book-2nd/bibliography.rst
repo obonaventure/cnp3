@@ -29,6 +29,7 @@ Whenever possible, the bibliography includes stable hypertext links to the refer
 .. [BOP1994] Brakmo, L. S., O'Malley, S. W., and Peterson, L. L., `TCP Vegas: new techniques for congestion detection and avoidance <http://doi.acm.org/10.1145/190314.190317>`_. In Proceedings of the Conference on Communications Architectures, Protocols and Applications (London, United Kingdom, August 31 - September 02, 1994). SIGCOMM '94. ACM, New York, NY, 24-35. 
 .. [Benvenuti2005] Benvenuti, C., `Understanding Linux Network Internals <http://books.google.com/books?id=yy7tihZLgGYC>`_, O'Reilly Media, 2005 
 .. [BH2013] Bormann, C., Hoffman, P., `Concise Binary Object Representation (CBOR) <http://tools.ietf.org/html/draft-bormann-cbor-09>`_, Internet draft, draft-bormann-cbor-09, work in progress, 2013
+.. [BS2005] D. Barrett, R. Silverman, R. Byrnes, `SSH: The Secure Shell (The Definitive Guide) <https://books.google.be/books?id=3XzIFG3w8-YC>`_, O'Reilly 2005 (2nd edition). 
 .. [Bush1945]  Bush, V. `As we may think <http://www.theatlantic.com/magazine/archive/1969/12/as-we-may-think/3881/>`_ The Atlantic Monthly 176 (July 1945), pp. 101–108 
 .. [Bush1993] Bush, R., `FidoNet: technology, tools, and history <http://doi.acm.org/10.1145/163381.163383>`_. Commun. ACM 36, 8 (Aug. 1993), 31-35. 
 .. [Bux1989] Bux, W., `Token-ring local-area networks and their performance <http://ieeexplore.ieee.org/xpls/abs_all.jsp?arnumber=18625>`_, Proceedings of the IEEE, Vol 77, No 2, p. 238-259, Feb. 1989 
@@ -48,13 +49,15 @@ Whenever possible, the bibliography includes stable hypertext links to the refer
 .. [Comer1988] Comer, D., `Internetworking with TCP/IP : principles, protocols & architecture`, Prentice Hall, 1988
 .. [Comer1991] Comer D., `Internetworking With TCP/IP : Design Implementation and Internals`,  Prentice Hall, 1991
 .. [Cohen1980] Cohen, D., `On Holy Wars and a Plea for Peace`, IEN 137, April 1980, http://www.ietf.org/rfc/ien/ien137.txt
-.. [DC2009] Donahoo, M., Calvert, K., `TCP/IP Sockets in C: Practical Guide for Programmers <http://books.google.com/books?id=dmt_mERzxV4C>`_ , Morgan Kaufman, 2009, 
+.. [DC2009] Donahoo, M., Calvert, K., `TCP/IP Sockets in C: Practical Guide for Programmers <http://books.google.com/books?id=dmt_mERzxV4C>`_ , Morgan Kaufman, 2009
+.. [DH1976] Diffie, W., Hellman, M., `New directions in cryptography`, in Information Theory, IEEE Transactions on , vol.22, no.6, pp.644-654, Nov 1976, http://dx.doi.org/10.1109/TIT.1976.1055638
 .. [DIX] Digital, Intel, Xerox, `The Ethernet: a local area network: data link layer and physical layer specifications <http://doi.acm.org/10.1145/1015591.1015594>`_. SIGCOMM Comput. Commun. Rev. 11, 3 (Jul. 1981), 20-66. 
 .. [DKF+2007] Dimitropoulos, X., Krioukov, D., Fomenkov, M., Huffaker, B., Hyun, Y., Claffy, K., Riley, G.,  `AS Relationships: Inference and Validation <http://doi.acm.org/10.1145/1198255.1198259>`_, ACM SIGCOMM Computer Communication Review (CCR), Jan. 2007
 .. [DP1981] Dalal, Y. K. and Printis, R. S., `48-bit absolute internet and Ethernet host numbers <http://doi.acm.org/10.1145/800081.802680>`_. In Proceedings of the Seventh Symposium on Data Communications (Mexico City, Mexico, October 27 - 29, 1981). SIGCOMM '81. ACM, New York, NY, 240-245.
 .. [DRC+2010] Dukkipati, N., Refice, T., Cheng, Y., Chu, J., Herbert, T., Agarwal, A., Jain, A., Sutin, N., `An Argument for Increasing TCP's Initial Congestion Window <http://dx.doi.org/10.1145/1823844.1823848>`_, ACM SIGCOMM Computer Communications Review, vol. 40 (2010), pp. 27-33
 .. [Dubuisson2000] O. Dubuisson, `ASN.1 : Communication between Heterogeneous Systems <http://www.oss.com/asn1/resources/books-whitepapers-pubs/asn1-books.html#dubuisson>`, Morgan Kauffman, 2000 
-.. [Dunkels2003] Dunkels, A., `Full TCP/IP for 8-Bit Architectures <http://www.sics.se/~adam/mobisys2003.pdf>`_. In Proceedings of the first international conference on mobile applications, systems and services (MOBISYS 2003), San Francisco, May 2003. 
+.. [Dunkels2003] Dunkels, A., `Full TCP/IP for 8-Bit Architectures <http://www.sics.se/~adam/mobisys2003.pdf>`_. In Proceedings of the first international conference on mobile applications, systems and services (MOBISYS 2003), San Francisco, May 2003.
+.. [DR2002] Daemen, J., Rijmen, V., `The Design of Rijndael: AES – The Advanced Encryption Standard <http://www.springer.com/us/book/9783540425809>`_ Springer, 2002. ISBN 3-540-42580-2. 
 .. [DT2007] Donnet, B. and Friedman, T., `Internet Topology Discovery: a Survey <http://inl.info.ucl.ac.be/publications/internet-topology-discovery-survey>`_. IEEE Communications Surveys and Tutorials, 9(4):2-15, December 2007
 .. [DYGU2004] Davik, F.  Yilmaz, M.  Gjessing, S.  Uzun, N., `IEEE 802.17 resilient packet ring tutorial <http://dx.doi.org/10.1109/MCOM.2004.1273782>`_, IEEE Communications Magazine, Mar 2004, Vol 42, N 3, p. 112-118 
 .. [Dijkstra1959] Dijkstra, E., `A Note on Two Problems in Connection with Graphs <http://dx.doi.org/10.1007/BF01386390>`_. Numerische Mathematik, 1:269- 271, 1959 
@@ -97,11 +100,13 @@ Whenever possible, the bibliography includes stable hypertext links to the refer
 .. [KP91] Karn, P. and Partridge, C., `Improving round-trip time estimates in reliable transport protocols <http://doi.acm.org/10.1145/118544.118549>`_. ACM Trans. Comput. Syst. 9, 4 (Nov. 1991), 364-373. 
 .. [KPD1985] Karn, P., Price, H., Diersing, R., `Packet radio in amateur service <http://dx.doi.org/10.1109/JSAC.1985.1146214>`_, IEEE Journal on Selected Areas in Communications, 3, May, 1985 
 .. [KPS2003] Kaufman, C., Perlman, R., and Sommerfeld, B. `DoS protection for UDP-based protocols <http://doi.acm.org/10.1145/948109.948113>`_. In Proceedings of the 10th ACM Conference on Computer and Communications Security (Washington D.C., USA, October 27 - 30, 2003). CCS '03. ACM, New York, NY, 2-7. 
+.. [KPS2002] Kaufman, C., Perlman, R., Speciner, M., `Network Security : Private communication in a public world <https://books.google.be/books?id=wxMqaz4JMb0C>`_, 2nd edition, Prentice Hall, 2002
 .. [KR1995] Kung, N.T.   Morris, R., `Credit-based flow control for ATM networks <http://dx.doi.org/10.1109/65.372658>`_, IEEE Network, Mar/Apr 1995, Volume: 9,  Issue: 2, pages: 40-48 
 .. [KT1975] Kleinrock, L., Tobagi, F., `Packet Switching in Radio Channels: Part I--Carrier Sense Multiple-Access Modes and their Throughput-Delay Characteristics <http://dx.doi.org/10.1109/TCOM.1975.1092768>`_, IEEE Transactions on Communications, Vol. COM-23, No. 12, pp. 1400-1416, December 1975. 
 .. [KW2009] Katz, D., Ward, D.,  `Bidirectional Forwarding Detection`, :rfc:`5880`, June 2010
 .. [KZ1989] Khanna, A. and Zinky, J. 1989. `The revised ARPANET routing metric <http://doi.acm.org/10.1145/75247.75252>`_. SIGCOMM Comput. Commun. Rev. 19, 4 (Aug. 1989), 45-56. 
 .. [KuroseRoss09] Kurose J. and Ross K., `Computer networking : a top-down approach featuring the Internet <http://books.google.com/books?id=2hv3PgAACAAJ&pgis=1>`_, Addison-Wesley, 2009 
+.. [Lamport1981] Lamport, L., `Password authentication with insecure communication <http://doi.acm.org/10.1145/358790.358797>`_. Commun. ACM 24, 11 (November 1981), 770-772. 
 .. [Licklider1963] Licklider, J., `Memorandum For Members and Affiliates of the Intergalactic Computer Network <http://www.kurzweilai.net/articles/art0366.html?printable=1>`_, 1963 
 .. [LCCD09] Leiner, B. M., Cerf, V. G., Clark, D. D., Kahn, R. E., Kleinrock, L., Lynch, D. C., Postel, J., Roberts, L. G., and Wolff, S., `A brief history of the internet <http://doi.acm.org/10.1145/1629607.1629613>`_. SIGCOMM Comput. Commun. Rev. 39, 5 (Oct. 2009), 22-31. 
 .. [LCP2005] Eng Keong Lua, Crowcroft, J., Pias, M., Sharma, R., Lim, S., `A survey and comparison of peer-to-peer overlay network schemes <http://dx.doi.org/10.1109/COMST.2005.1610546>`_, Communications Surveys & Tutorials, IEEE, Volume: 7 , Issue: 2, 2005, pp. 72-93
@@ -294,8 +299,10 @@ Whenever possible, the bibliography includes stable hypertext links to the refer
 .. [RFC6265] Barth, A., `HTTP State Management Mechanism`, :rfc:`6265`, April 2011
 .. [RFC6274] Gont, F., `Security Assessment of the Internet Protocol Version 4`, :rfc:`6274`, July 2011
 .. [RG2010] Rhodes, B. and Goerzen, J., `Foundations of Python Network Programming: The Comprehensive Guide to Building Network Applications with Python <http://books.google.com/books?id=9HGUc8AO2xQC>`_, Second Edition, Academic Press, 2004
+.. [Ristic2015] Ristic, I., `Bulletproof SSL and TLS: Understanding and Deploying SSL/TLS and PKI to Secure Web Servers and Applications <https://books.google.be/books?id=fQOLBAAAQBAJ>`_, Feisty Duck, 2015
 .. [RJ1995] Ramakrishnan, K. K. and Jain, R., `A binary feedback scheme for congestion avoidance in computer networks with a connectionless network layer <http://doi.acm.org/10.1145/205447.205461>`_. SIGCOMM Comput. Commun. Rev. 25, 1 (Jan. 1995), 138-156. 
-.. [RIB2013] Raiciu, C., Iyengar, J., Bonaventure, O., `Recent Advances in Reliable Transport Protocols <http://sigcomm.org/education/ebook/SIGCOMMeBook2013v1_chapter2.pdf>`_, in H. Haddadi, O. Bonaventure (Eds.), `Recent Advances in Networking <http://sigcomm.org/content/ebook>`_, (2013), pp. 59-106. 
+.. [RIB2013] Raiciu, C., Iyengar, J., Bonaventure, O., `Recent Advances in Reliable Transport Protocols <http://sigcomm.org/education/ebook/SIGCOMMeBook2013v1_chapter2.pdf>`_, in H. Haddadi, O. Bonaventure (Eds.), `Recent Advances in Networking <http://sigcomm.org/content/ebook>`_, (2013), pp. 59-106.
+.. [RSA1978] Rivest, R., Shamir, A. and Adleman, L., `A method for obtaining digital signatures and public-key cryptosystems <http://doi.acm.org/10.1145/359340.359342>`_. Commun. ACM 21, 2 (February 1978), 120-126
 .. [RY1994] Ramakrishnan, K.K. and Henry Yang, `The Ethernet Capture Effect: Analysis and Solution <http://www2.research.att.com/~kkrama/papers/capture_camera.pdf>`_, Proceedings of IEEE 19th Conference on Local Computer Networks, MN, Oct. 1994. 
 .. [Roberts1975] Roberts, L., `ALOHA packet system with and without slots and capture <http://doi.acm.org/10.1145/1024916.1024920>`_. SIGCOMM Comput. Commun. Rev. 5, 2 (Apr. 1975), 28-42. 
 .. [Ross1989] Ross, F., `An overview of FDDI: The fiber distributed data interface <http://dx.doi.org/10.1109/49.44552>`_, IEEE J. Selected Areas in Comm., vol. 7, no. 7, pp. 1043-1051, Sept. 1989
@@ -318,6 +325,7 @@ Whenever possible, the bibliography includes stable hypertext links to the refer
 .. [Sklower89] Sklower, K. 1989. `Improving the efficiency of the OSI checksum calculation <http://doi.acm.org/10.1145/74681.74684>`_. SIGCOMM Comput. Commun. Rev. 19, 5 (Oct. 1989), 32-43. 
 .. [SMASU2012] Sarrar, N., Maier, G., Ager, B., Sommer, R. and Uhlig, S., `Investigating IPv6 traffic <http://link.springer.com/chapter/10.1007/978-3-642-28537-0_2>`_, Passive and Active Measurements, Lecture Notes in Computer Science vol 7192, 2012, pp.11-20
 .. [SMM98] Semke, J., Mahdavi, J., and Mathis, M., `Automatic TCP buffer tuning <http://doi.acm.org/10.1145/285243.285292>`_. SIGCOMM Comput. Commun. Rev. 28, 4 (Oct. 1998), 315-323. 
+.. [Stallings2009] Stallings, W., `Protocol Basics: Secure Shell Protocol <http://www.cisco.com/web/about/ac123/ac147/archived_issues/ipj_12-4/124_ssh.html>`_, Internet Protocol Journal, vol 12, n 4, Dec. 2009
 .. [Stevens1994] Stevens, R., `TCP/IP Illustrated : the Protocols <http://books.google.com/books?id=-btNds68w84C>`_, Addison-Wesley, 1994 
 .. [Stevens1998] Stevens, R., `UNIX Network Programming, Volume 1, Second Edition: Networking APIs: Sockets and XTI <http://books.google.com/books?id=ptSC4LpwGA0C>`_, Prentice Hall, 1998 
 .. [Stewart1998] Stewart, J., `BGP4: Inter-Domain Routing In The Internet <http://books.google.com/books?id=UEcHpN4QHrAC>`_, Addison-Wesley, 1998
@@ -339,6 +347,8 @@ Whenever possible, the bibliography includes stable hypertext links to the refer
 .. [X200] ITU-T, recommendation X.200, `Open Systems Interconnection - Model and Notation <http://www.itu.int/rec/T-REC-X.200-199407-I/en>`_, 1994 
 .. [X224] ITU-T, recommendation X.224, `Information technology - Open Systems Interconnection - Protocol for providing the connection-mode transport service <http://www.itu.int/rec/T-REC-X.224-199511-I/en/>`_, 1995 
 .. [XNS] Xerox, `Xerox Network Systems Architecture <http://www.bitsavers.org/pdf/xerox/xns/XNSG058504_XNS_Introduction.pdf>`_, XNSG058504, 1985 
+.. [Ylonen1996] Ylonen, T., `SSH — Secure Login Connections over the Internet
+<https://www.usenix.org/legacy/publications/library/proceedings/sec96/full_papers/ylonen/index.html>`_, Usenix Security 1996
 .. [Zimmermann80] Zimmermann, H., `OSI Reference Model - The ISO Model of Architecture for Open Systems Interconnection <http://dx.doi.org/10.1109/TCOM.1980.1094702>`_, IEEE Transactions on Communications, vol. 28, no. 4, April 1980, pp. 425 - 432. 
 
 
