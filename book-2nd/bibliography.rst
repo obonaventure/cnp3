@@ -341,17 +341,12 @@ Whenever possible, the bibliography includes stable hypertext links to the refer
 .. [WMH2008] Wilson, P., Michaelson, G., Huston, G., `Redesignation of 240/4 from "Future Use" to "Private Use"`, Internet draft, September 2008, work in progress, http://tools.ietf.org/html/draft-wilson-class-e-02
 .. [WMS2004] White, R., Mc Pherson, D., Srihari, S., `Practical BGP <http://books.google.com/books?id=9OlSAAAAMAAJ>`_, Addison-Wesley, 2004 
 .. [Watson1981] Watson, R., `Timer-Based Mechanisms in Reliable Transport Protocol Connection Management <http://dx.doi.org/10.1016/0376-5075(81)90031-3>`_. Computer Networks 5: 47-56 (1981) 
+.. [WF2003] Wessels, D., Fomenkov, M., `Wow, That's a lot of packets <https://www.caida.org/publications/papers/2003/dnspackets/>`_,  Passive and Active Network Measurement Workshop (PAM), Apr 2003
 .. [Williams1993] Williams, R. `A painless guide to CRC error detection algorithms`, August 1993, unpublished manuscript, http://www.ross.net/crc/download/crc_v3.txt
 .. [Winston2003] Winston, G., `NetBIOS Specification <http://www.netbiosguide.com/>`_, 2003 
 .. [WY2011] Wing, D. and Yourtchenko, A., `Happy Eyeballs:  Success with Dual-Stack Hosts`, Internet draft, work in progress, July 2011, http://tools.ietf.org/html/draft-ietf-v6ops-happy-eyeballs-03
 .. [X200] ITU-T, recommendation X.200, `Open Systems Interconnection - Model and Notation <http://www.itu.int/rec/T-REC-X.200-199407-I/en>`_, 1994 
 .. [X224] ITU-T, recommendation X.224, `Information technology - Open Systems Interconnection - Protocol for providing the connection-mode transport service <http://www.itu.int/rec/T-REC-X.224-199511-I/en/>`_, 1995 
 .. [XNS] Xerox, `Xerox Network Systems Architecture <http://www.bitsavers.org/pdf/xerox/xns/XNSG058504_XNS_Introduction.pdf>`_, XNSG058504, 1985 
-.. [Ylonen1996] Ylonen, T., `SSH — Secure Login Connections over the Internet
-<https://www.usenix.org/legacy/publications/library/proceedings/sec96/full_papers/ylonen/index.html>`_, Usenix Security 1996
-.. [Zimmermann80] Zimmermann, H., `OSI Reference Model - The ISO Model of Architecture for Open Systems Interconnection <http://dx.doi.org/10.1109/TCOM.1980.1094702>`_, IEEE Transactions on Communications, vol. 28, no. 4, April 1980, pp. 425 - 432. 
-
-
-
-             
-                   
+.. [Ylonen1996] Ylonen, T., `SSH — Secure Login Connections over the Internet <https://www.usenix.org/legacy/publications/library/proceedings/sec96/full_papers/ylonen/index.html>`_, Usenix Security 1996
+.. [Zimmermann80] Zimmermann, H., `OSI Reference Model - The ISO Model of  Architecture for Open Systems Interconnection <http://dx.doi.org/10.1109/TCOM.1980.1094702>`_, IEEE Transactions on Communications, vol. 28, no. 4, April 1980, pp. 425 - 432.

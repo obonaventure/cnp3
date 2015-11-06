@@ -88,6 +88,7 @@ Part 2: Protocols
    protocols/http
    protocols/rpc
    protocols/tls
+   protocols/dnssec
    protocols/transport
    protocols/udp
    protocols/tcp
