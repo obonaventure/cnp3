@@ -64,9 +64,9 @@ Whenever possible, the bibliography includes stable hypertext links to the refer
 .. [FDDI] ANSI. `Information systems - Fiber Distributed Data Interface (FDDI) - token ring media access control (MAC)`. ANSI X3.139-1987 (R1997), 1997
 .. [Fletcher1982] Fletcher, J., `An Arithmetic Checksum for Serial Transmissions <http://dx.doi.org/10.1109/TCOM.1982.1095369>`_, Communications, IEEE Transactions on, Jan. 1982, Vol. 30, N. 1, pp. 247-252
 .. [FFEB2005] Francois, P., Filsfils, C., Evans, J., and Bonaventure, O., `Achieving sub-second IGP convergence in large IP networks <http://doi.acm.org/10.1145/1070873.1070877>`_. SIGCOMM Comput. Commun. Rev. 35, 3 (Jul. 2005), 35-44. 
-.. [NGB+1997] Nielsen, H., Gettys, J., Baird-Smith, A., Prudhommeaux, E., Wium Lie, H., and Lilley, C. `Network performance effects of HTTP/1.1, CSS1, and PNG <http://doi.acm.org/10.1145/263109.263157>`_. SIGCOMM Comput. Commun. Rev. 27, 4 (October 1997), 155-166. 
 .. [FJ1993] Sally Floyd and Van Jacobson. 1993. `Random early detection gateways for congestion avoidance <http://dx.doi.org/10.1109/90.251892>`_. IEEE/ACM Trans. Netw. 1, 4 (August 1993), 397-413. 
 .. [FJ1994] Floyd, S., and Jacobson, V., `The Synchronization of Periodic Routing Messages <http://dx.doi.org/10.1109/90.298431>`_, IEEE/ACM Transactions on Networking, V.2 N.2, p. 122-136, April 1994 
+.. [FKC1996] Freier, A., Karlton, P., Kocher, C., `The SSL Protocol Version 3.0`, Internet draft, November 1996,  https://tools.ietf.org/html/draft-ietf-tls-ssl-version3-00
 .. [FLM2008] Fuller, V., Lear, E., Meyer, D., `Reclassifying 240/4 as usable unicast address space <http://tools.ietf.org/html/draft-fuller-240space-02>`_, Internet draft, March 2008, workin progress 
 .. [FRT2002] Fortz, B. Rexford, J. ,Thorup, M., `Traffic engineering with traditional IP routing protocols <http://dx.doi.org/10.1109/MCOM.2002.1039866>`_, IEEE Communication Magazine, October 2002 
 .. [FTY99] Theodore Faber, Joe Touch, and Wei Yue, `The TIME-WAIT state in TCP and Its Effect on Busy Servers <http://dx.doi.org/10.1109/INFCOM.1999.752180>`_, Proc. Infocom '99, pp. 1573 
@@ -74,6 +74,7 @@ Whenever possible, the bibliography includes stable hypertext links to the refer
 .. [GAVE1999] Govindan, R., Alaettinoglu, C., Varadhan, K., Estrin, D., `An Architecture for Stable, Analyzable Internet Routing <http://dx.doi.org/10.1109/65.750447>`_, IEEE Network Magazine, Vol. 13, No. 1, pp. 29--35, January 1999 
 .. [GC2000] Grier, D., Campbell, M., `A social history of Bitnet and Listserv <http://www.computer.org/portal/web/csdl/doi/10.1109/85.841135>`_, 1985-1991, Annals of the History of Computing, IEEE, Volume 22, Issue 2, Apr-Jun 2000, pp. 32 - 41 
 .. [Genilloud1990] Genilloud, G., `X.400 MHS: first steps towards an EDI communication standard <http://doi.acm.org/10.1145/378570.378712>`_. SIGCOMM Comput. Commun. Rev. 20, 2 (Apr. 1990), 72-86. 
+.. [Greenwald2014] G. Greenwald, `No Place to Hide: Edward Snowden, the NSA, and the U.S. Surveillance State <https://books.google.be/books?isbn=1627790748>`_, Metropolitan books, 2014
 .. [GGR2001] Gao, L., Griffin, T., Rexford, J., `Inherently safe backup routing with BGP <http://dx.doi.org/10.1109/INFCOM.2001.916777>`_, Proc. IEEE INFOCOM, April 2001 
 .. [GN2011] Gettys, J., Nichols, K., `Bufferbloat: dark buffers in the internet <http://queue.acm.org/detail.cfm?id=2063196>`_. Communications of the ACM 55, no. 1 (2012): 57-65.
 .. [GR2001] Gao, L., Rexford, J., `Stable Internet routing without global coordination <http://dx.doi.org/10.1109/90.974523>`_, IEEE/ACM Transactions on Networking, December 2001, pp. 681-692 
@@ -132,8 +133,11 @@ Whenever possible, the bibliography includes stable hypertext links to the refer
 .. [Mogul1995] Mogul, J. , `The case for persistent-connection HTTP <http://doi.acm.org/10.1145/217382.217465>`_. In Proceedings of the Conference on Applications, Technologies, Architectures, and Protocols For Computer Communication (Cambridge, Massachusetts, United States, August 28 - September 01, 1995). D. Oran, Ed. SIGCOMM '95. ACM, New York, NY, 299-313. 
 .. [Moore] Moore, R., `Packet switching history`, http://rogerdmoore.ca/PS/
 .. [Moy1998] Moy, J., `OSPF: Anatomy of an Internet Routing Protocol <http://books.google.com/books?id=YXUWsqVhx60C>`_, Addison Wesley, 1998 
+.. [MVV2011]  Menezes, A., van Oorschot, P. and Vanstone, S. ,`Handbook of
+Applied Cryptography <http://cacr.uwaterloo.ca/hac/>`_ , CRC Press, 2011
 .. [Myers1998] Myers, B. A., `A brief history of human-computer interaction technology <http://doi.acm.org/10.1145/274430.274436>`_. interactions 5, 2 (Mar. 1998), 44-54. 
 .. [Nelson1965] Nelson, T. H., `Complex information processing: a file structure for the complex, the changing and the indeterminate <http://doi.acm.org/10.1145/800197.806036>`_. In Proceedings of the 1965 20th National Conference (Cleveland, Ohio, United States, August 24 - 26, 1965). L. Winner, Ed. ACM '65. ACM, New York, NY, 84-100. 
+.. [NGB+1997] Nielsen, H., Gettys, J., Baird-Smith, A., Prudhommeaux, E., Wium Lie, H., and Lilley, C. `Network performance effects of HTTP/1.1, CSS1, and PNG <http://doi.acm.org/10.1145/263109.263157>`_. SIGCOMM Comput. Commun. Rev. 27, 4 (October 1997), 155-166. 
 .. [Paxson99] Paxson, V. , `End-to-end Internet packet dynamics <http://doi.acm.org/10.1145/263109.263155>`_. SIGCOMM Comput. Commun. Rev. 27, 4 (Oct. 1997), 139-152. 
 .. [Perlman1985] Perlman, R., `An algorithm for distributed computation of a spanning tree in an extended LAN <http://doi.acm.org/10.1145/318951.319004>`_. SIGCOMM Comput. Commun. Rev. 15, 4 (Sep. 1985), 44-53. 
 .. [Perlman2000] Perlman, R., `Interconnections : Bridges, routers, switches and internetworking protocols <http://books.google.com/books?id=AIRitf5C-QQC&pgis=1>`_, 2nd edition, Addison Wesley, 2000 
