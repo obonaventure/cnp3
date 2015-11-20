@@ -164,7 +164,7 @@ has been upgraded and that a new key has been generated during this upgrade.
 The second point is that the server authenticates not only the result
 of the Diffie Hellman exchange but also a hash of all the information
 sent and received during the exchange. This is important to prevent
-:item:`downgrade attacks`. A `downgrade attack` is an attack where an
+:term:`downgrade attacks`. A `downgrade attack` is an attack where an
 active attacker modifies the messages sent by the communicating hosts
 (typically the client) to request the utilisation of weaker encryption
 algorithms. Consider a client that supports two encryption schemes. The
