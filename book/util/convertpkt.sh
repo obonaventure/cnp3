@@ -16,9 +16,9 @@ if [ "${1##*.}" = "svg" ]; then
 	H=${H/.*} # to integer
 	echo "Dimensions " ${W} "x" ${H}
 
-	if [ ${W} -gt 700 ]; then
-		${INKSCAPE} ${1} --export-width=700 --export-area-drawing --export-png=${DIRNAME}/${BASENAME}.png
-		${INKSCAPE} ${1} --export-width=700 --export-area-drawing --export-pdf=${DIRNAME}/${BASENAME}.pdf
+	if [ ${W} -gt 500 ]; then
+		${INKSCAPE} ${1} --export-width=500 --export-area-drawing --export-png=${DIRNAME}/${BASENAME}.png
+		${INKSCAPE} ${1} --export-width=500 --export-area-drawing --export-pdf=${DIRNAME}/${BASENAME}.pdf
 #       sips --resampleWidth 500 ${DIRNAME}/${BASENAME}.png
 #       sips --resampleWidth 1000 ${DIRNAME}/${BASENAME}.pdf
 	else

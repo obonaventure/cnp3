@@ -83,14 +83,9 @@ Vagrant.configure(2) do |config|
     # need netpbm for tikz
     sudo easy_install -U sphinxcontrib-mscgen
     sudo easy_install -U sphinxcontrib-tikz
-    # need needspace
-    sudo mkdir /usr/share/texlive/texmf-dist/tex/latex/needspace
-    sudo wget -q http://ftp.rz.uni-wuerzburg.de/pub/tex/latex2e/contrib/misc/needspace.sty -O /usr/share/texlive/texmf-dist/tex/latex/needspace/needspace.sty
     # need standalone.cls that is not in texlive :-(
     sudo -u vagrant wget -q http://mirrors.ctan.org/install/macros/latex/contrib/standalone.tds.zip -O /tmp/standalone.tds.zip
     sudo unzip -u -o /tmp/standalone.tds.zip -d /usr/share/texlive/texmf-dist/tex/latex/
     sudo texhash 
-    # fix epstopdf which is broken
-    sudo sed -i -e '1i#!/usr/bin/perl\' /usr/share/texlive/texmf-dist/scripts/epstopdf/epstopdf.pl
   SHELL
 end
