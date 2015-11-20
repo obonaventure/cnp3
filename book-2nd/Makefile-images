@@ -1,9 +1,10 @@
 #
 # OB
 #
-DIRS = intro/svg intro/pkt application/svg application/pkt transport/pkt transport/svg network/pkt network/svg lan/pkt lan/svg
-SUBDIRS := $(addprefix ../book/, $(DIRS))
-  
+OLDDIRS = intro/svg intro/pkt application/svg application/pkt transport/pkt transport/svg network/pkt network/svg lan/pkt lan/svg
+SUBDIRS := $(addprefix ../book/, $(OLDDIRS))
+SUBDIRS += protocols/figures protocols/pkt
+
 subdirs:
 	for dir in $(SUBDIRS); do \
                $(MAKE) -C $$dir; \
