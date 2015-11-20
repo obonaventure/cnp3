@@ -1,5 +1,10 @@
 #!/bin/bash 
-INKSCAPE=/Applications/Inkscape.app/Contents/Resources/bin/inkscape
+if [ `uname -s` = "Darwin" ]; then
+	INKSCAPE=/Applications/Inkscape.app/Contents/Resources/bin/inkscape
+else
+	INKSCAPE=`which inkscape`
+fi
+
 SCOUR=~obo/local/bin/scour.py 
 
 
