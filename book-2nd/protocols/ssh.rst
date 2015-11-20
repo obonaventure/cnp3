@@ -229,7 +229,33 @@ that are encoded according to the Binary Packet Protocol defined in
    the message counter and the unencrypted message. 
    The message counter is not transmitted,
    but the recipient can easily recover its value. The ``MAC`` is computed as 
-   :math:`mac = MAC(key, sequence_number || unencrypted_message)`
+   :math:`mac = MAC(key, sequence_number || unencrypted_message)` where the
+   key is the negotiated authentication key.
+
+.. index:: HMAC
+
+.. note:: Authenticating messages with HMAC
+
+   `ssh` is one example of a protocol that uses Message Authentication Codes
+   (MAC) to authenticates the messages that are sent. A naïve implementation
+   of such a MAC would be to simply use a hash function like SHA-1. However,
+   such a construction would not be safe from a security viewpoint. Internet
+   protocols usually rely on the HMAC construction defined in :rfc:`2104`. 
+   It works with any hash function (`H`) and a key (`K`). As an example, let
+   us consider HMAC with the SHA-1 hash function. SHA-1 uses 20 bytes
+   blocks and the block size will play an important role in the operation
+   of HMAC. We first require the key to as long as the block size. Since this
+   key is the output of the key generation algorithm, this is one parameter
+   of this algorithm. 
+
+   HMAC uses two padding strings : `ipad` (resp. `opad`)  which is a 
+   string containing 20 times byte ``0x36`` (resp. byte ``0x5C``). The HMAC
+   is then computed as :math:`H[K \xor opad, H(K \xor ipad, data) ]` 
+   where :math:`\xor` denotes the bitwise XOR operation. This computation
+   has been shown to be stronger than the naïve :math:`H(K,data)` against
+   some types of cryptographic attacks.
+
+
 
 Among the various features of the ``ssh`` protocol, it is interesting
 to mention how users are authenticated by the server. The ``ssh`` protocol
