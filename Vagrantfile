@@ -12,7 +12,7 @@ Vagrant.configure(2) do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
-  config.vm.box = "ubuntu/trusty64"
+  config.vm.box = "ubuntu/trusty32"
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
@@ -65,37 +65,32 @@ Vagrant.configure(2) do |config|
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
   config.vm.provision "shell", inline: <<-SHELL
-     sudo apt-get update
-     sudo apt-get install -y python-sphinx             \
-                             make                      \
-                             python-setuptools         \
-                             mscgen                    \
-                             graphviz                  \
-                             texlive                   \
-                             texlive-pictures          \
-                             texlive-latex-extra       \
-                             dvipng                    \
-                             texlive-fonts-recommended \
-                             poppler-utils             \
-                             inkscape                  \
-                             netpbm                    \
-                             unzip
-     # need netpbm for tikz
-     sudo easy_install -U sphinxcontrib-mscgen
-     sudo easy_install -U sphinxcontrib-tikz
-     # need standalone.cls that is not in texlive :-(
-     sudo -u vagrant wget -q http://mirrors.ctan.org/install/macros/latex/contrib/standalone.tds.zip -O /tmp/standalone.tds.zip
-     sudo -u vagrant wget -q http://mirrors.ctan.org/macros/latex/contrib/titlesec.zip -O /tmp/titlesec.zip
-     sudo -u vagrant wget -q http://mirrors.ctan.org/macros/latex/contrib/wrapfig.zip  -O /tmp/wrapfig.zip
-     sudo -u vagrant wget -q http://mirrors.ctan.org/macros/latex/contrib/multirow.zip -O /tmp/multirow.zip
-     sudo unzip -u -o /tmp/standalone.tds.zip -d /usr/share/texmf-texlive/tex/latex
-     sudo unzip -u -o /tmp/titlesec.zip -d /usr/share/texmf-texlive/tex/latex
-     sudo unzip -u -o /tmp/wrapfig.zip  -d /usr/share/texmf-texlive/tex/latex
-     sudo unzip -u -o /tmp/multirow.zip -d /usr/share/texmf-texlive/tex/latex
-     sudo mkdir -p /usr/share/texmf-texlive/tex/latex/needspace
-     sudo wget -q http://ftp.rz.uni-wuerzburg.de/pub/tex/latex2e/contrib/misc/needspace.sty -O /usr/share/texmf-texlive/tex/latex/needspace/needspace.sty
-     sudo texhash 
-     # fix epstopdf which is broken
-     sudo sed -i -e '1i#!/usr/bin/perl\' /usr/share/texmf-texlive/scripts/epstopdf/epstopdf.pl
-     SHELL
+    sudo apt-get update
+    sudo apt-get install -y dvipng                    \
+                            graphviz                  \
+                            inkscape                  \
+                            make                      \
+                            mscgen                    \
+                            netpbm                    \
+                            poppler-utils             \
+                            python-sphinx             \
+                            python-setuptools         \
+                            texlive                   \
+                            texlive-fonts-recommended \
+                            texlive-latex-extra       \
+                            texlive-pictures          \
+                            unzip
+    # need netpbm for tikz
+    sudo easy_install -U sphinxcontrib-mscgen
+    sudo easy_install -U sphinxcontrib-tikz
+    # need needspace
+    sudo mkdir /usr/share/texlive/texmf-dist/tex/latex/needspace
+    sudo wget -q http://ftp.rz.uni-wuerzburg.de/pub/tex/latex2e/contrib/misc/needspace.sty -O /usr/share/texlive/texmf-dist/tex/latex/needspace/needspace.sty
+    # need standalone.cls that is not in texlive :-(
+    sudo -u vagrant wget -q http://mirrors.ctan.org/install/macros/latex/contrib/standalone.tds.zip -O /tmp/standalone.tds.zip
+    sudo unzip -u -o /tmp/standalone.tds.zip -d /usr/share/texlive/texmf-dist/tex/latex/
+    sudo texhash 
+    # fix epstopdf which is broken
+    sudo sed -i -e '1i#!/usr/bin/perl\' /usr/share/texlive/texmf-dist/scripts/epstopdf/epstopdf.pl
+  SHELL
 end
