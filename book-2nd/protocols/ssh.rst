@@ -250,8 +250,8 @@ that are encoded according to the Binary Packet Protocol defined in
 
    HMAC uses two padding strings : `ipad` (resp. `opad`)  which is a 
    string containing 20 times byte ``0x36`` (resp. byte ``0x5C``). The HMAC
-   is then computed as :math:`H[K \xor opad, H(K \xor ipad, data) ]` 
-   where :math:`\xor` denotes the bitwise XOR operation. This computation
+   is then computed as :math:`H[K \oplus opad, H(K \oplus ipad, data) ]` 
+   where :math:`\oplus` denotes the bitwise XOR operation. This computation
    has been shown to be stronger than the naïve :math:`H(K,data)` against
    some types of cryptographic attacks.
 
