@@ -1,5 +1,8 @@
 #!/bin/bash 
-INKSCAPE=/Applications/Inkscape.app/Contents/Resources/bin/inkscape
+#on Ubuntu
+INKSCAPE=/usr/bin/inkscape
+#On MacOSX
+#INKSCAPE=/Applications/Inkscape.app/Contents/Resources/bin/inkscape
 
 if [ "${1##*.}" = "svg" ]
 then
