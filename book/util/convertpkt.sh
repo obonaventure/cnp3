@@ -1,5 +1,5 @@
 #!/bin/bash 
-if [ `uname -s`, "Darwin" ]; then
+if [ `uname -s` = "Darwin" ]; then
 	INKSCAPE=/Applications/Inkscape.app/Contents/Resources/bin/inkscape
 else
 	INKSCAPE=`which inkscape`
