@@ -295,6 +295,54 @@ or derived from the Diffie Hellman parameters with the ``DH_RSA``
 key exchange. The exact algorithm used to derive the keys is defined 
 in :rfc:`5246`.
 
+A TLS record is always composed of four different fields :
+
+ - a `Type` that indicates the type of record. The most frequent type
+   is `application data` which corresponds to a record containing encrypted
+   data. The other types are `handshake`, `change_cipher_spec` and
+   `alert`. 
+ - a `Protocol Version` field that indicates the version of the TLS protocol
+   used. This version is composed of two sub fields : a major and a
+   minor version number.
+ - a `Length` field. A TLS record cannot be longer than 16,384 bytes.
+ - a `TLSPlainText` that contains the encrypted data
+
+TLS supports several methods to generate the encrypted records. The selected
+method depends on the cryptographic algorithms that have been negotiated for
+the TLS session. A detailed presentation of the different methods that can
+be used to produce the `TLSPlainText` from the user data is outside the scope
+of this book. As an example, we study one method : Stream Encryption. This
+method is used with cryptographic algorithms which can operate on a stream
+of bytes. The method starts with a sequence of bytes provided by the
+user application : the plain text. The first step is to compute the
+authentication code to verify the integrity of the data. For this, TLS
+computes :math:`MAC(SeqNum, Header, PlainText)` using HMAC 
+where `SeqNum` is a sequence
+number which is incremented by one for each new TLS record transmitted. The
+`Header` is the header of the TLS record described above and `PlainText` is
+the information that needs to be encrypted. Note that the sequence number
+is maintained at the two endpoints of the TLS session, but it is not transmitted
+inside the TLS record. This sequence number is used to prevent replay attacks.
+
+                
+.. index:: MAC-then-encrypt, Encrypt-then-MAC
+
+.. note:: MAC-then-encrypt or Encrypt-then-MAC
+
+   When secure protocols use Message Authentication and Encryption, they
+   need to specify how these two algorithms are combined. A first
+   solution, which is used by the current version of TLS, is to compute 
+   the authentication code and then encrypt both the data and the 
+   authentication code. A drawback of this approach is that the receiver 
+   of an encrypted TLS record must first attempt to decrypt data that
+   has potentially been modified by an attacker before being able
+   to verify the authenticity of the record. A better approach is
+   for the sender to first encrypt the data and then compute the
+   authentication code over the encrypted data. This is the encrypt-then-MAC
+   approach proposed in :rfc:`7366`. With encrypt-then-MAC, the receiver
+   first checks the authentication code before attempting to decrypt the
+   record. 
+
 
 
 
