@@ -15,11 +15,12 @@ PAPEROPT_a4     = -D latex_paper_size=a4
 PAPEROPT_letter = -D latex_paper_size=letter
 ALLSPHINXOPTS   = -d $(BUILDDIR)/doctrees $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) .
 
-.PHONY: help clean html dirhtml singlehtml pickle json htmlhelp qthelp devhelp epub latex latexpdf text man changes linkcheck doctest
+.PHONY: help clean figures html dirhtml singlehtml pickle json htmlhelp qthelp devhelp epub latex latexpdf text man changes linkcheck doctest
 
 
 help:
 	@echo "Please use \`make <target>' where <target> is one of"
+	@echo "  figures    to make the figures required in all builds. This is a prerequisite!"
 	@echo "  html       to make standalone HTML files"
 	@echo "  dirhtml    to make HTML files named index.html in directories"
 	@echo "  singlehtml to make a single large HTML file"
@@ -138,3 +139,8 @@ pdf:
 	$(SPHINXBUILD) -b pdf $(ALLSPHINXOPTS) _build/pdf
 	@echo
 	@echo "Build finished. The PDF files are in _build/pdf."
+
+figures:
+	$(MAKE) -f Makefile-images
+	@echo
+	@echo "The figures have been built."

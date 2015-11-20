@@ -66,31 +66,30 @@ Vagrant.configure(2) do |config|
   # documentation for more information about their specific syntax and use.
   config.vm.provision "shell", inline: <<-SHELL
      sudo apt-get update
-     sudo apt-get install -y inkscape
-     sudo apt-get install -y python-sphinx
-     sudo apt-get install -y make
-     sudo apt-get install -y python-setuptools
-     sudo apt-get install -y mscgen
-     sudo apt-get install -y graphviz
-     sudo apt-get install -y texlive
-     sudo apt-get install -y texlive-pictures
-     sudo apt-get install -y texlive-latex-extra
-     sudo apt-get install -y dvipng
-     sudo apt-get install -y texlive-fonts-recommended
-     sudo apt-get install -y poppler-utils
-     sudo apt-get install -y inkscape
+     sudo apt-get install -y python-sphinx             \
+                             make                      \
+                             python-setuptools         \
+                             mscgen                    \
+                             graphviz                  \
+                             texlive                   \
+                             texlive-pictures          \
+                             texlive-latex-extra       \
+                             dvipng                    \
+                             texlive-fonts-recommended \
+                             poppler-utils             \
+                             inkscape                  \
+                             netpbm                    \
+                             unzip
+     # need netpbm for tikz
      sudo easy_install -U sphinxcontrib-mscgen
      sudo easy_install -U sphinxcontrib-tikz
-     # for tikz
-     sudo apt-get install netpbm
      # need standalone.cls that is not in texlive :-(
-     sudo -u vagrant wget  -q http://mirrors.ctan.org/install/macros/latex/contrib/standalone.tds.zip -O /tmp/standalone.tds.zip
-     sudo -u vagrant wget -q http://mirrors.ctan.org/macros/latex/contrib/titlesec.zip	-O /tmp/titlesec.zip
+     sudo -u vagrant wget -q http://mirrors.ctan.org/install/macros/latex/contrib/standalone.tds.zip -O /tmp/standalone.tds.zip
+     sudo -u vagrant wget -q http://mirrors.ctan.org/macros/latex/contrib/titlesec.zip -O /tmp/titlesec.zip
      sudo -u vagrant wget -q http://mirrors.ctan.org/macros/latex/contrib/wrapfig.zip -O /tmp/wrapfig.zip
+     sudo -u vagrant wget -q http://mirrors.ctan.org/macros/latex/contrib/multirow.zip -O /tmp/multirow.zip
      sudo mkdir /usr/share/texmf-texlive/tex/latex/needspace
      sudo wget -q http://ftp.rz.uni-wuerzburg.de/pub/tex/latex2e/contrib/misc/needspace.sty -O /usr/share/texmf-texlive/tex/latex/needspace/needspace.sty
-     sudo -u vagrant wget -q http://mirrors.ctan.org/macros/latex/contrib/multirow.zip -O /tmp/multirow.zip	
-     sudo apt-get install unzip
      sudo unzip -u /tmp/standalone.tds.zip -d /usr/share/texmf-texlive/tex/latex
      sudo unzip -u /tmp/titlesec.zip -d /usr/share/texmf-texlive/tex/latex
      sudo unzip -u /tmp/wrapfig.zip -d /usr/share/texmf-texlive/tex/latex
