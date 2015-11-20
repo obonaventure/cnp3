@@ -77,6 +77,7 @@ Vagrant.configure(2) do |config|
      sudo apt-get install dvipng
      sudo apt-get install texlive-fonts-recommended
      sudo apt-get install -y poppler-utils
+     sudo apt-get install -y inkscape
      sudo easy_install -U sphinxcontrib-mscgen
      sudo easy_install -U sphinxcontrib-tikz
      # for tikz
