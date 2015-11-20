@@ -467,9 +467,7 @@ generator. :rfc:`4086` provides useful recommendations.
 .. ability to sign and provide authentication because this is important
 .. hash functions and HMAC without entering in the details
 
-.. note:: Passwords must never be stored in clear 
 
-  store passwords in encrypted or hashed form, mention dictionnary attacks
 
 .. maybe introduce these hash functions as a replacement for cheksum to show their vulnerability
 
@@ -1010,7 +1008,6 @@ This prevents the attack mentioned above since Mallory cannot create a
 fake certificate and cannot sign a value by using Bob's private key. Given
 the risk of man-in-the-middle attacks, the Diffie-Hellman key exchange
 mechanism should never be used without authentification.
-
 
 
 
