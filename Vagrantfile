@@ -66,6 +66,7 @@ Vagrant.configure(2) do |config|
   # documentation for more information about their specific syntax and use.
   config.vm.provision "shell", inline: <<-SHELL
      sudo apt-get update
+     sudo apt-get install -y inkscape
      sudo apt-get install -y python-sphinx
      sudo apt-get install -y make
      sudo apt-get install -y python-setuptools
@@ -73,9 +74,9 @@ Vagrant.configure(2) do |config|
      sudo apt-get install -y graphviz
      sudo apt-get install -y texlive
      sudo apt-get install -y texlive-pictures
-     sudo apt-get install texlive-latex-extra
-     sudo apt-get install dvipng
-     sudo apt-get install texlive-fonts-recommended
+     sudo apt-get install -y texlive-latex-extra
+     sudo apt-get install -y dvipng
+     sudo apt-get install -y texlive-fonts-recommended
      sudo apt-get install -y poppler-utils
      sudo easy_install -U sphinxcontrib-mscgen
      sudo easy_install -U sphinxcontrib-tikz
