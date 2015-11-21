@@ -17,8 +17,9 @@ if [ "${1##*.}" = "svg" ]; then
 	echo "Dimensions " ${W} "x" ${H}
 
 	if [ ${W} -gt 500 ]; then
-		${INKSCAPE} ${1} --export-width=500 --export-area-snap --export-area-drawing --export-png=${DIRNAME}/${BASENAME}.png
+		${INKSCAPE} ${1} --export-width=1000 --export-area-snap --export-area-drawing --export-png=${DIRNAME}/${BASENAME}.png
 		${INKSCAPE} ${1} --export-width=500 --export-area-snap --export-area-drawing --export-pdf=${DIRNAME}/${BASENAME}.pdf
+		convert ${DIRNAME}/${BASENAME}.png -resize '500' ${DIRNAME}/${BASENAME}.png
 #       sips --resampleWidth 500 ${DIRNAME}/${BASENAME}.png
 #       sips --resampleWidth 1000 ${DIRNAME}/${BASENAME}.pdf
 	else
