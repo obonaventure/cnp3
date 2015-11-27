@@ -12,7 +12,7 @@ Vagrant.configure(2) do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
-  config.vm.box = "hashicorp/precise32"
+  config.vm.box = "ubuntu/trusty32"
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
@@ -45,10 +45,10 @@ Vagrant.configure(2) do |config|
   #
   # config.vm.provider "virtualbox" do |vb|
   #   # Display the VirtualBox GUI when booting the machine
-  #   vb.gui = true
+  #   vb.gui = false
   #
   #   # Customize the amount of memory on the VM:
-  #   vb.memory = "1024"
+  #   vb.memory = "2048"
   # end
   #
   # View the documentation for the provider you are using for more
@@ -65,37 +65,28 @@ Vagrant.configure(2) do |config|
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
   config.vm.provision "shell", inline: <<-SHELL
-     sudo apt-get update
-     sudo apt-get install -y python-sphinx             \
-                             make                      \
-                             python-setuptools         \
-                             mscgen                    \
-                             graphviz                  \
-                             texlive                   \
-                             texlive-pictures          \
-                             texlive-latex-extra       \
-                             dvipng                    \
-                             texlive-fonts-recommended \
-                             poppler-utils             \
-                             inkscape                  \
-                             netpbm                    \
-                             unzip
-     # need netpbm for tikz
-     sudo easy_install -U sphinxcontrib-mscgen
-     sudo easy_install -U sphinxcontrib-tikz
-     # need standalone.cls that is not in texlive :-(
-     sudo -u vagrant wget -q http://mirrors.ctan.org/install/macros/latex/contrib/standalone.tds.zip -O /tmp/standalone.tds.zip
-     sudo -u vagrant wget -q http://mirrors.ctan.org/macros/latex/contrib/titlesec.zip -O /tmp/titlesec.zip
-     sudo -u vagrant wget -q http://mirrors.ctan.org/macros/latex/contrib/wrapfig.zip -O /tmp/wrapfig.zip
-     sudo -u vagrant wget -q http://mirrors.ctan.org/macros/latex/contrib/multirow.zip -O /tmp/multirow.zip
-     sudo mkdir /usr/share/texmf-texlive/tex/latex/needspace
-     sudo wget -q http://ftp.rz.uni-wuerzburg.de/pub/tex/latex2e/contrib/misc/needspace.sty -O /usr/share/texmf-texlive/tex/latex/needspace/needspace.sty
-     sudo unzip -u /tmp/standalone.tds.zip -d /usr/share/texmf-texlive/tex/latex
-     sudo unzip -u /tmp/titlesec.zip -d /usr/share/texmf-texlive/tex/latex
-     sudo unzip -u /tmp/wrapfig.zip -d /usr/share/texmf-texlive/tex/latex
-     sudo unzip -u /tmp/multirow.zip -d /usr/share/texmf-texlive/tex/latex
-     sudo texhash 
-     # fix epstopdf which is broken
-     sudo sed -i -e '1i#!/usr/bin/perl\' /usr/share/texmf-texlive/scripts/epstopdf/epstopdf.pl
-     SHELL
+    sudo apt-get update
+    sudo apt-get install -y dvipng                    \
+                            graphviz                  \
+                            imagemagick               \
+                            inkscape                  \
+                            make                      \
+                            mscgen                    \
+                            netpbm                    \
+                            poppler-utils             \
+                            python-sphinx             \
+                            python-setuptools         \
+                            texlive                   \
+                            texlive-fonts-recommended \
+                            texlive-latex-extra       \
+                            texlive-pictures          \
+                            unzip
+    # need netpbm for tikz
+    sudo easy_install -U sphinxcontrib-mscgen
+    sudo easy_install -U sphinxcontrib-tikz
+    # need standalone.cls that is not in texlive :-(
+    sudo -u vagrant wget -q http://mirrors.ctan.org/install/macros/latex/contrib/standalone.tds.zip -O /tmp/standalone.tds.zip
+    sudo unzip -u -o /tmp/standalone.tds.zip -d /usr/share/texlive/texmf-dist/tex/latex/
+    sudo texhash 
+  SHELL
 end
