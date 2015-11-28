@@ -175,7 +175,7 @@ When you configure such a route, make sure that you use the correct IPv6 address
 
 .. code-block:: console
 
-   /sbin/route -A inet6 add 2001:db8:be:feed/64 gw 2001:db8:bad:1212::22
+   /sbin/route -A inet6 add 2001:db8:be:feed::/64 gw 2001:db8:bad:1212::22
 
 Assuming that subnet ``2001:db8:bad:1212/64`` has been used on the link between ``r1`` and ``r2`` and that the address of ``r2`` on this subnet is ``2001:db8:bad:1212::22``.
 

@@ -1,11 +1,11 @@
-#!/bin/bash 
-#on Ubuntu
-INKSCAPE=/usr/bin/inkscape
-#On MacOSX
-#INKSCAPE=/Applications/Inkscape.app/Contents/Resources/bin/inkscape
+#!/bin/bash
+if [ `uname -s` = "Darwin" ]; then
+	INKSCAPE=/Applications/Inkscape.app/Contents/Resources/bin/inkscape
+else
+	INKSCAPE=`which inkscape`
+fi
 
-if [ "${1##*.}" = "svg" ]
-then
+if [ "${1##*.}" = "svg" ]; then
 # svg format
 
  BASENAME=`basename ${1} .svg`
@@ -20,15 +20,15 @@ then
        ${INKSCAPE} ${1} --export-width=1000 --export-area-snap --export-area-drawing --export-png=${DIRNAME}/${BASENAME}.png
        ${INKSCAPE} ${1} --export-width=500 --export-area-snap --export-area-drawing --export-pdf=${DIRNAME}/${BASENAME}.pdf
         convert ${DIRNAME}/${BASENAME}.png -resize '500>' ${DIRNAME}/${BASENAME}.png
+
 #       sips --resampleWidth 500 ${DIRNAME}/${BASENAME}.png
 #       sips --resampleWidth 1000 ${DIRNAME}/${BASENAME}.pdf
- else
-       #echo "Dimensions " ${W} "x" ${H}
-       ${INKSCAPE} ${1} --export-area-snap --export-area-drawing --export-png=${DIRNAME}/${BASENAME}.png
-       ${INKSCAPE} ${1} --export-area-snap --export-area-drawing --export-pdf=${DIRNAME}/${BASENAME}.pdf
+	else
+		#echo "Dimensions " ${W} "x" ${H}
+		${INKSCAPE} ${1} --export-area-snap --export-area-drawing --export-png=${DIRNAME}/${BASENAME}.png
+		${INKSCAPE} ${1} --export-area-snap --export-area-drawing --export-pdf=${DIRNAME}/${BASENAME}.pdf
 #       ${INKSCAPE} ${1} --export-area-drawing --export-png=${DIRNAME}/${BASENAME}.png
- fi
-   
+	fi
 else
-        echo Not a svg file
+	echo Not a svg file
 fi
