@@ -25,7 +25,7 @@ telnet is the ASCII character set, but the extensions specified
 in :rfc:`5198` support the utilisation
 of Unicode characters.
 
-From a security viewpoint, the main drawback of :terme:`telnet` is that all
+From a security viewpoint, the main drawback of :term:`telnet` is that all
 the information, including the usernames, passwords and commands,
 is sent in cleartext over a TCP connection. This implies that
 an eavesdropper could easily capture the passwords used by anyone
@@ -45,7 +45,7 @@ similar protocols [Ylonen1996]_. :term:`ssh` became quickly popular and system
 administrators encouraged its usage. The original version of :term:`ssh`
 was freely available. After a few years, his author created a company
 to distribute it commercially, but other programmers continued to
-develop an open-source version of :term`ssh` called 
+develop an open-source version of :term:`ssh` called
 `OpenSSH <http://www.openssh.com>`_.
 Over the years, :term:`ssh` evolved
 and became a flexible applicable whose usage extends beyond remote

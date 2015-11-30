@@ -688,7 +688,7 @@ the other's public key.
 
       a=>b [ label = "" ] ,
       b>>y [ label = "I'm Alice, key=Alice_{pub}", arcskip="1"];
-      y>>c [ label = "I'm Alice, key=Mallory_{pub}", color="red", arcskip="1"];
+      y>>c [ label = "I'm Alice, key=Mallory_{pub}", textcolour="red", linecolour="red", arcskip="1"];
       c=>d [ label = "" ];
 
       d=>c [ label = "" ] ,
@@ -697,7 +697,7 @@ the other's public key.
 
       a=>b [ label = "" ] ,
       b>>y [ label = "E_p(Alice_{priv},R)", arcskip="1"];
-      y>>c [ label = "E_p(Mallory_{priv},R)", color="red", arcskip="1"];
+      y>>c [ label = "E_p(Mallory_{priv},R)", textcolour="red", linecolour="red", arcskip="1"];
       c=>d [ label = "" ];
 
       d=>c [ label = "" ] ,
@@ -730,7 +730,7 @@ both have been authenticated.
       d [label="", linecolour=white];
 
       a=>b [ label = "" ] ,
-      b>>c [ label = I'm Alice", arcskip="1"];
+      b>>c [ label = "I'm Alice", arcskip="1"];
       c=>d [ label = "" ];
 
       d=>c [ label = "" ] ,
