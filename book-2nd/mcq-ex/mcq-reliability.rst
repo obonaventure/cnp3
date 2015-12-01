@@ -142,14 +142,13 @@ Error detection and correction
         
    .. negative::
 
+    .. comment:: This is an odd parity block
     .. code-block:: text
         
         1010111011110101
         1110101010101011 
         1111111011111111  
         0100010101011110 => parity block
-      
-      .. comment:: This is an odd parity block
 
    .. negative::
 
@@ -174,7 +173,7 @@ Error detection and correction
  
     .. code-block:: text
 
-        1011101111&10111
+        1011101111110111
         1001011101010101
         1010000011111111
         1010000011111111 => parity block
