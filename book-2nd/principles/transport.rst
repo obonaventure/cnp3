@@ -268,7 +268,7 @@ The third phase of a connection is when it needs to be released. As a connection
    Abrupt connection release initiated by the service provider
 
 
-An abrupt connection release can also be triggered by one of the users. If a user needs, for any reason, to terminate a connection quickly, it can issue a `Disconnect.request` primitive and to request an abrupt release. The service provider will process the request, stop the two data streams and deliver the `Disconnect.indication` primitive to the remote user as soon as possible. As illustrated in the figure below, this abrupt connection release may cause losses of SDUs.
+An abrupt connection release can also be triggered by one of the users. If a user needs, for any reason, to terminate a connection quickly, it can issue a `Disconnect.request` primitive to request an abrupt release. The service provider will process the request, stop the two data streams and deliver the `Disconnect.indication` primitive to the remote user as soon as possible. As illustrated in the figure below, this abrupt connection release may cause losses of SDUs.
 
 
 .. figure:: ../../book/intro/svg/intro-figures-023-c.png
@@ -302,7 +302,7 @@ The request-response service
 
 The `request-response service` is a compromise between the `connectionless service` and the `connection-oriented service`. Many applications need to send a small amount of data and receive a small amount of information back. This is similar to procedure calls in programming languages. A call to a procedure takes a few arguments and returns a simple answer. In a network, it is sometimes useful to execute a procedure on a different host and receive the result of the computation. Executing a procedure on another host is often called Remote Procedure Call. It is possible to use the `connectionless service` for this application. However, since this service is usually unreliable, this would force the application to deal with any type of error that could occur. Using the `connection oriented service` is another alternative. This service ensures the reliable delivery of the data, but a connection must be created before the beginning of the data transfert. This overhead can be important for applications that only exchange a small amount of data. 
 
-The `request-response service` allows to efficiently exchange small amounts of information in a request and associate it with the corresponding response. This service can be depicted by using the time-sequence diagram below.
+The `request-response service` allows to efficiently exchange small amounts of information in a request and associates it with the corresponding response. This service can be depicted by using the time-sequence diagram below.
 
   .. msc::
 
@@ -330,7 +330,7 @@ The `request-response service` allows to efficiently exchange small amounts of i
 The transport layer
 -------------------
 
-The transport layer entity interacts with both a user in the application layer and the network layer. It improves the network layer service to make it useable by applications. From the application's viewpoint, the main limitations of the network layer service that its service is unreliable: 
+The transport layer entity interacts with both a user in the application layer and the network layer. It improves the network layer service to make it useable by applications. From the application's viewpoint, the main limitations of the network layer service come from the fact that its service is unreliable: 
 
  - the network layer may corrupt data
  - the network layer may loose data
@@ -516,7 +516,7 @@ Compared to reliable protocols in the datalink layer, reliable transport protoco
 
 `Go-back-n` and `selective repeat` can be used in the transport layer as in the datalink layer. Since the network layer does not guarantee an in-order delivery of the packets, a transport entity should always store the segments that it receives out-of-sequence. For this reason, most transport protocols will opt for some form of selective repeat mechanism. 
 
-In the datalink layer, the sliding window has usually a fixed size which depends on the amount of buffers allocated to the datalink layer entity. Such a datalink layer entity usually serves one or a few network layer entities. In the transport layer, the situation is different. A single transport layer entity serves a large and varying number of application processes. Each transport layer entity manages a pool of buffers that needs to be shared between all these processes. Transport entity are usually implemented inside the operating system kernel and shares memory with other parts of the system. Furthermore, a transport layer entity must support several (possibly hundreds or thousands) of transport connections at the same time. This implies that the memory which can be used to support the sending or the receiving buffer of a transport connection may change during the lifetime of the connection [#fautotune]_ . Thus, a transport protocol must allow the sender and the receiver to adjust their window sizes.
+In the datalink layer, the sliding window has usually a fixed size which depends on the amount of buffers allocated to the datalink layer entity. Such a datalink layer entity usually serves one or a few network layer entities. In the transport layer, the situation is different. A single transport layer entity serves a large and varying number of application processes. Each transport layer entity manages a pool of buffers that needs to be shared between all these processes. Transport entity are usually implemented inside the operating system kernel and shares memory with other parts of the system. Furthermore, a transport layer entity must support several (possibly hundreds or thousands) transport connections at the same time. This implies that the memory which can be used to support the sending or the receiving buffer of a transport connection may change during the lifetime of the connection [#fautotune]_ . Thus, a transport protocol must allow the sender and the receiver to adjust their window sizes.
 
 To deal with this issue, transport protocols allow the receiver to advertise the current size of its receiving window in all the acknowledgements that it sends. The receiving window advertised by the receiver bounds the size of the sending buffer used by the sender. In practice, the sender maintains two state variables : `swin`, the size of its sending window (that may be adjusted by the system) and `rwin`, the size of the receiving window advertised by the receiver. At any time, the number of unacknowledged segments cannot be larger than :math:`\min(swin,rwin)` [#facklost]_ . The utilisation of dynamic windows is illustrated in the figure below.
 
