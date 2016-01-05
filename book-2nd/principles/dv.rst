@@ -25,7 +25,7 @@ A router that uses distance vector routing regularly sends its distance vector o
      v.add(Pair(d,R[d].cost))
   for i in interfaces
      # send vector v on this interface
-     send(v,interface)  
+     send(v,i)  
 
 
 When a router boots, it does not know any destination in the network and its routing table only contains itself. It thus sends to all its neighbours a distance vector that contains only its address at a distance of `0`. When a router receives a distance vector on link `l`, it processes it as follows.
@@ -124,8 +124,8 @@ This count to infinity problem occurs because router `A` advertises to router `D
     v=Vector()
     for d in R[]:
       if (R[d].link != l) :
-      	 v=v+Pair(d,R[d.cost])
-    send(v)
+      	 v.add(Pair(d,R[d].cost))
+    send(v,l)
     # end for d in R[]
   #end for l in interfaces  
 
@@ -140,10 +140,10 @@ This technique is called `split-horizon`. With this technique, the count to infi
     v=Vector()
     for d in R[]:
       if (R[d].link != l) :
-      	 v=v+Pair(d,R[d.cost])
+      	 v.add(Pair(d,R[d].cost))
       else:
-         v=v+Pair(d,infinity);
-    send(v)
+         v.add(Pair(d,infinity))
+    send(v,l)
     # end for d in R[]
   #end for l in interfaces  
 
