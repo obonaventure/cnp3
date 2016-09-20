@@ -86,8 +86,7 @@ exclude_trees = ['_build']
 # List of files that should not be automatically compiled by sphynx because they are included
 
 exclude_patterns = [ '*#*',   # emacs backups
-                     'MCQ.old/*',
-                     'mcq-ex/*']
+                     'MCQ.old/*']
 
 # epilog add to all included files
 #rst_epilog = """

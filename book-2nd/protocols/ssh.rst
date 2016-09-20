@@ -25,7 +25,7 @@ telnet is the ASCII character set, but the extensions specified
 in :rfc:`5198` support the utilisation
 of Unicode characters.
 
-From a security viewpoint, the main drawback of :terme:`telnet` is that all
+From a security viewpoint, the main drawback of :term:`telnet` is that all
 the information, including the usernames, passwords and commands,
 is sent in cleartext over a TCP connection. This implies that
 an eavesdropper could easily capture the passwords used by anyone

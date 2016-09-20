@@ -6,7 +6,7 @@
 Preface
 =======
 
-This is the current draft of the second edition of the `Computer Networking : Principles, Protocols and Practice`. The document is updated every week.
+This is the current draft of the second edition of the `Computer Networking : Principles, Protocols and Practice`. 
 
 .. This textbook came from a frustration of its main author. Many authors chose to write a textbook because there are no textbooks in their field or because they are not satisfied with the existing textbooks. This frustration has produced several excellent textbooks in the networking community. At a time when networking textbooks were mainly theoretical, `Douglas Comer`_ chose to write a textbook entirely focused on the TCP/IP protocol suite [Comer1988]_, a difficult choice at that time. He later extended his textbook by describing a complete TCP/IP implementation, adding practical considerations to the theoretical descriptions in [Comer1988]_. `Richard Stevens`_ approached the Internet like an explorer and explained the operation of protocols by looking at all the packets that were exchanged on the wire [Stevens1994]_. `Jim Kurose`_ and `Keith Ross`_ reinvented the networking textbooks by starting from the applications that the students use and later explained the Internet protocols by removing one layer after the other [KuroseRoss09]_. 
 
@@ -30,7 +30,9 @@ The first edition of this ebook has been written by `Olivier Bonaventure`_. `Lau
 About the author
 ################
 
-`Olivier Bonaventure <http://inl.info.ucl.ac.be/obo>`_ is currently professor at `Universite catholique de Louvain <http://www.uclouvain.be>`_ (Belgium) where he leads the `IP Networking Lab <http://inl.info.ucl.ac.be>`_ and is vice-president of the `ICTEAM <http://www.uclouvain.be/icteam>`_ institute. His research has been focused on Internet protocols for more than twenty years. Together with his Ph.D. students, he has developed traffic engineering techniques, performed various types of Internet measurements, improved the performance of routing protocols such as BGP and IS-IS and participated to the development of new Internet protocols including shim6, LISP and Multipath TCP. He frequently contributes to standardisation within the `IETF <http://www.ietf.org>`_. He was on the editorial board of IEEE/ACM Transactions on Networking and is Education Director of `ACM SIGCOMM <http://www.sigcomm.org>`_.
+`Olivier Bonaventure <http://inl.info.ucl.ac.be/obo>`_ is currently professor at `Universite catholique de Louvain <http://www.uclouvain.be>`_ (Belgium) where he leads the `IP Networking Lab <http://inl.info.ucl.ac.be>`_ . His research has been focused on Internet protocols for more than twenty years. Together with his Ph.D. students, he has developed traffic engineering techniques, performed various types of Internet measurements, improved the performance of routing protocols such as BGP and IS-IS and participated to the development of new Internet protocols including shim6, LISP and Multipath TCP. He frequently contributes to standardisation within the `IETF <http://www.ietf.org>`_. 
+
+.. He was on the editorial board of IEEE/ACM Transactions on Networking and is Education Director of `ACM SIGCOMM <http://www.sigcomm.org>`_.
 
 
 

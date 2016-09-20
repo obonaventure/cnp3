@@ -8,13 +8,13 @@ Computer Networking : Principles, Protocols and Practice, 2nd edition
 
 
 
-.. figure:: cnp3.png
+.. figure:: ../cnp3.png
    :align: center
    :scale: 60
 
 .. only:: html
 
-   This is an unpolished draft of the second edition of this ebook. If you find any error or have suggestions to improve the text, please create an issue via https://github.com/obonaventure/cnp3/issues/new
+   This is an unpolished draft of the exercises of the second edition of this ebook. It will be updated during the fall semester. Exercises will be updated every week. If you find any error or have suggestions to improve the text, please create an issue via https://github.com/obonaventure/cnp3/issues/new
 
     The development of this edition of the textbook is carried out on `github
     <https://github.com/obonaventure/cnp3/tree/master/book-2nd>`_ 
@@ -35,39 +35,16 @@ Computer Networking : Principles, Protocols and Practice, 2nd edition
 	
 
 
-.. _toc:
 
-.. toctree:: 
-   :maxdepth: 2
-
-_part3:
-
-################
-Part 3: Practice
-################
 
 .. toctree::
    :maxdepth: 4
 
-..   intro           
-..   exercises/reliable
-..   exercises/network
-..   exercises/ex-transport
-..   exercises/ex-sharing
-..   exercises/ex-app
-..   exercises/netkit-app
-..   exercises/netkit-tcp
-..   exercises/packetdrill
-..   exercises/netkit-congestion
-..   exercises/netkit-ipv6
-..   exercises/ex-routing-policies
-..   exercises/netkit-ipv6-rtg
-..   exercises/ex-bgp
-..   exercises/ex-stp
-
-   intro           
-   ../mcq-ex/mcq-reliability
+   intro 
    reliable
+
+
+..     mcq-ex/mcq-reliability
 ..   mcq-ex/mcq-network-ftable	
 ..   mcq-ex/mcq-network-vc
 ..   mcq-ex/mcq-network-pftables	
@@ -103,6 +80,25 @@ Part 3: Practice
 
 ..  lan/lan
 
+..   intro           
+..   exercises/reliable
+..   exercises/network
+..   exercises/ex-transport
+..   exercises/ex-sharing
+..   exercises/ex-app
+..   exercises/netkit-app
+..   exercises/netkit-tcp
+..   exercises/packetdrill
+..   exercises/netkit-congestion
+..   exercises/netkit-ipv6
+..   exercises/ex-routing-policies
+..   exercises/netkit-ipv6-rtg
+..   exercises/ex-bgp
+..   exercises/ex-stp
+
+
+
+
 ##########
 Appendices
 ##########
@@ -110,8 +106,8 @@ Appendices
 .. toctree::
    :maxdepth: 4
 
-   glossary
-   bibliography
+   ../glossary
+   ../bibliography
 
 
 ==================
@@ -124,7 +120,7 @@ Indices and tables
 
 .. only:: html
 
-  .. figure:: ../book/cc-by.png
+  .. figure:: ../../book/cc-by.png
      :align: center
      :scale: 100
 

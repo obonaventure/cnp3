@@ -103,6 +103,8 @@ In all these networks, except the full-mesh, the link bandwidth is shared among 
       }
 
 
+
+
  .. index:: max-min fairness
 
  In large networks, fairness is always a compromise. The most widely used definition of fairness is the `max-min fairness`. A bandwidth allocation in a network is said to be `max-min fair` if it is such that it is impossible to allocate more bandwidth to one of the flows without reducing the bandwidth of a flow that already has a smaller allocation than the flow that we want to increase. If the network is completely known, it is possible to derive a `max-min fair` allocation as follows. Initially, all flows have a null bandwidth and they are placed in the candidate set. The bandwidth allocation of all flows in the candidate set is increased until one link becomes congested. At this point, the flows that use the congested link have reached their maximum allocation. They are removed from the candidate set and the process continues until the candidate set becomes empty.
@@ -490,7 +492,7 @@ In the second and third cases, both hosts have flipped different coins. The dela
 If two hosts are competing, the algorithm above will avoid a second collision 50% of the time. However, if the network is heavily loaded, several hosts may be competing at the same time. In this case, the hosts should be able to automatically adapt their retransmission delay. The `binary exponential back-off` performs this adaptation based on the number of collisions that have affected a frame. After the first collision, the host flips a coin and waits 0 or 1 `slot time`. After the second collision, it generates a random number and waits 0, 1, 2 or 3 `slot times`, etc. The duration of the waiting time is doubled after each collision. The complete pseudo-code for the CSMA/CD algorithm is shown in the figure below. 
 
 
-.. code-block:: python
+.. code-block:: python 
 
  # CSMA/CD pseudo-code
  N=1
@@ -817,31 +819,22 @@ Congestion control in a window-based transport protocol
 AIMD controls congestion by adjusting the transmission rate of the sources in reaction to the current congestion level. If the network is not congested, the transmission rate increases. If congestion is detected, the transmission rate is multiplicatively decreased. In practice, directly adjusting the transmission rate can be difficult since it requires the utilisation of fine grained timers. In reliable transport protocols, an alternative is to dynamically adjust the sending window. This is the solution chosen for protocols like TCP and SCTP that will be described in more details later. To understand how window-based protocols can adjust their transmission rate, let us consider the very simple scenario of a reliable transport protocol that uses `go-back-n`. Consider the very simple scenario shown in the figure below.
 
 
-.. graphviz::
+.. tikz::
+   :libs: positioning, matrix
 
-   graph foo {
-      randkir=LR;
-      A [color=white, shape=box label=<<TABLE border="0" cellborder="0">
-                       <TR><TD width="45" height="60" fixedsize="true"><IMG SRC="icons/host.png" scale="true"/></TD></TR><TR><td>A</td></TR>
-              </TABLE>>];
-      B [color=white, shape=box label=<<TABLE border="0" cellborder="0">
-                       <TR><TD width="45" height="60" fixedsize="true"><IMG SRC="icons/host.png" scale="true"/></TD></TR><TR><td>B</td></TR>
-              </TABLE>>];
-      D [color=white, shape=box label=<<TABLE border="0" cellborder="0">
-                       <TR><TD width="45" height="60" fixedsize="true"><IMG SRC="icons/host.png" scale="true"/></TD></TR><TR><td>D</td></TR>
-              </TABLE>>];
-      R1[shape=box, color=white, label=<<TABLE border="0" cellborder="0">
-                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="icons/router.png" scale="true"/></TD></TR><TR><td>R1</td></TR>
-              </TABLE>>];
-       R2[color=white, label=<<TABLE border="0" cellborder="0">
-                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="icons/router.png" scale="true"/></TD></TR><TR><td>R2</td></TR>
-              </TABLE>>];
-      A--R1;
-      B--R1;
-      R1--R2 [label="500 kbps"];
-      R2--D;
-   }
+    \tikzset{router/.style = {rectangle, draw, text centered, minimum height=2em}, }
+    \tikzset{host/.style = {circle, draw, text centered, minimum height=2em}, }
+    \node[router] (R1) {R1};
+    \node[router, right=of R1] (R2) {R2};
+    \node[host, left=of R1] (A) {A};
+    \node[host, below=of R1] (B) {B};
+    \node[host, right=of R2] (D) {D};
 
+    \path[draw,thick]
+    (R1) edge node [align=center] {500 Kbps\\} (R2)
+    (A) edge (R1)
+    (B) edge (R1)
+    (R2) edge (D);
 
 The links between the hosts and the routers have a bandwidth of 1 Mbps while the link between the two routers has a bandwidth of 500 Kbps. There is no significant propagation delay in this network. For simplicity, assume that hosts `A` and `B` send 1000 bits packets. The transmission of such a packet on a `host-router` (resp. `router-router` ) link requires 1 msec (resp. 2 msec). If there is no traffic in the network, round-trip-time measured by host `A` is slightly larger than 4 msec. Let us observe the flow of packets with different window sizes to understand the relationship between sending window and transmission rate.
 

@@ -114,28 +114,28 @@ Part 2: Protocols
 
 .. _part3:
 
-################
-Part 3: Practice
-################
+.. ################
+.. Part 3: Practice
+.. ################
 
-.. toctree::
-   :maxdepth: 4
+.. .. toctree::
+..   :maxdepth: 4
 
-   exercises/intro           
-   exercises/reliable
-   exercises/network
-   exercises/ex-transport
-   exercises/ex-sharing
-   exercises/ex-app
-   exercises/netkit-app
-   exercises/netkit-tcp
-   exercises/packetdrill
-   exercises/netkit-congestion
-   exercises/netkit-ipv6
-   exercises/ex-routing-policies
-   exercises/netkit-ipv6-rtg
-   exercises/ex-bgp
-   exercises/ex-stp
+..   exercises/intro           
+..   exercises/reliable
+..   exercises/network
+..   exercises/ex-transport
+..   exercises/ex-sharing
+..   exercises/ex-app
+..   exercises/netkit-app
+..   exercises/netkit-tcp
+..   exercises/packetdrill
+..   exercises/netkit-congestion
+..   exercises/netkit-ipv6
+..   exercises/ex-routing-policies
+..   exercises/netkit-ipv6-rtg
+..   exercises/ex-bgp
+..   exercises/ex-stp
 
 ..   exercises/intro           
 ..   mcq-ex/mcq-reliability

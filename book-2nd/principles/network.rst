@@ -88,7 +88,7 @@ As a first step, let us assume that we only need to exchange small amount of dat
 
 
 
-This network contains two types of devices. The end hosts, represented as a small workstation and the routers, represented as boxes with three arrows. An endhost is a device which is able to send and receive data for its own usage in contrast with routers that most of the time forward data towards their final destination. Routers have multiple links to neighboring routers or endhosts. Endhosts are usually attached via a single link to the network. Nowadays, with the growth of wireless networks, more and more endhosts are equipped with several physical interfaces. These endhosts are often called `multihomed`. Still, using several interfaces at the same time often leads to practical issues that are beyond the scope of this document. For this reason, we will only consider `single-homed` hosts in this ebook.
+This network contains two types of devices. The end hosts, represented with circles and the routers, represented as boxes. An endhost is a device which is able to send and receive data for its own usage in contrast with routers that most of the time forward data towards their final destination. Routers have multiple links to neighbouring routers or endhosts. Endhosts are usually attached via a single link to the network. Nowadays, with the growth of wireless networks, more and more endhosts are equipped with several physical interfaces. These endhosts are often called `multihomed`. Still, using several interfaces at the same time often leads to practical issues that are beyond the scope of this document. For this reason, we will only consider `single-homed` hosts in this ebook.
 
 To understand the key principles behind the operation of a network, let us analyse all the operations that need to be performed to allow host `A` in the above network to send one byte to host `B`. Thanks to the datalink layer used above the `A-R1` link, host `A` can easily send a byte to router `R1` inside a frame. However, upon reception of this frame, router `R1` needs to understand that the byte is destined to host `B` and not to itself. This is the objective of the network layer.
 
@@ -184,71 +184,56 @@ In a tree-shaped network, it is relatively simple for each node to automatically
 
 To understand the operation of the port-address table, let us consider the example network shown in the figure below. This network contains three hosts : `A`, `B` and `C` and five nodes, `R1` to `R5`. When the network boots, all the forwarding tables of the nodes are empty.
 
-.. graphviz::
 
-   graph foo {
-      A [color=white, shape=box label=<<TABLE border="0" cellborder="0">
-                       <TR><TD width="45" height="60" fixedsize="true"><IMG SRC="icons/host.png" scale="true"/></TD></TR><TR><td>A</td></TR>
-              </TABLE>>];
-      B [color=white, shape=box label=<<TABLE border="0" cellborder="0">
-                       <TR><TD width="45" height="60" fixedsize="true"><IMG SRC="icons/host.png" scale="true"/></TD></TR><TR><td>B</td></TR>
-              </TABLE>>];
-      C [color=white, shape=box label=<<TABLE border="0" cellborder="0">
-                       <TR><TD width="45" height="60" fixedsize="true"><IMG SRC="icons/host.png" scale="true"/></TD></TR><TR><td>C</td></TR>
-              </TABLE>>];
-      R1[shape=box, color=white, label=<<TABLE border="0" cellborder="0">
-                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="icons/router.png" scale="true"/></TD></TR><TR><td>R1</td></TR>
-              </TABLE>>];
-       R2[color=white, label=<<TABLE border="0" cellborder="0">
-                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="icons/router.png" scale="true"/></TD></TR><TR><td>R2</td></TR>
-              </TABLE>>];
-       R3[color=white, label=<<TABLE border="0" cellborder="0">
-                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="icons/router.png" scale="true"/></TD></TR><TR><td>R3</td></TR>
-              </TABLE>>];
-       R4[color=white, label=<<TABLE border="0" cellborder="0">
-                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="icons/router.png" scale="true"/></TD></TR><TR><td>R4</td></TR>
-              </TABLE>>];
-       R5[color=white, label=<<TABLE border="0" cellborder="0">
-                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="icons/router.png" scale="true"/></TD></TR><TR><td>R5</td></TR>
-              </TABLE>>];
-      A--R1;
-      R1--R3;
-      R3--R5;
-      R1--R2;
-      R3--R4;
-      R2--C;
-      R5--B;
-   }
+.. tikz::
+      :libs: positioning, matrix, arrows 
+
+      \tikzstyle{arrow} = [thick,->,>=stealth]
+      \tikzset{router/.style = {rectangle, draw, text centered, minimum height=2em}, }
+      \tikzset{host/.style = {circle, draw, text centered, minimum height=2em}, }
+      \tikzset{ftable/.style={rectangle, dashed, draw} }
+      \node[host] (A) {A};
+      \node[router, right=of A] (R1) {R1};
+      \node[router, right=of R1] (R2) {R2};
+      \node[host, right=of R2] (C) {C};
+      \node[router, below=of R2] (R3) {R3};
+      \node[router, right=of R3] (R4) {R4};
+      \node[router, below=of R4] (R5) {R5};
+      \node[host, right=of R4] (B) {B};
+      \path[draw,thick]
+      (A) edge (R1) 
+      (R1) edge (R2) 
+      (R1) edge (R3) 
+      (R2) edge (C) 
+      (R3) edge (R4)
+      (R5) edge (B)
+      (R3) edge (R5); 
 
 
 Host `A` sends a packet towards `B`. When receiving this packet, `R1` learns that `A` is reachable via its `North` interface. Since it does not have an entry for destination `B` in its port-address table, it forwards the packet to both `R2` and `R3`. When `R2` receives the packet, it updates its own forwarding table and forward the packet to `C`. Since `C` is not the intended recipient, it simply discards the received packet. Node `R3` also received the packet. It learns that `A` is reachable via its `North` interface and broadcasts the packet to `R4` and `R5`. `R5` also updates its forwarding table and finally forwards it to destination `B`.`Let us now consider what happens when `B` sends a reply to `A`. `R5`  first learns that `B` is attached to its `South` port. It then consults its port-address table and finds that `A` is reachable via its `North` interface. The packet is then forwarded hop-by-hop to `A` without any broadcasting. If `C` sends a packet to `B`, this packet will reach `R1` that contains a valid forwarding entry in its forwarding table.
 
 By inspecting the source and destination addresses of packets, network nodes can automatically derive their forwarding tables. As we will discuss later, this technique is used in Ethernet networks. Despite being widely used, it has two important drawbacks. First, packets sent to unknown destinations are broadcasted in the network even if the destination is not attached to the network. Consider the transmission of ten packets destined to `Z` in the network above. When a node receives a packet towards this destination, it can only broadcast the packet. Since `Z` is not attached to the network, no node will ever receive a packet whose source is `Z` to update its forwarding table. The second and more important problem is that few networks have a tree-shaped topology. It is interesting to analyze what happens when a port-address table is used in a network that contains a cycle. Consider the simple network shown below with a single host.
 
-.. graphviz::
 
-   graph foo {
-      A [color=white, shape=box label=<<TABLE border="0" cellborder="0">
-                       <TR><TD width="45" height="60" fixedsize="true"><IMG SRC="icons/host.png" scale="true"/></TD></TR><TR><td>A</td></TR>
-              </TABLE>>];
-      B [color=white, shape=box label=<<TABLE border="0" cellborder="0">
-                       <TR><TD width="45" height="60" fixedsize="true"><IMG SRC="icons/host.png" scale="true"/></TD></TR><TR><td>B</td></TR>
-              </TABLE>>];
-      R1[shape=box, color=white, label=<<TABLE border="0" cellborder="0">
-                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="icons/router.png" scale="true"/></TD></TR><TR><td>R1</td></TR>
-              </TABLE>>];
-       R2[color=white, label=<<TABLE border="0" cellborder="0">
-                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="icons/router.png" scale="true"/></TD></TR><TR><td>R2</td></TR>
-              </TABLE>>];
-       R3[color=white, label=<<TABLE border="0" cellborder="0">
-                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="icons/router.png" scale="true"/></TD></TR><TR><td>R3</td></TR>
-              </TABLE>>];
-      A--R1 ;
-      R1--R2 ;
-      R1--R3;
-      R2--R3;
-      R3--B;
-   }
+
+.. tikz::
+      :libs: positioning, matrix, arrows 
+
+      \tikzstyle{arrow} = [thick,->,>=stealth]
+      \tikzset{router/.style = {rectangle, draw, text centered, minimum height=2em}, }
+      \tikzset{host/.style = {circle, draw, text centered, minimum height=2em}, }
+      \tikzset{ftable/.style={rectangle, dashed, draw} }
+      \node[host] (A) {A};
+      \node[router, right=of A] (R1) {R1};
+      \node[router, right=of R1] (R3) {R3};
+      \node[router, below=of R1] (R2) {R2};
+      \node[host, right=of R3] (B) {B};
+      \path[draw,thick]
+      (A) edge (R1) 
+      (R1) edge (R2) 
+      (R1) edge (R3) 
+      (R3) edge (R2) 
+      (R3) edge (B); 
 
 Assume that the network has started and all port-station and forwarding tables are empty. Host `A` sends a packet towards `B`. Upon reception of this packet, `R1` updates its port-address table. Since `B` is not present in the port-address table, the packet is broadcasted. Both `R2` and `R3` receive a copy of the packet sent by `A`. They both update their port-address table. Unfortunately, they also both broadcast the received packet. `B` receives a first copy of the packet, but `R3` and `R2` receive it again. `R3` will then broadcast this copy of the packet to `B` and `R1` while `R2` will broadcast its copy to `R1`. Although `B` has already received two copies of the packet, it is still inside the network and will continue to loop. Due to the presence of the cycle, a single packet towards an unknown destination generates copies of this packet that loop and will saturate the network bandwidth. Network operators who are using port-address tables to automatically compute the forwarding tables also use distributed algorithms to ensure that the network topology is always a tree.
 
@@ -271,34 +256,27 @@ Another technique can be used to automatically compute forwarding tables. It has
 
 `Data packets` are used to exchange data while `control packets` are used to discover the paths between endhosts. With `Source routing`, network nodes can be kept as simple as possible and all the complexity is placed on the endhosts. This is in contrast with the previous technique where the nodes had to maintain a port-address and a forwarding table while the hosts simply sent and received packets. Each node is configured with one unique address and there is one identifier per outgoing link. For simplicity and to avoid cluttering the figures with those identifiers, we will assume that each node uses as link identifiers north, west, south, ... In practice, a node would associate one integer to each outgoing link. 
 
-.. graphviz::
+.. tikz::
+      :libs: positioning, matrix, arrows 
 
-   graph foo {
-      A [color=white, shape=box label=<<TABLE border="0" cellborder="0">
-                       <TR><TD width="45" height="60" fixedsize="true"><IMG SRC="icons/host.png" scale="true"/></TD></TR><TR><td>A</td></TR>
-              </TABLE>>];
-      B [color=white, shape=box label=<<TABLE border="0" cellborder="0">
-                       <TR><TD width="45" height="60" fixedsize="true"><IMG SRC="icons/host.png" scale="true"/></TD></TR><TR><td>B</td></TR>
-              </TABLE>>];
-      R1[shape=box, color=white, label=<<TABLE border="0" cellborder="0">
-                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="icons/router.png" scale="true"/></TD></TR><TR><td>R1</td></TR>
-              </TABLE>>];
-       R2[color=white, label=<<TABLE border="0" cellborder="0">
-                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="icons/router.png" scale="true"/></TD></TR><TR><td>R2</td></TR>
-              </TABLE>>];
-       R3[color=white, label=<<TABLE border="0" cellborder="0">
-                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="icons/router.png" scale="true"/></TD></TR><TR><td>R3</td></TR>
-              </TABLE>>];
-       R4[color=white, label=<<TABLE border="0" cellborder="0">
-                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="icons/router.png" scale="true"/></TD></TR><TR><td>R4</td></TR>
-              </TABLE>>];
-      A--R1 ;
-      R1--R2 [];
-      R1--R3 [];
-      R2--R3 [];
-      R3--R4 [];
-      R4--B ;
-   }
+      \tikzstyle{arrow} = [thick,->,>=stealth]
+      \tikzset{router/.style = {rectangle, draw, text centered, minimum height=2em}, }
+      \tikzset{host/.style = {circle, draw, text centered, minimum height=2em}, }
+      \tikzset{ftable/.style={rectangle, dashed, draw} }
+      \node[host] (A) {A};
+      \node[router, right=of A] (R1) {R1};
+      \node[router, right=of R1] (R3) {R3};
+      \node[router, below=of R1] (R2) {R2};
+      \node[router, right=of R3] (R4) {R4};
+      \node[host, right=of R4] (B) {B};
+      \path[draw,thick]
+      (A) edge (R1) 
+      (R1) edge (R2) 
+      (R1) edge (R3) 
+      (R3) edge (R2) 
+      (R3) edge (R4) 
+      (R4) edge (B); 
+
 
 In the network above, node `R2` is attached to two outgoing links. `R2` is connected to both `R1` and `R3`. `R2` can easily determine that it is connected to these two nodes by exchanging packets with them or observing the packets that it receives over each interface. Assume for example that when a host or node starts, it sends a special control packet over each of its interfaces to advertise its own address to its neighbors. When a host or node receives such a packet, it automatically replies with its own address. This exchange can also be used to verify whether a neighbor, either node or host, is still alive. With `source routing`, the data plane packets include a list of identifiers. This list is called a `source route` and indicates the path to be followed by the packet as a sequence of link identifiers. When a node receives such a `data plane` packet, it first checks whether the packet's destination is direct neighbor. In this case, the packet is forwarded to the destination. Otherwise, the node extracts the next address from the list and forwards it to the neighbor. This allows the source to specify the explicit path to be followed for each packet. For example, in the figure above there are two possible paths between `A` and `B`. To use the path via `R2`, `A` would send a packet that contains `R1,R2,R3` as source route. To avoid going via `R2`, `A` would place `R1,R3` as the source route in its transmitted packet. If `A` knows the complete network topology and all link identifiers, it can easily compute the source route towards each destination. If needed, it could even use different paths, e.g. for redundancy, to reach a given destination. However, in a real network hosts do not usually have a map of the entire network topology.
 
@@ -330,34 +308,29 @@ A widely used alternative to the `flat addressing scheme` is the `hierarchical a
 
 This hierarchical allocation of addresses can be applied in any type of network. In practice, the allocation of the addresses must follow the network topology. Usually, this is achieved by dividing the addressing space in consecutive blocks and then allocating these blocks to different parts of the network. In a small network, the simplest solution is to allocate one block of addresses to each network node and assign the host addresses from the attached node. 
 
-.. graphviz::
 
-   graph foo {
-      A [color=white, shape=box label=<<TABLE border="0" cellborder="0">
-                       <TR><TD width="45" height="60" fixedsize="true"><IMG SRC="icons/host.png" scale="true"/></TD></TR><TR><td>A</td></TR>
-              </TABLE>>];
-      B [color=white, shape=box label=<<TABLE border="0" cellborder="0">
-                       <TR><TD width="45" height="60" fixedsize="true"><IMG SRC="icons/host.png" scale="true"/></TD></TR><TR><td>B</td></TR>
-              </TABLE>>];
-      R1[shape=box, color=white, label=<<TABLE border="0" cellborder="0">
-                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="icons/router.png" scale="true"/></TD></TR><TR><td>R1</td></TR>
-              </TABLE>>];
-       R2[color=white, label=<<TABLE border="0" cellborder="0">
-                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="icons/router.png" scale="true"/></TD></TR><TR><td>R2</td></TR>
-              </TABLE>>];
-       R3[color=white, label=<<TABLE border="0" cellborder="0">
-                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="icons/router.png" scale="true"/></TD></TR><TR><td>R3</td></TR>
-              </TABLE>>];
-       R4[color=white, label=<<TABLE border="0" cellborder="0">
-                       <TR><TD width="75" height="30" fixedsize="true"><IMG SRC="icons/router.png" scale="true"/></TD></TR><TR><td>R4</td></TR>
-              </TABLE>>];
-      A--R1 ;
-      R1--R2 [];
-      R1--R3 [];
-      R2--R3 [];
-      R3--R4 [];
-      R4--B ;
-   }
+.. tikz::
+      :libs: positioning, matrix, arrows 
+
+      \tikzstyle{arrow} = [thick,->,>=stealth]
+      \tikzset{router/.style = {rectangle, draw, text centered, minimum height=2em}, }
+      \tikzset{host/.style = {circle, draw, text centered, minimum height=2em}, }
+      \tikzset{ftable/.style={rectangle, dashed, draw} }
+      \node[host] (A) {A};
+      \node[router, right=of A] (R1) {R1};
+      \node[router, right=of R1] (R3) {R3};
+      \node[router, below=of R1] (R2) {R2};
+      \node[router, right=of R3] (R4) {R4};
+      \node[host, right=of R4] (B) {B};
+      \path[draw,thick]
+      (A) edge (R1) 
+      (R1) edge (R2) 
+      (R1) edge (R3) 
+      (R3) edge (R2) 
+      (R3) edge (R4) 
+      (R4) edge (B); 
+
+
 
 In the above figure, assume that the network uses 16 bits addresses and that the prefix `01001010` has been assigned to the entire network. Since the network contains four routers, the network operator could assign one block of sixty-four addresses to each router. `R1` would use address `0100101000000000` while `A` could use address `0100101000000001`. `R2` could be assigned all adresses from `0100101001000000`  to `0100101001111111`. `R4` could then use `0100101011000000` and assign `0100101011000001` to `B`. Other allocation schemes are possible. For example, `R3` could be allocated a larger block of addresses than `R2` and `R4` could use a sub-block from `R3` 's address block. 
 

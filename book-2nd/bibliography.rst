@@ -133,8 +133,7 @@ Whenever possible, the bibliography includes stable hypertext links to the refer
 .. [Mogul1995] Mogul, J. , `The case for persistent-connection HTTP <http://doi.acm.org/10.1145/217382.217465>`_. In Proceedings of the Conference on Applications, Technologies, Architectures, and Protocols For Computer Communication (Cambridge, Massachusetts, United States, August 28 - September 01, 1995). D. Oran, Ed. SIGCOMM '95. ACM, New York, NY, 299-313. 
 .. [Moore] Moore, R., `Packet switching history`, http://rogerdmoore.ca/PS/
 .. [Moy1998] Moy, J., `OSPF: Anatomy of an Internet Routing Protocol <http://books.google.com/books?id=YXUWsqVhx60C>`_, Addison Wesley, 1998 
-.. [MVV2011]  Menezes, A., van Oorschot, P. and Vanstone, S. ,`Handbook of
-Applied Cryptography <http://cacr.uwaterloo.ca/hac/>`_ , CRC Press, 2011
+.. [MVV2011]  Menezes, A., van Oorschot, P. and Vanstone, S. , `Handbook of Applied Cryptography <http://cacr.uwaterloo.ca/hac/>`_ , CRC Press, 2011
 .. [Myers1998] Myers, B. A., `A brief history of human-computer interaction technology <http://doi.acm.org/10.1145/274430.274436>`_. interactions 5, 2 (Mar. 1998), 44-54. 
 .. [Nelson1965] Nelson, T. H., `Complex information processing: a file structure for the complex, the changing and the indeterminate <http://doi.acm.org/10.1145/800197.806036>`_. In Proceedings of the 1965 20th National Conference (Cleveland, Ohio, United States, August 24 - 26, 1965). L. Winner, Ed. ACM '65. ACM, New York, NY, 84-100. 
 .. [NGB+1997] Nielsen, H., Gettys, J., Baird-Smith, A., Prudhommeaux, E., Wium Lie, H., and Lilley, C. `Network performance effects of HTTP/1.1, CSS1, and PNG <http://doi.acm.org/10.1145/263109.263157>`_. SIGCOMM Comput. Commun. Rev. 27, 4 (October 1997), 155-166. 
