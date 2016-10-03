@@ -317,7 +317,7 @@ At this point, a new link is added between `R1` and `R3`. What happens for the f
                on A      on B      on C     on D     on E
   -----------  --------  --------  -------  -------  -------
   A            0         1 via A   2 via B  3 via C  4 via D
-  B            1 via B   0                  1 via B  2 via C  3 via D
+  B            1 via B   0         1 via B  2 via C  3 via D
   C            2 via B   1 via C   0        1 via C  2 via D
   D            3 via B   2 via C   1 via D  0        1 via D
   E            4 via B   3 via C   2 via D  1 via E  0
@@ -329,22 +329,11 @@ At this point, a new link is added between `R1` and `R3`. What happens for the f
 
   * Consider the same distance vector protocol, but now with `triggered updates`. When link `B-C` fails, assume that `B` updates its routing table immediately and sends its distance vector to `A` and `D`. Assume that both `A` and `D` process the received distance vector and that `A` sends its own distance vector, ... Indicate all the distance vectors that are exchanged and update the table above each time a distance vector is sent by a router (and received by other routers) until all routers have learned a new route to each destination. How many distance vector messages must be exchanged until the network converges to a stable state ?
 
-6. Consider again the network shown above. After some time, link state routing converges and all routers compute the following routing tables :
+6. Consider again the network shown above. After some time, link state routing converges and all routers compute the same routing tables.
 
- ===========  ========  =========  =========  =========  =========
- Destination   Routes   Routes     Routes     Routes     Routes
-               on A     on B       on C       on D       on E
- -----------  --------  ---------  ---------  ---------  ---------
- A             0        2 via C    1 via A    3 via B,E  2 via C
- B             2 via C  0          1 via B    1 via B    2 via D,C
- C             1 via C  1 via C    0          2 via B,E  1 via C
- D             3 via C  1 via D    2 via B,E  0          1 via D
- E             2 via C  2 via C,D  1 via E    1 via E    0
- ===========  ========  =========  =========  =========  =========
+ An important difference between OSPF and RIP is that OSPF routers flood link state packets that allow the other routers to recompute their own routing tables while RIP routers exchange distance vectors. Consider that link `B-C` fails and that router `B` is the first to detect the failure. At this point, `B` cannot reach anymore `C`, `D` and `E`. `C` cannot reach `B` and `A` anymore.
 
- An important difference between OSPF and RIP is that OSPF routers flood link state packets that allow the other routers to recompute their own routing tables while RIP routers exchange distance vectors. Consider that link `B-C` fails and that router `B` is the first to detect the failure. At this point, `B` cannot reach anymore `A`, `C` and 50% of its paths towards `E` have failed. `C` cannot reach `B` anymore and half of its paths towards `D` have failed.
-
- Router `B` will flood its updated link state packet through the entire network and all routers will recompute their forwarding table. Upon reception of a link state packet, routers usually first flood the received link-state packet and then recompute their forwarding table. Assume that `B` is the first to recompute its forwarding table, followed by `D`, `A`, `C` and finally `E`
+ Router `B` will flood its updated link state packet through the entire network and all routers will recompute their forwarding table. Upon reception of a link state packet, routers usually first flood the received link-state packet and then recompute their forwarding table. Assume that `B` is the first to recompute its forwarding table, followed by `D`, `A`, `C` and finally `E`.
 
 7. After each update of a forwarding table, verify which pairs of routers are able to exchange packets. Provide your answer using a table similar to the one shown above.
 
