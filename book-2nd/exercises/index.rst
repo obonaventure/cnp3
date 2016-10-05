@@ -42,21 +42,23 @@ Computer Networking : Principles, Protocols and Practice, 2nd edition
 
    intro 
    reliable
+   network
+   ex-transport
+   ex-sharing
+   ex-app
 
-
-..     mcq-ex/mcq-reliability
+..   mcq-ex/mcq-reliability
 ..   mcq-ex/mcq-network-ftable	
 ..   mcq-ex/mcq-network-vc
 ..   mcq-ex/mcq-network-pftables	
 ..   mcq-ex/mcq-network-shortest	
 ..   mcq-ex/mcq-network
-..   exercises/network
 ..   mcq-ex/mcq-transport
-..   exercises/ex-transport
+
 ..   mcq-ex/mcq-sharing
-..   exercises/ex-sharing
+
 ..   mcq-ex/mcq-app
-..   exercises/ex-app
+
 ..   exercises/netkit-app
 ..   exercises/netkit-tcp
 ..   exercises/packetdrill

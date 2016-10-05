@@ -8,8 +8,8 @@
    This is an unpolished draft of the second edition of this ebook. If you find any error or have suggestions to improve the text, please create an issue via https://github.com/obonaventure/cnp3/issues?milestone=2
 
 
-Open questions
-==============
+Network : Open questions
+========================
 
 1. In your daily life, you also use hierarchical and flat address spaces. Can you provide examples of these two types of addresses and discuss the benefits of using a hierarchical or flat addressing space in this particular context ?
 
@@ -151,6 +151,7 @@ Open questions
 
  Is it possible to achieve these paths and if so what are the required forwarding tables ?
 
+ Same question with virtual circuits.
 
 10. Consider the network shown in the figure below.
 
@@ -214,8 +215,8 @@ Open questions
 
 
 
-Discussion questions
-====================
+Network: Discussion questions
+=============================
 
 
 1. The network below uses port forwarding tables. It has been running for several hours and all hosts have exchanged packets. What is the content of the port forwarding tables ?
