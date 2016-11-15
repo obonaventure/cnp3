@@ -40,12 +40,13 @@ Computer Networking : Principles, Protocols and Practice, 2nd edition
 .. toctree::
    :maxdepth: 4
 
-   intro 
+   intro
    reliable
    network
    ex-transport
    ex-sharing
    ex-app
+   ex-routing-policies
 
 ..   mcq-ex/mcq-reliability
 ..   mcq-ex/mcq-network-ftable	
