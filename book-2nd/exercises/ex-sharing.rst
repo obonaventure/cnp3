@@ -581,7 +581,7 @@ In general, the links have a non-zero delay. This is illustrated in the figure b
 
 4. Compute the max-min fair bandwidth allocation in the network below.
 
- .. figure:: /principles/figures/png/ex-fairness.png
+ .. figure:: ../principles/figures/png/ex-fairness.png
     :align: center
 
 

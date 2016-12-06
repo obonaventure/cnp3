@@ -21,10 +21,11 @@ Computer Networking : Principles, Protocols and Practice, 2nd edition
 
     The source code of the entire textbook is written in `reStructuredText <http://docutils.sourceforge.net/rst.html>`_ and uses several `sphinx <http://sphinx.pocoo.org>`_ features. You can browse it from `github <https://github.com/obonaventure/cnp3/tree/master/book-2nd>`_ 
 
-..    You can also directly download the current ebook draft in various formats from the links below :
+    You can also directly download the current ebook draft in various formats from the links below :
 
+ 	- :download:`cnp3ex.pdf` suitable for viewing and printing anywhere
 ..   	- :download:`distrib/cnp3bis.epub` suitable for viewing on tablets like ipad
-.. 	- :download:`distrib/cnp3bis.pdf` suitable for viewing and printing anywhere
+
 .. 	- :download:`distrib/cnp3b.mobi` suitable for viewing on amazon kindle
 
 

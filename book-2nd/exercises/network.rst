@@ -73,7 +73,7 @@ Network : Open questions
 
 5. When a network specialist designs a network, one of the problems that he needs to solve is to set the metrics the links in his network. In the USA, the Abilene network interconnects most of the research labs and universities. The figure below shows the topology  of this network in 2009.
 
- .. figure:: /principles/figures/abilene-web-map.png
+ .. figure:: ../principles/figures/abilene-web-map.png
     :align: center
     :scale: 50 
 
