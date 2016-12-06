@@ -81,7 +81,7 @@ Exercises
 
 8. Most commercial Ethernet switches are able to run the Spanning tree protocol independently on each VLAN. What are the benefits of using per-VLAN spanning trees ?
 
-9. Consider the network shown below and assume that all routers use OSPF.
+9. Consider the network shown below and assume that all routers use a link-state routing protocol.
 
  .. figure:: ../../book/network/svg/ex-five-routers-redundant.png
     :align: center
@@ -97,7 +97,7 @@ Exercises
 
  d. Consider that link `B-C` fails and that router `B` is the first to detect the failure. Router `B` will flood its updated link state packet through the entire network and all routers will recompute their forwarding table. Compute the successive updates to the routers RIB, assuming that router `C` receives the updated link-state packet from router B before detecting the failure himself.
 
- e. What would change if routers had run RIP instead of OSPF.
+ e. What would change if routers had used a distance-vector protocol instead.
 
 Netkit STP lab
 --------------
