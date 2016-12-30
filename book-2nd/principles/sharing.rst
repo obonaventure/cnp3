@@ -947,7 +947,7 @@ A congestion control scheme for our simple transport protocol could be implement
       # no increase
   
    Congestion detected: 
-      cwnd=cwin/2 # only once per rtt
+      cwin=cwin/2 # only once per rtt
 
 
 
