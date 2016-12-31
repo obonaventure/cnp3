@@ -990,7 +990,7 @@ To safely use the Diffie-Hellman key exchange, Alice and Bob must use
 an `authenticated` exchange. Some of the information sent by Alice or Bob
 must be signed with a public key known by the other user. In practice,
 it is often important for Alice to authenticate Bob. If Bob has a
-certificated signed by Ted, the authenticated key exchange could
+certificate signed by Ted, the authenticated key exchange could
 be organised as follows.
 
   -  Alice chooses a secret integer : :math:`a` and sends
