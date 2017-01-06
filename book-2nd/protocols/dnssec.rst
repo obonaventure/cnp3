@@ -107,7 +107,7 @@ her implementation. From a security viewpoint there is a clear benefit
 since the attacker needs to guess both the 16 bits `Identifier` and the
 16 bits `UDP source port` to inject a fake DNS response. To generate all
 possible DNS responses, the attacker would need to generate almost
-:math:`2^32` different messages, which is excessive in today's networks. 
+:math:`2^{32}` different messages, which is excessive in today's networks. 
 Most DNS implementations use this second approach to prevent these cache
 poisoning attacks.
 

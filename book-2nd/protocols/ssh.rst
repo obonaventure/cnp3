@@ -229,7 +229,7 @@ that are encoded according to the Binary Packet Protocol defined in
    the message counter and the unencrypted message. 
    The message counter is not transmitted,
    but the recipient can easily recover its value. The ``MAC`` is computed as 
-   :math:`mac = MAC(key, sequence_number || unencrypted_message)` where the
+   :math:`mac = MAC(key, sequence\_number || unencrypted\_message)` where the
    key is the negotiated authentication key.
 
 .. index:: HMAC
