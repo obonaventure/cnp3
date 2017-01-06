@@ -213,7 +213,7 @@ can request the `AAAA` record for `www.example.org` and validate its
 signature.
 
 Thanks to the `DS` record, a resolver can validate the public keys of client
-zones as long as their is a chain of `DS` -> `DNSKEY` records from an
+zones as long as there is a chain of `DS` -> `DNSKEY` records from an
 anchored key. If the resolver trusts the public key of the root zone, it
 can validate all DNS replies for which this chain exists. 
 
