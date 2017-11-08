@@ -24,7 +24,7 @@ The first edition of this ebook has been written by `Olivier Bonaventure`_. `Lau
 
 .. note::
 
- `Computer Networking : Principles, Protocols and Practice`, (c) 2011, `Olivier Bonaventure <http://inl.info.ucl.ac.be/obo>`_, `Universite catholique de Louvain <http://www.uclouvain.be>`_ (Belgium) and the collaborators listed above, used under a Creative Commons Attribution (CC BY) license made possible by funding from The Saylor Foundation's Open Textbook Challenge in order to be incorporated into Saylor.org' collection of open courses available at `http://www.saylor.org <http://www.saylo.org>`_. Full license terms may be viewed at : `http://creativecommons.org/licenses/by/3.0/ <http://creativecommons.org/licenses/by/3.0/>`_
+ `Computer Networking : Principles, Protocols and Practice`, (c) 2011, `Olivier Bonaventure <http://inl.info.ucl.ac.be/obo>`_, `Universite catholique de Louvain <http://www.uclouvain.be>`_ (Belgium) and the collaborators listed above, used under a Creative Commons Attribution (CC BY) license made possible by funding from The Saylor Foundation's Open Textbook Challenge in order to be incorporated into Saylor.org' collection of open courses available at `http://www.saylor.org <http://www.saylor.org>`_. Full license terms may be viewed at : `http://creativecommons.org/licenses/by/3.0/ <http://creativecommons.org/licenses/by/3.0/>`_
 
 
 About the author
