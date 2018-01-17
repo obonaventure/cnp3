@@ -739,7 +739,7 @@ The forwarding tables of these three routers, ignoring the routes to the local i
 
       .. code-block:: console 
 
-         00000001 00100000 10111000 00001101 010000000010011 1 10000001 11111100 
+         00000001 00100000 10111000 00001101 01000000 00100111 10000001 11111100 
          00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000001
 
       .. comment:: This is the binary representation for IPv6 address ``0120:80DB:4113:81FC::1``
