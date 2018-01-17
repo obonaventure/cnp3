@@ -58,7 +58,7 @@ Hosts ``A`` and ``B`` are attached to the same datalink layer network. They can 
 
      A MAC address
 
- MAC addresses are allocated in blocks of :math:`2^{20}`. When a company registers for a block of MAC addresses, it receives an identifier. company identifier is then used to populated the `c` bits of the MAC addresses. The company can allocate all addresses in starting with this prefix and mangages the `m` bits as it wishes. 
+ MAC addresses are allocated in blocks of :math:`2^{20}`. When a company registers for a block of MAC addresses, it receives an identifier. The company identifier is then used to populate the `c` bits of the MAC addresses. The company can allocate all addresses in starting with this prefix and manages the `m` bits as it wishes. 
 
   .. figure:: pkt/macaddr-eui64.png
      :align: center
