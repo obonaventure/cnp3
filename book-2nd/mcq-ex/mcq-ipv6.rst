@@ -983,9 +983,9 @@ The routers have one address inside each network :
 
 3. Consider the network below that contains only routers. This network has been configured by a group of students and you must verify whether the configuration is correct. All the IPv6 addresses are part of the same ``/48`` prefix that we name ``p``. The following subnets are defined in this ``/48`` prefix.
 
- - ``p:12/64`` for the link between ``R1`` and ``R2``. On this subnet, ``R1`` uses address ``p:12::1`` while router ``R2`` uses address ``p:12::2``
- - ``p:13/64`` for the link between ``R1`` and ``R3``. On this subnet, ``R1`` uses address ``p:13::1`` while router ``R3`` uses address ``p:13::3``
- - ``p:24/64`` for the link between ``R2`` and ``R4``. On this subnet, ``R2`` uses address ``p:24::2`` while router ``R4`` uses address ``p:24::4``
+ - ``p:12::/64`` for the link between ``R1`` and ``R2``. On this subnet, ``R1`` uses address ``p:12::1`` while router ``R2`` uses address ``p:12::2``
+ - ``p:13::/64`` for the link between ``R1`` and ``R3``. On this subnet, ``R1`` uses address ``p:13::1`` while router ``R3`` uses address ``p:13::3``
+ - ``p:24::/64`` for the link between ``R2`` and ``R4``. On this subnet, ``R2`` uses address ``p:24::2`` while router ``R4`` uses address ``p:24::4``
  - ...
 
      .. tikz::
