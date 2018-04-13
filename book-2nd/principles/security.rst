@@ -233,6 +233,7 @@ Gbps of traffic are frequent on the Internet. In 2015,
 `github.com <http://www.github.com>`_ suffered from a distributed DoS that
 reached a top bandwidth of 400 Gbps according to some 
 `reports <http://www.techworld.com/news/security/worlds-largest-ddos-attack-reached-400gbps-says-arbor-networks-3595715/>`_.
+Since then, `DDoS attacks have risen to over 1 Tbps <https://githubengineering.com/ddos-incident-report/>`_.
 
 .. index:: reflection attack, amplification
 

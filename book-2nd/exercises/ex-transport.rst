@@ -185,7 +185,7 @@ In the example above, ``socket.getaddrinfo`` returns two tuples. The first one c
 
 ``socket.getaddrinfo`` can be used to build a simple client that queries the DNS and contact the server by using either IPv4 or IPv6 depending on the addresses returned by the ``socket.getaddrinfo`` method. The client below iterates over the list of addresses returned by the DNS and sends its request to the first destination address for which it can create a ``socket``. Other strategies are of course possible. For example, a host running in an IPv6 network might prefer to always use IPv6 when IPv6 is available [#fipv6pref]_. 
 
-.. Another example is the happy eyeballs approach which is being discussed within the IETF_ [WY2011]_. For example, [WY2011]_ mentions that some web browsers try to use the first address returned by ``socket.getaddrinfo``. If there is no answer within some small delay (e.g. 300 milliseconds), the second address is tried.
+.. Another example is the happy eyeballs approach which is proposed by the IETF_ [RFC8305]_. For example, [WY2011]_ mentions that some web browsers try to use the first address returned by ``socket.getaddrinfo``. If there is no answer within some small delay (e.g. 300 milliseconds), the second address is tried.
 
 .. literalinclude:: python/simpleclientname.py
    :language: python

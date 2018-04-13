@@ -193,7 +193,7 @@
 
 .. _Raj Jain: http://www.cse.wustl.edu/~jain/
 
-.. _Dah Ming Chiu: http://home.ie.cuhk.edu.hk/~dmchiu/
+.. _Dah Ming Chiu: http://personal.ie.cuhk.edu.hk/~dmchiu/
 
 .. _SRI: http://www.sri.com
 

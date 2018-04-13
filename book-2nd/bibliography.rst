@@ -8,11 +8,11 @@ Whenever possible, the bibliography includes stable hypertext links to the refer
 
 .. [IEEE802.11] LAN/MAN Standards Committee of the IEEE Computer Society. `IEEE Standard for Information Technology - Telecommunications and information exchange between systems - local and  metropolitan area networks - specific requirements - Part 11 : Wireless LAN Medium Access Control (MAC) and Physical Layer (PHY) Specifications <http://standards.ieee.org/getieee802/802.11.html>`_. IEEE, 1999. 
 .. [IEEE802.1d] LAN/MAN Standards Committee of the IEEE Computer Society, `IEEE Standard for Local and metropolitan area networks Media Access Control (MAC) Bridges <http://standards.ieee.org/getieee802/download/802.1D-2004.pdf>`_ , IEEE Std 802.1DTM-2004, 2004, 
-.. [IEEE802.1q] LAN/MAN Standards Committee of the IEEE Computer Society, `IEEE Standard for Local and metropolitan area networks— Virtual Bridged Local Area Networks <http://standards.ieee.org/getieee802/download/802.1Q-2005.pdf>`_, 2005, 
+.. [IEEE802.1q] LAN/MAN Standards Committee of the IEEE Computer Society, `IEEE Standard for Local and metropolitan area networks— Virtual Bridged Local Area Networks <http://standards.ieee.org/getieee802/download/802.1Q-2005.pdf>`_, 2014, 
 .. [IEEE802.2] IEEE 802.2-1998 (ISO/IEC 8802-2:1998), IEEE Standard for Information technology--Telecommunications and information exchange between systems--Local and metropolitan area networks--Specific requirements--Part 2: Logical Link Control. Available from http://standards.ieee.org/getieee802/802.2.html
 .. [IEEE802.3] LAN/MAN Standards Committee of the IEEE Computer Society. IEEE Standard for Information Technology - Telecommunications and information exchange between systems - local and metropolitan area networks - specific requirements - Part 3 : Carrier Sense multiple access with collision detection (CSMA/CD) access method and physical layer specification. IEEE, 2000. Available from http://standards.ieee.org/getieee802/802.3.html
 .. [IEEE802.5] LAN/MAN Standards Committee of the IEEE Computer Society. IEEE Standard for Information technology--Telecommunications and information exchange between systems--Local and metropolitan area networks--Specific requirements--Part 5: Token Ring Access Method and Physical Layer Specification. IEEE, 1998. available from http://standards.ieee.org/getieee802
-.. [IEEE802] IEEE, Std 802-2001 : IEEE Standard for Local and Metropolitan Area Networks: Overview and Architecture, Available from http://standards.ieee.org/getieee802/download/802-2001.pdf
+.. [IEEE802] IEEE, Std 802-2014 : IEEE Standard for Local and Metropolitan Area Networks: Overview and Architecture, Available from http://standards.ieee.org/getieee802/download/802-2001.pdf
 .. [ACO+2006] Augustin, B., Cuvellier, X., Orgogozo, B., Viger, F., Friedman, T., Latapy, M., Magnien, C., Teixeira, R., `Avoiding traceroute anomalies with Paris traceroute <http://dx.doi.org/10.1145/1177080.1177100>`_, Internet Measurement Conference, October 2006, See also http://www.paris-traceroute.net/
 .. [AS2004] Androutsellis-Theotokis, S. and Spinellis, D.. 2004. `A survey of peer-to-peer content distribution technologies <http://doi.acm.org/10.1145/1041680.1041681>`_. ACM Comput. Surv. 36, 4 (December 2004), 335-371. 
 .. [ATLAS2009] Labovitz, C., Iekel-Johnson, S., McPherson, D., Oberheide, J. and Jahanian, F., `Internet inter-domain traffic <http://doi.acm.org/10.1145/1851182.1851194>`_. In Proceedings of the ACM SIGCOMM 2010 conference on SIGCOMM (SIGCOMM '10). ACM, New York, NY, USA, 75-86. 
@@ -24,11 +24,9 @@ Whenever possible, the bibliography includes stable hypertext links to the refer
 .. [BF1995] Bonomi, F. and  Fendick, K.W., `The rate-based flow control framework for the available bit rate ATM service <http://dx.doi.org/10.1109/65.372653>`_, IEEE Network, Mar/Apr 1995, Volume: 9,  Issue: 2, pages : 25-39 
 .. [BG1992] Bertsekas, D., Gallager, G., `Data networks <http://books.google.com/books?id=FfpSAAAAMAAJ>`_, second edition, Prentice Hall, 1992
 .. [BMO2006] Bhatia, M., Manral, V., Ohara, Y., `IS-IS and OSPF Difference Discussions <http://tools.ietf.org/html/draft-bhatia-manral-diff-isis-ospf-01>`_, work in progress, Internet draft, Jan. 2006 
-.. [BMvB2009] Bagnulo, M., Matthews, P., van Beijnum, I., `NAT64: Network Address and Protocol Translation from IPv6 Clients to IPv4 Servers <http://tools.ietf.org/html/draft-ietf-behave-v6v4-xlate-stateful-02>`_, Internet draft, work in progress, October 2009, 
 .. [BNT1997] Beech, W., Nielsen, D., Taylor, J.,  `AX.25 Link Access Protocol for Amateur Packet Radio <http://www.tapr.org/pdf/AX25.2.2.pdf>`_, version 2.2, Revision: July 1998
 .. [BOP1994] Brakmo, L. S., O'Malley, S. W., and Peterson, L. L., `TCP Vegas: new techniques for congestion detection and avoidance <http://doi.acm.org/10.1145/190314.190317>`_. In Proceedings of the Conference on Communications Architectures, Protocols and Applications (London, United Kingdom, August 31 - September 02, 1994). SIGCOMM '94. ACM, New York, NY, 24-35. 
 .. [Benvenuti2005] Benvenuti, C., `Understanding Linux Network Internals <http://books.google.com/books?id=yy7tihZLgGYC>`_, O'Reilly Media, 2005 
-.. [BH2013] Bormann, C., Hoffman, P., `Concise Binary Object Representation (CBOR) <http://tools.ietf.org/html/draft-bormann-cbor-09>`_, Internet draft, draft-bormann-cbor-09, work in progress, 2013
 .. [BS2005] D. Barrett, R. Silverman, R. Byrnes, `SSH: The Secure Shell (The Definitive Guide) <https://books.google.be/books?id=3XzIFG3w8-YC>`_, O'Reilly 2005 (2nd edition). 
 .. [Bush1945]  Bush, V. `As we may think <http://www.theatlantic.com/magazine/archive/1969/12/as-we-may-think/3881/>`_ The Atlantic Monthly 176 (July 1945), pp. 101–108 
 .. [Bush1993] Bush, R., `FidoNet: technology, tools, and history <http://doi.acm.org/10.1145/163381.163383>`_. Commun. ACM 36, 8 (Aug. 1993), 31-35. 
@@ -39,7 +37,7 @@ Whenever possible, the bibliography includes stable hypertext links to the refer
 .. [CD2008] Calvert, K., Donahoo, M., `TCP/IP Sockets in Java : Practical Guide for Programmers <http://books.google.com/books?id=lfHo7uMk7r4C>`_, Morgan Kaufman, 2008
 .. [CJ1989] Chiu, D., Jain, R., `Analysis of the Increase and Decrease Algorithms for Congestion Avoidance in Computer Networks <http://dx.doi.org/10.1016/0169-7552(89)90019-6>`_, Computer Networks and ISDN Systems Vol 17, pp 1-14, 1989 
 .. [CK74] Cerf, V., Kahn, R., `A Protocol for Packet Network Intercommunication <http://dx.doi.org/10.1109/TCOM.1974.1092259>`_, IEEE Transactions on Communications, May 1974 
-.. [CNPI09] Gont, F., `Security Assessment of the Transmission Control Protocol (TCP) <http://tools.ietf.org/html/draft-ietf-tcpm-tcp-security-02>`_,Security Assessment of the Transmission Control Protocol (TCP), Internet draft, work in progress, Jan. 2011
+.. [CNPI09] Gont, F., `Security Assessment of the Transmission Control Protocol (TCP) <http://tools.ietf.org/html/draft-ietf-tcpm-tcp-security-02>`_,Security Assessment of the Transmission Control Protocol (TCP), Internet draft, work in progress, Mar. 2012
 .. [COZ2008] Chi, Y., Oliveira, R., Zhang, L., `Cyclops: The Internet AS-level Observatory <http://dx.doi.org/10.1145/1452335.1452337>`_, ACM SIGCOMM Computer Communication Review (CCR), October 2008
 .. [CSP2009] Carr, B., Sury, O., Palet Martinez, J., Davidson, A., Evans, R., Yilmaz, F., Wijte, Y., `IPv6 Address Allocation and Assignment Policy <http://www.ripe.net/ripe/docs/ipv6policy.html>`_, RIPE document ripe-481, September 2009 
 .. [CT1980] Crane, R., Taft, E., `Practical considerations in Ethernet local network design <http://ethernethistory.typepad.com/papers/PracticalConsiderations.pdf>`_, Proc. of the 13th Hawaii International Conference on Systems Sciences, Honolulu, January, 1980, pp. 166--174
@@ -92,7 +90,7 @@ Whenever possible, the bibliography includes stable hypertext links to the refer
 .. [ISO10589] ISO, `Intermediate System to Intermediate System intra-domain routeing information exchange protocol for use in conjunction with the protocol for providing the connectionless-mode network service (ISO 8473) <http://standards.iso.org/ittf/PubliclyAvailableStandards/c030932_ISO_IEC_10589_2002(E).zip>`_ , 2002 
 .. [Jacobson1988] Jacobson, V., `Congestion avoidance and control <http://doi.acm.org/10.1145/52324.52356>`_. In Symposium Proceedings on Communications Architectures and Protocols (Stanford, California, United States, August 16 - 18, 1988). V. Cerf, Ed. SIGCOMM '88. ACM, New York, NY, 314-329. 
 .. [Jain1990] Jain, R., `Congestion control in computer networks : Issues and trends <http://dx.doi.org/10.1109/65.56532>`_, IEEE Network Magazine, May 1990, pp. 24-30
-.. [JLT2013] Jesup, R., Loreto, S., Tuexen, M., `RTCWeb Data Channels <http://tools.ietf.org/html/draft-ietf-rtcweb-data-channel-06>`_, Internet draft, draft-ietf-rtcweb-data-channel, work in progress, 2013
+.. [JLT2013] Jesup, R., Loreto, S., Tuexen, M., `RTCWeb Data Channels <http://tools.ietf.org/html/draft-ietf-rtcweb-data-channel-06>`_, Internet draft, draft-ietf-rtcweb-data-channel, work in progress, 2015
 .. [JSBM2002] Jung, J., Sit, E., Balakrishnan, H., and Morris, R. 2002. `DNS performance and the effectiveness of caching <http://dx.doi.org/10.1109/TNET.2002.803905>`_. IEEE/ACM Trans. Netw. 10, 5 (Oct. 2002), 589-603. 
 .. [JSON-RPC2] JSON-RPC Working group, `JSON-RPC 2.0 Specification <http://www.jsonrpc.org/specification>`_, available on http://www.jsonrpc.org, 2010
 .. [Kerrisk2010] Kerrisk, M., `The Linux Programming Interface <http://nostarch.com/tlpi>`_, No Starch Press, 2010 
@@ -299,8 +297,12 @@ Whenever possible, the bibliography includes stable hypertext links to the refer
 .. [RFC6077] Papadimitriou, D. and Welzl, M. and Scharf, M. and Briscoe, B., `Open Research Issues in Internet Congestion Control`, :rfc:`6077`, February 2011
 .. [RFC6068] Duerst, M., Masinter, L. and Zawinski, J., `The 'mailto' URI Scheme` , :rfc:`6068`, October 2010 
 .. [RFC6144] Baker, F. and Li, X. and Bao, X. and Yin, K., `Framework for IPv4/IPv6 Translation`, :rfc:`6144`, April 2011
+.. [RFC6146] Bagnulo, M., Matthews, P., van Beijnum, I., `NAT64: Network Address and Protocol Translation from IPv6 Clients to IPv4 Servers`, :rfc:`6146`, Apr. 2011.
 .. [RFC6265] Barth, A., `HTTP State Management Mechanism`, :rfc:`6265`, April 2011
+.. [RFC6296] Waserman, M., Baker, F., `IPv6-to-IPv6 Network Prefix Translation`, :rfc:`6296`, June 2011.
 .. [RFC6274] Gont, F., `Security Assessment of the Internet Protocol Version 4`, :rfc:`6274`, July 2011
+.. [RFC7049] Bormann, C., Hoffman, P., `Concise Binary Object Representation (CBOR)`, :rfc:`7049`, Oct. 2013.
+.. [RFC8305] Schinazi, D., Pauly, T., `Happy Eyeballs Version 2: Better Connectivity Using Concurrency`, :rfc:`8305`, Dec. 2017.
 .. [RG2010] Rhodes, B. and Goerzen, J., `Foundations of Python Network Programming: The Comprehensive Guide to Building Network Applications with Python <http://books.google.com/books?id=9HGUc8AO2xQC>`_, Second Edition, Academic Press, 2004
 .. [Ristic2015] Ristic, I., `Bulletproof SSL and TLS: Understanding and Deploying SSL/TLS and PKI to Secure Web Servers and Applications <https://books.google.be/books?id=fQOLBAAAQBAJ>`_, Feisty Duck, 2015
 .. [RJ1995] Ramakrishnan, K. K. and Jain, R., `A binary feedback scheme for congestion avoidance in computer networks with a connectionless network layer <http://doi.acm.org/10.1145/205447.205461>`_. SIGCOMM Comput. Commun. Rev. 25, 1 (Jan. 1995), 138-156. 
@@ -340,14 +342,12 @@ Whenever possible, the bibliography includes stable hypertext links to the refer
 .. [VPD2004] Vasseur, J., Pickavet, M., and Demeester, P., `Network Recovery: Protection and Restoration of Optical, SONET-SDH, IP, and MPLS <http://books.google.com/books?id=nYO305Y5eNAC>`_. Morgan Kaufmann Publishers Inc., 2004 
 .. [Varghese2005] Varghese, G., `Network Algorithmics: An Interdisciplinary Approach to Designing Fast Networked Devices <http://books.google.com/books?id=01QORuRF6fIC>`_, Morgan Kaufmann, 2005 
 .. [Vyncke2007] Vyncke, E., Paggen, C., `LAN Switch Security: What Hackers Know About Your Switches <http://books.google.com/books?id=HkraAQAACAAJ>`_, Cisco Press, 2007
-.. [WB2008] Waserman, M., Baker, F., `IPv6-to-IPv6 Network Address Translation (NAT66)`, Internet draft, November 2008, http://tools.ietf.org/html/draft-mrw-behave-nat66-02
 .. [WMH2008] Wilson, P., Michaelson, G., Huston, G., `Redesignation of 240/4 from "Future Use" to "Private Use"`, Internet draft, September 2008, work in progress, http://tools.ietf.org/html/draft-wilson-class-e-02
 .. [WMS2004] White, R., Mc Pherson, D., Srihari, S., `Practical BGP <http://books.google.com/books?id=9OlSAAAAMAAJ>`_, Addison-Wesley, 2004 
 .. [Watson1981] Watson, R., `Timer-Based Mechanisms in Reliable Transport Protocol Connection Management <http://dx.doi.org/10.1016/0376-5075(81)90031-3>`_. Computer Networks 5: 47-56 (1981) 
 .. [WF2003] Wessels, D., Fomenkov, M., `Wow, That's a lot of packets <https://www.caida.org/publications/papers/2003/dnspackets/>`_,  Passive and Active Network Measurement Workshop (PAM), Apr 2003
 .. [Williams1993] Williams, R. `A painless guide to CRC error detection algorithms`, August 1993, unpublished manuscript, http://www.ross.net/crc/download/crc_v3.txt
 .. [Winston2003] Winston, G., `NetBIOS Specification <http://www.netbiosguide.com/>`_, 2003 
-.. [WY2011] Wing, D. and Yourtchenko, A., `Happy Eyeballs:  Success with Dual-Stack Hosts`, Internet draft, work in progress, July 2011, http://tools.ietf.org/html/draft-ietf-v6ops-happy-eyeballs-03
 .. [X200] ITU-T, recommendation X.200, `Open Systems Interconnection - Model and Notation <http://www.itu.int/rec/T-REC-X.200-199407-I/en>`_, 1994 
 .. [X224] ITU-T, recommendation X.224, `Information technology - Open Systems Interconnection - Protocol for providing the connection-mode transport service <http://www.itu.int/rec/T-REC-X.224-199511-I/en/>`_, 1995 
 .. [XNS] Xerox, `Xerox Network Systems Architecture <http://www.bitsavers.org/pdf/xerox/xns/XNSG058504_XNS_Introduction.pdf>`_, XNSG058504, 1985 

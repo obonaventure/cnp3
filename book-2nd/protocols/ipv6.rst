@@ -590,8 +590,7 @@ Another very useful debugging tool is :manpage:`traceroute6(8)`. The traceroute 
 
 .. [#fianaprotocol] The IANA_ maintains the list of all allocated Next Header types at http://www.iana.org/assignments/protocol-numbers/ 
 
-.. [#falert] For a discussion of the issues with the router alert IP option, see http://tools.ietf.org/html/draft-rahman-rtg-router-alert-dangerous-00 or
- http://tools.ietf.org/html/draft-rahman-rtg-router-alert-considerations-03
+.. [#falert] For a discussion of the issues with the router alert IP option, see :rfc:`6398`
 
 .. [#fprivacy] Using a datalink layer address to derive a 64 bits identifier for each host raises privacy concerns as the host will always use the same identifier. Attackers could use this to track hosts on the Internet. An extension to the Stateless Address Configuration mechanism that does not raise privacy concerns is defined in :rfc:`4941`. These privacy extensions allow a host to generate its 64 bits identifier randomly every time it attaches to a subnet. It then becomes impossible for an attacker to use the 64-bits identifier to track a host. 
 
