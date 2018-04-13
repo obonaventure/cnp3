@@ -248,7 +248,7 @@ To demonstrate your understanding of ICMPv6, prepare a lab with a few hosts and 
 
 .. rubric:: Footnotes
 
-.. [#fipcommand] You can use the ``ip`` command instead of :manpage:`ifconfig(8)` or :manpage:`route(8)`. See the `Linux IPv6 Howto <http://www.tldp.org/HOWTO/Linux%2BIPv6-HOWTO/chapter-configuration-interface.html>`_ for additional information.
+.. [#fipcommand] You can use the ``ip`` command instead of :manpage:`ifconfig(8)` or :manpage:`route(8)`. See the `Linux IPv6 Howto <https://www.tldp.org/HOWTO/Linux+IPv6-HOWTO/>`_ for additional information.
 
 
 .. include:: /links.rst

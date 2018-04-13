@@ -25,7 +25,7 @@ The `ID` (identifier) is a 16-bits random value chosen by the client. When a cli
 
 .. dns attacks http://www.cs.columbia.edu/~smb/papers/dnshack.ps
 .. http://unixwiz.net/techtips/iguide-kaminsky-dns-vuln.html
-.. http://www.secureworks.com/research/articles/dns-cache-poisoning
+.. https://www.secureworks.com/research/articles/dns-cache-poisoning
 
 The `QR` flag is set to `0` in DNS queries and `1` in DNS answers. The
 `Opcode` is used to specify the type of query. For instance, a :term:`standard query` is when a client sends a `name` and the server returns the corresponding `data` and an update request is when the client sends a `name` and new `data` and the server then updates its database.

@@ -35,7 +35,7 @@ Some ``tcpdump`` options (for more details and options, check ``man tcpdump``):
     ``-s`` allows to capture the entire packets (not only the first 68 bytes).
 
 
-Wireshark_ also allows to capture packets but provides a graphical user interface that is useful to analyse long packet traces. Wireshark is installed on the Linux machines in the lab and can be downloaded from http://www.wireshark.org
+Wireshark_ also allows to capture packets but provides a graphical user interface that is useful to analyse long packet traces. Wireshark is installed on the Linux machines in the lab and can be downloaded from https://www.wireshark.org/
 
 
 .. note::

@@ -58,7 +58,7 @@ Starting a lab consists thus simply in unpacking the provided archive, going int
 
  Another useful hint is that is it possible to share files between the Netkit_ virtual machines and the local host. Virtual machines can access to the directory of the lab they belong to. This directory is mounted in their filesystem at the path  `/hostlab`.  
 
-.. Note that capturing network traces can be facilitated by using the `uml_dump` extension available at http://kartoch.msi.unilim.fr/blog/?p=19 .  This extension is already installed in the Netkit installation on the student lab.  In order to capture the traffic exchanged on a given 'virtual LAN', you simply need to issue the command `vdump <LAN name>` on the host. If you want to pipe the trace to wireshark, you can use `vdump A | wireshark -i - -k`
+.. Note that capturing network traces can be facilitated by using the `uml_dump` extension available at https://netkit-ng.github.io/umldump.html .  This extension is already installed in the Netkit installation on the student lab.  In order to capture the traffic exchanged on a given 'virtual LAN', you simply need to issue the command `vdump <LAN name>` on the host. If you want to pipe the trace to wireshark, you can use `vdump A | wireshark -i - -k`
 
 
 
@@ -169,7 +169,7 @@ Enjoy !
 
 .. rubric:: Footnotes
 
-.. [#fimage] The image that we use is a custom Netkit_ filesystem with a recent 64 bits Linux kernel. If you wish to test it on your own Linux machine, you can install Netkit_ as explained on http://wiki.netkit.org and download the filesystem and kernel images from http://cnp3book.info.ucl.ac.be/netkit/netkit-images.zip  Note that this archive has a compressed size of more than 1 GByte ! 
+.. [#fimage] The image that we use is a custom Netkit_ filesystem with a recent 64 bits Linux kernel. If you wish to test it on your own Linux machine, you can install Netkit_ as explained on http://wiki.netkit.org/ and download the filesystem and kernel images from http://cnp3book.info.ucl.ac.be/netkit/netkit-images.zip  Note that this archive has a compressed size of more than 1 GByte ! 
 
 .. [#fdnslab] The files used by the DNS lab are available from :download:`/netkit/netkit-lab_dns.zip` if you would like to use them on your laptop.
 

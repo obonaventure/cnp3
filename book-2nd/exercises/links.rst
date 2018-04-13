@@ -5,31 +5,31 @@
 
 .. _packetdrill: https://code.google.com/p/packetdrill/
 
-.. _caida: http://www.caida.org
+.. _caida: http://www.caida.org/
 
-.. _linux: http://www.linux.org
+.. _linux: https://www.linux.org
 
-.. _minicomputer: http://en.wikipedia.org/wiki/Minicomputer
+.. _minicomputer: https://en.wikipedia.org/wiki/Minicomputer
 
-.. _freebsd: http://www.freebsd.org
+.. _freebsd: https://www.freebsd.org/
 
-.. _RFC: http://www.ietf.org/rfc.html
+.. _RFC: https://www.ietf.org/standards/rfcs/
 
-.. _Unicode: http://en.wikipedia.org/wiki/Unicode
+.. _Unicode: https://en.wikipedia.org/wiki/Unicode
 
-.. _Internet drafts: http://www.ietf.org/id-info/
+.. _Internet drafts: https://www.ietf.org/id-info/
 
-.. _telnet: http://en.wikipedia.org/wiki/Telnet
+.. _telnet: https://en.wikipedia.org/wiki/Telnet
 
-.. _Paul Baran: http://en.wikipedia.org/wiki/Paul_Baran
+.. _Paul Baran: https://en.wikipedia.org/wiki/Paul_Baran
 
-.. _Donald Davies: http://en.wikipedia.org/wiki/Donald_Davies
+.. _Donald Davies: https://en.wikipedia.org/wiki/Donald_Davies
 
 .. _Louis Pouzin: http://conferences.sigcomm.org/sigcomm/1999/pouzin.html
 
-.. _Joseph Licklider: http://en.wikipedia.org/wiki/J._C._R._Licklider
+.. _Joseph Licklider: https://en.wikipedia.org/wiki/J._C._R._Licklider
 
-.. _Douglas Comer: http://www.cs.purdue.edu/people/comer
+.. _Douglas Comer: https://www.cs.purdue.edu/people/comer
 
 .. _Larry Peterson: http://www.cs.princeton.edu/~llp/
 
@@ -37,7 +37,7 @@
 
 .. _Richard Stevens: http://www.kohala.com/
 
-.. _Van Jacobson: http://www.parc.com/about/people/88/van-jacobson.html
+.. _Van Jacobson: https://en.wikipedia.org/wiki/Van_Jacobson
 
 .. _Sally Floyd: http://www.icir.org/floyd/
 
@@ -47,212 +47,212 @@
 
 .. _Keith Ross: http://cis.poly.edu/~ross/
 
-.. _sendmail: http://www.sendmail.org
+.. _sendmail: https://www.proofpoint.com/us/sendmail-open-source/
 
-.. _X25: http://en.wikipedia.org/wiki/X.25
+.. _X25: https://en.wikipedia.org/wiki/X.25
 
 .. _xorp: http://www.xorp.org
 
-.. _quagga: http://www.quagga.net
+.. _quagga: https://www.quagga.net/
 
 .. _uIP: http://www.sics.se/~adam/uip/index.php/Main_Page
 
-.. _IETF: http://www.ietf.org
+.. _IETF: https://www.ietf.org
 
-.. _IEEE: http://www.ieee.org
+.. _IEEE: https://www.ieee.org/
 
-.. _ISO: http://www.iso.int
+.. _ISO: https://www.iso.org
 
-.. _python: http://www.python.org
+.. _python: https://www.python.org/
 
 .. _scapy: http://www.secdev.org/projects/scapy/ 
 
-.. _tcpdump: http://www.tcpdump.org
+.. _tcpdump: https://www.tcpdump.org
 
-.. _libpcap: http://www.tcpdump.org/
+.. _libpcap: https://www.tcpdump.org/
 
-.. _wireshark: http://www.wireshark.org
+.. _wireshark: https://www.wireshark.org/
 
-.. _iperf: https://code.google.com/p/iperf/
+.. _iperf: https://github.com/esnet/iperf
 
-.. _tcpprobe: http://www.linuxfoundation.org/en/Net:TcpProbe
+.. _tcpprobe: https://www.linuxfoundation.org/en/Net:TcpProbe
 
-.. _ASCII: http://en.wikipedia.org/wiki/ASCII
+.. _ASCII: https://en.wikipedia.org/wiki/ASCII
 
-.. _dig: http://linux.die.net/man/1/dig
+.. _dig: https://linux.die.net/man/1/dig
 
-.. _curl: http://curl.haxx.se/
+.. _curl: https://curl.haxx.se/
 
-.. _pine: http://en.wikipedia.org/wiki/Pine_(e-mail_client)
+.. _pine: https://en.wikipedia.org/wiki/Pine_(email_client)
 
 .. _elm: http://www.instinct.org/elm/
 
-.. _nagios: http://www.nagios.org
+.. _nagios: https://www.nagios.org/
 
-.. _POP: http://en.wikipedia.org/wiki/Post_Office_Protocol
+.. _POP: https://en.wikipedia.org/wiki/Post_Office_Protocol
 
-.. _IMAP: http://en.wikipedia.org/wiki/Internet_Message_Access_Protocol
+.. _IMAP: https://en.wikipedia.org/wiki/Internet_Message_Access_Protocol
 
 .. _IANA: http://www.iana.org
 
-.. _rfc794: http://tools.ietf.org/html/rfc794
+.. _rfc794: https://tools.ietf.org/html/rfc794
 
-.. _rfc821: http://tools.ietf.org/html/rfc821
+.. _rfc821: https://tools.ietf.org/html/rfc821
 
-.. _rfc1945: http://tools.ietf.org/html/rfc1945
+.. _rfc1945: https://tools.ietf.org/html/rfc1945
 
-.. _rfc1939: http://tools.ietf.org/html/rfc1939
+.. _rfc1939: https://tools.ietf.org/html/rfc1939
 
-.. _rfc2616: http://tools.ietf.org/html/rfc2616
+.. _rfc2616: https://tools.ietf.org/html/rfc2616
 
-.. _rfc5321: http://tools.ietf.org/html/rfc5321
+.. _rfc5321: https://tools.ietf.org/html/rfc5321
 
-.. _rfc5646: http://tools.ietf.org/html/rfc5646
+.. _rfc5646: https://tools.ietf.org/html/rfc5646
 
-.. _rfc1546: http://tools.ietf.org/html/rfc1546
+.. _rfc1546: https://tools.ietf.org/html/rfc1546
 
-.. _bind: https://www.isc.org/software/bind
+.. _bind: https://www.isc.org/downloads/bind
 
-.. _unbound: http://www.unbound.net
+.. _unbound: https://www.unbound.net
 
-.. _apache: http://www.apache.org
+.. _apache: https://www.apache.org
 
-.. _CRC: http://en.wikipedia.org/wiki/Cyclic_redundancy_check
+.. _CRC: https://en.wikipedia.org/wiki/Cyclic_redundancy_check
 
-.. _NFS: http://en.wikipedia.org/wiki/Network_File_System_(protocol)
+.. _NFS: https://en.wikipedia.org/wiki/Network_File_System
 
 .. _NTP: http://www.ntp.org
 
-.. _RPC: http://en.wikipedia.org/wiki/Remote_procedure_call
+.. _RPC: https://en.wikipedia.org/wiki/Remote_procedure_call
 
-.. _spam: http://en.wikipedia.org/wiki/Spam_(electronic)
+.. _spam: https://en.wikipedia.org/wiki/Email_spam
 
-.. _datacenter: http://en.wikipedia.org/wiki/Data_center
+.. _datacenter: https://en.wikipedia.org/wiki/Data_center
 
-.. _datacenters: http://en.wikipedia.org/wiki/Data_center
+.. _datacenters: https://en.wikipedia.org/wiki/Data_center
 
 .. _`Philippe Biondi`: http://www.secdev.org/
 
 .. _UML: http://user-mode-linux.sourceforge.net/
 
-.. _socket: http://en.wikipedia.org/wiki/Berkeley_sockets
+.. _socket: https://en.wikipedia.org/wiki/Berkeley_sockets
 
-.. _netfilter: http://www.netfilter.org/
+.. _netfilter: https://netfilter.org/
 
-.. _RIPE: http://www.ripe.net
+.. _RIPE: https://www.ripe.net/
 
-.. _ARIN: http://www.arin.net
+.. _ARIN: https://www.arin.net/
 
-.. _afrinic: http://www.afrinic.net
+.. _afrinic: https://www.afrinic.net/
 
-.. _snort: http://www.snort.org/
+.. _snort: https://www.snort.org/
 
-.. _belnet: http://www.belnet.be
+.. _belnet: https://www.belnet.be/
 
-.. _belgacom: http://www.belgacom.be
+.. _belgacom: https://www.belgacom.be/
 
-.. _cisco: http://www.cisco.com
+.. _cisco: https://www.cisco.com/
 
-.. _level3: http://www.level3.com
+.. _level3: https://www.level3.com
 
-.. _google: http://www.google.com
+.. _google: https://www.google.com
 
-.. _bing: http://www.bing.com
+.. _bing: https://www.bing.com
 
-.. _geant: http://www.geant.net
+.. _geant: https://geant3plus.archive.geant.net/
 
-.. _abilene: http://www.internet2.edu
+.. _abilene: https://www.internet2.edu/
 
-.. _youtube: http://www.youtube.com
+.. _youtube: https://www.youtube.com/
 
-.. _yahoo: http://www.yahoo.com
+.. _yahoo: https://www.yahoo.com
 
-.. _microsoft: http://www.microsoft.com
+.. _microsoft: https://www.microsoft.com/
 
-.. _facebook: http://www.facebook.com
+.. _facebook: https://www.facebook.com
 
-.. _akamai: http://www.akamai.com
+.. _akamai: https://www.akamai.com
 
 .. _sprint: https://www.sprint.net/
 
-.. _opentransit: http://www.opentransit.net
+.. _opentransit: https://wholesalesolutions.orange.com/open-transit-internet/
 
-.. _limelight: http://uk.limelightnetworks.com/index.php
+.. _limelight: https://www.limelight.com
 
-.. _Olivier Bonaventure: http://inl.info.ucl.ac.be/obo
+.. _Olivier Bonaventure: https://inl.info.ucl.ac.be/obo
 
-.. _Mickael Hoerdt: http://inl.info.ucl.ac.be/mhoerdt
+.. _Mickael Hoerdt: https://inl.info.ucl.ac.be/mhoerdt
 
-.. _Virginie Van den Schriek: http://inl.info.ucl.ac.be/vvandens
+.. _Virginie Van den Schriek: https://inl.info.ucl.ac.be/vvandens
 
-.. _Tim Berners-Lee: http://www.w3.org/People/Berners-Lee/
+.. _Tim Berners-Lee: https://www.w3.org/People/Berners-Lee/
 
-.. _Laurent Vanbever: http://inl.info.ucl.ac.be/lvanbeve
+.. _Laurent Vanbever: https://inl.info.ucl.ac.be/lvanbeve
 
-.. _Damien Saucez: http://inl.info.ucl.ac.be/dsaucez
+.. _Damien Saucez: https://inl.info.ucl.ac.be/dsaucez
 
 .. _Raj Jain: http://www.cse.wustl.edu/~jain/
 
 .. _Dah Ming Chiu: http://personal.ie.cuhk.edu.hk/~dmchiu/
 
-.. _SRI: http://www.sri.com
+.. _SRI: https://www.sri.com/
 
-.. _ISO-3166: http://www.iso.org/iso/country_codes.htm
+.. _ISO-3166: https://www.iso.org/iso/country_codes.htm
 
-.. _OpenDNS: http://www.opendns.com/
+.. _OpenDNS: https://www.opendns.com/
 
-.. _GoogleDNS: http://code.google.com/speed/public-dns/docs/using.html 
+.. _GoogleDNS: http://developers.google.com/speed/public-dns/docs/using 
 
-.. _wikipedia: http://en.wikipedia.org
+.. _wikipedia: https://en.wikipedia.org/
 
-.. _ISO-8859: http://en.wikipedia.org/wiki/ISO_8859
+.. _ISO-8859: https://en.wikipedia.org/wiki/ISO_8859
 
-.. _ENISA: http://www.enisa.europa.eu/
+.. _ENISA: https://www.enisa.europa.eu/
 
-.. _scp: http://www.openssh.org
+.. _scp: https://www.openssh.com/
 
-.. _sftp: http://www.openssh.org
+.. _sftp: https://www.openssh.com/
 
-.. _ssh: http://en.wikipedia.org/wiki/Secure_Shell
+.. _ssh: https://en.wikipedia.org/wiki/Secure_Shell
 
-.. _CERN: http://www.cern.ch
+.. _CERN: https://www.cern.ch
 
 .. _NCSA: http://www.ncsa.illinois.edu
 
-.. _SGML: http://en.wikipedia.org/wiki/Standard_Generalized_Markup_Language
+.. _SGML: https://en.wikipedia.org/wiki/Standard_Generalized_Markup_Language
 
-.. _W3C: http://www.w3.org
+.. _W3C: https://www.w3.org
 
 .. _gzip: http://www.gzip.org
 
-.. _Netscape: http://en.wikipedia.org/wiki/Netscape
+.. _Netscape: https://en.wikipedia.org/wiki/Netscape
 
-.. _netkit: http://www.netkit.org
+.. _netkit: http://wiki.netkit.org/
 
-.. _netstat: http://en.wikipedia.org/wiki/Netstat
+.. _netstat: https://en.wikipedia.org/wiki/Netstat
 
 .. _hping: http://www.hping.org
 
-.. _nmap: http://nmap.org
+.. _nmap: https://nmap.org/
 
-.. _ntop: http://www.ntop.org
+.. _ntop: https://www.ntop.org/
 
-.. _x86: http://en.wikipedia.org/wiki/X86
+.. _x86: https://en.wikipedia.org/wiki/X86
 
-.. _SPARC: http://en.wikipedia.org/wiki/SPARC
+.. _SPARC: https://en.wikipedia.org/wiki/SPARC
 
-.. _sphinx: http://sphinx.pocoo.org
+.. _sphinx: http://sphinx-doc.org/
 
-.. _inkscape: http://www.inkscape.org 
+.. _inkscape: https://www.inkscape.org 
 
-.. _email clients: http://en.wikipedia.org/wiki/Comparison_of_email_clients
+.. _email clients: https://en.wikipedia.org/wiki/Comparison_of_email_clients
 
-.. _ISP: http://en.wikipedia.org/wiki/Internet_service_provider
+.. _ISP: https://en.wikipedia.org/wiki/Internet_service_provider
 
-.. _Unix BSD: http://en.wikipedia.org/wiki/Berkeley_Software_Distribution
+.. _Unix BSD: https://en.wikipedia.org/wiki/Berkeley_Software_Distribution
 
-.. _troff: http://en.wikipedia.org/wiki/Troff
+.. _troff: https://en.wikipedia.org/wiki/Troff
 
-.. _LaTeX: http://en.wikipedia.org/wiki/LaTeX
+.. _LaTeX: https://en.wikipedia.org/wiki/LaTeX
 
-.. _netem: http://www.linuxfoundation.org/collaborate/workgroups/networking/netem
+.. _netem: https://www.linuxfoundation.org/collaborate/workgroups/networking/netem

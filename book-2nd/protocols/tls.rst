@@ -348,7 +348,7 @@ inside the TLS record. This sequence number is used to prevent replay attacks.
 
 .. rubric:: Footnotes
 
-.. [#fianaTLS] See http://www.iana.org/assignments/tls-parameters/tls-parameters.xhtml#tls-parameters-4
+.. [#fianaTLS] See https://www.iana.org/assignments/tls-parameters/tls-parameters.xhtml#tls-parameters-4
 
 
 .. include:: /links.rst

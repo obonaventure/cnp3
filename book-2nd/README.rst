@@ -6,7 +6,7 @@ This is the current draft for the second edition of the Computer Networking : Pr
 
 
 (c) Olivier Bonaventure, Universite catholique de Louvain, Belgium
-    http://perso.uclouvain.be/olivier.bonaventure
+    https://perso.uclouvain.be/olivier.bonaventure
 
 All the files in this subversion repository are licensed under a Creative Commons Attribution-Share Alike 3.0 Unported License.
 

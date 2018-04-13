@@ -28,13 +28,13 @@ In the late 1980s, high energy physicists working at CERN_ had to efficiently ex
 A document sharing system such as the `world wide web` is composed of three important parts.
 
  1. A standardised addressing scheme that allows unambiguous identification of documents 
- 2. A standard document format : the `HyperText Markup Language <http://www.w3.org/MarkUp>`_
+ 2. A standard document format : the `HyperText Markup Language <https://www.w3.org/MarkUp/>`_
  3. A standardised protocol that facilitates efficient retrieval of documents stored on a server
 
 
 .. note:: Open standards and open implementations
 
- Open standards have, and are still playing a key role in the success of the `world wide web` as we know it today. Without open standards, the world wide web would never have reached its current size. In addition to open standards, another important factor for the success of the web was the availability of open and efficient implementations of these standards. When CERN started to work on the `web`, their objective was to build a running system that could be used by physicists. They developed open-source implementations of the `first web servers <http://www.w3.org/Daemon/>`_ and `web clients <http://www.w3.org/Library/Activity.html>`_. These open-source implementations were powerful and could be used as is, by institutions willing to share information on the web. They were also extended by other developers who contributed to new features. For example, NCSA_ added support for images in their `Mosaic browser <http://en.wikipedia.org/wiki/Mosaic_(web_browser)>`_ that was eventually used to create `Netscape Communications <http://en.wikipedia.org/wiki/Netscape>`_. 
+ Open standards have, and are still playing a key role in the success of the `world wide web` as we know it today. Without open standards, the world wide web would never have reached its current size. In addition to open standards, another important factor for the success of the web was the availability of open and efficient implementations of these standards. When CERN started to work on the `web`, their objective was to build a running system that could be used by physicists. They developed open-source implementations of the `first web servers <https://www.w3.org/Daemon/>`_ and `web clients <https://dev.w3.org/libwww/Library/Activity.html>`_. These open-source implementations were powerful and could be used as is, by institutions willing to share information on the web. They were also extended by other developers who contributed to new features. For example, NCSA_ added support for images in their `Mosaic browser <https://en.wikipedia.org/wiki/Mosaic_(web_browser)>`_ that was eventually used to create `Netscape Communications <https://en.wikipedia.org/wiki/Netscape>`_. 
 
 
 The first components of the `world wide web` are the Uniform Resource Identifiers (URI), defined in :rfc:`3986`. A URI is a character string that unambiguously identifies a resource on the world wide web. Here is a subset of the BNF for URIs ::
@@ -62,9 +62,9 @@ The third part of the URI is the path to the document. This path is structured a
 
 .. code-block:: text
 
-   http://tools.ietf.org/html/rfc3986.html
+   https://tools.ietf.org/html/rfc3986
    mailto:infobot@example.com?subject=current-issue   
-   http://docs.python.org/library/basehttpserver.html?highlight=http#BaseHTTPServer.BaseHTTPRequestHandler
+   https://docs.python.org/library/basehttpserver.html?highlight=http#BaseHTTPServer.BaseHTTPRequestHandler
    telnet://[2001:db8:3080:3::2]:80/
    ftp://cnn.example.com&story=breaking_news@10.0.0.1/top_story.htm
 
@@ -72,7 +72,7 @@ The third part of the URI is the path to the document. This path is structured a
 
 The first URI corresponds to a document named `rfc3986.html` that is stored on the server named `tools.ietf.org` and can be accessed by using the `http` protocol on its default port. The second URI corresponds to an email message, with subject `current-issue`, that will be sent to user `infobot` in domain `example.com`. The `mailto:` URI scheme is defined in :rfc:`6068`. The third URI references the portion `BaseHTTPServer.BaseHTTPRequestHandler` of the document `basehttpserver.html` that is stored in the `library` directory on server `docs.python.org`. This document can be retrieved by using the `http` protocol. The query `highlight=http` is associated to this URI. The fourth example is a server that operates the telnet_ protocol, uses IPv6 address `2001:db8:3080:3::2` and is reachable on port 80. The last URI is somewhat special. Most users will assume that it corresponds to a document stored on the `cnn.example.com` server. However, to parse this URI, it is important to remember that the `@` character is used to separate the user name from the host name in the authorisation part of a URI. This implies that the URI points to a document named `top_story.htm` on host having IPv4 address `10.0.0.1`. The document will be retrieved by using the `ftp` protocol with the user name set to `cnn.example.com&story=breaking_news`. 
 
-The second component of the `word wide web` is the HyperText Markup Language (HTML). HTML defines the format of the documents that are exchanged on the `web`. The `first version of HTML <http://www.w3.org/History/19921103-hypertext/hypertext/WWW/MarkUp/Tags.html>`_ was derived from the Standard Generalized Markup Language (SGML) that was standardised in 1986 by :term:`ISO`. SGML_ was designed to allow large project documents in industries such as government, law or aerospace to be shared efficiently in a machine-readable manner. These industries require documents to remain readable and editable for tens of years and insisted on a standardised format supported by multiple vendors. Today, SGML_ is no longer widely used beyond specific applications, but its descendants including :term:`HTML` and :term:`XML` are now widespread.
+The second component of the `word wide web` is the HyperText Markup Language (HTML). HTML defines the format of the documents that are exchanged on the `web`. The `first version of HTML <https://www.w3.org/History/19921103-hypertext/hypertext/WWW/MarkUp/Tags.html>`_ was derived from the Standard Generalized Markup Language (SGML) that was standardised in 1986 by :term:`ISO`. SGML_ was designed to allow large project documents in industries such as government, law or aerospace to be shared efficiently in a machine-readable manner. These industries require documents to remain readable and editable for tens of years and insisted on a standardised format supported by multiple vendors. Today, SGML_ is no longer widely used beyond specific applications, but its descendants including :term:`HTML` and :term:`XML` are now widespread.
 
 A markup language is a structured way of adding annotations about the formatting of the document within the document itself. Example markup languages include troff_, which is used to write the Unix man pages or LaTeX_. HTML uses markers to annotate text and a document is composed of `HTML elements`. Each element is usually composed of three items: a start tag that potentially includes some specific attributes, some text (often including other elements), and an end tag. A HTML tag is a keyword enclosed in angle brackets. The generic form of a HTML element is ::
 
@@ -90,7 +90,7 @@ The HTML document shown below is composed of two parts : a header, delineated by
 
    A simple HTML page 
 
-Additional details about the various extensions to HTML may be found in the `official specifications <http://www.w3.org/MarkUp/>`_ maintained by W3C_.
+Additional details about the various extensions to HTML may be found in the `official specifications <https://www.w3.org/MarkUp/>`_ maintained by W3C_.
 
 The third component of the `world wide web` is the HyperText Transfert Protocol (HTTP). HTTP is a text-based protocol, in which the client sends a request and the server returns a response. HTTP runs above the bytestream service and HTTP servers listen by default on port `80`. The design of HTTP has largely been inspired by the Internet email protocols. Each HTTP request contains three parts :
 
@@ -113,7 +113,7 @@ The response sent by the server also contains three parts :
 
 Several types of method can be used in HTTP requests. The three most important ones are :
 
- - the `GET` method is the most popular one. It is used to retrieve a document from a server. The `GET` method is encoded as `GET` followed by the path of the URI of the requested document and the version of HTTP used by the client. For example, to retrieve the http://www.w3.org/MarkUp/ URI, a client must open a TCP on port `80` with host `www.w3.org` and send a HTTP request containing the following line :
+ - the `GET` method is the most popular one. It is used to retrieve a document from a server. The `GET` method is encoded as `GET` followed by the path of the URI of the requested document and the version of HTTP used by the client. For example, to retrieve the https://www.w3.org/MarkUp/ URI, a client must open a TCP on port `80` with host `www.w3.org` and send a HTTP request containing the following line :
 
  .. code-block:: console
 
@@ -150,7 +150,7 @@ Similarly, the following header lines can only appear inside HTTP requests sent 
 
    GET /index.html HTTP/1.0
 
- By parsing this line, a server cannot determine which `index.html` file is requested. Thanks to the `Host:` header line, the server knows whether the request is for `http://web.example.com/index.html` or `http://www.dummy.net/index.html`. Without the `Host:` header, this is impossible. The `Host:` header line allowed web hosting companies to develop their business by supporting a large number of independent web servers on the same physical server. 
+ By parsing this line, a server cannot determine which `index.html` file is requested. Thanks to the `Host:` header line, the server knows whether the request is for `http://web.example.com/index.html` or `http://another.example.net/index.html`. Without the `Host:` header, this is impossible. The `Host:` header line allowed web hosting companies to develop their business by supporting a large number of independent web servers on the same physical server. 
 
 The status line of the HTTP response begins with the version of HTTP used by the server (usually `HTTP/1.0` defined in :rfc:`1945` or `HTTP/1.1` defined in :rfc:`2616`) followed by a three digit status code and additional information in English. HTTP status codes have a similar structure as the reply codes used by SMTP. 
 
@@ -161,7 +161,7 @@ The status line of the HTTP response begins with the version of HTTP used by the
 
 In both the HTTP request and the HTTP response, the MIME document refers to a representation of the document with the MIME headers indicating the type of document and its size.
 
-As an illustration of HTTP/1.0, the transcript below shows a HTTP request for `http://www.ietf.org <http://www.ietf.org>`_ and the corresponding HTTP response. The HTTP request was sent using the curl_ command line tool. The `User-Agent:` header line contains more information about this client software. There is no MIME document attached to this HTTP request, and it ends with a blank line. 
+As an illustration of HTTP/1.0, the transcript below shows a HTTP request for `https://www.ietf.org <https://www.ietf.org>`_ and the corresponding HTTP response. The HTTP request was sent using the curl_ command line tool. The `User-Agent:` header line contains more information about this client software. There is no MIME document attached to this HTTP request, and it ends with a blank line. 
 
 .. code-block:: text
  
@@ -296,16 +296,16 @@ The third, and widely adopted, solution are HTTP cookies. HTTP cookies were init
 
 .. note:: Privacy issues with HTTP cookies
 
- The HTTP cookies introduced by Netscape_ are key for large e-commerce websites. However, they have also raised many discussions concerning their `potential misuses <http://www.nytimes.com/2001/09/04/technology/04COOK.html>`_. Consider `ad.com`, a company that delivers lots of advertisements on web sites. A web site that wishes to include `ad.com`'s advertisements next to its content will add links to `ad.com` inside its HTML pages. If `ad.com` is used by many web sites, `ad.com` could be able to track the interests of all the users that visit its client websites and use this information to provide targeted advertisements. Privacy advocates have even `sued <http://epic.org/privacy/internet/cookies/>`_ online advertisement companies to force them to comply with the privacy regulations. More recent related technologies also raise `privacy concerns <http://www.eff.org/deeplinks/2009/09/new-cookie-technologies-harder-see-and-remove-wide>`_ 
+ The HTTP cookies introduced by Netscape_ are key for large e-commerce websites. However, they have also raised many discussions concerning their `potential misuses <https://www.nytimes.com/2001/09/04/technology/04COOK.html>`_. Consider `ad.com`, a company that delivers lots of advertisements on web sites. A web site that wishes to include `ad.com`'s advertisements next to its content will add links to `ad.com` inside its HTML pages. If `ad.com` is used by many web sites, `ad.com` could be able to track the interests of all the users that visit its client websites and use this information to provide targeted advertisements. Privacy advocates have even `sued <https://epic.org/privacy/internet/cookies/>`_ online advertisement companies to force them to comply with the privacy regulations. More recent related technologies also raise `privacy concerns <https://www.eff.org/deeplinks/2009/09/new-cookie-technologies-harder-see-and-remove-wide>`_ 
  
 .. rubric:: Footnotes
 
-.. [#furiretrieve] An example of a non-retrievable URI is `urn:isbn:0-380-81593-1` which is an unique identifier for a book, through the urn scheme (see :rfc:`3187`). Of course, any URI can be made retrievable via a dedicated server or a new protocol but this one has no explicit protocol. Same thing for the scheme tag (see :rfc:`4151`), often used in Web syndication (see :rfc:`4287` about the Atom syndication format). Even when the scheme is retrievable (for instance with http`), it is often used only as an identifier, not as a way to get a resource. See  http://norman.walsh.name/2006/07/25/namesAndAddresses for a good explanation.
+.. [#furiretrieve] An example of a non-retrievable URI is `urn:isbn:0-380-81593-1` which is an unique identifier for a book, through the urn scheme (see :rfc:`3187`). Of course, any URI can be made retrievable via a dedicated server or a new protocol but this one has no explicit protocol. Same thing for the scheme tag (see :rfc:`4151`), often used in Web syndication (see :rfc:`4287` about the Atom syndication format). Even when the scheme is retrievable (for instance with http`), it is often used only as an identifier, not as a way to get a resource. See  https://norman.walsh.name/2006/07/25/namesAndAddresses for a good explanation.
 
 
-.. [#furilist] The list of standard URI schemes is maintained by IANA_ at http://www.iana.org/assignments/uri-schemes.html
+.. [#furilist] The list of standard URI schemes is maintained by IANA_ at https://www.iana.org/assignments/uri-schemes
 
-.. [#ffavicon] Favorite icons are small icons that are used to represent web servers in the toolbar of Internet browsers. Microsoft added this feature in their browsers without taking into account the W3C standards. See http://www.w3.org/2005/10/howto-favicon for a discussion on how to cleanly support such favorite icons.
+.. [#ffavicon] Favorite icons are small icons that are used to represent web servers in the toolbar of Internet browsers. Microsoft added this feature in their browsers without taking into account the W3C standards. See https://www.w3.org/2005/10/howto-favicon for a discussion on how to cleanly support such favorite icons.
 
 
 .. include:: /links.rst

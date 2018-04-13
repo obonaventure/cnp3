@@ -230,9 +230,9 @@ against real DoS attacks can be difficult, especially if the attacker
 controls a large number of sources that are used to launch the attacks. In terms
 of bandwidth, DoS attacks composed of a few Gbps to a few tens of
 Gbps of traffic are frequent on the Internet. In 2015,
-`github.com <http://www.github.com>`_ suffered from a distributed DoS that
+`github.com <https://www.github.com/>`_ suffered from a distributed DoS that
 reached a top bandwidth of 400 Gbps according to some 
-`reports <http://www.techworld.com/news/security/worlds-largest-ddos-attack-reached-400gbps-says-arbor-networks-3595715/>`_.
+`reports <https://www.techworld.com/news/security/worlds-largest-ddos-attack-reached-400gbps-says-arbor-networks-3595715/>`_.
 Since then, `DDoS attacks have risen to over 1 Tbps <https://githubengineering.com/ddos-incident-report/>`_.
 
 .. index:: reflection attack, amplification

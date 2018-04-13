@@ -128,7 +128,7 @@ Using the socket API
 ====================
 
 
-Networked applications were usually implemented by using the :term:`socket` :term:`API`. This API was designed when TCP/IP was first implemented in the `Unix BSD`_ operating system [Sechrest]_ [LFJLMT]_, and has served as the model for many APIs between applications and the networking stack in an operating system. Although the socket API is very popular, other APIs have also been developed. For example, the STREAMS API has been added to several Unix System V variants [Rago1993]_. The socket API is supported by most programming languages and several textbooks have been devoted to it. Users of the C language can consult [DC2009]_, [Stevens1998]_, [SFR2004]_ or [Kerrisk2010]_. The Java implementation of the socket API is described in [CD2008]_ and in the `Java tutorial <http://java.sun.com/docs/books/tutorial/networking/sockets/index.html>`_. In this section, we will use the python_ implementation of the socket_ API to illustrate the key concepts. Additional information about this API may be found in the `socket section <http://docs.python.org/library/socket.html>`_ of the `python documentation <http://docs.python.org/>`_ .
+Networked applications were usually implemented by using the :term:`socket` :term:`API`. This API was designed when TCP/IP was first implemented in the `Unix BSD`_ operating system [Sechrest]_ [LFJLMT]_, and has served as the model for many APIs between applications and the networking stack in an operating system. Although the socket API is very popular, other APIs have also been developed. For example, the STREAMS API has been added to several Unix System V variants [Rago1993]_. The socket API is supported by most programming languages and several textbooks have been devoted to it. Users of the C language can consult [DC2009]_, [Stevens1998]_, [SFR2004]_ or [Kerrisk2010]_. The Java implementation of the socket API is described in [CD2008]_ and in the `Java tutorial <http://download.oracle.com/javase/tutorial/networking/sockets/>`_. In this section, we will use the python_ implementation of the socket_ API to illustrate the key concepts. Additional information about this API may be found in the `socket section <https://docs.python.org/library/socket.html>`_ of the `python documentation <https://docs.python.org/>`_ .
 
 The socket API is quite low-level and should be used only when you need a complete control of the network access. If your application simply needs, for instance, to retrieve data from a web server, there are much simpler and higher-level APIs. 
 
@@ -142,7 +142,7 @@ The `DATA` primitives are exchanged through a service access point. In the socke
  - an `address family` that specifies the type of address family and thus the underlying networking stack that will be used with the socket. This parameter can be either ``socket.AF_INET`` or ``socket.AF_INET6``. ``socket.AF_INET``, which corresponds to the TCP/IPv4 protocol stack is the default. ``socket.AF_INET6`` corresponds to the TCP/IPv6 protocol stack.
  - a `type` indicates the type of service which is expected from the networking stack. ``socket.STREAM`` (the default) corresponds to the reliable bytestream connection-oriented service. ``socket.DGRAM`` corresponds to the connectionless service.
  
-.. However, it is important to understand the basics and the limitations of this API. We use the `python socket API <http://docs.python.org/library/socket.html>` to describe these issues. The socket API allows applications to interact with the transport services offered by the networking stack. The simplest transport service is the connectionless service. The simplest client application that uses this service will issue a `DATA.request` with its request and wait for a `DATA.indication` that contains the response.
+.. However, it is important to understand the basics and the limitations of this API. We use the `python socket API <https://docs.python.org/library/socket.html>` to describe these issues. The socket API allows applications to interact with the transport services offered by the networking stack. The simplest transport service is the connectionless service. The simplest client application that uses this service will issue a `DATA.request` with its request and wait for a `DATA.indication` that contains the response.
 
 .. index:: socket, sendto, AF_INET, AF_INET6, SOCK_DGRAM, SOCK_STREAM
 
@@ -207,13 +207,13 @@ With these methods, it is now possible to write a simple HTTP client. This clien
    :language: python
 
 
-.. As mentioned above, the socket API is very low-level. This is the interface to the transport service. For a common and simple task, like retrieving a document from the Web, there are much simpler solutions. For example, the python_ `standard library <http://docs.python.org/library/>`_ includes several high-level APIs to implementations of various application layer protocols including HTTP. For example, the `httplib <http://docs.python.org/library/httplib.html>`_ module can be used to easily access documents via HTTP. 
+.. As mentioned above, the socket API is very low-level. This is the interface to the transport service. For a common and simple task, like retrieving a document from the Web, there are much simpler solutions. For example, the python_ `standard library <https://docs.python.org/library/>`_ includes several high-level APIs to implementations of various application layer protocols including HTTP. For example, the `httplib <https://docs.python.org/library/httplib.html>`_ module can be used to easily access documents via HTTP. 
 
 
 .. .. literalinclude:: python/http-client-httplib.py
 ..  :language: python
 
-.. Another module, `urllib2 <http://docs.python.org/library/urllib2.html>`_ allows the programmer to directly use URLs. This is much more simpler than directly using sockets. 
+.. Another module, `urllib2 <https://docs.python.org/library/urllib2.html>`_ allows the programmer to directly use URLs. This is much more simpler than directly using sockets. 
 
 .. .. literalinclude:: python/http-client-urllib2.py
 ..  :language: python
@@ -244,9 +244,9 @@ This server is far from a production-quality web server. A real web server would
 Practice
 ========
 
-.. 1. Amazon provides the `S3 storage service <https://s3.amazonaws.com/>`_ where companies and researchers can store lots of information and perform computations on the stored information. Amazon allows users to send files through the Internet, but also by sending hard-disks. Assume that a 1 Terabyte hard-disk can be delivered within 24 hours to Amazon by courier service. What is the minimum bandwidth required to match the bandwidth of this courier service ? 
+.. 1. Amazon provides the `S3 storage service <https://aws.amazon.com/s3/>`_ where companies and researchers can store lots of information and perform computations on the stored information. Amazon allows users to send files through the Internet, but also by sending hard-disks. Assume that a 1 Terabyte hard-disk can be delivered within 24 hours to Amazon by courier service. What is the minimum bandwidth required to match the bandwidth of this courier service ? 
 
-.. 2. Several large data centers operators (e.g. `Microsoft <http://www.microsoft.com/showcase/en/us/details/bafe5c0f-8651-4609-8c71-24c733ce628b>`_ and `google <http://www.youtube.com/watch?v=zRwPSFpLX8I>`_) have announced that they install servers as containers with each container hosting up to 2000 servers. Assuming a container with 2000 servers and each storing 500 GBytes of data, what is the time required to move all the data stored in one container over one 10 Gbps link ? What is the bandwidth of a truck that needs 10 hours to move one container from one data center to another. 
+.. 2. Several large data centers operators (e.g. `Microsoft <https://www.cnet.com/news/inside-one-of-the-worlds-largest-data-centers/>`_ and `google <https://www.youtube.com/watch?v=zRwPSFpLX8I>`_) have announced that they install servers as containers with each container hosting up to 2000 servers. Assuming a container with 2000 servers and each storing 500 GBytes of data, what is the time required to move all the data stored in one container over one 10 Gbps link ? What is the bandwidth of a truck that needs 10 hours to move one container from one data center to another. 
 
 1. The socket_ interface allows you to use the UDP protocol that provides the connectionless service on a Unix host. UDP, in theory, allows you to send SDUs of up to 64 KBytes. 
 
@@ -335,7 +335,7 @@ Discussion questions
 
 5. What is piggybacking and what are the benefits of this technique ?
 
-..  To be written : connect by name API is key !  http://www.stuartcheshire.org/IETF72/
+..  To be written : connect by name API is key !  http://stuartcheshire.org/IETF72/
 
 .. [Cheshire2010]_
 
@@ -346,7 +346,7 @@ Discussion questions
 
 .. [#fnumrecv] Experiments with the client indicate that the number of `socket.recv` calls can vary at each run. There are various factors that influence the number of such calls that are required to retrieve some information from a server. We'll discuss some of them after having explained the operation of the underlying transport protocol.
 
-.. [#fapache] There are many `production quality web servers software <http://en.wikipedia.org/wiki/Comparison_of_web_server_software>`_ available. apache_ is a very complex but widely used one. `thttpd <http://www.acme.com/software/thttpd/>`_ and `lighttpd <http://www.lighttpd.net/>`_ are less complex and their source code is probably easier to understand.
+.. [#fapache] There are many `production quality web servers software <https://en.wikipedia.org/wiki/Comparison_of_web_server_software>`_ available. apache_ is a very complex but widely used one. `thttpd <http://www.acme.com/software/thttpd/>`_ and `lighttpd <http://www.lighttpd.net/>`_ are less complex and their source code is probably easier to understand.
 
 .. include:: /links.rst
 
