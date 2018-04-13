@@ -84,7 +84,7 @@ Names provide a lot of flexibility compared to addresses. For the network, they 
 
 .. rubric:: Footnotes
 
-.. [#fhosts] The :term:`hosts.txt` file is not maintained anymore. A historical snapshot retrieved on April 15th, 1984 is available from https://emaillab.jp/dns/hosts/
+.. [#fhosts] The :term:`hosts.txt` file is not maintained anymore. Several historical snapshots from 1974 to 1995 are available from https://emaillab.jp/dns/hosts/
 
 .. [#fdnstimeline] See http://www.donelan.com/dnstimeline.html for a time line of DNS related developments. 
 
