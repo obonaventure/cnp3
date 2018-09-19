@@ -272,7 +272,7 @@ Alternating Bit Protocol
 
    .. positive::  If the right host receives `D(1,y)`, it will ignore the frame and reply with `C(OK1)`.  
 
-   .. positive::  If the left host receives `C(OK,0)`, it will retransmit the frame `D(1,y)`. 
+   .. positive::  If the left host receives `C(OK,0)`, it will retransmit the frame `D(1,x)`. 
 
    .. negative::  If the right host receives `D(1,y)`, it will ignore the frame and reply with `C(OK0)`. 
 
