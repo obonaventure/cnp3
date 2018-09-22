@@ -38,16 +38,19 @@ information over a physical link. We are only interested in techniques that allo
 
 .. note:: Bit rate
 
- In computer networks, the bit rate of the physical layer is always expressed in bits per second. One Mbps is one million bits per second and one Gbps is one billion bits per second. This is in contrast with memory specifications that are usually expressed in bytes (8 bits), KiloBytes ( 1024 bytes) or MegaBytes (1048576 bytes). Thus transferring one MByte through a 1 Mbps link lasts 8.39 seconds.
+ In computer networks, the bit rate of the physical layer is always expressed in bits per second. One Mbps is one million bits per second and one Gbps is one billion bits per second. When describing file or memory size, early computer scientists found it more convenient to express the information in bytes (8 bits), kilobytes (1024 bytes), megabytes (1048576 bytes) and so on. This led to confusion. For example, transferring one Mbyte through a 1Mbps link lasts 8.39 seconds. For a terabyte, the difference between these `binary` and the `normal`, decimal bases is already about 10%. Confusion can be avoided when using the so-called `binary prefixes <https://en.wikipedia.org/wiki/Binary_prefix>`_, naming 1024 bytes a `kibibyte` (kiB), 1048576 bytes a `mebibyte` (MiB), and so on.
 
-  ========        ===============
-  Bit rate        Bits per second
-  ========        ===============
-  1 Kbps	  :math:`10^3`
-  1 Mbps	  :math:`10^6`
-  1 Gbps	  :math:`10^9`
-  1 Tbps	  :math:`10^{12}`
-  ========        ===============
+
+  ========        ===============      ===========       ===============
+         Decimal prefixes                       Binary prefixes
+  -------------------------------      ---------------------------------
+  Bit rate        Bits per second      Memory size       Number of bytes
+  ========        ===============      ===========       ===============
+  1 kbps	  :math:`10^3`         1 kiB             :math:`1024^1=1,024`
+  1 Mbps	  :math:`10^6`         1 MiB             :math:`1024^2=1,048,576`
+  1 Gbps	  :math:`10^9`         1 GiB             :math:`1024^3=1,073,741,824`
+  1 Tbps	  :math:`10^{12}`      1 TiB             :math:`1024^4=1,099,511,627,776`
+  ========        ===============      ===========       ===============
 
 
 
@@ -201,7 +204,7 @@ A first solution to this problem is to require the physical layer to remain idle
 
 .. note:: Bit rate and bandwidth
 
-  Bit rate and bandwidth are often used to characterize the transmission capacity of the physical service. The original definition of `bandwidth <http://www.merriam-webster.com/dictionary/bandwidth>`_, as listed in the `Webster dictionary <http://www.merriam-webster.com/dictionary>`_ is `a range of radio frequencies which is occupied by a modulated carrier wave, which is assigned to a service, or over which a device can operate`. This definition corresponds to the characteristics of a given transmission medium or receiver. For example, the human ear is able to decode sounds in roughly the 0-20 KHz frequency range. By extension, bandwidth is also used to represent the capacity of a communication system in bits per second. For example, a Gigabit Ethernet link is theoretically capable of transporting one billion bits per second.
+  Bit rate and bandwidth are often used to characterize the transmission capacity of the physical service. The original definition of `bandwidth <https://www.merriam-webster.com/dictionary/bandwidth>`_, as listed in the `Webster dictionary <https://www.merriam-webster.com/dictionary>`_ is `a range of radio frequencies which is occupied by a modulated carrier wave, which is assigned to a service, or over which a device can operate`. This definition corresponds to the characteristics of a given transmission medium or receiver. For example, the human ear is able to decode sounds in roughly the 0-20 KHz frequency range. By extension, bandwidth is also used to represent the capacity of a communication system in bits per second. For example, a Gigabit Ethernet link is theoretically capable of transporting one billion bits per second.
 
 
 .. index:: bit stuffing, stuffing (bit)
@@ -512,7 +515,7 @@ It is also possible to design a code that allows the receiver to correct transmi
 	 011			1
   ====================    =============
 
-Other more powerful error correction codes have been proposed and are used in some applications. The `Hamming Code <http://en.wikipedia.org/wiki/Hamming_code>`_ is a clever combination of parity bits that provides error detection and correction capabilities. 
+Other more powerful error correction codes have been proposed and are used in some applications. The `Hamming Code <https://en.wikipedia.org/wiki/Hamming_code>`_ is a clever combination of parity bits that provides error detection and correction capabilities. 
 
 
 Reliable protocols use error detection schemes, but none of the widely used reliable protocols rely on error correction schemes. To detect errors, a frame is usually divided into two parts :
@@ -534,8 +537,8 @@ The simplest error detection scheme is the checksum. A checksum is basically an 
 .. real checksum http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.55.8520
 .. do not invent your own checksum, use existing ones
 .. implementations can be optimised by using table lookups
-.. crc : http://en.wikipedia.org/wiki/Cyclic_redundancy_check
-.. tcp offload engine http://www.10gea.org/tcp-ip-offload-engine-toe.htm
+.. crc : https://en.wikipedia.org/wiki/Cyclic_redundancy_check
+.. tcp offload engine https://10gea.org/tcp-ip-offload-engine-toe.htm
 .. stcp used Adler-32 but it now uses CRC :rfc:`3309`
 
 .. The second imperfection of the network layer is that segments may be lost. As we will see later, the main cause of packet losses in the network layer is the lack of buffers in intermediate routers. 
@@ -719,7 +722,7 @@ And the loss of one control frame.
    note:: Random errors versus malicious modifications
    The protocols of the transport layer are designed to recover from the random errors and losses that may occur in the underlying layers. There random errors are caused by 
    see [SPMR09]_ for how to recompute a CRC
-   Checksums and CRCs should not be confused with hash functions such as MD5 defined in :rfc:`1321` or `SHA-1 <http://www.itl.nist.gov/fipspubs/fip180-1.htm>`_ .
+   Checksums and CRCs should not be confused with hash functions such as MD5 defined in :rfc:`1321` or `SHA-1 <https://www.itl.nist.gov/fipspubs/fip180-1.htm>`_ .
 
 
 The Alternating Bit Protocol can recover from transmission errors and frame losses. However, it has one important drawback. Consider two hosts that are directly connected by a 50 Kbits/sec satellite link that has a 250 milliseconds propagation delay. If these hosts send 1000 bits frames, then the maximum throughput that can be achieved by the alternating bit protocol is one frame every :math:`20+250+250=520` milliseconds if we ignore the transmission time of the acknowledgement. This is less than 2 Kbits/sec ! 
@@ -923,7 +926,7 @@ Reliable protocols often need to send data in both directions. To reduce the ove
 
 .. .. [#facklost] Note that if the receive window shrinks, it might happen that the sender has already sent a segment that is not anymore inside its window. This segment will be discarded by the receiver and the sender will retransmit it later.
 
-.. .. [#fmsl] As we will see in the next chapter, the Internet does not strictly enforce this MSL. However, it is reasonable to expect that most packets on the Internet will not remain in the network during more than 2 minutes. There are a few exceptions to this rule, such as :rfc:`1149` whose implementation is described in http://www.blug.linux.no/rfc1149/ but there are few real links supporting :rfc:`1149` in the Internet.
+.. .. [#fmsl] As we will see in the next chapter, the Internet does not strictly enforce this MSL. However, it is reasonable to expect that most packets on the Internet will not remain in the network during more than 2 minutes. There are a few exceptions to this rule, such as :rfc:`1149` whose implementation is described in https://www.blug.linux.no/rfc1149/ but there are few real links supporting :rfc:`1149` in the Internet.
 
 
 .. include:: /links.rst

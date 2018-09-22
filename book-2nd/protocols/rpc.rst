@@ -84,7 +84,7 @@ This object has one field named `Image`. It has five attributes. The first one, 
      "Primes" : [ 2, 3, 5, 7 ]
    }
 
-Compared with XDR, the main advantage of JSON is that the transfer syntax is easily readable by a human. However, this comes at the expense of a less compact encoding. Some data encoded in JSON will usually take more space than when it is encoded with XDR. More compact encoding schemes have been defined, see e.g. [BH2013]_ and the references therein.
+Compared with XDR, the main advantage of JSON is that the transfer syntax is easily readable by a human. However, this comes at the expense of a less compact encoding. Some data encoded in JSON will usually take more space than when it is encoded with XDR. More compact encoding schemes have been defined, see e.g. [RFC7049]_ and the references therein.
 
 
 Reaching the callee

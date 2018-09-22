@@ -46,7 +46,7 @@ administrators encouraged its usage. The original version of :term:`ssh`
 was freely available. After a few years, his author created a company
 to distribute it commercially, but other programmers continued to
 develop an open-source version of :term`ssh` called 
-`OpenSSH <http://www.openssh.com>`_.
+`OpenSSH <https://www.openssh.com>`_.
 Over the years, :term:`ssh` evolved
 and became a flexible applicable whose usage extends beyond remote
 login to support features such as file transfers, protocol tunnelling, ..
@@ -82,7 +82,7 @@ cryptographic algorithms :
  - Message Authentication Code (MAC)
  - compression 
 
-The IANA_ maintains a `list of the cryptographic algorithms <http://www.iana.org/assignments/ssh-parameters/ssh-parameters.xhtml#ssh-parameters-16>`_ 
+The IANA_ maintains a `list of the cryptographic algorithms <https://www.iana.org/assignments/ssh-parameters/ssh-parameters.xhtml#ssh-parameters-16>`_ 
 that can be used by ``ssh`` implementations. For each type of algorithm,
 the client provides an ordered list of the algorithms that it supports
 and agrees to use. The server compares the received list with its own list.

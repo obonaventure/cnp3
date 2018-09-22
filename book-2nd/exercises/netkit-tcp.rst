@@ -175,7 +175,7 @@ The last three services were popular services installed on all TCP/IP hosts. How
 
 ``daytime`` is a very simple protocol that allows to query the current time on the server. The format of the response is described in :rfc:`867`.
 
-Several tools allow to send information over UDP and TCP. :manpage:`telnet` is very useful to interact with TCP servers. :manpage:`nc` (or ``netcat``) is another tool which can be very useful when debugging network problems. It allows to easily contact servers over UDP or TCP, but can also be used to create simple but powerful servers from the command line. Several versions of ``nc`` or ``netcat`` have been written. See http://en.wikipedia.org/wiki/Netcat for additional details.
+Several tools allow to send information over UDP and TCP. :manpage:`telnet` is very useful to interact with TCP servers. :manpage:`nc` (or ``netcat``) is another tool which can be very useful when debugging network problems. It allows to easily contact servers over UDP or TCP, but can also be used to create simple but powerful servers from the command line. Several versions of ``nc`` or ``netcat`` have been written. See https://en.wikipedia.org/wiki/Netcat for additional details.
 
 Start ``tcpdump`` on ``router`` to capture all UDP segments. The ``tcpdump`` manpage will show you how to only capture UDP segments. 
 
@@ -224,7 +224,7 @@ Start by using :manpage:`tcpdump` on `router` to capture all the packets sent on
 
 6. The TCP stack on `Client1` was configured to disable all recent TCP extensions, including Window Scale defined in :rfc:`1323`, Timestamps defined in :rfc:`1323` and Selective acknowledgements defined in :rfc:`2018`. Enable the Timestamp option by setting the configuration variable ``net.ipv4.tcp_timestamps`` to 1 using ``sysctl -w`` and verify with :manpage:`tcpdump(8)` that this extension is actually used.
 
-7. The main benefit of TCP is that it can react to delays, losses and packet duplications. In a netkit lab, there are usually no delay and no losses or duplications. Fortunately, various tools can be used on the Linux kernel to emulate various network properties. `Netem <http://www.linuxfoundation.org/collaborate/workgroups/networking/netem>`_ is one of these tools. It can be used on a router to add delay, losses or duplications when a router sends packets. Using the commands described in http://www.linuxfoundation.org/collaborate/workgroups/networking/netem, configure the interface between `router` and `websever` with :
+7. The main benefit of TCP is that it can react to delays, losses and packet duplications. In a netkit lab, there are usually no delay and no losses or duplications. Fortunately, various tools can be used on the Linux kernel to emulate various network properties. `Netem <https://www.linuxfoundation.org/collaborate/workgroups/networking/netem>`_ is one of these tools. It can be used on a router to add delay, losses or duplications when a router sends packets. Using the commands described in https://www.linuxfoundation.org/collaborate/workgroups/networking/netem, configure the interface between `router` and `websever` with :
   
   #. A fixed delay of 100 milliseconds
   #. Packet losses of 10%, 50% and 95%

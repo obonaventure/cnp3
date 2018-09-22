@@ -36,7 +36,7 @@ During this lab, you will use three software packages that are very useful to un
 
 iperf_ (version 3) is a frequently used network performance testing tool. It is often used by network administrators who need to test the performance of a network between two hosts. To use iperf_, you first need to start the server process by using ``iperf -s`` on host ``server`` on the lab. The server listens on ``5201`` for measurements requests coming from the server. When a measurement starts, the client sends data to the server.
 
-The `iperf manpage <https://code.google.com/p/iperf/wiki/ManPage>`_ lists all the options of the server and the client. The most interesting ones are :
+The `iperf manpage <https://software.es.net/iperf/invoking.html>`_ lists all the options of the server and the client. The most interesting ones are :
 
  - ``-6`` forces the utilisation of IPv6
  - ``--udp`` uses UDP for the measurements instead of TCP which is the default

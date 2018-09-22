@@ -32,6 +32,6 @@ PPP played a key role in allowing Internet Service Providers to provide dial-up 
 
 .. rubric:: Footnotes
 
-.. [#flapb] `LAPB <http://en.wikipedia.org/wiki/LAPB>`_ and `HDLC <http://en.wikipedia.org/wiki/HDLC>`_ were widely used datalink layer protocols. 
+.. [#flapb] `LAPB <https://en.wikipedia.org/wiki/LAPB>`_ and `HDLC <https://en.wikipedia.org/wiki/HDLC>`_ were widely used datalink layer protocols. 
 
-.. [#fpppid] The IANA maintains the registry of all assigned PPP protocol fields at : http://www.iana.org/assignments/ppp-numbers
+.. [#fpppid] The IANA maintains the registry of all assigned PPP protocol fields at : https://www.iana.org/assignments/ppp-numbers/ppp-numbers.xhtml

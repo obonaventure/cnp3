@@ -38,7 +38,7 @@ The fourth part of the Ethernet frame is the payload. The minimum length of the 
 The last field of the Ethernet frame is a 32 bit Cyclical Redundancy Check (CRC). This CRC is able to catch a much larger number of transmission errors than the Internet checksum used by IP, UDP and TCP [SGP98]_. The format of the Ethernet frame is shown below.
 
 
-.. Ethernet evolution http://www.networkworld.com/slideshows/2009/042009-terabit-ethernet.html?ts0hb#slide14
+.. Ethernet evolution https://www.networkworld.com/article/2869883/lan-wan/evolution-of-ethernet.html
 
 .. index:: Ethernet DIX frame format
 
@@ -116,7 +116,7 @@ Computers can directly be attached to Ethernet hubs. Ethernet hubs themselves ca
 
 In the late 1980s, 10 Mbps became too slow for some applications and network manufacturers developed several LAN technologies that offered higher bandwidth, such as the 100 Mbps FDDI LAN that used optical fibers. As the development of 10Base5, 10Base2 and 10BaseT had shown that Ethernet could be adapted to different physical layers, several manufacturers started to work on 100 Mbps Ethernet and convinced IEEE to standardise this new technology that was initially called `Fast Ethernet`. `Fast Ethernet` was designed under two constraints. First, `Fast Ethernet` had to support twisted pairs. Although it was easier from a physical layer perspective to support higher bandwidth on coaxial cables than on twisted pairs, coaxial cables were a nightmare from deployment and maintenance perspectives. Second, `Fast Ethernet` had to be perfectly compatible with the existing 10 Mbps Ethernets to allow `Fast Ethernet` technology to be used initially as a backbone technology to interconnect 10 Mbps Ethernet networks. This forced `Fast Ethernet` to use exactly the same frame format as 10 Mbps Ethernet. This implied that the minimum `Fast Ethernet` frame size remained at 512 bits. To preserve CSMA/CD with this minimum frame size and 100 Mbps instead of 10 Mbps, the duration of the `slot time` was decreased to 5.12 microseconds.
 
-The evolution of Ethernet did not stop. In 1998, the IEEE published a first standard to provide Gigabit Ethernet over optical fibers. Several other types of physical layers were added afterwards. The `10 Gigabit Ethernet <http://en.wikipedia.org/wiki/10_gigabit_Ethernet>`_ standard appeared in 2002. Work is ongoing to develop `standards <http://www.ieee802.org/3/ba/public/index.html>`_ for 40 Gigabit and 100 Gigabit Ethernet and some are thinking about `Terabit Ethernet <http://www.networkworld.com/news/2009/042009-terabit-ethernet.html>`_. The table below lists the main Ethernet standards. A more detailed list may be found at http://en.wikipedia.org/wiki/Ethernet_physical_layer
+The evolution of Ethernet did not stop. In 1998, the IEEE published a first standard to provide Gigabit Ethernet over optical fibers. Several other types of physical layers were added afterwards. The `10 Gigabit Ethernet <https://en.wikipedia.org/wiki/10_gigabit_Ethernet>`_ standard appeared in 2002. Work is ongoing to develop `standards <http://www.ieee802.org/3/ba/public/>`_ for 40 Gigabit and 100 Gigabit Ethernet and some are thinking about `Terabit Ethernet <https://www.networkworld.com/news/2009/042009-terabit-ethernet.html>`_. The table below lists the main Ethernet standards. A more detailed list may be found at https://en.wikipedia.org/wiki/Ethernet_physical_layer
 
 .. In the late 1990s, the first Gigabit Ethernet interfaces had difficulties transmitting and receiving at 1000 Mbps given the performance limitations of the hosts on which they were running. One of the issues was the 1500 bytes maximum Ethernet frame size, as it forces hosts to send relatively small packets. This increases the number of interruptions that a host needs to process. To improve the usability of Gigabit Ethernet without requiring CPU and bus upgrades, several vendors proposed to increase the.... Experience with other networking technologies that support large frames showed limits performed with other networking technologies showed that a larger frame 
 
@@ -141,9 +141,9 @@ Standard       Comments
 
 .. [#fethernethistory] Additional information about the history of the Ethernet technology may be found at http://ethernethistory.typepad.com/
 
-.. [#foui] Initially, the OUIs were allocated by Xerox [DP1981]_. However, once Ethernet became an IEEE and later an ISO standard, the allocation of the OUIs moved to IEEE. The list of all OUI allocations may be found at http://standards.ieee.org/regauth/oui/index.shtml
+.. [#foui] Initially, the OUIs were allocated by Xerox [DP1981]_. However, once Ethernet became an IEEE and later an ISO standard, the allocation of the OUIs moved to IEEE. The list of all OUI allocations may be found at https://regauth.standards.ieee.org/standards-ra-web/pub/view.html#registries
 
-.. [#fethertype] The official list of all assigned Ethernet type values is available from http://standards.ieee.org/regauth/ethertype/eth.txt
+.. [#fethertype] The official list of all assigned Ethernet type values is available from http://standards-oui.ieee.org/ethertype/eth.txt
 
 .. [#fipv6ether] The attentive reader may question the need for different `EtherTypes` for IPv4 and IPv6 while the IP header already contains a version field that can be used to distinguish between IPv4 and IPv6 packets. Theoretically, IPv4 and IPv6 could have used the same `EtherType`. Unfortunately, developers of the early IPv6 implementations found that some devices did not check the version field of the IPv4 packets that they received and parsed frames whose `EtherType` was set to `0x0800` as IPv4 packets. Sending IPv6 packets to such devices would have caused disruptions. To avoid this problem, the IETF decided to apply for a distinct `EtherType` value for IPv6. Such a choice is now mandated by :rfc:`6274` (section 3.1), although we can find a funny counter-example in :rfc:`6214`.
 

@@ -325,7 +325,7 @@ order, this indicates that `pi.example.org` does not exist.
 .. rubric:: Footnotes
 
 
-.. [#fspoof] See http://spoofer.caida.org/summary.php for an ongoing 
+.. [#fspoof] See https://spoofer.caida.org/summary.php for an ongoing 
 measurement study that analyses the networks where an attacker could send
 packets with any source IP address.
 

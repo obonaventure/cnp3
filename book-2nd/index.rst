@@ -1,4 +1,4 @@
-.. Copyright |copy| 2013,2014 by `Olivier Bonaventure <http://inl.info.ucl.ac.be/obo>`_
+.. Copyright |copy| 2013,2014 by `Olivier Bonaventure <https://inl.info.ucl.ac.be/obo>`_
 .. This file is licensed under a `creative commons licence <http://creativecommons.org/licenses/by/3.0/>`_
 
 
@@ -19,7 +19,7 @@ Computer Networking : Principles, Protocols and Practice, 2nd edition
     The development of this edition of the textbook is carried out on `github
     <https://github.com/obonaventure/cnp3/tree/master/book-2nd>`_ 
 
-    The source code of the entire textbook is written in `reStructuredText <http://docutils.sourceforge.net/rst.html>`_ and uses several `sphinx <http://sphinx.pocoo.org>`_ features. You can browse it from `github <https://github.com/obonaventure/cnp3/tree/master/book-2nd>`_ 
+    The source code of the entire textbook is written in `reStructuredText <http://docutils.sourceforge.net/rst.html>`_ and uses several `sphinx <http://sphinx-doc.org/>`_ features. You can browse it from `github <https://github.com/obonaventure/cnp3/tree/master/book-2nd>`_ 
 
 ..    You can also directly download the current ebook draft in various formats from the links below :
 

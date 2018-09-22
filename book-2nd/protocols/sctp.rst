@@ -1,6 +1,6 @@
 .. Copyright |copy| 2013 by Olivier Bonaventure
 .. This file is licensed under a `creative commons licence <http://creativecommons.org/licenses/by/3.0/>`_
-.. Part of this text has been extracted from . Recent Advances in Reliable Transport Protocols (Costin Raiciu , Olivier Bonaventure, Janardhan Iyengar), http://www.sigcomm.org/content/ebook 
+.. Part of this text has been extracted from . Recent Advances in Reliable Transport Protocols (Costin Raiciu , Olivier Bonaventure, Janardhan Iyengar), https://www.sigcomm.org/content/ebook 
 
 .. index:: SCTP
 .. _SCTP:

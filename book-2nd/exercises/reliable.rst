@@ -54,9 +54,9 @@ Reliable protocols depend on error detection algorithms to detect transmission e
 
 1. Reliable protocols rely on different types of checksums to verify whether frames have been affected by transmission errors. The most frequently used checksums are :
 
- - the Internet checksum used by UDP, TCP and other Internet protocols which is defined in :rfc:`1071` and implemented in various libraries. See e.g. http://ilab.cs.byu.edu/cs460/code/ftp/ichecksum.py for a python_ implementation
- - the 16 bits or the 32 bits Cyclical Redundancy Checks (CRC) that are often used on disks, in zip archives and in datalink layer protocols. See http://rosettacode.org/wiki/CRC-32 for CRC-32 implementations in various languages.
- - the Fletcher checksum [Fletcher1982]_, see http://drdobbs.com/database/184408761 for implementation details
+ - the Internet checksum used by UDP, TCP and other Internet protocols which is defined in :rfc:`1071` and implemented in various libraries. See e.g. http://www.bitforestinfo.com/2018/01/python-codes-to-calculate-ipv4-checksum.html for a python_ implementation
+ - the 16 bits or the 32 bits Cyclical Redundancy Checks (CRC) that are often used on disks, in zip archives and in datalink layer protocols. See https://rosettacode.org/wiki/CRC-32 for CRC-32 implementations in various languages.
+ - the Fletcher checksum [Fletcher1982]_, see http://www.drdobbs.com/database/fletchers-checksum/184408761 for implementation details
 
  By using your knowledge of the Internet checksum, can you find a transmission error that will not be detected by this checksum ?
 
@@ -65,9 +65,9 @@ Reliable protocols depend on error detection algorithms to detect transmission e
  - all errors that affect an odd number of bits
  - all errors that affect a sequence of bits which is shorter than the length of the CRC
 
- Implement a small software that computes the CRC-32 for a text file. Then, modify the contents of the file to change an even number of bits or an odd number of bits inside the file. When modifying the file, remember that an ASCII file is composed of 8 bits characters that are encoded by using the ASCII table that you can find at : http://en.wikipedia.org/wiki/ASCII . You can also write a small program that produces binary files that are a small variation of each other.
+ Implement a small software that computes the CRC-32 for a text file. Then, modify the contents of the file to change an even number of bits or an odd number of bits inside the file. When modifying the file, remember that an ASCII file is composed of 8 bits characters that are encoded by using the ASCII table that you can find at : https://en.wikipedia.org/wiki/ASCII . You can also write a small program that produces binary files that are a small variation of each other.
 
-3. Checksums and CRCs should not be confused with secure hash functions such as MD5 defined in :rfc:`1321` or SHA-1 described in :rfc:`4634`. Secure hash functions are used to ensure that files or sometimes packets/segments have not been modified. Secure hash functions aim at detecting malicious changes while checksums and CRCs only detect random transmission errors. Use the `shasum <http://linux.die.net/man/1/shasum>`_ or `md5sum <http://linux.die.net/man/1/md5sum>`_ programs on Linux to perform the same tests as above.
+3. Checksums and CRCs should not be confused with secure hash functions such as MD5 defined in :rfc:`1321` or SHA-1 described in :rfc:`4634`. Secure hash functions are used to ensure that files or sometimes packets/segments have not been modified. Secure hash functions aim at detecting malicious changes while checksums and CRCs only detect random transmission errors. Use the `shasum <https://linux.die.net/man/1/shasum>`_ or `md5sum <https://linux.die.net/man/1/md5sum>`_ programs on Linux to perform the same tests as above.
 
 
 

@@ -67,7 +67,7 @@ A TCP header contains the following fields :
 
 The rest of this section is organised as follows. We first explain the establishment and the release of a TCP connection, then we discuss the mechanisms that are used by TCP to provide a reliable bytestream service. We end the section with a discussion of network congestion and explain the mechanisms that TCP uses to avoid congestion collapse.
 
-.. Urgent pointer not discussed, rarely used, see http://www.ietf.org/id/draft-ietf-tcpm-urgent-data-00.txt for discussion, defined in :rfc:`793` and updated in :rfc:`1122`
+.. Urgent pointer not discussed, rarely used, see https://tools.ietf.org/html/rfc6093 for discussion, defined in :rfc:`793` and updated in :rfc:`1122`
 
 
 .. _TCPOpen:
@@ -524,7 +524,7 @@ The `TIME\_WAIT` state is different from the other states of the TCP FSM. A TCP 
 
  The :math:`2*MSL` seconds delay in the `TIME\_WAIT` state is an important operational problem on servers having thousands of simultaneously opened TCP connections [FTY99]_. Consider for example a busy web server that processes 10.000 TCP connections every second. If each of these connections remain in the `TIME\_WAIT` state for 4 minutes, this implies that the server would have to maintain more than 2 million TCBs at any time. For this reason, some TCP implementations prefer to perform an abrupt connection release by sending a `RST` segment to close the connection [AW05]_ and immediately discard the corresponding :term:`TCB`. However, if the `RST` segment is lost, the remote host continues to maintain a :term:`TCB` for a connection no longer exists. This optimisation reduces the number of TCBs maintained by the host sending the `RST` segment but at the potential cost of increased processing on the remote host when the `RST` segment is lost.
 
-.. tuning timewait http://publib.boulder.ibm.com/infocenter/wasinfo/v7r0/index.jsp?topic=/com.ibm.websphere.edge.doc/cp/admingd45.htm bad idea
+.. tuning timewait https://www.ibm.com/support/knowledgecenter/SSAW57_7.0.0/as_ditamaps/welcome_nd.html bad idea
 
 .. note TCP RST attacks  Explain TCP reset and the risks of attacks rfc4953
 
@@ -536,7 +536,7 @@ The `TIME\_WAIT` state is different from the other states of the TCP FSM. A TCP 
 
 .. [#ftcpspecs] A detailed presentation of all standardisation documents concerning TCP may be found in :rfc:`4614`
 
-.. [#ftcpusage] Several researchers have analysed the utilisation of TCP and UDP in the global Internet. Most of these studies have been performed by collecting all the packets transmitted over a given link during a period of a few hours or days and then analysing their headers to infer the transport protocol used, the type of application, ... Recent studies include http://www.caida.org/research/traffic-analysis/tcpudpratio/, https://research.sprintlabs.com/packstat/packetoverview.php or http://www.nanog.org/meetings/nanog43/presentations/Labovitz_internetstats_N43.pdf
+.. [#ftcpusage] Several researchers have analysed the utilisation of TCP and UDP in the global Internet. Most of these studies have been performed by collecting all the packets transmitted over a given link during a period of a few hours or days and then analysing their headers to infer the transport protocol used, the type of application, ... Recent studies include http://www.caida.org/research/traffic-analysis/tcpudpratio/ or https://www.nanog.org/meetings/nanog43/presentations/Labovitz_internetstats_N43.pdf
 
 .. [#ftcpclock] This 32 bits counter was specified in :rfc:`793`. A 32 bits counter that is incremented every 4 microseconds wraps in about 4.5 hours. This period is much larger than the Maximum Segment Lifetime that is fixed at 2 minutes in the Internet (:rfc:`791`, :rfc:`1122`).
 
@@ -547,7 +547,7 @@ The `TIME\_WAIT` state is different from the other states of the TCP FSM. A TCP 
 
 .. [#fspoofing] Sending a packet with a different source IP address than the address allocated to the host is called sending a :term:`spoofed packet`.
 
-.. [#ftcpoptions] The full list of all TCP options may be found at http://www.iana.org/assignments/tcp-parameters/
+.. [#ftcpoptions] The full list of all TCP options may be found at https://www.iana.org/assignments/tcp-parameters
 
 .. [#fackflag] In practice, only the `SYN` segment do not have their `ACK` flag set.
 
@@ -560,7 +560,7 @@ The `TIME\_WAIT` state is different from the other states of the TCP FSM. A TCP 
 
 .. [#faveragebandwidth] A precise estimation of the maximum bandwidth that can be achieved by a TCP connection should take into account the overhead of the TCP and IP headers as well.
 
-.. [#ftcphosts] See http://fasterdata.es.net/tuning.html for more information on how to tune a TCP implementation
+.. [#ftcphosts] See http://fasterdata.es.net/fasterdata/host-tuning/ for more information on how to tune a TCP implementation
 
 .. [#frttmes] In theory, a TCP implementation could store the timestamp of each data segment transmitted and compute a new estimate for the round-trip-time upon reception of the corresponding acknowledgement. However, using such frequent measurements introduces a lot of noise in practice and many implementations still measure the round-trip-time once per round-trip-time by recording the transmission time of one segment at a time :rfc:`2988`
 
