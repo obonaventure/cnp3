@@ -44,8 +44,8 @@ The forwarding paths used in a network depend on the forwarding tables installed
        \node[ftable, right=of R2] (FR2) { \begin{tabular}{l|l} 
        Dest. & Port \\
        \hline 
-       A & E \\
-       B & S-E \\
+       A & W \\
+       B & S-W \\
        \end{tabular}\\};
        \node[router,below=of R1] (R3) {R3};
        \node[ftable, below=of R3] (FR3) { \begin{tabular}{l|l} 

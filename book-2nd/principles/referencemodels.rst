@@ -85,7 +85,7 @@ The Transport layer
 
 Most realisations of the network layer, including the internet, do not provide a reliable service. However, many applications need to exchange information reliably and so using the network layer service directly would be very difficult for them. Ensuring the reliable delivery of the data produced by applications is the task of the `transport layer`. `Transport layer` entities exchange `segments`. A segment is a finite sequence of bytes that are transported inside one or more packets. A transport layer entity issues segments (or sometimes part of segments) as `Data.request` to the underlying network layer entity. 
 
-There are different types of transport layers. The most widely used transport layers on the Internet are :term:`TCP` ,that provides a reliable connection-oriented bytestream transport service, and :term:`UDP` ,that provides an unreliable connection-less transport service.
+There are different types of transport layers. The most widely used transport layers on the Internet are :term:`TCP`, that provides a reliable connection-oriented bytestream transport service, and :term:`UDP`, that provides an unreliable connection-less transport service.
 
 
 .. figure:: /../book/intro/svg/intro-figures-030-c.png

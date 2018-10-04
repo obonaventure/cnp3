@@ -120,14 +120,14 @@ This count to infinity problem occurs because router `A` advertises to router `D
 
  Every N seconds: 
   # one vector for each interface
-  for l in interfaces:
+  for i in interfaces:
     v=Vector()
     for d in R[]:
       if (R[d].link != l) :
       	 v=v+Pair(d,R[d.cost])
     send(v)
     # end for d in R[]
-  #end for l in interfaces  
+  #end for i in interfaces  
 
 
 This technique is called `split-horizon`. With this technique, the count to infinity problem would not have happened in the above scenario, as router `A` would have advertised :math:`[A=0]`, since it learned all its other routes via router `D`. Another variant called `split-horizon with poison reverse` is also possible.  Routers using this variant advertise a cost of :math:`\infty` for the destinations that they reach via the router to which they send the distance vector. This can be implemented by using the pseudo-code below.
@@ -135,7 +135,7 @@ This technique is called `split-horizon`. With this technique, the count to infi
 .. code-block:: python
 
  Every N seconds: 
-  for l in interfaces:
+  for i in interfaces:
     # one vector for each interface
     v=Vector()
     for d in R[]:
@@ -145,7 +145,7 @@ This technique is called `split-horizon`. With this technique, the count to infi
          v=v+Pair(d,infinity);
     send(v)
     # end for d in R[]
-  #end for l in interfaces  
+  #end for i in interfaces  
 
 Unfortunately, split-horizon, is not sufficient to avoid all count to infinity problems with distance vector routing. Consider the failure of link `A-B` in the network of four routers below.
 

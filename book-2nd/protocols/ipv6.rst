@@ -44,7 +44,7 @@ In the next chapter, we describe the organisation and the operation of Local Are
 
 The third type of datalink layers are used in Non-Broadcast Multi-Access (NBMA) networks. These networks are used to interconnect devices like a LAN. All devices attached to an NBMA network are identified by a unique datalink layer address. However, and this is the main difference between an NBMA network and a traditional LAN, the NBMA service only supports unicast. The datalink layer service provided by an NBMA network supports neither broadcast nor multicast.
 
-Unfortunately no datalink layer is able to send frames of unlimited side. Each datalink layer is characterised by a maximum frame size. There are more than a dozen different datalink layers and unfortunately most of them use a different maximum frame size. The network layer must cope with the heterogeneity of the datalink layer.
+Unfortunately no datalink layer is able to send frames of unlimited size. Each datalink layer is characterised by a maximum frame size. There are more than a dozen different datalink layers and unfortunately most of them use a different maximum frame size. The network layer must cope with the heterogeneity of the datalink layer.
 
 
 IP version 6
@@ -457,7 +457,7 @@ The last type of `IPv6 header extension` is the `Routing`header. The ``type 0`` 
    The Type 0 routing header (:rfc:`2460`)
 
 
-The type 0 routing option was intended to allow a host to indicate a loose source route that should be followed by a packet by specifying the addresses of some of the routers that must forward this packet. Unfortunately, further work with this routing header, including an entertaining demonstration with scapy_ [BE2007]_ , revealed severe security problems with this routing header. For this reason, loose source routing with the type 0 routing header has been removed from the IPv6 specification :rfc:`5095`.
+The type 0 routing option was intended to allow a host to indicate a loose source route that should be followed by a packet by specifying the addresses of some of the routers that must forward this packet. Unfortunately, further work with this routing header, including an entertaining demonstration with scapy_ [BE2007]_, revealed severe security problems with this routing header. For this reason, loose source routing with the type 0 routing header has been removed from the IPv6 specification :rfc:`5095`.
 
 
 .. _ICMPv6:
@@ -521,7 +521,7 @@ The `Packet Too Big` ICMP messages enable the source endhost to discover the MTU
 
 If ``A`` sends a 1500 bytes packet, ``R1`` will return an ICMPv6 error message indicating a maximum packet length of 1400 bytes. ``A`` would then fragment the packet before retransmitting it. The small fragment would go through, but the large fragment will be refused by ``R2`` that would return an ICMPv6 error message. ``A`` can refragment the packet and send it to the final destination as two fragments.
 
-In practice, an IPv6 implementation does not store the transmitted packets to be able to retransmit them if needed. However, since TCP (and SCTP) buffer the segments that they transmit, a similar approach can be used in transport protocols to detect the maximum MTU on a path towards a given destination. This technique is called PathMTU Discovery :rfc:`1981`.
+In practice, an IPv6 implementation does not store the transmitted packets to be able to retransmit them if needed. However, since TCP (and SCTP) buffer the segments that they transmit, a similar approach can be used in transport protocols to detect the maximum MTU on a path towards a given destination. This technique is called Path MTU Discovery :rfc:`1981`.
 
 .. index:: Path MTU discovery
 
