@@ -504,7 +504,7 @@ If two hosts are competing, the algorithm above will avoid a second collision 50
 	stop transmitting
 	send(jamming)
 	k = min (10, N)
-	r = random(0, 2**k - 1) 
+	r = random(0, 2^k - 1) 
 	wait(r*slotTime)
 	N=N+1
     else :	
@@ -947,7 +947,7 @@ A congestion control scheme for our simple transport protocol could be implement
       # no increase
   
    Congestion detected: 
-      cwnd=cwin/2 # only once per rtt
+      cwin=cwin/2 # only once per rtt
 
 
 

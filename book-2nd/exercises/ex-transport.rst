@@ -119,7 +119,7 @@ Open questions
      b>>c [ label = "DATA(seq=1123,abcdef)", arcskip="1"];
      |||;
 
-8. A network layer service guarantees that network will never live during more than 100 seconds inside the network. A reliable connection-oriented transport protocol places a 32 bits sequence number inside each segment. What is the maximum rate (in segments per second) at which is should sent data segments to prevent having two segments with the same sequence number inside the network ?
+8. A network layer service guarantees that a packet will never live during more than 100 seconds inside the network. A reliable connection-oriented transport protocol places a 32 bits sequence number inside each segment. What is the maximum rate (in segments per second) at which is should send data segments to prevent having two segments with the same sequence number inside the network ?
 
 
 

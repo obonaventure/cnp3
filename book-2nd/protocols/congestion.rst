@@ -57,8 +57,8 @@ Most TCP implementations update the congestion window when they receive an ackno
        cwnd = cwnd + MSS
      else:
        # congestion avoidance : increase slowly cwnd
-       # increase cwnd by one mss every rtt
-       cwnd = cwnd+ mss*(mss/cwnd)
+       # increase cwnd by one MSS every rtt
+       cwnd = cwnd+ MSS*(MSS/cwnd)
    else: # duplicate or old ack
      if tcp.ack==snd.una:    # duplicate acknowledgement
        dupacks++
@@ -71,7 +71,7 @@ Most TCP implementations update the congestion window when they receive an ackno
   
    Expiration of the retransmission timer:
     send(snd.una)     # retransmit first lost segment
-    sshtresh=max(cwnd/2,2*MSS)
+    ssthresh=max(cwnd/2,2*MSS)
     cwnd=MSS
   
  
@@ -172,7 +172,7 @@ Modeling TCP congestion control
 
 Thanks to its congestion control scheme, TCP adapts its transmission rate to the losses that occur in the network. Intuitively, the TCP transmission rate decreases when the percentage of losses increases. Researchers have proposed detailed models that allow the prediction of the throughput of a TCP connection when losses occur [MSMO1997]_ . To have some intuition about the factors that affect the performance of TCP, let us consider a very simple model. Its assumptions are not completely realistic, but it gives us good intuition without requiring complex mathematics.
 
-This model considers a hypothetical TCP connection that suffers from equally spaced segment losses. If :math:`p` is the segment loss ratio, then the TCP connection successfully transfers :math:`\frac{1}{p}-1` segments and the next segment is lost. If we ignore the slow-start at the beginning of the connection, TCP in this environment is always in congestion avoidance as there are only isolated losses that can be recovered by using fast retransmit. The evolution of the congestion window is thus as shown in the figure below. Note the that `x-axis` of this figure represents time measured in units of one round-trip-time, which is supposed to be constant in the model, and the `y-axis` represents the size of the congestion window measured in MSS-sized segments.
+This model considers a hypothetical TCP connection that suffers from equally spaced segment losses. If :math:`p` is the segment loss ratio, then the TCP connection successfully transfers :math:`\frac{1}{p}-1` segments and the next segment is lost. If we ignore the slow-start at the beginning of the connection, TCP in this environment is always in congestion avoidance as there are only isolated losses that can be recovered by using fast retransmit. The evolution of the congestion window is thus as shown in the figure below. Note that the `x-axis` of this figure represents time measured in units of one round-trip-time, which is supposed to be constant in the model, and the `y-axis` represents the size of the congestion window measured in MSS-sized segments.
 
 .. figure:: /../book/transport/png/transport-fig-089-c.png 
    :align: center
@@ -193,7 +193,7 @@ However, given the regular losses that we consider, the number of segments that 
 More detailed models and the analysis of simulations have shown that a first order model of the TCP throughput when losses occur was :math:`Throughput \approx \frac{k \times MSS}{rtt \times \sqrt{p}}`. This is an important result which shows that :
 
  - TCP connections with a small round-trip-time can achieve a higher throughput than TCP connections having a longer round-trip-time when losses occur. This implies that the TCP congestion control scheme is not completely fair since it favors the connections that have the shorter round-trip-time
- - TCP connections that use a large MSS can achieve a higher throughput that the TCP connections that use a shorter MSS. This creates another source of unfairness between TCP connections. However, it should be noted that today most hosts are using almost the same MSS, roughly 1460 bytes. 
+ - TCP connections that use a large MSS can achieve a higher throughput than the TCP connections that use a shorter MSS. This creates another source of unfairness between TCP connections. However, it should be noted that today most hosts are using almost the same MSS, roughly 1460 bytes. 
 
 In general, the maximum throughput that can be achieved by a TCP connection depends on its maximum window size and the round-trip-time if there are no losses. If there are losses, it depends on the MSS, the round-trip-time and the loss ratio.
 
