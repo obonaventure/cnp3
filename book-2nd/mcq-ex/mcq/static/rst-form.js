@@ -8,7 +8,7 @@ var translations = {
     },
     en: {
         score: 'You have a score of ',
-        inginious_success: 'Everything wen well',
+        inginious_success: 'Everything went well',
         request_fail: 'The request failed'
     }
 };

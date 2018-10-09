@@ -70,7 +70,7 @@ Multiple choice questions
 
    .. negative:: ``2001:db8:a:bb::cc:ddd::1``
 
-      ..comment:: This address is invalid. An IPv6 address cannot contain twice two consecutive semicolumns ``::``
+      .. comment:: This address is invalid. An IPv6 address cannot contain twice two consecutive semicolumns ``::``
 
    .. positive:: ``2001:db8:1234:1234:1234:5678::1``
 
@@ -739,7 +739,7 @@ The forwarding tables of these three routers, ignoring the routes to the local i
 
       .. code-block:: console 
 
-         00000001 00100000 10111000 00001101 010000000010011 1 10000001 11111100 
+         00000001 00100000 10111000 00001101 01000000 00100111 10000001 11111100 
          00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000001
 
       .. comment:: This is the binary representation for IPv6 address ``0120:80DB:4113:81FC::1``
@@ -983,9 +983,9 @@ The routers have one address inside each network :
 
 3. Consider the network below that contains only routers. This network has been configured by a group of students and you must verify whether the configuration is correct. All the IPv6 addresses are part of the same ``/48`` prefix that we name ``p``. The following subnets are defined in this ``/48`` prefix.
 
- - ``p:12/64`` for the link between ``R1`` and ``R2``. On this subnet, ``R1`` uses address ``p:12::1`` while router ``R2`` uses address ``p:12::2``
- - ``p:13/64`` for the link between ``R1`` and ``R3``. On this subnet, ``R1`` uses address ``p:13::1`` while router ``R3`` uses address ``p:13::3``
- - ``p:24/64`` for the link between ``R2`` and ``R4``. On this subnet, ``R2`` uses address ``p:24::2`` while router ``R4`` uses address ``p:24::4``
+ - ``p:12::/64`` for the link between ``R1`` and ``R2``. On this subnet, ``R1`` uses address ``p:12::1`` while router ``R2`` uses address ``p:12::2``
+ - ``p:13::/64`` for the link between ``R1`` and ``R3``. On this subnet, ``R1`` uses address ``p:13::1`` while router ``R3`` uses address ``p:13::3``
+ - ``p:24::/64`` for the link between ``R2`` and ``R4``. On this subnet, ``R2`` uses address ``p:24::2`` while router ``R4`` uses address ``p:24::4``
  - ...
 
      .. tikz::
