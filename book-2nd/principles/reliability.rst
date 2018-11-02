@@ -38,16 +38,19 @@ information over a physical link. We are only interested in techniques that allo
 
 .. note:: Bit rate
 
- In computer networks, the bit rate of the physical layer is always expressed in bits per second. One Mbps is one million bits per second and one Gbps is one billion bits per second. This is in contrast with memory specifications that are usually expressed in bytes (8 bits), KiloBytes ( 1024 bytes) or MegaBytes (1048576 bytes). Thus transferring one MByte through a 1 Mbps link lasts 8.39 seconds.
+ In computer networks, the bit rate of the physical layer is always expressed in bits per second. One Mbps is one million bits per second and one Gbps is one billion bits per second. When describing file or memory size, early computer scientists found it more convenient to express the information in bytes (8 bits), kilobytes (1024 bytes), megabytes (1048576 bytes) and so on. This led to confusion. For example, transferring one Mbyte through a 1Mbps link lasts 8.39 seconds. For a terabyte, the difference between these `binary` and the `normal`, decimal bases is already about 10%. Confusion can be avoided when using the so-called `binary prefixes <https://en.wikipedia.org/wiki/Binary_prefix>`_, naming 1024 bytes a `kibibyte` (kiB), 1048576 bytes a `mebibyte` (MiB), and so on.
 
-  ========        ===============
-  Bit rate        Bits per second
-  ========        ===============
-  1 Kbps	  :math:`10^3`
-  1 Mbps	  :math:`10^6`
-  1 Gbps	  :math:`10^9`
-  1 Tbps	  :math:`10^{12}`
-  ========        ===============
+
+  ========        ===============      ===========       ===============
+         Decimal prefixes                       Binary prefixes
+  -------------------------------      ---------------------------------
+  Bit rate        Bits per second      Memory size       Number of bytes
+  ========        ===============      ===========       ===============
+  1 kbps	  :math:`10^3`         1 kiB             :math:`1024^1=1,024`
+  1 Mbps	  :math:`10^6`         1 MiB             :math:`1024^2=1,048,576`
+  1 Gbps	  :math:`10^9`         1 GiB             :math:`1024^3=1,073,741,824`
+  1 Tbps	  :math:`10^{12}`      1 TiB             :math:`1024^4=1,099,511,627,776`
+  ========        ===============      ===========       ===============
 
 
 
