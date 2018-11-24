@@ -598,7 +598,7 @@ The forwarding paths used in a network depend on the forwarding tables installed
       .. comment:: The two paths ``A->B`` and ``B->A`` do not pass through the same routers.
 
 
-7. Consider again the same network with three routers as discussed earlier. Let us know explore how :manpage:`traceroute6(8)` operates in such a network. A key point to remember about :manpage:`traceroute6(8)` is that when it returns an ICMP message, this message is sent inside a packet whose source is one of the addresses of the router and whose destination is the source address of the packet that triggered the generation of this ICMP message. In this network, the hosts have the following addresses :
+7. Consider again the same network with three routers as discussed earlier. Let us now explore how :manpage:`traceroute6(8)` operates in such a network. A key point to remember about :manpage:`traceroute6(8)` is that when it returns an ICMP message, this message is sent inside a packet whose source is one of the addresses of the router and whose destination is the source address of the packet that triggered the generation of this ICMP message. In this network, the hosts have the following addresses :
 
  - host ``A`` : ``2001:db8:1341:1::A`` and its default route points to ``2001:db8:1341:1::1``
  - host ``B`` : ``2001:db8:1341:3::B`` and its default route points to ``2001:db8:1341:3::3``
