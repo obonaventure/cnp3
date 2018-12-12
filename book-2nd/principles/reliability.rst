@@ -7,11 +7,11 @@
 Connecting two hosts
 ********************
 
-.. index:: electrical cable, optical fiber, multimode optical fiber, monomode optical fiber 
+.. index:: electrical cable, optical fiber, multimode optical fiber, monomode optical fiber
 
-.. warning:: 
+.. warning::
 
-   This is an unpolished draft of the second edition of this ebook. If you find any error or have suggestions to improve the text, please create an issue via https://github.com/obonaventure/cnp3/issues?milestone=1
+   This is an unpolished draft of the second edition of this ebook. If you find any errors or have suggestions to improve the text, please create an issue via https://github.com/obonaventure/cnp3/issues?milestone=1
 
 
 
@@ -20,25 +20,25 @@ The first step when building a network, even a worldwide network such as the Int
  .. figure:: figures/twohosts.png
     :align: center
     :scale: 70
-   
+
     Connecting two hosts together
 
-To enable the two hosts to exchange information, they need to be linked together by some kind of physical media. Computer networks have used various types of physical media to exchange information, notably :
+To enable the two hosts to exchange information, they need to be linked together by some kind of physical medium. Computer networks have used various types of physical media to exchange information, notably :
 
  - `electrical cable`. Information can be transmitted over different types of electrical cables. The most common ones are the twisted pairs (that are used in the telephone network, but also in enterprise networks) and the coaxial cables (that are still used in cable TV networks, but are no longer used in enterprise networks). Some networking technologies operate over the classical electrical cable.
- - `optical fiber`. Optical fibers are frequently used in public and enterprise networks when the distance between the communication devices is larger than one kilometer. There are two main types of optical fibers : multimode and monomode. Multimode is much cheaper than monomode fiber because a LED can be used to send a signal over a multimode fiber while a monomode fiber must be driven by a laser. Due to the different modes of propagation of light, monomode fibers are limited to distances of a few kilometers while multimode fibers can be used over distances greater than several tens of kilometers. In both cases, repeaters can be used to regenerate the optical signal at one endpoint of a fiber to send it over another fiber. 
+ - `optical fiber`. Optical fibers are frequently used in public and enterprise networks when the distance between the communication devices is larger than one kilometer. There are two main types of optical fibers : multimode and monomode. Multimode is much cheaper than monomode fiber because a LED can be used to send a signal over a multimode fiber while a monomode fiber must be driven by a laser. Due to the different modes of propagation of light, monomode fibers are limited to distances of a few kilometers while multimode fibers can be used over distances greater than several tens of kilometers. In both cases, repeaters can be used to regenerate the optical signal at one endpoint of a fiber to send it over another fiber.
  - `wireless`. In this case, a radio signal is used to encode the information exchanged between the communicating devices. Many types of modulation techniques are used to send information over a wireless channel and there is lot of innovation in this field with new techniques appearing every year. While most wireless networks rely on radio signals, some use a laser that sends light pulses to a remote detector. These optical techniques allow to create point-to-point links while radio-based techniques, depending on the directionality of the antennas, can be used to build networks containing devices spread over a small geographical area.
 
 
 The physical layer
 ==================
 
-These physical media can be used to exchange information once this information has been converted into a suitable electrical signal. Entire telecommunication courses and textbooks are devoted to the problem of converting analog or digital information into an electrical signal so that it can be transmitted over a given physical `link`. In this book, we only consider two very simple schemes that allow to transmit information over an electrical cable. This enables us to highlight the key problems when transmitting 
-information over a physical link. We are only interested in techniques that allow to transmit digital information through the wire and will focus on the transmission of bits, i.e. either `0` or `1`. 
+These physical media can be used to exchange information once this information has been converted into a suitable electrical signal. Entire telecommunication courses and textbooks are devoted to the problem of converting analog or digital information into an electrical signal so that it can be transmitted over a given physical `link`. In this book, we only consider two very simple schemes that allow to transmit information over an electrical cable. This enables us to highlight the key problems when transmitting
+information over a physical link. We are only interested in techniques that allow to transmit digital information through the wire and will focus on the transmission of bits, i.e. either `0` or `1`.
 
 .. note:: Bit rate
 
- In computer networks, the bit rate of the physical layer is always expressed in bits per second. One Mbps is one million bits per second and one Gbps is one billion bits per second. This is in contrast with memory specifications that are usually expressed in bytes (8 bits), KiloBytes ( 1024 bytes) or MegaBytes (1048576 bytes). Thus transferring one MByte through a 1 Mbps link lasts 8.39 seconds.
+ In computer networks, the bit rate of the physical layer is always expressed in bits per second. One Mbps is one million bits per second and one Gbps is one billion bits per second. This is in contrast with memory specifications which are usually expressed in bytes (8 bits), KiloBytes ( 1024 bytes) or MegaBytes (1048576 bytes). Thus transferring one MByte through a 1 Mbps link takes 8.39 seconds.
 
   ========        ===============
   Bit rate        Bits per second
@@ -56,10 +56,10 @@ To understand some of the principles behind the physical transmission of informa
  - On the sender side :
     - set the voltage on the electrical wire at ``+5V`` during one millisecond to transmit a bit set to `1`
     - set the voltage on the electrical wire at ``-5V`` during one millisecond to transmit a bit set to `0`
-   
+
  - On the receiver side :
     - every millisecond, record the voltage applied on the electrical wire. If the voltage is set to ``+5V``, record the reception of bit `1`. Otherwise, record the reception of bit `0`
-  
+
 .. index:: time-sequence diagram
 
 This transmission scheme has been used in some early networks. We use it as a basis to understand how hosts communicate.  From a Computer Science viewpoint, dealing with voltages is unusual. Computer scientists frequently rely on models that enable them to reason about the issues that they face without having to consider all implementation details. The physical transmission scheme described above can be represented by using a `time-sequence diagram`.
@@ -82,7 +82,7 @@ A `time-sequence diagram` describes the interactions between communicating hosts
 Time-sequence diagrams are usual when trying to understand the characteristics of a given communication scheme. When considering the above transmission scheme, is it useful to evaluate whether this scheme allows the two communicating hosts to reliably exchange information ? A digital transmission will be considered as reliable when a sequence of bits that is transmitted by a host is received correctly at the other end of the wire. In practice, achieving perfect reliability when transmitting information using the above scheme is difficult. Several problems can occur with such a transmission scheme.
 
 
-The first problem is that electrical transmission can be affected by electromagnetic interferences. These interferences can have various sources including natural phenomenons like thunderstorms, variations of the magnetic field, but also can be caused by interference with other electrical signals such as interference from neighboring cables, interferences from neighboring antennas, ... Due to all these interferences, there is unfortunately no guarantee that when a host transmit one bit on a wire, the same bit is received at the other end. This is illustrated in the figure below where a `DATA.request(0)` on the left host leads to a `Data.indication(1)` on the right host. 
+The first problem is that electrical transmission can be affected by electromagnetic interferences. These interferences can have various sources including natural phenomenons like thunderstorms, variations of the magnetic field, but also can be caused by interference with other electrical signals such as interference from neighboring cables, interferences from neighboring antennas, ... Due to all these interferences, there is unfortunately no guarantee that when a host transmits one bit on a wire, the same bit is received at the other end. This is illustrated in the figure below where a `DATA.request(0)` on the left host leads to a `DATA.indication(1)` on the right host.
 
 
   .. msc::
@@ -157,7 +157,7 @@ Many other types of encodings have been defined to transmit information over an 
  .. figure:: ../../book/lan/png/lan-fig-006-c.png
     :align: center
     :scale: 70
-   
+
     Manchester encoding
 
 
@@ -171,7 +171,7 @@ Many other types of encodings have been defined to transmit information over an 
 
    The Physical layer
 
-All the functions related to the physical transmission or information through a wire (or a wireless link) are usually known as the `physical layer`. The physical layer allows thus two or more entities that are directly attached to the same transmission medium to exchange bits. Being able to exchange bits is important as virtually any information can be encoded as a sequence of bits. Electrical engineers are used to processing streams of bits, but computer scientists usually prefer to deal with higher level concepts. A similar issue arises with file storage. Storage devices such as hard-disks also store streams of bits. There are hardware devices that process the bit stream produced by a hard-disk, but computer scientists have designed filesystems to allow applications to easily access such storage devices. These filesystems are typically divided into several layers as well. Hard-disks store sectors of 512 bytes or more. Unix filesystems group sectors in larger blocks that can contain data or `inodes` representing the structure of the filesystem. Finally, applications manipulate files and directories that are translated in blocks, sectors and eventually bits by the operating system.
+All the functions related to the physical transmission of information through a wire (or a wireless link) are usually known as the `physical layer`. The physical layer allows thus two or more entities that are directly attached to the same transmission medium to exchange bits. Being able to exchange bits is important as virtually any information can be encoded as a sequence of bits. Electrical engineers are used to processing streams of bits, but computer scientists usually prefer to deal with higher level concepts. A similar issue arises with file storage. Storage devices such as hard-disks also store streams of bits. There are hardware devices that process the bit stream produced by a hard-disk, but computer scientists have designed filesystems to allow applications to easily access such storage devices. These filesystems are typically divided into several layers as well. Hard-disks store sectors of 512 bytes or more. Unix filesystems group sectors in larger blocks that can contain data or `inodes` representing the structure of the filesystem. Finally, applications manipulate files and directories that are translated in blocks, sectors and eventually bits by the operating system.
 
 .. index:: Datalink layer, frame
 
@@ -183,7 +183,7 @@ The datalink layer
 
 .. index:: frame
 
-Computer scientists are usually not interested in exchanging bits between two hosts. They prefer to write software that deals with larger blocks of data in order to transmit messages or complete files. Thanks to the physical layer service, it is possible to send a continuous stream of bits between two hosts. This stream of bits can include logical blocks of data, but we need to be able to extract each block of data from the bit stream despite the imperfections of the physical layer. In many networks, the basic unit of information exchanged between two directly connected hosts is often called a `frame`. A `frame` can be defined has a sequence of bits that has a particular syntax or structure. We will see examples of such frames later in this chapter. 
+Computer scientists are usually not interested in exchanging bits between two hosts. They prefer to write software that deals with larger blocks of data in order to transmit messages or complete files. Thanks to the physical layer service, it is possible to send a continuous stream of bits between two hosts. This stream of bits can include logical blocks of data, but we need to be able to extract each block of data from the bit stream despite the imperfections of the physical layer. In many networks, the basic unit of information exchanged between two directly connected hosts is often called a `frame`. A `frame` can be defined as a sequence of bits that has a particular syntax or structure. We will see examples of such frames later in this chapter.
 
 To enable the transmission/reception of frames, the first problem to be solved is how to encode a frame as a sequence of bits, so that the receiver can easily recover the received frame despite the limitations of the physical layer.
 
@@ -195,9 +195,9 @@ If the physical layer were perfect, the problem would be very simple. We would s
 Framing
 -------
 
-The `framing` problem can be defined as : "`How does a sender encode frames so that the receiver can efficiently extract them from the stream of bits that it receives from the physical layer`". 
+The `framing` problem can be defined as : "`How does a sender encode frames so that the receiver can efficiently extract them from the stream of bits that it receives from the physical layer`".
 
-A first solution to this problem is to require the physical layer to remain idle for some time after the transmission of each frame. These idle periods can be detected by the receiver and serve as a marker to delineate frame boundaries. Unfortunately, this solution is not acceptable for two reasons. First, some physical layers cannot remain idle and always need to transmit bits. Second, inserting an idle period between frames decreases the maximum bit rate that can be achieved. 
+A first solution to this problem is to require the physical layer to remain idle for some time after the transmission of each frame. These idle periods can be detected by the receiver and serve as a marker to delineate frame boundaries. Unfortunately, this solution is not acceptable for two reasons. First, some physical layers cannot remain idle and always need to transmit bits. Second, inserting an idle period between frames decreases the maximum bit rate that can be achieved.
 
 .. note:: Bit rate and bandwidth
 
@@ -217,19 +217,19 @@ Given that multi-symbol encodings cannot be used by all physical layers, a gener
  0110111111111111111110010     01111110011011111011111011111011001001111110
  01111110		       0111111001111101001111110
  ===========================   =============================================
- 
+
 
 For example, consider the transmission of `0110111111111111111110010`. The sender will first send the `01111110` marker followed by `011011111`. After these five consecutive bits set to `1`, it inserts a bit set to `0` followed by `11111`. A new `0` is inserted, followed by `11111`. A new `0` is inserted followed by the end of the frame `110010` and the `01111110` marker.
 
 
-`Bit stuffing` increases the number of bits required to transmit each frame. The worst case for bit stuffing is of course a long sequence of bits set to `1` inside the frame. If transmission errors occur, stuffed bits or markers can be in error. In these cases, the frame affected by the error and possibly the next frame will not be correctly decoded by the receiver, but it will be able to resynchronize itself at the next valid marker. 
+`Bit stuffing` increases the number of bits required to transmit each frame. The worst case for bit stuffing is of course a long sequence of bits set to `1` inside the frame. If transmission errors occur, stuffed bits or markers can be in error. In these cases, the frame affected by the error and possibly the next frame will not be correctly decoded by the receiver, but it will be able to resynchronize itself at the next valid marker.
 
 
 .. index:: character stuffing, stuffing (character)
 
 `Bit stuffing` can be easily implemented in hardware. However, implementing it in software is difficult given the complexity of performing bit manipulations in software. Software implementations prefer to process characters than bits, software-based datalink layers usually use `character stuffing`. This technique operates on frames that contain an integer number of characters. In computer networks, characters are usually encoded by relying on the :term:`ASCII` table. This table defines the encoding of various alphanumeric characters as a sequence of bits. :rfc:`20` provides the ASCII table that is used by many protocols on the Internet. For example, the table defines the following binary representations :
 
- - `A` : `1000011` b 
+ - `A` : `1000011` b
  - `0` : `0110000` b
  - `z` : `1111010` b
  - `@` : `1000000` b
@@ -256,11 +256,11 @@ Some characters are used as markers to delineate the frame boundaries. Many `cha
  **DLE STX DLE ETX**	                      `DLE STX` **DLE** `DLE` **STX** **DLE** `DLE` ETX** `DLE ETX`
  ===========================================  ===============================================================
 
-`Character stuffing` , like bit stuffing, increases the length of the transmitted frames. For `character stuffing`, the worst frame is a frame containing many `DLE` characters. When transmission errors occur, the receiver may incorrectly decode one or two frames (e.g. if the errors occur in the markers). However, it will be able to resynchronise itself with the next correctly received markers.
+`Character stuffing`, like bit stuffing, increases the length of the transmitted frames. For `character stuffing`, the worst frame is a frame containing many `DLE` characters. When transmission errors occur, the receiver may incorrectly decode one or two frames (e.g. if the errors occur in the markers). However, it will be able to resynchronize itself with the next correctly received markers.
 
 
 
-Bit stuffing and character stuffing allow to recover frames from a stream of bits or bytes. This framing mechanism provides a richer service than the physical layer. Through the framing service, one can send and receive complete frames. This framing service can also be represented by using the `DATA.request` and `DATA.indication` primitives. This is illustrated in the figure below, assuming hypothetical frames containing four useful bit and one bit of framing for graphical reasons.
+Bit stuffing and character stuffing allow to recover frames from a stream of bits or bytes. This framing mechanism provides a richer service than the physical layer. Through the framing service, one can send and receive complete frames. This framing service can also be represented by using the `DATA.request` and `DATA.indication` primitives. This is illustrated in the figure below, assuming hypothetical frames containing four useful bits and one bit of framing for graphical reasons.
 
   .. msc::
 
@@ -288,13 +288,13 @@ Bit stuffing and character stuffing allow to recover frames from a stream of bit
       cf=>d [ label = "DATA.ind(1...1)", textcolour=red ];
 
 
-We can now build upon the framing mechanism to allow the hosts to exchange frames containing an integer number of bits or bytes. Once the framing problem has been solved, we can focus on designing a technique that allows to reliably exchange frames. 
+We can now build upon the framing mechanism to allow the hosts to exchange frames containing an integer number of bits or bytes. Once the framing problem has been solved, we can focus on designing a technique that allows to reliably exchange frames.
 
 
 Recovering from transmission errors
 -----------------------------------
- 
-In this section, we develop a reliable datalink protocol running above the physical layer service. To design this protocol, we first assume that the physical layer provides a perfect service. We will then develop solutions to recover from the transmission errors. 
+
+In this section, we develop a reliable datalink protocol running above the physical layer service. To design this protocol, we first assume that the physical layer provides a perfect service. We will then develop solutions to recover from the transmission errors.
 
 .. Reliable data transfer above a perfect physical service
 .. ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -303,7 +303,7 @@ The datalink layer is designed to send and receive frames on behalf of a user. W
 
  - the interactions between the user and the datalink layer entity are represented by using the classical `DATA.req` and the `DATA.ind` primitives
  - the interactions between the datalink layer entity and the framing sublayer are represented by using `send` instead of `DATA.req` and `recvd` instead of `DATA.ind`
- 
+
 When running on top of a perfect framing sublayer, a datalink entity can simply issue a `send(SDU)` upon arrival of a `DATA.req(SDU)` [#fsdu]_ .Similarly, the receiver issues a `DATA.ind(SDU)` upon receipt of a `recvd(SDU)`. Such a simple protocol is sufficient when a single SDU is sent. This is illustrated in the figure below.
 
 
@@ -322,17 +322,17 @@ When running on top of a perfect framing sublayer, a datalink entity can simply 
 
 .. .. figure:: ../../book/transport/svg/transport-fig-004.png
    :align: center
-   :scale: 70 
+   :scale: 70
 
    The simplest reliable protocol
 
 
-Unfortunately, this is not always sufficient to ensure a reliable delivery of the SDUs. Consider the case where a client sends tens of SDUs to a server. If the server is faster that the client, it will be able to receive and process all the segments sent by the client and deliver their content to its user. However, if the server is slower than the client, problems may arise. The datalink entity contains buffers to store SDUs that have been received as a `Data.request` but have not yet been sent. If the application is faster than the physical link, the buffer may become full. At this point, the operating system suspends the application to let the datalink entity empty its transmission queue. The datalink entity also uses a buffer to store the received frames that have not yet been processed by the application. If the application is slow to process the data, this buffer may overflow and the datalink entity will not able to accept any additional frame. The buffers of the datalink entity have a limited size and if they overflow, the arriving frames will be discarded, even if they are correct.
+Unfortunately, this is not always sufficient to ensure a reliable delivery of the SDUs. Consider the case where a client sends tens of SDUs to a server. If the server is faster that the client, it will be able to receive and process all the segments sent by the client and deliver their content to its user. However, if the server is slower than the client, problems may arise. The datalink entity contains buffers to store SDUs that have been received as a `DATA.request` but have not yet been sent. If the application is faster than the physical link, the buffer may become full. At this point, the operating system suspends the application to let the datalink entity empty its transmission queue. The datalink entity also uses a buffer to store the received frames that have not yet been processed by the application. If the application is slow to process the data, this buffer may overflow and the datalink entity will not able to accept any additional frames. The buffers of the datalink entity have a limited size and if they overflow, the arriving frames will be discarded, even if they are correct.
 
 To solve this problem, a reliable protocol must include a feedback mechanism that allows the receiver to inform the sender that it has processed a frame and that another one can be sent. This feedback is required even though there are no transmission errors. To include such a feedback, our reliable protocol must process two types of frames :
 
- - data frames carrying a SDU
- - control frames carrying an acknowledgment indicating that the previous frames was processed correctly
+ - data frames carrying an SDU
+ - control frames carrying an acknowledgment indicating that the previous frames were processed correctly
 
 These two types of frames can be distinguished by dividing the frame in two parts :
 
@@ -344,7 +344,7 @@ The datalink entity can then be modelled as a finite state machine, containing t
 ..
   .. digraph:: sender
 	rankdir=LR;
-	node [shape = circle label="Wait\nfor\nSDU"] Wait_SDU; 
+	node [shape = circle label="Wait\nfor\nSDU"] Wait_SDU;
 	node [shape = circle label="Wait\nfor\n\OK"] Wait_OK;
 	Wait_SDU -> Wait_OK[label= <<TABLE BORDER="0" CELLBORDER="0">
                        <TR>
@@ -357,12 +357,12 @@ The datalink entity can then be modelled as a finite state machine, containing t
                     </TABLE>>];
 
 
-..	Wait_OK -> Wait_SDU [label=<<font color="blue">recvd(C(OK))</font><br/>=======<br/>>]; 
+..	Wait_OK -> Wait_SDU [label=<<font color="blue">recvd(C(OK))</font><br/>=======<br/>>];
 
 ..
  .. digraph:: receiver
 	rankdir=LR;
-	node [shape=circle label=<Wait<br/>for<br/>frame>] Wait_frame; 
+	node [shape=circle label=<Wait<br/>for<br/>frame>] Wait_frame;
 	node [shape=circle label=<Process<br/>SDU>] Process_SDU;
 	Process_SDU -> Wait_frame [label= <<TABLE BORDER="0" CELLBORDER="0">
                        <TR>
@@ -383,14 +383,14 @@ The datalink entity can then be modelled as a finite state machine, containing t
                        </TR>
                     </TABLE>>];
 
-.. /<br/><font color="blue">send(C(OK))</font>>]; 
+.. /<br/><font color="blue">send(C(OK))</font>>];
 
 
 ..	Wait_frame -> Process_SDU [label=<
 ..	<font color="blue">recvd(D(SDU))</font>
 ..	<br/>=========<br/>
 ..	<font color="red">DATA.ind(SDU)</font>
-..	>]; 
+..	>];
 
 
 
@@ -398,7 +398,7 @@ The datalink entity can then be modelled as a finite state machine, containing t
 
 .. figure:: ../../book/transport/png/transport-fig-008-c.png
    :align: center
-   :scale: 60 
+   :scale: 60
 
    Finite state machine of the simplest reliable protocol
 
@@ -433,7 +433,7 @@ The above FSM shows that the sender has to wait for an acknowledgement from the 
 
 .. The `Datalink layer` builds on the service provided by the underlying physical layer. The `Datalink layer` allows two hosts that are directly connected through the physical layer to exchange information. The unit of information exchanged between two entities in the `Datalink layer` is a frame. A frame is a finite sequence of bits. Some `Datalink layers` use variable-length frames while others only use fixed-length frames. Some `Datalink layers` provide a connection-oriented service while others provide a connectionless service. Some `Datalink layers` provide reliable delivery while others do not guarantee the correct delivery of the information.
 
-.. An important point to note about the `Datalink layer` is that although the figure below indicates that two entities of the `Datalink layer` exchange frames directly, in reality this is slightly different. When the `Datalink layer` entity on the left needs to transmit a frame, it issues as many `Data.request` primitives to the underlying `physical layer` as there are bits in the frame. The physical layer will then convert the sequence of bits in an electromagnetic or optical signal that will be sent over the physical medium. The `physical layer` on the right hand side of the figure will decode the received signal, recover the bits and issue the corresponding `Data.indication` primitives to its `Datalink layer` entity. If there are no transmission errors, this entity will receive the frame sent earlier. 
+.. An important point to note about the `Datalink layer` is that although the figure below indicates that two entities of the `Datalink layer` exchange frames directly, in reality this is slightly different. When the `Datalink layer` entity on the left needs to transmit a frame, it issues as many `Data.request` primitives to the underlying `physical layer` as there are bits in the frame. The physical layer will then convert the sequence of bits in an electromagnetic or optical signal that will be sent over the physical medium. The `physical layer` on the right hand side of the figure will decode the received signal, recover the bits and issue the corresponding `Data.indication` primitives to its `Datalink layer` entity. If there are no transmission errors, this entity will receive the frame sent earlier.
 
 .. The datalink layer uses the service provided by the physical layer. Although there are many different implementations of the physical layer from a technological perspective, they all provide a service that enables the datalink layer to send and receive bits between directly connected devices. The datalink layer receives packets from the network layer. Two datalink layer entities exchange `frames`. As explained in the previous chapter, most datalink layer technologies impose limitations on the size of the frames. Some technologies only impose a maximum frame size, others enforce both minimum and maximum frames sizes and finally some technologies only support a single frame size. In the latter case, the datalink layer will usually include an adaptation sublayer to allow the network layer to send and receive variable-length packets. This adaptation layer may include fragmentation and reassembly mechanisms.
 
@@ -445,13 +445,13 @@ The above FSM shows that the sender has to wait for an acknowledgement from the 
 Reliable data transfer on top of an imperfect link
 --------------------------------------------------
 
-The datalink layer must deal with the transmission errors. In practice, we mainly have to deal with two types of errors in the datalink layer : 
+The datalink layer must deal with the transmission errors. In practice, we mainly have to deal with two types of errors in the datalink layer :
 
- - Frames can be corrupted by transmission errors 
+ - Frames can be corrupted by transmission errors
  - Frames can be lost or unexpected frames can appear
 
 
-A first glance, loosing frames might seem strange on single link. However, if we take framing into account, transmission errors can affect the frame delineation mechanism and make the frame unreadable. For the same reason, a receiver could receive two (likely invalid) frames after a sender has transmitted a single frame.
+At first glance, losing frames might seem strange on single link. However, if we take framing into account, transmission errors can affect the frame delineation mechanism and make the frame unreadable. For the same reason, a receiver could receive two (likely invalid) frames after a sender has transmitted a single frame.
 
 To deal with these types of imperfections, reliable protocols rely on different types of mechanisms. The first problem is transmission errors. Data transmission on a physical link can be affected by the following errors :
 
@@ -473,17 +473,17 @@ The only solution to protect against transmission errors is to add redundancy to
 ..  - `1` is encoded as `111`
 ..  - `0` is encoded as `000`
 
-.. For example, consider a sender that sends `111`. If there is one bit in error, the receiver could receive `011` or `101` or `110`. In these three cases, the receiver will decode the received bit pattern as a `1` since it contains a majority of bits set to `1`. If there are two bits in error, the receiver will not be able anymore to recover from the transmission error. 
+.. For example, consider a sender that sends `111`. If there is one bit in error, the receiver could receive `011` or `101` or `110`. In these three cases, the receiver will decode the received bit pattern as a `1` since it contains a majority of bits set to `1`. If there are two bits in error, the receiver will not be able anymore to recover from the transmission error.
 
 .. This simple coding scheme forces the sender to transmit three bits for each source bit. However, it allows the receiver to correct single bit errors. More advanced coding systems that allow to recover from errors are used in several types of physical layers.
 
 
-Besides framing, datalink layers also include mechanisms to detect and sometimes even recover from transmission errors. To allow a receiver to detect transmission errors, a sender must add some redundant information as an `error detection` code to the frame sent. This `error detection` code is computed by the sender on the frame that it transmits. When the receiver receives a frame with an error detection code, it recomputes it and verifies whether the received `error detection code` matches the computer `error detection code`. If they match, the frame is considered to be valid. Many error detection schemes exist and entire books have been written on the subject. A detailed discussion of these techniques is outside the scope of this book, and we will only discuss some examples to illustrate the key principles.
+Besides framing, datalink layers also include mechanisms to detect and sometimes even recover from transmission errors. To allow a receiver to detect transmission errors, a sender must add some redundant information as an `error detection` code to the frame sent. This `error detection` code is computed by the sender on the frame that it transmits. When the receiver receives a frame with an error detection code, it recomputes it and verifies whether the received `error detection code` matches the computed `error detection code`. If they match, the frame is considered to be valid. Many error detection schemes exist and entire books have been written on the subject. A detailed discussion of these techniques is outside the scope of this book, and we will only discuss some examples to illustrate the key principles.
 
-To understand `error detection codes`, let us consider two devices that exchange bit strings containing `N` bits. To allow the receiver to detect a transmission error, the sender converts each string of `N` bits into a string of `N+r` bits. Usually, the `r` redundant bits are added at the beginning or the end of the transmitted bit string, but some techniques interleave redundant bits with the original bits. An `error detection code` can be defined as a function that computes the `r` redundant bits corresponding to each string of `N` bits. The simplest error detection code is the parity bit. There are two types of parity schemes : even and odd parity. With the `even` (resp. `odd`) parity scheme, the redundant bit is chosen so that an even (resp. odd) number of bits are set to `1` in the transmitted bit string of `N+r` bits. The receiver can easily recompute the parity of each received bit string and discard the strings with an invalid parity. The parity scheme is often used when 7-bit characters are exchanged. In this case, the eighth bit is often a parity bit. The table below shows the parity bits that are computed for bit strings containing three bits. 
+To understand `error detection codes`, let us consider two devices that exchange bit strings containing `N` bits. To allow the receiver to detect a transmission error, the sender converts each string of `N` bits into a string of `N+r` bits. Usually, the `r` redundant bits are added at the beginning or the end of the transmitted bit string, but some techniques interleave redundant bits with the original bits. An `error detection code` can be defined as a function that computes the `r` redundant bits corresponding to each string of `N` bits. The simplest error detection code is the parity bit. There are two types of parity schemes : even and odd parity. With the `even` (resp. `odd`) parity scheme, the redundant bit is chosen so that an even (resp. odd) number of bits are set to `1` in the transmitted bit string of `N+r` bits. The receiver can easily recompute the parity of each received bit string and discard the strings with an invalid parity. The parity scheme is often used when 7-bit characters are exchanged. In this case, the eighth bit is often a parity bit. The table below shows the parity bits that are computed for bit strings containing three bits.
 
   ====================    ==========   	   ===========
-  3 bits string		  Odd parity	   Even parity	 
+  3 bits string		  Odd parity	   Even parity
   ====================    ==========	   ===========
   000	     		  1		   0
   001			  0		   1
@@ -495,9 +495,9 @@ To understand `error detection codes`, let us consider two devices that exchange
   011			  1		   0
   ====================    ==========       ===========
 
-The parity bit allows a receiver to detect transmission errors that have affected a single bit among the transmitted `N+r` bits. If there are two or more bits in error, the receiver may not necessarily be able to detect the transmission error. More powerful error detection schemes have been defined. The Cyclical Redundancy Checks (CRC) are widely used in datalink layer protocols. An N-bits CRC can detect all transmission errors affecting a burst of less than N bits in the transmitted frame and all transmission errors that affect an odd number of bits. Additional details about CRCs may be found in [Williams1993]_.
+The parity bit allows a receiver to detect transmission errors that have affected a single bit among the transmitted `N+r` bits. If there are two or more bits in error, the receiver may not necessarily be able to detect the transmission error. More powerful error detection schemes have been defined. The Cyclical Redundancy Checks (CRC) are widely used in datalink layer protocols. An `N`-bit CRC can detect all transmission errors affecting a burst of less than `N` bits in the transmitted frame and all transmission errors that affect an odd number of bits. Additional details about CRCs may be found in [Williams1993]_.
 
-It is also possible to design a code that allows the receiver to correct transmission errors. The simplest `error correction code` is the triple modular redundancy (TMR). To transmit a bit set to `1` (resp. `0`), the sender transmits `111` (resp. `000`). When there are no transmission errors, the receiver can decode `111` as `1`. If transmission errors have affected a single bit, the receiver performs majority voting as shown in the table below. This scheme allows the receiver to correct all transmission errors that affect a single bit. 
+It is also possible to design a code that allows the receiver to correct transmission errors. The simplest `error correction code` is the triple modular redundancy (TMR). To transmit a bit set to `1` (resp. `0`), the sender transmits `111` (resp. `000`). When there are no transmission errors, the receiver can decode `111` as `1`. If transmission errors have affected a single bit, the receiver performs majority voting as shown in the table below. This scheme allows the receiver to correct all transmission errors that affect a single bit.
 
   ====================    =============
   Received bits           Decoded bit
@@ -512,21 +512,21 @@ It is also possible to design a code that allows the receiver to correct transmi
 	 011			1
   ====================    =============
 
-Other more powerful error correction codes have been proposed and are used in some applications. The `Hamming Code <http://en.wikipedia.org/wiki/Hamming_code>`_ is a clever combination of parity bits that provides error detection and correction capabilities. 
+Other more powerful error correction codes have been proposed and are used in some applications. The `Hamming Code <http://en.wikipedia.org/wiki/Hamming_code>`_ is a clever combination of parity bits that provides error detection and correction capabilities.
 
 
 Reliable protocols use error detection schemes, but none of the widely used reliable protocols rely on error correction schemes. To detect errors, a frame is usually divided into two parts :
 
  - a `header` that contains the fields used by the reliable protocol to ensure reliable delivery. The header contains a checksum or Cyclical Redundancy Check (CRC) [Williams1993]_ that is used to detect transmission errors
- - a `payload` that contains the user data 
+ - a `payload` that contains the user data
 
-Some headers also include a `length` field, which indicates the total length of the frame or the length of the payload. 
+Some headers also include a `length` field, which indicates the total length of the frame or the length of the payload.
 
 The simplest error detection scheme is the checksum. A checksum is basically an arithmetic sum of all the bytes that a frame is composed of. There are different types of checksums. For example, an eight bit checksum can be computed as the arithmetic sum of all the bytes of (both the header and trailer of) the frame. The checksum is computed by the sender before sending the frame and the receiver verifies the checksum upon frame reception. The receiver discards frames received with an invalid checksum. Checksums can be easily implemented in software, but their error detection capabilities are limited. Cyclical Redundancy Checks (CRC) have better error detection capabilities [SGP98]_, but require more CPU when implemented in software.
 
 .. note:: Checksums, CRCs, ...
 
-   Most of the protocols in the TCP/IP protocol suite rely on the simple Internet checksum in order to verify that a received packet has not been affected by transmission errors. Despite its popularity and ease of implementation, the Internet checksum is not the only available checksum mechanism. Cyclical Redundancy Checks (CRC_) are very powerful error detection schemes that are used notably on disks, by many datalink layer protocols and file formats such as zip or png. They can easily be implemented efficiently in hardware and have better error-detection capabilities than the Internet checksum [SGP98]_ . However, CRCs are sometimes considered to be too CPU-intensive for software implementations and other checksum mechanisms are preferred. The TCP/IP community chose the Internet checksum, the OSI community chose the Fletcher checksum [Sklower89]_ . Nowadays there are efficient techniques to quickly compute CRCs in software [Feldmeier95]_
+   Most of the protocols in the TCP/IP protocol suite rely on the simple Internet checksum in order to verify that a received packet has not been affected by transmission errors. Despite its popularity and ease of implementation, the Internet checksum is not the only available checksum mechanism. Cyclical Redundancy Checks (CRC_) are very powerful error detection schemes that are used notably on disks, by many datalink layer protocols and file formats such as zip or png. They can easily be implemented efficiently in hardware and have better error-detection capabilities than the Internet checksum [SGP98]_ . However, CRCs are sometimes considered to be too CPU-intensive for software implementations and other checksum mechanisms are preferred. The TCP/IP community chose the Internet checksum, the OSI community chose the Fletcher checksum [Sklower89]_ . Nowadays there are efficient techniques to quickly compute CRCs in software [Feldmeier95]_ .
 
 .. , the SCTP protocol initially chose the Adler-32 checksum but replaced it recently with a CRC (see :rfc:`3309`).
 
@@ -538,7 +538,7 @@ The simplest error detection scheme is the checksum. A checksum is basically an 
 .. tcp offload engine http://www.10gea.org/tcp-ip-offload-engine-toe.htm
 .. stcp used Adler-32 but it now uses CRC :rfc:`3309`
 
-.. The second imperfection of the network layer is that segments may be lost. As we will see later, the main cause of packet losses in the network layer is the lack of buffers in intermediate routers. 
+.. The second imperfection of the network layer is that segments may be lost. As we will see later, the main cause of packet losses in the network layer is the lack of buffers in intermediate routers.
 
 Since the receiver sends an acknowledgement after having received each data frame, the simplest solution to deal with losses is to use a retransmission timer. When the sender sends a frame, it starts a retransmission timer. The value of this retransmission timer should be larger than the `round-trip-time`, i.e. the delay between the transmission of a data frame and the reception of the corresponding acknowledgement. When the retransmission timer expires, the sender assumes that the data segment has been lost and retransmits it. This is illustrated in the figure below.
 
@@ -554,7 +554,7 @@ Since the receiver sends an acknowledgement after having received each data fram
       a=>b [ label = "DATA.req(a)\nstart timer" ] ,
       b>>c [ label = "D(a)", arcskip="1"];
       c=>d [ label = "DATA.ind(a)" ];
-      c>>b [label= "C(OK)", arcskip="1"]; 
+      c>>b [label= "C(OK)", arcskip="1"];
       b->a [linecolour=white, label="cancel timer"];
       |||;
       a=>b [ label = "DATA.req(b)\nstart timer" ] ,
@@ -581,13 +581,13 @@ Unfortunately, retransmission timers alone are not sufficient to recover from lo
       a=>b [ label = "DATA.req(a)\nstart timer" ] ,
       b>>c [ label = "D(a)", arcskip="1"];
       c=>d [ label = "DATA.ind(a)" ];
-      c>>b [label= "C(OK)", arcskip="1"]; 
+      c>>b [label= "C(OK)", arcskip="1"];
       b->a [linecolour=white, label="cancel timer"];
       |||;
       a=>b [ label = "DATA.req(b)\nstart timer" ] ,
       b>>c [ label = "D(b)", arcskip="1"];
       c=>d [ label = "DATA.ind(b)" ];
-      c-x b [label= "C(OK)", linecolour=red, arcskip="1"]; 
+      c-x b [label= "C(OK)", linecolour=red, arcskip="1"];
       |||;
       a=>b [ linecolour=white, label = "timer expires" ] ,
       b>>c [ label = "D(b)", arcskip="1"];
@@ -599,7 +599,7 @@ Unfortunately, retransmission timers alone are not sufficient to recover from lo
 
 .. index:: sequence number
 
-To solve this problem, datalink protocols associate a `sequence number` to each data frame. This `sequence number` is one of the fields found in the header of data frames. We use the notation `D(x,...)` to indicate a data frame whose sequence number field is set to value `x`. The acknowledgements also contain a sequence number indicating the data frames that it is acknowledging. We use `OKx` to indicate an acknowledgement frame that confirms the reception of `D(x,...)`. The sequence number is encoded as a bit string of fixed length. The simplest reliable protocol is the Alternating Bit Protocol (ABP). 
+To solve this problem, datalink protocols associate a `sequence number` to each data frame. This `sequence number` is one of the fields found in the header of data frames. We use the notation `D(x,...)` to indicate a data frame whose sequence number field is set to value `x`. The acknowledgements also contain a sequence number indicating the data frames that it is acknowledging. We use `OKx` to indicate an acknowledgement frame that confirms the reception of `D(x,...)`. The sequence number is encoded as a bit string of fixed length. The simplest reliable protocol is the Alternating Bit Protocol (ABP).
 
 .. index:: Alternating Bit Protocol
 
@@ -609,19 +609,19 @@ The Alternating Bit Protocol uses a single bit to encode the sequence number. It
 
 .. figure:: ../../book/transport/svg/transport-fig-021.png
    :align: center
-   :scale: 80 
+   :scale: 80
 
    Alternating bit protocol : Sender FSM
 
 
-The initial state of the sender is `Wait for D(0,...)`. In this state, the sender waits for a `Data.request`. The first data frame that it sends uses sequence number `0`. After having sent this frame, the sender waits for an `OK0` acknowledgement. A frame is retransmitted upon expiration of the retransmission timer or if an acknowledgement with an incorrect sequence number has been received.
+The initial state of the sender is `Wait for D(0,...)`. In this state, the sender waits for a `DATA.request`. The first data frame that it sends uses sequence number `0`. After having sent this frame, the sender waits for an `OK0` acknowledgement. A frame is retransmitted upon expiration of the retransmission timer or if an acknowledgement with an incorrect sequence number has been received.
 
 The receiver first waits for `D(0,...)`. If the frame contains a correct `CRC`, it passes the SDU to its user and sends `OK0`. If the frame contains an invalid CRC, it is immediately discarded. Then, the receiver waits for `D(1,...)`. In this state, it may receive a duplicate `D(0,...)` or a data frame with an invalid CRC. In both cases, it returns an `OK0` frame to allow the sender to recover from the possible loss of the previous `OK0` frame.
 
 
 .. figure:: ../../book/transport/svg/transport-fig-022.png
    :align: center
-   :scale: 70 
+   :scale: 70
 
    Alternating bit protocol : Receiver FSM
 
@@ -645,7 +645,7 @@ The figure below illustrates the operation of the alternating bit protocol.
       a=>b [ label = "DATA.req(a)\nstart timer" ] ,
       b>>c [ label = "D(0,a)", arcskip="1"];
       c=>d [ label = "DATA.ind(a)" ];
-      c>>b [label= "C(OK0)", arcskip="1"]; 
+      c>>b [label= "C(OK0)", arcskip="1"];
       b->a [linecolour=white, label="cancel timer"];
       |||;
       a=>b [ label = "DATA.req(b)\nstart timer" ];
@@ -674,7 +674,7 @@ The Alternating Bit Protocol can recover from the losses of data or control fram
       a=>b [ label = "DATA.req(a)\nstart timer" ] ,
       b>>c [ label = "D(0,a)", arcskip="1"];
       c=>d [ label = "DATA.ind(a)" ];
-      c>>b [label= "C(OK0)", arcskip="1"]; 
+      c>>b [label= "C(OK0)", arcskip="1"];
       b->a [linecolour=white, label="cancel timer"];
       |||;
       a=>b [ label = "DATA.req(b)\nstart timer" ] ,
@@ -707,7 +707,7 @@ And the loss of one control frame.
       a=>b [ label = "DATA.req(b)\nstart timer" ] ,
       b>>c [ label = "D(1,b)", arcskip="1"];
       c=>d [ label = "DATA.ind(b)" ];
-      c-x b [label= "C(OK1)", linecolour=red, arcskip="1"]; 
+      c-x b [label= "C(OK1)", linecolour=red, arcskip="1"];
       |||;
       a=>b [ linecolour=white, label = "timer expires" ] ,
       b>>c [ label = "D(1,b)", arcskip="1"];
@@ -715,19 +715,19 @@ And the loss of one control frame.
       c>>b [label= "C(OK1)", arcskip="1"];
       |||;
 
-.. 
+..
    note:: Random errors versus malicious modifications
-   The protocols of the transport layer are designed to recover from the random errors and losses that may occur in the underlying layers. There random errors are caused by 
+   The protocols of the transport layer are designed to recover from the random errors and losses that may occur in the underlying layers. There random errors are caused by
    see [SPMR09]_ for how to recompute a CRC
    Checksums and CRCs should not be confused with hash functions such as MD5 defined in :rfc:`1321` or `SHA-1 <http://www.itl.nist.gov/fipspubs/fip180-1.htm>`_ .
 
 
-The Alternating Bit Protocol can recover from transmission errors and frame losses. However, it has one important drawback. Consider two hosts that are directly connected by a 50 Kbits/sec satellite link that has a 250 milliseconds propagation delay. If these hosts send 1000 bits frames, then the maximum throughput that can be achieved by the alternating bit protocol is one frame every :math:`20+250+250=520` milliseconds if we ignore the transmission time of the acknowledgement. This is less than 2 Kbits/sec ! 
+The Alternating Bit Protocol can recover from transmission errors and frame losses. However, it has one important drawback. Consider two hosts that are directly connected by a 50 Kbits/sec satellite link that has a 250 milliseconds propagation delay. If these hosts send 1000 bits frames, then the maximum throughput that can be achieved by the alternating bit protocol is one frame every :math:`20+250+250=520` milliseconds if we ignore the transmission time of the acknowledgement. This is less than 2 Kbits/sec !
 
-.. 
+..
   figure:: ../../book/transport/png/transport-fig-024-c.png
   :align: center
-  :scale: 70 
+  :scale: 70
   Performance of the alternating bit protocol
 
 
@@ -738,28 +738,28 @@ To overcome the performance limitations of the alternating bit protocol, reliabl
 
 .. figure:: figures/png/pipelining.png
    :align: center
-   :scale: 70 
+   :scale: 70
 
    Pipelining improves the performance of reliable protocols
 
-`Pipelining` allows the sender to transmit frames at a higher rate. However this higher transmission rate may overload the receiver. In this case, the frames sent by the sender will not be correctly received by their final destination. The reliable protocols that rely on pipelining allow the sender to transmit `W` unacknowledged frames before being forced to wait for an acknowledgement from the receiving entity. 
+`Pipelining` allows the sender to transmit frames at a higher rate. However this higher transmission rate may overload the receiver. In this case, the frames sent by the sender will not be correctly received by their final destination. The reliable protocols that rely on pipelining allow the sender to transmit `W` unacknowledged frames before being forced to wait for an acknowledgement from the receiving entity.
 
-This is implemented by using a `sliding window`. The sliding window is the set of consecutive sequence numbers that the sender can use when transmitting frames without being forced to wait for an acknowledgement. The figure below shows a sliding window containing five segments (`6,7,8,9` and `10`). Two of these sequence numbers (`6` and `7`) have been used to send frames and only three sequence numbers (`8`, `9` and `10`) remain in the sliding window. The sliding window is said to be closed once all sequence numbers contained in the sliding window have been used. 
+This is implemented by using a `sliding window`. The sliding window is the set of consecutive sequence numbers that the sender can use when transmitting frames without being forced to wait for an acknowledgement. The figure below shows a sliding window containing five segments (`6,7,8,9` and `10`). Two of these sequence numbers (`6` and `7`) have been used to send frames and only three sequence numbers (`8`, `9` and `10`) remain in the sliding window. The sliding window is said to be closed once all sequence numbers contained in the sliding window have been used.
 
 .. figure:: figures/png/slidingwin.png
    :align: center
-   :scale: 70 
+   :scale: 70
 
-   The sliding window 
+   The sliding window
 
 The figure below illustrates the operation of the sliding window. It uses a sliding window of three frames. The sender can thus transmit three frames before being forced to wait for an acknowledgement. The sliding window moves to the higher sequence numbers upon the reception of each acknowledgement. When the first acknowledgement (`OK0`) is received, it allows the sender to move its sliding window to the right and sequence number `3` becomes available. This sequence number is used later to transmit the frame containing `d`.
 
 
 .. figure:: figures/png/gbnwin.png
    :align: center
-   :scale: 70 
+   :scale: 70
 
-   Sliding window example 
+   Sliding window example
 
 
 In practice, as the frame header includes an `n` bits field to encode the sequence number, only the sequence numbers between :math:`0` and :math:`2^{n}-1` can be used. This implies that, during a long transfer, the same sequence number will be used for different frames and the sliding window will wrap. This is illustrated in the figure below assuming that `2` bits are used to encode the sequence number in the frame header. Note that upon reception of `OK1`, the sender slides its window and can use sequence number `0` again.
@@ -767,29 +767,29 @@ In practice, as the frame header includes an `n` bits field to encode the sequen
 
 .. figure:: figures/png/gbnwinex.png
    :align: center
-   :scale: 70 
+   :scale: 70
 
    Utilisation of the sliding window with modulo arithmetic
 
 .. index:: go-back-n
 
 
-Unfortunately, frame losses do not disappear because a reliable protocol uses a sliding window. To recover from losses, a sliding window protocol must define : 
+Unfortunately, frame losses do not disappear because a reliable protocol uses a sliding window. To recover from losses, a sliding window protocol must define :
 
- - a heuristic to detect frame losses 
+ - a heuristic to detect frame losses
  - a `retransmission strategy` to retransmit the lost frames
 
 
 .. index:: cumulative acknowledgements
 
-The simplest sliding window protocol uses the `go-back-n` recovery. Intuitively, `go-back-n` operates as follows. A `go-back-n` receiver is as simple as possible. It only accepts the frames that arrive in-sequence. A `go-back-n` receiver discards any out-of-sequence frame that it receives. When `go-back-n` receives a data frame, it always returns an acknowledgement containing the sequence number of the last in-sequence frame that it has received. This acknowledgement is said to be `cumulative`. When a `go-back-n` receiver sends an acknowledgement for sequence number `x`, it implicitly acknowledges the reception of all frames whose sequence number is earlier than `x`. A key advantage of these cumulative acknowledgements is that it is easy to recover from the loss of an acknowledgement. Consider for example a `go-back-n` receiver that received frames `1`, `2` and `3`. It sent `OK1`, `OK2` and `OK3`. Unfortunately, `OK1` and `OK2` were lost. Thanks to the cumulative acknowledgements, when the receiver receives `OK3`, it knows that all three frames have been correctly received. 
+The simplest sliding window protocol uses the `go-back-n` recovery. Intuitively, `go-back-n` operates as follows. A `go-back-n` receiver is as simple as possible. It only accepts the frames that arrive in-sequence. A `go-back-n` receiver discards any out-of-sequence frame that it receives. When `go-back-n` receives a data frame, it always returns an acknowledgement containing the sequence number of the last in-sequence frame that it has received. This acknowledgement is said to be `cumulative`. When a `go-back-n` receiver sends an acknowledgement for sequence number `x`, it implicitly acknowledges the reception of all frames whose sequence number is earlier than `x`. A key advantage of these cumulative acknowledgements is that it is easy to recover from the loss of an acknowledgement. Consider for example a `go-back-n` receiver that received frames `1`, `2` and `3`. It sent `OK1`, `OK2` and `OK3`. Unfortunately, `OK1` and `OK2` were lost. Thanks to the cumulative acknowledgements, when the receiver receives `OK3`, it knows that all three frames have been correctly received.
 
-The figure below shows the FSM of a simple `go-back-n` receiver. This receiver uses two variables : `lastack` and `next`. `next` is the next expected sequence number and `lastack` the sequence number of the last data frame that has been acknowledged. The receiver only accepts the frame that are received in sequence. `maxseq` is the number of different sequence numbers (:math:`2^n`).
+The figure below shows the FSM of a simple `go-back-n` receiver. This receiver uses two variables : `lastack` and `next`. `next` is the next expected sequence number and `lastack` the sequence number of the last data frame that has been acknowledged. The receiver only accepts the frames that are received in sequence. `maxseq` is the number of different sequence numbers (:math:`2^n`).
 
 
 .. figure:: figures/png/gbn-rec.png
    :align: center
-   :scale: 70 
+   :scale: 70
 
    Go-back-n : receiver FSM
 
@@ -799,7 +799,7 @@ A `go-back-n` sender is also very simple. It uses a sending buffer that can stor
 
 .. figure:: figures/png/gbn-sender.png
    :align: center
-   :scale: 70 
+   :scale: 70
 
    Go-back-n : sender FSM
 
@@ -808,13 +808,13 @@ The operation of `go-back-n` is illustrated in the figure below. In this figure,
 
 .. figure:: figures/png/gbnex.png
    :align: center
-   :scale: 70 
+   :scale: 70
 
    Go-back-n : example
 
 
 The main advantage of `go-back-n` is that it can be easily implemented, and it can also provide good performance when only a few frames are lost. However, when there are many losses, the performance of `go-back-n` quickly drops for two reasons :
- 
+
  - the `go-back-n` receiver does not accept out-of-sequence frames
  - the `go-back-n` sender retransmits all unacknowledged frames once it has detected a loss
 
@@ -826,9 +826,9 @@ A `selective repeat` receiver maintains a sliding window of `W` frames and store
 
 .. figure:: figures/png/selrepeatwin.png
    :align: center
-   :scale: 70 
+   :scale: 70
 
-   The receiving window with selective repeat 
+   The receiving window with selective repeat
 
 A `selective repeat` receiver discards all frames having an invalid CRC, and maintains the variable `lastack` as the sequence number of the last in-sequence frame that it has received. The receiver always includes the value of `lastack` in the acknowledgements that it sends. Some protocols also allow the `selective repeat` receiver to acknowledge the out-of-sequence frames that it has received. This can be done for example by placing the list of the correctly received, but out-of-sequence frames in the acknowledgements together with the `lastack` value.
 
@@ -840,9 +840,9 @@ The figure below illustrates the operation of `selective repeat` when frames are
 
 .. figure:: figures/png/selrepeat.png
    :align: center
-   :scale: 70 
+   :scale: 70
 
-   Selective repeat : example 
+   Selective repeat : example
 
 .. index:: selective acknowledgements
 
@@ -850,12 +850,12 @@ Pure cumulative acknowledgements work well with the `go-back-n` strategy. Howeve
 
 .. ..figure:: png/manque
       :align: center
-      :scale: 70 
+      :scale: 70
 
-..   TODO : SACK Selective repeat : example 
+..   TODO : SACK Selective repeat : example
 
 
-In the figure above, when the sender receives `C(OK,0,[2])`, it knows that all frames up to and including `D(0,...)` have been correctly received. It also knows that frame `D(2,...)` has been received and can cancel the retransmission timer associated to this frame. However, this frame should not be removed from the sending buffer before the reception of a cumulative acknowledgement (`C(OK,2)` in the figure above) that covers this frame. 
+In the figure above, when the sender receives `C(OK,0,[2])`, it knows that all frames up to and including `D(0,...)` have been correctly received. It also knows that frame `D(2,...)` has been received and can cancel the retransmission timer associated to this frame. However, this frame should not be removed from the sending buffer before the reception of a cumulative acknowledgement (`C(OK,2)` in the figure above) that covers this frame.
 
 .. note:: Maximum window size with `go-back-n` and `selective repeat`
 
@@ -870,7 +870,7 @@ In the figure above, when the sender receives `C(OK,0,[2])`, it knows that all f
 
 .. .. figure:: ../../book/transport/svg/transport-fig-039.png
      :align: center
-     :scale: 90 
+     :scale: 90
 
       Dynamic receiving window
 
@@ -878,7 +878,7 @@ In the figure above, when the sender receives `C(OK,0,[2])`, it knows that all f
 
 .. .. figure:: ../../book/transport/png/transport-fig-040-c.png
       :align: center
-      :scale: 70 
+      :scale: 70
 
       Risk of deadlock with dynamic windows
 
@@ -895,7 +895,7 @@ In the figure above, when the sender receives `C(OK,0,[2])`, it knows that all f
 ..
  .. figure:: png/transport-fig-041-c.png
     :align: center
-    :scale: 70 
+    :scale: 70
 
     Ambiguities caused by excessive delays
 
@@ -907,9 +907,9 @@ In the figure above, when the sender receives `C(OK,0,[2])`, it knows that all f
 
 Reliable protocols often need to send data in both directions. To reduce the overhead caused by the acknowledgements, most reliable protocols use `piggybacking`. Thanks to this technique, a datalink entity can place the acknowledgements and the receive window that it advertises for the opposite direction of the data flow inside the header of the data frames that it sends. The main advantage of piggybacking is that it reduces the overhead as it is not necessary to send a complete frame to carry an acknowledgement. This is illustrated in the figure below where the acknowledgement number is underlined in the data frames. Piggybacking is only used when data flows in both directions. A receiver will generate a pure acknowledgement when it does not send data in the opposite direction as shown in the bottom of the figure.
 
-.. figure:: figures/png/piggyback.png 
+.. figure:: figures/png/piggyback.png
    :align: center
-   :scale: 70 
+   :scale: 70
 
    Piggybacking example
 
@@ -917,7 +917,7 @@ Reliable protocols often need to send data in both directions. To reduce the ove
 
 .. [#fsdu] SDU is the acronym of Service Data Unit. We use it as a generic term to represent the data that is transported by a protocol.
 
-.. [#fsizesliding] The size of the sliding window can be either fixed for a given protocol or negotiated during the connection establishment phase. Some protocols allow to change the maximum window size during the data transfert. We will explain these techniques with real protocols later. 
+.. [#fsizesliding] The size of the sliding window can be either fixed for a given protocol or negotiated during the connection establishment phase. Some protocols allow to change the maximum window size during the data transfert. We will explain these techniques with real protocols later.
 
 .. .. [#fautotune] For a discussion on how the sending buffer can change, see e.g. [SMM1998]_
 
@@ -927,5 +927,3 @@ Reliable protocols often need to send data in both directions. To reduce the ove
 
 
 .. include:: /links.rst
-
-
