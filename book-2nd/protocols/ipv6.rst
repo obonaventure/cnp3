@@ -138,14 +138,14 @@ When considering the allocation of IPv6 addresses, two types of address allocati
  - ``/64`` for a single user (e.g. a home user connected via ADSL) 
  - ``/128`` in the rare case when it is known that no more than one endhost will be attached
 
-There is one difficulty with the utilisation of these IPv6 prefixes. Consider Belnet, the Belgian research  ISP that has been allocated the ``2001:6a8::/32`` prefix. Universities are connected to Belnet. UCL uses prefix ``2001:6a8:3080::/48`` while the University of Liege uses ``2001:6a8:2d80::/48``. A commercial ISP uses prefix ``2a02:2788::/32``. Both Belnet and the commercial ISP are connected to the global Internet. 
+There is one difficulty with the utilisation of these IPv6 prefixes. Consider Belnet, the Belgian research  ISP that has been allocated the ``2001:6a8::/32`` prefix. Universities are connected to Belnet. UCLouvain uses prefix ``2001:6a8:3080::/48`` while the University of Liege uses ``2001:6a8:2d80::/48``. A commercial ISP uses prefix ``2a02:2788::/32``. Both Belnet and the commercial ISP are connected to the global Internet. 
 
 .. graphviz:: 
 
   digraph G {
     graph[ compound=true];
     subgraph cluster_0 {
-        ucl [label="UCL\n2001:6a8:3080::/48"];
+        ucl [label="UCLouvain\n2001:6a8:3080::/48"];
 	ulg [label="ULg\n2001:6a8:2d80::/48"];
         label = "Belnet\n2001:6a8::/32";
     }
@@ -162,10 +162,10 @@ There is one difficulty with the utilisation of these IPv6 prefixes. Consider Be
 
 
 
-The Belnet network advertises prefix ``2001:6a8::/32`` that includes the prefixes from both UCL and ULg. These two subnetworks can be easily reached from any internet connected host. After a few years, UCL decides to increase the redundancy of its Internet connectivity and buys transit service from ISP1. A direct link between UCL and the commercial ISP appears on the network and UCL expects to receive packets from both Belnet and the commercial ISP.
+The Belnet network advertises prefix ``2001:6a8::/32`` that includes the prefixes from both UCLouvain and ULg. These two subnetworks can be easily reached from any internet connected host. After a few years, UCLouvain decides to increase the redundancy of its Internet connectivity and buys transit service from ISP1. A direct link between UCLouvain and the commercial ISP appears on the network and UCLouvain expects to receive packets from both Belnet and the commercial ISP.
 
 
-Now, consider how a router inside ``alpha.com`` would reach a host in the ``UCL`` network. This router has two routes towards ``2001:6a8:3080::1``. The first one, for prefix ``2001:6a8:3080::/48`` is via the direct link between the commercial ISP and UCL. The second one, for prefix ``2001:6a8::/32`` is via the Internet and Belnet. Since :rfc:`1519` when a router knows several routes towards the same destination address, it must forward packets along the route having the longest prefix length. In the case of ``2001:6a8:3080::1``, this is the route ``2001:6a8:3080::/48`` that is used to forward the packet. This forwarding rule is called the `longest prefix match` or the `more specific match`. All IP routers implement this forwarding rule.
+Now, consider how a router inside ``alpha.com`` would reach a host in the ``UCLouvain`` network. This router has two routes towards ``2001:6a8:3080::1``. The first one, for prefix ``2001:6a8:3080::/48`` is via the direct link between the commercial ISP and UCLouvain. The second one, for prefix ``2001:6a8::/32`` is via the Internet and Belnet. Since :rfc:`1519` when a router knows several routes towards the same destination address, it must forward packets along the route having the longest prefix length. In the case of ``2001:6a8:3080::1``, this is the route ``2001:6a8:3080::/48`` that is used to forward the packet. This forwarding rule is called the `longest prefix match` or the `more specific match`. All IP routers implement this forwarding rule.
 
 To understand the `longest prefix match` forwarding, consider the IPv6 routing below. 
 
@@ -180,12 +180,12 @@ To understand the `longest prefix match` forwarding, consider the IPv6 routing b
    2001:6a8::/32                        fe80::aaaa:bbbb 
 
 
-With the longest match rule, the route `::/0` plays a particular role. As this route has a prefix length of `0` bits, it matches all destination addresses. This route is often called the `default` route. 
+With the longest match rule, the route ``::/0`` plays a particular role. As this route has a prefix length of `0` bits, it matches all destination addresses. This route is often called the `default` route. 
 
  - a packet with destination ``2a02:2788:2c4:16f::1`` received by router `R` is destined to a host on interface ``eth0`` .
  - a packet with destination ``2001:6a8:3080::1234`` matches three routes : ``::/0``, ``2001:6a8::/32`` and ``2001:6a8:3080::/48``. The packet is forwarded via gateway ``fe80::bad:cafe``
  - a packet with destination ``2001:1890:123a::1:1e`` matches one route : ``::/0``. The packet is forwarded via ``fe80::dead:beef``
- - a packet with destination `2001:6a8:3880:40::2`` matches two routes : ``2001:6a8::/32`` and `::/0`. The packet is forwarded via ``fe80::aaaa:bbbb``
+ - a packet with destination ``2001:6a8:3880:40::2`` matches two routes : ``2001:6a8::/32`` and ``::/0``. The packet is forwarded via ``fe80::aaaa:bbbb``
 
 
 The longest prefix match can be implemented by using different data structures. One possibility is to use a trie. Details on how to implement efficient packet forwarding algorithms may be found in [Varghese2005]_.
@@ -315,7 +315,7 @@ For example, an IPv6 packet that contains an SCTP segment would appear as shown 
 
 .. _IPv6Options:
 
-However, the `Next header` has broader usages than simply indicating the transport protocol which is responsible for the packet payload. An IPv6 packet can contain a chain of headers and the last one indicates the transport protocol that is responsible for the packet payload. Supporting a chain of headers is a clever design from an extensibility viewpoint. As we will seen, this chain of headers has several usages. 
+However, the `Next header` has broader usages than simply indicating the transport protocol which is responsible for the packet payload. An IPv6 packet can contain a chain of headers and the last one indicates the transport protocol that is responsible for the packet payload. Supporting a chain of headers is a clever design from an extensibility viewpoint. As we will see, this chain of headers has several usages. 
 
 :rfc:`2460` defines several types of IPv6 extension headers that could be added to an IPv6 packet :
 
@@ -441,14 +441,14 @@ The fragments of an IPv6 packet may arrive at the destination in any order, as e
 
 The reassembly algorithm used by the destination host is roughly as follows. First, the destination can verify whether a received IPv6 packet is a fragment or not by checking whether it contains a fragment header. If so, all fragments with the some identification must be reassembled together. The reassembly algorithm relies on the `Identification` field of the received fragments to associate a fragment with the corresponding packet being reassembled. Furthermore, the `Fragment Offset` field indicates the position of the fragment payload in the original unfragmented packet. Finally, the packet with the `M` flag reset allows the destination to determine the total length of the original unfragmented packet.
 
-Note that the reassembly algorithm must deal with the unreliability of the IP network. This implies that a fragment may be duplicated or a fragment may never reach the destination. The destination can easily detect fragment duplication thanks to the `Fragment Offset`. To deal with fragment losses, the reassembly algorithm must bound the time during which the fragments of a packet are stored in its buffer while the packet is being reassembled. This can be implemented by starting a timer when the first fragment of a packet is received. If the packet has not been reassembled upon expiration of the timer, all fragments are discarded and the packet is considered to be lost. 
+Note that the reassembly algorithm must deal with the unreliability of the IP network. This implies that a fragment may be duplicated or a fragment may never reach the destination. The destination can easily detect fragment duplication thanks to the `Fragment Offset`. To deal with fragment losses, the reassembly algorithm must bind the time during which the fragments of a packet are stored in its buffer while the packet is being reassembled. This can be implemented by starting a timer when the first fragment of a packet is received. If the packet has not been reassembled upon expiration of the timer, all fragments are discarded and the packet is considered to be lost. 
 
 
 .. note:: Header compression on low bandwidth links
 
  Given the size of the IPv6 header, it can cause huge overhead on low bandwidth links, especially when small packets are exchanged such as for Voice over IP applications. In such environments, several techniques can be used to reduce the overhead. A first solution is to use data compression in the datalink layer to compress all the information exchanged [Thomborson1992]_. These techniques are similar to the data compression algorithms used in tools such as :manpage:`compress(1)` or :manpage:`gzip(1)` :rfc:`1951`. They compress streams of bits without taking advantage of the fact that these streams contain IP packets with a known structure. A second solution is to compress the IP and TCP header. These header compression techniques, such as the one defined in :rfc:`5795` take advantage of the redundancy found in successive packets from the same flow to significantly reduce the size of the protocol headers. Another solution is to define a compressed encoding of the IPv6 header that matches the capabilities of the underlying datalink layer :rfc:`4944`. 
 
-The last type of `IPv6 header extension` is the `Routing`header. The ``type 0`` routing header defined in :rfc:`2460` is an example of an IPv6 option that must be processed by some routers. This option is encoded as shown below.
+The last type of `IPv6 header extension` is the `Routing` header. The ``type 0`` routing header defined in :rfc:`2460` is an example of an IPv6 option that must be processed by some routers. This option is encoded as shown below.
 
 .. figure:: /../book/network/pkt/ipv6-routing-0.png
    :align: center
@@ -486,7 +486,7 @@ ICMPv6 specifies two classes of messages : error messages that indicate a proble
      - ``4`` : Port unreachable. This message indicates that the IPv6 packet was received by the destination, but there was no application listening to the specified port.
  - ``2`` : Packet Too Big. The router that was to send the ICMPv6 message received an IPv6 packet that is larger than the MTU of the outgoing link. The ICMPv6 message contains the MTU of this link in bytes. This allows the sending host to implement Path MTU discovery :rfc:`1981`
  - ``3`` : Time Exceeded. This error message can be sent either by a router or by a host. A router would set `code` to `0` to report the reception of a packet whose `Hop Limit` reached `0`. A host would set `code` to `1` to report that it was unable to reassemble received IPv6 fragments.
- - ``4`` : Parameter Problem. This ICMPv6 message is used to report either the reception of an IPv6 packet with an erroneous header field (type `0`) or an unknown `Next Header` or IP option (types `1` and `2`). In this case, the message body contains the erroneous IPv6 packet and the first 32 bits of the message body contain a pointer to the error.
+ - ``4`` : Parameter Problem. This ICMPv6 message is used to report either the reception of an IPv6 packet with an erroneous header field (code `0`) or an unknown `Next Header` or IP option (codes `1` and `2`). In this case, the message body contains the erroneous IPv6 packet and the first 32 bits of the message body contain a pointer to the error.
 
 
 The `Destination Unreachable` ICMP error message is returned when a packet cannot be forwarded to its final destination. The first four ICMPv6 error messages (type ``1``, codes ``0-3``)  are generated by routers while endhosts may return code ``4`` when there is no application bound to the corresponding port number.
@@ -521,7 +521,7 @@ The `Packet Too Big` ICMP messages enable the source endhost to discover the MTU
 
 If ``A`` sends a 1500 bytes packet, ``R1`` will return an ICMPv6 error message indicating a maximum packet length of 1400 bytes. ``A`` would then fragment the packet before retransmitting it. The small fragment would go through, but the large fragment will be refused by ``R2`` that would return an ICMPv6 error message. ``A`` can refragment the packet and send it to the final destination as two fragments.
 
-In practice, an IPv6 implementation does not store the transmitted packets to be able to retransmit them if needed. However, since TCP (and SCTP) buffer the segments that they transmit, a similar approach can be used in transport protocols to detect the maximum MTU on a path towards a given destination. This technique is called PathMTU Discovery :rfc:`1981`.
+In practice, an IPv6 implementation does not store the transmitted packets to be able to retransmit them if needed. However, since TCP (and SCTP) buffer the segments that they transmit, a similar approach can be used in transport protocols to detect the largest MTU on a path towards a given destination. This technique is called PathMTU Discovery :rfc:`1981`.
 
 .. index:: Path MTU discovery
 
@@ -532,7 +532,7 @@ ICMPv6 is used by TCP implementations to discover the largest MTU size that is a
 
 .. index:: ping6
 
-Two types of informational ICMPv6 messages are defined in :rfc:`4443` : `echo request` and `echo reply`, which are used to test the reachability of a destination by using :manpage:`ping6(8)`. Each host is supposed [#fpingproblems]_ to reply with an ICMP `Echo reply` message when its receives an  ICMP `Echo request` message. A sample usage of :manpage:`ping6(8)` is shown below.
+Two types of informational ICMPv6 messages are defined in :rfc:`4443` : `echo request` and `echo reply`, which are used to test the reachability of a destination by using :manpage:`ping6(8)`. Each host is supposed [#fpingproblems]_ to reply with an ICMP `Echo reply` message when it receives an  ICMP `Echo request` message. A sample usage of :manpage:`ping6(8)` is shown below.
 
 .. code-block:: console
   
