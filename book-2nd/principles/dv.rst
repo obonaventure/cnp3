@@ -25,7 +25,7 @@ A router that uses distance vector routing regularly sends its distance vector o
      v.add(Pair(d,R[d].cost))
   for i in interfaces
      # send vector v on this interface
-     send(v,interface)  
+     send(v,i)  
 
 
 When a router boots, it does not know any destination in the network and its routing table only contains itself. It thus sends to all its neighbours a distance vector that contains only its address at a distance of `0`. When a router receives a distance vector on link `l`, it processes it as follows.
