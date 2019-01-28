@@ -6,7 +6,7 @@
 Distance vector routing
 -----------------------
 
-Distance vector routing is a simple distributed routing protocol. Distance vector routing allows routers to automatically discover the destinations reachable inside the network as well as the shortest path to reach each of these destinations. The shortest path is computed based on `metrics` or `costs` that are associated to each link. We use `l.cost` to represent the metric that has been configured for link `l` on a router. 
+Distance vector routing is a simple distributed routing protocol. Distance vector routing allows routers to automatically discover the destinations reachable inside the network as well as the shortest path to reach each of these destinations. The shortest path is computed based on `metrics` or `costs` that are associated to each link. We use `l.cost` to represent the metric that has been configured for link `l` on a router.
 
 Each router maintains a routing table. The routing table `R` can be modelled as a data structure that stores, for each known destination address `d`, the following attributes :
 
@@ -18,14 +18,14 @@ A router that uses distance vector routing regularly sends its distance vector o
 
 .. code-block:: python
 
- Every N seconds: 
+ Every N seconds:
   v=Vector()
   for d in R[]:
      # add destination d to vector
      v.add(Pair(d,R[d].cost))
   for i in interfaces
      # send vector v on this interface
-     send(v,i)  
+     send(v,i)
 
 
 When a router boots, it does not know any destination in the network and its routing table only contains itself. It thus sends to all its neighbours a distance vector that contains only its address at a distance of `0`. When a router receives a distance vector on link `l`, it processes it as follows.
@@ -35,24 +35,24 @@ When a router boots, it does not know any destination in the network and its rou
  # V : received Vector
  # l : link over which vector is received
  def received(V,l):
-    # received vector from link l  
+    # received vector from link l
     for d in V[]
       if not (d in R[]) :
-         # new route 
+         # new route
       	 R[d].cost=V[d].cost+l.cost
       	 R[d].link=l
       	 R[d].time=now
       else :
          # existing route, is the new better ?
 	 if ( ((V[d].cost+l.cost) < R[d].cost) or ( R[d].link == l) )  :
-	      # Better route or change to current route 
+	      # Better route or change to current route
        	      R[d].cost=V[d].cost+l.cost
        	      R[d].link=l
        	      R[d].time=now
 
 
-The router iterates over all addresses included in the distance vector. If the distance vector contains an address that the router does not know, it inserts the destination inside its routing table via link `l` and at a distance which is the sum between the distance indicated in the distance vector and the cost associated to link `l`. If the destination was already known by the router, it only updates the corresponding entry in its routing table if either : 
- 
+The router iterates over all addresses included in the distance vector. If the distance vector contains an address that the router does not know, it inserts the destination inside its routing table via link `l` and at a distance which is the sum between the distance indicated in the distance vector and the cost associated to link `l`. If the destination was already known by the router, it only updates the corresponding entry in its routing table if either :
+
  - the cost of the new route is smaller than the cost of the already known route `( (V[d].cost+l.cost) < R[d].cost)`
  - the new route was learned over the same link as the current best route towards this destination `( R[d].link == l)`
 
@@ -63,43 +63,43 @@ To understand the operation of a distance vector protocol, let us consider the n
 
 .. figure:: ../../book/network/svg/dv-1.png
    :align: center
-   :scale: 100   
+   :scale: 100
 
    Operation of distance vector routing in a simple network
 
 Assume that `A` is the first to send its distance vector `[A=0]`.
 
- - `B` and `D` process the received distance vector and update their routing table with a route towards `A`. 
+ - `B` and `D` process the received distance vector and update their routing table with a route towards `A`.
  - `D` sends its distance vector `[D=0,A=1]` to `A` and `E`. `E` can now reach `A` and `D`.
  - `C` sends its distance vector `[C=0]` to `B` and `E`
  - `E` sends its distance vector `[E=0,D=1,A=2,C=1]` to `D`, `B` and `C`. `B` can now reach `A`, `C`, `D` and `E`
  - `B` sends its distance vector `[B=0,A=1,C=1,D=2,E=1]` to `A`, `C` and `E`. `A`, `B`, `C` and `E` can now reach all destinations.
- - `A` sends its distance vector `[A=0,B=1,C=2,D=1,E=2]` to `B` and `D`. 
+ - `A` sends its distance vector `[A=0,B=1,C=2,D=1,E=2]` to `B` and `D`.
 
 At this point, all routers can reach all other routers in the network thanks to the routing tables shown in the figure below.
 
 .. figure:: ../../book/network/svg/dv-full.png
    :align: center
-   :scale: 100   
+   :scale: 100
 
    Routing tables computed by distance vector in a simple network
 
-To deal with link and router failures, routers use the timestamp stored in their routing table. As all routers send their distance vector every `N` seconds, the timestamp of each route should be regularly refreshed. Thus no route should have a timestamp older than `N` seconds, unless the route is not reachable anymore. In practice, to cope with the possible loss of a distance vector due to transmission errors, routers check the timestamp of the routes stored in their routing table every `N` seconds and remove the routes that are older than :math:`3 \times N` seconds. When a router notices that a route towards a destination has expired, it must first associate an :math:`\infty` cost to this route and send its distance vector to its neighbours to inform them. The route can then be removed from the routing table after some time (e.g. :math:`3 \times N` seconds), to ensure that the neighbouring routers have received the bad news, even if some distance vectors do not reach them due to transmission errors. 
+To deal with link and router failures, routers use the timestamp stored in their routing table. As all routers send their distance vector every `N` seconds, the timestamp of each route should be regularly refreshed. Thus no route should have a timestamp older than `N` seconds, unless the route is not reachable anymore. In practice, to cope with the possible loss of a distance vector due to transmission errors, routers check the timestamp of the routes stored in their routing table every `N` seconds and remove the routes that are older than :math:`3 \times N` seconds. When a router notices that a route towards a destination has expired, it must first associate an :math:`\infty` cost to this route and send its distance vector to its neighbours to inform them. The route can then be removed from the routing table after some time (e.g. :math:`3 \times N` seconds), to ensure that the neighbouring routers have received the bad news, even if some distance vectors do not reach them due to transmission errors.
 
 Consider the example above and assume that the link between routers `A` and `B` fails. Before the failure, `A` used `B` to reach destinations `B`, `C` and `E` while `B` only used the `A-B` link to reach `A`. The affected entries timeout on routers `A` and `B` and they both send their distance vector.
 
  - `A` sends its distance vector :math:`[A=0,B=\infty,C=\infty,D=1,E=\infty]`. `D` knows that it cannot reach `B` anymore via `A`
  - `D` sends its distance vector :math:`[D=0,B=\infty,A=1,C=2,E=1]` to `A` and `E`. `A` recovers routes towards `C` and `E` via `D`.
  - `B` sends its distance vector :math:`[B=0,A=\infty,C=1,D=2,E=1]` to `E` and `C`. `C` learns that there is no route anymore to reach `A` via `B`.
- - `E` sends its distance vector :math:`[E=0,A=2,C=1,D=1,B=1]` to `D`, `B` and `C`. `D` learns a route towards `B`. `C` and `B` learn a route towards `A`. 
- 
+ - `E` sends its distance vector :math:`[E=0,A=2,C=1,D=1,B=1]` to `D`, `B` and `C`. `D` learns a route towards `B`. `C` and `B` learn a route towards `A`.
+
 At this point, all routers have a routing table allowing them to reach all another routers, except router `A`, which cannot yet reach router `B`. `A` recovers the route towards `B` once router `D` sends its updated distance vector :math:`[A=1,B=2,C=2,D=1,E=1]`. This last step is illustrated in figure :ref:`fig-afterfailure`, which shows the routing tables on all routers.
 
 .. _fig-afterfailure:
 
 .. figure:: ../../book/network/svg/dv-failure-2.png
    :align: center
-   :scale: 100   
+   :scale: 100
 
    Routing tables computed by distance vector after a failure
 
@@ -118,40 +118,40 @@ This count to infinity problem occurs because router `A` advertises to router `D
 
 .. code-block:: python
 
- Every N seconds: 
+ Every N seconds:
   # one vector for each interface
   for l in interfaces:
     v=Vector()
     for d in R[]:
       if (R[d].link != l) :
-      	 v=v+Pair(d,R[d.cost])
+      	 v=v+Pair(d,R[d].cost)
     send(v)
     # end for d in R[]
-  #end for l in interfaces  
+  #end for l in interfaces
 
 
 This technique is called `split-horizon`. With this technique, the count to infinity problem would not have happened in the above scenario, as router `A` would have advertised :math:`[A=0]`, since it learned all its other routes via router `D`. Another variant called `split-horizon with poison reverse` is also possible.  Routers using this variant advertise a cost of :math:`\infty` for the destinations that they reach via the router to which they send the distance vector. This can be implemented by using the pseudo-code below.
 
 .. code-block:: python
 
- Every N seconds: 
+ Every N seconds:
   for l in interfaces:
     # one vector for each interface
     v=Vector()
     for d in R[]:
       if (R[d].link != l) :
-      	 v=v+Pair(d,R[d.cost])
+      	 v=v+Pair(d,R[d].cost)
       else:
          v=v+Pair(d,infinity);
     send(v)
     # end for d in R[]
-  #end for l in interfaces  
+  #end for l in interfaces
 
-Unfortunately, split-horizon, is not sufficient to avoid all count to infinity problems with distance vector routing. Consider the failure of link `A-B` in the network of four routers below.
+Unfortunately, split-horizon is not sufficient to avoid all count to infinity problems with distance vector routing. Consider the failure of link `A-B` in the network of four routers below.
 
 .. figure:: ../../book/network/svg/dv-infinity.png
    :align: center
-   :scale: 100   
+   :scale: 100
 
    Count to infinity problem
 

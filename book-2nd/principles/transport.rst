@@ -2,25 +2,25 @@
 .. Some portions of this text come from the first edition of this ebook
 .. This file is licensed under a `creative commons licence <http://creativecommons.org/licenses/by-sa/3.0/>`_
 
-.. warning:: 
+.. warning::
 
    This is an unpolished draft of the second edition of this ebook. If you find any error or have suggestions to improve the text, please create an issue via https://github.com/obonaventure/cnp3/issues?milestone=3
 
 Applications
 ============
 
-The are two important models used to organise a networked application. The first and oldest model is the client-server model. In this model, a server provides services to clients that exchange information with it. This model is highly asymmetrical : clients send requests and servers perform actions and return responses. It is illustrated in the figure below.
+The are two important models used to organize a networked application. The first and oldest model is the client-server model. In this model, a server provides services to clients that exchange information with it. This model is highly asymmetrical : clients send requests and servers perform actions and return responses. It is illustrated in the figure below.
 
 
 .. figure:: ../../book/application/png/app-fig-001-c.png
    :align: center
-   :scale: 50 
+   :scale: 50
 
    The client-server model
 
 The client-server model was the first model to be used to develop networked applications. This model comes naturally from the mainframes and minicomputers that were the only networked computers used until the 1980s. A minicomputer_ is a multi-user system that is used by tens or more users at the same time. Each user interacts with the minicomputer by using a terminal. Those terminals, were mainly a screen, a keyboard and a cable directly connected to the minicomputer.
 
-There are various types of servers as well as various types of clients. A web server provides information in response to the query sent by its clients. A print server prints documents sent as queries by the client. An email server will forward towards their recipient the email messages sent as queries while a music server will deliver the music requested by the client. From the viewpoint of the application developer, the client and the server applications directly exchange messages (the horizontal arrows labelled `Queries` and `Responses` in the above figure), but in practice these messages are exchanged thanks to the underlying layers (the vertical arrows in the above figure). In this chapter, we focus on these horizontal exchanges of messages. 
+There are various types of servers as well as various types of clients. A web server provides information in response to the query sent by its clients. A print server prints documents sent as queries by the client. An email server will forward towards their recipient the email messages sent as queries while a music server will deliver the music requested by the client. From the viewpoint of the application developer, the client and the server applications directly exchange messages (the horizontal arrows labelled `Queries` and `Responses` in the above figure), but in practice these messages are exchanged thanks to the underlying layers (the vertical arrows in the above figure). In this chapter, we focus on these horizontal exchanges of messages.
 
 Networked applications do not exchange random messages. In order to ensure that the server is able to understand the queries sent by a client, and also that the client is able to understand the responses sent by the server, they must both agree on a set of syntactical and semantic rules. These rules define the format of the messages exchanged as well as their ordering. This set of rules is called an application-level `protocol`.
 
@@ -31,30 +31,30 @@ An `application-level protocol` is similar to a structured conversation between 
  - Alice : `What time is it ?`
  - Bob : `11:55`
  - Alice : `Thank you`
- - Bob : `You're welcome`  
+ - Bob : `You're welcome`
 
 Such a conversation succeeds if both Alice and Bob speak the same language. If Alice meets Tchang who only speaks Chinese, she won't be able to ask him the current time. A conversation between humans can be more complex. For example, assume that Bob is a security guard whose duty is to only allow trusted secret agents to enter a meeting room. If all agents know a secret password, the conversation between Bob and Trudy could be as follows :
 
  - Bob : `What is the secret password ?`
  - Trudy : `1234`
  - Bob : `This is the correct password, you're welcome`
- 
+
 If Alice wants to enter the meeting room but does not know the password, her conversation could be as follows :
 
  - Bob : `What is the secret password ?`
  - Alice : `3.1415`
  - Bob : `This is not the correct password.`
 
-Human conversations can be very formal, e.g. when soldiers communicate with their hierarchy, or informal such as when friends discuss. Computers that communicate are more akin to soldiers and require well-defined rules to ensure an successful exchange of information.  There are two types of rules that define how information can be exchanged between computers :
+Human conversations can be very formal, e.g. when soldiers communicate with their hierarchy, or informal such as when friends discuss. Computers that communicate are more akin to soldiers and require well-defined rules to ensure a successful exchange of information.  There are two types of rules that define how information can be exchanged between computers :
 
- - syntactical rules that precisely define the format of the messages that are exchanged. As computers only process bits, the syntactical rules specify how information is encoded as bit strings 
+ - syntactical rules that precisely define the format of the messages that are exchanged. As computers only process bits, the syntactical rules specify how information is encoded as bit strings
  - organisation of the information flow. For many applications, the flow of information must be structured and there are precedence relationships between the different types of information. In the time example above, Alice must greet Bob before asking for the current time. Alice would not ask for the current time first and greet Bob afterwards. Such precedence relationships exist in networked applications as well. For example, a server must receive a username and a valid password before accepting more complex commands from its clients.
 
 Let us first discuss the syntactical rules. We will later explain how the information flow can be organised by analysing real networked applications.
 
 Application-layer protocols exchange two types of messages. Some protocols such as those used to support electronic mail exchange messages expressed as strings or lines of characters. As the transport layer allows hosts to exchange bytes, they need to agree on a common representation of the characters. The first and simplest method to encode characters is to use the :term:`ASCII` table. :rfc:`20` provides the ASCII table that is used by many protocols on the Internet. For example, the table defines the following binary representations :
 
- - `A` : `1000011b` 
+ - `A` : `1000011b`
  - `0` : `0110000b`
  - `z` : `1111010b`
  - `@` : `1000000b`
@@ -72,7 +72,7 @@ Most applications exchange strings that are composed of fixed or variable number
 
 .. figure:: ../../book/application/pkt/bnf.png
    :align: center
-   :scale: 100 
+   :scale: 100
 
    A simple BNF specification
 
@@ -83,13 +83,13 @@ Besides character strings, some applications also need to exchange 16 bits and 3
   - send the most significant byte followed by the least significant byte
   - send the least significant byte followed by the most significant byte
 
-The first possibility was named  `big-endian` in a note written by Cohen [Cohen1980]_ while the second was named `little-endian`. Vendors of CPUs that used `big-endian` in memory insisted on using `big-endian` encoding in networked applications while vendors of CPUs that used `little-endian` recommended the opposite. Several studies were written on the relative merits of each type of encoding, but the discussion became almost a religious issue [Cohen1980]_. Eventually, the Internet chose the `big-endian` encoding, i.e. multi-byte fields are always transmitted by sending the most significant byte first, :rfc:`791` refers to this encoding as the :term:`network-byte order`. Most libraries [#fhtonl]_ used to write networked applications contain functions to convert multi-byte fields from memory to the network byte order and vice versa. 
+The first possibility was named  `big-endian` in a note written by Cohen [Cohen1980]_ while the second was named `little-endian`. Vendors of CPUs that used `big-endian` in memory insisted on using `big-endian` encoding in networked applications while vendors of CPUs that used `little-endian` recommended the opposite. Several studies were written on the relative merits of each type of encoding, but the discussion became almost a religious issue [Cohen1980]_. Eventually, the Internet chose the `big-endian` encoding, i.e. multi-byte fields are always transmitted by sending the most significant byte first, :rfc:`791` refers to this encoding as the :term:`network-byte order`. Most libraries [#fhtonl]_ used to write networked applications contain functions to convert multi-byte fields from memory to the network byte order and vice versa.
 
-Besides 16 and 32 bit words, some applications need to exchange data structures containing bit fields of various lengths. For example, a message may be composed of a 16 bits field followed by eight, one bit flags, a 24 bits field and two 8 bits bytes. Internet protocol specifications will define such a message by using a representation such as the one below. In this representation, each line corresponds to 32 bits and the vertical lines are used to delineate fields. The numbers above the lines indicate the bit positions in the 32-bits word, with the high order bit at position `0`. 
+Besides 16 and 32 bit words, some applications need to exchange data structures containing bit fields of various lengths. For example, a message may be composed of a 16 bits field followed by eight, one bit flags, a 24 bits field and two 8 bits bytes. Internet protocol specifications will define such a message by using a representation such as the one below. In this representation, each line corresponds to 32 bits and the vertical lines are used to delineate fields. The numbers above the lines indicate the bit positions in the 32-bits word, with the high order bit at position `0`.
 
 .. figure:: ../../book/application/pkt/message.png
    :align: center
-   :scale: 100 
+   :scale: 100
 
    Message format
 
@@ -107,12 +107,12 @@ The peer-to-peer model emerged during the last ten years as another possible arc
 .. unstructured p2P like gnutella or freenet
 .. structured like chord as example
 
-.. Surveys : 
+.. Surveys :
 
 .. Chord : [SMKKB2001]_
 
 
-.. The peer-to-peer model 
+.. The peer-to-peer model
 
 
 
@@ -125,23 +125,23 @@ A network is always designed and built to enable applications running on hosts t
 
 .. index:: connectionless service
 
-The network layer ensures the delivery of packets on a hop-by-hop basis through intermediate nodes. As such, it provides a service to the upper layer. In practice, this layer is usually the `transport layer` that improves the service provided by the `network layer` to make it useable by applications. 
+The network layer ensures the delivery of packets on a hop-by-hop basis through intermediate nodes. As such, it provides a service to the upper layer. In practice, this layer is usually the `transport layer` that improves the service provided by the `network layer` to make it useable by applications.
 
 
 .. figure:: ../../book/intro/svg/intro-figures-030-c.png
    :align: center
-   :scale: 80 
+   :scale: 80
 
    The transport layer
 
 
-Most networks use a datagram organisation and provide a simple service which is called the `connectionless service`. 
+Most networks use a datagram organisation and provide a simple service which is called the `connectionless service`.
 
 The figure below provides a representation of the connectionless service as a `time-sequence diagram`. The user on the left, having address `S`, issues a `Data.request` primitive containing Service Data Unit (SDU) `M` that must be delivered by the service provider to destination `D`. The dashed line between the two primitives indicates that the `Data.indication` primitive that is delivered to the user on the right corresponds to the `Data.request` primitive sent by the user on the left.
 
 .. figure:: ../../book/intro/svg/intro-figures-017-c.png
    :align: center
-   :scale: 80 
+   :scale: 80
 
    A simple connectionless service
 
@@ -153,32 +153,32 @@ An `unreliable connectionless` service may suffer from various types of problems
 
 .. figure:: ../../book/intro/svg/intro-figures-034-c.png
    :align: center
-   :scale: 80 
+   :scale: 80
 
    An unreliable connectionless service may loose SDUs
 
-In practice, an `unreliable connectionless service` will usually deliver a large fraction of the SDUs. However, since the delivery of SDUs is not guaranteed, the user must be able to recover from the loss of any SDU. 
+In practice, an `unreliable connectionless service` will usually deliver a large fraction of the SDUs. However, since the delivery of SDUs is not guaranteed, the user must be able to recover from the loss of any SDU.
 
 A second imperfection that may affect an `unreliable connectionless service` is that it may duplicate SDUs. Some packets may be duplicated in a network and be delivered twice to their destination. This is illustrated by the time-sequence diagram below.
 
 
 .. figure:: ../../book/intro/svg/intro-figures-033-c.png
    :align: center
-   :scale: 80 
+   :scale: 80
 
    An unreliable connectionless service may duplicate SDUs
 
-Finally, some unreliable connectionless service providers may deliver to a destination a different SDU than the one that was supplied in the `Data.request`. This is illustrated in the figure below. 
+Finally, some unreliable connectionless service providers may deliver to a destination a different SDU than the one that was supplied in the `Data.request`. This is illustrated in the figure below.
 
 .. figure:: ../../book/intro/svg/intro-figures-035-c.png
    :align: center
-   :scale: 80 
+   :scale: 80
 
    An unreliable connectionless service may deliver erroneous SDUs
 
 As the transport layer is built on top of the network layer, it is important to know the key features of the network layer service. In this book, we only consider the `connectionless network layer service` which is the most widespread. Its main characteristics are :
 
- - the `connectionless network layer service` can only transfer SDUs of *limited size* 
+ - the `connectionless network layer service` can only transfer SDUs of *limited size*
  - the `connectionless network layer service` may discard SDUs
  - the `connectionless network layer service` may corrupt SDUs
  - the `connectionless network layer service` may delay, reorder or even duplicate SDUs
@@ -186,9 +186,9 @@ As the transport layer is built on top of the network layer, it is important to 
 
 .. figure:: ../../book/transport/png/transport-fig-001-c.png
    :align: center
-   :scale: 80 
+   :scale: 80
 
-   The transport layer 
+   The transport layer
 
 
 These imperfections of the `connectionless network layer service` are caused by the operations of the `network layer`. This `layer` is able to deliver packets to their intended destination, but it cannot guarantee this delivery. The main cause of packet losses and errors are the buffers used on the network nodes. If the buffers of one of these nodes becomes full, all arriving packets must be discarded. This situation happens frequently in practice. Transmission errors can also affect packet transmissions on links where reliable transmission techniques are not enabled or because of errors in the buffers of the network nodes.
@@ -206,7 +206,7 @@ When two applications need to communicate, they need to structure their exchange
 The connectionless service
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The `connectionless service` that we have described earlier is frequently used by users who need to exchange small SDUs. It can be easily built on top of the connectionless network layer service that we have described earlier. Users needing to either send or receive several different and potentially large SDUs, or who need structured exchanges often prefer the `connection-oriented service`. 
+The `connectionless service` that we have described earlier is frequently used by users who need to exchange small SDUs. It can be easily built on top of the connectionless network layer service that we have described earlier. Users needing to either send or receive several different and potentially large SDUs, or who need structured exchanges often prefer the `connection-oriented service`.
 
 The connection-oriented service
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -220,7 +220,7 @@ The establishment of a connection can be modelled by using four primitives : `Co
 
 .. figure:: ../../book/intro/svg/intro-figures-019-c.png
    :align: center
-   :scale: 80 
+   :scale: 80
 
    Connection establishment
 
@@ -229,7 +229,7 @@ The example above shows a successful connection establishment. However, in pract
 
 .. figure:: ../../book/intro/svg/intro-figures-020-c.png
    :align: center
-   :scale: 80 
+   :scale: 80
 
    Two types of rejection for a connection establishment attempt
 
@@ -240,7 +240,7 @@ Once the connection has been established, the service provider supplies two data
 
 .. figure:: ../../book/intro/svg/intro-figures-021-c.png
    :align: center
-   :scale: 80 
+   :scale: 80
 
    Message-mode transfer in a connection oriented service
 
@@ -251,7 +251,7 @@ Unfortunately, the `message-mode` transfer is not widely used on the Internet. O
 
 .. figure:: ../../book/intro/svg/intro-figures-022-c.png
    :align: center
-   :scale: 80 
+   :scale: 80
 
    Stream-mode transfer in a connection oriented service
 
@@ -263,7 +263,7 @@ The third phase of a connection is when it needs to be released. As a connection
 
 .. figure:: ../../book/intro/svg/intro-figures-038-c.png
    :align: center
-   :scale: 80 
+   :scale: 80
 
    Abrupt connection release initiated by the service provider
 
@@ -273,7 +273,7 @@ An abrupt connection release can also be triggered by one of the users. If a use
 
 .. figure:: ../../book/intro/svg/intro-figures-023-c.png
    :align: center
-   :scale: 80 
+   :scale: 80
 
    Abrupt connection release initiated by a user
 
@@ -284,14 +284,14 @@ To ensure a reliable delivery of the SDUs sent by each user over a connection, w
 
 .. figure:: ../../book/intro/svg/intro-figures-024-c.png
    :align: center
-   :scale: 80 
+   :scale: 80
 
    Graceful connection release
 
 
 .. note:: Reliability of the connection-oriented service
 
- An important point to note about the connection-oriented service is its reliability. A `connection-oriented` service can only guarantee the correct delivery of all SDUs provided that the connection has been released gracefully. This implies that while the connection is active, there is no guarantee for the actual delivery of the SDUs exchanged as the connection may need to be released abruptly at any time. 
+ An important point to note about the connection-oriented service is its reliability. A `connection-oriented` service can only guarantee the correct delivery of all SDUs provided that the connection has been released gracefully. This implies that while the connection is active, there is no guarantee for the actual delivery of the SDUs exchanged as the connection may need to be released abruptly at any time.
 
 .. index:: request-response service
 
@@ -300,7 +300,7 @@ The request-response service
 
 .. index:: Remote Procedure Call, RPC
 
-The `request-response service` is a compromise between the `connectionless service` and the `connection-oriented service`. Many applications need to send a small amount of data and receive a small amount of information back. This is similar to procedure calls in programming languages. A call to a procedure takes a few arguments and returns a simple answer. In a network, it is sometimes useful to execute a procedure on a different host and receive the result of the computation. Executing a procedure on another host is often called Remote Procedure Call. It is possible to use the `connectionless service` for this application. However, since this service is usually unreliable, this would force the application to deal with any type of error that could occur. Using the `connection oriented service` is another alternative. This service ensures the reliable delivery of the data, but a connection must be created before the beginning of the data transfert. This overhead can be important for applications that only exchange a small amount of data. 
+The `request-response service` is a compromise between the `connectionless service` and the `connection-oriented service`. Many applications need to send a small amount of data and receive a small amount of information back. This is similar to procedure calls in programming languages. A call to a procedure takes a few arguments and returns a simple answer. In a network, it is sometimes useful to execute a procedure on a different host and receive the result of the computation. Executing a procedure on another host is often called Remote Procedure Call. It is possible to use the `connectionless service` for this application. However, since this service is usually unreliable, this would force the application to deal with any type of error that could occur. Using the `connection oriented service` is another alternative. This service ensures the reliable delivery of the data, but a connection must be created before the beginning of the data transfert. This overhead can be important for applications that only exchange a small amount of data.
 
 The `request-response service` allows to efficiently exchange small amounts of information in a request and associate it with the corresponding response. This service can be depicted by using the time-sequence diagram below.
 
@@ -330,7 +330,7 @@ The `request-response service` allows to efficiently exchange small amounts of i
 The transport layer
 -------------------
 
-The transport layer entity interacts with both a user in the application layer and the network layer. It improves the network layer service to make it useable by applications. From the application's viewpoint, the main limitations of the network layer service that its service is unreliable: 
+The transport layer entity interacts with both a user in the application layer and the network layer. It improves the network layer service to make it useable by applications. From the application's viewpoint, the main limitations of the network layer service are that its service is unreliable:
 
  - the network layer may corrupt data
  - the network layer may loose data
@@ -338,11 +338,11 @@ The transport layer entity interacts with both a user in the application layer a
  - the network layer has an upper bound on maximum length of the data
  - the network layer may duplicate data
 
-To deal with these issues, the transport layer includes several mechanisms that depend on the service that it provides. It interacts with both the applications and the underlying network layer. 
+To deal with these issues, the transport layer includes several mechanisms that depend on the service that it provides. It interacts with both the applications and the underlying network layer.
 
 .. figure:: ../../book/transport/svg/transport-fig-007-c.png
    :align: center
-   :scale: 80 
+   :scale: 80
 
    Interactions between the transport layer, its user, and its network layer provider
 
@@ -353,7 +353,7 @@ Connectionless transport
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
 The simplest service that can be provided in the transport layer is the connectionless transport service. Compared to the connectionless network layer service, this transport service includes two additional features :
- 
+
  - an `error detection` mechanism that allows to detect corrupted data
  - a `multiplexing technique` that enables several applications running on one host to exchange information with another host
 
@@ -361,17 +361,17 @@ The simplest service that can be provided in the transport layer is the connecti
 
 To exchange data, the transport protocol encapsulates the SDU produced by its user inside a `segment`. The `segment` is the unit of transfert of information in the transport layer. Transport layer entities always exchange segments. When a transport layer entity creates a segment, this segment is encapsulated by the network layer into a packet which contains the segment as its payload and a network header. The packet is then encapsulated in a frame to be transmitted in the datalink layer.
 
-A `segment` also contains control information, usually stored inside a `header` and the payload that comes from the application. To detect transmission errors, transport protocols rely on checksums or CRCs like the datalink layer protocols. 
+A `segment` also contains control information, usually stored inside a `header` and the payload that comes from the application. To detect transmission errors, transport protocols rely on checksums or CRCs like the datalink layer protocols.
 
-Compared to the connectionless network layer service, the transport layer service allows several applications running on a host to exchange SDUs with several other applications running on remote hosts. Let us consider two hosts, e.g. a client and a server. The network layer service allows the client to send information to the server, but if an application running on the client wants to contact a particular application running on the server, then an additional addressing mechanism is required other than the network layer address that identifies a host, in order to differentiate the application running on a host. This additional addressing can be provided by using `port numbers`. When a server application is launched on a host, it registers a `port number`. This `port number` will be used by the clients to contact the server process. 
+Compared to the connectionless network layer service, the transport layer service allows several applications running on a host to exchange SDUs with several other applications running on remote hosts. Let us consider two hosts, e.g. a client and a server. The network layer service allows the client to send information to the server, but if an application running on the client wants to contact a particular application running on the server, then an additional addressing mechanism is required other than the network layer address that identifies a host, in order to differentiate the application running on a host. This additional addressing can be provided by using `port numbers`. When a server application is launched on a host, it registers a `port number`. This `port number` will be used by the clients to contact the server process.
 
 The figure below shows a typical usage of port numbers. The client process uses port number `1234` while the server process uses port number `5678`. When the client sends a request, it is identified as originating from port number `1234` on the client host and destined to port number `5678` on the server host. When the server process replies to this request, the server's transport layer returns the reply as originating from port  `5678` on the server host and destined to port `1234` on the client host.
 
  .. figure:: ../../book/transport/svg/udp-ports.png
     :align: center
-    :scale: 70 
+    :scale: 70
 
-    Utilisation of port numbers 
+    Utilisation of port numbers
 
 To support the connection-oriented service, the transport layer needs to include several mechanisms to enrich the connectionless network-layer service. We discuss these mechanisms in the following sections.
 
@@ -379,25 +379,25 @@ To support the connection-oriented service, the transport layer needs to include
 Connection establishment
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-Like the connectionless service, the connection-oriented service allows several applications running on a given host to exchange data with other hosts. The port numbers described above for the connectionless service are also used by the connection-oriented service to multiplex several applications. Similarly, connection-oriented protocols used checksums/CRCs to detect transmission errors and discard segments containing an invalid checksum/CRC.
+Like the connectionless service, the connection-oriented service allows several applications running on a given host to exchange data with other hosts. The port numbers described above for the connectionless service are also used by the connection-oriented service to multiplex several applications. Similarly, connection-oriented protocols use checksums/CRCs to detect transmission errors and discard segments containing an invalid checksum/CRC.
 
-An important difference between the connectionless service and the connection-oriented one is that the transport entities in the latter maintain some state during lifetime of the connection. This state is created when a connection is established and is removed when it is released. 
+An important difference between the connectionless service and the connection-oriented one is that the transport entities in the latter maintain some state during the lifetime of the connection. This state is created when a connection is established and is removed when it is released.
 
 The simplest approach to establish a transport connection would be to define two special control segments : `CR` and `CA`. The `CR` segment is sent by the transport entity that wishes to initiate a connection. If the remote entity wishes to accept the connection, it replies by sending a `CA` segment. The `CR` and `CA` segments contain `port numbers` that allow to identify the communicating applications. The transport connection is considered to be established once the `CA` segment has been received. At that point, data segments can be sent in both directions.
- 
+
 .. figure:: ../../book/transport/png/transport-fig-045-c.png
    :align: center
-   :scale: 70 
+   :scale: 70
 
-   Naive transport connection establishment 
+   Naive transport connection establishment
 
-Unfortunately, this scheme is not sufficient given the unreliable network layer. Since the network layer is imperfect, the `CR` or `CA` segments can be lost, delayed, or suffer from transmission errors. To deal with these problems, the control segments must be protected by using a CRC or checksum to detect transmission errors. Furthermore, since the `CA` segment acknowledges the reception of the `CR` segment, the `CR` segment can be protected by using a retransmission timer. 
+Unfortunately, this scheme is not sufficient given the unreliable network layer. Since the network layer is imperfect, the `CR` or `CA` segments can be lost, delayed, or suffer from transmission errors. To deal with these problems, the control segments must be protected by using a CRC or checksum to detect transmission errors. Furthermore, since the `CA` segment acknowledges the reception of the `CR` segment, the `CR` segment can be protected by using a retransmission timer.
 
-Unfortunately, this scheme is not sufficient to ensure the reliability of the transport service. Consider for example a short-lived transport connection where a single, but important transfer (e.g. money transfer from a bank account) is sent. Such a short-lived connection starts with a `CR` segment acknowledged by a `CA` segment, then the data segment is sent, acknowledged and the connection terminates. Unfortunately, as the network layer service is unreliable, delays combined to retransmissions may lead to the situation depicted in the figure below, where a delayed `CR` and data segments from a former connection are accepted by the receiving entity as valid segments, and the corresponding data is delivered to the user. Duplicating SDUs is not acceptable, and the transport protocol must solve this problem. 
+Unfortunately, this scheme is not sufficient to ensure the reliability of the transport service. Consider for example a short-lived transport connection where a single, but important transfer (e.g. money transfer from a bank account) is sent. Such a short-lived connection starts with a `CR` segment acknowledged by a `CA` segment, then the data segment is sent, acknowledged and the connection terminates. Unfortunately, as the network layer service is unreliable, delays combined to retransmissions may lead to the situation depicted in the figure below, where a delayed `CR` and data segments from a former connection are accepted by the receiving entity as valid segments, and the corresponding data is delivered to the user. Duplicating SDUs is not acceptable, and the transport protocol must solve this problem.
 
 .. figure:: ../../book/transport/png/transport-fig-047-c.png
    :align: center
-   :scale: 70 
+   :scale: 70
 
    Duplicate transport connections ?
 
@@ -405,7 +405,7 @@ Unfortunately, this scheme is not sufficient to ensure the reliability of the tr
 .. index:: Maximum Segment Lifetime (MSL), transport clock
 
 
-To avoid these duplicates, transport protocols require the network layer to bound the `Maximum Segment Lifetime (MSL)`. The organisation of the network must guarantee that no segment remains in the network for longer than `MSL` seconds. For example, on today's Internet, `MSL` is expected to be 2 minutes. To avoid duplicate transport connections, transport protocol entities must be able to safely distinguish between a duplicate `CR` segment and a new `CR` segment, without forcing each transport entity to remember all the transport connections that it has established in the past. 
+To avoid these duplicates, transport protocols require the network layer to bound the `Maximum Segment Lifetime (MSL)`. The organisation of the network must guarantee that no segment remains in the network for longer than `MSL` seconds. For example, on today's Internet, `MSL` is expected to be 2 minutes. To avoid duplicate transport connections, transport protocol entities must be able to safely distinguish between a duplicate `CR` segment and a new `CR` segment, without forcing each transport entity to remember all the transport connections that it has established in the past.
 
 A classical solution to avoid remembering the previous transport connections to detect duplicates is to use a clock inside each transport entity. This `transport clock` has the following characteristics :
 
@@ -414,7 +414,7 @@ A classical solution to avoid remembering the previous transport connections to 
 
 .. figure:: ../../book/transport/png/transport-fig-048-c.png
    :align: center
-   :scale: 70 
+   :scale: 70
 
    Transport clock
 
@@ -425,7 +425,7 @@ This `transport clock` can now be combined with an exchange of three segments, c
 
  #. The initiating transport entity sends a `CR` segment. This segment requests the establishment of a transport connection. It contains a port number (not shown in the figure) and a sequence number (`seq=x` in the figure below) whose value is extracted from the `transport clock`. The transmission of the `CR` segment is protected by a retransmission timer.
 
- #. The remote transport entity processes the `CR` segment and creates state for the connection attempt. At this stage, the remote entity does not yet know whether this is a new connection attempt or a duplicate segment. It returns a `CA` segment that contains an acknowledgement number to confirm the reception of the `CR` segment (`ack=x` in the figure below) and a sequence number (`seq=y` in the figure below) whose value is extracted from its transport clock. At this stage, the connection is not yet established.
+ #. The remote transport entity processes the `CR` segment and creates a state for the connection attempt. At this stage, the remote entity does not yet know whether this is a new connection attempt or a duplicate segment. It returns a `CA` segment that contains an acknowledgement number to confirm the reception of the `CR` segment (`ack=x` in the figure below) and a sequence number (`seq=y` in the figure below) whose value is extracted from its transport clock. At this stage, the connection is not yet established.
 
  #. The initiating entity receives the `CA` segment. The acknowledgement number of this segment confirms that the remote entity has correctly received the `CR` segment. The transport connection is considered to be established by the initiating entity and the numbering of the data segments starts at sequence number `x`. Before sending data segments, the initiating entity must acknowledge the received `CA` segments by sending another `CA` segment.
 
@@ -435,17 +435,17 @@ This `transport clock` can now be combined with an exchange of three segments, c
 
 .. figure:: ../../book/transport/png/transport-fig-049-c.png
    :align: center
-   :scale: 70 
+   :scale: 70
 
    Three-way handshake
 
 Thanks to the three way handshake, transport entities avoid duplicate transport connections. This is illustrated by considering the three scenarios below.
 
-The first scenario is when the remote entity receives an old `CR` segment. It considers this `CR` segment as a connection establishment attempt and replies by sending a `CA` segment. However, the initiating host cannot match the received `CA` segment with a previous connection attempt. It sends a control segment (`REJECT` in the figure below) to cancel the spurious connection attempt. The remote entity cancels the connection attempt upon reception of this control segment. 
+The first scenario is when the remote entity receives an old `CR` segment. It considers this `CR` segment as a connection establishment attempt and replies by sending a `CA` segment. However, the initiating host cannot match the received `CA` segment with a previous connection attempt. It sends a control segment (`REJECT` in the figure below) to cancel the spurious connection attempt. The remote entity cancels the connection attempt upon reception of this control segment.
 
 .. figure:: ../../book/transport/png/transport-fig-050-c.png
    :align: center
-   :scale: 70 
+   :scale: 70
 
    Three-way handshake : recovery from a duplicate `CR`
 
@@ -454,15 +454,15 @@ A second scenario is when the initiating entity sends a `CR` segment that does n
 
 .. figure:: ../../book/transport/png/transport-fig-051-c.png
    :align: center
-   :scale: 70 
+   :scale: 70
 
    Three-way handshake : recovery from a duplicate `CA`
 
-The last scenario is less likely, but it it important to consider it as well. The remote entity receives an old `CR` segment. It notes the connection attempt and acknowledges it by sending a `CA` segment. The initiating entity does not have a matching connection attempt and replies by sending a `REJECT`. Unfortunately, this segment never reaches the remote entity. Instead, the remote entity receives a retransmission of an older `CA` segment that contains the same sequence number as the first `CR` segment. This `CA` segment cannot be accepted by the remote entity as a confirmation of the transport connection as its acknowledgement number cannot have the same value as the sequence number of the first `CA` segment. 
+The last scenario is less likely, but it it important to consider it as well. The remote entity receives an old `CR` segment. It notes the connection attempt and acknowledges it by sending a `CA` segment. The initiating entity does not have a matching connection attempt and replies by sending a `REJECT`. Unfortunately, this segment never reaches the remote entity. Instead, the remote entity receives a retransmission of an older `CA` segment that contains the same sequence number as the first `CR` segment. This `CA` segment cannot be accepted by the remote entity as a confirmation of the transport connection as its acknowledgement number cannot have the same value as the sequence number of the first `CA` segment.
 
 .. figure:: ../../book/transport/png/transport-fig-052-c.png
    :align: center
-   :scale: 70 
+   :scale: 70
 
    Three-way handshake : recovery from duplicates `CR` and `CA`
 
@@ -514,15 +514,15 @@ Using sequence numbers to count bytes has also one advantage when the transport 
 
 Compared to reliable protocols in the datalink layer, reliable transport protocols encode their sequence numbers in more bits. 32 bits and 64 bits sequence numbers are frequent in the transport layer while some datalink layer protocols encode their sequence numbers in an 8 bits field. This large sequence number space is motivated by two reasons. First, since the sequence number is incremented for each transmitted byte, a single segment may consume one or several thousands of sequence numbers. Second, a reliable transport protocol must be able to detect delayed segments. This can only be done if the number of bytes transmitted during the MSL period is smaller than the sequence number space. Otherwise, there is a risk of accepting duplicate segments.
 
-`Go-back-n` and `selective repeat` can be used in the transport layer as in the datalink layer. Since the network layer does not guarantee an in-order delivery of the packets, a transport entity should always store the segments that it receives out-of-sequence. For this reason, most transport protocols will opt for some form of selective repeat mechanism. 
+`Go-back-n` and `selective repeat` can be used in the transport layer as in the datalink layer. Since the network layer does not guarantee an in-order delivery of the packets, a transport entity should always store the segments that it receives out-of-sequence. For this reason, most transport protocols will opt for some form of selective repeat mechanism.
 
-In the datalink layer, the sliding window has usually a fixed size which depends on the amount of buffers allocated to the datalink layer entity. Such a datalink layer entity usually serves one or a few network layer entities. In the transport layer, the situation is different. A single transport layer entity serves a large and varying number of application processes. Each transport layer entity manages a pool of buffers that needs to be shared between all these processes. Transport entity are usually implemented inside the operating system kernel and shares memory with other parts of the system. Furthermore, a transport layer entity must support several (possibly hundreds or thousands) of transport connections at the same time. This implies that the memory which can be used to support the sending or the receiving buffer of a transport connection may change during the lifetime of the connection [#fautotune]_ . Thus, a transport protocol must allow the sender and the receiver to adjust their window sizes.
+In the datalink layer, the sliding window has usually a fixed size which depends on the amount of buffers allocated to the datalink layer entity. Such a datalink layer entity usually serves one or a few network layer entities. In the transport layer, the situation is different. A single transport layer entity serves a large and varying number of application processes. Each transport layer entity manages a pool of buffers that needs to be shared between all these processes. Transport entities are usually implemented inside the operating system kernel and share memory with other parts of the system. Furthermore, a transport layer entity must support several (possibly hundreds or thousands) of transport connections at the same time. This implies that the memory which can be used to support the sending or the receiving buffer of a transport connection may change during the lifetime of the connection [#fautotune]_ . Thus, a transport protocol must allow the sender and the receiver to adjust their window sizes.
 
 To deal with this issue, transport protocols allow the receiver to advertise the current size of its receiving window in all the acknowledgements that it sends. The receiving window advertised by the receiver bounds the size of the sending buffer used by the sender. In practice, the sender maintains two state variables : `swin`, the size of its sending window (that may be adjusted by the system) and `rwin`, the size of the receiving window advertised by the receiver. At any time, the number of unacknowledged segments cannot be larger than :math:`\min(swin,rwin)` [#facklost]_ . The utilisation of dynamic windows is illustrated in the figure below.
 
 .. figure:: ../../book/transport/svg/transport-fig-039.png
    :align: center
-   :scale: 90 
+   :scale: 90
 
    Dynamic receiving window
 
@@ -530,7 +530,7 @@ The receiver may adjust its advertised receive window based on its current memor
 
 .. figure:: ../../book/transport/png/transport-fig-040-c.png
    :align: center
-   :scale: 70 
+   :scale: 70
 
    Risk of deadlock with dynamic windows
 
@@ -544,7 +544,7 @@ To conclude our description of the basic mechanisms found in transport protocols
 
 .. figure:: ../../book/transport/png/transport-fig-041-c.png
     :align: center
-    :scale: 70 
+    :scale: 70
 
     Ambiguities caused by excessive delays
 
@@ -558,18 +558,18 @@ Connection release
 
 .. index:: abrupt connection release
 
-When we discussed the connection-oriented service, we mentioned that there are two types of connection releases : `abrupt release` and `graceful release`. 
+When we discussed the connection-oriented service, we mentioned that there are two types of connection releases : `abrupt release` and `graceful release`.
 
 The first solution to release a transport connection is to define a new control segment (e.g. the `DR` segment) and consider the connection to be released once this segment has been sent or received. This is illustrated in the figure below.
 
 
 .. figure:: ../../book/transport/png/transport-fig-053-c.png
    :align: center
-   :scale: 70 
+   :scale: 70
 
    Abrupt connection release
 
-As the entity that sends the `DR` segment cannot know whether the other entity has already sent all its data on the connection, SDUs can be lost during such an `abrupt connection release`. 
+As the entity that sends the `DR` segment cannot know whether the other entity has already sent all its data on the connection, SDUs can be lost during such an `abrupt connection release`.
 
 .. index:: graceful connection release
 
@@ -577,7 +577,7 @@ The second method to release a transport connection is to release independently 
 
 .. figure:: ../../book/transport/png/transport-fig-054-c.png
    :align: center
-   :scale: 70 
+   :scale: 70
 
    Graceful connection release
 
@@ -599,5 +599,3 @@ The second method to release a transport connection is to release independently 
 
 
 .. include:: /links.rst
-
-
