@@ -14,9 +14,9 @@ and 1970s, the mainframes and the emerging minicomputers were composed
 of a central unit and a set of terminals connected through serial
 lines or modems. The simplest protocol that was designed to access
 remote computers over a network is probably :term:`telnet` :rfc:`854`.
-:term:`telnet` runs over TCP and a telnet server listens on port `23` by 
-default. The TCP connection used by telnet is bidirectional, both the client 
-and the server can send data over it. The data exchanged over such a 
+:term:`telnet` runs over TCP and a telnet server listens on port `23` by
+default. The TCP connection used by telnet is bidirectional, both the client
+and the server can send data over it. The data exchanged over such a
 connection is essentially the characters that are typed by the user on the
 client machine and the text output of the processes running on the server
 machine with a few exceptions (e.g. control characters, characters to control
@@ -45,7 +45,7 @@ similar protocols [Ylonen1996]_. :term:`ssh` became quickly popular and system
 administrators encouraged its usage. The original version of :term:`ssh`
 was freely available. After a few years, his author created a company
 to distribute it commercially, but other programmers continued to
-develop an open-source version of :term`ssh` called 
+develop an open-source version of :term`ssh` called
 `OpenSSH <http://www.openssh.com>`_.
 Over the years, :term:`ssh` evolved
 and became a flexible applicable whose usage extends beyond remote
@@ -55,24 +55,24 @@ how it differs from :term:`telnet`. Entire books have been written to describe
 :term:`ssh` in details [BS2005]_. An overview of the protocol
 appeared in [Stallings2009]_.
 
-The :term:`ssh` protocol runs directly above the TCP protocol. 
+The :term:`ssh` protocol runs directly above the TCP protocol.
 Once the TCP bytestream
 has been established, the client and the server exchange messages. The
 first message exchanged is an ASCII line that announces the version of the
 protocol and the version of the software implementation used by the client
 and the server. These two lines are useful when debugging interoperability
-problems and other issues. 
+problems and other issues.
 
 The next message is the ``SSH_MSG_KEX_INIT`` message that is used
-to negotiate the cryptographic algorithms that will be used for the 
+to negotiate the cryptographic algorithms that will be used for the
 ``ssh`` session. It is very important for security protocols to
 include mechanisms that enable a negotiation of the cryptographic
 algorithms that are used for several reasons. First, these
 algorithms provide different levels of security. Some algorithms might
 be considered totally secure and are recommended today while they could
 become deprecated a few years laters after the publication of some
-attacks. Second, these algorithms provide different levels of 
-performance and have different CPU and memory impacts. 
+attacks. Second, these algorithms provide different levels of
+performance and have different CPU and memory impacts.
 
 In practice, an ``ssh`` implementation supports four types of
 cryptographic algorithms :
@@ -80,13 +80,13 @@ cryptographic algorithms :
  - key exchange
  - encryption
  - Message Authentication Code (MAC)
- - compression 
+ - compression
 
-The IANA_ maintains a `list of the cryptographic algorithms <http://www.iana.org/assignments/ssh-parameters/ssh-parameters.xhtml#ssh-parameters-16>`_ 
+The IANA_ maintains a `list of the cryptographic algorithms <http://www.iana.org/assignments/ssh-parameters/ssh-parameters.xhtml#ssh-parameters-16>`_
 that can be used by ``ssh`` implementations. For each type of algorithm,
 the client provides an ordered list of the algorithms that it supports
 and agrees to use. The server compares the received list with its own list.
-The outcome of the negotiation is a set of four algorithms [#fnull]_ 
+The outcome of the negotiation is a set of four algorithms [#fnull]_
 that will be combined for this session.
 
   .. msc::
@@ -124,28 +124,28 @@ used to negotiate a secret key that will be shared by the client and the server.
 These key exchange algorithms include some variations over
 the basic algorithms. As an example, let us analyse how the
 Diffie Hellman key exchange algorithm is used within the
-``ssh`` protocol. In this case, each host has both a private and a public key. 
+``ssh`` protocol. In this case, each host has both a private and a public key.
 
- - the client generates the random number :math:`a` and sends 
+ - the client generates the random number :math:`a` and sends
    :math:`A=g^{a} mod p` to the server
  - the server generates the random number :math:`b`. It then computes
-   :math:`B=g^{b} mod p`, :math:`K=B^{a} mod p` and signs with its private 
-   key :math:`hash(V_{Client} || V_{Server} || KEX\_INIT_{Client} || KEX\_INIT_{Server} || Server_{pub} || A || B || K )` 
+   :math:`B=g^{b} mod p`, :math:`K=B^{a} mod p` and signs with its private
+   key :math:`hash(V_{Client} || V_{Server} || KEX\_INIT_{Client} || KEX\_INIT_{Server} || Server_{pub} || A || B || K )`
    where :math:`V_{Server}` (resp. :math:`V_{Client}`) is the initial
-   messages sent by the client (resp. server), :math:`KEX\_INIT_{Client}` 
+   messages sent by the client (resp. server), :math:`KEX\_INIT_{Client}`
    (resp.  :math:`KEX\_INIT_{Server}`) is the key exchange message sent by
-   the client (resp. server) and :math:`A`, :math:`B` and :math:`K` are the 
+   the client (resp. server) and :math:`A`, :math:`B` and :math:`K` are the
    messages of the Diffie Hellman key exchange
- - the client can recompute :math:`K=A^{b} mod p` and verify the 
+ - the client can recompute :math:`K=A^{b} mod p` and verify the
    signature provided by the server
 
 This is a slightly modified authenticated Diffie Hellman key exchange
-with two interesting points. The first point is that 
+with two interesting points. The first point is that
 when the server authenticates the key exchange it does not provide a
-certificate. This is because ``ssh`` assumes that the client will store 
+certificate. This is because ``ssh`` assumes that the client will store
 inside its cache the public key of the servers that it uses on a
 regular basis. This assumption is valid for a protocol like ``ssh``
-because users typically use it to interact with a small number of 
+because users typically use it to interact with a small number of
 servers, typically a few or a few tens. Storing this information does
 not require a lot of storage. In practice, most ``ssh`` clients will
 accept to connect to remote servers without knowing their public key before
@@ -155,7 +155,7 @@ with a fingerprint of the key, either as a sequence of letters or as
 an ASCII art which can be posted on the web or elsewhere [#fdnsssh]_ by the
 system administrator of the server. If a client connects to a server
 whose public key does not match the stored one, a stronger warning is
-issued because this could indicate a man-in-the-middle attack or that 
+issued because this could indicate a man-in-the-middle attack or that
 the remote server has been compromised. It can also indicate that the server
 has been upgraded and that a new key has been generated during this upgrade.
 
@@ -169,26 +169,26 @@ active attacker modifies the messages sent by the communicating hosts
 (typically the client) to request the utilisation of weaker encryption
 algorithms. Consider a client that supports two encryption schemes. The
 preferred one uses 128 bits secret keys and the second one is an old
-encryption scheme that uses 48 bits keys. This second algorithm is 
+encryption scheme that uses 48 bits keys. This second algorithm is
 kept for backward compatibility with older implementations. If an attacker
 can remove the preferred algorithm from the list of encryption algorithms
 supported by the client, he can force the server to use a weaker
 encryption scheme that will be easier to break. Thanks
 to the hash that covers all the messages exchanged by the server,
 the downgrade attack cannot occur against ``ssh``. Algorithm agility is
-a key requirement for security protocols that need to evolve when 
+a key requirement for security protocols that need to evolve when
 encryption algorithms are broken by researchers. This agility cannot be
 used without care and signing a hash of all the messages exchanged
-is a technique that is frequently used to prevent downgrade attacks. 
+is a technique that is frequently used to prevent downgrade attacks.
 
 .. note:: Single use keys
 
-   Thanks to the Diffie Hellman key exchange, the client and the 
+   Thanks to the Diffie Hellman key exchange, the client and the
    servers share key :math:`K`. A naive implementation would probably
    directly use this key for all the cryptographic algorithms that
    have been negotiated for this session. Like most security protocols,
    ``ssh`` does not directly use key :math:`K`. Instead, it uses
-   the negotiated hash function with different parameters [fsshkeys]_ 
+   the negotiated hash function with different parameters [fsshkeys]_
    to allow the
    client and the servers to compute six keys from :math:`K` :
 
@@ -196,14 +196,14 @@ is a technique that is frequently used to prevent downgrade attacks.
         it sends
       - a key used by the client (resp. server) to authenticate the
         data that is sends
-      - a key used by the client (resp. server) to initialise the 
+      - a key used by the client (resp. server) to initialize the
         negotiated encryption scheme (if required by this scheme)
 
    It is common practice among designers of security protocols to never
    use the same key for different purposes. For example, allowing the
    client and the server to use the same key to encrypt data could
    enable an attacker to launch a replay attack by resending to the
-   client data that it has itself encrypted. 
+   client data that it has itself encrypted.
 
 
 At this point, all the messages sent over the TCP connection will be encrypted
@@ -214,21 +214,21 @@ that are encoded according to the Binary Packet Protocol defined in
  - ``length`` : this is the length of the message in bytes, excluding the MAC
    and length fields
  - ``padding length`` : this is the number of random bytes that have been added
-   at the end of the message. 
+   at the end of the message.
  - ``payload`` : the data (after optional compression) passed by the user
  - ``padding`` : random bytes added in each message (at least four) to
    ensure that the message length is a multiple of the block size
    used by the negotiated encryption algorithm
- - ``MAC`` : this field is present if a Message Authentication Code has been 
+ - ``MAC`` : this field is present if a Message Authentication Code has been
    negotiated for the session (in practice, using ``ssh`` without
    authentication is risky and this field should always be present). Note
    that to compute the MAC, an ``ssh`` implementation must maintain
    a message counter. This counter is incremented by one every time a
    message is sent and the MAC is computed with the negotiated authentication
-   algorithm using the MAC key over the concatenation of 
-   the message counter and the unencrypted message. 
+   algorithm using the MAC key over the concatenation of
+   the message counter and the unencrypted message.
    The message counter is not transmitted,
-   but the recipient can easily recover its value. The ``MAC`` is computed as 
+   but the recipient can easily recover its value. The ``MAC`` is computed as
    :math:`mac = MAC(key, sequence_number || unencrypted_message)` where the
    key is the negotiated authentication key.
 
@@ -240,17 +240,17 @@ that are encoded according to the Binary Packet Protocol defined in
    (MAC) to authenticates the messages that are sent. A naïve implementation
    of such a MAC would be to simply use a hash function like SHA-1. However,
    such a construction would not be safe from a security viewpoint. Internet
-   protocols usually rely on the HMAC construction defined in :rfc:`2104`. 
+   protocols usually rely on the HMAC construction defined in :rfc:`2104`.
    It works with any hash function (`H`) and a key (`K`). As an example, let
    us consider HMAC with the SHA-1 hash function. SHA-1 uses 20 bytes
    blocks and the block size will play an important role in the operation
-   of HMAC. We first require the key to as long as the block size. Since this
+   of HMAC. We first require the key to be as long as the block size. Since this
    key is the output of the key generation algorithm, this is one parameter
-   of this algorithm. 
+   of this algorithm.
 
-   HMAC uses two padding strings : `ipad` (resp. `opad`)  which is a 
+   HMAC uses two padding strings : `ipad` (resp. `opad`)  which is a
    string containing 20 times byte ``0x36`` (resp. byte ``0x5C``). The HMAC
-   is then computed as :math:`H[K \oplus opad, H(K \oplus ipad, data) ]` 
+   is then computed as :math:`H[K \oplus opad, H(K \oplus ipad, data) ]`
    where :math:`\oplus` denotes the bitwise XOR operation. This computation
    has been shown to be stronger than the naïve :math:`H(K,data)` against
    some types of cryptographic attacks.
@@ -262,10 +262,10 @@ to mention how users are authenticated by the server. The ``ssh`` protocol
 supports the classical username/password authentication (but both
 the username and the password are transmitted over the secure encrypted
 channel). In addition, ``ssh`` supports two authentication mechanisms that
-rely on public keys. To use the first one, each user needs to generate 
+rely on public keys. To use the first one, each user needs to generate
 his/her own public/private key pair and store the public key on the server.
 To be authenticated, the user needs to sign a message containing his/her
-public key by using his/her private key. The server can easily verify the 
+public key by using his/her private key. The server can easily verify the
 validity of the signature since it already knows the user's public key.
 The second authentication scheme is designed for hosts that trust each
 other. Each host has a public/private key pair and stores the public keys
@@ -276,7 +276,7 @@ command on ``computer2``, she can create an ``ssh`` session on this computer
 and type (again) her password. With the host-based authentication scheme,
 ``computer1`` signs a message with its private key to confirm that
 it has already authenticated Alice. ``computer2`` would then accept
-Alice's session without asking her credentials. 
+Alice's session without asking her credentials.
 
 The ``ssh`` protocol includes other features that are beyond the
 scope of this book. Additional details may be found in [BS2005]_.
@@ -284,16 +284,16 @@ scope of this book. Additional details may be found in [BS2005]_.
 
 .. rubric:: Footnotes
 
-.. [#fnull] For some of the algorithms, it is possible to negotiate the 
+.. [#fnull] For some of the algorithms, it is possible to negotiate the
            utilisation of no algorithm. This happens frequently for the
            compression algorithm that is not always used. For this,
            both the client and the server must announce ``null``
            in their ordered list of supported algorithms.
 
-.. [#fdnsssh] For example, :rfc:`4255` describes a DNS record that can be 
+.. [#fdnsssh] For example, :rfc:`4255` describes a DNS record that can be
               used to associate an ``ssh`` fingerprint to a DNS name.
 
 .. [#fsshkeys] The exact algorithms used for the computation of these
-               keys are defined in :rfc:`4253` 
+               keys are defined in :rfc:`4253`
 
 .. include:: /links.rst

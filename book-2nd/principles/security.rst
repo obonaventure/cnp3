@@ -18,10 +18,10 @@ mechanism is the password. A `username` is assigned to
 each user and when this user wants to access
 the computer, he or she needs to provide his/her `username` and his/her
 `password`. Most passwords are composed of a sequence of characters.
-The strength of the password is function of the difficulty of guessing the 
-characters chosen by each user. Various guidelines have been defined on how 
-to select a good password [#fpasswords]_. Some systems require regular 
-modifications of the passwords chosen by their users. 
+The strength of the password is function of the difficulty of guessing the
+characters chosen by each user. Various guidelines have been defined on how
+to select a good password [#fpasswords]_. Some systems require regular
+modifications of the passwords chosen by their users.
 
 .. introduce the need for passwords and exchanging them through the network
 
@@ -30,7 +30,7 @@ developed to enable them to access to remote computers through the network.
 To authenticate the remote users, these applications have also relied on
 usernames and passwords. When a user connects to a distant computer, she
 sends her username through the network and then provides her password
-to confirm her `identity`. This authentication scheme can be represented 
+to confirm her `identity`. This authentication scheme can be represented
 by the time sequence diagram shown below.
 
   .. msc::
@@ -66,7 +66,7 @@ by the time sequence diagram shown below.
    and Hellman [DH1976]_. Since then, Alice and Bob are the most
    frequently used names to represent the users who interact with a network.
    Other characters such as Eve or Mallory have been added over the years.
-   We will explain their respective roles later. 
+   We will explain their respective roles later.
 
 
 .. The usernames and passward can be sent in different types of packets and segments
@@ -87,7 +87,7 @@ important threats that a network architect must take into account.
 
 .. index:: passive attacker
 
-The first type of attacker is called the `passive attacker`. 
+The first type of attacker is called the `passive attacker`.
 A `passive attacker` is someone who is
 able to observe and usually store the information (e.g. the packets)
 exchanged in a given network or subset of it (e.g. a specific link). This
@@ -97,7 +97,7 @@ are vulnerable to this type of attack. In the above example, a passive
 attacker could easily capture the password sent by Alice and reuse it later
 to be authenticated as Alice on the remote computer. This is illustrated
 on the figure below where we do not show anymore the ``DATA.req`` and
-``DATA.ind`` primitives but only show the messages that are exchanged. 
+``DATA.ind`` primitives but only show the messages that are exchanged.
 Throughout this chapter, we will always use `Eve` as a user who is
 able to eavesdrop the data passing in front of her.
 
@@ -140,7 +140,7 @@ easy. In other networks, this is a bit more complex depending on the network
 technology used, but various software packages exist to automate this process.
 As will be described later, the best approach to prevent this type of attack
 is to rely on cryptographic techniques to ensure that passwords are never
-sent in clear. 
+sent in clear.
 
 .. index:: pervasive monitoring, Edward Snowden
 
@@ -150,7 +150,7 @@ sent in clear.
    a particular user. This is not the only attack of this type. In 2013, based
    on documents collected by Edward Snowden, the press revealed that several
    governmental agencies were collecting lots of data on various links that
-   compose the global Internet [Greenwald2014]_. Thanks to this massive amount 
+   compose the global Internet [Greenwald2014]_. Thanks to this massive amount
    of data, these
    governmental agencies have been able to extract lots of information about
    the behaviour of Internet users. Like Eve, they are in a position to extract
@@ -219,10 +219,10 @@ given target. Since the attacking traffic comes from a wide range of sources,
 it is difficult for the victim to locate the culprit and also to counter the
 attack. Saturating a link is the simplest example of `Distributed Denial of Service
 (DDoS)`
-attacks. 
+attacks.
 
-In practice, there is a possibility of denial of service attacks as soon as 
-there is a limited resource somewhere in the network. 
+In practice, there is a possibility of denial of service attacks as soon as
+there is a limited resource somewhere in the network.
 This ressource can be the bandwidth of a
 link, but it could also be the computational power of a server, its memory or
 even the size of tables used by a given protocol implementation. Defending
@@ -231,7 +231,7 @@ controls a large number of sources that are used to launch the attacks. In terms
 of bandwidth, DoS attacks composed of a few Gbps to a few tens of
 Gbps of traffic are frequent on the Internet. In 2015,
 `github.com <http://www.github.com>`_ suffered from a distributed DoS that
-reached a top bandwidth of 400 Gbps according to some 
+reached a top bandwidth of 400 Gbps according to some
 `reports <http://www.techworld.com/news/security/worlds-largest-ddos-attack-reached-400gbps-says-arbor-networks-3595715/>`_.
 
 .. index:: reflection attack, amplification
@@ -247,9 +247,9 @@ response. Often the response is larger or much larger than the request sent
 by the client. Consider that such a simple protocol is used over a datagram
 network. When Alice sends a datagram to Bob containing her request, Bob
 extracts both the request and Alice's address from the packet. He then sends
-his response in a single packet destined to Alice. Mallory would like to create a 
+his response in a single packet destined to Alice. Mallory would like to create a
 DoS attack against Alice without being identified. Since he has studied
-the specification of this protocol, he can 
+the specification of this protocol, he can
 send a request to Bob inside a packet having Alice's address
 as its source address. Bob will process the request and send his (large)
 response to Alice. If the response has the same size as the request, Mallory
@@ -264,7 +264,7 @@ requests, his victim receives :math:`k` Gbps of attack traffic. Such amplificati
 attacks are a very important problem and protocol designers should ensure that
 they never send a large response before having received the proof that the
 request that they have received originated from the source indicated in
-the request. 
+the request.
 
 
 Cryptographic primitives
@@ -321,7 +321,7 @@ the key, then the scheme becomes less secure since the same key is used to
 decrypt different parts of the message. In practice, `XOR` is often one of the
 basic operations used by encryption schemes. To be useable, the deployed
 encryption schemes use keys that are composed of a small number of bits, typically
-56, 64, 128, 256, ... 
+56, 64, 128, 256, ...
 
 A secret key encryption scheme is a perfectly reversible
 functions, i.e. given an encryption function `E`, there is an associated
@@ -329,7 +329,7 @@ decryption function `D` such that :math:`\forall k \forall M : D(K, E(M,K))=M`.
 
 .. index:: DES
 
-Various secret key cryptographic functions have been proposed, implemented and 
+Various secret key cryptographic functions have been proposed, implemented and
 deployed. The most popular ones are :
 
  - DES, the Data Encryption Standard that became a standard in 1977 and has
@@ -339,12 +339,12 @@ deployed. The most popular ones are :
    making the brute force attacks more difficult.
  - RC4 is an encryption scheme defined in the late 1980s by Ron Rivest for RSA
    Security. Given the speed of its software implementation, it has been included in
-   various protocols and implementations. However, cryptographers have 
+   various protocols and implementations. However, cryptographers have
    identified several weaknesses in this algorithm. It is now deprecated
-   and should not be used anymore :rfc:`7465`. 
- - AES or the Advanced Encryption Standard is an encryption scheme that was 
-   designed by the Belgian cryptographers Joan Daemen and Vincent Rijmen 
-   in 2001 [DR2002]_. This algorithm  has been standardised by the U.S. 
+   and should not be used anymore :rfc:`7465`.
+ - AES or the Advanced Encryption Standard is an encryption scheme that was
+   designed by the Belgian cryptographers Joan Daemen and Vincent Rijmen
+   in 2001 [DR2002]_. This algorithm  has been standardised by the U.S.
    National Institute
    of Standards and Technology (NIST). It is now used by a wide range of
    applications and various hardware and software implementations exist. Many
@@ -355,8 +355,8 @@ deployed. The most popular ones are :
    the smallest message that can be encrypted and forces the sender to divide
    each message in blocks of the supported size. If the message is larger than
    an integer number of blocks, then the message must be padded before being
-   encrypted and this padding must be removed after decryption. The key size 
-   indicates the resistance of the encryption scheme against brute force 
+   encrypted and this padding must be removed after decryption. The key size
+   indicates the resistance of the encryption scheme against brute force
    attacks, i.e. attacks where the attacker tries all possible keys to find
    the correct one.
 
@@ -364,7 +364,7 @@ deployed. The most popular ones are :
 AES is widely used as of this writing, but other secret key encryption schemes
 continue to appear. ChaCha20, proposed by D. Bernstein is now used by
 several internet protocols :rfc:`7539`. A detailed discussion of encryption
-schemes is outside the scope of this book. We will consider encryption schemes 
+schemes is outside the scope of this book. We will consider encryption schemes
 as black boxes whose operation depends on a single key. A detailed overview
 of several of these schemes may be found in [MVV2011]_.
 
@@ -380,7 +380,7 @@ cryptography, each user has two different keys :
 
 These two keys are generated together and they are linked by a complex
 mathematical relationship that is such that it is computationally difficult
-to compute :math:`K_{priv}` from :math:`K_{pub}`. 
+to compute :math:`K_{priv}` from :math:`K_{pub}`.
 
 A public key cryptographic scheme is a combination of two functions :
 
@@ -421,7 +421,7 @@ would then compute :math:`C=Checksum(M)` and :math:`SC=E_p(A_{priv},C)`. She
 would then send both `M` and `SC` to the recipient of the message who can
 easily compute `C` from `SC` and verify the authenticity of the message. Unfortunately,
 this solution does not protect Alice and the message's recipient against
-a man-in-the-middle attack. If Mallory can intercept the message sent by Alice, 
+a man-in-the-middle attack. If Mallory can intercept the message sent by Alice,
 he can easily modify Alice's message and tweak it so that it has the same
 checksum as the original one. The CRCs, although more complex to compute,
 suffer from the same problem.
@@ -431,17 +431,17 @@ suffer from the same problem.
 .. wikipedia illustration is nice https://en.wikipedia.org/wiki/MD5
 
 To efficiently sign messages, Alice needs to be able to compute a summary
-of her message in a way that makes prohibits an attacker from generating a
+of her message in a way that prohibits an attacker from generating a
 different message that has the same summary. `Cryptographic hash functions`
 were designed to solve this problem. The ideal hash function is a function
 that returns a different number for every possible input. In practice, it
 is impossible to find such a function. Cryptographic hash functions are an
 approximation of this perfect summarisation function. They
 compute a summary of a given message in 128, 160, 256 bits or more. They also
-exhibit the `avalanche effect`. This effect indicates that a small change in 
-the message causes a large change in the hash value. Finally hash functions 
-are very difficult to invert. Knowing a hash value, it is computationally very 
-difficult to find the corresponding input message. Several hash functions have 
+exhibit the `avalanche effect`. This effect indicates that a small change in
+the message causes a large change in the hash value. Finally hash functions
+are very difficult to invert. Knowing a hash value, it is computationally very
+difficult to find the corresponding input message. Several hash functions have
 been proposed by cryptographers. The most popular ones are :
 
  - MD5, originally proposed in :rfc:`1321`. It has been used in a wide range of
@@ -520,7 +520,7 @@ Mallory is to be authenticated as Alice. If Mallory can capture
 `Hash(passwd)`, he can simply replay this data, without being able to invert
 the hash function. This is called a `replay attack`.
 
-To counter this replay attack, we need to ensure that Alice never sends the 
+To counter this replay attack, we need to ensure that Alice never sends the
 same information twice to Bob. A possible mode of operation is shown below.
 
   .. msc::
@@ -770,7 +770,7 @@ Alice and for Alice to authenticate Bob. A faster authentification could be the 
       c=>d [ label = "" ];
 
 
-Alice sends her random nonce, :math:`R2`. Bob signs :math:`R2` and sends his nonce : 
+Alice sends her random nonce, :math:`R2`. Bob signs :math:`R2` and sends his nonce :
 :math:`R1`. Alice signs :math:`R1` and both are authenticated.
 
 
@@ -836,7 +836,7 @@ protocol is not vulnerable anymore.
 
 .. index:: certificates, trusted third party
 
-To cope with some of the above mentioned problems, 
+To cope with some of the above mentioned problems,
 public-key cryptography is usually combined with
 certificates. A `certificate` is a data structure that includes a signature from
 a trusted third party. A simple explanation of the utilisation of certificates
@@ -855,7 +855,7 @@ for each certified user :
 Then, knowing Ted's public key, anyone can verify the validity of a certificate.
 When a user sends his/her public key, he/she must also attach the certificate to
 prove the link between his/her identity and the public key. In practice,
-certificates are more complex than this. 
+certificates are more complex than this.
 Certificates will often be used to authenticate the
 server and sometimes to authenticate the client.
 
@@ -895,7 +895,7 @@ and Bob need to both :
 Let us first explore how this could be realised by using public-key
 cryptography. We assume that Alice and Bob have both a public-private
 key pair and the corresponding certificates signed by a trusted
-third party : Ted. 
+third party : Ted.
 
 A possible protocol would be the following.
 Alice sends :math:`Cert(Alice_{pub},Ted)`. This certificate provides Alice's
@@ -920,8 +920,8 @@ used by an encryption algorithm even in the presence of an
 eavesdropper. The most widely used algorithm that allows
 two users to safely exchange an integer in the presence of
 an eavesdropper is the one proposed by Diffie and Hellman [DH1976]_.
-It operates with (large) integers. Two of them are public, the modulus, p, 
-which is prime and the base, g, which must be a primitive root of p. 
+It operates with (large) integers. Two of them are public, the modulus, p,
+which is prime and the base, g, which must be a primitive root of p.
 The communicating users select a random integer, :math:`a` for Alice and :math:`b` for
 Bob. The exchange starts as :
 
@@ -1013,7 +1013,7 @@ mechanism should never be used without authentification.
 
 .. rubric:: Footnotes
 
-.. [#fpasswords] The wikipedia page on passwords provides many of these references : 
+.. [#fpasswords] The wikipedia page on passwords provides many of these references :
                  https://en.wikipedia.org/wiki/Password_strength
 
 .. [#frsa] A detailed explanation of the operation of the RSA algorithm is
@@ -1028,4 +1028,3 @@ mechanism should never be used without authentification.
            CPU.
 
 .. include:: /links.rst
-

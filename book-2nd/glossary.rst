@@ -192,9 +192,6 @@ Glossary
    POP
 	The Post Office Protocol is defined in :rfc:`1939`
 
-   IMAP
-	The Internet Message Access Protocol is defined in :rfc:`3501`
-
    FTP
 	The File Transfer Protocol is defined in :rfc:`959`
 

@@ -25,18 +25,18 @@ A key question that must be answered by any congestion control scheme is how con
 The figure below illustrates the evolution of the congestion window when there is severe congestion. At the beginning of the connection, the sender performs `slow-start` until the first segments are lost and the retransmission timer expires. At this time, the `ssthresh` is set to half of the current congestion window and the congestion window is reset at one segment. The lost segments are retransmitted as the sender again performs slow-start until the congestion window reaches the `sshtresh`. It then switches to congestion avoidance and the congestion window increases linearly until segments are lost and the retransmission timer expires ...
 
 
-.. figure:: /../book/transport/png/transport-fig-088-c.png 
+.. figure:: /../book/transport/png/transport-fig-088-c.png
    :align: center
-   :scale: 70 
+   :scale: 70
 
    Evaluation of the TCP congestion window with severe congestion
 
 
 The figure below illustrates the evolution of the congestion window when the network is lightly congested and all lost segments can be retransmitted using fast retransmit. The sender begins with a slow-start. A segment is lost but successfully retransmitted by a fast retransmit. The congestion window is divided by 2 and the sender immediately enters congestion avoidance as this was a mild congestion.
 
-.. figure:: /../book/transport/png/transport-fig-094-c.png 
+.. figure:: /../book/transport/png/transport-fig-094-c.png
    :align: center
-   :scale: 70 
+   :scale: 70
 
    Evaluation of the TCP congestion window when the network is lightly congested
 
@@ -45,11 +45,11 @@ Most TCP implementations update the congestion window when they receive an ackno
 
 .. code-block:: python
 
-   # Initialization 
+   # Initialization
    cwnd = MSS  # congestion window in bytes
    ssthresh= swin # in bytes
-    
-   # Ack arrival 
+
+   # Ack arrival
    if tcp.ack > snd.una :  # new ack, no congestion
      if  cwnd < ssthresh :
        # slow-start : increase quickly cwnd
@@ -58,23 +58,23 @@ Most TCP implementations update the congestion window when they receive an ackno
      else:
        # congestion avoidance : increase slowly cwnd
        # increase cwnd by one mss every rtt
-       cwnd = cwnd+ mss*(mss/cwnd)
+       cwnd = cwnd+ MSS*(MSS/cwnd)
    else: # duplicate or old ack
      if tcp.ack==snd.una:    # duplicate acknowledgement
        dupacks++
        if dupacks==3:
-         retransmitsegment(snd.una)
+         retransmit segment(snd.una)
 	 ssthresh=max(cwnd/2,2*MSS)
-	 cwnd=ssthresh   
+	 cwnd=ssthresh
      else:    # ack for old segment, ignored
        dupacks=0
-  
+
    Expiration of the retransmission timer:
     send(snd.una)     # retransmit first lost segment
     sshtresh=max(cwnd/2,2*MSS)
     cwnd=MSS
-  
- 
+
+
 Furthermore when a TCP connection has been idle for more than its current retransmission timer, it should reset its congestion window to the congestion window size that it uses when the connection begins, as it no longer knows the current congestion state of the network.
 
 .. note:: Initial congestion window
@@ -94,7 +94,7 @@ As explained earlier, Explicit Congestion Notification :rfc:`3168`, improves the
 
 The first difficulty in adding Explicit Congestion Notification (ECN) in TCP/IP network was to modify the format of the network packet and transport segment headers to carry the required information. In the network layer, one bit was required to allow the routers to mark the packets they forward during congestion periods. In the IP network layer, this bit is called the `Congestion Experienced` (`CE`) bit and is part of the packet header. However, using a single bit to mark packets is not sufficient. Consider a simple scenario with two sources, one congested router and one destination. Assume that the first sender and the destination support ECN, but not the second sender. If the router is congested it will mark packets from both senders. The first sender will react to the packet markings by reducing its transmission rate. However since the second sender does not support ECN, it will not react to the markings. Furthermore, this sender could continue to increase its transmission rate, which would lead to more packets being marked and the first source would decrease again its transmission rate, ... In the end, the sources that implement ECN are penalized compared to the sources that do not implement it. This unfairness issue is a major hurdle to widely deploy ECN on the public Internet [#fprivate]_. The solution proposed in :rfc:`3168` to deal with this problem is to use a second bit in the network packet header. This bit, called the `ECN-capable transport` (ECT) bit, indicates whether the packet contains a segment produced by a transport protocol that supports ECN or not. Transport protocols that support ECN set the ECT bit in all packets. When a router is congested, it first verifies whether the ECT bit is set. In this case, the CE bit of the packet is set to indicate congestion. Otherwise, the packet is discarded. This improves the deployability of ECN [#fecnnonce]_.
 
-The second difficulty is how to allow the receiver to inform the sender of the reception of network packets marked with the `CE` bit. In reliable transport protocols like TCP and SCTP, the acknowledgements can be used to provide this feedback. For TCP, two options were possible : change some bits in the TCP segment header or define a new TCP option to carry this information. The designers of ECN opted for reusing spare bits in the TCP header. More precisely, two TCP flags have been added in the TCP header to support ECN. The `ECN-Echo` (ECE) is set in the acknowledgements when the `CE` was set in packets received on the forward path. 
+The second difficulty is how to allow the receiver to inform the sender of the reception of network packets marked with the `CE` bit. In reliable transport protocols like TCP and SCTP, the acknowledgements can be used to provide this feedback. For TCP, two options were possible : change some bits in the TCP segment header or define a new TCP option to carry this information. The designers of ECN opted for reusing spare bits in the TCP header. More precisely, two TCP flags have been added in the TCP header to support ECN. The `ECN-Echo` (ECE) is set in the acknowledgements when the `CE` was set in packets received on the forward path.
 
 .. figure:: /protocols/pkt/tcp-enc.png
 
@@ -103,7 +103,7 @@ The second difficulty is how to allow the receiver to inform the sender of the r
 
 The third difficulty is to allow an ECN-capable sender to detect whether the remote host also supports ECN. This is a classical negotiation of extensions to a transport protocol. In TCP, this could have been solved by defining a new TCP option used during the three-way handshake. To avoid wasting space in the TCP options, the designers of ECN opted in :rfc:`3168` for using the `ECN-Echo` and `CWR` bits in the TCP header to perform this negotiation. In the end, the result is the same with fewer bits exchanged. SCTP defines in [STD2013]_ the `ECN Support parameter` which can be included in the ``INIT`` and ``INIT-ACK`` chunks to negotiate the utilization of ECN. The solution adopted for SCTP is cleaner than the solution adopted for TCP.
 
-Thanks to the `ECT`, `CE` and `ECE`, routers can mark packets during congestion and receivers can return the congestion information back to the TCP senders. However, these three bits are not sufficient to allow a server to reliably send the `ECE` bit to a TCP sender. TCP acknowledgements are not sent reliably. A TCP acknowledgement always contains the next expected sequence number. Since TCP acknowledgements are cumulative, the loss of one acknowledgement is recovered by the correct reception of a subsequent acknowledgement. 
+Thanks to the `ECT`, `CE` and `ECE`, routers can mark packets during congestion and receivers can return the congestion information back to the TCP senders. However, these three bits are not sufficient to allow a server to reliably send the `ECE` bit to a TCP sender. TCP acknowledgements are not sent reliably. A TCP acknowledgement always contains the next expected sequence number. Since TCP acknowledgements are cumulative, the loss of one acknowledgement is recovered by the correct reception of a subsequent acknowledgement.
 
 If TCP acknowledgements are overloaded to carry the `ECE` bit, the situation is different. Consider the example shown in the figure below. A client sends packets to a server through a router. In the example below, the first packet is marked. The server returns an acknowledgement with the `ECE` bit set. Unfortunately, this acknowledgement is lost and never reaches the client. Shortly after, the server sends a data segment that also carries a cumulative acknowledgement. This acknowledgement confirms the reception of the data to the client, but it did not receive the congestion information through the `ECE` bit.
 
@@ -116,18 +116,18 @@ If TCP acknowledgements are overloaded to carry the `ECE` bit, the situation is 
 
       client=>router [ label = "data[seq=1,ECT=1,CE=0]", arcskip="1" ];
       router=>server [ label = "data[seq=1,ECT=1,CE=1]", arcskip="1"];
-      |||;  
+      |||;
       server=>router [ label = "ack=2,ECE=1", arcskip="1" ];
       router -x client [label="ack=2,ECE=1", arcskip="1" ];
       |||;
       server=>router [ label = "data[seq=x,ack=2,ECE=0,ECT=1,CE=0]", arcskip="1" ];
       router=>client [ label = "data[seq=x,ack=2,ECE=0,ECT=1,CE=0]", arcskip="1"];
-      |||;     
+      |||;
       client->server [linecolour=white];
 
 
 
-To solve this problem, :rfc:`3168` uses an additional bit in the TCP header : the `Congestion Window Reduced` (CWR) bit. 
+To solve this problem, :rfc:`3168` uses an additional bit in the TCP header : the `Congestion Window Reduced` (CWR) bit.
 
  .. msc::
 
@@ -136,7 +136,7 @@ To solve this problem, :rfc:`3168` uses an additional bit in the TCP header : th
       server [label="server", linecolour=black];
       client=>router [ label = "data[seq=1,ECT=1,CE=0]", arcskip="1" ];
       router=>server [ label = "data[seq=1,ECT=1,CE=1]", arcskip="1"];
-      |||;  
+      |||;
       server=>router [ label = "ack=2,ECE=1", arcskip="1" ];
       router -x client [label="ack=2,ECE=1", arcskip="1" ];
       |||;
@@ -148,12 +148,12 @@ To solve this problem, :rfc:`3168` uses an additional bit in the TCP header : th
       |||;
       client->server [linecolour=white];
 
-     
+
 The `CWR` bit of the TCP header provides some form of acknowledgement for the `ECE` bit. When a TCP receiver detects a packet marked with the `CE` bit, it sets the `ECE` bit in all segments that it returns to the sender. Upon reception of an acknowledgement with the `ECE` bit set, the sender reduces its congestion window to reflect a mild congestion and sets the `CWR` bit. This bit remains set as long as the segments received contained the `ECE` bit set. A sender should only react once per round-trip-time to marked packets.
 
 .. index:: SCTP ECN Echo chunk, SCTP CWR chunk
 
-SCTP uses a different approach to inform the sender once congestion has been detected. Instead of using one bit to carry the congestion notification from the receiver to the sender, SCTP defines an entire ``ECN Echo`` chunk for this. This chunk contains the lowest ``TSN`` that was received in a packet with the `CE` bit set and the number of marked packets received. The SCTP ``CWR`` chunk allows to acknowledge the reception of an ``ECN Echo`` chunk. It echoes the lowest ``TSN`` placed in the ``ECN Echo`` chunk. 
+SCTP uses a different approach to inform the sender once congestion has been detected. Instead of using one bit to carry the congestion notification from the receiver to the sender, SCTP defines an entire ``ECN Echo`` chunk for this. This chunk contains the lowest ``TSN`` that was received in a packet with the `CE` bit set and the number of marked packets received. The SCTP ``CWR`` chunk allows to acknowledge the reception of an ``ECN Echo`` chunk. It echoes the lowest ``TSN`` placed in the ``ECN Echo`` chunk.
 
 
 The last point that needs to be discussed about Explicit Congestion Notification is the algorithm that is used by routers to detect congestion. On a router, congestion manifests itself by the number of packets that are stored inside the router buffers. As explained earlier, we need to distinguish between two types of routers :
@@ -163,7 +163,7 @@ The last point that needs to be discussed about Explicit Congestion Notification
 
 Routers that use a single queue measure their buffer occupancy as the number of bytes of packets stored in the queue [#fslot]_. A first method to detect congestion is to measure the instantaneous buffer occupancy and consider the router to be congested as soon as this occupancy is above a threshold. Typical values of the threshold could be 40% of the total buffer. Measuring the instantaneous buffer occupancy is simple since it only requires one counter. However, this value is fragile from a control viewpoint since it changes frequently. A better solution is to measure the *average* buffer occupancy and consider the router to be congested when this average occupancy is too high. Random Early Detection (RED) [FJ1993]_ is an algorithm that was designed to support Explicit Congestion Notification. In addition to measuring the average buffer occupancy, it also uses probabilistic marking. When the router is congested, the arriving packets are marked with a probability that increases with the average buffer occupancy. The main advantage of using probabilistic marking instead of marking all arriving packets is that flows will be marked in proportion of the number of packets that they transmit. If the router marks 10% of the arriving packets when congested, then a large flow that sends hundred packets per second will be marked 10 times while a flow that only sends one packet per second will not be marked. This probabilistic marking allows to mark packets in proportion of their usage of the network ressources.
 
-If the router uses several queues served by a scheduler, the situation is different. If a large and a small flow are competing for bandwidth, the scheduler will already favor the small flow that is not using its fair share of the bandwidth. The queue for the small flow will be almost empty while the queue for the large flow will build up. On routers using such schedulers, a good way of marking the packets is to set a threshold on the occupancy of each queue and mark the packets that arrive in a particular queue as soon as its occupancy is above the configured threshold. 
+If the router uses several queues served by a scheduler, the situation is different. If a large and a small flow are competing for bandwidth, the scheduler will already favor the small flow that is not using its fair share of the bandwidth. The queue for the small flow will be almost empty while the queue for the large flow will build up. On routers using such schedulers, a good way of marking the packets is to set a threshold on the occupancy of each queue and mark the packets that arrive in a particular queue as soon as its occupancy is above the configured threshold.
 
 
 Modeling TCP congestion control
@@ -174,9 +174,9 @@ Thanks to its congestion control scheme, TCP adapts its transmission rate to the
 
 This model considers a hypothetical TCP connection that suffers from equally spaced segment losses. If :math:`p` is the segment loss ratio, then the TCP connection successfully transfers :math:`\frac{1}{p}-1` segments and the next segment is lost. If we ignore the slow-start at the beginning of the connection, TCP in this environment is always in congestion avoidance as there are only isolated losses that can be recovered by using fast retransmit. The evolution of the congestion window is thus as shown in the figure below. Note the that `x-axis` of this figure represents time measured in units of one round-trip-time, which is supposed to be constant in the model, and the `y-axis` represents the size of the congestion window measured in MSS-sized segments.
 
-.. figure:: /../book/transport/png/transport-fig-089-c.png 
+.. figure:: /../book/transport/png/transport-fig-089-c.png
    :align: center
-   :scale: 70 
+   :scale: 70
 
    Evolution of the congestion window with regular losses
 
@@ -185,15 +185,15 @@ As the losses are equally spaced, the congestion window always starts at some va
  :math:`area=(\frac{W}{2})^2 + \frac{1}{2} \times (\frac{W}{2})^2 = \frac{3 \times W^2}{8}`
 
 However, given the regular losses that we consider, the number of segments that are sent between two losses (i.e. during a cycle) is by definition equal to :math:`\frac{1}{p}`. Thus, :math:`W=\sqrt{\frac{8}{3 \times p}}=\frac{k}{\sqrt{p}}`. The throughput (in bytes per second) of the TCP connection is equal to the number of segments transmitted divided by the duration of the cycle :
- 
- :math:`Throughput=\frac{area \times MSS}{time} = \frac{ \frac{3 \times W^2}{8}}{\frac{W}{2} \times rtt}`
+
+ :math:`Throughput=\frac{area \times MSS}{time} = \frac{ \frac{3 \times W^2}{8} \times MSS}{\frac{W}{2} \times rtt}`
  or, after having eliminated `W`, :math:`Throughput=\sqrt{\frac{3}{2}} \times \frac{MSS}{rtt \times \sqrt{p}}`
 
 
 More detailed models and the analysis of simulations have shown that a first order model of the TCP throughput when losses occur was :math:`Throughput \approx \frac{k \times MSS}{rtt \times \sqrt{p}}`. This is an important result which shows that :
 
  - TCP connections with a small round-trip-time can achieve a higher throughput than TCP connections having a longer round-trip-time when losses occur. This implies that the TCP congestion control scheme is not completely fair since it favors the connections that have the shorter round-trip-time
- - TCP connections that use a large MSS can achieve a higher throughput that the TCP connections that use a shorter MSS. This creates another source of unfairness between TCP connections. However, it should be noted that today most hosts are using almost the same MSS, roughly 1460 bytes. 
+ - TCP connections that use a large MSS can achieve a higher throughput that the TCP connections that use a shorter MSS. This creates another source of unfairness between TCP connections. However, it should be noted that today most hosts are using almost the same MSS, roughly 1460 bytes.
 
 In general, the maximum throughput that can be achieved by a TCP connection depends on its maximum window size and the round-trip-time if there are no losses. If there are losses, it depends on the MSS, the round-trip-time and the loss ratio.
 
@@ -204,12 +204,12 @@ In general, the maximum throughput that can be achieved by a TCP connection depe
 
  The first TCP congestion control scheme was proposed by `Van Jacobson`_ in [Jacobson1988]_. In addition to writing the scientific paper, `Van Jacobson`_ also implemented the slow-start and congestion avoidance schemes in release 4.3 `Tahoe` of the BSD Unix distributed by the University of Berkeley. Later, he improved the congestion control by adding the fast retransmit and the fast recovery mechanisms in the `Reno` release of 4.3 BSD Unix. Since then, many researchers have proposed, simulated and implemented modifications to the TCP congestion control scheme. Some of these modifications are still used today, e.g. :
 
-  - `NewReno` (:rfc:`3782`), which was proposed as an improvement of the fast recovery mechanism in the `Reno` implementation 
+  - `NewReno` (:rfc:`3782`), which was proposed as an improvement of the fast recovery mechanism in the `Reno` implementation
   - `TCP Vegas`, which uses changes in the round-trip-time to estimate congestion in order to avoid it [BOP1994]_
   - `CUBIC`, which was designed for high bandwidth links and is the default congestion control scheme in the Linux 2.6.19 kernel [HRX2008]_
-  - `Compound TCP`, which was designed for high bandwidth links is the default congestion control scheme in several Microsoft operating systems [STBT2009]_
+  - `Compound TCP`, which was designed for high bandwidth links, is the default congestion control scheme in several Microsoft operating systems [STBT2009]_
 
- A search of the scientific literature (:rfc:`6077`) will probably reveal more than 100 different variants of the TCP congestion control scheme. Most of them have only been evaluated by simulations. However, the TCP implementation in the recent Linux kernels supports several congestion control schemes and new ones can be easily added. We can expect that new TCP congestion control schemes will always continue to appear. 
+ A search of the scientific literature (:rfc:`6077`) will probably reveal more than 100 different variants of the TCP congestion control scheme. Most of them have only been evaluated by simulations. However, the TCP implementation in the recent Linux kernels supports several congestion control schemes and new ones can be easily added. We can expect that new TCP congestion control schemes will always continue to appear.
 
 .. rubric:: Footnotes
 
@@ -220,6 +220,6 @@ In general, the maximum throughput that can be achieved by a TCP connection depe
 
 .. [#fecnnonce] With the ECT bit, the deployment issue with ECN is solved provided that all sources cooperate. If some sources do not support ECN but still set the ECT bit in the packets that they sent, they will have an unfair advantage over the sources that correctly react to packet markings. Several solutions have been proposed to deal with this problem :rfc:`3540`, but they are outside the scope of this book.
 
-.. [#fslot] The buffers of a router can be implemented as variable or fixed-length slots. If the router uses variable length slots to store the queued packets, then the occupancy is usually measured in bytes. Some routers have use fixed-length slots with each slot large enough to store a maximum-length packet. In this case, the buffer occupancy is measured in packets.
+.. [#fslot] The buffers of a router can be implemented as variable or fixed-length slots. If the router uses variable length slots to store the queued packets, then the occupancy is usually measured in bytes. Some routers use fixed-length slots with each slot large enough to store a maximum-length packet. In this case, the buffer occupancy is measured in packets.
 
 .. include:: /links.rst
