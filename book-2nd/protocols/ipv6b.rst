@@ -2,14 +2,14 @@
 .. This file is licensed under a `creative commons licence <http://creativecommons.org/licenses/by/3.0/>`_
 
 
-.. warning:: 
+.. warning::
 
    This is an unpolished draft of the second edition of this ebook. If you find any error or have suggestions to improve the text, please create an issue via https://github.com/obonaventure/cnp3/issues?milestone=9
 
 The IPv6 subnet
 ===============
 
-Until now, we have focussed our discussion on the utilisation of IPv6 on point-to-point links. Although there are point-to-point links in the Internet, mainly between routers and sometimes for endhosts, most of the endhosts are attached to datalink layer networks such as Ethernet LANs or WiFi networks. These datalink layer networks play an important role in today's Internet and have heavily influenced the design of the operation of IPv6. To understand IPv6 and ICMPv6 completely, we first need to correctly understand the key principles behind these datalink layer technologies.
+Until now, we have focused our discussion on the utilisation of IPv6 on point-to-point links. Although there are point-to-point links in the Internet, mainly between routers and sometimes for endhosts, most of the endhosts are attached to datalink layer networks such as Ethernet LANs or WiFi networks. These datalink layer networks play an important role in today's Internet and have heavily influenced the design of the operation of IPv6. To understand IPv6 and ICMPv6 completely, we first need to correctly understand the key principles behind these datalink layer technologies.
 
 As explained earlier, devices attached to a Local Area Network can directly exchange frames among themselves. For this, each datalink layer interface on a device (endhost, router, ...) attached to such a network is identified by a MAC address. Each datalink layer interface includes a unique hardwired MAC address. MAC addresses are allocated to manufacturers in blocks and interface is numbered with a unique address. Thanks to the global unicity of the MAC addresses, the datalink layer service can assume that two hosts attached to a LAN have different addresses. Most LANs provide an unreliable connectionless service and a datalink layer frame has a header containing :
 
@@ -58,7 +58,7 @@ Hosts ``A`` and ``B`` are attached to the same datalink layer network. They can 
 
      A MAC address
 
- MAC addresses are allocated in blocks of :math:`2^{20}`. When a company registers for a block of MAC addresses, it receives an identifier. company identifier is then used to populated the `c` bits of the MAC addresses. The company can allocate all addresses in starting with this prefix and manages the `m` bits as it wishes. 
+ MAC addresses are allocated in blocks of :math:`2^{20}`. When a company registers for a block of MAC addresses, it receives an identifier. The company identifier is then used to populated the `c` bits of the MAC addresses. The company can allocate all addresses in starting with this prefix and manages the `m` bits as it wishes.
 
   .. figure:: pkt/macaddr-eui64.png
      :align: center
@@ -92,9 +92,9 @@ The next step is to connect the LAN to the Internet. For this, a router is attac
 
 Assume that the LAN containing the two hosts and the router is assigned prefix ``2001:db8:1234:5678/64``. A first solution to configure the IPv6 addresses in this network is to assign them manually. A possible assignment is :
 
- - ``2001:db8:1234:5678::1`` is assigned to ``router`` 
- - ``2001:db8:1234:5678::AA`` is assigned to ``hostA`` 
- - ``2001:db8:1234:5678::BB`` is assigned to ``hostB`` 
+ - ``2001:db8:1234:5678::1`` is assigned to ``router``
+ - ``2001:db8:1234:5678::AA`` is assigned to ``hostA``
+ - ``2001:db8:1234:5678::BB`` is assigned to ``hostB``
 
 .. index:: Address resolution problem, Neighbor Discovery Protocol, NDP
 
@@ -102,7 +102,7 @@ To be able to exchange IPv6 packets with ``hostB``, ``hostA`` needs to know the 
 
 .. index:: Neighbor Solicitation message
 
-NDP allows a host to discover the MAC address used by any other host attached to the same LAN. NDP operates in two steps. First, the querier sends a multicast ICMPv6 Neighbor Solicitation message that contains as parameter the queried IPv6 address. This multicast ICMPv6 NS is placed inside a multicast frame [#fndpmulti]_. The queried node receives the frame, parses it and replies with a unicast ICMPv6 Neighbor Advertisement that provides its own IPv6 and MAC addresses. Upon reception of the Neighbor Advertisement message, the querier stores the mapping between the IPv6 and the MAC address inside its NDP table. This table is a data structure that maintains a cache of the recently received Neighbor Advertisement. Thanks to this cache, a host only needs to send a Neighbor Sollicitation message for the first packet that it sends to a given host. After this initial packet, the NDP table can provide the mapping between the destination IPv6 address and the corresponding MAC address. 
+NDP allows a host to discover the MAC address used by any other host attached to the same LAN. NDP operates in two steps. First, the querier sends a multicast ICMPv6 Neighbor Solicitation message that contains as parameter the queried IPv6 address. This multicast ICMPv6 NS is placed inside a multicast frame [#fndpmulti]_. The queried node receives the frame, parses it and replies with a unicast ICMPv6 Neighbor Advertisement that provides its own IPv6 and MAC addresses. Upon reception of the Neighbor Advertisement message, the querier stores the mapping between the IPv6 and the MAC address inside its NDP table. This table is a data structure that maintains a cache of the recently received Neighbor Advertisement. Thanks to this cache, a host only needs to send a Neighbor Sollicitation message for the first packet that it sends to a given host. After this initial packet, the NDP table can provide the mapping between the destination IPv6 address and the corresponding MAC address.
 
  .. msc::
       router [label="router", linecolour=black],
@@ -111,7 +111,7 @@ NDP allows a host to discover the MAC address used by any other host attached to
 
       hostA->* [ label = "NS : Who has 2001:db8:1234:5678::BB" ];
       hostB->hostA [ label = "NA : 1234:5678:9abc:dede"];
-      |||;  
+      |||;
 
 The NS message can also be used to verify the reachability of a host in the local subnet. For this usage, NS messages can be sent in unicast since other nodes on the subnet do not need to process the message.
 
@@ -122,11 +122,11 @@ When an entry in the NDP table times out on a host, it may either be deleted or 
 
 .. index:: Duplicate Address Detection
 
-This is not the only usage of the Neighbor Solicitation and Neighbor Advertisement messages. They are also used to detect the utilization of duplicate addresses. In the network above, consider what happens when a new host is connected to the LAN. If this host is configured by mistake with the same address as ``hostA`` (i.e. ``2001:db8:1234:5678::AA``), problems could occur. Indeed, if two hosts have the same IPv6 address on the LAN, but different MAC addresses, it will be difficult to correctly reach them. IPv6 anticipated this problem and includes a `Duplicate Address Detection` Algorithm (DAD). When an IPv6 address [#flinklocal]_ is configured on a host, by any means, the host must verify the uniqueness of this address on the LAN. For this, it multicasts an ICMPv6 Neighbor Solicitation that queries the network for its newly configured address. The IPv6 source address of this NS is set to ``::`` (i.e. the reserved unassigned address) if the host does not already have an IPv6 address on this subnet). If the NS does not receive any answer, the new address is considered to be unique and can safely be used. Otherwise, the new address is refused and an error message should be returned to the system administrator or a new IPv6 address should be generated. The `Duplicate Address Detection` Algorithm can prevent various operational problems that are often difficult to debug.
+This is not the only usage of the Neighbor Solicitation and Neighbor Advertisement messages. They are also used to detect the utilization of duplicate addresses. In the network above, consider what happens when a new host is connected to the LAN. If this host is configured by mistake with the same address as ``hostA`` (i.e. ``2001:db8:1234:5678::AA``), problems could occur. Indeed, if two hosts have the same IPv6 address on the LAN, but different MAC addresses, it will be difficult to correctly reach them. IPv6 anticipated this problem and includes a `Duplicate Address Detection` Algorithm (DAD). When an IPv6 address [#flinklocal]_ is configured on a host, by any means, the host must verify the uniqueness of this address on the LAN. For this, it multicasts an ICMPv6 Neighbor Solicitation that queries the network for its newly configured address. The IPv6 source address of this NS is set to ``::`` (i.e. the reserved unassigned address) if the host does not already have an IPv6 address on this subnet. If the NS does not receive any answer, the new address is considered to be unique and can safely be used. Otherwise, the new address is refused and an error message should be returned to the system administrator or a new IPv6 address should be generated. The `Duplicate Address Detection` Algorithm can prevent various operational problems that are often difficult to debug.
 
 
 
-.. There are several differences between IPv6 and IPv4 when considering their interactions with the datalink layer. In IPv6, the interactions between the network and the datalink layer is performed using ICMPv6. 
+.. There are several differences between IPv6 and IPv4 when considering their interactions with the datalink layer. In IPv6, the interactions between the network and the datalink layer is performed using ICMPv6.
 
 Few users manually configure the IPv6 addresses on their hosts. They prefer to rely on protocols that can automatically configure their IPv6 addresses. IPv6 supports two such protocols : DHCPv6 and the Stateless Address Autoconfiguration (SLAAC).
 
@@ -134,13 +134,13 @@ Few users manually configure the IPv6 addresses on their hosts. They prefer to r
 .. index:: DHCPv6, SLAC, Stateless Address Autoconfiguration
 
 
-The Stateless Address Autoconfiguration (SLAAC) mechanism defined in :rfc:`4862` enables hosts to automatically configure their addresses without maintaining any state. When a host boots, it derives its identifier from its datalink layer address [#fprivacy]_ as explained earlier and concatenates this 64 bits identifier to the `FE80::/64` prefix to obtain its link-local IPv6 address. It then multicasts a Neighbour Solicitation with its link-local address as a target to verify whether another host is using the same link-local address on this subnet. If it receives a Neighbour Advertisement indicating that the link-local address is used by another host, it generates another 64 bits identifier and sends again a Neighbour Solicitation. If there is no answer, the host considers its link-local address to be valid. This address will be used as the source address for all NDP messages sent on the subnet. 
+The Stateless Address Autoconfiguration (SLAAC) mechanism defined in :rfc:`4862` enables hosts to automatically configure their addresses without maintaining any state. When a host boots, it derives its identifier from its datalink layer address [#fprivacy]_ as explained earlier and concatenates this 64 bits identifier to the `FE80::/64` prefix to obtain its link-local IPv6 address. It then multicasts a Neighbour Solicitation with its link-local address as a target to verify whether another host is using the same link-local address on this subnet. If it receives a Neighbour Advertisement indicating that the link-local address is used by another host, it generates another 64 bits identifier and sends again a Neighbour Solicitation. If there is no answer, the host considers its link-local address to be valid. This address will be used as the source address for all NDP messages sent on the subnet.
 
 To automatically configure its global IPv6 address, the host must know the globally routable IPv6 prefix that is used on the local subnet. IPv6 routers regularly multicast ICMPv6 Router Advertisement messages that indicate the IPv6 prefix assigned to the subnet. The Router Advertisement message contains several interesting fields.
 
 .. figure:: pkt/router-adv.png
    :align: center
-   
+
    Format of the ICMPv6 Router Advertisement message
 
 This message is sent from the link-local address of the router on the subnet. Its destination is the IPv6 multicast address that targets all IPv6 enabled hosts (i.e. ``ff02::1``). The `Cur Hop Limit` field, if different from zero, allows to specify the default `Hop Limit` that hosts should use when sending IPv6 from this subnet. ``64`` is a frequently used value. The `M` and `O` bits are used to indicate that some information can be obtained from DHCPv6. The `Router Lifetime` parameter provides the expected lifetime (in seconds) of the sending router acting as a default router. This lifetime allows to plan the replacement of a router by another one in the same subnet. The `Reachable Time` and the `Retrans Timer` parameter are used to configure the utilisation of the NDP protocol on the hosts attached to the subnet.
@@ -192,16 +192,16 @@ The last point that needs to be explained about ICMPv6 is the `Redirect` message
       router2--lan;
    }
 
-In this network, ``router1`` is the default router for all hosts. The second router, ``router2`` provides connectivity to a specific IPv6 subnet, e.g. ``2001:db8:abcd::/48``. These two routers attached to the same subnet can be used in different ways. First, it is possible to manually configure the routing tables on all hosts to add a route towards ``2001:db8:abcd::/48`` via ``router2``. Unfortunately, forcing such manual configuration boils down all the benefits of using address auto-configuration in IPv6. The second approach is to automatically configure a default route via ``router1`` on all hosts. With such route, when a host needs to send a packet to any address within ``2001:db8:abcd::/48``, it will send it to ``router1``. ``router1`` would consult its routing table and find that the packet needs to be sent again on the subnet to reach ``router2``. This is a waste of time. A better approach would be to enable the hosts to automatically learn the new route. This is possible thanks to the ICMPv6 `Redirect` message. When ``router1`` receives a packet that needs to be forwarded back on the same interface, it replies with a `Redirect` message that indicates that the packet should have been sent via ``router2``. Upon reception of a `Redirect`  message, the host updates it forwarding table to include a new transient entry for the destination reported in the message. A timeout is usually associated with  this transient entry to automatically delete it after some time.
- 
+In this network, ``router1`` is the default router for all hosts. The second router, ``router2`` provides connectivity to a specific IPv6 subnet, e.g. ``2001:db8:abcd::/48``. These two routers attached to the same subnet can be used in different ways. First, it is possible to manually configure the routing tables on all hosts to add a route towards ``2001:db8:abcd::/48`` via ``router2``. Unfortunately, forcing such manual configuration boils down all the benefits of using address auto-configuration in IPv6. The second approach is to automatically configure a default route via ``router1`` on all hosts. With such route, when a host needs to send a packet to any address within ``2001:db8:abcd::/48``, it will send it to ``router1``. ``router1`` would consult its routing table and find that the packet needs to be sent again on the subnet to reach ``router2``. This is a waste of time. A better approach would be to enable the hosts to automatically learn the new route. This is possible thanks to the ICMPv6 `Redirect` message. When ``router1`` receives a packet that needs to be forwarded back on the same interface, it replies with a `Redirect` message that indicates that the packet should have been sent via ``router2``. Upon reception of a `Redirect`  message, the host updates its forwarding table to include a new transient entry for the destination reported in the message. A timeout is usually associated with  this transient entry to automatically delete it after some time.
+
 
 .. index:: DHCPv6
 
 
 
-An alternative is the Dynamic Host Configuration Protocol (DHCP) defined in :rfc:`2131` and :rfc:`3315`. DHCP allows a host to automatically retrieve its assigned IPv6 address, but relies on  server. A DHCP server is associated to each subnet [#fdhcpserver]_. Each DHCP server manages a pool of IPv6 addresses assigned to the subnet. When a host is first attached to the subnet, it sends a DHCP request message in a UDP segment (the DHCP server listens on port 67). As the host knows neither its IPv6 address nor the IPv6 address of the DHCP server, this UDP segment is sent inside a multicast packet target at the DHCP servers. The DHCP request may contain various options such as the name of the host, its datalink layer address, etc. The server captures the DHCP request and selects an unassigned address in its address pool. It then sends the assigned IPv6 address in a DHCP reply message which contains the datalink layer address of the host and additional information such as the subnet mask, the address of the default router or the address of the DNS resolver. The DHCP reply also specifies the lifetime of the address allocation. This forces the host to renew its address allocation once it expires. Thanks to the limited lease time, IP addresses are automatically returned to the pool of addresses when  hosts are powered off. 
+An alternative is the Dynamic Host Configuration Protocol (DHCP) defined in :rfc:`2131` and :rfc:`3315`. DHCP allows a host to automatically retrieve its assigned IPv6 address, but relies on  server. A DHCP server is associated to each subnet [#fdhcpserver]_. Each DHCP server manages a pool of IPv6 addresses assigned to the subnet. When a host is first attached to the subnet, it sends a DHCP request message in a UDP segment (the DHCP server listens on port 67). As the host knows neither its IPv6 address nor the IPv6 address of the DHCP server, this UDP segment is sent inside a multicast packet target at the DHCP servers. The DHCP request may contain various options such as the name of the host, its datalink layer address, etc. The server captures the DHCP request and selects an unassigned address in its address pool. It then sends the assigned IPv6 address in a DHCP reply message which contains the datalink layer address of the host and additional information such as the subnet mask, the address of the default router or the address of the DNS resolver. The DHCP reply also specifies the lifetime of the address allocation. This forces the host to renew its address allocation once it expires. Thanks to the limited lease time, IP addresses are automatically returned to the pool of addresses when  hosts are powered off.
 
-Both SLAAC and DHCPv6 can be extended to provide additional information beyond the IPv6 prefix/address. For example, :rfc:`6106` defines options for the ICMPv6 ND message that can carry the IPv6 address of the recursive DNS resolver and a list of default domain search suffixes. It is also possible to combine SLAAC with DHCPv6. :rfc:`3736` defines a stateless variant of DHCPv6 that can be used to distribute DNS information while SLAAC is used to distribute the prefixes. 
+Both SLAAC and DHCPv6 can be extended to provide additional information beyond the IPv6 prefix/address. For example, :rfc:`6106` defines options for the ICMPv6 ND message that can carry the IPv6 address of the recursive DNS resolver and a list of default domain search suffixes. It is also possible to combine SLAAC with DHCPv6. :rfc:`3736` defines a stateless variant of DHCPv6 that can be used to distribute DNS information while SLAAC is used to distribute the prefixes.
 
 
 
@@ -216,7 +216,7 @@ Both SLAAC and DHCPv6 can be extended to provide additional information beyond t
 
 .. [#flinklocal] The DAD algorithm is also used with `link-local` addresses.
 
-.. [#fprivacy] Using a datalink layer address to derive a 64 bits identifier for each host raises privacy concerns as the host will always use the same identifier. Attackers could use this to track hosts on the Internet. An extension to the Stateless Address Configuration mechanism that does not raise privacy concerns is defined in :rfc:`4941`. These privacy extensions allow a host to generate its 64 bits identifier randomly every time it attaches to a subnet. It then becomes impossible for an attacker to use the 64-bits identifier to track a host. 
+.. [#fprivacy] Using a datalink layer address to derive a 64 bits identifier for each host raises privacy concerns as the host will always use the same identifier. Attackers could use this to track hosts on the Internet. An extension to the Stateless Address Configuration mechanism that does not raise privacy concerns is defined in :rfc:`4941`. These privacy extensions allow a host to generate its 64 bits identifier randomly every time it attaches to a subnet. It then becomes impossible for an attacker to use the 64-bits identifier to track a host.
 
 .. [#fsend] Using a `Hop Limit` of ``255`` prevents one family of attacks against ICMPv6, but other attacks still remain possible. A detailed discussion of the security issues with IPv6 is outside the scope of this book. It is possible to secure NDP by using the `Cryptographically Generated IPv6 Addresses` (CGA) defined in :rfc:`3972`. The Secure Neighbour Discovery Protocol is defined in :rfc:`3971`. A detailed discussion of the security of IPv6 may be found in [HV2008]_.
 
