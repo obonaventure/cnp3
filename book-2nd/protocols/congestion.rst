@@ -186,7 +186,7 @@ As the losses are equally spaced, the congestion window always starts at some va
 
 However, given the regular losses that we consider, the number of segments that are sent between two losses (i.e. during a cycle) is by definition equal to :math:`\frac{1}{p}`. Thus, :math:`W=\sqrt{\frac{8}{3 \times p}}=\frac{k}{\sqrt{p}}`. The throughput (in bytes per second) of the TCP connection is equal to the number of segments transmitted divided by the duration of the cycle :
 
- :math:`Throughput=\frac{area \times MSS}{time} = \frac{ \frac{3 \times W^2}{8}}{\frac{W}{2} \times rtt}`
+ :math:`Throughput=\frac{area \times MSS}{time} = \frac{ \frac{3 \times W^2}{8} \times MSS}{\frac{W}{2} \times rtt}`
  or, after having eliminated `W`, :math:`Throughput=\sqrt{\frac{3}{2}} \times \frac{MSS}{rtt \times \sqrt{p}}`
 
 
