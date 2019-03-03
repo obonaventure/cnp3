@@ -7,19 +7,19 @@ Securing the Domain Name System
 ===============================
 
 The Domain Name System provides a critical service in the Internet 
-infrastructure since it maps the domain names that are used by endusers 
-onto IP addresses. Since endusers rely on names to identify the servers
+infrastructure since it maps the domain names that are used by end users 
+onto IP addresses. Since end users rely on names to identify the servers
 that they connect to, any incorrect information distributed by the DNS
-would direct endusers' connections to invalid destinations. Unfortunately,
+would direct end users' connections to invalid destinations. Unfortunately,
 several attacks of this kind occurred in the past. A detailed analysis
 of the security threats against the DNS appeared in :rfc:`3833`. We consider
 three of these threats in this section and leave the others to :rfc:`3833`.
 
 The first type of attack is `eavesdropping`. An attacker who can capture
 packets sent to a DNS resolver or a DNS server can gain valuable information
-about the DNS names that are used by a given enduser. If the attacker can
+about the DNS names that are used by a given end user. If the attacker can
 capture all the packets sent to a DNS resolver, he/she can collect a lot of
-meta data about the domain names used by the enduser. Preventing this type
+meta data about the domain names used by the end user. Preventing this type
 of attack has not been an objective of the initial design of the DNS. 
 There are currently discussions with the IETF to carry DNS messages over
 TLS sessions to protect against such attacks. However, these solutions
