@@ -26,11 +26,11 @@ import sys, os
 #sys.path.append(os.path.abspath('mcq'))
 #sys.path.insert(0, os.path.abspath('.'))
 
-extensions = ['sphinx.ext.todo', 'sphinxcontrib.mscgen','sphinx.ext.graphviz','sphinxcontrib.tikz', 'sphinx.ext.mathjax']
+extensions = ['sphinx.ext.todo', 'sphinxcontrib.mscgen', 'sphinx.ext.graphviz', 'sphinxcontrib.tikz', 'sphinx.ext.mathjax']
 #extensions = ['sphinx.ext.todo', 'sphinx.ext.pngmath', 'sphinxcontrib.mscgen','sphinx.ext.graphviz','sphinxcontrib.tikz']
 #mscgen
 #mscgen_args=['-T eps']
-mscgen='/home/vagrant/local/mscgen-0.20/bin/mscgen'
+#mscgen='/home/vagrant/local/mscgen-0.20/bin/mscgen'
 #mscgen_epstopdf='/usr/bin/epstopdf'
 mscgen_epstopdf_args=['--debug']
 
