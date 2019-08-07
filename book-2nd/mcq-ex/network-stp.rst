@@ -296,7 +296,7 @@ The third information contains two parts : the identifier of the switch that sen
 
       .. comment:: The BPDU of this switch is worse than the BPDU of switch ``6``. 
 
-   .. positive:: The port of switch ``6`` attached to the Hub is a blocked  port.
+   .. negative:: The port of switch ``6`` attached to the Hub is a blocked  port.
 
 
 
