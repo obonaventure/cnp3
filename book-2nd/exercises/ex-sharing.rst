@@ -390,7 +390,7 @@ To understand congestion control algorithms, it can also be useful to represent 
       \tikzset{host/.style = {circle, draw, text centered, minimum height=2em}, }
       \tikzset{ftable/.style={rectangle, dashed, draw} }
       \node[host] (A) {A};
-      \node[host, right=3 cm of A] (R) {R};
+      \node[router, right=3 cm of A] (R) {R};
       \node[host, right=3 cm of R] (B) {B};
       \draw[-] (A) -- node [midway, above] { 3 Mbps} (R); 
       \draw[-] (R) -- node [midway, above] { 1 Mbps} (B); 

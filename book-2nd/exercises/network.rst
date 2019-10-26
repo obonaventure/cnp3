@@ -1,4 +1,4 @@
-.. Copyright |copy| 2013 by Olivier Bonaventure
+.. Copyright |copy| 2013, 2019 by Olivier Bonaventure
 .. This file is licensed under a `creative commons licence <http://creativecommons.org/licenses/by/3.0/>`_
 
 
@@ -66,10 +66,22 @@ Network : Open questions
 
 4. Routing protocols used in data networks only use positive link weights. What would happen with a distance vector routing protocol in the network below that contains a negative link weight ?
 
- .. figure:: ../../book/network/svg/ex-simple.png
-    :scale: 50 
 
-    A simple network
+   .. tikz::
+      :libs: positioning, matrix, arrows 
+
+      \tikzstyle{arrow} = [thick,->,>=stealth]
+      \tikzset{router/.style = {rectangle, draw, text centered, minimum height=2em}, }
+      \tikzset{host/.style = {circle, draw, text centered, minimum height=2em}, }
+      \tikzset{ftable/.style={rectangle, dashed, draw} }
+      \node[router] (R1) { R1 };
+      \node[router,right=of R1] (R2) {R2};
+      \node[router,below=of R1] (R3) {R3};
+      \draw[black] (R1) -- (R2) node [midway, below] {\small{1}};
+      \draw[black] (R2) -- (R3) node [midway, below] {\small{-3}};
+      \draw[black] (R1) -- (R3) node [midway, below] {\small{-1}};
+
+
 
 5. When a network specialist designs a network, one of the problems that he needs to solve is to set the metrics the links in his network. In the USA, the Abilene network interconnects most of the research labs and universities. The figure below shows the topology  of this network in 2009.
 
@@ -92,11 +104,27 @@ Network : Open questions
 
 6. In the five nodes network shown below, can you configure the link metrics so that the packets sent by router `E` to router `A` use link `B->A` while the packets sent by router `B` use links `B->D` and `D->A`?
 
-.. figure:: ../../book/network/svg/ex-five-routers.png
-   :align: center 
-   :scale: 50 
+   .. tikz::
+      :libs: positioning, matrix, arrows 
 
-   Simple five nodes network
+      \tikzstyle{arrow} = [thick,->,>=stealth]
+      \tikzset{router/.style = {rectangle, draw, text centered, minimum height=2em}, }
+      \tikzset{host/.style = {circle, draw, text centered, minimum height=2em}, }
+      \tikzset{ftable/.style={rectangle, dashed, draw} }
+      \node[router] (R1) { R1 };
+      \node[router,below right=of R1] (R2) {R2};
+      \node[router,below left=of R1] (R3) {R3};
+      \node[router,below=of R2] (R4) {R4};
+      \node[router,below=of R3] (R5) {R5};
+      \node[router,below right=of R1] (R2) {R2};
+      \draw[black] (R1) -- (R2);
+      \draw[black] (R2) -- (R3);
+      \draw[black] (R1) -- (R3);
+      \draw[black] (R2) -- (R4);
+      \draw[black] (R3) -- (R5);
+      \draw[black] (R4) -- (R5);
+      
+      
 
 7. In the five nodes network shown above, can you configure the link weights so that the packets sent by router `E` (resp. `F`) follow the `E->B->A` path (resp. `F->D->B->A`) ?
 

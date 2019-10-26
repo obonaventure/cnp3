@@ -6,7 +6,7 @@ Bibliography
 
 Whenever possible, the bibliography includes stable hypertext links to the references cited. 
 
-.. [IEEE802.11] LAN/MAN Standards Committee of the IEEE Computer Society. `IEEE Standard for Information Technology - Telecommunications and information exchange between systems - local and  metropolitan area networks - specific requirements - Part 11 : Wireless LAN Medium Access Control (MAC) and Physical Layer (PHY) Specifications <http://standards.ieee.org/getieee802/802.11.html>`_. IEEE, 1999. 
+.. [IEEE802.11] LAN/MAN Standards Committee of the IEEE Computer Society. `IEEE Standard for Information Technology - Telecommunications and information exchang between systems - local and  metropolitan area networks - specific requirements - Part 11 : Wireless LAN Medium Access Control (MAC) and Physical Layer (PHY) Specifications <http://standards.ieee.org/getieee802/802.11.html>`_. IEEE, 1999. 
 .. [IEEE802.1d] LAN/MAN Standards Committee of the IEEE Computer Society, `IEEE Standard for Local and metropolitan area networks Media Access Control (MAC) Bridges <http://standards.ieee.org/getieee802/download/802.1D-2004.pdf>`_ , IEEE Std 802.1DTM-2004, 2004, 
 .. [IEEE802.1q] LAN/MAN Standards Committee of the IEEE Computer Society, `IEEE Standard for Local and metropolitan area networks— Virtual Bridged Local Area Networks <http://standards.ieee.org/getieee802/download/802.1Q-2005.pdf>`_, 2005, 
 .. [IEEE802.2] IEEE 802.2-1998 (ISO/IEC 8802-2:1998), IEEE Standard for Information technology--Telecommunications and information exchange between systems--Local and metropolitan area networks--Specific requirements--Part 2: Logical Link Control. Available from http://standards.ieee.org/getieee802/802.2.html
@@ -19,7 +19,7 @@ Whenever possible, the bibliography includes stable hypertext links to the refer
 .. [AW05] Arlitt, M. and Williamson, C. 2005. `An analysis of TCP reset behaviour on the internet <http://doi.acm.org/10.1145/1052812.1052823>`_. SIGCOMM Comput. Commun. Rev. 35, 1 (Jan. 2005), 37-44. 
 .. [Abramson1970] Abramson, N., `THE ALOHA SYSTEM: another alternative for computer communications <http://doi.acm.org/10.1145/1478462.1478502>`_. In Proceedings of the November 17-19, 1970, Fall Joint Computer Conference (Houston, Texas, November 17 - 19, 1970). AFIPS '70 (Fall). ACM, New York, NY, 281-285. 
 .. [B1989] Berners-Lee, T., `Information Management: A Proposal <http://www.w3.org/History/1989/proposal.html>`_, March 1989 
-.. [Baran] Baran, P., `On distributed communications series`, http://www.rand.org/about/history/baran.list.html, 
+.. [Baran] Baran, P., `On distributed communications series`, http://www.rand.org/about/history/baran.list.html
 .. [BE2007] Biondi, P. and A. Ebalard, `IPv6 Routing Header  Security <http://www.secdev.org/conf/IPv6_RH_security-csw07.pdf>`_, CanSecWest Security Conference 2007, April 2007. 
 .. [BF1995] Bonomi, F. and  Fendick, K.W., `The rate-based flow control framework for the available bit rate ATM service <http://dx.doi.org/10.1109/65.372653>`_, IEEE Network, Mar/Apr 1995, Volume: 9,  Issue: 2, pages : 25-39 
 .. [BG1992] Bertsekas, D., Gallager, G., `Data networks <http://books.google.com/books?id=FfpSAAAAMAAJ>`_, second edition, Prentice Hall, 1992
