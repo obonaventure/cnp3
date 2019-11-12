@@ -124,8 +124,8 @@ This count to infinity problem occurs because router `A` advertises to router `D
     v=Vector()
     for d in R[]:
       if (R[d].link != l) :
-      	 v=v+Pair(d,R[d.cost])
-    send(v)
+      	 v.add(Pair(d,R[d].cost))
+    send(v,l)
     # end for d in R[]
   #end for l in interfaces  
 
@@ -140,10 +140,10 @@ This technique is called `split-horizon`. With this technique, the count to infi
     v=Vector()
     for d in R[]:
       if (R[d].link != l) :
-      	 v=v+Pair(d,R[d.cost])
+      	 v.add(Pair(d,R[d].cost))
       else:
-         v=v+Pair(d,infinity);
-    send(v)
+         v.add(Pair(d,infinity))
+    send(v,l)
     # end for d in R[]
   #end for l in interfaces  
 
