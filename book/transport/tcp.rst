@@ -789,7 +789,7 @@ In general, the maximum throughput that can be achieved by a TCP connection depe
 
 .. [#faveragebandwidth] A precise estimation of the maximum bandwidth that can be achieved by a TCP connection should take into account the overhead of the TCP and IP headers as well.
 
-.. [#ftcphosts] See http://fasterdata.es.net/tuning.html for more information on how to tune a TCP implementation
+.. [#ftcphosts] See https://fasterdata.es.net/host-tuning/ for more information on how to tune a TCP implementation
 
 .. [#frttmes] In theory, a TCP implementation could store the timestamp of each data segment transmitted and compute a new estimate for the round-trip-time upon reception of the corresponding acknowledgement. However, using such frequent measurements introduces a lot of noise in practice and many implementations still measure the round-trip-time once per round-trip-time by recording the transmission time of one segment at a time :rfc:`2988`
 
