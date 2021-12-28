@@ -122,7 +122,7 @@ An important point to note regarding the Domain Name System is its extensibility
 .. rubric:: Footnotes
 
 
-.. [#fhosts] The :term:`hosts.txt` file is not maintained anymore. A historical snapshot retrieved on April 15th, 1984 is available from http://ftp.univie.ac.at/netinfo/netinfo/hosts.txt
+.. [#fhosts] The :term:`hosts.txt` file is not maintained anymore. A historical snapshot dated April 19th, 1984 is available from https://www.saildart.org/HOSTS.TXT%5BHST,NET%5D15
 
 .. [#fdnstimeline] See http://www.donelan.com/dnstimeline.html for a time line of DNS related developments. 
 
