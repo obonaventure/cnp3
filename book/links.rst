@@ -36,7 +36,7 @@
 
 .. _Richard Stevens: http://www.kohala.com/
 
-.. _Van Jacobson: http://www.parc.com/about/people/88/van-jacobson.html
+.. _Van Jacobson: https://en.wikipedia.org/wiki/Van_Jacobson
 
 .. _Sally Floyd: http://www.icir.org/floyd/
 
