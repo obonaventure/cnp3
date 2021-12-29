@@ -16,7 +16,7 @@
 
 .. _Unicode: http://en.wikipedia.org/wiki/Unicode
 
-.. _Internet drafts: http://www.ietf.org/id-info/
+.. _Internet drafts: https://www.ietf.org/standards/ids/
 
 .. _telnet: http://en.wikipedia.org/wiki/Telnet
 
