@@ -156,7 +156,7 @@
 
 .. _cisco: http://www.cisco.com
 
-.. _level3: https://www.centurylink.com
+.. _level3: https://www.lumen.com
 
 .. _google: http://www.google.com
 
