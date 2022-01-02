@@ -2,12 +2,12 @@
 Computer Networking : Principles, Protocols and Practice
 ========================================================
 
-(c) Olivier Bonaventure, Universite catholique de Louvain, Belgium
-    http://inl.info.ucl.ac.be
+    (c) Olivier Bonaventure, Universite catholique de Louvain, Belgium
+    https://inl.info.ucl.ac.be
 
-All the files in this subversion repository are licensed under a Creative Commons Attribution-Share Alike 3.0 Unported License.
+All the files in this repository are licensed under a Creative Commons Attribution-Share Alike 3.0 Unported License.
 
-Like any open-source project, the future of Computer Networking Principles, Protocols and Practice will depend on the work of contributors. Most of the text has been written by Olivier Bonaventure. Laurent Vanbever, Virginie Van den Schriek, Damien Saucez and Mickael Hoerdt have contributed to exercises. Stéphane Bortzmeyer has provided many comments that have improved the book.
+Like any open-source project, the future of Computer Networking Principles, Protocols and Practice will depend on the work of contributors. Most of the text has been written by Olivier Bonaventure. Laurent Vanbever, Virginie Van den Schriek, Damien Saucez and Mickael Hoerdt have contributed to exercises. StÃ©phane Bortzmeyer has provided many comments that have improved the book.
 
 This directory is structured as follows :
 
@@ -21,9 +21,11 @@ The book was compiled on MacOS/X Snow Leopard using sphinx. inkscape is required
 
 The textbook was written on a Mac running Snow Leopard, but it should rebuild on other Unix based systems. Comments on issues in rebuilding the textbook are welcome.
 
-
+This repository is not maintained anymore, please see the third edition:
+- https://www.computer-networking.info
+- https://github.com/cnp3/ebook
 
     	     	 	      
 				Olivier Bonaventure
-				Louvain-la-Neuve, July 2011 
+				
 
