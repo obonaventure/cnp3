@@ -11,8 +11,8 @@ Sharing resources
    This is an unpolished draft of the second edition of this ebook. If you find any error or have suggestions to improve the text, please create an issue via https://github.com/obonaventure/cnp3/issues?milestone=4
 
 
-Open questions
-==============
+Medium Access Control
+=====================
 
 To understand the operation of Medium Access Control algorithms, it is often interesting to use a geometric representation of the transmission of frames on a shared medium. This representation is suitable if the communicating devices are attached to a single cable. Consider a simple scenario with a host connected at one end of a cable. For simplicity, let us consider a cable that has a length of one kilometer. Let us also consider that the propagation delay of the electrical signal is five microseconds per kilometer. The figure below shows the transmission of a 2000 bits frame at 100 Mbps by host A on the cable.
 
@@ -339,7 +339,10 @@ In a shared medium, a collision may happen if two hosts transmit at almost the s
      \draw[very thick, blue, ->] (10,7.5) node [anchor=north, fill=white] {B$\rightarrow$C [100 bits]} -- (9,6.5);
 
 
-10. Consider the network below. Compute the max-min fair allocation for the hosts in this network assuming that nodes `Sx` always send traffic towards node `Dx`. Furthermore, link `R1-R2` has a bandwidth of 10 Mpbs while link `R2-R3` has a bandwidth of 20 Mbps.
+Fairness and congestion control
+===============================
+
+1. Consider the network below. Compute the max-min fair allocation for the hosts in this network assuming that nodes `Sx` always send traffic towards node `Dx`. Furthermore, link `R1-R2` has a bandwidth of 10 Mpbs while link `R2-R3` has a bandwidth of 20 Mbps.
 
 
    .. tikz::
@@ -387,7 +390,7 @@ To understand congestion control algorithms, it can also be useful to represent 
       \tikzset{host/.style = {circle, draw, text centered, minimum height=2em}, }
       \tikzset{ftable/.style={rectangle, dashed, draw} }
       \node[host] (A) {A};
-      \node[host, right=3 cm of A] (R) {R};
+      \node[router, right=3 cm of A] (R) {R};
       \node[host, right=3 cm of R] (B) {B};
       \draw[-] (A) -- node [midway, above] { 3 Mbps} (R); 
       \draw[-] (R) -- node [midway, above] { 1 Mbps} (B); 
@@ -532,7 +535,7 @@ In general, the links have a non-zero delay. This is illustrated in the figure b
      \draw[very thick, red, ->] (7,4) -- (1,3);
      \draw[very thick, blue, ->] (7,3) -- (2.5,2);
 
-11. Consider the network depicted in the figure below.
+2. Consider the network depicted in the figure below.
 
    .. tikz::
       :libs: positioning, matrix, arrows 
@@ -558,7 +561,7 @@ In general, the links have a non-zero delay. This is illustrated in the figure b
  d. Assume now that `R1` is using round-robin scheduling instead of a FIFO buffer. One queue is used to store the packets sent by `A` and another for the packets sent by `B`. `A` sends one 1000 bits packet every second while `B` sends packets at 10 Mbps. What is the round-trip-time measured by each of these two hosts if each of the two queues of `R1` can store 5 packets ? 
 
 
-12. When analyzing the reaction of a network using round-robin schedulers, it is sometimes useful to consider that the packets sent by each source are equivalent to a fluid and that each scheduler acts as a tap. Using this analogy, consider the network below. In this network, all the links are 100 Mbps and host `B` is sending packets at 100 Mbps. If A sends at 1, 5, 10, 20, 30, 40, 50, 60, 80 and 100 Mbps, what is the throughput that destination `D` will receive from `A`. Use this data to plot a graph that shows the portion of the traffic sent by host `A` which is received by host `D`. 
+3. When analyzing the reaction of a network using round-robin schedulers, it is sometimes useful to consider that the packets sent by each source are equivalent to a fluid and that each scheduler acts as a tap. Using this analogy, consider the network below. In this network, all the links are 100 Mbps and host `B` is sending packets at 100 Mbps. If A sends at 1, 5, 10, 20, 30, 40, 50, 60, 80 and 100 Mbps, what is the throughput that destination `D` will receive from `A`. Use this data to plot a graph that shows the portion of the traffic sent by host `A` which is received by host `D`. 
 
 
    .. tikz::
@@ -576,16 +579,16 @@ In general, the links have a non-zero delay. This is illustrated in the figure b
       \draw[-] (B) -- (R1); 
       \draw[-] (R1)  (D); 
 
-13. Compute the max-min fair bandwidth allocation in the network below.
+4. Compute the max-min fair bandwidth allocation in the network below.
 
- .. figure:: /principles/figures/png/ex-fairness.png
+ .. figure:: ../principles/figures/png/ex-fairness.png
     :align: center
 
 
     Simple network topology
 
 
-14. Consider the simple network depicted in the figure below.   
+5. Consider the simple network depicted in the figure below.   
 
    .. tikz::
       :libs: positioning, matrix, arrows 
@@ -607,7 +610,7 @@ In general, the links have a non-zero delay. This is illustrated in the figure b
  b. If host `A` uses a window of two segments and needs to transmit five segments of data. How long does the entire transfer lasts ?
  c. Same question as above, but now host `A` uses the simple DECBIT congestion control mechanism and a maximum window size of four segments.
 
-15. Consider the network depicted in the figure below.
+6. Consider the network depicted in the figure below.
 
    .. tikz::
       :libs: positioning, matrix, arrows 

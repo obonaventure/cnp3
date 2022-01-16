@@ -142,14 +142,16 @@ Error detection and correction
         
    .. negative::
 
+    .. comment:: 
+    
+       This is an odd parity block
+       
     .. code-block:: text
         
         1010111011110101
         1110101010101011 
         1111111011111111  
         0100010101011110 => parity block
-      
-      .. comment:: This is an odd parity block
 
    .. negative::
 
@@ -174,7 +176,7 @@ Error detection and correction
  
     .. code-block:: text
 
-        1011101111&10111
+        1011101111110111
         1001011101010101
         1010000011111111
         1010000011111111 => parity block
@@ -271,15 +273,15 @@ Alternating Bit Protocol
    At this stage, which of the following affirmations are correct (select all of them) ?
 
 
-   .. positive::  If the right host receives `D(1,y)`, it will ignore the frame and reply with `C(OK1)`.  
+   .. positive::  If the right host receives `D(1,x)`, it will ignore the frame and reply with `C(OK1)`.  
 
-   .. positive::  If the left host receives `C(OK,0)`, it will retransmit the frame `D(1,y)`. 
+   .. positive::  If the left host receives `C(OK,0)`, it will retransmit the frame `D(1,x)`. 
 
-   .. negative::  If the right host receives `D(1,y)`, it will ignore the frame and reply with `C(OK0)`. 
+   .. negative::  If the right host receives `D(1,x)`, it will ignore the frame and reply with `C(OK0)`. 
 
-   .. negative::  If the right host receives `D(0,y)`, it will ignore the frame and reply with `C(OK1)`. 
+   .. negative::  If the right host receives `D(0,x)`, it will ignore the frame and reply with `C(OK1)`. 
 
-   .. positive::  If the right host receives `D(0,y)`, it will accept the frame and reply with `C(OK0)`. 
+   .. positive::  If the right host receives `D(0,x)`, it will accept the frame and reply with `C(OK0)`. 
 
 
 .. question:: abp1

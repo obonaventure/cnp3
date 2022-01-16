@@ -686,9 +686,9 @@ the other's public key.
       c [label="Bob", linecolour=black],
       d [label="", linecolour=white];
 
-      a=>b [ label = "" ] ,
-      b>>y [ label = "I'm Alice, key=Alice_{pub}", arcskip="1"];
-      y>>c [ label = "I'm Alice, key=Mallory_{pub}", color="red", arcskip="1"];
+      a=>b [ label = " " ] ,
+      b>>y [ label = "I'm Alice key=Alice_{pub}", arcskip="1" ];
+      y>>c [ label = "I'm Alice key=Mallory_{pub}", textcolour="red", arcskip="1" ];
       c=>d [ label = "" ];
 
       d=>c [ label = "" ] ,
@@ -697,7 +697,7 @@ the other's public key.
 
       a=>b [ label = "" ] ,
       b>>y [ label = "E_p(Alice_{priv},R)", arcskip="1"];
-      y>>c [ label = "E_p(Mallory_{priv},R)", color="red", arcskip="1"];
+      y>>c [ label = "E_p(Mallory_{priv},R)", textcolour="red",  arcskip="1"];
       c=>d [ label = "" ];
 
       d=>c [ label = "" ] ,
@@ -730,7 +730,7 @@ both have been authenticated.
       d [label="", linecolour=white];
 
       a=>b [ label = "" ] ,
-      b>>c [ label = I'm Alice", arcskip="1"];
+      b>>c [ label = "I'm Alice", arcskip="1"];
       c=>d [ label = "" ];
 
       d=>c [ label = "" ] ,
@@ -920,10 +920,9 @@ used by an encryption algorithm even in the presence of an
 eavesdropper. The most widely used algorithm that allows
 two users to safely exchange an integer in the presence of
 an eavesdropper is the one proposed by Diffie and Hellman [DH1976]_.
-It operates with (large) integers. Two of them are public, the
-base, :math:`g`, which is prime and the modulus, :math:`p`, which
-must be a primitive root of :math:`p`. The communicating users
-select a random integer, :math:`a` for Alice and :math:`b` for
+It operates with (large) integers. Two of them are public, the modulus, p, 
+which is prime and the base, g, which must be a primitive root of p. 
+The communicating users select a random integer, :math:`a` for Alice and :math:`b` for
 Bob. The exchange starts as :
 
  - Alice selects a random integer, :math:`a` and sends

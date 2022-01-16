@@ -1,4 +1,4 @@
-.. Copyright |copy| 2013 by Olivier Bonaventure
+.. Copyright |copy| 2013, 2019 by Olivier Bonaventure
 .. This file is licensed under a `creative commons licence <http://creativecommons.org/licenses/by/3.0/>`_
 
 
@@ -8,8 +8,8 @@
    This is an unpolished draft of the second edition of this ebook. If you find any error or have suggestions to improve the text, please create an issue via https://github.com/obonaventure/cnp3/issues?milestone=2
 
 
-Open questions
-==============
+Network : Open questions
+========================
 
 1. In your daily life, you also use hierarchical and flat address spaces. Can you provide examples of these two types of addresses and discuss the benefits of using a hierarchical or flat addressing space in this particular context ?
 
@@ -66,14 +66,26 @@ Open questions
 
 4. Routing protocols used in data networks only use positive link weights. What would happen with a distance vector routing protocol in the network below that contains a negative link weight ?
 
- .. figure:: ../../book/network/svg/ex-simple.png
-    :scale: 50 
 
-    A simple network
+   .. tikz::
+      :libs: positioning, matrix, arrows 
+
+      \tikzstyle{arrow} = [thick,->,>=stealth]
+      \tikzset{router/.style = {rectangle, draw, text centered, minimum height=2em}, }
+      \tikzset{host/.style = {circle, draw, text centered, minimum height=2em}, }
+      \tikzset{ftable/.style={rectangle, dashed, draw} }
+      \node[router] (R1) { R1 };
+      \node[router,right=of R1] (R2) {R2};
+      \node[router,below=of R1] (R3) {R3};
+      \draw[black] (R1) -- (R2) node [midway, below] {\small{1}};
+      \draw[black] (R2) -- (R3) node [midway, below] {\small{-3}};
+      \draw[black] (R1) -- (R3) node [midway, below] {\small{-1}};
+
+
 
 5. When a network specialist designs a network, one of the problems that he needs to solve is to set the metrics the links in his network. In the USA, the Abilene network interconnects most of the research labs and universities. The figure below shows the topology  of this network in 2009.
 
- .. figure:: /principles/figures/abilene-web-map.png
+ .. figure:: ../principles/figures/abilene-web-map.png
     :align: center
     :scale: 50 
 
@@ -92,11 +104,27 @@ Open questions
 
 6. In the five nodes network shown below, can you configure the link metrics so that the packets sent by router `E` to router `A` use link `B->A` while the packets sent by router `B` use links `B->D` and `D->A`?
 
-.. figure:: ../../book/network/svg/ex-five-routers.png
-   :align: center 
-   :scale: 50 
+   .. tikz::
+      :libs: positioning, matrix, arrows 
 
-   Simple five nodes network
+      \tikzstyle{arrow} = [thick,->,>=stealth]
+      \tikzset{router/.style = {rectangle, draw, text centered, minimum height=2em}, }
+      \tikzset{host/.style = {circle, draw, text centered, minimum height=2em}, }
+      \tikzset{ftable/.style={rectangle, dashed, draw} }
+      \node[router] (R1) { R1 };
+      \node[router,below right=of R1] (R2) {R2};
+      \node[router,below left=of R1] (R3) {R3};
+      \node[router,below=of R2] (R4) {R4};
+      \node[router,below=of R3] (R5) {R5};
+      \node[router,below right=of R1] (R2) {R2};
+      \draw[black] (R1) -- (R2);
+      \draw[black] (R2) -- (R3);
+      \draw[black] (R1) -- (R3);
+      \draw[black] (R2) -- (R4);
+      \draw[black] (R3) -- (R5);
+      \draw[black] (R4) -- (R5);
+      
+      
 
 7. In the five nodes network shown above, can you configure the link weights so that the packets sent by router `E` (resp. `F`) follow the `E->B->A` path (resp. `F->D->B->A`) ?
 
@@ -151,6 +179,7 @@ Open questions
 
  Is it possible to achieve these paths and if so what are the required forwarding tables ?
 
+ Same question with virtual circuits.
 
 10. Consider the network shown in the figure below.
 
@@ -214,8 +243,8 @@ Open questions
 
 
 
-Discussion questions
-====================
+Network: Discussion questions
+=============================
 
 
 1. The network below uses port forwarding tables. It has been running for several hours and all hosts have exchanged packets. What is the content of the port forwarding tables ?
@@ -317,7 +346,7 @@ At this point, a new link is added between `R1` and `R3`. What happens for the f
                on A      on B      on C     on D     on E
   -----------  --------  --------  -------  -------  -------
   A            0         1 via A   2 via B  3 via C  4 via D
-  B            1 via B   0                  1 via B  2 via C  3 via D
+  B            1 via B   0         1 via B  2 via C  3 via D
   C            2 via B   1 via C   0        1 via C  2 via D
   D            3 via B   2 via C   1 via D  0        1 via D
   E            4 via B   3 via C   2 via D  1 via E  0
@@ -329,22 +358,11 @@ At this point, a new link is added between `R1` and `R3`. What happens for the f
 
   * Consider the same distance vector protocol, but now with `triggered updates`. When link `B-C` fails, assume that `B` updates its routing table immediately and sends its distance vector to `A` and `D`. Assume that both `A` and `D` process the received distance vector and that `A` sends its own distance vector, ... Indicate all the distance vectors that are exchanged and update the table above each time a distance vector is sent by a router (and received by other routers) until all routers have learned a new route to each destination. How many distance vector messages must be exchanged until the network converges to a stable state ?
 
-6. Consider again the network shown above. After some time, link state routing converges and all routers compute the following routing tables :
+6. Consider again the network shown above. After some time, link state routing converges and all routers compute the same routing tables as above.
 
- ===========  ========  =========  =========  =========  =========
- Destination   Routes   Routes     Routes     Routes     Routes
-               on A     on B       on C       on D       on E
- -----------  --------  ---------  ---------  ---------  ---------
- A             0        2 via C    1 via A    3 via B,E  2 via C
- B             2 via C  0          1 via B    1 via B    2 via D,C
- C             1 via C  1 via C    0          2 via B,E  1 via C
- D             3 via C  1 via D    2 via B,E  0          1 via D
- E             2 via C  2 via C,D  1 via E    1 via E    0
- ===========  ========  =========  =========  =========  =========
+ An important difference between OSPF and RIP is that OSPF routers flood link state packets that allow the other routers to recompute their own routing tables while RIP routers exchange distance vectors. Consider that link `B-C` fails and that router `B` is the first to detect the failure. At this point, `B` cannot reach anymore `C`, `D` and `E`. `C` cannot reach `B` and `A` anymore.
 
- An important difference between OSPF and RIP is that OSPF routers flood link state packets that allow the other routers to recompute their own routing tables while RIP routers exchange distance vectors. Consider that link `B-C` fails and that router `B` is the first to detect the failure. At this point, `B` cannot reach anymore `A`, `C` and 50% of its paths towards `E` have failed. `C` cannot reach `B` anymore and half of its paths towards `D` have failed.
-
- Router `B` will flood its updated link state packet through the entire network and all routers will recompute their forwarding table. Upon reception of a link state packet, routers usually first flood the received link-state packet and then recompute their forwarding table. Assume that `B` is the first to recompute its forwarding table, followed by `D`, `A`, `C` and finally `E`
+ Router `B` will flood its updated link state packet through the entire network and all routers will recompute their forwarding table. Upon reception of a link state packet, routers usually first flood the received link-state packet and then recompute their forwarding table. Assume that `B` is the first to recompute its forwarding table, followed by `D`, `A`, `C` and finally `E`.
 
 7. After each update of a forwarding table, verify which pairs of routers are able to exchange packets. Provide your answer using a table similar to the one shown above.
 

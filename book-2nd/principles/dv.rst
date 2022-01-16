@@ -25,7 +25,7 @@ A router that uses distance vector routing regularly sends its distance vector o
      v.add(Pair(d,R[d].cost))
   for i in interfaces
      # send vector v on this interface
-     send(v,interface)  
+     send(v,i)  
 
 
 When a router boots, it does not know any destination in the network and its routing table only contains itself. It thus sends to all its neighbours a distance vector that contains only its address at a distance of `0`. When a router receives a distance vector on link `l`, it processes it as follows.
@@ -90,7 +90,7 @@ Consider the example above and assume that the link between routers `A` and `B` 
 
  - `A` sends its distance vector :math:`[A=0,B=\infty,C=\infty,D=1,E=\infty]`. `D` knows that it cannot reach `B` anymore via `A`
  - `D` sends its distance vector :math:`[D=0,B=\infty,A=1,C=2,E=1]` to `A` and `E`. `A` recovers routes towards `C` and `E` via `D`.
- - `B` sends its distance vector :math:`[B=0,A=\infty,C=1,D=2,E=1]` to `E` and `C`. `D` learns that there is no route anymore to reach `A` via `B`.
+ - `B` sends its distance vector :math:`[B=0,A=\infty,C=1,D=2,E=1]` to `E` and `C`. `C` learns that there is no route anymore to reach `A` via `B`.
  - `E` sends its distance vector :math:`[E=0,A=2,C=1,D=1,B=1]` to `D`, `B` and `C`. `D` learns a route towards `B`. `C` and `B` learn a route towards `A`. 
  
 At this point, all routers have a routing table allowing them to reach all another routers, except router `A`, which cannot yet reach router `B`. `A` recovers the route towards `B` once router `D` sends its updated distance vector :math:`[A=1,B=2,C=2,D=1,E=1]`. This last step is illustrated in figure :ref:`fig-afterfailure`, which shows the routing tables on all routers.
@@ -123,7 +123,7 @@ This count to infinity problem occurs because router `A` advertises to router `D
   for l in interfaces:
     v=Vector()
     for d in R[]:
-      if (R[d].link != i) :
+      if (R[d].link != l) :
       	 v=v+Pair(d,R[d.cost])
     send(v)
     # end for d in R[]
@@ -139,7 +139,7 @@ This technique is called `split-horizon`. With this technique, the count to infi
     # one vector for each interface
     v=Vector()
     for d in R[]:
-      if (R[d].link != i) :
+      if (R[d].link != l) :
       	 v=v+Pair(d,R[d.cost])
       else:
          v=v+Pair(d,infinity);
@@ -164,4 +164,4 @@ If, unfortunately, the distance vector sent to router `C` is lost due to a trans
 
 .. note:: Forwarding tables versus routing tables
 
-   Routers usually maintain at least two data structures that contain information the reachable destinations. The first data structure is the `routing table`. The `routing table` is a data structure that associates a destination to an outgoing interface or a nexthop router and a set of additional attributes. Different routing protocols can associate different attributes for each destination. Distance vector routing protocols will store the cost to reach the destination along the shortest path. Other routing protocols may store information about the number of hops of the best path, its lifetime or the number of sub paths. A `routing table` may store multipath paths towards a given destination and flag one of them as the best one. The `routing table` is a software data structure which is updated by (one or more) routing protocols. The `routing table` is usually not directly used when forwarding packets. Packet forwarding relies on a more compact data structure which is the `forwarding table`. On high-end routers, the `forwarding table` is implemented directly in hardware while lower performance routers will use a software implementation. A `forwarding table` contains a subset of the information found in the `routing table`. It only contains the paths that are used to forward packets and no attributes. A `forwarding table` will typically associate each destination to an outgoing interface or nexthop router.
+   Routers usually maintain at least two data structures that contain information about the reachable destinations. The first data structure is the `routing table`. The `routing table` is a data structure that associates a destination to an outgoing interface or a nexthop router and a set of additional attributes. Different routing protocols can associate different attributes for each destination. Distance vector routing protocols will store the cost to reach the destination along the shortest path. Other routing protocols may store information about the number of hops of the best path, its lifetime or the number of sub paths. A `routing table` may store multipath paths towards a given destination and flag one of them as the best one. The `routing table` is a software data structure which is updated by (one or more) routing protocols. The `routing table` is usually not directly used when forwarding packets. Packet forwarding relies on a more compact data structure which is the `forwarding table`. On high-end routers, the `forwarding table` is implemented directly in hardware while lower performance routers will use a software implementation. A `forwarding table` contains a subset of the information found in the `routing table`. It only contains the paths that are used to forward packets and no attributes. A `forwarding table` will typically associate each destination to an outgoing interface or nexthop router.

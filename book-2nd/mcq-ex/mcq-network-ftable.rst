@@ -305,7 +305,7 @@ The forwarding paths used in a network depend on the forwarding tables installed
        B      E 
        ====== =====
 
-   .. negative:: New forwarding table for `R2`:
+   .. positive:: New forwarding table for `R2`:
 
        ====== =====
        Dest.  Port 

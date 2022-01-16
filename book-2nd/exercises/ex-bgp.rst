@@ -30,7 +30,6 @@ Exercises
 Assume that the BGP sessions are activated in the following order :
 
   - `AS1-AS2`
-  - `AS2-AS1` 
   - `AS3-AS4` 
   - `AS1-AS3`
   - `AS1-AS4`
@@ -44,31 +43,7 @@ Once the interdomain network has fully converged, analyze the consequence of a f
 
 
 
-2. Consider the network below in which a stub domain, `AS456`, is connected to two providers `AS123` and `AS789`. `AS456` advertises its prefix to both its providers. On the other hand, `AS123` advertises `2001:db8:dead://48` while `AS789` advertises `2001:db8:beef::/48` and `2001:db8:dead:cafe::/63`. Via which provider will the packets destined to ``2001:db8:dead:cafe::1`` will be received by `AS456` ?
-
-  .. figure:: fig/ex-bgp-stub-two-providers.png
-     :align: center
-     :scale: 100
-
-
- 
- Should `AS123` change its configuration ? 
-
-3. Consider that the AS stub (`AS456`) shown in the figure below decides to advertise two ``/48`` prefixes instead of its allocated ``/47`` prefix.
-
-
-  .. figure:: fig/ex-bgp-stub-two-providers-specific.png
-     :align: center
-     :scale: 100
-
-
- - Via which provider does `AS456` receive the packets destined to ``2001:db8:caff::bb`` and ``2001:db8:cafe::aa`` ?
-  
-  - How is the reachability of these addresses affected when link `R1`-`R3` fails ?
-
-  - Propose a configuration on R1 that achieves the same objective as the one shown in the figure but also preserves the reachability of all IP addresses inside `AS456` if one of `AS456`'s interdomain links fails.
-
-4. Consider the network shown in the figure below. In this network, each AS contains a single BGP router. Assume that `R1` advertises a single prefix. `R1` receives a lot of packets from `R9`. Without any help from `R2`, `R9` or `R4`, how could `R1` configure its BGP advertisement such that it receives the packets from `R9` via `R3` ? What happens when a link fails ?
+2. Consider the network shown in the figure below. In this network, each AS contains a single BGP router. Assume that `R1` advertises a single prefix. `R1` receives a lot of packets from `R9`. Without any help from `R2`, `R9` or `R4`, how could `R1` configure its BGP advertisement such that it receives the packets from `R9` via `R3` ? What happens when a link fails ?
 
 
   .. figure:: fig/ex-bgp-internetwork.png
@@ -76,7 +51,7 @@ Once the interdomain network has fully converged, analyze the consequence of a f
      :scale: 100
 
 
-5. Consider the network shown in the figure below where R1 advertises a single prefix. In this network, the link between R1 and R2 is considered as a backup link. It should only be used only when the primary link (R1-R4) fails. 
+3. Consider the network shown in the figure below where R1 advertises a single prefix. In this network, the link between R1 and R2 is considered as a backup link. It should only be used only when the primary link (R1-R4) fails. 
 
 
   .. figure:: fig/ex-bgp-backup.png
@@ -92,7 +67,7 @@ Once the interdomain network has fully converged, analyze the consequence of a f
  
   - Link `R1` - `R4` comes back. Which BGP messages are exchanged and what do the paths used to reach `R1` become ?
 
-6. Consider the small Internet show in the figure below.
+4. Consider the small Internet show in the figure below.
 
   .. graphviz::
 
@@ -115,7 +90,7 @@ Once the interdomain network has fully converged, analyze the consequence of a f
    - the link between ``AS1`` and ``AS2`` fails
    - the link between ``AS2`` and ``AS5`` fails
 
-7. Consider the small Internet show in the figure below.
+5. Consider the small Internet show in the figure below.
 
   .. graphviz::
 

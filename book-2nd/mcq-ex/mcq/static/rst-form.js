@@ -47,7 +47,7 @@ function check() {
     $('.question').each(compute_score);
     $('#checker').append('<div class="result">' + translations[language]['score'] + ' ' +
                         score + '/' +
-                        $('.positive').parent().length + '</div>');
+                        $('.question').length + '</div>');
 }
 
 function compute_score() {
