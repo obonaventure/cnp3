@@ -931,7 +931,7 @@ Bob. The exchange starts as :
    :math:`B=g^{b} mod p` to Alice
  - From her knowledge of :math:`a` and :math:`B`, Alice can compute
    :math:`Secret=B^{a} mod p= (g^{b} mod p) ^{a} mod p=g^{a \times b} mod p`
- - From is knowledge of :math:`b` and :math:`A`, Bob can compute
+ - From his knowledge of :math:`b` and :math:`A`, Bob can compute
    :math:`Secret=A^{b} mod p=(g^{a} mod p) ^{b} mod p=g^{a \times b} mod p`
 
 The security of this protocol relies on the difficulty of computing
