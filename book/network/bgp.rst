@@ -617,7 +617,7 @@ Due to this organisation of the Internet and due to the BGP decision process, mo
 
 .. [#fgranularity] Some researchers such as [MUF+2007]_ have shown that modelling the Internet topology at the AS-level requires more than the `shared-cost` and `customer->provider` peering relationships. However, there is no publicly available model that goes beyond these classical peering relationships.
 
-.. [#fbgpdata] BGP data is often collected by establishing BGP sessions between Unix hosts running a BGP daemon and BGP routers in different ASes. The Unix hosts stores all BGP messages received and regular dumps of its BGP routing table. See http://www.routeviews.org, http://www.ripe.net/ris, http://bgp.potaroo.net or http://irl.cs.ucla.edu/topology/
+.. [#fbgpdata] BGP data is often collected by establishing BGP sessions between Unix hosts running a BGP daemon and BGP routers in different ASes. The Unix hosts store all BGP messages received and regular dumps of their BGP routing tables. See http://www.routeviews.org, https://www.ripe.net/ris, or https://bgp.potaroo.net
 
 
-.. [#fpotaroo] Several web sites collect and analyse data about the evolution of BGP in the global Internet. http://bgp.potaroo.net provides lots of statistics and analyses that are updated daily.
+.. [#fpotaroo] Several web sites collect and analyse data about the evolution of BGP in the global Internet. https://bgp.potaroo.net provides lots of statistics and analyses that are updated daily.

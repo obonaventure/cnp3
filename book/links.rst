@@ -16,7 +16,7 @@
 
 .. _Unicode: http://en.wikipedia.org/wiki/Unicode
 
-.. _Internet drafts: http://www.ietf.org/id-info/
+.. _Internet drafts: https://www.ietf.org/standards/ids/
 
 .. _telnet: http://en.wikipedia.org/wiki/Telnet
 
@@ -36,7 +36,7 @@
 
 .. _Richard Stevens: http://www.kohala.com/
 
-.. _Van Jacobson: http://www.parc.com/about/people/88/van-jacobson.html
+.. _Van Jacobson: https://en.wikipedia.org/wiki/Van_Jacobson
 
 .. _Sally Floyd: http://www.icir.org/floyd/
 
@@ -156,7 +156,7 @@
 
 .. _cisco: http://www.cisco.com
 
-.. _level3: http://www.level3.com
+.. _level3: https://www.lumen.com
 
 .. _google: http://www.google.com
 
