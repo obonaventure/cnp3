@@ -218,7 +218,7 @@ The third information contains two parts : the identifier of the switch that sen
 
    .. positive:: The port of ``S7`` that leads to ``S9`` is in the designated state. 
 
-   .. positive:: The port of ``S4`` that leads to ``S6`` is in the blocked state. 
+   .. negative:: The port of ``S4`` that leads to ``S6`` is in the blocked state. 
 
    .. positive:: The port of ``S4`` that leads to ``S7`` is in the blocked state. 
 
